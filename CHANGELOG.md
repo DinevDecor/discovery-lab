@@ -281,3 +281,47 @@
   fix, separate from the substantive Candidate Conflicts above.
 - No new governance layer, no new employee, no automation introduced.
   No other repository read, modified, or notified.
+
+## 2026-07-24 (PROP-0002 — Discovery Intake System)
+
+- Added `docs/proposals/PROP-0002-discovery-intake-system.md` (v0.1,
+  DRAFT, not implemented). Explicitly variant-agnostic with respect to
+  `PROP-0001`'s still-unaccepted mandate — Intake defines how raw
+  material enters, not what happens to it downstream.
+- **Specification:** Intake as a defined capture point, explicitly not
+  a new employee/Role — no Employee ID, no `CONTRACT.md`. Preserves
+  input verbatim; never classifies, researches, or edits meaning.
+- **Ledger:** immutable append-only record (`entry_id`, `timestamp`,
+  `original_text`, `source`, `author`, `status`, `classification`,
+  `related_entries`, `promoted_to`) — only `status` and derived
+  metadata change, and only by append, never by overwrite. Rationale
+  tied explicitly to `FOUNDING-CHARTER.md` Section 7 (Memory).
+- **Entry Types:** decided entries stay `UNCLASSIFIED` at intake
+  (Principles 2/3); a fixed four-type taxonomy (Observation/Question/
+  Idea/Anomaly) applies only later, at Classification.
+- **Workflow:** all nine transitions in `Reality → Inbox → Intake →
+  Ledger → Classification → Origin Artifact → Investigation → Proposal
+  → Adoption` defined individually, with Adoption requiring a human
+  decision per `FOUNDING-CHARTER.md` Section 9 and Principle 0.
+- **Weekly Curation, Governance, Metrics** (reusing `PROP-0001`'s
+  `acceptance_rate` and ORB's Q4 "real value" question rather than
+  inventing competing ones; no vanity metrics; no aggregate score,
+  matching AG-001's `METRICS.md` precedent), and a **recommended (not
+  created)** repository layout under `docs/intake/`.
+- **Adversarial critical review**, run after the design and left
+  unfixed per instruction: **14 findings** across all 7 requested
+  categories — including three overlapping, unreconciled pipelines now
+  present in this repository (`PROP-0001`, `FOUNDING-CHARTER.md`
+  Section 4, and this document's own workflow); reuse of the reserved
+  word "Observation" as an Entry Type without a disambiguation note;
+  no enforcement mechanism for the Investigation-must-cite-its-Ledger-
+  entry rule; and a concrete, evidence-grounded scalability concern —
+  `RUN-0001` alone produced 17 distinct findings from a single run of a
+  single Role, far more than a weekly, single-Curator process could
+  obviously absorb.
+- Two unrelated broken bare-filename references (mechanical fixes, not
+  Candidate-Conflict-style findings) were corrected to full relative
+  paths before commit; all references mechanically re-verified.
+- No implementation, no automation, no GitHub Action, no agent, no
+  prompt. Nothing under `docs/intake/` was created. No other
+  repository read, modified, or notified.
