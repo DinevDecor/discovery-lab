@@ -426,3 +426,50 @@
 - Registered AG-002 in `EMPLOYEE-REGISTRY.md` (now 2 Roles, 0 Trusted).
   All relative-path references mechanically verified before commit. No
   other repository read, modified, or notified.
+
+## 2026-07-24 (Memory Source Registry + Connection Protocol)
+
+- Added `docs/ai-organization/MEMORY-SOURCES/` — **infrastructure, not
+  a new employee**: no Employee ID, no `EMPLOYEE-REGISTRY.md` entry, no
+  `CONTRACT.md`, no assigned Executor, matching the same framing already
+  used for `ORB/`. **AG-002 was left entirely unchanged**, per explicit
+  instruction — confirmed via `git diff --stat` showing zero changes
+  under its directory.
+- `MEMORY-SOURCE-PROTOCOL.md` defines a registry schema
+  (`source_id`, `name`, `type`, `locator`, `access_requirements`,
+  `status`, `steward`, `added`, `last_verified`, `notes`) and a
+  six-stage Connection Protocol: Lookup → Selection & Authorization →
+  Resolution → Verification → Read-only Access → Disconnection.
+  **Paths are never hardcoded**: a `locator` is a stable,
+  environment-independent reference (a Git repository name + relative
+  path + ref; a Drive folder's own identifier) — never a literal local
+  filesystem path, which is specific to one session's mount layout and
+  would silently break elsewhere. Resolution to an actual local path
+  happens fresh per session (Stage 3) and is never written back into
+  the registry.
+- Explicitly **not** a trust/reliability score for sources (`status` is
+  an availability flag only — trust-scoring is trust-engine's territory,
+  per `PROP-0001` ground rule 3) and explicitly **not** a credential
+  store (`access_requirements` is an abstract description, never an
+  actual secret).
+- Added disambiguation notes: "Memory" here means an external data
+  repository, not trust-engine's "Trust Memory"/"Observation Memory"
+  concepts; "Source" here is a registered, typed, verifiable system,
+  distinct from `PROP-0002`'s Discovery Ledger `source` field (a
+  possible future integration is noted as an open question, not acted
+  on — `PROP-0002` itself was not modified).
+- `SOURCE-REGISTRATION-TEMPLATE.md` added, mirroring
+  `../ORB/ORB-REVIEW-TEMPLATE.md`'s placeholder-based style.
+- `MEMORY-SOURCE-REGISTRY.md` seeded with exactly **one** real entry,
+  `MEM-001` (`project-memory` archive, the source `PILOT-RUN-0001`
+  actually scanned and verified) — no `google_drive` entry and no
+  additional Git repositories (`KOD`, `generative-discovery-engine`,
+  `trust-engine`, though technically accessible in this session from
+  unrelated earlier work) were registered, since none has actually been
+  used as a memory source by any Role yet; adding them now would be
+  registering ahead of evidence.
+- Wiring AG-002 (or any Role) to actually consult this registry by
+  default is explicitly deferred to a future step, not performed here.
+  All relative-path references mechanically verified before commit. No
+  code, automation, or GitHub Action introduced. No other repository
+  read, modified, or notified.
