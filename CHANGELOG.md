@@ -17,3 +17,7 @@
 - Added a provenance/recovery note
   (`docs/notes/2026-07-24-recovery-investigation.md`) recording the search
   performed and its outcome.
+- Opened draft PR #1 (`claude/recover-discovery-lab` → `main`) with this
+  work. A companion investigation note recording the same findings from
+  the `project-memory` side is at
+  `project-memory/notes/2026-07-24-discovery-lab-recovery.md`.
