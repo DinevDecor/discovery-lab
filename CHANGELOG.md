@@ -132,3 +132,23 @@
   dependency introduced; no responsibility added beyond what Variant B
   already claimed; still strictly read-only and proposal-only. No ADR
   created or accepted.
+
+## 2026-07-24 (DL-0001)
+
+- Recorded the first entry in a new "DL-" investigation series (distinct
+  from the fact-checking "INV-" series): `docs/investigations/
+  DL-0001-ecosystem-purpose-shift.md` — a candidate hypothesis, provided
+  directly by the requester with its origin quoted verbatim, that KOD,
+  Trust Engine, Discovery Lab, project-memory, and
+  generative-discovery-engine may share a common terminal purpose
+  (improving decisions) for which each repository's own primary output is
+  instrumental rather than terminal.
+- Recorded explicitly as CANDIDATE, not accepted, not a KOD Hypothesis
+  object, not entered in any registry outside discovery-lab. Documented
+  arguments for and against (grounded only in citations already gathered
+  in `INV-0002`), potential impact if verified or falsified, and a
+  proposed verification experiment (DL-0001-EXP-1) that is defined but
+  not run.
+- No other repository (KOD, generative-discovery-engine, trust-engine,
+  project-memory) was read, modified, or notified. `PROP-0001`'s
+  recommendation is explicitly unaffected by this document.
