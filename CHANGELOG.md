@@ -624,3 +624,44 @@
   are all explicitly listed (ADR §8) as separate, human-gated migration
   steps this document does not perform — no registry created ahead of a
   first real entry, no existing file rewritten.
+
+## 2026-07-24 (ADR-0001 accepted; migration planned, not started; Sprint 01 continued)
+
+- **Petko accepted ADR-0001.** `ADR-0001-human-authority-gates.md`'s
+  `Status:` changed `DRAFT → ACCEPTED`, with a new "Acceptance record"
+  section quoting the exact terms ("architectural principles approved...
+  do not begin the migration yet") and stating precisely what is now
+  settled architecture (§1–§7) versus what remains deliberately
+  unimplemented (§8). Fixed two stale internal section references found
+  while editing (`§7` had incorrectly pointed at "Success Criteria" in
+  two places where "§8, the punch list" was meant).
+- Added `docs/adr/README.md` — the ADR index the acceptance decision
+  asked for, distinct from the existing `PROP-000N` series, with a
+  Status-value legend and an explicit rule that the ADR file itself is
+  authoritative if this table ever drifts from it. Current total: 1 ADR,
+  1 accepted.
+- Added `docs/adr/ADR-0001-migration-plan.md` — Status: **PLANNED / NOT
+  STARTED**, per explicit instruction not to begin migration yet. Expands
+  ADR-0001 §8's four items into ordered, verifiable steps (owner /
+  prerequisite / action / expected result / verification, matching
+  `INFRA-SPRINT-01-report.md`'s Connection Plan format): AG-002
+  terminology migration, Registry schema migration (including resolving
+  §5.2's open `deprecated`-placement question first), a HAG Log
+  explicitly gated on a first real HAG entry existing before the file is
+  created, and an "automatic resume" item flagged as possibly bounded by
+  the same platform layer Sprint 01 already found responsible for the
+  approval gate itself — not assumed buildable within this repository.
+- **Continued Infrastructure Sprint 01**, per instruction: re-attempted
+  Google Drive access (`list_recent_files`, `search_files`, plus a fresh
+  `ListConnectors` check). Result: **still blocked**. Every call again
+  returned `MCP error -32003: MCP tool call requires approval`
+  (fresh log timestamps 13:09–13:10Z); the connector's own state is
+  unchanged from Sprint 01 (`connected: true`, `enabledInChat: true`) —
+  nothing indicates the pending approval has been granted yet. No
+  `PILOT-RUN-0002` report was produced; Sprint 01's actual completion
+  criterion (a successful Recovery Run) remains unmet. This re-check is
+  itself the first real, evidence-backed encounter that could be filed
+  in ADR-0001's HAG report format — reported to the requester in that
+  format directly, without creating `docs/adr/HAG-LOG.md`, since
+  Migration Item 3 correctly gates that file's creation on migration
+  actually starting, which it has not.

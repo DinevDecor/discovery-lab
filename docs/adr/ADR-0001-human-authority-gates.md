@@ -1,7 +1,11 @@
 # ADR-0001 — Human Authority Gates (HAG)
 
-Status: **DRAFT**
+Status: **ACCEPTED**
 Date: 2026-07-24
+Accepted: 2026-07-24, by Petko (repository owner) — architectural
+principles (§1–§7) approved and adopted as part of the AI Organization's
+architecture. Migration explicitly deferred — see "Acceptance record",
+below, and `ADR-0001-migration-plan.md`.
 Author: Implementer session (Claude Code), from a design dictated directly
 by the requester
 Depends on / builds on: `../ai-organization/MEMORY-SOURCES/
@@ -11,18 +15,45 @@ from), `../ai-organization/MEMORY-SOURCES/MEMORY-SOURCE-PROTOCOL.md`
 employees/AG-002-discovery-archaeologist/RUN-PROTOCOL.md` (the Stop rule
 this ADR reclassifies, without editing it)
 
+## Acceptance record
+
+Accepted by Petko on 2026-07-24, in response to the draft submitted the
+same day. Explicit terms of acceptance, quoted from the decision: "The
+architectural principles are approved and become part of the
+organization's architecture. Do not begin the migration yet." Concretely:
+
+- **Accepted and now in force as architecture**: the Human Authority Gate
+  concept (§2), Standard Agent Behavior (§3), the required HAG report
+  format (§4), the Registry Connectivity/Authority extension as designed
+  (§5), and the four-category Organizational Principle with its
+  reconciliation against Sprint 01 (§6). Future architectural reasoning in
+  this repository may now cite this ADR as settled, the way `PROP-0001`'s
+  Principle 0 is already cited elsewhere.
+- **Explicitly not started**: implementation/migration. §8's four items
+  (AG-002 terminology migration, Registry schema migration, HAG Log
+  creation, automatic resume) remain unimplemented by decision, not by
+  oversight. `ADR-0001-migration-plan.md` records the plan for that future
+  work without performing any of it.
+- Acceptance does not itself change any file this ADR previously left
+  unmodified — `RUN-PROTOCOL.md`, `INPUTS.md`, `MEMORY-SOURCE-PROTOCOL.md`,
+  and `MEMORY-SOURCE-REGISTRY.md` are all still exactly as they were when
+  this ADR was drafted.
+
 ## How to read this document
 
 This is the first ADR in `discovery-lab` — a new document type alongside
 this repository's existing `PROP-000N` proposals. Where a `PROP` argues for
 a policy or process, this ADR names and defines an architectural concept
-(**Human Authority Gate**) and records the decision to adopt it — but,
-consistent with every other governing document in this repository so far
-(`FOUNDING-CHARTER.md`, `PROP-0001`–`PROP-0003`), it is recorded as
-**DRAFT**, not applied. Nothing existing is rewritten by this ADR: not
-AG-002's `RUN-PROTOCOL.md` or `INPUTS.md`, not the Memory Source
-Registry's schema, not `INFRA-SPRINT-01-report.md`'s own text. Section 7
-states exactly what remains to be done if this ADR is adopted, and by whom.
+(**Human Authority Gate**) and records the decision to adopt it. As of the
+Acceptance record above, its architectural content (§1–§7) is **ACCEPTED**
+— the first document in this repository to reach that status, ahead of
+`FOUNDING-CHARTER.md` and `PROP-0001`–`PROP-0003`, which remain DRAFT.
+Acceptance is deliberately narrow: nothing existing is rewritten by this
+ADR or its acceptance — not AG-002's `RUN-PROTOCOL.md` or `INPUTS.md`, not
+the Memory Source Registry's schema, not `INFRA-SPRINT-01-report.md`'s own
+text. Section 8 states exactly what remains to be done to actually apply
+this architecture, and `ADR-0001-migration-plan.md` is the plan for doing
+it — deliberately not executed yet, per the acceptance terms above.
 
 ---
 
@@ -93,7 +124,7 @@ Every HAG report must contain:
 `INFRA-SPRINT-01-report.md` §5 ("Human Action Required") already contains
 every one of these fields for the Google Drive incident, in substance if
 not under these exact headings — it can serve as the worked template for
-this format once adopted (§7, item 3).
+this format once adopted (§8, item 3).
 
 ## 5. Registry Extension
 
@@ -175,7 +206,7 @@ downstream findings — no automatic resume path (behavior 6 above,
 currently unimplemented anywhere), Registry Stage 4 not enforced before
 Stage 2, no assigned owner — remain genuine **Infrastructure
 limitations**: real, fixable gaps, exactly what Sprint 01's "smallest
-permanent fix" and this ADR's §7 both target. Nothing in Sprint 01's
+permanent fix" and this ADR's §8 both target. Nothing in Sprint 01's
 conclusion is contradicted by this ADR; the HAG concept refines which part
 of that finding was ever an "error" (none of it, once correctly
 classified) versus which part is still a real, actionable gap (the
@@ -188,11 +219,13 @@ systems, banking APIs, or other protected resources should all behave
 identically: stop, preserve, report using the fixed field list in §4, wait,
 resume if possible — never retry, never work around, never duplicate data.
 
-## 8. What adopting this ADR would still require (not done here)
+## 8. What implementing this ADR still requires (accepted, not started)
 
-This ADR defines the concept and records the decision to adopt it; it does
-not, by itself, change any other file. If adopted, these remain separate,
-human-gated steps:
+This ADR's architecture is **ACCEPTED** (see Acceptance record, above),
+but acceptance did not, by itself, change any other file, and the
+requester explicitly instructed that migration not begin yet. These
+remain separate, deferred steps — planned in full in
+`ADR-0001-migration-plan.md`, not performed here or there:
 
 1. **`RUN-PROTOCOL.md` / `INPUTS.md` (AG-002) migration** — deciding
    whether `INSUFFICIENT ACCESS` and `BLOCKED` should be replaced by, or
@@ -218,5 +251,8 @@ human-gated steps:
 
 ## Definition of Done
 
-This ADR is DRAFT and unadopted. Adoption is a human decision (Petko);
-this document does not claim otherwise. If adopted, §8 is the punch list.
+**ACCEPTED, migration not started.** Petko accepted this ADR's
+architectural content (§1–§7) on 2026-07-24, with migration explicitly
+deferred (see Acceptance record, above). §8 remains the punch list of
+what implementation requires; `ADR-0001-migration-plan.md` is the plan
+for executing it, on its own future authorization.
