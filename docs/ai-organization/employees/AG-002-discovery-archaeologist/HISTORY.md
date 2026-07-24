@@ -121,3 +121,36 @@ Reality Inbox yet. AG-001 was reviewed for a compatibility need and
 found not to require one — recorded in
 `../../MEMORY-SOURCES/MEMORY-SOURCE-REGISTRY.md`'s `MEM-004` entry, not
 silently skipped.
+
+## 2026-07-24 — PILOT-RUN-0002, for real (partial)
+
+The real diary named all the way back at this Role's creation
+("Project Memory → Archive → oneDay 6.zip") arrived — not via any Drive
+mechanism ever built, but through a direct GitHub upload
+(commit `a3d4dcb`) landing in `reality-inbox/📥 DROP HERE/`, which this
+session merged in. Processed as Reality Inbox intake `RI-0002`
+(`reality-inbox/manifests/RI-0002.md`, `intake_mode: GITHUB_UPLOAD` — a
+real value discovered in production use, added to
+`../../../../reality-inbox/PROCESSING-PROTOCOL.md`'s schema alongside
+the two previously defined). The archive (77 dated entries, 2025-10-18
+to 2026-07-22) turned out to be genuinely mixed: personal content (life
+philosophy, family, dreams, finances — 58 of 77 entries) and, from
+2026-06-22 onward, a distinct cluster of structured KOD research
+artifacts ("GRIF" documents).
+
+This run — finally, genuinely `PILOT-RUN-0002` — read four of those
+organizational entries in full and recovered 9 ideas, 2 repeated themes,
+1 idea-evolution timeline (4 linked steps across 6 days), 0 forgotten
+ideas, 3 candidate investigations (none created), 0 confirmed
+contradictions (1 tension recorded as `INSUFFICIENT EVIDENCE` instead),
+and 4 open questions — full report:
+`runs/PILOT-RUN-0002-recovery-report.md`. **The run deliberately did not
+process the 58 personal entries** — reading and git-committing verbatim
+quotations of deeply personal content (family, named individuals,
+finances, dreams) without explicit guidance was judged a genuine
+human-decision point, not a technical block, and the run paused there
+rather than either fabricating restraint by skipping silently or
+overriding it by extracting anyway. `RI-0002`'s `status` remains
+`PROCESSING`, not `ACCEPTED` — this is an honest, partial state, not a
+finished one. `runs_completed` in `STATUS.yaml` incremented (`3 → 4`) —
+the run was real and substantial, even though incomplete.

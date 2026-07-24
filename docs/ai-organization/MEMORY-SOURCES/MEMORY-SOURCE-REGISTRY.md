@@ -182,6 +182,22 @@ notes: >
   locator/access_requirements block still describes the git_repository
   side (manifests/, processed/, fixtures/) which is unchanged and
   unaffected by which folder fed it.
+  FIRST REAL PRODUCTION USE, 2026-07-24 (RI-0002): the actual diary this
+  whole engagement was originally trying to reach ("oneDay 6.zip")
+  arrived via reality-inbox/DROP HERE/ (the repo-tracked fallback path,
+  not the local-Drive path) - the human uploaded it directly through
+  GitHub's own web UI, landing as commit a3d4dcb3de2e4ff5b86d52b063d96bc00108ed63
+  ("Add files via upload"), which this session merged in. intake_mode
+  for this real intake is GITHUB_UPLOAD - a real value discovered in
+  use, now added to PROCESSING-PROTOCOL.md's schema alongside the two
+  previously-defined ones. Processing is genuinely partial: the archive
+  turned out to be a mix of personal content (58 of 77 entries) and
+  organizational KOD research content (a distinct cluster); only 4
+  organizational entries were fully processed this run, deliberately
+  paused at the personal-content boundary pending human guidance - see
+  ../employees/AG-002-discovery-archaeologist/runs/
+  PILOT-RUN-0002-recovery-report.md for the full record. This is the
+  first time MEM-004 has carried any real (non-synthetic) content.
 ```
 
 ## Reading this table

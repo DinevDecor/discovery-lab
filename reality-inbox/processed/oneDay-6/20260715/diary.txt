@@ -1,0 +1,106 @@
+Това бих го формулирал като изследователски GRIF, а не като вече установен принцип.
+
+GRIF:
+id: KOD-RES-BOUNDARY-GVS-001
+project: KOD
+category: Research
+subtype: Boundary Conditions
+title: Generation–Validation Separation Boundary Conditions
+state: RESEARCH
+confidence: MEDIUM
+priority: HIGH
+maturity: CONVERGENCE
+owner: Petko Dinev
+
+purpose: >
+Determine under which conditions separating generation from
+validation produces legitimate outcomes, and under which
+conditions the separation breaks down.
+
+research_question: >
+When does a minimal, deterministic validator increase trust,
+and when does it merely create an illusion of legitimacy?
+
+candidate_principle: >
+Whenever a system must produce legitimate outputs,
+free generation should be separated from validation,
+and legitimacy should be conferred only by a minimal,
+constrained, externally inspectable validation layer.
+
+status: >
+This is a research hypothesis supported by convergence across
+multiple independent domains. It is NOT yet a validated principle.
+
+convergence_evidence:
+
+- LCF theorem proving
+- Trusted Computing Base (security engineering)
+- Constitutional rule-of-law systems
+- KOD Kernel architecture
+- AI Agent OS policy-kernel architecture
+
+hypothesis:
+
+If the validator remains:
+  - minimal
+  - deterministic where possible
+  - externally inspectable
+  - governed by explicit contracts
+  - slow to change
+then trust becomes concentrated on a small auditable surface.
+Intelligence remains outside the trusted core.
+
+expected_benefit:
+
+The architecture does not eliminate the trust problem.
+It compresses trust into a small, governable, auditable surface.
+
+predicted_failure_conditions:
+
+FC-001:
+  Criteria cannot be externalized or formalized.
+FC-002:
+  Validation depends entirely on subjective judgement.
+FC-003:
+  Contract authors become captured or corrupted.
+FC-004:
+  Generators optimize for passing validation
+  rather than for truth or reality (Goodhart pressure).
+FC-005:
+  Validator becomes large, adaptive,
+  opaque or self-modifying.
+FC-006:
+  Authority chain is ambiguous or disputed.
+
+predictions:
+
+- Systems following this architecture should exhibit
+  higher auditability.
+- They should be easier to govern over time.
+- Failures should increasingly originate in contract
+  governance rather than validator implementation.
+- Trust failures should cluster around boundary
+  conditions rather than kernel mechanics.
+
+next_research:
+
+- Classify validation criteria into formal vs semantic.
+- Determine which semantic criteria can be made
+  mechanically verifiable.
+- Model governance of contract evolution.
+- Study adversarial optimization against validators.
+- Investigate whether multi-reviewer architectures
+  reduce semantic validation uncertainty.
+
+open_question: >
+Is Generation–Validation Separation a domain-specific design
+pattern, or a fundamental architectural law governing systems
+that must produce legitimate beliefs or legitimate actions?
+
+success_criterion: >
+The hypothesis becomes a validated KOD principle only if its
+boundary conditions are mapped, its predictions repeatedly hold
+across independent domains, and no simpler architecture explains
+the same observations equally well.
+
+Това ми харесва повече от формулировка тип „нов закон“, защото е напълно в духа на KOD: първо дефинираме хипотезата, после търсим границите, при които тя се проваля. Ако оцелее след тези тестове, едва тогава заслужава да стане принцип.

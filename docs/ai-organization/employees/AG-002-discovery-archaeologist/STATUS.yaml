@@ -6,7 +6,7 @@ adoption_status: not_adopted
 location: discovery-lab
 executor: unassigned
 created_from: task-specified role design, adapted to preserve AI Organization's existing lifecycle discipline (status set to prototype, not the "production-ready" language used in the requesting task)
-runs_completed: 3
+runs_completed: 4
 reports_reviewed: 0
 known_false_positives: unknown
 known_missed_findings: unknown
@@ -18,3 +18,4 @@ open_governance_questions:
   - authority to promote to trusted
   - long-term repository location
   - whether "production-ready" framing in a requesting task should ever override this repository's own Prototype-first lifecycle discipline
+  - how AG-002 should handle personal/private content mixed into an organizational source (surfaced for real by PILOT-RUN-0002 against the real diary; run paused rather than deciding unilaterally, see runs/PILOT-RUN-0002-recovery-report.md "Open Questions")

@@ -1009,3 +1009,65 @@
   running on the user's machine, with Google Drive for Desktop syncing
   the target folder) prevents completion; nothing in this repository can
   substitute for it.
+
+## 2026-07-24 (PILOT-RUN-0002, for real — production diary processed, partial)
+
+- **The local working tree was stale.** `git status` was clean, but a
+  check of `git ls-remote` showed the remote branch had moved to a
+  commit (`a3d4dcb`, "Add files via upload") this session didn't have.
+  Fetched and fast-forward merged before touching anything — the real
+  diary (`oneDay 6.zip`, 174,539 bytes, a valid zip) was in that commit,
+  uploaded directly through GitHub by the human, landing in
+  `reality-inbox/📥 DROP HERE/`.
+- **Original preserved, never edited.** Moved unmodified into
+  `reality-inbox/processed/oneDay 6.zip` (hash re-verified identical
+  before and after); its 77 `<date>/diary.txt` entries extracted
+  read-only into `reality-inbox/processed/oneDay-6/` for reading, each
+  individually hashed.
+- **Triaged all 77 entries before extracting anything.** Read a
+  representative sample across the full date range first. Result: the
+  diary is genuinely mixed — 58 entries are personal (life philosophy,
+  family, named individuals, finances, dream journal entries); a
+  distinct cluster from `2026-06-22` onward contains structured KOD
+  research artifacts ("GRIF" documents: `id:`, `project: KOD`,
+  `category:`, `state:`, `confidence:`, `owner: Petko`) explicitly
+  written as shareable knowledge objects.
+- **Deliberately processed only the organizational entries — 4 of them,
+  in full, this run.** Reading and git-committing verbatim quotations of
+  deeply personal content without explicit guidance was treated as a
+  genuine human-decision point (a content-level Human Authority Gate, in
+  `ADR-0001`'s sense, not a technical one), not decided unilaterally
+  either way. Real findings recovered from the 4 processed entries: a
+  KOD Kernel verification protocol, a 15-article Cognitive Constitution,
+  a methodology treating nature as a comparative library of
+  architectures, and a major "Architecture Baseline v1.0" milestone —
+  9 Recovered Ideas, 2 Repeated Themes (including a flagged, disclaimed
+  terminology overlap with this repository's own `BLOCKED` value), a
+  4-step Idea Evolution timeline across 6 days, 3 Candidate
+  Investigations (none created), and one `confidence`-value tension
+  recorded honestly as `INSUFFICIENT EVIDENCE` rather than asserted as a
+  Contradiction. Full report:
+  `docs/ai-organization/employees/AG-002-discovery-archaeologist/runs/
+  PILOT-RUN-0002-recovery-report.md` — the run originally opened
+  `BLOCKED` at the very start of this whole engagement, now real and
+  honestly `PARTIAL`.
+- **`reality-inbox/manifests/RI-0002.md`** records full provenance for
+  all 77 entries (per-file hash, content class, processing status) and
+  an explicit resume point (`20260701`, chronological, 14 more
+  identified organizational entries queued) — processing can continue
+  without restarting, per the task's own requirement.
+- Two of the same off-by-one relative-path bugs already seen twice in
+  this repository's `runs/` reports were caught again and fixed during
+  mechanical verification before commit.
+- Updated `reality-inbox/INDEX.md`, `MEMORY-SOURCE-REGISTRY.md`'s
+  `MEM-004` notes (first real, non-synthetic content it has ever
+  carried), `PROCESSING-PROTOCOL.md` (added `GITHUB_UPLOAD` as a real
+  `intake_mode` value, discovered in production use), AG-002's
+  `HISTORY.md` and `STATUS.yaml` (`runs_completed` `3 → 4`; a new
+  `open_governance_questions` entry for the personal-content policy
+  gap), and `INFRA-SPRINT-01-report.md` §12, closing the loop on the
+  entire Google-Drive-access saga this report has tracked since its
+  first line.
+- **Verdict: PARTIAL** — real, substantial, cited progress on real
+  production data; genuinely incomplete by design, paused on a human
+  decision rather than an access or effort limit.

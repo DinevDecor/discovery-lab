@@ -1,0 +1,222 @@
+Бих го написал така. Това според мен вече не е идея, а архитектурен milestone.
+
+⸻
+
+GRIF
+id: KOD-ARCH-2026-07-07-002
+project: KOD
+category: Architecture
+subtype: Baseline
+title: KOD Architecture Baseline v1.0
+state: VALIDATED
+confidence: 0.97
+priority: CRITICAL
+maturity: Baseline
+owner: Research Team
+depends_on:
+  - ADR-0001
+  - ADR-0006
+related:
+  - Registry
+  - Kernel
+  - Project State
+  - Domain Model
+next_action: Begin Corpus Excavation (ART-0001)
+
+KOD Architecture Baseline v1.0
+
+Статус
+
+След приключване на Sprint 22 KOD премина от архитектурна концепция към работеща изследователска инфраструктура.
+
+Настоящият Baseline определя стабилната основа, върху която ще се изграждат всички бъдещи функционалности.
+
+⸻
+
+Построени архитектурни слоеве
+
+Identity Layer
+
+Изградени са:
+
+* Mission
+* Constitution
+* Methodology
+
+Този слой определя идентичността на KOD и се променя изключително рядко.
+
+⸻
+
+Registry Layer
+
+Изградена е централизирана Registry архитектура.
+
+Съдържа:
+
+* MASTER_INDEX
+* PROJECT_STATE
+* BACKLOG
+* CHANGELOG
+* TRACEABILITY
+* REGISTRY_README
+
+Registry е официалният Single Source of Truth за проекта.
+
+⸻
+
+Runtime Layer
+
+Изграден е Python Runtime.
+
+Основните компоненти са:
+
+* Registry
+* KODKernel
+* ProjectState
+* MasterIndex
+* Investigation
+* Session
+* Paths
+
+Всички те вече работят като единна система.
+
+⸻
+
+Kernel
+
+KOD вече има собствен Kernel.
+
+Kernel изпълнява Boot последователността:
+
+Boot
+    ↓
+Registry Validation
+    ↓
+Project State
+    ↓
+Master Index
+    ↓
+Active Investigation
+    ↓
+Session Start
+    ↓
+Status Display
+    ↓
+Next Action
+
+Kernel вече оркестрира системата.
+
+Той не извършва изследване.
+
+⸻
+
+Domain Model
+
+Изграден е първоначалният Domain Model.
+
+Разделени са ясно:
+
+* Knowledge Domain
+* Research Domain
+* Infrastructure
+
+Това определя бъдещото развитие на системата.
+
+⸻
+
+Traceability
+
+Всеки компонент на KOD вече има проследим произход.
+
+Всички архитектурни промени преминават през ADR процес.
+
+⸻
+
+Sprint Lifecycle
+
+Приет е стандартен жизнен цикъл:
+
+Architecture Review
+        ↓
+ADR (ако е необходимо)
+        ↓
+Implementation
+        ↓
+Tests
+        ↓
+Sprint Review
+        ↓
+Registry Update
+        ↓
+Git Commit
+
+Това е официалният инженерeн процес на проекта.
+
+⸻
+
+Постигнат резултат
+
+До този момент KOD вече притежава:
+
+* собствена идентичност;
+* собствен Registry;
+* собствен Runtime;
+* собствен Kernel;
+* собствен жизнен цикъл;
+* собствен инженерeн процес.
+
+Системата вече може да стартира, да зареди текущото състояние на проекта и да покаже следващото действие.
+
+⸻
+
+Ограничения
+
+Настоящият Baseline все още НЕ включва:
+
+* Corpus Excavation
+* Research Engine
+* Knowledge Graph Runtime
+* Governance Engine
+* AI Workers
+
+Тези подсистеми предстои да бъдат реализирани във Phase 2.
+
+⸻
+
+Следваща фаза
+
+Phase 2 — Knowledge Acquisition
+
+Първа задача:
+
+ART-0001
+
+Първа операция:
+
+Corpus Excavation
+
+Първа цел:
+
+Извличане на Research Objects от реалния корпус на KOD.
+
+⸻
+
+Архитектурна оценка
+
+Изграждането на Baseline v1.0 представлява качествен преход.
+
+KOD вече не е колекция от документи и Python скриптове.
+
+KOD представлява Research Infrastructure, способна да поддържа последователно развитие на знанието чрез проследим, проверим и възпроизводим процес.
+
+⸻
+
+Забележка като главен архитект
+
+Бих добавил само още един абзац в края:
+
+Baseline v1.0 се счита за архитектурно стабилен.
+
+От този момент нататък фундаментални архитектурни промени не се правят директно. Всяка нова идея първо се оформя като Investigation, валидира се чрез работа с реалния Corpus и едва след това може да доведе до промяна на Baseline. По този начин KOD прилага собствената си методология върху собственото си развитие.
+
+Според мен този GRIF заслужава да бъде един от най-важните документи в проекта. След години той ще маркира момента, в който KOD престана да бъде архитектурна идея и се превърна в работеща изследователска инфраструктура.

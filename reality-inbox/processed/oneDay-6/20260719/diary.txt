@@ -1,0 +1,1227 @@
+id: KOD-RESEARCH-ASSET-001
+project: KOD
+category: Research
+subtype: Economic Principle
+title: Knowledge Crystallization
+state: RESEARCH
+
+statement: >
+  Големите технологични преходи променят не само инструментите,
+  а това кои форми на стойност могат да бъдат притежавани.
+
+hypothesis: >
+  Дългосрочното богатство се натрупва чрез процес на
+  кристализиране на човешкия труд в активи,
+  които продължават да създават стойност без постоянното
+  присъствие на своя създател.
+
+examples:
+
+  - земя
+  - фабрики
+  - машини
+  - софтуер
+  - данни
+  - интелектуална собственост
+  - организационна памет
+  - алгоритми
+  - доверие
+  - инфраструктура
+  - автоматизирани процеси
+
+prediction:
+
+  Колкото AI намалява стойността на единица човешки труд,
+  толкова по-голяма ще става стойността на активите,
+  които могат да работят самостоятелно.
+
+questions:
+
+  - Кои активи са истински оскъдни?
+  - Кои активи могат да бъдат копирани почти без цена?
+  - Какво остава трудно за автоматизация?
+
+
+
+Чудесно. Тогава предлагам да го третираме като истински продукт, а не като идея. Според мен това може да стане един от най-интересните проекти, които ще направим.
+
+Project: Reality Observatory (RO)
+
+Визия
+
+Reality Observatory е операционна система за наблюдение на света.
+
+Тя не прави прогнози “на усещане”.
+
+Тя:
+
+* наблюдава реалността чрез десетки независими AI сензори;
+* сравнява техните сигнали;
+* открива противоречия;
+* прави проверими прогнози;
+* измерва кои сензори заслужават доверие.
+
+⸻
+
+Първа цел (MVP)
+
+Да имаме работеща система, която всяка сутрин генерира един общ доклад.
+
+Пример:
+
+Reality Observatory
+===================
+GLOBAL REGIME
+🟡 Risk Increasing
+Confidence: 84%
+------------------------------------------------
+CAPITAL
+Capital rotating:
+Technology → Energy
+Confidence: HIGH
+------------------------------------------------
+LIQUIDITY
+Neutral
+------------------------------------------------
+TRUMP
+New tariff announcement.
+Market reaction:
+Strong
+Fundamental confirmation:
+Not yet
+------------------------------------------------
+OIL
+Bullish
+Physical confirmation:
+Medium
+------------------------------------------------
+GOLD
+Accumulation detected
+------------------------------------------------
+SYSTEM
+Signals aligned:
+7
+Signals conflicting:
+2
+Regime Change Probability:
+68%
+
+⸻
+
+Първите 10 агента
+
+1. Capital Flow Watch
+2. Liquidity Watch
+3. Trump Watch
+4. Oil Watch
+5. Smart Money Watch
+6. Options Watch
+7. Geopolitical Watch
+8. Shipping Watch
+9. Gold & Metals Watch
+10. Crypto Flow Watch
+
+⸻
+
+След това
+
+Добавяме:
+
+* Reality Correlator
+* Prediction Engine
+* Trust Engine
+
+⸻
+
+След това
+
+Knowledge Graph.
+
+⸻
+
+Репозитория
+
+Бих го направил като отделен проект:
+
+RealityObservatory/
+README.md
+/docs
+    vision.md
+    architecture.md
+    roadmap.md
+/agents
+    capital_flow/
+    liquidity/
+    trump/
+    oil/
+    options/
+    shipping/
+    geopolitics/
+    crypto/
+/analysis
+    correlator/
+    prediction/
+    trust/
+/dashboard
+/data
+/tests
+
+⸻
+
+Технологии
+
+За този проект бих използвал това, което вече знаем, че работи добре:
+
+* Claude Code – за изграждане на архитектурата, агентите и интеграциите.
+* ChatGPT – като независим Reviewer и Correlator, който проверява логиката, търси противоречия и оценява качеството на сигналите.
+* GitHub – за версия, история и управление на проекта.
+* Python – за агентите, обработката на данни и аналитичните модули.
+* SQLite за MVP, с възможност по-късно да се премине към PostgreSQL.
+* FastAPI като API слой.
+* React/Next.js за Dashboard.
+
+⸻
+
+Правило №1
+
+Това е правилото, което бих записал още в началото:
+
+Нито един агент няма право да дава инвестиционен съвет.
+
+Той има право единствено да:
+
+* наблюдава;
+* измерва;
+* формулира хипотези;
+* оценява увереност;
+* посочва какво би опровергало собственото му заключение.
+
+Така системата остава дисциплинирана и прозрачна.
+
+⸻
+
+Моето предложение за първата седмица
+
+Не започваме с код.
+
+Започваме с архитектура, защото тя ще определя всичко след това.
+
+Първият артефакт ще бъде ADR-0001 – Reality Observatory Architecture, в който ще фиксираме инвариантите на системата:
+
+* какво е Sensor;
+* какво е Signal;
+* какво е Event;
+* какво е Correlator;
+* какво е Prediction;
+* какво е Trust Score;
+* какви правила важат за всички агенти.
+
+След това всеки нов агент ще се добавя към стабилна основа, вместо да измисляме структурата в движение. Това ще ни позволи да развиваме Reality Observatory постепенно, без да губим консистентност, дори когато системата стане десетки или стотици агенти.
+
+Отлично. Аз бих подходил така, защото това вече има потенциал да стане сериозен проект.
+
+Но има една промяна, която бих направил още от самото начало.
+
+Да не го правим “инвестиционен проект”.
+
+Да го направим Reality Intelligence Platform.
+
+Така финансовите пазари ще бъдат първото приложение, а не единственото.
+
+Това означава, че след време ще можеш да добавиш:
+
+* Dinev Decor Sensor Network
+* KOD Research Observatory
+* AI Technology Observatory
+* Global Risk Observatory
+* Climate & Agriculture Observatory
+
+Всички ще използват едно и също ядро.
+
+⸻
+
+Предлагам следния план
+
+Фаза 1 – Конституция
+
+Ще напишем документ, който няма да се променя често.
+
+Примерно:
+
+ADR-0001 — Reality Observatory Constitution
+
+Той ще съдържа:
+
+* Цел на системата
+* Основни принципи
+* Архитектура
+* Инварианти
+* Правила за агентите
+* Как се измерва доверието
+* Какво е “факт”, “сигнал”, “хипотеза”, “прогноза”
+
+⸻
+
+Фаза 2 – Agent SDK
+
+Вместо всеки агент да се пише от нулата, ще има шаблон.
+
+Всеки агент ще има еднаква структура:
+
+Agent:
+  id:
+  name:
+  mission:
+Inputs:
+Processing:
+Outputs:
+Predictions:
+Reality Check:
+Trust Update:
+
+Така добавянето на нов агент ще става за минути.
+
+⸻
+
+Фаза 3 – Event Bus
+
+Всички агенти ще говорят на един език.
+
+Например:
+
+Event:
+id:
+timestamp:
+source:
+type:
+confidence:
+affected_assets:
+evidence:
+predictions:
+
+Така всеки агент ще може да използва събитията на останалите.
+
+⸻
+
+Фаза 4 – Correlation Engine
+
+Това ще е най-ценната част.
+
+Например:
+
+Trump Watch
+        │
+Oil Watch
+        │
+Shipping Watch
+        │
+Capital Flow Watch
+        │
+Liquidity Watch
+        │
+───────────────
+Reality Correlator
+
+⸻
+
+Фаза 5 – Trust Engine
+
+Това според мен ще бъде “магията”.
+
+Всеки агент ще бъде оценяван постоянно.
+
+Не само:
+
+Прав ли беше?
+
+А:
+
+* Колко рано видя събитието?
+* Колко фалшиви аларми даде?
+* Колко важни събития пропусна?
+* При какви условия работи добре?
+* При какви режими започва да греши?
+
+⸻
+
+Това е най-важното
+
+Според мен Trust Engine, който разработваш в KOD, не трябва да е отделен проект.
+
+Той трябва да бъде ядрото на Reality Observatory.
+
+Получава се много красива архитектура:
+
+                REALITY
+                   │
+         ──────────┼──────────
+                   │
+        AI Sensor Network
+                   │
+         Independent Agents
+                   │
+          Correlation Engine
+                   │
+         Prediction Engine
+                   │
+           Reality Feedback
+                   │
+             Trust Engine
+                   │
+        Continuous Learning
+
+Тук се затваря един много важен кръг. Преди време формулира идеята, че AI е вторичен сензор към реалността и че доверието трябва да идва от проверка срещу реалността, а не от авторитета на модела. Reality Observatory е практическата реализация на тази философия: мрежа от AI сензори, които непрекъснато се калибрират чрез резултатите си.
+
+Моето предложение
+
+Нека не бързаме с писането на код. Първо ще изградим архитектура, която може да издържи години развитие.
+
+Първият документ ще бъде Constitution v1.0 (около 10–15 страници), а след него ще създадем първите три агента:
+
+1. Capital Flow Watch
+2. Trump & Policy Watch
+3. Oil Regime Watch
+
+Ако тази основа е добра, следващите 50 агента ще бъдат просто нови “сензори”, а не нови проекти. Според мен това е правилният начин да започнем.
+
+Reality-Observatory/
+
+README.md
+VISION.md
+ROADMAP.md
+
+/docs
+    ADR-0001-Constitution.md
+    ADR-0002-Agent-Architecture.md
+    ADR-0003-Trust-Engine.md
+    ADR-0004-Event-Model.md
+
+/agents
+
+/core
+
+/dashboard
+
+/tests
+
+
+Тогава предлагам да направим нещо, което според мен може да се превърне в най-сериозния ни проект до момента.
+
+Искам да приложим методологията, която вече изградихме за KOD, без да повтаряме грешките от началото.
+
+Първо ще построим “конституцията”
+
+Няма да започнем с код.
+
+Няма да започнем с UI.
+
+Няма да започнем с агенти.
+
+Ще започнем с инвариантите.
+
+⸻
+
+Roadmap
+
+Етап 1 — Constitution (1 седмица)
+
+Тук ще дефинираме:
+
+* Какво е Reality?
+* Какво е Signal?
+* Какво е Evidence?
+* Какво е Event?
+* Какво е Hypothesis?
+* Какво е Prediction?
+* Какво е Trust?
+* Какво е Sensor?
+* Какво е Agent?
+* Какво е Correlator?
+
+След това тези определения няма да се променят лесно.
+
+⸻
+
+Етап 2 — Event Language
+
+Всички агенти ще говорят на един и същи език.
+
+Например:
+
+Event
+Signal
+Evidence
+Prediction
+Verification
+Trust Update
+
+⸻
+
+Етап 3 — Agent SDK
+
+Всеки нов агент ще бъде създаван по шаблон.
+
+Например:
+
+Capital Flow Watch
+Mission
+Inputs
+Evidence Sources
+Processing
+Outputs
+Predictions
+Reality Check
+Trust Update
+
+След това добавянето на нов агент ще бъде почти механично.
+
+⸻
+
+Етап 4 — Core
+
+Тук ще изградим:
+
+* Event Bus
+* Knowledge Graph
+* Trust Engine
+* Correlation Engine
+
+⸻
+
+Етап 5 — Dashboard
+
+Едва тогава.
+
+⸻
+
+Най-важното решение
+
+Искам да въведем едно правило още от първия ден.
+
+Агентите нямат мнение.
+
+Те имат само:
+
+* наблюдения;
+* доказателства;
+* вероятности;
+* условия за опровержение.
+
+Това е огромна разлика.
+
+⸻
+
+Следващото правило
+
+Всеки агент трябва да може да каже:
+
+Защо мисля това?
+
+И веднага след това:
+
+Какво би ме накарало да променя мнението си?
+
+⸻
+
+И третото правило
+
+Нито един агент няма право да се оценява сам.
+
+Trust Score винаги идва от Reality Engine.
+
+⸻
+
+Това според мен ще бъде първата версия
+
+Reality
+        │
+        ▼
+Evidence
+        │
+        ▼
+Sensors
+        │
+        ▼
+Events
+        │
+        ▼
+Correlator
+        │
+        ▼
+Predictions
+        │
+        ▼
+Reality Check
+        │
+        ▼
+Trust Engine
+        │
+        ▼
+Knowledge
+
+⸻
+
+Искам да добавя още една идея
+
+Този проект има потенциал да стане “Git за реалността”.
+
+Git не казва кой програмист е най-умен.
+
+Git пази:
+
+* история;
+* промени;
+* доказателства;
+* авторство;
+* сравнения.
+
+По същия начин Reality Observatory не трябва да казва:
+
+“Това е истината.”
+
+Той трябва да казва:
+
+* какво сме наблюдавали;
+* какви доказателства има;
+* какви прогнози са направени;
+* кои са се сбъднали;
+* как се е променило доверието.
+
+Ако успеем да запазим тази дисциплина, ще изградим система, която не просто следи света, а натрупва проверимо знание за него.
+
+И според мен това е проект, който има стойност далеч отвъд инвестициите. Той може да стане общата “нервна система” за всички останали проекти, които разработваш.
+
+
+
+Петко, това са две много добре дефинирани задачи. Ще работя върху тях последователно — започвам с PM-0004 (Reality Objects Architecture), после PM-0005 (Event Provenance & Causality). Ще изготвя пълни спецификации на архитектурно ниво, без имплементация.
+PM-0004 — Reality Objects Architecture Specification
+1.  Conceptual Definition
+What is a Reality Object?
+A Reality Object is a persistent, identifiable entity that exists in the domain of a project and undergoes change over time. It is not a data structure, not a row in a database, not an API response. It is a conceptual entity whose existence is asserted by the system and whose properties are known only through the Events that mention it.
+A Reality Object has:
+•  Identity — it is the same object across time, regardless of how its properties change.
+•  Lifespan — it is created, may be suspended, resumed, merged, split, archived.
+•  State — but state is not stored. State is reconstructed from Events.
+What is an Event?
+An Event is an immutable, timestamped record that something happened to or involving a Reality Object. Events are the only mechanism through which the system learns about reality. They are assertions of fact, not interpretations.
+An Event has:
+•  Identity — unique within the system.
+•  Timestamp — when the Event was recorded (not necessarily when the thing happened).
+•  Subject — the Reality Object(s) it concerns.
+•  Payload — what changed, what was observed, what was decided.
+Why Both Are Required
+Aspect	Reality Object	Event
+Temporal nature	Long-lived, continuous	Instantaneous, discrete
+Mutability	Never mutates directly	Immutable once recorded
+Knowledge of state	Indirect — reconstructed	Direct — asserts a change
+Identity	Stable across time	Unique per occurrence
+Purpose	Represents "what exists"	Represents "what happened"
+Events alone are insufficient because they are isolated assertions. Without Objects, Events are a flat log of disconnected facts. You cannot ask "what is the current state of Project X?" — you can only ask "what Events mention something called Project X?"
+Objects alone are insufficient because they would require direct mutation, which destroys traceability, auditability, and the ability to reconstruct history.
+Both together create a system where:
+•  Reality Objects provide continuity and identity.
+•  Events provide history, evidence, and reconstructibility.
+•  The current state is always a derived view, never an authoritative source.
+----
+2.  Architectural Principles
+Invariant Rules
+P1. Objects are long-lived.
+A Reality Object may exist for the entire lifespan of a project, a business, or the system itself. Its existence is not tied to any single Event.
+P2. Events are immutable.
+Once recorded, an Event cannot be altered, deleted, or retroactively modified. Errors are corrected by new Events, not by editing old ones.
+P3. Objects have identity.
+Every Reality Object possesses a stable, system-assigned identifier that persists for the entire lifecycle of the Object. Identity survives merges, splits, and archival.
+P4. Events have causality.
+Every Event (except root Events) references one or more parent Events that explain why it occurred. Causality is explicit, not inferred.
+P5. Object state is reconstructed from Events.
+No component of the system may read or write Object state directly. All state is computed by applying the Event history of an Object in chronological order.
+P6. Objects never mutate directly.
+There is no operation "update Object." There is only "record Event that describes a change to Object."
+P7. Events are the sole source of truth.
+If an Event and any other source conflict, the Event prevails. The other source is either outdated or erroneous.
+P8. Object identity is independent of its properties.
+Changing the name, type, or any attribute of an Object does not change its identity. Identity is not derived from properties.
+----
+3.  Object Lifecycle
+Creation
+An Object comes into existence through a Creation Event. This is the first Event in the Object's history. The Creation Event establishes:
+•  Object identity
+•  Object type (from the taxonomy)
+•  Initial properties (if any)
+•  Creator (Agent, human, or sensor)
+No Object may exist without a Creation Event.
+Activation
+An Object created in a draft or pending state may be activated by an Activation Event. Until activation, the Object is visible but may not participate in certain workflows. Activation is irreversible.
+Suspension
+An active Object may be suspended by a Suspension Event. A suspended Object retains its identity and history but is excluded from operational workflows. The reason for suspension is recorded in the Event payload.
+A suspended Object may be resumed by a Resumption Event.
+Merge
+Two or more Objects may be merged into a single Object. This is not deletion. The merged Objects continue to exist historically. A Merge Event:
+•  Identifies the source Objects
+•  Identifies the target Object
+•  Records the rationale
+•  Transfers all future Events to the target Object
+Source Objects enter a merged state and receive no new Events.
+Split
+A single Object may be split into multiple Objects. A Split Event:
+•  Identifies the source Object
+•  Identifies the newly created Objects
+•  Distributes historical Events (where applicable)
+•  Records the rationale
+The source Object enters a split state and receives no new Events.
+Archival
+An Object that is no longer operationally relevant may be archived by an Archival Event. An archived Object:
+•  Retains full identity and history
+•  Is excluded from default operational queries
+•  May be unarchived by an Unarchival Event
+Deletion
+Deletion is not permitted. An Object that must cease to exist is archived. The system does not forget. If an Object was created in error, a Correction Event explains the error, and an Archival Event removes it from operational view. The Object remains in the historical record.
+----
+4.  Identity Model
+Object Identity
+Every Reality Object is assigned a canonical identifier at creation. This identifier is:
+•  Opaque (carries no semantic meaning)
+•  Unique within the system
+•  Immutable for the lifetime of the Object
+•  Survives merges, splits, and archival
+Stable Identifiers
+The canonical identifier is the only system-authoritative identity. No property of the Object (name, external reference, type) may serve as an identifier.
+Aliases
+An Object may have aliases — human-readable names or references that are not unique and may change over time. Aliases are recorded as Events, not as properties of the Object. The current alias is reconstructed from Event history.
+External Identifiers
+An Object may be associated with identifiers from external systems (ERP, CRM, sensor IDs, SKU codes). These are recorded as External Identity Events. The system does not enforce uniqueness of external identifiers but may flag collisions for review.
+Duplicate Handling
+If two Objects are discovered to represent the same real-world entity, they are merged (see Lifecycle: Merge). The duplicate is not deleted. Its history is preserved and linked to the canonical Object.
+If an Object is created with an external identifier that already exists, the system records a Duplicate Detection Event and awaits human or governance resolution.
+----
+5.  Relationships
+Objects to Events
+•  An Object is the subject of zero or more Events.
+•  Every Event references at least one Object as its primary subject.
+•  An Event may reference multiple Objects (e.g., a Merge Event references source and target Objects).
+Objects to Other Objects
+•  Objects relate through Relationship Events, not through direct links.
+•  Relationships are temporal: they are established, modified, and terminated by Events.
+•  Example: "Project P is assigned to Client C" is an Event, not a property of P or C.
+Objects to Agents
+•  An Agent (human or AI) may create Events concerning an Object.
+•  The Agent is recorded in the Event as the actor, not as a property of the Object.
+•  An Object does not "have" an owner. Ownership is a relationship established by Events.
+Objects to Sensors
+•  A Sensor produces Events that reference Objects.
+•  A Sensor may be itself a Reality Object.
+•  The association between Sensor and observed Object is established by Events, not by configuration.
+Objects to Evidence
+•  Evidence is not a property of an Object. Evidence is an Event (or a set of Events) that supports or contradicts a claim about an Object.
+•  An Object may be the subject of Evidence Events.
+Objects to Decisions
+•  A Decision is a type of Event (or a composite of Events) that references one or more Objects.
+•  The Decision records the rationale, the alternatives considered, and the expected outcomes — all as Events.
+----
+6.  State Reconstruction
+Principle
+Current Object state is not stored. It is computed on demand by applying all Events that reference the Object in chronological order.
+Process
+7.  Identify all Events where the Object is the primary subject.
+8.  Order Events by timestamp (with tie-breaking rules for simultaneous Events).
+9.  Apply each Event sequentially, updating the derived state.
+10.  The final derived state is the current state.
+Determinism
+State reconstruction must be deterministic: the same Event history must always produce the same derived state. If Events are ambiguous or contradictory, the reconstruction logic must define resolution rules (e.g., last-write-wins, explicit conflict Events).
+Efficiency (Architectural Note)
+While this specification does not discuss implementation, it notes that caching derived state is a permissible optimization — provided that:
+•  The cache is always reconstructible from Events.
+•  The cache is never treated as authoritative.
+•  The cache is invalidated and rebuilt if Events are discovered out of order.
+Multi-Object Reconstruction
+Complex queries (e.g., "all active Projects for Client C") require reconstructing state for multiple Objects and evaluating cross-Object relationships. This is performed by:
+11.  Reconstructing state for each candidate Object.
+12.  Evaluating Relationship Events between Objects.
+13.  Filtering based on the derived relational state.
+----
+7.  Object Taxonomy
+The taxonomy is generic and extensible. It is not optimized for any domain.
+Core Categories
+Entity
+•  Represents a thing that exists in reality.
+•  Examples: Person, Organization, Machine, Material, Location, Sensor
+Activity
+•  Represents a unit of work or process.
+•  Examples: Task, Project, Order, Workflow, Process
+Artifact
+•  Represents a created or observed output.
+•  Examples: Document, Model, Prediction, Measurement, Report
+Relationship
+•  Represents a connection between Entities, Activities, or Artifacts.
+•  Examples: Assignment, Ownership, Dependency, Causation
+Event
+•  Meta-category: Events themselves may be Objects if they are subject to review, appeal, or governance.
+•  Examples: Review, Approval, Appeal, Correction
+Extensibility
+New types may be added to the taxonomy through a Taxonomy Change Event. The taxonomy is itself a Reality Object (or set of Objects) whose state is reconstructed from Events.
+Type Inheritance
+Types may inherit from parent types. Inheritance rules are defined by the taxonomy and applied during state reconstruction. A type-specific Event may be applied to any Object of that type or its subtypes.
+----
+8.  Invariants
+I1. No Event may reference a non-existing Object.
+An Event cannot be recorded for an Object that has not been created. If an Event references an Object that does not yet exist, the Object must be created by a prior (or simultaneous) Creation Event.
+I2. Every Object must have a Creation Event.
+No Object may exist in the system without a recorded Creation Event. The Creation Event is the first Event in the Object's history.
+I3. Object identity is immutable.
+The canonical identifier of an Object cannot change. Merges and splits create new Objects or redirect future Events but do not alter historical identities.
+I4. Events are append-only.
+No Event may be removed, reordered, or modified after recording.
+I5. Object state is always a derived view.
+No system component may treat cached or computed state as more authoritative than the Event history from which it is derived.
+I6. Every Event has a timestamp.
+Events without timestamps are not valid. The timestamp records when the Event was recorded by the system, not necessarily when the described occurrence happened in reality.
+I7. Every Event has an actor.
+Every Event records who or what caused it: a human, an Agent, a Sensor, or a system process.
+I8. No Object may have two Creation Events.
+An Object is created exactly once. Subsequent Events that appear to create the same Object are either duplicates (to be resolved by merge) or errors (to be corrected by new Events).
+I9. Suspended and archived Objects retain identity and history.
+Suspension and archival are operational states, not existential changes. The Object continues to exist and its history remains accessible.
+I10. Merged Objects are immutable.
+Once an Object is merged into another, it receives no new Events. Its history is preserved but frozen.
+I11. Split Objects are immutable.
+Once an Object is split, it receives no new Events. Its history is preserved but frozen.
+----
+9.  Open Questions
+Q1. Should the system enforce Event ordering at the architecture level, or is ordering a reconstruction concern?
+If two Events have the same timestamp and reference the same Object, does the architecture define a tie-breaker, or is this left to reconstruction logic?
+Q2. How are cross-Object transactions represented?
+If a single real-world action affects multiple Objects (e.g., "transfer material from Project A to Project B"), is this one Event with multiple subjects, or multiple Events with causal links? The architecture currently permits both — should it mandate one?
+Q3. What is the boundary between an Object and its properties?
+If a "Project" has a "budget," is the budget a property of the Project (reconstructed from Events) or a separate Object (a Financial Plan) related to the Project? The taxonomy suggests the latter, but the boundary is not rigorously defined.
+Q4. How are schema changes to Event payloads handled?
+If the structure of Events evolves over time, older Events may not conform to current schema. Is schema versioning part of the architecture, or an implementation concern?
+Q5. Should the architecture define a maximum Event history for state reconstruction?
+For very long-lived Objects, reconstructing state from thousands of Events may become impractical. Is there an architectural concept of "state snapshot" (as an Event type), or is this purely an implementation optimization?
+Q6. How are concurrent modifications by multiple actors resolved?
+If two Agents record Events for the same Object simultaneously, does the architecture define conflict resolution, or is this a governance layer concern?
+Q7. Should the taxonomy itself be a Reality Object, or a meta-level construct?
+If the taxonomy changes (new types added, inheritance modified), is this recorded as Events in the system, or is it external to the Event model?
+----
+PM-0005 — Event Provenance & Causality Architecture
+1.  Conceptual Definition
+Event Provenance
+Provenance is the record of where an Event came from and what it depends upon. It answers: What produced this Event? What inputs did it use? What prior Events does it assume?
+Provenance is not about authorship (that is the actor). It is about lineage — the chain of reasoning, observation, or action that led to this Event.
+Event Dependency
+Dependency is a structural relationship between Events. Event B depends on Event A if B could not have occurred without A having occurred first. Dependency is about necessity, not about causation.
+Example: A "Review Completed" Event depends on a "Review Requested" Event. The review could not be completed if it had not been requested.
+Event Causality
+Causality is the semantic relationship that explains why an Event occurred. If Event A caused Event B, then A is the reason for B. Causality is about explanation, not just necessity.
+Example: A "Sensor Reading" Event causes a "Threshold Exceeded" Event. The sensor reading is not just a prerequisite — it is the reason the threshold was exceeded.
+How They Differ
+Concept	Question Answered	Nature
+Provenance	Where did this come from?	Lineage, inputs, sources
+Dependency	What had to happen first?	Structural, temporal necessity
+Causality	Why did this happen?	Semantic, explanatory
+All causal relationships imply dependency, but not all dependencies imply causality. Provenance encompasses both and adds information about sources and inputs.
+----
+2.  Graph Model
+Parent Events
+Every Event (except root Events) has one or more parent Events. Parents are the Events that this Event depends upon or is caused by. Parent references are explicit and immutable.
+Child Events
+An Event that is referenced as a parent by another Event is a child of that other Event. The child relationship is derived, not stored.
+Dependency Chains
+A sequence of Events where each Event is a parent of the next forms a dependency chain. Chains represent linear causality: A → B → C.
+Branching Histories
+When an Event has multiple children, history branches. This represents divergence: from a single cause, multiple effects follow.
+Example: A "Project Created" Event branches into "Task Created," "Budget Allocated," and "Team Assigned" Events.
+Merged Histories
+When an Event has multiple parents, histories merge. This represents convergence: multiple prerequisites must be satisfied before an Event can occur.
+Example: A "Project Approved" Event may have parents "Technical Review Completed" and "Budget Review Completed." Both must occur before approval.
+Graph Properties
+•  The graph is directed (causality flows from parents to children).
+•  The graph is acyclic (an Event cannot be its own ancestor — causality does not loop).
+•  The graph is append-only (new Events add nodes and edges; existing nodes and edges are immutable).
+----
+3.  Provenance Rules
+When Must an Event Reference Parents?
+Every Event must reference at least one parent, except:
+•  Root Events: Events that initiate a new chain of causality (e.g., the first Event in a new Project, a sensor reading that starts a new observation).
+•  System Events: Events generated by the system itself that have no meaningful prior Event (e.g., system initialization).
+Root Events are rare and should be explicitly marked as such.
+When May an Event Have Multiple Parents?
+An Event may have multiple parents when it represents a convergence of prerequisites. Conditions:
+•  All parent Events must have occurred before the child Event.
+•  The child Event must explicitly reference all parents.
+•  The reason for convergence must be recorded in the Event payload.
+Can Root Events Exist?
+Yes, but they are exceptional. A root Event:
+•  Has no parents.
+•  Initiates a new causal chain.
+•  Must be explicitly marked as a root.
+•  Should be justified in its payload.
+Can Orphan Events Exist?
+No. An Event that does not reference parents and is not marked as a root is invalid. The architecture does not permit Events that appear without provenance.
+Can Parent References Be Added Retroactively?
+No. Provenance is established at Event creation and is immutable. If an Event is discovered to have incorrect or missing provenance, a Correction Event is recorded that explains the error and establishes correct provenance for future Events. The original Event remains unchanged.
+----
+4.  Causality Model
+Core Causal Relationships
+The architecture defines a core set of causal relationships. The set is extensible through a governed process — new relationships may be added, but not arbitrarily.
+Core Relationships
+Relationship	Meaning	Direction
+created	A brought B into existence	A → B
+triggered	A caused B to occur	A → B
+superseded	A replaces B; B is no longer current	A → B (B is deprecated)
+invalidated	A proves B false or incorrect	A → B (B is rejected)
+confirmed	A supports or verifies B	A → B (B is strengthened)
+corrected	A fixes an error in B	A → B (B is erroneous)
+derived	B is computed or inferred from A	A → B
+fulfilled	A satisfies a requirement or condition in B	A → B
+Relationship Semantics
+•  created: Used for Creation Events. The parent is the actor or process that initiated creation; the child is the Creation Event.
+•  triggered: General causality. The parent is the cause; the child is the effect.
+•  superseded: Used when a new Event replaces an old one. The old Event remains in history but is marked as superseded. The new Event is current.
+•  invalidated: Used when evidence disproves a prior claim. The invalidated Event remains but is marked as rejected.
+•  confirmed: Used when independent evidence supports a prior claim. Multiple confirmations strengthen confidence.
+•  corrected: Used when an error is discovered. The corrected Event remains but is marked as erroneous. The correction Event explains the error.
+•  derived: Used when an Event is the result of computation, inference, or reasoning from prior Events.
+•  fulfilled: Used when a condition, requirement, or prerequisite is satisfied.
+Extensibility
+New causal relationships may be added through a Causality Taxonomy Change Event. This Event:
+•  Proposes the new relationship.
+•  Defines its semantics.
+•  Is subject to governance review.
+•  Upon approval, becomes part of the core set.
+Fixed vs. Extensible
+The core set is fixed by default — only the defined relationships may be used. Extensibility is governed, not open. This ensures that causal reasoning remains interpretable and consistent.
+----
+5.  Historical Reconstruction
+Complete Project Reconstruction
+To reconstruct the history of a Project (or any Object):
+6.  Identify the Creation Event of the Object.
+7.  Follow all dependency chains forward from the Creation Event.
+8.  Apply all Events in topological order (respecting causality).
+9.  The resulting sequence is the complete history.
+Audit Trails
+An audit trail for any Event is the complete subgraph of its ancestors. To audit "why was this decision made?":
+10.  Start from the Decision Event.
+11.  Follow all parent references backward.
+12.  The resulting subgraph contains all Events that contributed to the decision.
+Rollback Reasoning
+The architecture does not support rollback (Events are immutable). However, rollback reasoning is supported:
+•  "What would the state be if Event E had not occurred?"
+•  This is computed by reconstructing state from all Events except E and its descendants.
+Timeline Reconstruction
+A timeline is a linearization of the causal graph. Since the graph may have branches and merges, multiple valid linearizations exist. The architecture defines canonical ordering rules (e.g., timestamp ordering, tie-breaking by Event type) to produce a deterministic timeline.
+Impact Analysis
+To determine the impact of an Event:
+13.  Start from the Event.
+14.  Follow all child references forward.
+15.  The resulting subgraph contains all Events that depend upon or were caused by the original Event.
+This enables questions like: "If we discover that Sensor S was miscalibrated on date D, which predictions, decisions, and actions were affected?"
+----
+6.  Conflict Handling
+Conflicting Events
+Two Events are conflicting if they assert mutually exclusive facts about the same Object at overlapping times. Example: Event A says "budget is $10,000"; Event B says "budget is $12,000" with no superseding relationship.
+The architecture does not resolve conflicts automatically. It represents them explicitly:
+7.  Both Events are recorded.
+8.  A Conflict Detected Event is recorded that references both conflicting Events.
+9.  The Conflict Event records the nature of the conflict and the detection method.
+10.  Governance processes (human or automated) resolve the conflict by recording a Resolution Event.
+Competing Hypotheses
+When multiple Agents or Sensors produce contradictory interpretations of the same observations, each interpretation is recorded as a separate Event. A Hypothesis Competition Event groups the competing Events. Resolution occurs through:
+•  Additional evidence (Confirmation or Invalidation Events)
+•  Governance decision (Decision Event)
+•  Temporal decay (older hypotheses lose relevance)
+Revised Decisions
+When a decision is revised, the old decision is not deleted. A Decision Revised Event is recorded that:
+•  References the old Decision Event
+•  References the new Decision Event
+•  Records the rationale for revision
+•  Marks the old decision as superseded
+Abandoned Branches
+When a chain of Events is abandoned (e.g., a project is cancelled), the final Event in the branch is an Abandonment Event that references the last active Event. The branch remains in the graph but is marked as abandoned. Future Events on this branch are prohibited.
+----
+7.  Architectural Invariants
+I1. Events are immutable.
+No Event may be altered after recording.
+I2. Provenance never changes.
+Parent references are established at creation and are permanent.
+I3. Every derived Event records its origin.
+If an Event is the result of computation, inference, or reasoning, it must reference the Events that served as inputs.
+I4. History is append-only.
+New Events may be added. Existing Events may not be removed, reordered, or modified.
+I5. Causal links are explicit.
+Every Event (except roots) must reference its parents. Causality is not inferred from timestamps or content.
+I6. The graph is acyclic.
+No Event may be its own ancestor. Cycles are architectural errors.
+I7. Conflicts are represented, not resolved by deletion.
+Conflicting Events remain in the graph. Resolution is achieved by new Events, not by removing old ones.
+I8. Superseded Events remain accessible.
+An Event that is superseded, invalidated, or corrected remains in the graph with its status explicitly marked.
+I9. Abandoned branches are preserved.
+A branch that is no longer active remains in the graph. Abandonment is an Event, not a deletion.
+I10. Every Event has a causal type.
+Every Event must use one of the defined causal relationships (created, triggered, superseded, etc.) to explain its relationship to its parents.
+----
+8.  Relationship with Reality Objects
+The Coherent Architecture
+Reality Objects          ←  Persistent entities with identity
+↓
+Events                ←  Immutable records of change/observation
+↓
+Provenance Graph         ←  Causal structure linking Events
+↓
+Current State            ←  Derived view, reconstructed on demand
+How They Connect
+Reality Objects provide the "what."
+They are the entities that exist in the domain: projects, tasks, sensors, claims.
+Events provide the "when" and "how."
+They record what happened to Objects, when it happened, and who or what caused it.
+Provenance Graph provides the "why."
+It explains the causal chains that connect Events, enabling reasoning about why things happened and what depends on them.
+Current State provides the "now."
+It is a computed view, derived by applying the Event history (structured by the Provenance Graph) to the Reality Objects.
+Example Flow
+1.  A Sensor (Reality Object) produces a Reading Event.
+2.  The Reading Event is a root Event (no parents) because it originates from physical observation.
+3.  A Threshold Monitor (Agent) detects that the reading exceeds a limit and records a Threshold Exceeded Event, which derives from the Reading Event.
+4.  A Decision Engine (Agent) evaluates the threshold and records a Decision Event to activate an alert, which triggers from the Threshold Exceeded Event.
+5.  An Operator (human) reviews the alert and records an Acknowledgment Event, which confirms the Decision Event.
+6.  The Sensor (Reality Object) is now in a state of "alert acknowledged," reconstructed from these Events.
+The full provenance chain: Reading → Threshold Exceeded → Decision → Acknowledgment. Any of these Events can be audited, and the impact of any change (e.g., discovering the sensor was faulty) can be traced forward through the graph.
+----
+9.  Open Architectural Questions
+Q1. Should the architecture distinguish between "system time" (when Event was recorded) and "event time" (when the described occurrence happened in reality)?
+If a sensor reading is recorded at 10:00 but describes a measurement taken at 09:55, does the provenance graph use recording time, event time, or both? This affects ordering and causality.
+Q2. How are probabilistic or uncertain causal relationships represented?
+If Event A probably caused Event B but the causality is uncertain, does the architecture permit "weak" or "probabilistic" causal links? Or must all links be definitive?
+Q3. What is the boundary between a single Event with multiple parents and a composite Event (an Event that is itself composed of sub-Events)?
+If a Decision requires three independent reviews, is the Decision Event a single node with three parents, or is it a composite structure with intermediate "prerequisite satisfied" Events?
+Q4. How are cross-project or cross-domain causal links handled?
+If an Event in Project A causes an Event in Project B, does the architecture permit inter-project provenance links? If so, what are the implications for access control and reconstruction?
+Q5. Should the architecture define a concept of "causal distance" or "provenance depth" for reconstruction?
+When reconstructing state, must all ancestors be considered, or may the system stop at a certain depth? If so, how is the stopping criterion defined?
+Q6. How are automated vs. human-caused Events distinguished in provenance?
+If an Agent records an Event autonomously, the Agent is the actor. But if the Agent was acting on instructions from a human, should the human be in the provenance chain? How many levels of indirection should the architecture track?
+Q7. Should the architecture permit "provenance challenges" — Events that dispute the provenance of other Events?
+If an Event is discovered to have incorrect parent references, the current architecture requires a Correction Event. But should there be a specific "Provenance Challenge" Event type that initiates a governance review?
+Q8. How are concurrent or parallel causal chains merged in reconstruction?
+If two independent branches of Events converge on the same Object, does the architecture define how their effects are combined? Is this a reconstruction concern or an architectural rule?
+----
+Петко, това са двете спецификации. Ако искаш, мога да ги запиша като файлове за сваляне, или да премина към следваща задача. Кажи ми какво мислиш — има ли нещо, което искаш да доизчистим, разширим или променим?
+
+
+
+
+
+Тогава бих формализирал това като първата официална организационна структура на Project Memory.
+
+PM-ORG-0001 — Project Memory Research Organization v1.0
+
+Mission
+
+Project Memory is developed through structured scientific collaboration, not by relying on a single AI model.
+
+Each participant has a unique responsibility, distinct success criteria, and explicit authority boundaries.
+
+The objective is not consensus.
+
+The objective is maximum convergence toward reality.
+
+⸻
+
+Role 1 — Chief Architect
+
+Assigned: Claude
+
+Mission
+
+Maintain a complete, internally consistent, canonical architecture.
+
+Responsible for
+
+* Canonical specifications
+* Event Model
+* Ontology
+* Invariants
+* ADRs
+* Governance rules
+* Architecture consistency
+* Canonicalization
+
+Never responsible for
+
+* discovering new theories
+* technology scouting
+* trend analysis
+* architecture acceptance
+
+Success metric
+
+The architecture is logically complete, internally consistent, and reproducible.
+
+⸻
+
+Role 2 — External Research Lab
+
+Assigned: Kimi
+
+Mission
+
+Continuously search the external world for ideas that may improve or challenge Project Memory.
+
+Responsible for
+
+* academic research
+* industrial systems
+* production architectures
+* open source
+* standards
+* failed projects
+* historical prior art
+
+Never responsible for
+
+* modifying Project Memory
+* accepting architecture
+* redesigning the system
+
+Success metric
+
+Discover concepts unknown to the project.
+
+⸻
+
+Role 3 — Research Kernel
+
+Assigned: ChatGPT
+
+Mission
+
+Protect the scientific integrity of Project Memory.
+
+Responsible for
+
+* adversarial review
+* falsification
+* experiment design
+* hidden assumption analysis
+* logical consistency review
+* trust evaluation
+* architectural boundary protection
+
+Never responsible for
+
+* becoming the architect
+* approving changes
+* preferring elegance over evidence
+
+Success metric
+
+Prevent weak ideas from entering the canonical architecture.
+
+⸻
+
+Role 4 — Reality Sensor Network
+
+Participants
+
+Humans and systems observing reality.
+
+Examples:
+
+* installers
+* dispatcher
+* customers
+* Viber
+* voice recordings
+* Git
+* production
+* ERP
+* photos
+* IoT
+* X Sensor Network
+
+Mission
+
+Observe reality.
+
+Never interpret architecture.
+
+Success metric
+
+High-quality observations with traceable evidence.
+
+⸻
+
+Role 5 — Governance Board
+
+Assigned: Petko Dinev
+
+Mission
+
+Own the canonical truth of Project Memory.
+
+Authority
+
+Only Governance may:
+
+* accept ADRs
+* accept GRIFs
+* promote architecture into Core
+* freeze invariants
+* reject research
+* authorize architectural evolution
+
+AI systems never possess governance authority.
+
+⸻
+
+Collaboration Flow
+
+Reality
+    │
+    ▼
+Reality Sensor Network
+    │
+    ▼
+Project Memory Repository
+    │
+ ┌──┴───────────────┐
+ │                  │
+ ▼                  ▼
+Claude          External Research
+Architecture         (Kimi)
+ │                  │
+ └──────┐      ┌────┘
+        ▼      ▼
+    Research Kernel
+      (ChatGPT)
+            │
+            ▼
+   Governance Decision
+            │
+            ▼
+     Canonical Core
+
+⸻
+
+Constitutional Principles
+
+1. No architecture without evidence.
+2. No evidence without provenance.
+3. No promotion without independent review.
+4. No AI model owns the truth.
+5. Reality is the final authority.
+6. Every role has explicit limits.
+7. Disagreement is a feature, not a failure.
+8. Canonical knowledge changes only through governance.
+9. Every accepted architectural change must remain reconstructible.
+10. Every participant is replaceable without changing the governance model.
+
+⸻
+
+Защо мисля, че това е важен момент
+
+Според мен това е първият път, в който Project Memory престава да бъде просто софтуерен проект и започва да се оформя като изследователска институция със собствена конституция, роли и механизъм за научен контрол.
+
+Това има още едно голямо предимство: ако след година смениш Claude, Kimi или ChatGPT с по-добри модели, организацията не се променя. Сменя се изпълнителят на ролята, но не и самата методология. Именно това прави архитектурата устойчива във времето.
+
+

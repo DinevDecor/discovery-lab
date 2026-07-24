@@ -774,6 +774,21 @@ synthetic pilot: discovery, manifest creation, provenance preservation,
 one finding extracted, source unmodified, final status recorded, per
 every element of the task's own verification requirement.
 
+## 12. Closing the loop — the real diary, finally (2026-07-24)
+
+Recorded briefly, since the full record lives in
+`../employees/AG-002-discovery-archaeologist/runs/
+PILOT-RUN-0002-recovery-report.md`, not here. The real "oneDay 6.zip"
+diary this entire sprint was ultimately trying to reach arrived — not
+through any Drive mechanism this sprint built, but through a direct
+GitHub upload landing in `reality-inbox/📥 DROP HERE/`. `PILOT-RUN-0002`,
+open since this sprint's very first entry as `BLOCKED`, is now real and
+partial: 4 of 77 entries processed, real findings recovered and cited,
+58 personal entries deliberately held pending human guidance rather than
+extracted without it. This is not this sprint's work to finish — it is
+AG-002's own ongoing operational use of the infrastructure this sprint
+built, which is exactly what §§10–11's `PASS` verdicts were for.
+
 ## Definition of Done
 
 **Google Drive connector path: NOT PASS, closed as a platform limitation
@@ -783,4 +798,5 @@ direct Drive dependency): PASS (§10.5), now layered with an
 organization-wide intake mechanism (§11.6: PASS).** This sprint closes
 having produced two working, verified, alternative paths — `memory/` and
 `reality-inbox/` — rather than remaining blocked on a human action that
-turned out not to be sufficient.
+turned out not to be sufficient. Both paths are now proven not just in
+verification, but in real use (§12).

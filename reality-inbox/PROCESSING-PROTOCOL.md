@@ -46,9 +46,15 @@ One manifest file per intake, stored in `manifests/`, named
 ```yaml
 intake_id:              # sequential, RI-NNNN, never reused
 original_filename:        # exactly as dropped, never altered
-intake_mode:                # local-drive-sync | repo-tracked-fallback —
-                            #   added per ADR-0004, which of the two
-                            #   folders this file actually came through
+intake_mode:                # local-drive-sync | repo-tracked-fallback |
+                            #   GITHUB_UPLOAD — added per ADR-0004, which
+                            #   path this file actually came through.
+                            #   GITHUB_UPLOAD added 2026-07-24 (RI-0002,
+                            #   the first real production intake): a more
+                            #   precise value than repo-tracked-fallback
+                            #   for a file the human placed directly via
+                            #   GitHub's own upload UI, discovered in real
+                            #   use rather than invented ahead of it.
 source_system:             # e.g. google_drive, SYNTHETIC_TEST_FIXTURE
 source_path:                 # human-supplied, as given at drop time
 source_file_id:                # source's own stable ID if known; UNKNOWN if not
