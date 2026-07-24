@@ -17,3 +17,7 @@ written as DRAFT / EXPERIMENTAL / NOT ADOPTED. No runs have been
 executed. No executor is assigned. No metrics have been measured. This
 entry exists to record only that the prototype was created, and
 nothing more.
+
+## 2026-07-24 — RUN-0001
+
+First real run executed. Scope: `discovery-lab` only, read-only, baseline commit `dff7810`, target state = branch `claude/ai-org-ag-001-prototype` at commit `bfaa17f`. Report: `runs/RUN-0001-observation-report.md`.
