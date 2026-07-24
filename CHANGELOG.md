@@ -1392,3 +1392,60 @@
   (`RELEASE-1.0.md`, `VALIDATION-HISTORY.md`, `LESSONS-FROM-V1.md`) —
   left unfixed on purpose, since fixing it would itself be new
   architecture work this task's own rule forbade.
+
+## 2026-07-24 (continued) — AG-003 Meta-Theory Extraction from RI-0002
+
+- Ran a research task, **DRAFT RESEARCH** status: does `RI-0002`'s
+  recovered material imply one underlying research philosophy, or is
+  that appearance selective interpretation? Explicit input restriction
+  honored throughout — only `PILOT-RUN-0002-recovery-report.md`, the
+  existing AG-003 curation artifacts built from it (`KO-0001`,
+  `KMP-0001`, `REL-0001`, `CPP-0001`, `CONTRADICTION-CHECK-0001.md`,
+  `KEV-0001`, `GAP-0001`, and `DATASET-1-REAUDIT.md`'s `F-4`), and
+  provenance were used; **the original diary was not read again.**
+- Produced six deliverables at `docs/proposals/
+  AG-003-meta-theory-RI-0002/`: a Meta-Theory Report (convergence
+  verdict `PARTIAL`, a two-principle explanatory core, four hidden
+  assumptions stated as hypotheses), an Evidence Matrix (recurrence,
+  independent appearance, temporal persistence, conceptual centrality —
+  ranked by evidence, not blended into an invented score), a Dependency
+  Graph (`generates`/`explains`/`justifies` edges, not chronology or
+  similarity — two independent root justifications converging on the
+  same mechanisms, `RI-18` and `RT-2` independently reconfirmed as
+  isolated), a Compression Analysis (10 → 5 → 3 → 1 principles, with
+  exactly what coverage and precision is lost stated at every step —
+  the tightest, one-sentence compression is shown to fail the archive's
+  own single most-repeated idea, `RT-3`), and a Counter-Theory document
+  (every mismatch classified — zero genuine contradictions found after
+  an active search — plus the mandatory Adversarial Pass).
+- **The Adversarial Pass's strongest counter-argument, reported in
+  full**: AG-002's own selection of 19 of 77 diary entries as
+  "organizational" was based on structured `GRIF`-format markers — a
+  criterion that may already pre-select for content that performs
+  rigor stylistically, before any synthesis began; the 47 excluded
+  personal entries provide no evidence either way, since they were
+  never examined for methodology content. This is not fully rebutted.
+  What survives it: `RT-4` (Recursive Adaptive Response) is not merely
+  labeled rigorously — it is a real, dated, traceable event, revised
+  three times with its confidence dropping from `0.93` to `0.55` and
+  partially recovering as it narrowed, cited by AG-002's own report as
+  direct evidence the Kernel protocol is not aspirational.
+- **Final Verdict: `EMERGING META-THEORY`** — not `NO` (real,
+  independently-arrived, applied evidence exists), not `WEAK` (the
+  evidence clears that bar by a real margin), not `STRONG` (real
+  content — `RI-4`, `RI-13`, `RI-18`, `RT-2` — stays genuinely outside
+  the theory at every compression level, and the sample-selection
+  concern remains open). No Knowledge Object's `status` was changed, no
+  merge was proposed, and no existing curation decision (`KMP-0001`,
+  `CONTRADICTION-CHECK-0001.md`) was relitigated.
+- Noted explicitly, in `README.md` and `FINAL-VERDICT.md`: this report
+  is **not** one of AG-003's six canonical output kinds
+  (`OUTPUTS.md`) — a one-off research deliverable, not a precedent for
+  a seventh output kind without its own evidence-linked process under
+  `GOVERNANCE.md`.
+- **Verdict: PASS** — the task's own Critical Rule ("a beautiful theory
+  with weak evidence is a failure; a small, incomplete theory with
+  strong evidence is a success") is honored: the returned theory is
+  small and explicitly incomplete, backed by the strongest evidence the
+  material offers, with no idea forced to fit and the strongest
+  available counter-argument reported in full rather than softened.
