@@ -1,0 +1,19 @@
+employee_id: AG-001
+role: Repository Observer
+version: 0.1
+status: prototype
+adoption_status: not_adopted
+location: discovery-lab
+executor: unassigned
+created_from: candidate organizational design
+runs_completed: 0
+reports_reviewed: 0
+known_false_positives: 0
+known_missed_changes: unknown
+boundary_violations: 0
+last_run: null
+last_review: null
+open_governance_questions:
+  - permanent organizational owner
+  - authority to promote to trusted
+  - long-term repository location
