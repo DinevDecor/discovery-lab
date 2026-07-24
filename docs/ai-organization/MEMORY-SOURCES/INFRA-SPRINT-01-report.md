@@ -297,6 +297,111 @@ itself is recorded here as a now-followed practice — formalizing it into
 governance change, which is a separate, human-gated step this sprint does
 not take.
 
+## 8. Five Whys — Root Cause Classification
+
+Each step below is restricted to what §1 already established with evidence
+or what is directly on record elsewhere in this repository — no new claims
+are introduced here.
+
+**Symptom** — the outward, user-visible failure:
+`PILOT-RUN-0002` returned `BLOCKED — Diary archive exists but is not
+accessible from the current execution environment.` No Recovery Report was
+produced.
+
+1. **Why did AG-002 return `BLOCKED`?**
+   Because every Google Drive MCP tool call it (or its steward) made —
+   `search_files` ×2, `list_recent_files` ×2 — returned `MCP error -32003:
+   MCP tool call requires approval`. Stage 1 (Historical Sources / Lookup)
+   never reached the source, so nothing downstream could run.
+   → **Technical cause.**
+
+2. **Why did those calls require approval and fail?**
+   Because the Google Drive connector is an org "Directory"-origin
+   connector, and the platform gates every one of its tools behind a
+   one-time, human-interactive "approval card" per session — independent
+   of the connector's own authenticated/connected state (`connected: true`,
+   `enabledInChat: true`, per §1.1). This gate sits in front of the Drive
+   API itself; nothing about the query, the tool chosen, or the retry count
+   changes the outcome.
+   → **Technical cause** (the mechanism itself).
+
+3. **Why was that approval never granted?**
+   Because this task executed as an unattended session — a task delivered
+   and run without a human live in the conversation at the moment each
+   approval card was surfaced. The platform's only path to satisfy this
+   gate is a human clicking "Approve" in an active client; an automated or
+   scheduled run has no such path available to it.
+   → **Infrastructure cause**: the gate is interactive-only, and
+   Discovery Lab has no automated or pre-authorized path through it for
+   unattended runs.
+
+4. **Why does Discovery Lab's infrastructure let a mission be assigned
+   against a source that was never confirmed reachable?**
+   Because the Memory Source Registry's Stage 4 (Verification) is not a
+   hard precondition for Stage 2 (Selection & Authorization) — nothing in
+   `MEMORY-SOURCE-PROTOCOL.md` or in AG-002's own `INPUTS.md` stops a
+   `status: unverified` entry (or, before this sprint, an entry that did
+   not exist at all) from being named as "the sole authorized source" for
+   a real mission. `MEM-002` itself was created at `status: unverified`
+   and could, as written today, still be cited as an authorized source
+   before anyone confirms Stage 0/Stage 4 actually pass.
+   → **Infrastructure cause**: a process gap in the Registry's own
+   Connection Protocol — verification is defined but not enforced before
+   authorization.
+
+5. **Why does that process gap exist — why is there no rule requiring
+   verification before authorization, and no one responsible for closing
+   it?**
+   Because no human or Curator has ever been assigned standing ownership
+   of external-connector access for Discovery Lab. This is not a new
+   finding: AG-002's own `STATUS.yaml` already lists `permanent
+   organizational owner` under `open_governance_questions`, unresolved
+   since AG-002's creation. Verification (Registry Stage 4) and platform
+   approval (the Stage 0 gate found in §2.1) both require a human to *act*
+   — and with no one assigned to own that class of action, there is no
+   one whose job it is to grant it before a mission is issued, only
+   someone who can be asked reactively, once, after a run already failed.
+   → **Governance cause — and the first cause under human organizational
+   control.** Stopping here: nothing past this point is a technical or
+   infrastructure fact to keep decomposing; it is a human ownership
+   decision Discovery Lab has not yet made.
+
+### Classification summary
+
+| Layer | Finding |
+|---|---|
+| Symptom | AG-002 `PILOT-RUN-0002` returned `BLOCKED`, no report produced |
+| Technical cause | Every Google Drive tool call returns `MCP error -32003: MCP tool call requires approval`, regardless of tool or query |
+| Infrastructure cause | (a) The approval gate is interactive-only with no unattended/automated path through it; (b) the Registry's Stage 4 Verification is not enforced as a precondition for Stage 2 Selection & Authorization |
+| Governance cause (root, human-controlled) | No human or Curator holds standing ownership of external-connector approval and source verification — an open question already on record in `../employees/AG-002-discovery-archaeologist/STATUS.yaml` and never assigned |
+
+### Smallest permanent fix
+
+Two actions, both small, both already-defined mechanisms — no new
+employee, no new document set, no redesign of AG-002 or the Connection
+Protocol:
+
+1. **One human click** (§5 of this report, unchanged by this analysis):
+   Petko approves the pending Google Drive tool-call request once. This
+   resolves the technical and immediate infrastructure cause for this
+   specific connector.
+2. **One ownership assignment, closing the governance cause:** Petko (or a
+   named Curator) is recorded as the standing owner of Registry Stage 4
+   Verification and of granting platform-level connector approvals, and a
+   single rule is adopted: **a Registry entry may not be cited as an
+   authorized source in a Role's `INPUTS.md` while its `status` is
+   `unverified`.** This is a one-line policy addition to existing,
+   already-built infrastructure (the Registry's `status` field and
+   Governance table already exist in `MEMORY-SOURCE-PROTOCOL.md`) — it
+   requires no new stage, no new document, and no automation. It converts
+   Stage 4 from an aspirational step into an enforced gate, which is what
+   would have caught this sprint's root cause *before* a mission was
+   issued rather than after it failed.
+
+Both actions are recommended, not applied — adopting rule 2 is a
+governance change to `MEMORY-SOURCE-PROTOCOL.md`'s Governance table, which
+this sprint does not make unilaterally, consistent with §6.
+
 ## Definition of Done
 
 **NOT YET PASS.** The infrastructure is diagnosed with evidence, the

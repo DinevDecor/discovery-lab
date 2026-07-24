@@ -561,3 +561,21 @@
   silently written into
   `docs/ai-organization/FOUNDING-CHARTER.md` or
   `docs/ai-organization/HIRING-LIFECYCLE-DRAFT.md`.
+- Added a **Five Whys** root-cause classification to the same report
+  (§8) before closing the sprint. Chain: symptom (`PILOT-RUN-0002`
+  `BLOCKED`) → technical cause (`-32003` on every Google Drive call,
+  regardless of tool/query) → infrastructure cause (the approval gate
+  is interactive-only with no unattended path through it, *and* the
+  Registry's Stage 4 Verification is not enforced before Stage 2
+  Selection & Authorization) → **governance cause, and the first cause
+  under human organizational control**: no human or Curator has ever
+  been assigned standing ownership of external-connector approval or
+  source verification — already on record, unresolved, as
+  `permanent organizational owner` in AG-002's own
+  `STATUS.yaml`. Smallest permanent fix recommended (not applied): (1)
+  the one human approval click already requested in §5, plus (2) one
+  governance rule — a Registry entry may not be cited as an authorized
+  source while `status: unverified` — which converts the existing,
+  already-built Stage 4 into an enforced gate instead of an
+  aspirational one. No new employee, document set, or automation
+  proposed.
