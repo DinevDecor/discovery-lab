@@ -1071,3 +1071,84 @@
 - **Verdict: PARTIAL** — real, substantial, cited progress on real
   production data; genuinely incomplete by design, paused on a human
   decision rather than an access or effort limit.
+
+## 2026-07-24 (PILOT-RUN-0002 COMPLETED — all 77 real diary entries read)
+
+- **Decision applied**: the "AG-002 Personal Diary Processing Policy"
+  (Petko, ACCEPTED) — AG-002 may read the whole diary; personal content
+  is authorized to be read but is not automatically knowledge; only
+  durable knowledge (ideas, principles, hypotheses, observations,
+  recurring patterns, decisions, experiments, research questions,
+  methodology) is extracted, with minimum necessary quotation and full
+  provenance; an entry with none is recorded `NO KNOWLEDGE EXTRACTED`
+  and processing continues without stopping.
+- **Read the remaining 73 entries**: 15 more organizational entries, 4
+  originally-`AMBIGUOUS` entries resolved as organizational on an actual
+  read, all 47 personal entries, and 1 more `AMBIGUOUS` entry resolved
+  as personal.
+- **New real, cited findings**: a formal "KOD Research Protocol v1.0"
+  (Evidence Ladder: Observation → Pattern → Independent Convergence →
+  Candidate Principle → Validated Principle, never skip levels;
+  Convergence Mode; Breaker Mode); a cluster of six `VALIDATED`/`ADOPTED`
+  methodology GRIFs, one at `confidence: 1.00` — the highest value found
+  anywhere in the diary; a proposed three-layer knowledge architecture
+  (Obsidian = storage, KOD Registry = Single Source of Truth, AI =
+  reconstructs context each session, never memorizes); the diary's
+  **first Trust Engine content** — a Historical Analogy Engine comparing
+  market regimes by constraint-similarity rather than chart-pattern
+  matching (a different DinevDecor-ecosystem project from KOD); a
+  self-identity GRIF stating KOD's "only sacred rule"; a documented
+  negative-knowledge research result (eight candidate properties
+  explicitly tested and rejected, two survived independent adversarial
+  testing); a hypothesis on AI as a "second-order sensor"; an economic
+  principle on knowledge crystallization; and a newly-named, not
+  previously seen, project concept, "Reality Observatory."
+- **The diary's single most repeated idea confirmed**: "nature as a
+  library of architectures" (`20260625`) is independently restated five
+  times across a month — the strongest evidentiary signal in the whole
+  archive for what its author considered most important.
+- **All 47 personal entries read in full, correctly yielded no
+  extractable knowledge** — a real, checked outcome, not an assumption.
+  One entry (`20260623`, a book-idea list echoing the repeated
+  architecture theme) was a genuinely close call and is shown with its
+  reasoning rather than silently folded into the rest.
+- **`docs/ai-organization/employees/AG-002-discovery-archaeologist/runs/
+  PILOT-RUN-0002-recovery-report.md`** substantially rewritten (not
+  merely appended to) to reflect completion: `STATUS: COMPLETE`, RI-1
+  through RI-9 preserved unchanged from the first pass, RI-10 through
+  RI-18 added, a new Repeated Theme (RT-3, the five-appearance chain)
+  and a new Idea Evolution entry (RT-4, a candidate principle revised
+  three times under its own adversarial "Breaker" testing — direct
+  evidence RI-1/RI-2's judging protocol is not just aspirational), two
+  new Candidate Investigations (whether "Reality Observatory" relates to
+  this repository's own recommended-but-unaccepted "Ecosystem
+  Observatory" from `PROP-0001`; whether Trust Engine's Historical
+  Analogy Engine is already built — neither checkable from this
+  session), and a full, honest "Personal entries — screened, no
+  knowledge extracted" section listing all 47 by date with zero content
+  reproduction.
+- **`reality-inbox/manifests/RI-0002.md`** finalized: `status: COMPLETED`,
+  every one of the 77 table rows given a final disposition (no `PENDING`
+  remains).
+- **Explicitly not done, recorded as a real gap, not silently
+  substituted**: per-category Knowledge registries (Ideas, Principles,
+  Hypotheses, Decisions, Research Questions) and a relationship-graph
+  artifact, both named in the original task's taxonomy, were recommended
+  in the Recovery Queue but not built this run — AG-002's existing
+  Recovery Report format was used instead, which covers most of the same
+  taxonomy under different section names.
+- Updated `reality-inbox/INDEX.md`, `MEMORY-SOURCE-REGISTRY.md`'s
+  `MEM-004` notes, and AG-002's `HISTORY.md` and `STATUS.yaml` (the
+  personal-content `open_governance_questions` entry marked `RESOLVED`,
+  kept for the record rather than deleted, per the append-only
+  convention already used elsewhere in this repository).
+- Verified no personal-entry content leaked into any authored file
+  before committing, consistent with the prior partial-run commit's
+  discipline.
+- **Verdict: PASS** — `RI-0002.status = COMPLETED`, as requested. Stated
+  honestly: "completed" means every entry was read at an appropriate
+  depth, not that every possible finding has been extracted from the
+  largest organizational entries — several contain multiple distinct
+  GRIF documents a deeper future pass could still mine further; this
+  limitation is recorded in the report's own Archaeologist Boundary
+  Statement, not smoothed over.

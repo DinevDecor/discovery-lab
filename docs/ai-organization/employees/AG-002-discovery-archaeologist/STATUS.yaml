@@ -18,4 +18,4 @@ open_governance_questions:
   - authority to promote to trusted
   - long-term repository location
   - whether "production-ready" framing in a requesting task should ever override this repository's own Prototype-first lifecycle discipline
-  - how AG-002 should handle personal/private content mixed into an organizational source (surfaced for real by PILOT-RUN-0002 against the real diary; run paused rather than deciding unilaterally, see runs/PILOT-RUN-0002-recovery-report.md "Open Questions")
+  - "RESOLVED 2026-07-24 (kept for record, not deleted): how AG-002 should handle personal/private content mixed into an organizational source. Decided via the 'AG-002 Personal Diary Processing Policy' - read everything, extract only durable knowledge, personal content is not knowledge unless it directly supports a recovered principle, use minimum necessary quotation, never stop for personal content. Applied in full in PILOT-RUN-0002's completing pass."

@@ -154,3 +154,53 @@ overriding it by extracting anyway. `RI-0002`'s `status` remains
 `PROCESSING`, not `ACCEPTED` — this is an honest, partial state, not a
 finished one. `runs_completed` in `STATUS.yaml` incremented (`3 → 4`) —
 the run was real and substantial, even though incomplete.
+
+## 2026-07-24 — PILOT-RUN-0002 completed, under a new decided policy
+
+Petko decided the "AG-002 Personal Diary Processing Policy": AG-002 is
+authorized to read the entire diary, including personal entries, but
+personal content does not automatically become recorded knowledge — only
+durable knowledge (ideas, principles, hypotheses, observations,
+recurring patterns, decisions, experiments, research questions,
+methodology) is extracted, with minimum necessary quotation and full
+provenance; an entry with none is recorded as `NO KNOWLEDGE EXTRACTED`
+and processing continues without stopping.
+
+Under this policy, this run read the remaining 73 entries: 15 more
+organizational entries plus 4 originally-`AMBIGUOUS` entries resolved
+as organizational on an actual read, and all 47 personal entries (1
+originally-`AMBIGUOUS` entry resolved as personal). Real findings
+recovered from the newly-read organizational content: a formal "KOD
+Research Protocol v1.0" (an Evidence Ladder, Convergence Mode, Breaker
+Mode), a cluster of six `VALIDATED`-state methodology GRIFs at
+confidence up to `1.00`, a three-layer knowledge architecture proposal
+(Obsidian / KOD Registry / AI), the diary's first **Trust Engine**
+content (a Historical Analogy Engine — comparing market regimes by
+constraint-similarity, not chart shape), a self-identity GRIF stating
+KOD's "only sacred rule," a documented negative-knowledge research
+result (eight candidate properties explicitly rejected, two survived
+adversarial testing), a hypothesis on AI as a "second-order sensor," an
+economic principle on knowledge crystallization, and a newly-named
+project concept, "Reality Observatory." The diary's single most
+repeated idea — "nature as a library of architectures" — was confirmed
+restated five independent times across a month, the strongest
+evidentiary signal in the whole archive of what its author considered
+most important. All 47 personal entries were read in full and correctly
+yielded no extractable knowledge — a real, checked result, not an
+assumption; one entry (`20260623`, a book-idea list) was a genuinely
+close call and is recorded with its reasoning shown, not silently
+folded into the rest.
+
+Full report (substantially rewritten to reflect completion, not just
+appended to): `runs/PILOT-RUN-0002-recovery-report.md`. `RI-0002`'s
+`status` is now `COMPLETED` — every entry read at an appropriate depth,
+though the report's own Archaeologist Boundary Statement states plainly
+that the largest organizational entries likely contain further findings
+a deeper future pass could still extract; "completed" is not claimed to
+mean "exhaustive." A relationship-graph artifact and per-category
+Knowledge registries (Ideas/Principles/Hypotheses/Decisions/Research
+Questions, as the original task's taxonomy asked for) were recommended
+in the Recovery Queue but not built this run — recorded as a real gap
+against the literal ask, not silently substituted. `runs_completed` in
+`STATUS.yaml` is not incremented again for this entry — it is the
+completion of the same `PILOT-RUN-0002` already counted, not a new run.

@@ -190,14 +190,18 @@ notes: >
   ("Add files via upload"), which this session merged in. intake_mode
   for this real intake is GITHUB_UPLOAD - a real value discovered in
   use, now added to PROCESSING-PROTOCOL.md's schema alongside the two
-  previously-defined ones. Processing is genuinely partial: the archive
-  turned out to be a mix of personal content (58 of 77 entries) and
-  organizational KOD research content (a distinct cluster); only 4
-  organizational entries were fully processed this run, deliberately
-  paused at the personal-content boundary pending human guidance - see
-  ../employees/AG-002-discovery-archaeologist/runs/
-  PILOT-RUN-0002-recovery-report.md for the full record. This is the
-  first time MEM-004 has carried any real (non-synthetic) content.
+  previously-defined ones. The archive turned out to be a mix of
+  personal content (47 of 77 entries) and organizational KOD/Cognitive
+  Sovereignty/Trust Engine research content (19 entries). COMPLETED
+  2026-07-24 under the "AG-002 Personal Diary Processing Policy"
+  decision: all 77 entries read; personal content authorized for
+  reading but not automatically treated as knowledge - it is recorded
+  as NO KNOWLEDGE EXTRACTED unless it directly supports a recovered
+  principle - see ../employees/AG-002-discovery-archaeologist/runs/
+  PILOT-RUN-0002-recovery-report.md for the full record (19 real
+  findings, cited). This is the first time MEM-004 has carried any real
+  (non-synthetic) content, and the first Reality Inbox intake to reach
+  RI-0002.status: COMPLETED.
 ```
 
 ## Reading this table
