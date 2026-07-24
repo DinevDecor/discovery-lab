@@ -325,3 +325,53 @@
 - No implementation, no automation, no GitHub Action, no agent, no
   prompt. Nothing under `docs/intake/` was created. No other
   repository read, modified, or notified.
+
+## 2026-07-24 (PROP-0003 — Discovery Lifecycle Consolidation)
+
+- Added `docs/proposals/PROP-0003-discovery-lifecycle-consolidation.md`
+  (DRAFT / EXPERIMENTAL / NOT ADOPTED). Inspected and cited exact file
+  locations for all three existing lifecycle descriptions (`PROP-0001`'s
+  information-flow map, `FOUNDING-CHARTER.md` §4's Evolution pipeline,
+  `PROP-0002`'s Intake Workflow), plus `HIRING-LIFECYCLE-DRAFT.md` as
+  adjacent (Role-status, not content-flow) context, and KOD's own
+  Research Session and Knowledge lifecycles as external reference
+  material already quoted elsewhere in this repository.
+- Built a comparative inventory of all three models (stages, entry
+  point, terminal states, decision points, actors, transition
+  explicitness, rollback support) without smoothing over differences,
+  and a conflict analysis covering all nine conflict types named in the
+  task, each with evidence, severity, and whether it needs a decision
+  now or can stay open.
+- Proposed one canonical 7-stage Discovery Lifecycle (Captured →
+  Classified → Curated → Escalated → Investigated → Proposed →
+  Adopted/Rejected), derived from the union of the three existing
+  models — no wholly new concept introduced. Confirmed via full-
+  repository search that "Spark" is used nowhere in this repository and
+  is therefore not added to the canonical model. Kept Artifact Type
+  (Discovery Observation/Question/Idea/Anomaly) and Lifecycle State
+  explicitly separate throughout.
+- Compared three canonical-source-of-truth options against six criteria
+  and recommended a dedicated `docs/discovery/DISCOVERY-LIFECYCLE.md`
+  (not created), explicitly declining to treat `FOUNDING-CHARTER.md` as
+  default authority without argument. Proposed a reference rule
+  preventing future documents from redrawing the full pipeline, plus a
+  namespace dictionary covering all 18 terms named in the task,
+  including a three-way qualified split for "Observation" and two kept-
+  distinct senses each for "Archive" and "Rejection."
+- Converted the "AG-001's one run produced 17 findings" scalability
+  concern into a stated research question and a minimal-data
+  requirement, explicitly avoiding both a premature architectural fix
+  and premature escalation to a formal Investigation.
+- Ran the required adversarial review of this document itself and
+  recorded 10 findings, none disposed FIX BEFORE ADOPTION. Most
+  notable: six of the seven canonical stage names do not appear
+  verbatim in any of the three source documents, and "Captured" (this
+  document's own Stage 1 name) collides with a stage name `PROP-0002`
+  §1 already uses for the Intake mechanism's own separate micro-
+  lifecycle — recorded as an OPEN QUESTION, not fixed silently.
+- `PROP-0001` and `PROP-0002` were not modified in substance. No code,
+  automation, GitHub Action, agent, or prompt introduced. No dedicated
+  proposal registry exists in this repository (confirmed by inspection)
+  — only `STATE.md`/`CHANGELOG.md` registration was added, matching the
+  same minimal pattern already used for `PROP-0001` and `PROP-0002`.
+  No other repository read, modified, or notified.
