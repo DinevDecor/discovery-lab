@@ -192,3 +192,55 @@
 - No other repository (KOD, generative-discovery-engine, trust-engine,
   project-memory) was read, modified, or notified. No new GitHub
   repository was created; `add_repo` was not used.
+
+## 2026-07-24 (AG-001 RUN-0001)
+
+- Executed AG-001 Repository Observer's first real run, `RUN-0001`,
+  following `PROMPT.md` / `RUN-PROTOCOL.md` / `CHECKLIST.md` /
+  `OUTPUTS.md` exactly. Scope: `discovery-lab` only, read-only.
+  Baseline: commit `dff7810`. Target state: branch
+  `claude/ai-org-ag-001-prototype` at commit `bfaa17f`.
+- Report at `docs/ai-organization/employees/AG-001-repository-observer/
+  runs/RUN-0001-observation-report.md`: 5 confirmed changes, 6
+  current-state observations, 3 structural signals (including two
+  broken relative-path references discovered in AG-001's own
+  `HISTORY.md`, and a field mismatch between `INPUTS.md`/`PROMPT.md`
+  and `OUTPUTS.md`'s fixed Run Metadata template), 1 `INSUFFICIENT
+  ACCESS` item, 2 `UNKNOWN` items. No recommendations or conclusions
+  given.
+- Per `RUN-PROTOCOL.md` step 8, exactly one line was appended to
+  `HISTORY.md` recording the run — no other file in AG-001's folder was
+  touched. `STATUS.yaml` was deliberately not updated; the role's status
+  remains `prototype` pending independent review.
+
+## 2026-07-24 (ORB — Organizational Review Board)
+
+- Created `docs/ai-organization/ORB/` — an organizational **process**,
+  not a new employee: no Employee ID, no entry in
+  `EMPLOYEE-REGISTRY.md`, no `CONTRACT.md`, no assigned Executor.
+- Added `ORB-PROTOCOL.md`, formalizing the "independent review of a
+  sample of reports" step `HIRING-LIFECYCLE-DRAFT.md` already requires
+  for every stage transition, without modifying that document. Defines
+  who may act as Reviewer (must not be the Executor of the reviewed
+  run), what ORB does and does not review (conduct against an existing
+  contract, never the contract's own design), and hard boundaries: an
+  ORB Review never edits a reviewed Role's files or `STATUS.yaml`, never
+  changes governance, is not automated, and never itself decides a
+  status change — only a human does, per `HIRING-LIFECYCLE-DRAFT.md`.
+- Added `ORB-REVIEW-TEMPLATE.md`, requiring every review to answer six
+  fixed questions (contract honored; authority exceeded; unsupported
+  claims; real value delivered; new organizational lesson; whether a
+  separate Investigation is needed instead of a direct change), each
+  with a fixed verdict vocabulary and mandatory evidence, plus a Review
+  Boundary Statement mirroring AG-001's own Observer Boundary Statement.
+- Added `ORB-REGISTRY.md`, an empty append-only index (0 reviews
+  conducted) — no review of AG-001 or `RUN-0001` was performed as part
+  of this change, per instruction.
+- Added a disambiguation note distinguishing "ORB Review" from KOD's
+  "Under Review" Research Session stage and generative-discovery-
+  engine's "Critical Review" — a third, distinct scope (AI employee
+  conduct, not knowledge claims or discovery methods).
+- No changes to AG-001, `EMPLOYEE-REGISTRY.md`, `HIRING-LIFECYCLE-
+  DRAFT.md`, `ORGANIZATION-DRAFT.md`, or any other governance document.
+  No automation introduced. No other repository read, modified, or
+  notified.
