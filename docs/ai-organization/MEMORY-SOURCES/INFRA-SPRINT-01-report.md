@@ -1,12 +1,15 @@
 # Infrastructure Sprint 01 — Permanent Access to Project Memory (Google Drive)
 
-**Status: CLOSED — PLATFORM LIMITATION (Google Drive connector path).
-Definition of Done: NOT PASS, and not achievable via this path in this
-client.** Alternative architecture proposed, not implemented — see
-`../../adr/ADR-0002-ag002-alternative-memory-access.md`.
+**Status: CLOSED (Google Drive connector path) — RESOLVED via an
+alternative operational architecture. Overall Definition of Done: PASS**
+— see §10. Direct Google Drive access remains NOT PASS and not achievable
+in this client (§9); AG-002 is nonetheless operational via
+`ADR-0002-ag002-alternative-memory-access.md` (ACCEPTED, IMPLEMENTED).
 Date: 2026-07-24. Triggered by: AG-002 `PILOT-RUN-0002`, blocked at Stage 1
 (`../employees/AG-002-discovery-archaeologist/HISTORY.md`, `../../../CHANGELOG.md`,
-both dated 2026-07-24). Closed after a live approval test — see §9.
+both dated 2026-07-24). Closed as a platform limitation after a live
+approval test (§9); resolved by building a repository-based operational
+memory layer instead (§10).
 
 This is an infrastructure problem, not an AG-002 problem, per the task that
 requested this sprint. Nothing in `AG-002` or in Discovery Lab's governance
@@ -169,6 +172,29 @@ No layer here is new *governance*: Stages 1–6 are exactly the Connection
 Protocol already defined in `MEMORY-SOURCE-PROTOCOL.md`, unmodified by this
 sprint. What this sprint adds is naming the precondition that sits in front
 of Stage 1 and was, until now, implicit and undocumented.
+
+**Superseded, 2026-07-24 (§10): as actually adopted**, the diagram above
+is no longer the live path for the diary specifically. Stage 0 does not
+clear in this client (§9), so AG-002's real read path is:
+
+```
+Google Drive (Project Memory)
+        │
+        │  Manual export (human, outside this repository/session)
+        ▼
+memory/inbox/ → validate & file → memory/journal|decisions/  (MEM-003)
+        │        (IMPORT-PROCEDURE.md — new Stage, see 2.1a)
+        ▼
+Memory Source Registry           (MEMORY-SOURCE-PROTOCOL.md, unmodified)
+   Stage 1 Lookup ... Stage 5 Read-only Access
+        │
+        ▼
+AG-002 (verified, §10.3) · AG-001, future employees (not yet exercised)
+```
+
+The original diagram is kept, unedited, above — it remains the intended
+*eventual* path if Stage 0 is ever cleared by a platform change; it is
+simply not the path in force today.
 
 ### 2.1 Stage 0 — Platform Tool Approval (finding, not a protocol edit)
 
@@ -490,17 +516,136 @@ repository's or this session's control, per §1.4.
 - `MEM-002` remains in the Registry, `status: unverified`, with its notes
   updated to point here rather than to a still-pending action (see
   `MEMORY-SOURCE-REGISTRY.md`).
-- An alternative architecture for AG-002 is proposed, not implemented, in
+- An alternative architecture for AG-002 was proposed in
   `../../adr/ADR-0002-ag002-alternative-memory-access.md` — keeping Google
   Drive as the human-maintained canonical source while giving AG-002 a
-  source type it can already access reliably.
+  source type it can already access reliably. **Superseded by §10: this
+  was subsequently accepted and implemented**, in the same task sequence
+  that closed this section.
+
+## 10. Decision & Implementation — Repository-Based Operational Memory Layer
+
+Recorded 2026-07-24, in direct response to a task titled "Resolve AG-002
+Memory Access Blocker," issued immediately after §9 closed. This section
+is the documented decision §6's constraint ("do not change Google Drive's
+role without documenting the decision") requires, and the record of what
+was actually built and verified.
+
+### 10.1 Decision
+
+**Google Drive's role changes.** It was originally envisioned (§2's
+diagram) as a source AG-002 and future Roles would eventually read
+directly, once Stage 0 (Platform Tool Approval) cleared. §9 established
+that Stage 0 cannot clear, unattended, in this client — ever, not just
+today. The decision, made explicitly rather than left to drift:
+
+- **Google Drive remains the canonical, human-maintained archive.** Nothing
+  about its authority or role as the source of record changes.
+- **Google Drive is no longer treated as a source any Role reads
+  directly.** `MEM-002` is reclassified (not deprecated) —
+  `agent_access: HUMAN-INTERACTIVE / NOT AGENT-OPERATIONAL` — in
+  `MEMORY-SOURCE-REGISTRY.md`.
+- **The Git repository (`discovery-lab/memory/`) becomes AG-002's actual
+  operational read source**, registered as `MEM-003`, populated by manual,
+  human-mediated import — implementing
+  `../../adr/ADR-0002-ag002-alternative-memory-access.md`, which is
+  hereby **ACCEPTED** (see that document's own Acceptance record).
+
+### 10.2 What was built
+
+- **`memory/`** — a new top-level structure in `discovery-lab`:
+  `inbox/`, `journal/`, `decisions/`, `observations/`, plus
+  `README.md`, `PROVENANCE-SYNC-SPEC.md`, `IMPORT-PROCEDURE.md`, and
+  `source-manifest.md`. Explicitly **not** a bulk Drive copy — seeded
+  with exactly one file, added via the real import procedure it defines.
+- **`PROVENANCE-SYNC-SPEC.md`** — the required metadata schema
+  (`source_system`, `source_path`, `source_file_id`,
+  `source_modified_at`, `mirrored_at`, `mirror_method`, `content_hash`,
+  `verification_status`) and the synchronization rules: Drive is
+  canonical, the mirror is never a second source of truth, no silent
+  overwrites, no claim of completeness, unresolved divergence is
+  reported not guessed.
+- **`IMPORT-PROCEDURE.md`** — manual v1 only, no automatic Drive sync.
+  Five steps: export (human, outside this repository) → place in
+  `inbox/` → validate and file (steward) → record in
+  `source-manifest.md` → Registry Stage 4 check. Explicit that "the
+  agent" performing this procedure is the steward, not AG-002 —
+  consistent with AG-002's own `INPUTS.md`, which was not modified.
+- **`MEMORY-SOURCE-REGISTRY.md`** — `MEM-002` reclassified as above;
+  `MEM-003` added (`type: git_repository`, same shape as `MEM-001`,
+  `access_requirements` identical — no new capability required of any
+  Role). Two new fields, `connectivity` and `agent_access`, added to
+  both entries as a small, pragmatic step — explicitly **not** the full
+  two-axis schema migration `ADR-0001-migration-plan.md` Item 2 still
+  lists as **NOT STARTED**; that migration remains undone.
+
+### 10.3 Verification performed
+
+Per the task's own verification requirement, a real, complete
+end-to-end run was executed — not just the structure:
+
+1. A synthetic test fixture was created and clearly labeled as such at
+   every point of contact (in-file banner, front matter, manifest entry,
+   run report), since no real, accessible Drive content exists yet to
+   test against — using invented content here, honestly labeled, is
+   different from AG-002 ever inventing a *finding* about real history,
+   which remains absolutely prohibited (`LIMITATIONS.md`, unmodified).
+2. It was placed in `memory/inbox/`, validated, hashed
+   (`sha256:aa75e30c1edc6e4df6cbb793dcc0ad2f91ba7b2be84f2c9a3d89b6b1c0ee8407`),
+   filed into `memory/journal/` with a full provenance block, and logged
+   as `memory/source-manifest.md` entry `MIRROR-001`.
+3. **AG-002 was run against it** — `MIRROR-VERIFY-0001`
+   (`../employees/AG-002-discovery-archaeologist/runs/
+  MIRROR-VERIFY-0001-recovery-report.md`), using AG-002's existing,
+   unmodified Recovery Protocol. Result: the source was discovered via
+   the Registry (`MEM-003`), read in full, its provenance preserved and
+   cited, one finding extracted (a recurring "standing observatory"
+   idea, stated twice) with full citations, the result written to
+   `memory/observations/MIRROR-VERIFY-0001-observation-0001.md`, and the
+   source itself left unmodified — confirmed in the report's own
+   Archaeologist Boundary Statement.
+4. `MEM-003` was then updated: `status: unverified → active`,
+   `last_verified: 2026-07-24`, `agent_access: AGENT-OPERATIONAL —
+   PRIMARY FOR AG-002` — per the task's own instruction, marked primary
+   only *after* this verification, not on creation.
+5. AG-002's `STATUS.yaml`: `runs_completed` incremented `1 → 2` (a real
+   run genuinely occurred); performance/quality fields left untouched,
+   pending independent review, per `CHECKLIST.md`.
+
+### 10.4 Remaining limitations (stated honestly, not smoothed over)
+
+- **No real content has been mirrored yet.** `MEM-003` is proven
+  *mechanically* reachable and readable; the diary itself remains
+  entirely unmirrored. `PILOT-RUN-0002` against real content is still
+  unattempted.
+- **The mirror is manual and single-file so far.** No real export has
+  been performed by a human; `IMPORT-PROCEDURE.md` describes the process
+  but has only been exercised once, against synthetic content.
+- **The "no duplicated memory" tension `ADR-0002` §4 raised is resolved
+  only partially** — this task's own constraint ("store only the files
+  required for active agent work") sets a bound, but no explicit
+  governance amendment to `MEMORY-SOURCE-PROTOCOL.md` was made.
+- **`ADR-0001`'s full two-axis Registry schema migration is still not
+  started** — `connectivity`/`agent_access` are a minimal, ad hoc
+  addition, not that migration.
+- **Google Drive access itself is unchanged** — §9's conclusion stands;
+  nothing here makes Drive reachable, it routes around it.
+
+### 10.5 Completion verdict
+
+**PASS** — AG-002 successfully completed an end-to-end run using the
+repository memory source (`MEM-003`), per the task's own verification
+requirement in full (discover, read, preserve provenance, extract one
+finding, write the result, avoid modifying the source). This verdict
+covers the *mechanism*; §10.4's limitations — most importantly, that no
+real diary content has been mirrored yet — are not resolved by this PASS
+and are not implied by it.
 
 ## Definition of Done
 
-**NOT PASS — closed as a platform limitation, per §9.** The infrastructure
-was diagnosed with evidence, the permanent architecture is specified, and
-the Connection Plan was tested for real, including a live approval
-attempt — and did not clear. This sprint does not end in "waiting on a
-human action"; it ends in a conclusion this repository cannot engineer
-its way past. `ADR-0002-ag002-alternative-memory-access.md` is the
-proposed next step, not yet authorized to implement.
+**Google Drive connector path: NOT PASS, closed as a platform limitation
+(§9) — unchanged, and not expected to change without a platform-side
+fix.** **Overall sprint objective (AG-002 operational without direct
+Drive dependency): PASS (§10.5).** This sprint closes having produced a
+working, verified, alternative path rather than remaining blocked on a
+human action that turned out not to be sufficient.

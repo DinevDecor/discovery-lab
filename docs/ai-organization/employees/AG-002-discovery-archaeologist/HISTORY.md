@@ -52,3 +52,33 @@ Reported to the requester verbatim as: `BLOCKED — Diary archive exists
 but is not accessible from the current execution environment.` No
 source document was read, modified, or invented. `runs_completed` in
 `STATUS.yaml` was not incremented — no run was actually completed.
+
+## 2026-07-24 — MIRROR-VERIFY-0001 (pipeline verification, not a real
+recovery mission)
+
+After `../../MEMORY-SOURCES/INFRA-SPRINT-01-report.md` §9 closed direct
+Google Drive access as a platform limitation (a live approval test,
+conducted with Petko actively granting approval in real time, still
+failed with `MCP error -32003` on the very next call), a repository
+operational memory mirror (`memory/`, registered as `MEM-003`) was built
+per `../../../adr/ADR-0002-ag002-alternative-memory-access.md`
+(ACCEPTED). This run verified AG-002 can read that mirror end to end,
+using a source that has never touched Google Drive: a labeled synthetic
+test fixture (`memory/journal/SYNTHETIC-TEST-journal-0001.md`),
+fabricated and clearly marked as such throughout, since no real,
+accessible content exists yet to test against. Full run report:
+`runs/MIRROR-VERIFY-0001-recovery-report.md`. Recovered: 1 idea (a
+fabricated "standing observatory" concept), 1 repeated theme, 1
+idea-evolution entry, 0 forgotten ideas, 0 candidate investigations
+(none proposed — the content is synthetic), 0 contradictions. Extracted
+finding also written to `memory/observations/
+MIRROR-VERIFY-0001-observation-0001.md`. Source file unmodified;
+Archaeologist Boundary Statement confirms no invented content beyond
+what the labeled-synthetic source itself contains. This is a genuine,
+real execution of the Recovery Protocol's mechanics (Stages 1–7 all
+actually performed) against fabricated content — distinct from
+`PILOT-RUN-0002`, which remains unattempted against the real diary.
+`runs_completed` in `STATUS.yaml` **is** incremented for this entry,
+since the run itself was real, even though its source content was not;
+performance/quality fields are left untouched, pending independent
+review, per `CHECKLIST.md`.

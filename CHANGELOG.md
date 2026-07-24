@@ -718,3 +718,84 @@
   often it recurs.
 - `docs/adr/README.md` updated: ADR-0002 added as **DRAFT** (index now 2
   ADRs: 1 accepted, 1 draft).
+
+## 2026-07-24 (AG-002 Memory Access Blocker resolved — ADR-0002 implemented, verified PASS)
+
+- **ADR-0002 accepted and implemented**, in the same task sequence as its
+  draft — `docs/adr/ADR-0002-ag002-alternative-memory-access.md`'s
+  `Status:` changed `DRAFT → ACCEPTED — IMPLEMENTED`, with an Acceptance
+  record resolving its own open questions (export location =
+  `discovery-lab/memory/`; cadence = manual v1; the "no duplicated
+  memory" tension resolved by instruction — bounded, purpose-scoped
+  mirroring authorized, wholesale duplication still prohibited). The
+  original draft text (§1–§6) is preserved unedited below the Acceptance
+  block, per this repository's "don't rewrite history" discipline.
+- **Documented the Google Drive role change** `INFRA-SPRINT-01-report.md`
+  §6 required before making it: Drive stays the canonical,
+  human-maintained archive, but is no longer treated as a source any Role
+  reads directly. Recorded in a new **§10, "Decision & Implementation —
+  Repository-Based Operational Memory Layer,"** which also updates §2's
+  Permanent Architecture diagram (superseded-and-annotated, not deleted)
+  and closes with a completion verdict.
+- **Added `memory/`** at the `discovery-lab` repo root: `inbox/`,
+  `journal/`, `decisions/`, `observations/`, `README.md`,
+  `PROVENANCE-SYNC-SPEC.md`, `IMPORT-PROCEDURE.md`, `source-manifest.md`.
+  Explicitly not a bulk Drive copy — seeded with exactly one file, added
+  through the real import procedure it defines. `PROVENANCE-SYNC-SPEC.md`
+  defines the 8-field metadata block (`source_system`, `source_path`,
+  `source_file_id`, `source_modified_at`, `mirrored_at`, `mirror_method`,
+  `content_hash`, `verification_status`) and the sync rules: Drive is
+  canonical, the mirror is never a second source of truth, no silent
+  overwrites, no claim of completeness, unresolved divergence reported
+  not guessed. `IMPORT-PROCEDURE.md` is manual-only for v1 (no automatic
+  Drive sync), and is explicit that the mechanical filing steps are
+  performed by a human/steward, not by AG-002 — consistent with AG-002's
+  own unmodified `INPUTS.md`.
+- **`MEMORY-SOURCE-REGISTRY.md` updated**: `MEM-002` reclassified (not
+  deprecated) — `connectivity: CONNECTED`,
+  `agent_access: HUMAN-INTERACTIVE / NOT AGENT-OPERATIONAL`. `MEM-003`
+  added (`type: git_repository`, same shape as `MEM-001`, zero new
+  capability required of any Role), initially `unverified`, later
+  promoted to `status: active`, `agent_access: AGENT-OPERATIONAL —
+  PRIMARY FOR AG-002` once verification passed (below) — marked primary
+  only after verification, per instruction, not on creation. The new
+  `connectivity`/`agent_access` fields are noted explicitly as a small,
+  ad hoc addition, **not** `ADR-0001-migration-plan.md` Item 2's full
+  two-axis schema migration, which remains **NOT STARTED**.
+- **One real end-to-end verification performed.** A synthetic test
+  fixture (`memory/journal/SYNTHETIC-TEST-journal-0001.md`) was created
+  and labeled as fabricated at every point of contact — in its own
+  banner text, its provenance front matter, its manifest entry, and the
+  run report — since no real, accessible Drive content exists yet to
+  test against. It was imported through the real procedure: placed in
+  `memory/inbox/`, hashed
+  (`sha256:aa75e30c1edc6e4df6cbb793dcc0ad2f91ba7b2be84f2c9a3d89b6b1c0ee8407`),
+  filed into `memory/journal/` with full provenance, logged as
+  `memory/source-manifest.md` entry `MIRROR-001`.
+- **AG-002 run `MIRROR-VERIFY-0001`**
+  (`docs/ai-organization/employees/AG-002-discovery-archaeologist/runs/
+  MIRROR-VERIFY-0001-recovery-report.md`), using AG-002's existing,
+  unmodified Recovery Protocol, unedited by this task: discovered
+  `MEM-003` via the Registry, read the filed file in full, preserved and
+  cited its provenance, extracted one finding (a recurring, fabricated
+  "standing observatory" idea, stated twice), wrote the result to
+  `memory/observations/MIRROR-VERIFY-0001-observation-0001.md`, and did
+  not modify the source — confirmed in the report's own Archaeologist
+  Boundary Statement. The report itself carries a prominent warning
+  banner distinguishing it from a real recovery mission and from the
+  still-unattempted, still-blocked `PILOT-RUN-0002`.
+- `AG-002`'s `HISTORY.md` gets a new, honestly-labeled entry
+  (`MIRROR-VERIFY-0001`); `STATUS.yaml`'s `runs_completed` incremented
+  `1 → 2` (a real run genuinely occurred, even though its source content
+  was synthetic) — performance/quality fields left untouched, pending
+  independent review, per `CHECKLIST.md`.
+- Two broken relative-path references caught and fixed during mechanical
+  verification before commit (`../../MEMORY-SOURCES/...` in the new run
+  report needed one more `../` level — corrected to `../../../MEMORY-SOURCES/...`).
+- **Completion verdict: PASS** — AG-002 successfully completed an
+  end-to-end run using the repository memory source. Remaining
+  limitation, stated plainly: no real Google Drive content has been
+  mirrored yet; only the mechanism is proven. No further Google Drive
+  MCP calls were attempted, no bulk copy was made, no background sync was
+  built, and no secrets or sensitive data were introduced — all per
+  explicit constraint.

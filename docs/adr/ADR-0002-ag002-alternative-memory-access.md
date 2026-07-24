@@ -1,7 +1,18 @@
 # ADR-0002 — Alternative Memory Access for AG-002 (Human-Mediated Export Bridge)
 
-Status: **DRAFT — PROPOSAL ONLY, NOT IMPLEMENTED**
+Status: **ACCEPTED — IMPLEMENTED**
 Date: 2026-07-24
+Accepted: 2026-07-24, by Petko, via a direct implementation order ("Task —
+Resolve AG-002 Memory Access Blocker") rather than a separate approve/amend
+round on this draft. Concrete design decisions this order made, resolving
+§5's open questions: location = `discovery-lab/memory/` (open question 1);
+cadence = manual, on-demand import for v1, no background sync (open
+question 2); the §4 tension is resolved by instruction, not by silent
+default — "do not duplicate the entire Google Drive. Store only the files
+required for active agent work": **bounded, purpose-scoped mirroring is
+authorized; wholesale duplication remains prohibited.** See
+`../ai-organization/MEMORY-SOURCES/INFRA-SPRINT-01-report.md` §10 for the
+implementation record.
 Author: Implementer session (Claude Code)
 Depends on / builds on: `ADR-0001-human-authority-gates.md` (ACCEPTED —
 the HAG concept this proposal applies), `../ai-organization/MEMORY-SOURCES/
@@ -10,12 +21,16 @@ proposal responds to)
 
 ## How to read this document
 
-This is a **proposal**, not a decision — unlike ADR-0001, nothing here is
-accepted. Per explicit instruction, no part of this design is implemented:
-no new Registry entry is created, no export is performed, no file under
-`../ai-organization/employees/AG-002-discovery-archaeologist/` is touched.
-This document exists so Petko can evaluate the design before deciding
-whether to authorize it.
+This ADR was **drafted and accepted in the same work sequence**: Petko's
+next message after the draft was a direct order to implement it, not a
+separate accept/reject decision — so acceptance and implementation are
+recorded together here rather than as two dated events. What follows below
+this point (§1–§6) is the **original draft text, unedited**, preserved as
+the record of what was proposed; the Acceptance block above and
+`INFRA-SPRINT-01-report.md` §10 record what was actually built, which
+refines but does not contradict this draft (e.g. the exact `memory/`
+folder names came from the implementation order, not from §3 below, which
+only said "a Git-tracked location").
 
 ---
 
@@ -134,7 +149,11 @@ establishing one.
 3. **Does §4's tension get resolved by exception, by declining this
    proposal, or by some third design not yet considered?**
 
-## 6. What this document does not do
+## 6. What this document did not do, as originally drafted
+
+*(preserved verbatim from the draft; superseded by the Acceptance block
+above and by `INFRA-SPRINT-01-report.md` §10, which record what was
+actually implemented)*
 
 - Does not create `MEM-003`.
 - Does not perform any export.
@@ -142,10 +161,14 @@ establishing one.
   `MEMORY-SOURCE-REGISTRY.md`, or any governance document.
 - Does not mark `MEM-002` deprecated — Google Drive remains the intended
   canonical source if a working, unattended access path is ever found;
-  this proposal is a bridge, not a replacement of intent.
+  this proposal is a bridge, not a replacement of intent. (This point
+  still holds after implementation: `MEM-002` is reclassified, not
+  deprecated — see `INFRA-SPRINT-01-report.md` §10.)
 
 ## Definition of Done
 
-This document is a proposal. It is done when it accurately describes a
-design Petko can accept, reject, or amend — not when anything in §3 has
-been built.
+**ACCEPTED AND IMPLEMENTED.** Superseded from "done when it accurately
+describes a design" (the draft's original criterion) to "done when the
+design is built and verified" — see `INFRA-SPRINT-01-report.md` §10 for
+the full implementation and verification record, including the completion
+verdict.
