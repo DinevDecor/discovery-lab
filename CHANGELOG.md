@@ -40,7 +40,51 @@
   (this session's own recovery investigation and the 2026-07-19 Dinev
   Decor evidence check, both previously done ad hoc in
   `project-memory/notes/`).
-- Proposed a smallest-possible first experiment (INV-0002, not yet run) to
-  test the recommended mandate before committing further.
+- Proposed a smallest-possible first experiment ("Ecosystem Health Review
+  v0.1", not yet run) to test the recommended mandate before committing
+  further.
 - Updated `STATE.md` to reflect `MANDATE_DRAFTING` phase. No ADR was
   created or accepted; no architecture was invented.
+
+## 2026-07-24 (independent architecture passes)
+
+- Ran three completely independent, isolated, read-only architecture
+  reviews — one each over KOD, generative-discovery-engine, and
+  trust-engine — each answering a fixed 8-question diagnostic with no
+  visibility into the other two passes or into prior discovery-lab work.
+  Recorded verbatim, plus a fourth cross-repository synthesis pass run
+  only afterward, in
+  `docs/investigations/INV-0002-independent-architecture-passes.md`.
+- The trust-engine pass found a previously undocumented gap: roughly
+  60+ architecture/spec documents but only 15 implemented Python
+  modules, with entire subsystems (Mechanism Trust Layer, Meta Trust
+  Layer) fully specified but never built.
+- Rewrote `docs/proposals/PROP-0001-discovery-lab-boundaries.md` (revision
+  2) with three variants that are genuinely distinct in entry criteria,
+  exit criteria, deletion mechanics, and governance burden — not
+  cosmetic renamings of the same design — each specifying its
+  relationship to KOD, generative-discovery-engine, trust-engine, and
+  project-memory individually.
+- Recommendation unchanged in substance (Ecosystem Observatory, still
+  not accepted) but now backed by the trust-engine gap as a live example
+  of the role's value, with explicit reasons Variants A and C were not
+  selected and a list of assumptions still requiring validation.
+- Added a full information-flow map (Reality → Observation → Candidate
+  investigation → Experiment → Evidence → Review/falsification →
+  Decision → Graduation/rejection/deletion → Destination repository)
+  with per-transfer source/destination/artifact/approval-gate/provenance
+  specifications, and marked the Experiment stage explicitly dormant
+  under the recommended variant.
+- Defined "Ecosystem Health Review v0.1" as the proposed first
+  experiment — fixed scope, frozen review criteria, a defined output
+  schema and PASS/PARTIAL/FAIL/INSUFFICIENT rubric, a stop rule, and
+  named conditions under which its result would invalidate the
+  recommended mandate. Not implemented; no agent created; no recurring
+  monitoring scheduled.
+- Ran a self-critique pass (hidden duplication, vague ownership,
+  irreversible scope growth, circular information flows, missing
+  deletion rules, unsupported recommendations) and fixed two findings:
+  added a terminology disambiguation note against KOD's "Investigation"
+  concept, and added an `archive/` consolidation path to Variant B's
+  deletion rules to bound long-term accumulation. Still no ADR created
+  or accepted; still no architecture invented or implemented.
