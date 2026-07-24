@@ -1,8 +1,8 @@
 # Promotion Rules — AG-003 Knowledge Curator
 
 Employee ID: **AG-003** · Role Name: **Knowledge Curator** ·
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
-**v0.1**
+Status: **FROZEN** · Version:
+**1.0**
 
 Governs Track 1 of `LIFECYCLE.md` — the `status` field. Every rule below
 produces, at most, a Core Principle Proposal (`OUTPUTS.md`). **No rule

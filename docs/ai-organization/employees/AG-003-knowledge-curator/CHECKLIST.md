@@ -1,8 +1,8 @@
 # Checklist — AG-003 Knowledge Curator
 
 Employee ID: **AG-003** · Role Name: **Knowledge Curator** ·
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
-**v0.1**
+Status: **FROZEN** · Version:
+**1.0**
 
 ## Before a curation pass
 

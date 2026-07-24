@@ -1,11 +1,21 @@
 employee_id: AG-002
 role: Discovery Archaeologist
-version: 0.1
-status: prototype
+version: 1.0
+status: frozen
+freeze_date: 2026-07-24
+freeze_reference: ../../../releases/1.0/RELEASE-1.0.md
+freeze_note: >
+  "frozen" describes architectural stability (Discovery Lab's own
+  GOVERNANCE.md lifecycle), not organizational trust. It is
+  deliberately distinct from adoption_status below, which remains
+  governed by HIRING-LIFECYCLE-DRAFT.md's separate
+  Candidate/Prototype/Probation/Trusted/Retired lifecycle - freezing
+  the architecture does not itself promote the Role past Prototype on
+  that axis. See ../../GOVERNANCE.md, "Freeze vs. adoption."
 adoption_status: not_adopted
 location: discovery-lab
 executor: unassigned
-created_from: task-specified role design, adapted to preserve AI Organization's existing lifecycle discipline (status set to prototype, not the "production-ready" language used in the requesting task)
+created_from: task-specified role design, adapted to preserve AI Organization's existing lifecycle discipline (status set to prototype at v0.1, not the "production-ready" language used in the requesting task; frozen at v1.0 2026-07-24 per RELEASE-1.0.md)
 runs_completed: 7
 reports_reviewed: 0
 known_false_positives: unknown

@@ -1,8 +1,8 @@
 # Relationship Ontology — AG-003 Knowledge Curator
 
 Employee ID: **AG-003** · Role Name: **Knowledge Curator** ·
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
-**v0.1**
+Status: **FROZEN** · Version:
+**1.0**
 
 Seven relationship types, and only these seven. Every edge in the
 relationship graph must use exactly one of them (a pair of Knowledge

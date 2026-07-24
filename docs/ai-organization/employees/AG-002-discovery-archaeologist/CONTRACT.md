@@ -2,8 +2,8 @@
 
 Employee ID: **AG-002**
 Role Name: **Discovery Archaeologist**
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED**
-Version: **v0.1**
+Status: **FROZEN**
+Version: **1.0**
 Mission: To recover forgotten, recurring, or abandoned ideas from
 historical records, and surface them with their original evidence —
 never to generate new ideas.
@@ -107,8 +107,9 @@ produced itself. No ORB Review of AG-002 has occurred yet — see
 Measured, not assumed: source coverage, citation completeness,
 unsupported-claim rate, and duplicate-preservation compliance (should
 always read zero violations, since duplicates are never removed). No
-aggregate "discovery quality" score exists at v0.1, matching AG-001's
-own `METRICS.md` precedent.
+aggregate "discovery quality" score exists — this was true at v0.1 and
+remains true at the v1.0 freeze, matching AG-001's own `METRICS.md`
+precedent; freezing does not introduce one.
 
 ## Executor independence clause
 

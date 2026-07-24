@@ -2,8 +2,8 @@
 
 Employee ID: **AG-003**
 Role Name: **Knowledge Curator**
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED**
-Version: **v0.1**
+Status: **FROZEN**
+Version: **1.0**
 Mission: To transform AG-002's recovered findings into a coherent,
 evolving Knowledge Base — never to discover new evidence, and never to
 decide anything on its own authority.
@@ -120,8 +120,9 @@ Measured, not assumed: citation completeness, merge-proposal precision,
 relationship explainability, promotion-proposal discipline (should
 always read zero automatic promotions), and contradiction-report
 restraint (should always read zero overridden `INSUFFICIENT EVIDENCE`
-markings). No aggregate "curation quality" score exists at v0.1, matching
-AG-001's and AG-002's own `METRICS.md` precedent.
+markings). No aggregate "curation quality" score exists — this was true
+at v0.1 and remains true at the v1.0 freeze, matching AG-001's and
+AG-002's own `METRICS.md` precedent; freezing does not introduce one.
 
 ## Executor independence clause
 

@@ -1317,3 +1317,78 @@
   narrow, evidence-linked clarifications, not redesigns). Per the task's
   own "Important Rule," no other change was made — every correction
   above is linked to one specific, cited piece of stress-test evidence.
+
+## 2026-07-24 (continued) — Discovery Lab Release 1.0
+
+- **Froze AG-002 Discovery Archaeologist and AG-003 Knowledge Curator at
+  version 1.0**, per an explicit governance-only task ("do not redesign
+  the architecture, do not introduce new features"). No architecture
+  change was made in this task — the freeze formalizes validation work
+  already completed and committed (internal review, adversarial
+  self-review, Reality Stress Test).
+- Updated `Status:`/`Version:` headers across both Roles' full document
+  sets (25 files total) from `Prototype / DRAFT / EXPERIMENTAL / NOT
+  ADOPTED` / `v0.1` to `FROZEN` / `1.0`, including two prose spots that
+  had gone stale (`AG-003 METRICS.md` still said "no real run as of
+  v0.1" after the stress test had already given it three — corrected to
+  match `STATUS.yaml`, not just cosmetically re-versioned).
+- Produced five new governance documents:
+  - **`docs/releases/1.0/RELEASE-1.0.md`** — what has been proven, what
+    remains intentionally out of scope (no real Knowledge Base store, no
+    independent review yet, `Validated`/`Core Principle` thresholds
+    never exercised, no `CI-NNNN` collision-prevention mechanism, no
+    aggregate score, no organizational adoption), known limitations,
+    acceptance criteria (all five met), freeze date, and repository
+    commit references.
+  - **`docs/releases/1.0/VALIDATION-HISTORY.md`** — a 17-entry
+    chronological ledger from AG-002's creation through this freeze,
+    including a full defect table for both the adversarial review and
+    the Reality Stress Test. Its item 16 records a real inconsistency
+    caught while writing it: the stress test's `F-2` fix incidentally
+    restates, rather than closes, the adversarial review's separate
+    finding 4 (a `maturity: Convergent` re-scan loophole) — left
+    unfixed in this freeze, since fixing it would itself be a new
+    architecture change this task's own rule forbids.
+  - **`docs/ai-organization/GOVERNANCE.md`** — formalizes the mandatory
+    lifecycle (`Idea → Draft → Internal Review → Adversarial Review →
+    Reality Stress Test → Freeze Recommendation → FROZEN`), generalized
+    from the real path AG-002 and AG-003 both actually took, plus
+    explicit versioning rules (bug fix / clarification / minor revision
+    `X.Y→X.(Y+1)` / major revision `X.0→(X+1).0` / deprecation).
+    Explicit about being a second axis, independent from
+    `HIRING-LIFECYCLE-DRAFT.md`'s own adoption lifecycle — freezing is
+    not adopting.
+  - **`docs/ai-organization/ARCHITECTURE-MAP.md`** — the
+    `Reality → AG-002 → Recovered Knowledge → AG-003 → Knowledge Base`
+    pipeline, marking AG-002 and AG-003 as validated production
+    components with an explicit definition of what that phrase does and
+    does not claim, and stating plainly that `Knowledge Base` is
+    architecturally specified but has no populated store yet. Also notes
+    AG-001 is not part of this pipeline and is unaffected by this
+    release.
+  - **`docs/releases/1.0/LESSONS-FROM-V1.md`** — mistakes made
+    (including the item-16 inconsistency above, and the recurring
+    relative-path bug pattern), architectural decisions that proved
+    correct ("propose, never impose" chief among them, validated with
+    zero boundary violations across four datasets), discarded ideas (an
+    eighth relationship type considered and rejected in favor of scoping
+    `supersedes`; a separate `CI-NNNN` namespace deferred as premature),
+    principles that survived reality, and six concrete recommendations
+    for future agents.
+- Updated `docs/ai-organization/EMPLOYEE-REGISTRY.md` (AG-002/AG-003 now
+  show `FROZEN 1.0` alongside their unchanged `Prototype (not adopted)`
+  adoption status — the two axes shown side by side, not conflated) and
+  both Roles' own `STATUS.yaml` (`status: frozen`, `version: 1.0`,
+  `freeze_date`, and a `freeze_note` explicitly distinguishing this from
+  `adoption_status`, which remains `not_adopted`, unchanged by this
+  release) and `HISTORY.md`.
+- **Verdict: PASS** — both Roles frozen at 1.0, all five required
+  documents produced, no architecture redesigned and no feature added
+  (the only "changes" bundled were the Reality Stress Test's own `F-1`–
+  `F-3` corrections, already committed before this freeze was
+  requested). One real, previously-unnoticed inconsistency between two
+  earlier validation passes was found while preparing this release and
+  is recorded honestly, not smoothed over, in three separate documents
+  (`RELEASE-1.0.md`, `VALIDATION-HISTORY.md`, `LESSONS-FROM-V1.md`) —
+  left unfixed on purpose, since fixing it would itself be new
+  architecture work this task's own rule forbade.

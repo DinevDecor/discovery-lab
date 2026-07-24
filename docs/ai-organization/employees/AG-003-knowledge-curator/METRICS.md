@@ -1,8 +1,8 @@
 # Metrics — AG-003 Knowledge Curator
 
 Employee ID: **AG-003** · Role Name: **Knowledge Curator** ·
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
-**v0.1**
+Status: **FROZEN** · Version:
+**1.0**
 
 This document defines AG-003's quality-measurement **interface** only.
 No aggregate score, no invented starting values — matching AG-001's and
@@ -47,7 +47,13 @@ general trust-scoring pipeline is trust-engine's territory (per
 
 ## Measured, not assumed
 
-AG-003 has had no real run as of v0.1 — see `STATUS.yaml`. The worked
-example in `../../../proposals/AG-003-knowledge-curator-walkthrough/` is
-an architecture demonstration, not a scored run; none of the metrics
-above have a real value yet.
+At v1.0 freeze: AG-003 has 3 completed real curation passes — see
+`STATUS.yaml` and `../../../proposals/AG-003-reality-stress-test/
+REALITY-STRESS-TEST-REPORT.md`. The first worked example
+(`../../../proposals/AG-003-knowledge-curator-walkthrough/`) remains an
+architecture demonstration, not a scored run. None of the metrics above
+have been formally scored against a numeric target — the Reality Stress
+Test evaluated correctness and boundary compliance qualitatively
+(`PASS`/`PARTIAL`/`BLOCKED` per dataset), not against these specific
+metric definitions; converting that evaluation into scored values for
+each metric above remains future work, not done as part of this freeze.

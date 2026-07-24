@@ -252,3 +252,17 @@ architecture (not in AG-002's) and one coverage/completeness note — see
 that report and AG-003's own `HISTORY.md` for the curation-side detail.
 `runs_completed` in `STATUS.yaml` incremented by 3 (`4 → 7`) — three
 real, distinct runs.
+
+## 2026-07-24 — Release 1.0: FROZEN
+
+Per an explicit "Discovery Lab — Freeze Release 1.0" task (governance,
+not development — no redesign, no new feature). Status advanced
+`prototype, v0.1` → `frozen, v1.0`, on the strength of the validation
+record above: an internal design review, an adversarial self-review, and
+a real Reality Stress Test across four structurally different real
+datasets, all summarized in `../../../releases/1.0/
+VALIDATION-HISTORY.md`. `adoption_status` remains `not_adopted` and is
+unchanged by this freeze — see `STATUS.yaml`'s `freeze_note` and
+`../../GOVERNANCE.md`, "Freeze vs. adoption": architectural stability and
+organizational trust are deliberately independent axes. Full release
+record: `../../../releases/1.0/RELEASE-1.0.md`.

@@ -1,8 +1,8 @@
-# Curation Protocol v0.1 — AG-003 Knowledge Curator
+# Curation Protocol v1.0 — AG-003 Knowledge Curator
 
 Employee ID: **AG-003** · Role Name: **Knowledge Curator** ·
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
-**v0.1**
+Status: **FROZEN** · Version:
+**1.0**
 Core Principle: **Curate what was recovered. Propose, never impose.
 Every claim traces back to a Recovery Report.**
 

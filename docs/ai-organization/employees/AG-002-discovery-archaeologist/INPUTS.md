@@ -1,8 +1,8 @@
 # Inputs — AG-002 Discovery Archaeologist
 
 Employee ID: **AG-002** · Role Name: **Discovery Archaeologist** ·
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
-**v0.1**
+Status: **FROZEN** · Version:
+**1.0**
 Core Principle: **Recover what was recorded. Cite where. Draw no
 conclusions.**
 

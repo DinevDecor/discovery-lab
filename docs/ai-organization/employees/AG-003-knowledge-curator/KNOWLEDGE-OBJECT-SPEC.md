@@ -1,8 +1,8 @@
 # Knowledge Object Specification — AG-003 Knowledge Curator
 
 Employee ID: **AG-003** · Role Name: **Knowledge Curator** ·
-Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
-**v0.1**
+Status: **FROZEN** · Version:
+**1.0**
 
 A Knowledge Object is `discovery-lab`'s own curated unit of recovered
 knowledge. It is not a copy of, and has no relationship to, KOD's own

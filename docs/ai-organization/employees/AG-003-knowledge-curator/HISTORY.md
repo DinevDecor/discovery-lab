@@ -86,3 +86,21 @@ Freeze recommendation returned by the stress test: **READY WITH MINOR
 CHANGES** — the three corrections above are those changes, already
 applied. `known_missed_findings` in `STATUS.yaml` updated to record
 `F-1`–`F-4` by name, not left at "unknown."
+
+## 2026-07-24 — Release 1.0: FROZEN
+
+Per an explicit "Discovery Lab — Freeze Release 1.0" task (governance,
+not development — no redesign, no new feature). Status advanced
+`prototype, v0.1` → `frozen, v1.0`, on the strength of the validation
+record above. `adoption_status` remains `not_adopted` and is unchanged
+by this freeze — see `STATUS.yaml`'s `freeze_note` and
+`../../GOVERNANCE.md`, "Freeze vs. adoption." One real, unresolved
+inconsistency between two validation passes was caught while preparing
+this freeze (not before): the Reality Stress Test's own `F-2` fix
+incidentally restates, rather than closes, the adversarial review's
+earlier finding 4 (a `maturity: Convergent` re-scan loophole) — recorded
+honestly, left unfixed in this freeze since fixing it would be a new
+architecture change this release's own task forbids; see
+`../../../releases/1.0/VALIDATION-HISTORY.md` item 16 and
+`LESSONS-FROM-V1.md`. Full release record:
+`../../../releases/1.0/RELEASE-1.0.md`.

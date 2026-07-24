@@ -1,6 +1,8 @@
 # Review Protocol — AG-003 Knowledge Curator (Knowledge Review)
 
-**Status: DRAFT / Experimental Process.** Version v0.1. Date: 2026-07-24.
+**Status: FROZEN, as part of AG-003 v1.0** (`../../../releases/1.0/
+RELEASE-1.0.md`).
+Version 1.0. Date: 2026-07-24 (drafted); frozen 2026-07-24.
 
 ## What Knowledge Review is
 
