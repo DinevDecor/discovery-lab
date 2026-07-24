@@ -1,0 +1,20 @@
+employee_id: AG-002
+role: Discovery Archaeologist
+version: 0.1
+status: prototype
+adoption_status: not_adopted
+location: discovery-lab
+executor: unassigned
+created_from: task-specified role design, adapted to preserve AI Organization's existing lifecycle discipline (status set to prototype, not the "production-ready" language used in the requesting task)
+runs_completed: 1
+reports_reviewed: 0
+known_false_positives: unknown
+known_missed_findings: unknown
+boundary_violations: 0
+last_run: 2026-07-24
+last_review: null
+open_governance_questions:
+  - permanent organizational owner
+  - authority to promote to trusted
+  - long-term repository location
+  - whether "production-ready" framing in a requesting task should ever override this repository's own Prototype-first lifecycle discipline

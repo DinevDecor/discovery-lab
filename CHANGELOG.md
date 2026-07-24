@@ -375,3 +375,54 @@
   — only `STATE.md`/`CHANGELOG.md` registration was added, matching the
   same minimal pattern already used for `PROP-0001` and `PROP-0002`.
   No other repository read, modified, or notified.
+
+## 2026-07-24 (AG-002 — Discovery Archaeologist, v0.1 + PILOT-RUN-0001)
+
+- **Blocker found before any design work began, and reported rather
+  than worked around:** the task requested review of "the supplied
+  diary archive together with the Project Memory archive." A full
+  filesystem search (`/home/user`, `/workspace`, and a broad
+  system-wide `find`) found no diary archive anywhere accessible to
+  this session. Rather than inventing diary content or fabricating
+  "recovered ideas" attributed to a nonexistent source — which would
+  have directly violated the task's own "never invent information" and
+  "evidence always wins over interpretation" constraints — this was
+  reported, and the run proceeded on the one named source that does
+  exist: `project-memory/archive/`.
+- Created `docs/ai-organization/employees/AG-002-discovery-archaeologist/`
+  — full document set (`CONTRACT.md`, `ROLE.md`, `INPUTS.md`,
+  `OUTPUTS.md`, `LIMITATIONS.md`, `CHECKLIST.md`, `METRICS.md`, a
+  Recovery Protocol `RUN-PROTOCOL.md` — Historical Sources → Scanning →
+  Candidate Discovery → Evidence Linking → Clustering → Recovery Report
+  → Recovery Queue — `PROMPT.md`, `STATUS.yaml`, `HISTORY.md`), mirroring
+  AG-001's established convention. Status set to **`prototype`**, not
+  the "production-ready" language the requesting task used — recorded
+  explicitly as a deliberate deviation, since this is the Role's first
+  run and `HIRING-LIFECYCLE-DRAFT.md` requires real runs, independent
+  review, and a human decision before any advancement.
+- Ran `PILOT-RUN-0001` for real: scanned
+  `project-memory/archive/architecture-design-document.md`,
+  `spike-protocol-potok-b.md`, `AI-Collaboration-Architecture-v1_0.md`,
+  and `v1_1.md` in full, plus current-state `project-memory` files for
+  comparison. Report:
+  `employees/AG-002-discovery-archaeologist/runs/
+  PILOT-RUN-0001-recovery-report.md`.
+- **Findings, each fully cited:** 7 Recovered Ideas (including a
+  complete, apparently-unbound installer "Handover" architecture, and a
+  complete, apparently-unexecuted "Поток B" validation spike); 4
+  Repeated Themes (most stable: the identical five-word `OPEN → BRIEF →
+  WORK → EXTRACT → CLOSE` session lifecycle, unchanged across three
+  points in time); 5 Idea Evolution timelines (e.g. a "Kernel"
+  governance layer absent from the earliest version scanned, then
+  explicitly reintroduced, then accepted but explicitly left
+  unvalidated by Pilot 0's own stated boundary); 2 Forgotten Ideas; 2
+  Contradictions (one self-documented revision between versions, one
+  principle-vs-outcome gap, neither adjudicated); 6 Open Questions; a
+  4-item Recovery Queue — **no Investigation created automatically**.
+- No source document was edited. No duplicate was removed — repeated
+  appearances across versions are cited together as the finding itself,
+  not collapsed. No recovered idea is asserted as true or worth
+  pursuing.
+- Registered AG-002 in `EMPLOYEE-REGISTRY.md` (now 2 Roles, 0 Trusted).
+  All relative-path references mechanically verified before commit. No
+  other repository read, modified, or notified.
