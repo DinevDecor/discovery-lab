@@ -21,3 +21,114 @@
   work. A companion investigation note recording the same findings from
   the `project-memory` side is at
   `project-memory/notes/2026-07-24-discovery-lab-recovery.md`.
+
+## 2026-07-24 (mandate drafting)
+
+- Inspected KOD (`Core/`, `Foundations/`, `Knowledge/`, `Core/Registry/`)
+  and generative-discovery-engine (`README`, `CONTEXT`, `STATE`, `adr/`,
+  `contracts/`, `registry/`, `docs/protocols/RVS-00-validation-kernel.md`)
+  to identify what each already owns, to avoid duplicating either.
+- Recorded the inspection and diagnosis (overlaps, gaps, ownership risks,
+  dumping-ground risk) in
+  `docs/investigations/INV-0001-discovery-lab-mandate.md`.
+- Proposed three mandate variants — Experiment Laboratory, Ecosystem
+  Observatory, Combined Lab + Observatory — with allowed/prohibited
+  artifacts, lifecycle, relationships, advantages, and failure modes for
+  each, in `docs/proposals/PROP-0001-discovery-lab-boundaries.md`.
+- Recommended (not accepted) the Ecosystem Observatory variant, on the
+  grounds that it is the only variant with directly observed precedent
+  (this session's own recovery investigation and the 2026-07-19 Dinev
+  Decor evidence check, both previously done ad hoc in
+  `project-memory/notes/`).
+- Proposed a smallest-possible first experiment ("Ecosystem Health Review
+  v0.1", not yet run) to test the recommended mandate before committing
+  further.
+- Updated `STATE.md` to reflect `MANDATE_DRAFTING` phase. No ADR was
+  created or accepted; no architecture was invented.
+
+## 2026-07-24 (independent architecture passes)
+
+- Ran three completely independent, isolated, read-only architecture
+  reviews — one each over KOD, generative-discovery-engine, and
+  trust-engine — each answering a fixed 8-question diagnostic with no
+  visibility into the other two passes or into prior discovery-lab work.
+  Recorded verbatim, plus a fourth cross-repository synthesis pass run
+  only afterward, in
+  `docs/investigations/INV-0002-independent-architecture-passes.md`.
+- The trust-engine pass found a previously undocumented gap: roughly
+  60+ architecture/spec documents but only 15 implemented Python
+  modules, with entire subsystems (Mechanism Trust Layer, Meta Trust
+  Layer) fully specified but never built.
+- Rewrote `docs/proposals/PROP-0001-discovery-lab-boundaries.md` (revision
+  2) with three variants that are genuinely distinct in entry criteria,
+  exit criteria, deletion mechanics, and governance burden — not
+  cosmetic renamings of the same design — each specifying its
+  relationship to KOD, generative-discovery-engine, trust-engine, and
+  project-memory individually.
+- Recommendation unchanged in substance (Ecosystem Observatory, still
+  not accepted) but now backed by the trust-engine gap as a live example
+  of the role's value, with explicit reasons Variants A and C were not
+  selected and a list of assumptions still requiring validation.
+- Added a full information-flow map (Reality → Observation → Candidate
+  investigation → Experiment → Evidence → Review/falsification →
+  Decision → Graduation/rejection/deletion → Destination repository)
+  with per-transfer source/destination/artifact/approval-gate/provenance
+  specifications, and marked the Experiment stage explicitly dormant
+  under the recommended variant.
+- Defined "Ecosystem Health Review v0.1" as the proposed first
+  experiment — fixed scope, frozen review criteria, a defined output
+  schema and PASS/PARTIAL/FAIL/INSUFFICIENT rubric, a stop rule, and
+  named conditions under which its result would invalidate the
+  recommended mandate. Not implemented; no agent created; no recurring
+  monitoring scheduled.
+- Ran a self-critique pass (hidden duplication, vague ownership,
+  irreversible scope growth, circular information flows, missing
+  deletion rules, unsupported recommendations) and fixed two findings:
+  added a terminology disambiguation note against KOD's "Investigation"
+  concept, and added an `archive/` consolidation path to Variant B's
+  deletion rules to bound long-term accumulation. Still no ADR created
+  or accepted; still no architecture invented or implemented.
+
+## 2026-07-24 (adversarial review, vFinal)
+
+- Ran an independent, deliberately destructive architecture review of
+  `docs/proposals/PROP-0001-discovery-lab-boundaries.md`, instructed to
+  attack the design rather than defend it. Full record, including risks
+  as originally found before any fix, in the new "Adversarial Review —
+  vFinal" section of that document.
+- Evaluated three candidate additions and integrated all three, minimally
+  and not implemented:
+  - **Principle 0** ("Discovery Lab never creates truth... only
+    observes, compares, identifies inconsistencies, and proposes next
+    steps") — added above the Shared ground rules as the frame the rest
+    of the document derives from, reworded from the candidate text which
+    overclaimed a dormant capability (Experiment).
+  - **Recommendation quality** — defined a Recommendation Ledger
+    interface (not implemented) so "do receiving repositories act on
+    routed proposals?" can eventually be checked instead of staying
+    permanently untestable. Named the metric `acceptance_rate`, not
+    "precision" — Discovery Lab has no correctness oracle and Principle
+    0 forbids claiming one. Added a `PENDING_NO_RESPONSE` status so
+    silence is never conflated with rejection.
+  - **Evidence Coverage** — added as a defined-but-unformulated field in
+    the Ecosystem Health Review v0.1 output schema, with no formula
+    invented.
+- Attempted to break the recommended Variant B and found, described, then
+  fixed 6 risks: (1) criterion C2 smuggled interpretation of another
+  team's intent into a claimed read-only check — narrowed to require a
+  citable planning artifact; (2) Variant B's C1–C3 checks were never
+  checked against KOD's Research Guardian specifically (only against the
+  Research Engine) — added an explicit non-duplication boundary; (3) the
+  "no repository added mid-review" rule bounded a single review but not
+  a series of them — added a scope-stability rule across future review
+  generations; (4) the archive-consolidation rule used non-binding
+  language — replaced with a concrete 12-month/20-report trigger; (5)
+  adding two new self-tracking structures at once is a real, if mild,
+  governance-creep risk — named explicitly, not hidden; (6) recommendation
+  tracking could have inferred REJECTED from silence — fixed via the
+  `PENDING_NO_RESPONSE` status.
+- Merge gate verdict: **APPROVE WITH MINOR CHANGES**. All fixes applied
+  in place, next to the rule each corrects. No new architectural
+  dependency introduced; no responsibility added beyond what Variant B
+  already claimed; still strictly read-only and proposal-only. No ADR
+  created or accepted.
