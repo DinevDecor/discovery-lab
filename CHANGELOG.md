@@ -88,3 +88,47 @@
   concept, and added an `archive/` consolidation path to Variant B's
   deletion rules to bound long-term accumulation. Still no ADR created
   or accepted; still no architecture invented or implemented.
+
+## 2026-07-24 (adversarial review, vFinal)
+
+- Ran an independent, deliberately destructive architecture review of
+  `docs/proposals/PROP-0001-discovery-lab-boundaries.md`, instructed to
+  attack the design rather than defend it. Full record, including risks
+  as originally found before any fix, in the new "Adversarial Review —
+  vFinal" section of that document.
+- Evaluated three candidate additions and integrated all three, minimally
+  and not implemented:
+  - **Principle 0** ("Discovery Lab never creates truth... only
+    observes, compares, identifies inconsistencies, and proposes next
+    steps") — added above the Shared ground rules as the frame the rest
+    of the document derives from, reworded from the candidate text which
+    overclaimed a dormant capability (Experiment).
+  - **Recommendation quality** — defined a Recommendation Ledger
+    interface (not implemented) so "do receiving repositories act on
+    routed proposals?" can eventually be checked instead of staying
+    permanently untestable. Named the metric `acceptance_rate`, not
+    "precision" — Discovery Lab has no correctness oracle and Principle
+    0 forbids claiming one. Added a `PENDING_NO_RESPONSE` status so
+    silence is never conflated with rejection.
+  - **Evidence Coverage** — added as a defined-but-unformulated field in
+    the Ecosystem Health Review v0.1 output schema, with no formula
+    invented.
+- Attempted to break the recommended Variant B and found, described, then
+  fixed 6 risks: (1) criterion C2 smuggled interpretation of another
+  team's intent into a claimed read-only check — narrowed to require a
+  citable planning artifact; (2) Variant B's C1–C3 checks were never
+  checked against KOD's Research Guardian specifically (only against the
+  Research Engine) — added an explicit non-duplication boundary; (3) the
+  "no repository added mid-review" rule bounded a single review but not
+  a series of them — added a scope-stability rule across future review
+  generations; (4) the archive-consolidation rule used non-binding
+  language — replaced with a concrete 12-month/20-report trigger; (5)
+  adding two new self-tracking structures at once is a real, if mild,
+  governance-creep risk — named explicitly, not hidden; (6) recommendation
+  tracking could have inferred REJECTED from silence — fixed via the
+  `PENDING_NO_RESPONSE` status.
+- Merge gate verdict: **APPROVE WITH MINOR CHANGES**. All fixes applied
+  in place, next to the rule each corrects. No new architectural
+  dependency introduced; no responsibility added beyond what Variant B
+  already claimed; still strictly read-only and proposal-only. No ADR
+  created or accepted.

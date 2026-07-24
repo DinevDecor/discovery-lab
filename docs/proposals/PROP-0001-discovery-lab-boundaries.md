@@ -1,6 +1,6 @@
 # PROP-0001 — Discovery Lab Mandate: Three Variants and a Recommendation
 
-Status: DRAFT PROPOSAL — not accepted, not an ADR (revision 2)
+Status: DRAFT PROPOSAL — not accepted, not an ADR (revision 3, post-adversarial-review)
 Date: 2026-07-24
 Author: Implementer session (Claude Code)
 Depends on: `docs/investigations/INV-0001-discovery-lab-mandate.md` and
@@ -29,6 +29,25 @@ draft, propose, and recommend; it may not finalize.
 
 ---
 
+## Principle 0
+
+> **Discovery Lab never creates truth. It only observes, compares, and
+> identifies inconsistencies, and proposes next steps — an experiment, a
+> correction, or a question — for the owning repository to accept or
+> reject through its own governance. Discovery Lab itself never accepts,
+> finalizes, or applies any of these proposals.**
+
+This is the frame every other rule in this document derives from. It was
+added and reworded during the adversarial review recorded at the end of
+this document (see "Adversarial Review — vFinal"): the original candidate
+wording said Discovery Lab "proposes experiments," which overclaims —
+under the recommended Variant B, the Experiment stage is dormant, so the
+principle is worded to cover whichever next step is actually authorized
+(currently: a proposal, nothing more) without hard-coding a capability
+Discovery Lab does not yet have.
+
+---
+
 ## Shared ground rules (apply to all three variants)
 
 These follow directly from the overlaps and risks identified in
@@ -53,7 +72,8 @@ any) is eventually chosen:
    ledgered) — that is trust-engine's fully-specified territory.
 4. Discovery Lab never writes to another repository's registry or
    state file. It may only *propose* a change for a human, or that
-   repository's own process, to apply.
+   repository's own process, to apply — this is Principle 0 applied
+   mechanically to registries and state files specifically.
 5. Every artifact Discovery Lab produces has an explicit fate: it
    either graduates to a named receiving repository, or it is marked
    SUPERSEDED/EXPIRED with a date. Nothing sits indefinitely in an
@@ -153,7 +173,13 @@ handed to the owning repository's own process, never decided here.
 **Entry criteria.** A specific, falsifiable question about the
 ecosystem's actual current state (e.g. "does trust-engine's documented
 Mechanism Trust Layer have any corresponding implementation?"). No
-open-ended, unscoped "look around and see" investigations.
+open-ended, unscoped "look around and see" investigations. The set of
+repositories Discovery Lab is allowed to inspect is fixed by the mandate
+that authorized the current review cycle (see "Ecosystem Health Review
+v0.1" below); expanding that list is a mandate change, not a decision a
+future review may make on its own — this prevents scope drift from
+happening gradually, one review generation at a time, instead of all at
+once and visibly (see Adversarial Review — vFinal, Risk 3).
 
 **Exit / graduation criteria.** The investigation ends in confirmed /
 contradicted / insufficient evidence. If the finding implies a change,
@@ -165,12 +191,29 @@ directly by Discovery Lab.
 later investigation of the same question is marked SUPERSEDED with a
 date and kept — an append-only evidence trail, matching the convention
 already used in `project-memory/notes/`. To prevent unbounded
-accumulation over long timescales, very old SUPERSEDED reports may later
-be moved into an `archive/` directory (mirroring project-memory's own
-`archive/` convention) without ever being destroyed.
+accumulation over long timescales, SUPERSEDED reports are moved into an
+`archive/` directory (mirroring project-memory's own `archive/`
+convention) once **either** 12 months have passed since they were
+superseded **or** more than 20 non-archived reports exist, whichever
+comes first — a concrete, checkable trigger, not an optional "later"
+(the first draft of this rule used vague language that would not have
+reliably fired; see Adversarial Review — vFinal, Risk 4). Archiving never
+destroys content.
 
 **Relationship to KOD.** Read-only inspector of KOD's Registry,
 `PROJECT_STATE.md`, and ADRs. May propose but never apply a correction.
+**Explicit non-duplication note:** KOD's own Research Guardian already
+performs process-compliance checking — verifying observations are
+separated from interpretation, falsification attempts preserved,
+reasoning traceable — but strictly *inside* a single Research Session.
+Discovery Lab's C1–C3 checks (see "Ecosystem Health Review v0.1") are a
+structurally similar act (checking whether a stated claim satisfies its
+own evidentiary standard) applied *across* repository boundaries instead
+of within one Research Session. This is close enough to warrant an
+explicit boundary: Discovery Lab must never run this kind of check
+*inside* a KOD Research Session — that is the Research Guardian's
+exclusive territory — only across or outside them (see Adversarial
+Review — vFinal, Risk 2).
 
 **Relationship to generative-discovery-engine.** Read-only inspector of
 GDE's `registry/` and `STATE.md`. May flag if GDE's claimed phase does
@@ -481,6 +524,69 @@ Variant A or C is later adopted)*
 
 ---
 
+## Recommendation quality: interface definition only (not implemented)
+
+Variant B's own principal failure mode is "becomes a passive audit
+archive nobody acts on." There is currently no way to tell, even in
+principle, whether that is happening — Discovery Lab has no record of
+what happened to the proposals it routes out (Transfer 1 in the
+information-flow map above). This section defines the interface for
+tracking that. **Nothing in this section is implemented.** No file, no
+automation, no schedule is created by this document.
+
+**Why this is architecturally necessary, not optional polish:** without
+it, "Assumption requiring validation #1" in the Recommendation section
+above (do receiving repositories act on routed proposals?) can never be
+checked — it would stay permanently untestable, which defeats the point
+of naming it as an assumption at all.
+
+**Proposed artifact: a Recommendation Ledger**, one entry per proposal
+routed out via Transfer 1, with fields:
+
+```
+recommendation_id: <id>
+source_investigation: <path to the INV-NNNN report that produced it>
+destination_repository: <KOD | generative-discovery-engine | trust-engine
+                          | project-memory>
+date_proposed: <date>
+status: PROPOSED | ACCEPTED | REJECTED | PENDING_NO_RESPONSE | INSUFFICIENT
+date_status_recorded: <date, when status last changed>
+```
+
+**Status discipline (this is the part that must not be gotten wrong):**
+`status` is set only from the destination repository's own recorded
+decision — never inferred by Discovery Lab itself. In particular,
+**silence is never treated as REJECTED.** If a destination repository has
+not responded after a stated waiting period, the status is
+`PENDING_NO_RESPONSE`, a distinct value — collapsing "no answer" into
+"answer was no" would let Discovery Lab quietly assign an outcome that
+belongs exclusively to the destination repository's own governance,
+violating Principle 0 (see Adversarial Review — vFinal, Risk 6).
+
+**Metrics (interface only, not computed by this document):**
+
+- `total`, `accepted`, `rejected`, `pending_no_response`, `insufficient`
+- `acceptance_rate = accepted / (accepted + rejected)`, explicitly
+  excluding `pending_no_response` and `insufficient` from the
+  denominator, since neither represents a governance decision yet.
+
+**Naming caveat — read before using this number anywhere:**
+`acceptance_rate` measures whether a destination repository's own
+governance *agreed* with a Discovery Lab proposal. It is **not** a
+measure of objective correctness, and must never be called "precision"
+without this caveat attached. Discovery Lab has no oracle for whether an
+accepted proposal was actually right, or a rejected one actually wrong —
+claiming otherwise would directly violate Principle 0. This naming
+problem was caught during the adversarial review recorded at the end of
+this document (see "Adversarial Review — vFinal," Part 1B) and is the
+reason "precision" is avoided as the metric's name here.
+
+This ledger has no home yet (no file has been created for it) and is not
+populated until at least one recommendation exists to track — it should
+not block the first run of Ecosystem Health Review v0.1 below.
+
+---
+
 ## First experiment: Ecosystem Health Review v0.1
 
 The smallest experiment that could test whether the recommended mandate
@@ -507,9 +613,16 @@ each repository, check exactly three things, no more:
   commits, or no registry activity matching the claim)?
 - **C2 — Lifecycle vs. artifacts.** Does the repository's own claimed
   lifecycle stage (a sprint, a phase, an MVP slice) match what is
-  actually implemented or committed — while distinguishing a
-  *documented, sequenced, planned* gap (not a problem) from an
-  *undocumented* one (a real finding)?
+  actually implemented or committed? A gap counts as "planned, not a
+  finding" **only if a specific file in the repository itself can be
+  cited stating the gap is intentional and sequenced** (a roadmap entry,
+  a phase document, an explicit "not yet implemented" note). Absent such
+  a citable artifact, the gap is recorded as MISMATCH (or INSUFFICIENT
+  if it cannot be checked at all) — never silently assumed intentional.
+  This keeps C2 an observation ("is there a citable planning document?
+  yes/no") rather than an inference about another team's intent, which
+  would smuggle interpretation into a check that must stay observational
+  (see Adversarial Review — vFinal, Risk 1).
 - **C3 — Internal consistency.** Does the repository's own doc set
   cross-reference consistently — no document claims something is DONE
   that another document in the same repository contradicts?
@@ -528,9 +641,24 @@ observation_date: <date>
 C1_status_vs_reality: MATCH | MISMATCH | INSUFFICIENT_EVIDENCE   (+ citation)
 C2_lifecycle_vs_artifacts: MATCH | MISMATCH | INSUFFICIENT_EVIDENCE (+ citation)
 C3_internal_consistency: MATCH | MISMATCH | INSUFFICIENT_EVIDENCE (+ citation)
+evidence_coverage: <per-criterion note on which relevant documents were
+  checked vs. not checked, and why — no formula defined yet; see
+  "Evidence Coverage" below>
 repo_verdict: PASS | PARTIAL | FAIL | INSUFFICIENT
 notes: <optional>
 ```
+
+**Evidence Coverage.** A defined field, not a computed metric — there is
+not yet enough information to fix a formula (what counts as "all
+relevant evidence" is not comparable between a 5-file repository and a
+60-plus-document one). Its role is to record, per criterion, what was
+actually checked versus what exists but was not checked, and why —
+distinguishing "I reviewed everything relevant and still can't tell"
+(genuine INSUFFICIENT_EVIDENCE) from "I checked one document out of many
+and called it MATCH" (a shallow verdict that looks confident but isn't).
+A concrete formula should only be proposed after Ecosystem Health Review
+v0.1 has actually run once and shown what "relevant evidence" looks like
+in practice for repositories of very different sizes.
 
 **Verdict rubric (fixed, frozen before running).**
 
@@ -648,6 +776,120 @@ Run against the specific failure modes named in the task:
   unbuilt Mechanism Trust Layer — is explicitly labeled *inferred, not
   requested* and used as a reason to *not* select Variant A yet, which
   is the evidence-humble direction, not an overreach.
+
+---
+
+## Adversarial Review — vFinal
+
+Date: 2026-07-24. An independent, deliberately destructive review pass
+over this document as it stood at the end of the "independent
+architecture passes" revision — instructed to attack the design, not
+defend it. Recorded here in full, including the risks as originally
+found, before any fix, per the review's own instructions.
+
+### Part 1 — Evaluation of three candidate additions
+
+**A. Principle 0 — accepted, reworded.** The candidate wording said
+Discovery Lab "proposes experiments," which overclaims a capability not
+authorized under the recommended Variant B (Experiment stays dormant).
+Reworded to "proposes next steps — an experiment, a correction, or a
+question" and integrated above, before the Shared ground rules, as the
+frame the rest of the document derives from.
+
+**B. Recommendation Precision — accepted, renamed.** Well-motivated: it
+is the only way to ever check "Assumption #1" (do proposals get acted
+on?) instead of leaving it permanently untestable. But "precision"
+implies a correctness oracle Discovery Lab does not have and Principle 0
+forbids claiming. Integrated as an `acceptance_rate` metric with an
+explicit naming caveat, plus a `PENDING_NO_RESPONSE` status so silence is
+never conflated with rejection (see Risk 6 below). Interface only — not
+implemented.
+
+**C. Evidence Coverage — accepted, scoped down.** The existing "Fixed
+review criteria" require a citation per claim but not comprehensiveness,
+so a shallow, cherry-picked citation could currently pass as MATCH.
+Integrated as a defined-but-unformulated field in the Ecosystem Health
+Review v0.1 output schema. No formula invented, as instructed — there is
+not yet enough evidence across repositories of very different sizes to
+fix one responsibly.
+
+### Part 2 — Attempting to break Variant B
+
+Risks as originally found, described before any fix was applied:
+
+1. **Hidden interpretation inside a claimed read-only check.** The
+   original C2 criterion ("distinguishing a documented, sequenced,
+   planned gap from an undocumented one") required the reviewer to infer
+   another team's *intent*, not just observe a fact — exactly the
+   Observation/interpretation mixing that Trust Engine's own rules
+   forbid ("observation must never contain interpretation"). Variant B
+   claims to be purely observational; this criterion, as first written,
+   was not.
+2. **Possible duplication of KOD's Research Guardian.** The Guardian
+   already performs process-compliance checking — verifying a claim
+   satisfies its own evidentiary standard — inside a Research Session.
+   Variant B's C1–C3 checks are a structurally similar act, just applied
+   across repository boundaries. The earlier duplication analysis
+   checked against KOD's Research Engine (truth-evaluation) and found no
+   overlap, but never checked against the Guardian's narrower
+   process-compliance function specifically — a real gap in the earlier
+   analysis.
+3. **Scope is bounded per review, not across review generations.**
+   "No repository added mid-review" protects any single Ecosystem Health
+   Review, but nothing prevented v0.2, v0.3, etc. from each quietly
+   adding repositories on their own — scope inflation spread across
+   versions instead of happening visibly, all at once.
+4. **The archive trigger was optional language, not a rule.** "Very old
+   reports may later be moved" does not reliably fire; a rule that can
+   always be deferred is not a rule.
+5. **Governance creep from adding two new self-tracking structures at
+   once.** A Recommendation Ledger plus an Evidence Coverage field both
+   at once nudge Discovery Lab toward tracking its own performance —
+   individually justified (Part 1), but worth naming as a real, if mild,
+   increase in governance surface. Notably, trust-engine's own Meta Trust
+   Layer (a mechanism for validating its own mechanisms) is fully
+   specified but still unbuilt in that repository — self-referential
+   tracking is evidently hard to get right even for a repository built
+   for exactly this purpose.
+6. **Recommendation Precision could infer REJECTED from silence.** If a
+   destination repository simply never responds, Discovery Lab must not
+   decide on its own that this means "rejected" — that would be Discovery
+   Lab assigning an outcome that belongs exclusively to the destination
+   repository's own governance, in direct violation of Principle 0.
+
+All six risks were judged fixable with precise, minimal, non-scope-
+expanding edits — none required reopening the Variant A/B/C decision or
+redesigning Variant B. Each fix is applied at its specific location
+above (C2's wording, the KOD non-duplication note, the scope-stability
+sentence, the archive trigger threshold, the ledger's status discipline)
+rather than gathered into a single patch, so each stays next to the rule
+it corrects.
+
+### Part 3 — Merge Gate
+
+**Verdict: APPROVE WITH MINOR CHANGES.**
+
+Changes made in response to this review (all applied above, no other
+scope added):
+- Added Principle 0, reworded from the candidate text.
+- Added the Recommendation Ledger interface, with an explicit naming
+  caveat and a `PENDING_NO_RESPONSE` status.
+- Added the Evidence Coverage field to the Ecosystem Health Review v0.1
+  output schema, without inventing a formula.
+- Narrowed C2 to require a citable planning artifact instead of inferred
+  intent.
+- Added an explicit non-duplication boundary against KOD's Research
+  Guardian.
+- Added a scope-stability rule preventing silent expansion across future
+  review generations.
+- Replaced the vague archive-consolidation language with a concrete,
+  checkable trigger.
+
+No new architectural dependency was introduced. No responsibility was
+added to Discovery Lab beyond what Variant B already claimed — every
+change either sharpens an existing boundary or defines an interface that
+remains explicitly unimplemented. The mandate remains strictly read-only
+and proposal-only.
 
 ---
 
