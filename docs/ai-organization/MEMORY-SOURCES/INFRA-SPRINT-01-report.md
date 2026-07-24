@@ -641,11 +641,146 @@ covers the *mechanism*; §10.4's limitations — most importantly, that no
 real diary content has been mirrored yet — are not resolved by this PASS
 and are not implied by it.
 
+## 11. The Reality Inbox — an organization-wide intake layer
+
+Recorded 2026-07-24, from the "Create the Reality Inbox" task, issued
+directly after §10 closed. Where §10 built `memory/` (`MEM-003`) as
+AG-002's operational mirror, this task builds the layer *in front of it*:
+a single, organization-wide, human-facing intake point, intended for
+AG-001, AG-002, Discovery Lab, and Project Memory generally — not scoped
+to AG-002 alone the way `memory/` was.
+
+### 11.1 Design, as actually built (simplified from the task's own first
+draft)
+
+The task specified an elaborate structure
+(`incoming/processing/accepted/rejected/manifests/fixtures/INDEX.md`)
+and then, in the same message, replaced it with a simpler instruction:
+**one folder for humans.** What was built reflects the simplified
+version:
+
+- **`reality-inbox/📥 DROP HERE/`** — the only folder a human ever
+  interacts with. No routing decision is asked of them.
+- **`reality-inbox/manifests/`**, **`reality-inbox/processed/`**,
+  **`reality-inbox/fixtures/`** — internal bookkeeping, not folders a
+  human chooses between. A file's status (`INCOMING` through
+  `ARCHIVED`) lives in its manifest, not in which folder it physically
+  sits in — a single `processed/` archive holds every handled file
+  regardless of outcome, consistent with "do not delete rejected files
+  automatically."
+- **`reality-inbox/INDEX.md`** — agent-maintained current inventory.
+- **`reality-inbox/PROCESSING-PROTOCOL.md`** — the 12-step processing
+  protocol, the manifest schema (the task's required minimum fields plus
+  three supplementary fields — `processing_agent`, `processed_at`,
+  `outputs` — needed to actually satisfy the task's own Provenance rule
+  and step 11, "record all produced outputs in the manifest"), and the
+  file-handling rules (no secrets, no uncontrolled large binaries, no
+  overwrites, no silent renames, no auto-deletion, duplicates never
+  treated as new evidence).
+
+### 11.2 Relationship to `memory/` (MEM-003) and the Registry
+
+```
+Google Drive              memory/ (MEM-003) + Memory Source Registry
+(human archive)  ─────►   = "Knowledge/Registry/Ledger"
+      │                          ▲
+      │ human copies                    │ agent writes validated
+      ▼                                  │ output here
+reality-inbox/📥 DROP HERE/  ───────────►
+(MEM-004 — operational intake,
+ Git-tracked, organization-wide)
+```
+
+Registered as **`MEM-004`** in `MEMORY-SOURCE-REGISTRY.md`, alongside
+`MEM-001`–`MEM-003`. `MEM-004` becomes AG-002's *default* operational
+source; `MEM-003` remains active as the downstream layer, not
+superseded or deprecated. `reality-inbox/` is the front door;
+`memory/journal|decisions|observations/` remain where validated content
+is actually filed once processed. `memory/inbox/` (from §10) is
+explicitly superseded as the human-facing drop point — see that
+folder's own README.
+
+### 11.3 AG-002 integration — small, additive edits, not a redesign
+
+`INPUTS.md`, `LIMITATIONS.md`, `RUN-PROTOCOL.md`, and `CHECKLIST.md`
+each gained a short, targeted addition:
+
+- `INPUTS.md`: a new "Default operational source: the Reality Inbox"
+  section — AG-002 may only process a Reality Inbox file whose manifest
+  shows `status: ACCEPTED` with complete provenance, and never scans
+  unrelated repository content as memory.
+- `LIMITATIONS.md`: a new prohibition (no scanning unrelated repository
+  content as memory) and a **fourth mandatory escalation value,
+  `BLOCKED`** — distinct from `INSUFFICIENT ACCESS`: the file is
+  reachable, but its manifest/provenance failed validation.
+- `RUN-PROTOCOL.md` Stage 1 and `CHECKLIST.md`: a one-line check that a
+  Reality Inbox source's manifest is `ACCEPTED` before Stage 2 begins.
+
+`ROLE.md`, `OUTPUTS.md`, `CONTRACT.md`, `METRICS.md`, and `PROMPT.md`
+were not touched — AG-002's actual recovery logic and output format are
+unchanged. **AG-001 was reviewed and found not to need a compatibility
+update** — it observes `discovery-lab`'s own repository structure, not
+external evidence, so the Reality Inbox is out of its scope; this is
+recorded as a real finding, not a silent skip (see `MEM-004`'s notes).
+
+### 11.4 Verification performed
+
+A second, independent end-to-end cycle, deliberately distinct from
+§10.3's:
+
+1. A synthetic fixture (`reality-inbox/fixtures/SYNTHETIC-TEST-note-0001.md`)
+   was placed in `📥 DROP HERE/`, simulating a human drop.
+2. Manifested as `RI-0001` (`reality-inbox/manifests/RI-0001.md`):
+   file-type detected, hash computed
+   (`sha256:0f75163b0c3204d8de2893caafe088072b34570b75acca15e158b4beeaf4f6b1`),
+   checked against existing manifests (no duplicate), verified readable,
+   sensitivity classified `non-sensitive`, intended project/agent
+   identified, moved to `reality-inbox/processed/`.
+3. **AG-002 ran `REALITY-VERIFY-0001`**
+   (`../employees/AG-002-discovery-archaeologist/runs/
+  REALITY-VERIFY-0001-recovery-report.md`) — and, per the new Stage 1
+   check, confirmed `RI-0001`'s manifest was `ACCEPTED` with complete
+   provenance *before* reading, not after. Result: discovered the
+   source via its manifest, read it in full, preserved and cited
+   provenance, extracted one finding, wrote it to
+   `../../../memory/observations/
+  REALITY-VERIFY-0001-observation-0001.md`, left the source unmodified
+   (confirmed in the report's own Archaeologist Boundary Statement),
+   and the manifest's final `status` was recorded as `ACCEPTED`.
+4. `reality-inbox/INDEX.md` updated with the one real (synthetic) entry.
+   AG-002's `STATUS.yaml`: `runs_completed` incremented `2 → 3`.
+
+### 11.5 Remaining limitations (stated honestly)
+
+- **No real evidence has entered the Reality Inbox yet** — both
+  verification runs to date (`MIRROR-VERIFY-0001`, `REALITY-VERIFY-0001`)
+  used labeled synthetic fixtures, because no real, accessible content
+  exists. The mechanism is proven twice over; real content is not yet
+  flowing through it.
+- **No size policy for large files exists** — `PROCESSING-PROTOCOL.md`
+  states the rule (manifest-only, external reference, until one is
+  approved) but no policy has actually been written.
+- **The Reality Inbox is not yet cross-repository** — `project-memory`
+  and other repositories are named as intended consumers but are not
+  wired to it, recorded honestly in `README.md` as unbuilt.
+- **Google Drive access itself remains unchanged** — §9 stands; this
+  layer, like `memory/` before it, routes around the block rather than
+  resolving it.
+
+### 11.6 Completion verdict
+
+**PASS** — the Reality Inbox works end to end and AG-002 completed the
+synthetic pilot: discovery, manifest creation, provenance preservation,
+one finding extracted, source unmodified, final status recorded, per
+every element of the task's own verification requirement.
+
 ## Definition of Done
 
 **Google Drive connector path: NOT PASS, closed as a platform limitation
 (§9) — unchanged, and not expected to change without a platform-side
-fix.** **Overall sprint objective (AG-002 operational without direct
-Drive dependency): PASS (§10.5).** This sprint closes having produced a
-working, verified, alternative path rather than remaining blocked on a
-human action that turned out not to be sufficient.
+fix.** **Sprint 01's original objective (AG-002 operational without
+direct Drive dependency): PASS (§10.5), now layered with an
+organization-wide intake mechanism (§11.6: PASS).** This sprint closes
+having produced two working, verified, alternative paths — `memory/` and
+`reality-inbox/` — rather than remaining blocked on a human action that
+turned out not to be sufficient.

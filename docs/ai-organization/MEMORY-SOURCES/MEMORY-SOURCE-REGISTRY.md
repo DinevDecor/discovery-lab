@@ -119,12 +119,61 @@ notes: >
   promoted to active/primary because the *mechanism* is proven, not
   because any real historical material has been mirrored. See
   INFRA-SPRINT-01-report.md section 10 for the full verification
-  record and completion verdict.
+  record and completion verdict. Superseded as AG-002's *default*
+  source, 2026-07-24 (see MEM-004) - MEM-003 remains active as the
+  downstream "Knowledge/Registry/Ledger" layer, not the front door.
+```
+
+### MEM-004
+
+```
+source_id: MEM-004
+name: Reality Inbox (discovery-lab/reality-inbox/)
+type: git_repository
+locator:
+  repository: discovery-lab
+  owner: DinevDecor
+  path_within_repo: reality-inbox/
+  ref: main
+access_requirements: read-only Git fetch access (identical to MEM-001/
+  MEM-003 - no new capability required of any Role)
+status: active
+connectivity: CONNECTED
+agent_access: AGENT-OPERATIONAL — DEFAULT SOURCE FOR AG-002
+steward: Implementer session (Claude Code)
+added: 2026-07-24
+last_verified: 2026-07-24
+notes: >
+  Implements the "Create the Reality Inbox" task. The organization-wide,
+  human-facing intake layer: a human drops a file into
+  reality-inbox/DROP HERE/ (one folder, no routing decision required of
+  the human) and an agent/steward handles everything else - manifest
+  creation (reality-inbox/manifests/), duplicate/readability/sensitivity
+  checks, processing, and filing into reality-inbox/processed/. Not a
+  second archive and not a source of truth by itself - see
+  reality-inbox/PROCESSING-PROTOCOL.md, "No claim of verified truth."
+  AG-002's INPUTS.md, LIMITATIONS.md, RUN-PROTOCOL.md, and CHECKLIST.md
+  were all given small, additive edits (not a redesign) establishing
+  this as AG-002's default operational source, gated on manifest
+  status: ACCEPTED, with a new BLOCKED escalation value for insufficient
+  provenance. VERIFIED 2026-07-24 via REALITY-VERIFY-0001
+  (../employees/AG-002-discovery-archaeologist/runs/
+  REALITY-VERIFY-0001-recovery-report.md): a labeled synthetic fixture
+  was dropped, manifested (RI-0001), processed, read by AG-002, one
+  finding extracted and written to
+  memory/observations/REALITY-VERIFY-0001-observation-0001.md, and the
+  source left unmodified. No real content has been processed yet - only
+  the mechanism is proven, same honesty as MEM-003's own verification.
+  Relationship to MEM-003: this is the front door; memory/ (MEM-003)
+  remains the downstream filed/validated layer content can land in.
+  AG-001 was reviewed for a compatibility update and found not to need
+  one - it observes discovery-lab's own repository structure, not
+  external evidence, so this task made no changes to it.
 ```
 
 ## Reading this table
 
-- **Current total: 3 sources registered. 2 active. 0 deprecated. 1
+- **Current total: 4 sources registered. 3 active. 0 deprecated. 1
   unverified.**
 - `MEM-002` is the first `google_drive`-type entry — see
   `MEMORY-SOURCE-PROTOCOL.md`, "What this document does not do," which

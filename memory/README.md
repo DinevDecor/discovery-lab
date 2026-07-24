@@ -59,13 +59,25 @@ up in the Registry first, per the existing Connection Protocol
 
 ## Relationship to AG-002
 
-AG-002's own `RUN-PROTOCOL.md`, `INPUTS.md`, `OUTPUTS.md`, `LIMITATIONS.md`,
-and `CHECKLIST.md` are **unmodified** by this structure. AG-002 reads a
-filed, provenance-tagged file under `journal/` or `decisions/` exactly as
-it already reads `project-memory/archive/` (`MEM-001`) — no new capability
-was added to the Role. The mechanical work of importing and filing a file
-(§`IMPORT-PROCEDURE.md`) is performed by a human or the Implementer
-session acting as steward, consistent with AG-002's own `INPUTS.md`
-("AG-002 may only begin a run once it has received an explicit list of
-authorized historical sources") — AG-002 does not discover, fetch, or file
-its own sources.
+AG-002 reads a filed, provenance-tagged file under `journal/` or
+`decisions/` exactly as it already reads `project-memory/archive/`
+(`MEM-001`) — no new *recovery* capability was added to the Role. Its
+`INPUTS.md`, `LIMITATIONS.md`, `RUN-PROTOCOL.md`, and `CHECKLIST.md` did
+later gain small, additive edits (2026-07-24, the "Create the Reality
+Inbox" task) establishing `reality-inbox/` — not this folder — as
+AG-002's actual default operational source; see
+`../reality-inbox/README.md`. The mechanical work of importing and
+filing a file (`IMPORT-PROCEDURE.md`) remains a human/steward job,
+consistent with AG-002's own `INPUTS.md` — AG-002 does not discover,
+fetch, or file its own sources.
+
+## Relationship to the Reality Inbox
+
+`../reality-inbox/` (added 2026-07-24) is now the organization-wide,
+human-facing front door — a human drops a file into
+`../reality-inbox/📥 DROP HERE/`, not into this folder's `inbox/`
+directly (see that folder's own superseded-notice). This `memory/`
+structure remains the downstream "Knowledge/Registry/Ledger" layer a
+Reality Inbox intake's validated, filed content can land in, alongside
+`observations/` for extracted findings. See
+`../reality-inbox/PROCESSING-PROTOCOL.md`, "Relationship to `../memory/`."

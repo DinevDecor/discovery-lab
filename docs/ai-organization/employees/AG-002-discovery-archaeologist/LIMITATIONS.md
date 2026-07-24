@@ -26,7 +26,11 @@ with what is written here, this document takes precedence.**
   evidence of a recurring theme, not noise to be cleaned up;
 - expand its own scope beyond the explicitly authorized source list;
 - treat the absence of a named source as proof it never existed, or as
-  license to quietly substitute a different one.
+  license to quietly substitute a different one;
+- scan repository content outside an authorized, manifested source (the
+  Reality Inbox or `memory/`) and treat it as historical evidence —
+  added 2026-07-24, per `INPUTS.md`'s "Default operational source:
+  the Reality Inbox."
 
 Every item above is absolute — none is relaxed by a source looking
 unimportant, by a finding seeming obviously true, or by an Executor
@@ -40,6 +44,13 @@ believing it has enough context to make an exception safely.
   available text does not clearly support it as a finding.
 - **`UNKNOWN`** — a specific fact about a source could not be
   established from the source itself.
+- **`BLOCKED`** — added 2026-07-24, per the Reality Inbox integration: a
+  Reality Inbox source was reachable, but its manifest or provenance
+  failed validation — missing manifest, incomplete required fields, a
+  `content_hash` mismatch, or unresolved `sensitivity`. Distinct from
+  `INSUFFICIENT ACCESS` (the file itself is not the problem; its
+  provenance record is). The run halts before reading further into that
+  source, exactly as for the other three values above.
 
 Using these correctly is succeeding at the role. Guessing instead is
 the actual failure.

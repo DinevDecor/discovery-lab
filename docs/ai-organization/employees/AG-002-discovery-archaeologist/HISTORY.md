@@ -82,3 +82,42 @@ actually performed) against fabricated content — distinct from
 since the run itself was real, even though its source content was not;
 performance/quality fields are left untouched, pending independent
 review, per `CHECKLIST.md`.
+
+## 2026-07-24 — Reality Inbox integration + REALITY-VERIFY-0001
+
+The "Create the Reality Inbox" task established
+`../../../../reality-inbox/` as an organization-wide, human-facing
+intake layer (one drop folder, `📥 DROP HERE/` — the human never
+chooses where a file goes; an agent/steward handles manifesting,
+validation, and routing). This Role's own files received small,
+additive edits, not a redesign: `INPUTS.md` gained a "Default
+operational source: the Reality Inbox" section; `LIMITATIONS.md` gained
+a new bullet (no scanning unrelated repository content as memory) and a
+fourth mandatory escalation value, `BLOCKED` (a Reality Inbox source
+reachable but with insufficient manifest/provenance); `RUN-PROTOCOL.md`
+Stage 1 and `CHECKLIST.md` each gained a short Reality Inbox check.
+`ROLE.md`, `OUTPUTS.md`, `CONTRACT.md`, `METRICS.md`, and `PROMPT.md`
+were not touched.
+
+Verification run `REALITY-VERIFY-0001`
+(`runs/REALITY-VERIFY-0001-recovery-report.md`) exercised the full
+cycle for real: a labeled synthetic fixture
+(`reality-inbox/fixtures/SYNTHETIC-TEST-note-0001.md`) was placed in
+`📥 DROP HERE/`, manifested (`reality-inbox/manifests/RI-0001.md`,
+`intake_id: RI-0001`), moved to `reality-inbox/processed/`, and read by
+AG-002 only after its manifest's `status: ACCEPTED` and provenance were
+confirmed (per the new Stage 1 check) — not assumed. Recovered: 1 idea,
+0 repeated themes (single appearance), 0 forgotten ideas, 0 candidate
+investigations, 0 contradictions. Finding written to
+`../../../../memory/observations/
+REALITY-VERIFY-0001-observation-0001.md`. Source file unmodified;
+Archaeologist Boundary Statement confirms the manifest was checked
+before reading, not after. Distinct from `MIRROR-VERIFY-0001` (verified
+`memory/`, not the Reality Inbox) and from the still-unattempted, still
+-blocked `PILOT-RUN-0002`. `runs_completed` in `STATUS.yaml`
+incremented again (`2 → 3`) — a second genuine run, again against
+labeled synthetic content since no real evidence has entered the
+Reality Inbox yet. AG-001 was reviewed for a compatibility need and
+found not to require one — recorded in
+`../../MEMORY-SOURCES/MEMORY-SOURCE-REGISTRY.md`'s `MEM-004` entry, not
+silently skipped.

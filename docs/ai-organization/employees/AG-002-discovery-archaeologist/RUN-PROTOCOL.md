@@ -33,6 +33,14 @@ stop. If a named source cannot actually be located, this is recorded
 here, immediately, as `INSUFFICIENT ACCESS` — the run proceeds only on
 what is actually accessible, and says so.
 
+**For a Reality Inbox source specifically** (added 2026-07-24, per
+`INPUTS.md`'s "Default operational source"): its manifest in
+`reality-inbox/manifests/` must show `status: ACCEPTED` and a complete
+provenance block before Stage 2 begins. If it does not, this is recorded
+as `BLOCKED` (`LIMITATIONS.md`) — not `INSUFFICIENT ACCESS`, since the
+file itself may be perfectly reachable; it is the provenance record that
+failed.
+
 ## Stage 2 — Scanning
 
 Every authorized source is read in full — no sampling, no skimming past

@@ -32,6 +32,32 @@ filesystem search was performed and is cited in that report's
 evidence). The run proceeded on the Project Memory archive alone, with
 the missing source recorded, not papered over.
 
+## Default operational source: the Reality Inbox
+
+Added 2026-07-24, per the "Create the Reality Inbox" task. AG-002's
+**default operational source is `../../../../reality-inbox/`** (the
+Reality Inbox — see `../../../../reality-inbox/README.md` and
+`../../../../reality-inbox/PROCESSING-PROTOCOL.md`), not the raw
+repository. Concretely:
+
+- AG-002 may only process a Reality Inbox file that has a **manifest**
+  in `reality-inbox/manifests/` with `status: ACCEPTED` and a
+  complete provenance block. A file without one, or with insufficient
+  provenance (missing fields, unresolved sensitivity, a content-hash
+  mismatch), is not a valid source — see `LIMITATIONS.md`'s `BLOCKED`
+  escalation value.
+- AG-002 **never scans unrelated repository content as memory.** The
+  Reality Inbox (manifested files) and the previously-established
+  `../../../../memory/` mirror (`MEM-003` et al., registered in
+  `../../MEMORY-SOURCES/MEMORY-SOURCE-REGISTRY.md`) remain the only
+  source classes AG-002 treats as historical evidence — not
+  `discovery-lab`'s own documentation, code, or any other file it
+  happens to have read access to.
+- This does not relax the rule above ("an explicit list of authorized
+  historical sources") — it specifies *where that list is drawn from*
+  by default, the same way the Memory Source Registry did for
+  `project-memory/archive/` (`MEM-001`) in an earlier task.
+
 ## Relationship to other documents
 
 What AG-002 does with these inputs is defined in the Recovery Protocol.

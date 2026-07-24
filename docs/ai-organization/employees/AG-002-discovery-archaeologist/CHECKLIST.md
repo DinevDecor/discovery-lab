@@ -10,6 +10,9 @@ Status: **Prototype / DRAFT / EXPERIMENTAL / NOT ADOPTED** · Version:
       received?
 - [ ] Is it clear what kinds of findings are in scope (or is the full
       `ROLE.md` Responsibilities list assumed)?
+- [ ] For any Reality Inbox source, does its manifest show
+      `status: ACCEPTED` with complete provenance? (If not — `BLOCKED`,
+      per `LIMITATIONS.md`, added 2026-07-24.)
 
 ## During a run
 
