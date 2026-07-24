@@ -10,6 +10,7 @@ convention already used elsewhere in `discovery-lab`
 |---|---|---|---|---|---|---|---|
 | AG-001 | Repository Observer | Prototype (not adopted) | v0.1 | `docs/ai-organization/employees/AG-001-repository-observer/` | unassigned | 2026-07-24 | `employees/AG-001-repository-observer/ROLE.md` §Origin |
 | AG-002 | Discovery Archaeologist | Prototype (not adopted) | v0.1 | `docs/ai-organization/employees/AG-002-discovery-archaeologist/` | unassigned | 2026-07-24 | `employees/AG-002-discovery-archaeologist/ROLE.md` §Origin |
+| AG-003 | Knowledge Curator | Prototype (not adopted) | v0.1 | `docs/ai-organization/employees/AG-003-knowledge-curator/` | unassigned | 2026-07-24 | `employees/AG-003-knowledge-curator/ROLE.md` §Origin |
 
 ## Reading this table
 
@@ -26,4 +27,4 @@ convention already used elsewhere in `discovery-lab`
 
 ## Current total
 
-2 Roles recorded. 0 Trusted. 0 Retired.
+3 Roles recorded. 0 Trusted. 0 Retired.

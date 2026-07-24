@@ -1152,3 +1152,92 @@
   GRIF documents a deeper future pass could still mine further; this
   limitation is recorded in the report's own Archaeologist Boundary
   Statement, not smoothed over.
+
+## 2026-07-24 (continued) — AG-003 Knowledge Curator designed (architecture only)
+
+- Designed **AG-003 Knowledge Curator v0.1** per an explicit "DRAFT — do
+  not implement code first, design the architecture" task. AG-003 never
+  reads a raw historical source (diary, PDF, note) — that remains
+  AG-002's exclusive territory; its only inputs are Recovery Reports,
+  Knowledge Objects, Registries, the Investigation Registry,
+  relationship metadata, and provenance metadata.
+- Full document set created at
+  `docs/ai-organization/employees/AG-003-knowledge-curator/`:
+  `ROLE.md`, `CONTRACT.md`, `INPUTS.md`, `OUTPUTS.md`, `LIMITATIONS.md`,
+  `CHECKLIST.md`, `METRICS.md`, `PROMPT.md`, `STATUS.yaml`,
+  `HISTORY.md`, plus four AG-003-specific documents:
+  - **`KNOWLEDGE-OBJECT-SPEC.md`** — the exact field set the requesting
+    task specified (`id`, `title`, `status`, `first_seen`, `last_seen`,
+    `occurrences`, `confidence`, `maturity`, `derived_from`,
+    `supported_by`, `contradicted_by`, `related_objects`,
+    `candidate_investigations`, `provenance`), with `confidence`
+    explicitly disambiguated from a KOD `GRIF`'s own `confidence` field
+    (preserved in `provenance`, never averaged into AG-003's own value)
+    and given a concrete, reproducible formula.
+  - **`LIFECYCLE.md`** — two independent tracks: `status`
+    (`Draft → Candidate Principle → Validated Principle → Core
+    Principle`, formal, human-gated, moves only via an accepted Core
+    Principle Proposal) and `maturity` (`Emerging → Recurring →
+    Convergent → Entrenched`, informal, recomputed automatically).
+  - **`RELATIONSHIP-ONTOLOGY.md`** — the seven required types
+    (`supports`, `contradicts`, `depends_on`, `inspired`, `supersedes`,
+    `derived_from`, `alternative_to`), each defined, plus a
+    disambiguation table for five confusable pairs.
+  - **`PROMOTION-RULES.md`** — concrete, checkable thresholds for each
+    promotion step, always one step at a time, never automatic;
+    explicitly disambiguated from KOD's own recovered "Evidence Ladder"
+    (`RI-10`) as a convergent-but-independent design, not a copy of it.
+  - **`REVIEW-PROTOCOL.md`** — a new "Knowledge Review" process for
+    checking a proposal's *content* (evidence, citations, type choice),
+    distinct from ORB's conduct review, KOD's "Under Review," and
+    generative-discovery-engine's Critical Review — now four
+    disambiguated senses of "review" in this ecosystem, not three.
+  - **`CURATION-PROTOCOL.md`** — a nine-stage procedure analogous to
+    AG-002's `RUN-PROTOCOL.md`.
+- Produced a worked-example walkthrough at
+  `docs/proposals/AG-003-knowledge-curator-walkthrough/`, demonstrating
+  the architecture against AG-002's one completed real run
+  (`PILOT-RUN-0002-recovery-report.md`), written inline so it cannot be
+  mistaken for a filed Knowledge Base entry (none exists yet): a
+  Knowledge Object (`KO-0001`, RT-3's five-appearance "nature as a
+  library of architectures"), a Knowledge Merge Proposal that concluded
+  **not** to merge (`RI-8` vs. `RI-12`, two real but genuinely distinct
+  KOD architecture descriptions), a Relationship Proposal (`RI-11`'s
+  methodology cluster and the separately-named "Cognitive Sovereignty"
+  line, proposed as bidirectional `supports`, flagged
+  `INSUFFICIENT EVIDENCE`), a Core Principle Proposal (`KO-0001`,
+  `Draft → Candidate Principle` only), a contradiction screening that
+  explicitly declined to file a report — preserving, not escalating,
+  AG-002's own `INSUFFICIENT EVIDENCE` marking on the `NORM`/confidence
+  tension — a Knowledge Evolution Report (`RT-4`'s four-version
+  Recursive Adaptive Response chain), and a Gap Report (citing AG-002's
+  existing `CI-4`/`CI-5` by reference, plus one new structural
+  observation about isolated Knowledge Objects).
+- Conducted an internal adversarial review
+  (`ADVERSARIAL-REVIEW-0001.md`) against this architecture, as the
+  task's own completion condition required. Found and **fixed** three
+  real design defects during the review itself: `confidence` had no
+  reproducible formula (added one); Knowledge Merge Proposal
+  reversibility was asserted without a mechanism (added
+  `merged_from_ko` provenance tagging); `derived_from` was defined
+  twice with no sync rule between its two uses (added one, deliberately
+  choosing not to sync them). Recorded four further gaps as **open**,
+  not fixed: an exploitable `maturity: Convergent` loophole via
+  re-scanning the same source; the admittedly-invented `Validated →
+  Core` time threshold; no collision-prevention mechanism for the
+  `CI-NNNN` numbering shared with AG-002; the walkthrough's own
+  "isolated node" claim being asserted from a manual read rather than a
+  computed graph (only one Knowledge Object was actually built
+  end-to-end). Verdict: **APPROVE WITH OPEN ITEMS** — explicitly flagged
+  as not independent (reviewer = same session as designer), recorded as
+  the most important residual gap rather than smoothed over.
+- Updated `docs/ai-organization/EMPLOYEE-REGISTRY.md` (3 Roles now:
+  AG-001, AG-002, AG-003) and `STATE.md`.
+- **Verdict: PASS** — architecture designed, documented in full, and
+  survived an internal adversarial review that found and fixed real
+  defects rather than rubber-stamping the design. Stated honestly: the
+  review was not independent, no real AG-003 run has occurred
+  (`runs_completed: 0`), and several concrete gaps (loophole in
+  `maturity` scoring, unmechanized `CI-NNNN` collision prevention) remain
+  open for a future revision — this is architecture-complete, not
+  battle-tested.

@@ -1,0 +1,32 @@
+employee_id: AG-003
+role: Knowledge Curator
+version: 0.1
+status: prototype
+adoption_status: not_adopted
+location: discovery-lab
+executor: unassigned
+created_from: task-specified role design ("AG-003 Knowledge Curator",
+  DRAFT, architecture only - no implementation requested). Status set to
+  prototype, matching AG-001's and AG-002's existing lifecycle discipline
+  rather than any "production-ready" framing.
+runs_completed: 0
+reports_reviewed: 0
+known_false_positives: unknown
+known_missed_findings: unknown
+boundary_violations: 0
+last_run: null
+last_review: null
+open_governance_questions:
+  - permanent organizational owner
+  - authority to promote to trusted
+  - long-term repository location
+  - whether a real Knowledge Base store (memory/knowledge-objects/)
+    should be created now, or only once a second AG-002 Recovery Report
+    exists to curate alongside PILOT-RUN-0002
+  - who conducts the first real Knowledge Review (REVIEW-PROTOCOL.md) -
+    no Reviewer has been assigned yet, shared in kind with AG-002's own
+    open ORB-Reviewer question
+  - whether Candidate Investigation numbering (CI-NNNN) should remain a
+    single global sequence shared with AG-002, or eventually need its
+    own namespace if volume grows - deferred, not decided, in
+    OUTPUTS.md and CURATION-PROTOCOL.md
