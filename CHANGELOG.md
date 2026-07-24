@@ -579,3 +579,48 @@
   already-built Stage 4 into an enforced gate instead of an
   aspirational one. No new employee, document set, or automation
   proposed.
+
+## 2026-07-24 (ADR-0001 — Human Authority Gates)
+
+- Added `docs/adr/` and its first document,
+  `docs/adr/ADR-0001-human-authority-gates.md` — the first ADR in this
+  repository, distinct from the existing `PROP-000N` proposal series.
+  Status: **DRAFT**, unadopted, matching every other governing document
+  in this repository.
+- Defines **Human Authority Gate (HAG)**: any action requiring explicit
+  human authorization before the organization may continue — never an
+  error, always a normal state transition. Generalizes exactly what
+  `INFRA-SPRINT-01-report.md` found concretely: a connected, authenticated
+  Google Drive connector that still requires one-time human consent per
+  tool call.
+- Defines **Standard Agent Behavior** for a HAG (stop, preserve, record,
+  specify the minimal human action, wait, resume automatically if
+  possible — no retries, no workarounds, no duplicated data) and a
+  **required HAG report format** (Resource / Requested action / Blocking
+  authority / Evidence / Exact human action / Expected result / Resume
+  point) — `INFRA-SPRINT-01-report.md` §5 already contains every one of
+  these fields in substance, cited as the worked template.
+- Proposes a **Registry extension**: every source gains two independent
+  states — Connectivity (Connected/Disconnected) and Authority
+  (Authorized/Pending Human Approval/Denied/Unknown) — never merged.
+  Worked example, from real evidence: `MEM-002` is Connected (the MCP
+  transport connects fine) **and** Pending Human Approval (every tool
+  call returns `-32003`), a distinction the current single `status`
+  field cannot represent. Flags one unresolved question of its own:
+  where the existing `deprecated` value fits in a two-axis model — not
+  decided here.
+- **Reconciles a terminology collision** between this ADR's four
+  organizational categories (technical failure / infrastructure
+  limitation / governance boundary / Human Authority Gate) and Sprint
+  01's Five Whys, which used "governance cause" in a different sense (an
+  organizational ownership gap, not a by-design boundary). Under this
+  ADR, the `-32003` signal itself reclassifies from Sprint 01's
+  "technical cause" to a Human Authority Gate; Sprint 01's downstream
+  findings (no automatic resume path, Stage 4 not enforced, no assigned
+  owner) remain genuine Infrastructure limitations — nothing in Sprint
+  01's conclusion is contradicted, only refined.
+- **Adopts nothing else.** AG-002's `RUN-PROTOCOL.md`/`INPUTS.md`
+  terminology, the Memory Source Registry's actual schema, and a HAG Log
+  are all explicitly listed (ADR §8) as separate, human-gated migration
+  steps this document does not perform — no registry created ahead of a
+  first real entry, no existing file rewritten.
