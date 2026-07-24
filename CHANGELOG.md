@@ -152,3 +152,43 @@
 - No other repository (KOD, generative-discovery-engine, trust-engine,
   project-memory) was read, modified, or notified. `PROP-0001`'s
   recommendation is explicitly unaffected by this document.
+
+## 2026-07-24 (AI Organization prototype)
+
+- Created `docs/ai-organization/`, a bounded DRAFT/EXPERIMENTAL/NOT
+  ADOPTED prototype living inside `discovery-lab` — explicitly not a new
+  GitHub repository. Four organization-level documents
+  (`README.md`, `ORGANIZATION-DRAFT.md`, `EMPLOYEE-REGISTRY.md`,
+  `HIRING-LIFECYCLE-DRAFT.md`) establish a candidate organizational
+  model: a permanent, versioned **Role** (organizational position) is
+  defined independently of whichever **Executor** currently performs it
+  ("Role is stable. Executor is replaceable.").
+- Fully populated the first Role, `AG-001 — Repository Observer` v0.1,
+  across all 11 required documents (`CONTRACT.md`, `ROLE.md`,
+  `INPUTS.md`, `OUTPUTS.md`, `LIMITATIONS.md`, `CHECKLIST.md`,
+  `METRICS.md`, `RUN-PROTOCOL.md`, `PROMPT.md`, `STATUS.yaml`,
+  `HISTORY.md`) at `docs/ai-organization/employees/
+  AG-001-repository-observer/`. Mission: "Observe changes. Report
+  evidence. Do not decide." — read-only, no recommendations, no
+  architectural interpretation, escalates to `UNKNOWN` /
+  `INSUFFICIENT ACCESS` rather than guessing.
+- Added an explicit terminology disambiguation (in `README.md` and
+  `ROLE.md`) clarifying that AG-001's "Observation Report" /
+  "Observations" use the plain-English sense of the word, and are
+  **not** KOD's Knowledge Domain "Observation" object or trust-engine's
+  "Observation Memory" — found and fixed as part of the required
+  pre-commit check against `PROP-0001`'s ground rule 1, following the
+  same pattern already used for "Investigation" (`PROP-0001`) and
+  "Hypothesis" (`DL-0001`).
+- No aggregate trust score, no invented metric values, and no candidate
+  promotion thresholds were defined in v0.1 — `METRICS.md` defines nine
+  named metrics as an interface only, with zero run data to populate
+  them (`runs_completed: 0`). No Senior/Architect lifecycle tier was
+  added, for lack of demonstrated need.
+- No code, no automation workflow, and no specific AI model is
+  referenced anywhere in the architecture (model names appear only as
+  illustrative examples of interchangeable executors, in explanatory
+  prose, never inside the actual role definition or prompt template).
+- No other repository (KOD, generative-discovery-engine, trust-engine,
+  project-memory) was read, modified, or notified. No new GitHub
+  repository was created; `add_repo` was not used.
