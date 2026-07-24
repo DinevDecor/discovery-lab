@@ -244,3 +244,40 @@
   DRAFT.md`, `ORGANIZATION-DRAFT.md`, or any other governance document.
   No automation introduced. No other repository read, modified, or
   notified.
+
+## 2026-07-24 (FP-0001 — Founding Charter)
+
+- Added `docs/ai-organization/FOUNDING-CHARTER.md` (FP-0001, v0.1),
+  **Status: DRAFT**, deliberately not the word KOD's own foundational
+  document uses for itself — the distinction is explained in the
+  document's own opening section. Creates no new governance layer:
+  every one of its 9 sections restates a principle already established
+  in `ORGANIZATION-DRAFT.md`, `HIRING-LIFECYCLE-DRAFT.md`, or
+  `PROP-0001`, labeled explicitly as a "Candidate principle," or states
+  a design intent (Purpose) distinct from `DL-0001`'s still-unverified
+  hypothesis.
+- Sections: Purpose, Identity, Evidence, Evolution (a named six-stage
+  change pipeline — Observation → Investigation → Experiment → Review →
+  Decision → Adoption, never by direct edit), Boundaries, Independence,
+  Memory, Promotion, Human Authority, and a mandatory Open Questions
+  section (5 questions recorded, none resolved prematurely).
+- Ran the required self-critical review after writing the document and
+  recorded — without fixing any of them directly, per instruction — 6
+  Candidate Conflicts: (1) four of Discovery Lab's five reserved terms
+  (`Observation`, `Experiment`, `Review`, `Evidence`) used as section
+  titles without the disambiguation notes given to every earlier
+  instance of this exact collision; (2) Section 4's "Review" stage is a
+  fourth, unreconciled sense of the word alongside KOD's, GDE's, and
+  ORB's; (3) Section 3's evidence standard is not satisfied by how the
+  lifecycle stages, ORB's six questions, or AG-001's metric names were
+  actually produced (design reasoning, not gathered evidence); (4)
+  Section 6's independence standard goes further than `RUN-0001`
+  actually practiced; (5) Section 4's "Experiment" stage names a
+  capability `PROP-0001` marks as currently dormant; (6) Section 8's use
+  of "Trust" thematically echoes trust-engine's namesake concept.
+- All relative-path references mechanically verified before commit;
+  two ambiguous bare-filename references (to AG-001's `CONTRACT.md` and
+  `METRICS.md`) were tightened to full relative paths as a mechanical
+  fix, separate from the substantive Candidate Conflicts above.
+- No new governance layer, no new employee, no automation introduced.
+  No other repository read, modified, or notified.
