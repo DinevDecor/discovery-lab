@@ -473,3 +473,31 @@
   All relative-path references mechanically verified before commit. No
   code, automation, or GitHub Action introduced. No other repository
   read, modified, or notified.
+
+## 2026-07-24 (AG-002 PILOT-RUN-0002 — blocked at Stage 1)
+
+- A second real recovery mission was requested for AG-002, naming one
+  sole authorized source (no substitution permitted this time): a
+  diary archive at Google Drive, "Project Memory → Archive → oneDay
+  6.zip".
+- Stage 1 (Historical Sources / Lookup) was attempted by three
+  distinct methods in this session: `search_files` with
+  `title contains 'oneDay 6'`, `search_files` with
+  `title contains 'Project Memory'`, and `list_recent_files`. All
+  three returned identically: `MCP error -32003: MCP tool call
+  requires approval`. No file, folder, or file metadata was ever
+  retrieved from Google Drive.
+- Per the requesting task's stop rule and `RUN-PROTOCOL.md`'s own Stop
+  rule, the run halted at Stage 1 rather than substituting another
+  source or inventing content. **No Recovery Report was produced** —
+  writing one would misrepresent zero actual scanning as a completed
+  run. `PILOT-RUN-0002-Recovery-Report.md` does not exist.
+- Reported to the requester as `BLOCKED — Diary archive exists but is
+  not accessible from the current execution environment.`
+- Recorded as a new entry in AG-002's own append-only
+  `HISTORY.md` (the run was real and belongs to AG-002's record even
+  though it produced no report). `EMPLOYEE-REGISTRY.md`,
+  `STATUS.yaml`, and every other AG-002 file were left unchanged — no
+  run was actually completed, so `runs_completed` was not incremented.
+  No source document was read, modified, or fabricated. No other
+  repository read, modified, or notified.

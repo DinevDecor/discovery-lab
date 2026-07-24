@@ -29,3 +29,26 @@ recorded as `INSUFFICIENT ACCESS`, not substituted. Report:
 themes, 5 idea-evolution timelines, 2 forgotten ideas, 4 candidate
 investigations (none created), 2 contradictions (one documented
 revision, one principle/outcome gap), 6 open questions.
+
+## 2026-07-24 — PILOT-RUN-0002 (blocked at Stage 1, no report produced)
+
+Second real run requested. Unlike PILOT-RUN-0001, exactly one source
+was authorized this time, with no substitution permitted: a diary
+archive at Google Drive, "Project Memory → Archive → oneDay 6.zip" (or
+its already-extracted folder at the same location). Stage 1 (Historical
+Sources / Lookup, `RUN-PROTOCOL.md`) was attempted by three distinct
+methods in this session — `search_files` (`title contains 'oneDay
+6'`), `search_files` (`title contains 'Project Memory'`), and
+`list_recent_files` — all against the Google Drive MCP connector. All
+three calls returned identically: `MCP error -32003: MCP tool call
+requires approval`. No file, folder, or metadata was ever retrieved.
+No source was ever reached, so no candidate could be discovered, no
+citation linked, and no clustering performed — the run halted at Stage
+1 per `RUN-PROTOCOL.md`'s Stop rule and the requesting task's own
+instruction, rather than substituting Project Memory or any other
+source. No Recovery Report exists for this run; producing one would
+have misrepresented zero actual scanning as a completed pilot.
+Reported to the requester verbatim as: `BLOCKED — Diary archive exists
+but is not accessible from the current execution environment.` No
+source document was read, modified, or invented. `runs_completed` in
+`STATUS.yaml` was not incremented — no run was actually completed.
