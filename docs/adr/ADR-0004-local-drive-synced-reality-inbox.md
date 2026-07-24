@@ -1,6 +1,9 @@
 # ADR-0004 — Local-Filesystem Reality Inbox Intake (Google Drive Sync)
 
 Status: **ACCEPTED — DESIGN COMPLETE, AWAITING LOCAL VERIFICATION**
+(one remote verification attempt on 2026-07-24 correctly returned
+`BLOCKED` at the first precondition — see §6; still awaiting a real
+local attempt)
 Date: 2026-07-24
 Accepted: 2026-07-24, by Petko, via a direct redesign order ("We
 optimized for the repository instead of the user... Redesign the Reality
@@ -193,9 +196,61 @@ documentation, and the manifest schema extension — ready for the first
 real local run to exercise, the same way `reality-inbox/` itself was
 ready for `REALITY-VERIFY-0001` before that run actually happened.
 
+## 6. Verification attempt log (2026-07-24, this session, result: BLOCKED)
+
+Requested: run the full local-verification cycle from this session.
+Attempted in good faith rather than declined outright, with exact
+evidence recorded either way — same discipline as every prior Google
+Drive attempt in this repository.
+
+**Re-confirmed this is still the identical remote container** from §2,
+fresh, not assumed carried over:
+```
+hostname                                → vm
+CLAUDE_CODE_REMOTE                      = true
+CLAUDE_CODE_CONTAINER_ID                = container_01T4iigk7CVPKUrCE3TAbvc2--claude_code_remote--9e8649
+CLAUDE_CODE_REMOTE_ENVIRONMENT_TYPE     = cloud_default
+ls /mnt/                                → only "skills" (unrelated, read-only tooling mount)
+mount | grep cifs\|smb\|nfs\|9p\|drvfs\|fuse   → nothing
+env | grep -i drive\|winuser\|userprofile\|smb → nothing
+```
+
+**One important negative result, recorded explicitly so it is never
+mistaken for progress:** attempting `mkdir -p "/mnt/g/My Drive/Projects/
+discovery-lab/DROP HERE"` **succeeded** (exit code 0) and the directory
+appeared to exist afterward. This is **not evidence of Google Drive
+access.** Linux will create any arbitrary directory path on a writable
+filesystem regardless of what it's named — `mkdir` has no concept of
+"Google Drive" and cannot fail in a way that reveals whether a path is
+meaningfully connected to anything. The directory it created was an
+ordinary, empty, disconnected folder on this container's own ephemeral
+local disk (`/dev/vda`), coincidentally sharing a name with the real
+target — never networked to Google's servers or the user's computer, and
+containing no real diary file, because none could reach it. **Deleted
+immediately** (`rm -rf /mnt/g`) once this was established, so no
+misleading artifact was left in the filesystem for a future reader to
+mistake for a working bridge.
+
+**Consequence for steps 3 onward of the requested cycle:** "confirm read
+and write," "place or detect one real diary file," "copy the original,"
+and every step after them are moot — there is no real folder to read
+from, no real diary file reachable, and copying the fabricated
+look-alike directory's (empty) contents would not be copying anything
+real. None of those steps were performed on fabricated data; they were
+correctly not attempted once the precondition failed.
+
+**Status not changed to `VERIFIED`** — per the requester's own
+instruction ("only if the full cycle succeeds") and per this
+repository's standing discipline against claiming synchronization or
+access that has not happened.
+
 ## Definition of Done
 
 **ACCEPTED — design complete, documented, and repository-side pieces in
 place; end-to-end verification requires a session with local filesystem
-access and has not happened yet.** Not claimed as `IMPLEMENTED` or
-`VERIFIED` — that status is earned only by a real local run, per §5.
+access and has not happened yet.** One real verification attempt was
+made from this (remote) session on 2026-07-24 and correctly returned
+**BLOCKED** at the first precondition (§6) — not a failure of the
+design, a confirmation that this session is not the right one to run it.
+Not claimed as `IMPLEMENTED` or `VERIFIED` — that status is earned only
+by a real local run, per §5.

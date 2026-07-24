@@ -969,3 +969,43 @@
   or test `G:\My Drive\Projects\discovery-lab\DROP HERE` — the design is
   recorded as accepted and ready, explicitly not as implemented or
   tested, pending a real run from a session with local access.
+
+## 2026-07-24 (ADR-0004 local verification attempted — result: BLOCKED)
+
+- **Requested: run the full local-verification cycle from this session.**
+  Attempted in good faith, with exact evidence recorded, rather than
+  declined outright.
+- **Re-confirmed, fresh, this is the identical remote container**
+  (`CLAUDE_CODE_CONTAINER_ID=container_01T4iigk7CVPKUrCE3TAbvc2--claude_code_remote--9e8649`,
+  `CLAUDE_CODE_REMOTE_ENVIRONMENT_TYPE=cloud_default`), with no mount,
+  network filesystem, or environment variable connecting it to the
+  user's machine or Google Drive — same conclusion as `ADR-0004` §2, not
+  assumed carried over.
+- **One important negative result, recorded so it is never mistaken for
+  progress:** `mkdir -p "/mnt/g/My Drive/Projects/discovery-lab/DROP
+  HERE"` **succeeded** (exit 0). This is explicitly **not** evidence of
+  Drive access — Linux creates arbitrary directory paths regardless of
+  what they're named; the resulting folder was an ordinary, empty,
+  fully disconnected directory on this container's own ephemeral disk,
+  coincidentally sharing a name with the real target. **Deleted
+  immediately** (`rm -rf /mnt/g`) once established, so no misleading
+  artifact was left for a future reader to mistake for a working bridge.
+- Since there was no real folder to read from, steps 3 onward of the
+  requested cycle (confirm read/write, detect a real diary file, copy
+  the original, manifest with `intake_mode: LOCAL_DRIVE`, process,
+  commit/push) were **correctly not attempted** — not skipped by
+  oversight, but because performing them against the fabricated
+  look-alike directory would have meant processing nothing real while
+  appearing to complete the cycle.
+- **`ADR-0004`'s status was not changed to `VERIFIED`**, per the
+  requester's own explicit instruction ("only if the full cycle
+  succeeds") and this repository's standing discipline against claiming
+  synchronization or access that has not happened. Added a new §6,
+  "Verification attempt log," documenting the attempt and its evidence
+  in full; updated the ADR's header status line and `docs/adr/README.md`'s
+  summary row to reflect it, without erasing the original "awaiting
+  verification" framing.
+- **Verdict: BLOCKED** — an external dependency (a session actually
+  running on the user's machine, with Google Drive for Desktop syncing
+  the target folder) prevents completion; nothing in this repository can
+  substitute for it.
