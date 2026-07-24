@@ -3,10 +3,10 @@
 ```yaml
 project: discovery-lab
 status: ACTIVE / BOOTSTRAP
-current_phase: RECOVERY
-current_step: Repository access confirmed; no prior architectural draft could be located
-blocked_by: no local export of the claimed "architectural draft" exists; purpose and scope unconfirmed
-last_completed: Repository established with baseline docs (README, CONTEXT, STATE, CHANGELOG) and a provenance/recovery note; no architecture invented
-next_action: Confirm whether an architectural draft for discovery-lab exists somewhere outside this session (another machine, chat export, or a repository not yet granted access) before any architecture work begins
+current_phase: MANDATE_DRAFTING
+current_step: Three mandate variants proposed (Experiment Laboratory, Ecosystem Observatory, Combined Lab + Observatory); Ecosystem Observatory recommended but not accepted
+blocked_by: no human decision yet on which mandate variant (if any) governs discovery-lab; purpose and scope remain unconfirmed until then
+last_completed: Inspected KOD, generative-discovery-engine, and project-memory baselines; recorded findings in docs/investigations/INV-0001-discovery-lab-mandate.md; proposed three mandate variants and an unaccepted recommendation in docs/proposals/PROP-0001-discovery-lab-boundaries.md
+next_action: Petko to review PROP-0001-discovery-lab-boundaries.md and accept, reject, or amend a mandate variant; no investigation or experiment should run under an assumed mandate until then
 updated_at: 2026-07-24
 ```

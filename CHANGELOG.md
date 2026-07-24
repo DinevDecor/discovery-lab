@@ -21,3 +21,26 @@
   work. A companion investigation note recording the same findings from
   the `project-memory` side is at
   `project-memory/notes/2026-07-24-discovery-lab-recovery.md`.
+
+## 2026-07-24 (mandate drafting)
+
+- Inspected KOD (`Core/`, `Foundations/`, `Knowledge/`, `Core/Registry/`)
+  and generative-discovery-engine (`README`, `CONTEXT`, `STATE`, `adr/`,
+  `contracts/`, `registry/`, `docs/protocols/RVS-00-validation-kernel.md`)
+  to identify what each already owns, to avoid duplicating either.
+- Recorded the inspection and diagnosis (overlaps, gaps, ownership risks,
+  dumping-ground risk) in
+  `docs/investigations/INV-0001-discovery-lab-mandate.md`.
+- Proposed three mandate variants — Experiment Laboratory, Ecosystem
+  Observatory, Combined Lab + Observatory — with allowed/prohibited
+  artifacts, lifecycle, relationships, advantages, and failure modes for
+  each, in `docs/proposals/PROP-0001-discovery-lab-boundaries.md`.
+- Recommended (not accepted) the Ecosystem Observatory variant, on the
+  grounds that it is the only variant with directly observed precedent
+  (this session's own recovery investigation and the 2026-07-19 Dinev
+  Decor evidence check, both previously done ad hoc in
+  `project-memory/notes/`).
+- Proposed a smallest-possible first experiment (INV-0002, not yet run) to
+  test the recommended mandate before committing further.
+- Updated `STATE.md` to reflect `MANDATE_DRAFTING` phase. No ADR was
+  created or accepted; no architecture was invented.
