@@ -1,9 +1,12 @@
 # Infrastructure Sprint 01 — Permanent Access to Project Memory (Google Drive)
 
-**Status: DIAGNOSTIC + PROPOSAL. Definition of Done: NOT YET PASS.**
+**Status: CLOSED — PLATFORM LIMITATION (Google Drive connector path).
+Definition of Done: NOT PASS, and not achievable via this path in this
+client.** Alternative architecture proposed, not implemented — see
+`../../adr/ADR-0002-ag002-alternative-memory-access.md`.
 Date: 2026-07-24. Triggered by: AG-002 `PILOT-RUN-0002`, blocked at Stage 1
 (`../employees/AG-002-discovery-archaeologist/HISTORY.md`, `../../../CHANGELOG.md`,
-both dated 2026-07-24).
+both dated 2026-07-24). Closed after a live approval test — see §9.
 
 This is an infrastructure problem, not an AG-002 problem, per the task that
 requested this sprint. Nothing in `AG-002` or in Discovery Lab's governance
@@ -129,6 +132,15 @@ and a second, independent session then being tested against the same
 connector. This is flagged explicitly rather than assumed away — see the
 Connection Plan, step 5, and the Verification Procedure.
 
+**Superseded, 2026-07-24 (see §9):** the live approval test performed after
+this report was first written found a more fundamental result than (a)/(b)
+above anticipated. Petko granted approval ("Allow once") while a session
+was live and watching; the *very next* call in the *same* session still
+returned `-32003`, identically. The session-scoped-vs-persistent question
+this section posed turned out to be moot — the approval flow does not
+establish a standing grant even within the session where it was granted,
+let alone across sessions. See §9 for the full evidence and conclusion.
+
 ---
 
 ## 2. Permanent Architecture
@@ -204,6 +216,13 @@ Step 5 is the honest core of "permanent": nothing in this sprint can
 guarantee permanence without that empirical check, because the mechanism
 that gates approval is opaque to the session experiencing the block.
 
+**Result, 2026-07-24 (see §9): step 1 was attempted for real — twice, in
+two different ways — and did not resolve.** Steps 2–5 were never reached;
+they remain correct *as a plan*, but are understood, as of §9, to require
+a source-access path other than this Google Drive connector as currently
+gated in this client. Superseding proposal:
+`../../adr/ADR-0002-ag002-alternative-memory-access.md`.
+
 ---
 
 ## 4. Verification Procedure — PASS test
@@ -232,13 +251,23 @@ point:
 chain; any citation without a real diary date/path/quote; any content not
 traceable to an actual diary entry; any edit to the diary.
 
-**Current status: NOT YET PASS.** Every precondition above is blocked on
-Connection Plan step 1, which requires the human action in §5 — nothing in
-this session can substitute for it.
+**Current status: NOT PASS — closed as a platform limitation, not a
+pending human action.** Precondition 2 (source resolves and verifies
+reachable) was tested directly, with a human present granting approval in
+real time, and did not clear. This is no longer "blocked on Connection
+Plan step 1 awaiting a human"; see §9.
 
 ---
 
 ## 5. Human Action Required
+
+**Result: performed, did not resolve — see §9.** Petko approved the
+surfaced card ("Allow once" — the only option that was available/used;
+this section's preference for a broader "always allow" grant was not
+tested because no such option was exercised). The card was approved
+correctly; the very next call, in the same session, still returned
+`-32003`. This section is kept as-written, unedited, as the historical
+record of what was tried — not as still-outstanding guidance.
 
 - **Which permission:** Approval of this session's pending Google Drive
   tool-call request(s) — the "approval card" the Claude Code client
@@ -402,9 +431,76 @@ Both actions are recommended, not applied — adopting rule 2 is a
 governance change to `MEMORY-SOURCE-PROTOCOL.md`'s Governance table, which
 this sprint does not make unilaterally, consistent with §6.
 
+## 9. Final Conclusion — Platform Limitation, Not a Project Failure
+
+Recorded 2026-07-24, after a live approval test conducted with Petko
+present and actively granting approval in real time — the strongest test
+this sprint could run, and the one that closes the question §1.6 and §3
+step 5 left open.
+
+### 9.1 What was actually tested
+
+Three distinct rounds, beyond the four calls already logged in §1.2:
+
+1. **Re-check, unattended** (this sprint's continuation): `list_recent_files`
+   and `search_files`, both `-32003`, connector state unchanged.
+2. **Immediately after Petko clicked "Allow once"**: `list_recent_files`
+   then `search_files`, both `-32003` again, with the log repeating the
+   same `"...surfacing retroactive approval card"` pattern for the new
+   calls — i.e. each new call generates its *own* fresh card, rather than
+   consuming a standing grant.
+3. **A single, minimal call issued while Petko was actively watching and
+   approving**, specifically to test whether a call could be caught
+   "in flight" and resumed after approval: `list_recent_files`, pageSize 1.
+   Result: `"failed after 0s"` — identical to every prior attempt. The `0s`
+   timing is itself evidence: the call is rejected before any Drive API
+   round trip is possible, which means it never reaches a "pending" state
+   an out-of-band approval could attach to. The approval card is generated
+   *after* the rejection ("retroactive"), not *during* a live request.
+
+### 9.2 Conclusion
+
+| Field | Value |
+|---|---|
+| Connector status | **CONNECTED** |
+| Organization authorization | **COMPLETE** |
+| Per-call approval flow | **NON-RESUMABLE / RETROACTIVE** |
+| Unattended Google Drive access | **NOT SUPPORTED IN THIS CLIENT** |
+| `MEM-002` operational status | **BLOCKED BY PLATFORM APPROVAL MODEL** |
+
+This is recorded as a **platform limitation** — not a project failure, and
+not a missing OAuth authorization. Every layer this repository, AG-002, or
+the Memory Source Registry controls is correct and working as designed:
+the connector is authenticated, the transport connects, the Registry
+entry exists and is honestly marked `unverified`, and AG-002's own Stop
+rule was followed at every step. The unresolved layer — a per-call
+approval mechanism that manufactures a fresh, retroactive card for every
+new call instead of establishing any standing grant, even within one live
+session with a human actively approving — sits entirely outside this
+repository's or this session's control, per §1.4.
+
+### 9.3 What this changes going forward
+
+- **No further Google Drive retries will be attempted** against this
+  connector in this client, per explicit instruction. Retrying would not
+  produce new information: §9.1's round 3 establishes that *even a human
+  actively watching and approving in real time* cannot make a call
+  succeed, which is a stronger and more conclusive result than any further
+  unattended retry could add.
+- `MEM-002` remains in the Registry, `status: unverified`, with its notes
+  updated to point here rather than to a still-pending action (see
+  `MEMORY-SOURCE-REGISTRY.md`).
+- An alternative architecture for AG-002 is proposed, not implemented, in
+  `../../adr/ADR-0002-ag002-alternative-memory-access.md` — keeping Google
+  Drive as the human-maintained canonical source while giving AG-002 a
+  source type it can already access reliably.
+
 ## Definition of Done
 
-**NOT YET PASS.** The infrastructure is diagnosed with evidence, the
-permanent architecture is specified, and the connection plan is concrete —
-but every remaining step is blocked on Connection Plan step 1 (§5), which
-only Petko can perform.
+**NOT PASS — closed as a platform limitation, per §9.** The infrastructure
+was diagnosed with evidence, the permanent architecture is specified, and
+the Connection Plan was tested for real, including a live approval
+attempt — and did not clear. This sprint does not end in "waiting on a
+human action"; it ends in a conclusion this repository cannot engineer
+its way past. `ADR-0002-ag002-alternative-memory-access.md` is the
+proposed next step, not yet authorized to implement.

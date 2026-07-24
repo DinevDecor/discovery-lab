@@ -665,3 +665,56 @@
   format directly, without creating `docs/adr/HAG-LOG.md`, since
   Migration Item 3 correctly gates that file's creation on migration
   actually starting, which it has not.
+
+## 2026-07-24 (Infrastructure Sprint 01 closed — platform limitation; ADR-0002 drafted)
+
+- **Live approval test, conducted with Petko actively present.** After
+  Petko clicked "Allow once" on the surfaced Drive approval card, the
+  very next call in the same session (`list_recent_files`, then
+  `search_files`) still returned `MCP error -32003`, with the log
+  repeating `"...surfacing retroactive approval card"` for each new call
+  — each call generates its own fresh card rather than consuming a
+  standing grant. A further, deliberately minimal single call
+  (`list_recent_files`, pageSize 1) was then issued while Petko was
+  actively watching and approving, to test whether a call could be
+  caught mid-flight and resumed. It also failed in `0s` — proof the call
+  never reaches a "pending" state at all; the card is generated
+  retroactively, after rejection, not during a live request.
+- **`INFRA-SPRINT-01-report.md` updated with a new §9, "Final
+  Conclusion — Platform Limitation, Not a Project Failure,"** recording:
+  Connector status **CONNECTED**; Organization authorization
+  **COMPLETE**; Per-call approval flow **NON-RESUMABLE / RETROACTIVE**;
+  Unattended Google Drive access **NOT SUPPORTED IN THIS CLIENT**;
+  `MEM-002` operational status **BLOCKED BY PLATFORM APPROVAL MODEL**.
+  Explicitly framed as a platform limitation — not a project failure,
+  not a missing OAuth authorization; every layer this repository
+  controls (connector auth, Registry entry, AG-002's Stop rule) worked
+  correctly throughout. The report's header, §1.6, §3 (Connection Plan),
+  §4 (Verification Procedure), and §5 (Human Action Required) were all
+  annotated with this outcome — none of the original text was deleted,
+  each superseded section is marked as such, preserving the historical
+  record of what was actually tried. **No further Google Drive retries
+  will be attempted**, per explicit instruction.
+- `MEMORY-SOURCE-REGISTRY.md`'s `MEM-002` entry updated: `status` stays
+  `unverified` (still accurate — Lookup never succeeded), `notes`
+  rewritten to record the closure and point to the new ADR-0002 proposal
+  instead of a still-pending action. Not marked `deprecated` — Google
+  Drive remains the intended canonical source if a working access path
+  is ever found.
+- **Added `docs/adr/ADR-0002-ag002-alternative-memory-access.md`** —
+  Status: **DRAFT, proposal only, not implemented**. Proposes a
+  Human-Mediated Export Bridge: a human periodically exports the diary
+  from Drive into a new Git-tracked source (a future `MEM-003`, not
+  created here) that AG-002 reads through its existing, unmodified
+  Recovery Protocol — the same mechanism already proven working for
+  `MEM-001`. Frames this as relocating the Human Authority Gate ADR-0001
+  defines to one human action per export, instead of one per call (which
+  §9 shows this client cannot support). Records two alternatives
+  considered and not recommended (a service-account Drive path; waiting
+  for a platform fix) and one self-critical, explicitly unresolved
+  tension: this proposal duplicates data, in tension with the Registry's
+  own "no duplicated memory" principle — flagged for Petko to decide, not
+  resolved unilaterally. Leaves open where the export lives and how
+  often it recurs.
+- `docs/adr/README.md` updated: ADR-0002 added as **DRAFT** (index now 2
+  ADRs: 1 accepted, 1 draft).

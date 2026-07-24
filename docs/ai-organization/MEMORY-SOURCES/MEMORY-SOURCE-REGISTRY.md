@@ -43,26 +43,34 @@ type: google_drive
 locator:
   drive_or_shared_drive: UNKNOWN
   folder_path_or_id: UNKNOWN
-access_requirements: read-only Google Drive API scope, plus a one-time
-  platform-level tool-call approval per session (see
-  INFRA-SPRINT-01-report.md, section 1.5 - this is a session/connector
-  gate, not a Drive scope, and is not yet resolved)
+access_requirements: read-only Google Drive API scope, gated behind a
+  per-call platform tool-call approval that this client cannot satisfy
+  in a resumable way (see INFRA-SPRINT-01-report.md, section 9 -
+  confirmed a platform limitation, not a missing scope or missing
+  authorization)
 status: unverified
 steward: Implementer session (Claude Code)
 added: 2026-07-24
 last_verified: null
 notes: >
   Named by the requesting task as "Project Memory -> Archive -> oneDay
-  6.zip". Lookup was attempted four times across two tasks
-  (PILOT-RUN-0002 and Infrastructure Sprint 01), via two distinct
-  tools (search_files, list_recent_files) - every attempt returned
-  "MCP error -32003: MCP tool call requires approval" before any Drive
-  API call was reached. No file, folder, or ID was ever actually
-  retrieved, so drive_or_shared_drive and folder_path_or_id are
-  honestly UNKNOWN rather than invented. Full diagnostic evidence in
-  INFRA-SPRINT-01-report.md. This entry exists so the Registry
-  reflects a real, named, in-progress source - not to claim it is
-  reachable yet.
+  6.zip". Lookup was attempted nine times across three tasks
+  (PILOT-RUN-0002, Infrastructure Sprint 01, and a live approval test
+  conducted with Petko actively granting approval in real time), via
+  two distinct tools (search_files, list_recent_files) - every attempt
+  returned "MCP error -32003: MCP tool call requires approval" before
+  any Drive API call was reached, including the call made while
+  approval was being actively granted. Closed, 2026-07-24, as a
+  platform limitation (INFRA-SPRINT-01-report.md section 9): connector
+  status CONNECTED, organization authorization COMPLETE, per-call
+  approval flow NON-RESUMABLE / RETROACTIVE, unattended Google Drive
+  access NOT SUPPORTED IN THIS CLIENT. No further retries planned.
+  drive_or_shared_drive and folder_path_or_id remain honestly UNKNOWN -
+  Lookup never succeeded, so none was invented. An alternative
+  architecture for AG-002 is proposed, not yet implemented, in
+  ../../adr/ADR-0002-ag002-alternative-memory-access.md - Google Drive
+  remains the intended canonical source if a working access path is
+  ever found; this entry is not deprecated, only blocked.
 ```
 
 ## Reading this table
