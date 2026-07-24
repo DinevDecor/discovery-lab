@@ -501,3 +501,63 @@
   run was actually completed, so `runs_completed` was not incremented.
   No source document was read, modified, or fabricated. No other
   repository read, modified, or notified.
+
+## 2026-07-24 (Infrastructure Sprint 01 — root-cause diagnosis of the Google Drive block)
+
+- Treated the PILOT-RUN-0002 block as an infrastructure problem, not an
+  AG-002 problem, per explicit instruction. Gathered direct evidence
+  instead of guessing: `ListConnectors` output (Google Drive
+  `connected: true`, `enabledInChat: true` — fully authenticated),
+  Claude Code's own MCP debug logs (`mcp-logs-6c0f8fb6-.../*.jsonl`,
+  `mcp-logs-Google-Drive/*.jsonl`), the CLI's local permission settings
+  (`/root/.claude/launcher-settings.json`,
+  `/home/claude/.claude/launcher-settings.json` — both
+  `permissions.allow: ["Skill"]` only), and the agent proxy's own
+  documented failure modes (`/root/.ccr/README.md`, ruled out — this is
+  not a network/TLS issue).
+- **Root cause identified, with quoted log evidence:** every Google
+  Drive tool call fails with `MCP error -32003: MCP tool call requires
+  approval`; the same log line reads `"...needs_approval
+  (tool_name=mcp__Google_Drive__search_files) — surfacing retroactive
+  approval card"`. This is a per-tool, per-session, human-interactive
+  consent gate on org "Directory"-origin connectors, sitting in front
+  of the Drive API itself, independent of the connector's own
+  authenticated/connected state. No human was present in this
+  unattended task session to click the approval card when it was
+  surfaced, so it was never granted. Explicitly ruled out with
+  evidence: network/proxy/TLS, missing OAuth, missing connector,
+  repository/`.claude/settings.json` configuration, Drive API scope.
+- Produced
+  `docs/ai-organization/MEMORY-SOURCES/INFRA-SPRINT-01-report.md`:
+  Infrastructure Report (what works / what's blocked / why / which
+  component / exact missing capability), Permanent Architecture (Google
+  Drive → Memory Source Registry → AI Organization → AG-001/AG-002/
+  future employees, built entirely on the existing, unmodified
+  Connection Protocol, plus one *finding* — an implicit "Stage 0
+  Platform Tool Approval" precondition — recorded, not silently added
+  to the Protocol), a 5-step Connection Plan (owner / prerequisite /
+  expected result / verification method each), a PASS-test Verification
+  Procedure (AG-002 must discover, resolve, verify, read, and produce a
+  real cited Recovery Report, unattended, with zero manual copying), and
+  an exact Human Action section naming the one action only Petko can
+  take, including an explicit, flagged uncertainty about whether
+  approval is session-scoped or persistent — not assumed either way.
+- Added `MEM-002` (Project Memory diary archive, Google Drive) to
+  `MEMORY-SOURCE-REGISTRY.md`: `type: google_drive`, `status:
+  unverified`, `drive_or_shared_drive`/`folder_path_or_id` both
+  honestly `UNKNOWN` (Lookup never succeeded — no ID was ever
+  retrieved, so none was invented). This is the correct starting state
+  per `SOURCE-REGISTRATION-TEMPLATE.md`, not a defect.
+- **Definition of Done: NOT YET PASS.** Every remaining step is blocked
+  on one human action (approving the pending Drive tool-call request);
+  nothing in this sprint claims otherwise. AG-002 and Discovery Lab's
+  governance documents (`FOUNDING-CHARTER.md`, `PROP-0001`–`PROP-0003`,
+  `ORB/`, `MEMORY-SOURCE-PROTOCOL.md`) were not modified. No temporary
+  workaround (caching, copying, bypassing the gate) was attempted.
+- Recorded, per explicit new instruction: from this sprint forward, a
+  `BLOCKED` result from any Discovery Lab agent is followed by
+  "diagnose and eliminate the root cause," not "retry" — this sprint is
+  the first applied instance, noted as a now-followed practice, not
+  silently written into
+  `docs/ai-organization/FOUNDING-CHARTER.md` or
+  `docs/ai-organization/HIRING-LIFECYCLE-DRAFT.md`.

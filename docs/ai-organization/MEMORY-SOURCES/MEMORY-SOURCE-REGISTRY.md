@@ -34,12 +34,46 @@ notes: >
   Registered here after the fact, honestly, not in advance of evidence.
 ```
 
+### MEM-002
+
+```
+source_id: MEM-002
+name: Project Memory diary archive (Google Drive)
+type: google_drive
+locator:
+  drive_or_shared_drive: UNKNOWN
+  folder_path_or_id: UNKNOWN
+access_requirements: read-only Google Drive API scope, plus a one-time
+  platform-level tool-call approval per session (see
+  INFRA-SPRINT-01-report.md, section 1.5 - this is a session/connector
+  gate, not a Drive scope, and is not yet resolved)
+status: unverified
+steward: Implementer session (Claude Code)
+added: 2026-07-24
+last_verified: null
+notes: >
+  Named by the requesting task as "Project Memory -> Archive -> oneDay
+  6.zip". Lookup was attempted four times across two tasks
+  (PILOT-RUN-0002 and Infrastructure Sprint 01), via two distinct
+  tools (search_files, list_recent_files) - every attempt returned
+  "MCP error -32003: MCP tool call requires approval" before any Drive
+  API call was reached. No file, folder, or ID was ever actually
+  retrieved, so drive_or_shared_drive and folder_path_or_id are
+  honestly UNKNOWN rather than invented. Full diagnostic evidence in
+  INFRA-SPRINT-01-report.md. This entry exists so the Registry
+  reflects a real, named, in-progress source - not to claim it is
+  reachable yet.
+```
+
 ## Reading this table
 
-- **Current total: 1 source registered. 1 active. 0 deprecated. 0
+- **Current total: 2 sources registered. 1 active. 0 deprecated. 1
   unverified.**
-- No `google_drive`-type entry exists yet — see
-  `MEMORY-SOURCE-PROTOCOL.md`, "What this document does not do."
+- `MEM-002` is the first `google_drive`-type entry — see
+  `MEMORY-SOURCE-PROTOCOL.md`, "What this document does not do," which
+  is now partially superseded by this addition (a `google_drive` entry
+  now exists, though still unverified — the Protocol document itself is
+  not edited by this addition).
 - `KOD`, `generative-discovery-engine`, and `trust-engine` are not
   registered, despite being technically accessible in this session from
   unrelated earlier work — none has actually been used as a memory
