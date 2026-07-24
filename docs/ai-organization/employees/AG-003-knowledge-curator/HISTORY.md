@@ -41,3 +41,48 @@ The architecture was then reviewed adversarially against itself —
 `../../../proposals/AG-003-knowledge-curator-walkthrough/
 ADVERSARIAL-REVIEW-0001.md` — before this Role was reported complete.
 See that file for the recorded findings, both fixed and left open.
+
+## 2026-07-24 — AG-003 Reality Stress Test (first real curation passes)
+
+The architecture's first **real** curation passes (not demonstrations):
+three new real AG-002 recovery runs — `STRESS-RUN-0003` (this
+repository's own four ADRs), `STRESS-RUN-0004` (seven real files from
+the separate `kod` repository), `STRESS-RUN-0005` (three real reports
+from the separate `trust-engine` repository) — each curated in full
+(`../../../proposals/AG-003-reality-stress-test/CURATION-0003.md`,
+`CURATION-0004.md`, `CURATION-0005.md`), plus a fresh adversarial
+re-audit of the existing diary dataset
+(`DATASET-1-REAUDIT.md`). `runs_completed` incremented `0 → 3` (the
+re-audit is not counted as a fourth run, matching AG-002's own
+precedent of not double-counting a re-examination pass).
+
+Requested explicitly as a falsification exercise, not a confirmation
+one. Result: the architecture's **governance layer held without
+exception** across four structurally different real datasets (a
+narrative diary, header-linked governance documents, an undated
+multi-file research corpus, and dense tabular audit data) — no
+automatic merge, promotion, or contradiction resolution occurred
+anywhere, no citation was invented, and two deliberate hallucination
+traps (a near-empty excavation progress file, a blank Knowledge Object
+template) both correctly yielded no fabricated content. The
+**relationship- and maturity-detection layers did not fully
+generalize**: three real, evidence-linked gaps were found — `F-1`
+(`RELATIONSHIP-ONTOLOGY.md`'s `supersedes` type could not honestly
+express a real source's own "amends one property, leaves the rest
+unchanged" relationship), `F-2` (`KNOWLEDGE-OBJECT-SPEC.md`'s
+`maturity` field did not define what counts as "one source" when a
+corpus spans multiple files in one repository), and `F-3` (no cycle
+check existed for `supersedes`/`depends_on` proposals, found through
+active adversarial reasoning, not from an actual cycle in any dataset).
+All three were fixed with small, targeted corrections, each cited
+directly to its originating piece of evidence — see
+`../../../proposals/AG-003-reality-stress-test/
+REALITY-STRESS-TEST-REPORT.md` for the full trail. A fourth finding,
+`F-4` (two concrete relationships the first walkthrough's own limited
+scope had missed), was recorded as a coverage note, not an architecture
+defect — no file was changed for it.
+
+Freeze recommendation returned by the stress test: **READY WITH MINOR
+CHANGES** — the three corrections above are those changes, already
+applied. `known_missed_findings` in `STATUS.yaml` updated to record
+`F-1`–`F-4` by name, not left at "unknown."

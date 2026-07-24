@@ -99,6 +99,19 @@ provenance:                  # list of {report, finding_id, date, citation}
   requires no human approval, unlike `status`. A high `maturity` is
   evidence a Core Principle Proposal may cite; it is not itself a
   promotion.
+  **Source-granularity rule** — added 2026-07-24 per the Reality Stress
+  Test's finding F-2 (`../../../proposals/AG-003-reality-stress-test/
+  REALITY-STRESS-TEST-REPORT.md`): "one source" means **one originating
+  repository, archive, or document collection scanned in one AG-002
+  run** — not one file. Three citations drawn from three different files
+  within the same repository, in the same run (e.g. `kod`'s
+  `EX-0001_CASE.md`, `ART-0001.md`, and its own `ADR-0002.md`, all
+  scanned in one `STRESS-RUN-0004` pass) count as **one** source for this
+  purpose, same as five citations from five entries in one diary archive
+  count as one source. `Convergent` requires citations from **two
+  separate repositories/archives, or two separate AG-002 runs over the
+  same one** — never satisfied by file count alone within a single run
+  over a single repository.
 - **`derived_from`** — set only when this Knowledge Object was built by
   an accepted Knowledge Merge Proposal, or when it is explicitly a
   refinement/extraction of another KO's content. Empty for a

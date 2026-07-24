@@ -1241,3 +1241,79 @@
   `maturity` scoring, unmechanized `CI-NNNN` collision prevention) remain
   open for a future revision — this is architecture-complete, not
   battle-tested.
+
+## 2026-07-24 (continued) — AG-003 Reality Stress Test
+
+- Ran a deliberate falsification exercise against AG-003, per an
+  explicit "the goal is to falsify AG-003, not to prove it correct"
+  task. Four structurally different real datasets: the existing
+  personal diary (re-audited, not re-run — `DATASET-1-REAUDIT.md`),
+  this repository's own four ADRs (`STRESS-RUN-0003`), seven real files
+  from the separate `kod` repository (`STRESS-RUN-0004`), and three real
+  operational reports from the separate `trust-engine` repository
+  (`STRESS-RUN-0005`). `kod` and `trust-engine` were read as external,
+  observed sources only (`PROP-0001` Principle 0) — nothing written back
+  to either.
+- Added a fourth real Reality Inbox `intake_mode` value,
+  `SESSION-LOCAL-REPO-COPY` (`reality-inbox/PROCESSING-PROTOCOL.md`), for
+  a file copied from another repository already accessible in the same
+  session's workspace rather than dropped by a human — same precedent as
+  `GITHUB_UPLOAD`'s addition during `PILOT-RUN-0002`, a real value found
+  in use, not invented ahead of it. Manifests `RI-0003`, `RI-0004`,
+  `RI-0005` created; `reality-inbox/INDEX.md` updated (5 intakes total).
+- **Governance layer held without exception** across all four datasets:
+  no automatic merge, promotion, or contradiction resolution occurred
+  anywhere; no citation was invented; no provenance was lost. Three
+  deliberate traps were built into the datasets and all three were
+  handled correctly: two near-empty KOD sources (an excavation progress
+  file at 0%, a blank Knowledge Object template) yielded no fabricated
+  content, and a Latin/Cyrillic `M1`/`М1` data-identity collision inside
+  a real trust-engine audit was correctly recognized as one finding
+  about the audited system, not mistaken for two duplicate Knowledge
+  Objects needing a merge proposal.
+- **Three real, evidence-linked architecture gaps found and fixed**, each
+  with a minimal, targeted correction (no redesign):
+  - **`F-1`** — `RELATIONSHIP-ONTOLOGY.md`'s `supersedes` type could not
+    honestly express a real source's own relationship (`ADR-0004`
+    "amends" `ADR-0003`, revising one named property while explicitly
+    leaving the rest unchanged). Fixed by allowing `supersedes` to be
+    scoped to a specific, named property rather than an entire Knowledge
+    Object, with a stated requirement that a scoped proposal name which
+    property it covers.
+  - **`F-2`** — `KNOWLEDGE-OBJECT-SPEC.md`'s `maturity` field did not
+    define what counts as "one source" when a corpus spans multiple
+    files within one repository (exposed by `kod`'s multi-file research
+    corpus, which the single-archive diary could never have shown).
+    Fixed with an explicit source-granularity rule: one repository/
+    archive scanned in one run is one source, regardless of file count —
+    resolved conservatively, consistent with the diary's own `KO-0001`
+    precedent.
+  - **`F-3`** — no cycle check existed before proposing a `supersedes` or
+    `depends_on` relationship edge. Found through active adversarial
+    reasoning about the task's own "circular relationships" failure
+    category, not from an actual cycle in any dataset. Fixed by adding a
+    cycle check to `CURATION-PROTOCOL.md` Stage 5, scoped only to these
+    two directional types (`supports`/`alternative_to` remain coherent
+    even when mutual, so are unaffected).
+  - **`F-4`** (two concrete relationships the first walkthrough's
+    limited one-Knowledge-Object scope had missed, found by re-auditing
+    the diary dataset) was recorded as a coverage/completeness note, not
+    an architecture defect — no file was changed for it.
+- Updated `docs/ai-organization/employees/AG-002-discovery-archaeologist/
+  HISTORY.md` and `STATUS.yaml` (`runs_completed: 4 → 7`), and AG-003's
+  own `HISTORY.md` and `STATUS.yaml` (`runs_completed: 0 → 3`,
+  `known_missed_findings` updated from `unknown` to name `F-1`–`F-4`
+  explicitly).
+- Full report: `docs/proposals/AG-003-reality-stress-test/
+  REALITY-STRESS-TEST-REPORT.md`, including a Cross-Dataset Analysis
+  explaining *why* AG-003 did not behave fully consistently across all
+  four document types (the relationship- and maturity-detection layers
+  were designed and reviewed against one narrative source before this
+  test; the governance layer, tested independently of document
+  structure, was consistent throughout).
+- **Freeze Recommendation: READY WITH MINOR CHANGES** — not
+  `READY FOR FROZEN` (three real gaps existed pre-correction), not
+  `NOT READY` (every governance boundary held, and all three fixes were
+  narrow, evidence-linked clarifications, not redesigns). Per the task's
+  own "Important Rule," no other change was made — every correction
+  above is linked to one specific, cited piece of stress-test evidence.

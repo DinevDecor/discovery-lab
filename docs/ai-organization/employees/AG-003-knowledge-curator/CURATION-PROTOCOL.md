@@ -71,6 +71,23 @@ A candidate that cannot be explained against the disambiguation table is
 downgraded to `INSUFFICIENT EVIDENCE` and left for a future pass, not
 forced into the nearest-sounding type.
 
+**Cycle check, `supersedes`/`depends_on` only** — added 2026-07-24 per
+the Reality Stress Test's finding F-3
+(`../../../proposals/AG-003-reality-stress-test/
+REALITY-STRESS-TEST-REPORT.md`): before proposing a new `supersedes` or
+`depends_on` edge, check whether adding it would close a cycle with
+already-accepted edges of the *same* type (`A supersedes B supersedes
+... supersedes A`, or the `depends_on` equivalent). Both types encode a
+one-directional authority claim ("B is now current, not A" / "B requires
+A"), which a cycle makes incoherent — there is no well-defined "current"
+version or dependency root inside a loop. `supports` and
+`alternative_to` are unaffected by this check; they remain coherent even
+when mutual. If a cycle would result, the new edge is not proposed as
+stated — it is filed as `INSUFFICIENT EVIDENCE` and surfaced in a Gap
+Report for a human to determine which existing edge in the cycle is
+actually wrong, rather than silently adding a third, equally
+unresolvable claim.
+
 ## Stage 6 — Promotion Screening
 
 Every Knowledge Object whose `maturity` changed in Stage 4 is checked

@@ -47,14 +47,27 @@ One manifest file per intake, stored in `manifests/`, named
 intake_id:              # sequential, RI-NNNN, never reused
 original_filename:        # exactly as dropped, never altered
 intake_mode:                # local-drive-sync | repo-tracked-fallback |
-                            #   GITHUB_UPLOAD — added per ADR-0004, which
-                            #   path this file actually came through.
+                            #   GITHUB_UPLOAD | SESSION-LOCAL-REPO-COPY
+                            #   — records which path this file actually
+                            #   came through. local-drive-sync /
+                            #   repo-tracked-fallback added per ADR-0004.
                             #   GITHUB_UPLOAD added 2026-07-24 (RI-0002,
                             #   the first real production intake): a more
                             #   precise value than repo-tracked-fallback
                             #   for a file the human placed directly via
                             #   GitHub's own upload UI, discovered in real
                             #   use rather than invented ahead of it.
+                            #   SESSION-LOCAL-REPO-COPY added 2026-07-24
+                            #   (AG-003 Reality Stress Test, RI-0003/4/5):
+                            #   a file copied from another repository
+                            #   already accessible in the same session's
+                            #   workspace (e.g. `kod`, `trust-engine`),
+                            #   not dropped by a human at all — same
+                            #   precedent as GITHUB_UPLOAD, a real value
+                            #   found in use, not invented ahead of it;
+                            #   adding it extends the enum, it does not
+                            #   change a required field, so it does not
+                            #   require a new ADR per ADR-0003 §3.
 source_system:             # e.g. google_drive, SYNTHETIC_TEST_FIXTURE
 source_path:                 # human-supplied, as given at drop time
 source_file_id:                # source's own stable ID if known; UNKNOWN if not

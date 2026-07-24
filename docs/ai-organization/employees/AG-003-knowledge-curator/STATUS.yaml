@@ -9,12 +9,17 @@ created_from: task-specified role design ("AG-003 Knowledge Curator",
   DRAFT, architecture only - no implementation requested). Status set to
   prototype, matching AG-001's and AG-002's existing lifecycle discipline
   rather than any "production-ready" framing.
-runs_completed: 0
+runs_completed: 3
 reports_reviewed: 0
-known_false_positives: unknown
-known_missed_findings: unknown
+known_false_positives: 0
+known_missed_findings: 4 (F-1 through F-4, all found and recorded by the
+  "AG-003 Reality Stress Test," 2026-07-24 - see
+  ../../../proposals/AG-003-reality-stress-test/
+  REALITY-STRESS-TEST-REPORT.md. F-1/F-2/F-3 were architecture-level
+  gaps, since corrected; F-4 is a coverage/completeness note, not a
+  logic defect)
 boundary_violations: 0
-last_run: null
+last_run: 2026-07-24
 last_review: null
 open_governance_questions:
   - permanent organizational owner

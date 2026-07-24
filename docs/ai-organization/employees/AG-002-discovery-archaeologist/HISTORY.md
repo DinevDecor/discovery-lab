@@ -204,3 +204,51 @@ in the Recovery Queue but not built this run — recorded as a real gap
 against the literal ask, not silently substituted. `runs_completed` in
 `STATUS.yaml` is not incremented again for this entry — it is the
 completion of the same `PILOT-RUN-0002` already counted, not a new run.
+
+## 2026-07-24 — STRESS-RUN-0003, -0004, -0005 (AG-003 Reality Stress Test)
+
+Three new real recovery runs, requested as part of the "AG-003 Reality
+Stress Test" task — validating AG-003 against real source material
+structurally different from the diary. Each run read a small,
+manifested Reality Inbox intake (`RI-0003`, `RI-0004`, `RI-0005`) using
+a new, real `intake_mode` value, `SESSION-LOCAL-REPO-COPY` (added to
+`../../../../reality-inbox/PROCESSING-PROTOCOL.md`'s schema, same
+precedent as `GITHUB_UPLOAD`): files copied from other repositories
+already accessible in this session's workspace (this repository's own
+`docs/adr/`, and the separate `kod` and `trust-engine` repositories),
+never a human drop.
+
+- **`STRESS-RUN-0003`** (`runs/STRESS-RUN-0003-recovery-report.md`):
+  this repository's own four ADRs. Recovered 14 findings, 2 repeated
+  themes, one self-documented ID-numbering collision (`ADR-0003`'s own
+  header), and three source-declared cross-document dependencies
+  (`Depends on`/`Amends` headers) — a different evidentiary situation
+  than every prior run, where all relationships had to be inferred from
+  prose.
+- **`STRESS-RUN-0004`** (`runs/STRESS-RUN-0004-recovery-report.md`):
+  seven real files from `kod` (read as an external, observed source
+  only, per `../../../../proposals/PROP-0001-discovery-lab-
+  boundaries.md` Principle 0 — nothing written back to `kod`). Recovered
+  7 findings including one strong repeated theme (three independent
+  "research over conclusions" statements) and one probable near-
+  duplicate ("reality is the final arbiter," two documents). Two
+  deliberately near-empty sources (an excavation progress tracker at 0%,
+  a blank Knowledge Object template) correctly yielded almost no
+  extracted content, not fabricated content.
+- **`STRESS-RUN-0005`** (`runs/STRESS-RUN-0005-recovery-report.md`):
+  three real operational reports from `trust-engine` (also read as an
+  external, observed source only). Recovered a real, unresolved
+  Latin/Cyrillic model-ID data collision and a real audit-then-migration
+  sequence, with the migration correctly read as *excluding* the
+  audit's flagged bad rows rather than fixing them — a distinction
+  verified against the report's own row counts, not assumed from its
+  `PASS` label.
+
+All three runs, plus a fresh adversarial re-audit of the existing
+`PILOT-RUN-0002` diary material, fed the AG-003 Reality Stress Test
+Report (`../../../../proposals/AG-003-reality-stress-test/
+REALITY-STRESS-TEST-REPORT.md`), which found three real gaps in AG-003's
+architecture (not in AG-002's) and one coverage/completeness note — see
+that report and AG-003's own `HISTORY.md` for the curation-side detail.
+`runs_completed` in `STATUS.yaml` incremented by 3 (`4 → 7`) — three
+real, distinct runs.

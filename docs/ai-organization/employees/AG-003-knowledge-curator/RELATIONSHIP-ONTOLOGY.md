@@ -32,7 +32,17 @@ type fits better than each confusable alternative is not valid
 5. **`supersedes`** — B is a later, revised version of the same
    underlying claim as A, and is the version that should now be treated
    as current; A remains on record but is no longer the going-forward
-   statement. Directional.
+   statement. Directional. **May be scoped to a specific, named property
+   of A rather than all of A** — added 2026-07-24 per the Reality Stress
+   Test's finding F-1 (`../../../proposals/AG-003-reality-stress-test/
+   REALITY-STRESS-TEST-REPORT.md`): a real source (`ADR-0004`
+   "amending" `ADR-0003`'s single-folder-location property while
+   explicitly leaving `ADR-0003`'s manifest-tracking property untouched)
+   could not be honestly expressed by whole-object `supersedes` without
+   overclaiming. A `supersedes` Relationship Proposal covering less than
+   all of A's content **must name the specific property/claim it
+   supersedes** in its own text — an unscoped `supersedes` proposal is
+   read as covering the whole object, exactly as before this addition.
 6. **`derived_from`** — B was built by extracting, narrowing, or
    recombining part of A's own content (as a relationship-graph edge,
    distinct from the top-level lineage field of the same name in
