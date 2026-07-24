@@ -1,6 +1,9 @@
 # Reality Inbox — Processing Protocol
 
-Status: DRAFT / EXPERIMENTAL v1
+Status: DRAFT / EXPERIMENTAL v1. Core architecture FROZEN per
+`../docs/adr/ADR-0003-reality-inbox-architecture.md` (2026-07-24) — see
+that ADR §3 for exactly what does and does not require a new ADR before
+changing.
 Date: 2026-07-24
 
 ## Who does this

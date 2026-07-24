@@ -872,3 +872,41 @@
   AG-002 completed the synthetic pilot. Stated limitation: no real
   evidence has entered the Reality Inbox yet; only the mechanism is
   proven, twice over now (`memory/` and `reality-inbox/`).
+
+## 2026-07-24 (ADR-0003 — Reality Inbox Architecture, FROZEN)
+
+- **Numbering conflict flagged, not silently resolved.** The requesting
+  task asked to create "ADR-0002 — Reality Inbox Architecture," but
+  `ADR-0002` was already registered
+  (`ADR-0002-ag002-alternative-memory-access.md`, ACCEPTED — IMPLEMENTED).
+  Per `docs/adr/README.md`'s own rule ("numbered sequentially, never
+  renumbered or reused"), this document is registered as **`ADR-0003`**
+  instead — recorded explicitly in the ADR's own header, not silently
+  renumbered or overwritten.
+- **Added `docs/adr/ADR-0003-reality-inbox-architecture.md`** — Status:
+  **ACCEPTED — FROZEN**. Freezes two properties of the design built and
+  verified in the immediately preceding task
+  (`INFRA-SPRINT-01-report.md` §11) as fixed architecture: (1) the
+  human-facing interface is exactly one folder,
+  `reality-inbox/📥 DROP HERE/`; (2) processing state is tracked only
+  through manifests (`reality-inbox/manifests/`), never through which
+  folder a file sits in.
+- **§3 draws an explicit, enforceable governance line** — requires a new
+  ADR: a second human-facing folder or drop-time choice; moving state
+  tracking out of manifests; changing the manifest schema; changing who
+  may perform mechanical processing; weakening any file-handling rule.
+  Does **not** require a new ADR: processing real files through the
+  existing procedure; adding manifest/`INDEX.md` entries; writing the
+  still-missing large-file size policy (a documented gap, not a frozen
+  absence); extending the same design to another repository.
+- **Made the freeze discoverable, not just recorded**: added a one-line
+  "Core architecture FROZEN, see ADR-0003" status marker to
+  `reality-inbox/README.md` and `reality-inbox/PROCESSING-PROTOCOL.md` —
+  no other content in either file changed.
+- **Caught and fixed a real staleness bug** while updating the ADR index:
+  `docs/adr/README.md` still listed `ADR-0002` as `DRAFT`, even though
+  the ADR file itself was updated to `ACCEPTED — IMPLEMENTED` in an
+  earlier task and the index was never updated to match. Corrected, per
+  the index's own stated rule that the ADR file is authoritative over
+  its summary table. `docs/adr/README.md` now lists 3 ADRs (all
+  accepted: 1 migration-deferred, 1 implemented, 1 frozen).

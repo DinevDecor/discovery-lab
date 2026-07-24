@@ -1,6 +1,10 @@
 # Reality Inbox
 
-**Status: DRAFT / EXPERIMENTAL v1.**
+**Status: DRAFT / EXPERIMENTAL v1. Core architecture FROZEN per
+[`../docs/adr/ADR-0003-reality-inbox-architecture.md`](../docs/adr/ADR-0003-reality-inbox-architecture.md)
+(2026-07-24) — the single-`📥 DROP HERE/`-folder design and
+manifest-only state tracking may not be changed ad hoc; see that ADR
+before proposing a structural change.**
 Created: 2026-07-24, implementing the "Create the Reality Inbox" task, as
 simplified by that task's own final instruction: one folder for humans,
 everything else is the agent's job.
