@@ -1,21 +1,42 @@
 # Reality Inbox — Processing Protocol
 
 Status: DRAFT / EXPERIMENTAL v1. Core architecture FROZEN per
-`../docs/adr/ADR-0003-reality-inbox-architecture.md` (2026-07-24) — see
-that ADR §3 for exactly what does and does not require a new ADR before
+`../docs/adr/ADR-0003-reality-inbox-architecture.md` (2026-07-24),
+amended per `../docs/adr/ADR-0004-local-drive-synced-reality-inbox.md`
+(2026-07-24) for the local-mode intake path — see those ADRs before
 changing.
-Date: 2026-07-24
+Date: 2026-07-24 (updated for two intake modes)
+
+## Two intake sources — same protocol either way
+
+Per `ADR-0004`, a file can now enter this protocol from either of two
+places, depending on which one the running session can reach:
+
+- **`G:\My Drive\Projects\discovery-lab\DROP HERE`** — local mode
+  (Claude Desktop, local Claude Code). The agent reads the file directly
+  from this local path and **copies** it into `processed/`; the original
+  stays on the user's Drive-synced disk, untouched.
+- **`📥 DROP HERE/`** (this directory) — the Git-tracked fallback for
+  sessions without local filesystem access (e.g. this repository's own
+  remote sessions — confirmed unreachable from local Drive,
+  `ADR-0004` §2). The agent **moves** the file into `processed/`, since
+  that copy only ever existed in Git.
+
+Every step below is identical from that point on. Step 1 and step 8 note
+the mode-specific detail; nothing else changes.
 
 ## Who does this
 
-The mechanical steps below (detect, hash, validate, file, move) are
+The mechanical steps below (detect, hash, validate, file, move/copy) are
 performed by a **human or the Implementer session acting as steward** —
 not by AG-002 itself. This matches the same Role-boundary precedent
 already established for `../memory/IMPORT-PROCEDURE.md`: AG-002's
 `INPUTS.md` requires an explicit, already-authorized source; it does not
 discover, fetch, hash, or file its own sources. AG-002's actual work
 begins once a file has a valid manifest with `status: ACCEPTED` — see
-step 9 onward.
+step 9 onward. **In local mode, the same steward role also performs the
+`git add`/`git commit`/`git push` of the manifest and processed copy as
+part of processing — the human is never handed a separate Git step.**
 
 ## Manifest schema
 
@@ -25,11 +46,14 @@ One manifest file per intake, stored in `manifests/`, named
 ```yaml
 intake_id:              # sequential, RI-NNNN, never reused
 original_filename:        # exactly as dropped, never altered
+intake_mode:                # local-drive-sync | repo-tracked-fallback —
+                            #   added per ADR-0004, which of the two
+                            #   folders this file actually came through
 source_system:             # e.g. google_drive, SYNTHETIC_TEST_FIXTURE
 source_path:                 # human-supplied, as given at drop time
 source_file_id:                # source's own stable ID if known; UNKNOWN if not
 uploaded_by:                     # who dropped the file
-uploaded_at:                      # date/time dropped into 📥 DROP HERE/
+uploaded_at:                      # date/time dropped into whichever DROP HERE was used
 content_type:                      # detected file type
 content_hash:                       # sha256, agent-computed
 sensitivity:                         # see "Sensitivity classification" below
@@ -65,7 +89,10 @@ steward cannot tell from the file alone.
 
 For each file:
 
-1. **Detect file type.**
+1. **Detect file type**, from whichever intake source the session can
+   reach — `G:\My Drive\Projects\discovery-lab\DROP HERE` (local mode) or
+   `📥 DROP HERE/` (repo-tracked fallback). Record `intake_mode`
+   accordingly.
 2. **Calculate a content hash** (sha256).
 3. **Check for duplicates** — compare against every existing manifest's
    `content_hash`. A duplicate is never treated as new evidence (see
@@ -76,10 +103,13 @@ For each file:
 6. **Classify sensitivity.**
 7. **Identify the intended project and agent** — from context, or
    `UNKNOWN` if it cannot be determined yet.
-8. **Move the original from `📥 DROP HERE/` to `processed/`**,
-   `status → PROCESSING`. The file itself is never renamed on this move
-   — `original_filename` in the manifest is the permanent record if it
-   ever needs to be (see "File handling rules").
+8. **File it into `processed/`**, `status → PROCESSING` — a **move** from
+   `📥 DROP HERE/` (repo-tracked fallback: that copy only ever existed in
+   Git), or a **copy** from `G:\My Drive\...\DROP HERE` (local mode: the
+   original stays on the user's Drive-synced disk, per `ADR-0004` §3.2).
+   The file itself is never renamed either way — `original_filename` in
+   the manifest is the permanent record if it ever needs to be (see "File
+   handling rules").
 9. **Process it without modifying the original** — this is where AG-002
    (or another Role) actually reads the file and does its own work, per
    its own existing Recovery Protocol, unmodified by this document.

@@ -169,6 +169,19 @@ notes: >
   AG-001 was reviewed for a compatibility update and found not to need
   one - it observes discovery-lab's own repository structure, not
   external evidence, so this task made no changes to it.
+  AMENDED 2026-07-24 per
+  ../../adr/ADR-0004-local-drive-synced-reality-inbox.md
+  (ACCEPTED - design complete, awaiting local verification):
+  reality-inbox/DROP HERE/ (this entry's git-tracked folder) is now the
+  documented fallback for sessions without local filesystem access
+  (confirmed via mount/env checks that this session has none); the
+  primary human-facing folder for local sessions (Claude Desktop, local
+  Claude Code) is a local path outside this repository entirely -
+  "G:\My Drive\Projects\discovery-lab\DROP HERE" - which this or any
+  other remote session cannot create, populate, or verify. This
+  locator/access_requirements block still describes the git_repository
+  side (manifests/, processed/, fixtures/) which is unchanged and
+  unaffected by which folder fed it.
 ```
 
 ## Reading this table

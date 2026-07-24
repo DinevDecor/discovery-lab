@@ -21,6 +21,23 @@ INFRA-SPRINT-01-report.md` §11 (the implementation and verification
 record this ADR freezes), `../../reality-inbox/README.md` and
 `../../reality-inbox/PROCESSING-PROTOCOL.md` (the design being frozen)
 
+## Amended, 2026-07-24 — see `ADR-0004-local-drive-synced-reality-inbox.md`
+
+**This ADR's §2, property 1 ("the human-facing interface is exactly one
+folder: `reality-inbox/📥 DROP HERE/`") is amended, not overridden.**
+`ADR-0004` adds a second, mode-specific reading: for a session that can
+reach the user's local machine (Claude Desktop, local Claude Code), the
+one human-facing folder is instead
+`G:\My Drive\Projects\discovery-lab\DROP HERE`; `reality-inbox/
+📥 DROP HERE/` remains the one human-facing folder for sessions that
+cannot (this repository's own remote sessions, confirmed by evidence in
+`ADR-0004` §2). The property itself — *exactly one* folder, never a
+choice the human makes — is unchanged; only which filesystem it lives on
+depends on which session is running. This is the "new ADR" this
+document's own §3 required before touching that property — triggered
+correctly, not worked around. The text below is preserved exactly as
+originally frozen.
+
 ## How to read this document
 
 This ADR does not introduce a new design — `reality-inbox/` was already

@@ -910,3 +910,62 @@
   the index's own stated rule that the ADR file is authoritative over
   its summary table. `docs/adr/README.md` now lists 3 ADRs (all
   accepted: 1 migration-deferred, 1 implemented, 1 frozen).
+
+## 2026-07-24 (ADR-0004 — local Google-Drive-synced intake; ADR-0003 amended)
+
+- **Requester's core complaint**: the Reality Inbox as built (previous
+  entry) still optimized for the repository, not the user — every
+  ordinary intake required a GitHub upload or branch interaction.
+- **Rigorously confirmed, not assumed, that this session cannot reach
+  the user's local machine.** Checked `git rev-parse --show-toplevel`
+  (`/workspace/discovery-lab`), `df -h .` (`/dev/vda`, mounted at `/`),
+  the full mount table (no CIFS/SMB/NFS/9p, no drive-letter concept —
+  this is Linux), environment variables (nothing Drive/Windows-related),
+  and `rclone listremotes` (binary present at `/opt/rclone` but not on
+  `PATH`, no remotes configured). **Conclusion: structural, not a
+  permissions gap** — this session runs in a remote, ephemeral container
+  (`CLAUDE_CODE_REMOTE=true`) with no filesystem bridge to the user's
+  computer at all, let alone to Google Drive specifically.
+- **Explicitly disambiguated from the earlier Drive limitation**
+  (`INFRA-SPRINT-01-report.md` §9): that was the Drive **MCP
+  connector's** non-resumable per-call approval flow — an API problem.
+  This is a **local-filesystem** problem — unrelated, does not depend on
+  the MCP connector, and would not be solved even if that connector were
+  fixed (`G:\...` is a Windows path, not a Drive API identifier).
+- **Added `docs/adr/ADR-0004-local-drive-synced-reality-inbox.md`** —
+  Status: **ACCEPTED — DESIGN COMPLETE, AWAITING LOCAL VERIFICATION**.
+  Decision: for sessions with local filesystem access (Claude Desktop,
+  local Claude Code), the one human-facing intake folder becomes
+  `G:\My Drive\Projects\discovery-lab\DROP HERE` — an ordinary,
+  already-Drive-synced folder requiring only a file copy and a spoken
+  instruction to the agent; no Git, no GitHub, no branch. The local
+  agent performs hashing, manifesting, and the `git commit`/`push` of
+  the result itself, never handing a Git step back to the human. The
+  original file is **copied**, not moved, into
+  `reality-inbox/processed/` — it stays on the user's Drive-synced disk
+  untouched. `reality-inbox/📥 DROP HERE/` (git-tracked) is kept,
+  unedited, as the explicit fallback for sessions without local access —
+  this repository's own remote sessions among them.
+- **Amended `ADR-0003` in place** (frozen text preserved, not rewritten):
+  added an "Amended, 2026-07-24" note pointing to `ADR-0004`, explaining
+  that "exactly one human-facing folder" now means exactly one *per
+  reachable filesystem*, not a rule broken by the new local path. This
+  is `ADR-0003` §3's own required "new ADR" step, triggered correctly.
+- **Repository-side logic kept as-is**, per instruction: the manifest
+  schema, provenance rule, and 12-step processing protocol are
+  unchanged in substance. One small additive field,
+  `intake_mode: local-drive-sync | repo-tracked-fallback`, records which
+  folder a file actually came through; steps 1 and 8 note the
+  mode-specific copy-vs-move detail.
+- Updated `reality-inbox/README.md` (two-mode workflow, updated
+  architecture diagram, honest "not yet verified in local mode" note),
+  `PROCESSING-PROTOCOL.md`, `MEMORY-SOURCE-REGISTRY.md`'s `MEM-004`
+  notes, and `docs/adr/README.md` (4 ADRs now, `ADR-0003`'s row marked
+  "amended by ADR-0004"). One inconsistent citation style caught and
+  fixed in the Registry during verification (a bare `ADR-0004-...`
+  filename that didn't match this file's own `../../adr/...` convention
+  elsewhere).
+- **No fabricated verification.** This session cannot create, populate,
+  or test `G:\My Drive\Projects\discovery-lab\DROP HERE` — the design is
+  recorded as accepted and ready, explicitly not as implemented or
+  tested, pending a real run from a session with local access.
