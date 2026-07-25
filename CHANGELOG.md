@@ -1,5 +1,83 @@
 # Changelog
 
+## 2026-07-25 (EXEC-003 — Human Decision: narrow merge, activation, acceptance)
+
+- Petko's response to the BLOCKED verdict below: **APPROVED** merging the
+  workflow into `main` "when appropriate under the repository's normal
+  merge process," explicitly resolving the blocker by human
+  authorization. Also decided, in the same message: cross-repository
+  access stays deferred (discovery-lab-only for the first operational
+  phase, not a deployment blocker); `AG-002`/`AG-003` stay
+  `INSUFFICIENT_EVIDENCE` with no further parser complexity requested;
+  the `registry.py` correction is accepted; future reports must
+  distinguish empty file / non-empty stub / operational implementation.
+- Before merging anything, flagged a scale mismatch found while
+  inspecting `main`: it contained only the repository's original
+  auto-generated "Initial commit" — none of this entire engagement's
+  46 commits / 327 files had ever reached `main`. Asked Petko directly
+  whether "merge the workflow" meant the narrow Observation Agent
+  changeset or the full task branch, rather than guessing on an
+  irreversible-feeling, large-blast-radius action.
+- Petko's follow-up: **NARROW MERGE APPROVED** — explicitly only
+  `observation-agent/`, `.github/workflows/observation-agent.yml`, the
+  two accepted factual corrections, and minimal supporting
+  configuration; explicitly not the full branch; with a seven-point
+  pre-merge checklist and an instruction to stop and list dependencies
+  rather than merge the full branch if isolation wasn't safe.
+- Built the narrow changeset on a fresh branch off `main`
+  (`claude/activate-observation-agent`): checked out exactly 28 files
+  from the task branch (`observation-agent/` minus `reports/`, plus
+  the workflow file), confirmed via `git status --short` nothing else
+  was staged, and ran the full 45-test suite on this isolated branch
+  to prove no hidden dependency on excluded files (all passing).
+- **Hit exactly the dependency conflict Petko's own fallback rule
+  anticipated**: the `registry.py` correction lives inside
+  `docs/investigations/INV-0003-...` and `RECOMMENDATION-LEDGER.md`,
+  neither of which exists on `main` at all — merging "the correction"
+  would require introducing both full investigation/ledger documents
+  for the first time, exactly the unrelated engagement-history content
+  the narrow merge was scoped to avoid. Excluded both files, reported
+  the conflict explicitly rather than silently deciding it, per
+  Petko's own stop-and-list-dependencies instruction.
+- Confirmed the workflow retains `contents: read` (workflow and job
+  level) and `persist-credentials: false`, and that `config.ci.json`
+  only reaches `discovery-lab`, before merging.
+- Opened PR #8 (`claude/activate-observation-agent` → `main`),
+  documenting the narrow scope and the excluded-files decision in the
+  PR body, and merged it (squash) as commit `428e18f` — the safest
+  available method per Petko's preference for "a clean cherry-pick or
+  a dedicated minimal PR rather than merging the entire branch
+  history."
+- Confirmed via the GitHub API that `main` now recognizes the
+  workflow (`state: active`; 0 workflows before the merge, 1 after).
+- Triggered a real `workflow_dispatch` run on `main` — completed in 10
+  seconds, `conclusion: success`. Verified from the actual runner
+  logs (not just the summary): `GITHUB_TOKEN Permissions: Contents:
+  read, Metadata: read`; `persist-credentials: false` (auth header
+  explicitly unset immediately after checkout); console output
+  `"Scanned 1 repositories, skipped 4. 2 total observations (2 new, 0
+  repeated, 0 resolved)."`; artifact `observation-agent-report-1` (3
+  files, 2311 bytes) uploaded, retained 90 days; no push/commit/write
+  command anywhere in the logs.
+- Confirmed via `git status --short` that `discovery-lab` and all 4
+  other observed repositories (`project-memory`, `kod`,
+  `generative-discovery-engine`, `trust-engine`) remained unmodified
+  by the run.
+- Reported the full result — mechanism, schedule, permissions, first
+  real run outcome, proof of no repository modification, and the
+  registry.py placement conflict as a remaining human decision — and
+  gave the final determination: **OBSERVATION AGENT ACTIVE**.
+- Petko's closing message: **EXEC-003 ACCEPTED**. Confirmed all three
+  deferrals exactly as executed (registry.py correction stays off
+  `main`; cross-repository coverage stays deferred, not a blocker;
+  `AG-002`/`AG-003` stay `INSUFFICIENT_EVIDENCE`, no further parser
+  work requested) and declared Observation Agent 001 a permanent
+  operational read-only service of the ecosystem, whose outputs are
+  now valid evidence inputs for the next ecosystem layer. Named the
+  next initiative: an Ecosystem Headquarters / Development Orchestrator
+  that consumes Observation Agent findings rather than duplicating
+  its work — not yet started.
+
 ## 2026-07-25 (EXEC-003)
 
 - Executed `EXEC-003 — Activate Observation Agent 001`: built a genuine
