@@ -24,9 +24,12 @@ Command: `git log origin/main --oneline`
 7531956 Initial commit
 ```
 
-`main` has exactly 3 commits. Everything else in this repository's
-history — including `EXEC-005` and `EXEC-006` — lives only on
-`claude/prop-0002-discovery-intake` and has not been merged.
+`main` had exactly 3 commits as of original certification (2026-07-25).
+Everything else in this repository's history — including `EXEC-005`
+and `EXEC-006` — lived only on `claude/prop-0002-discovery-intake` and
+had not been merged. **Update**: a 4th commit, `12f82fd`, has since
+been added to `main` via the authorized `EXEC-006` deployment — see
+`[EV-21]`.
 
 ### [EV-02] Commits ahead of `main`
 
@@ -45,11 +48,13 @@ cd <worktree>/observation-agent/tests
 python3 -m unittest discover -s . -p "test_*.py"
 ```
 
-Result: `Ran 45 tests in 0.025s` — `OK`. Test files present on `main`:
-`test_broken_references.py`, `test_ci_activation.py`,
-`test_orphan_files.py`, `test_registry_check.py`, `test_report.py`,
-`test_safety.py`, `test_stale_state.py`,
-`test_status_history_consistency.py` (8 files).
+Result at original certification: `Ran 45 tests in 0.025s` — `OK`. Test
+files present on `main` at that time: `test_broken_references.py`,
+`test_ci_activation.py`, `test_orphan_files.py`,
+`test_registry_check.py`, `test_report.py`, `test_safety.py`,
+`test_stale_state.py`, `test_status_history_consistency.py` (8 files).
+**Update**: after the `EXEC-006` deployment, `main` has 58 tests across
+10 files — see `[EV-21]`.
 
 ### [EV-04] Headquarters test suite on `main`
 
@@ -281,9 +286,12 @@ Commits on `claude/prop-0002-discovery-intake`:
 - `1217473` — "Record Human Acceptance — EXEC-006 (Verdict: PASS)" —
   2 files changed (`STATE.md`, `CHANGELOG.md`).
 
-Neither commit is an ancestor of `origin/main` — confirmed by
-`[EV-01]`/`[EV-02]` showing `main`'s HEAD is still `8726ac1`, predating
-both.
+At original certification, neither commit was an ancestor of
+`origin/main` — confirmed by `[EV-01]`/`[EV-02]` showing `main`'s HEAD
+was still `8726ac1`, predating both. **Update**: the content of
+`0e4acad` (excluding `STATE.md`/`CHANGELOG.md`, which do not exist on
+`main`) is now part of `main` via the squash-merged deployment commit
+`12f82fd` — see `[EV-21]`.
 
 ### [EV-17] Repository-integrity checks
 
@@ -346,3 +354,101 @@ both `observation-agent/tests/test_safety.py` and
 This test constructs a deliberately-violating fixture and asserts the
 detector actually flags it — proving the forbidden-pattern scan is a
 real check, not a vacuously-passing no-op.
+
+---
+
+## Evidence added for the CERT-001 verdict update (2026-07-25)
+
+The entries below were gathered after Petko's "Human Decision —
+CERT-001" authorized the narrow `EXEC-006` deployment. They document
+that deployment and its required post-deployment verification —
+per that decision, no other certification content was rewritten
+beyond what these two entries and the corrections to `[EV-01]`,
+`[EV-03]`, and `[EV-16]` above required.
+
+### [EV-21] `EXEC-006` deployment to `main`
+
+Branch built off `origin/main` via `git worktree add ... -b
+claude/exec-006-narrow-deploy origin/main`. Populated with exactly 15
+files (`git show claude/prop-0002-discovery-intake:<path>` for each),
+deliberately excluding `STATE.md` and `CHANGELOG.md` (dev-branch
+narrative, absent from `main`):
+
+```
+observation-agent/README.md
+observation-agent/config.ci.json
+observation-agent/config.json
+observation-agent/src/observation_agent/checks/broken_references.py
+observation-agent/src/observation_agent/checks/orphan_files.py
+observation-agent/src/observation_agent/checks/registry_check.py
+observation-agent/src/observation_agent/checks/stale_state.py
+observation-agent/src/observation_agent/checks/status_history_consistency.py
+observation-agent/src/observation_agent/cli.py
+observation-agent/src/observation_agent/config.py
+observation-agent/src/observation_agent/scanner.py
+observation-agent/tests/test_broken_references.py
+observation-agent/tests/test_ci_activation.py
+observation-agent/tests/test_cli_stability.py
+observation-agent/tests/test_scanner.py
+```
+
+Verified in isolation before pushing:
+- `git status --short` on the branch showed exactly these 15 files,
+  nothing else.
+- `python3 -m unittest discover -s . -p "test_*.py"` in
+  `observation-agent/tests/`: `Ran 58 tests in 0.035s` — `OK`.
+- `python3 -m unittest test_safety -v`: 5/5 passing.
+- `headquarters/` confirmed untouched:
+  `git diff origin/main..claude/exec-006-narrow-deploy --stat --
+  headquarters/` produced no output.
+
+Committed as `7e07361` on `claude/exec-006-narrow-deploy`, pushed,
+opened as **PR #10** ("Fix Observation Agent self-observation
+feedback-loop defect (EXEC-006, narrow scope)"), squash-merged to
+`main` as **`12f82fd`**. Confirmed via
+`git fetch origin main && git log origin/main --oneline`:
+
+```
+12f82fd Fix Observation Agent self-observation feedback-loop defect (narrow scope, EXEC-006)
+8726ac1 Activate Ecosystem Headquarters v1.0 (narrow scope, EXEC-004)
+428e18f Activate Observation Agent 001 (narrow scope, EXEC-002/EXEC-003)
+7531956 Initial commit
+```
+
+### [EV-22] Post-deployment verification (5 of 5 required checks)
+
+All commands run against a fresh `git worktree` of the new
+`origin/main` HEAD (`12f82fd`), using `config.json`'s real absolute
+repository paths — code from the freshly-deployed `main`, data from
+the live 5-repository ecosystem, exactly as the `EXEC-004` deployment
+was originally validated.
+
+1. **Real Observation Agent run**: `python3 run_observation_agent.py`
+   → `Scanned 5 repositories, skipped 0. 37 total observations (37
+   new, 0 repeated, 0 resolved).`
+2. **Real Headquarters run**: `python3 run_headquarters.py` →
+   `Overall Health: 71%` / `Top recommendation: HQ-0001 —
+   discovery-lab: two files both claim ADR-0001 (score 6)`.
+3. **Repeated local executions stable**: `run_observation_agent.py`
+   run 2 more times with no repository content changed in between →
+   `37 total observations (0 new, 37 repeated, 0 resolved)` both
+   times. Sequence: `37 → 37 → 37`, 0 new after the first run.
+4. **CI execution unchanged**: `python3 run_observation_agent.py
+   --config config.ci.json --reports-dir reports-ci` (from
+   `observation-agent/`, matching the workflow's own
+   `working-directory`) → `Scanned 1 repositories, skipped 4. 0 total
+   observations (0 new, 0 repeated, 0 resolved).` Then `python3
+   ci_summary.py reports-ci` → `STATUS: PARTIAL` with the expected
+   "one or more configured repositories were not accessible... Expected
+   in CI" message — identical classification behavior to every prior
+   CI run on record [EV-11].
+5. **`HQ-0001` sole recommendation, unchanged**: confirmed directly in
+   the Headquarters run above and in the rendered Executive Brief's
+   "Most Important Recommendation" section — same ID, same score (6),
+   same evidence as every prior real run [EV-13, EV-14].
+
+After verification, the worktree was removed; `git status --short`
+confirmed on all 5 ecosystem repositories (empty on the 4
+cross-referenced repositories, clean on `discovery-lab` beyond the
+intended deployment) both before and after — no repository was left
+modified by this verification pass [EV-17].

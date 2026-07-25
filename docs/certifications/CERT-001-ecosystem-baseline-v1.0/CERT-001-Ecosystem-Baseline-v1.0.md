@@ -17,6 +17,28 @@ reproducible by any reviewer with access to this repository.
 
 ---
 
+## Certification Update Log
+
+- **2026-07-25 (original)**: issued as **PARTIALLY CERTIFIED**. `main`
+  HEAD was `8726ac1`; the `EXEC-006` self-observation fix existed,
+  tested and validated, only on `claude/prop-0002-discovery-intake`,
+  not on `main`.
+- **2026-07-25 (update)**: Petko's "Human Decision — CERT-001" accepted
+  the original verdict and its evidence, made the
+  implemented/deployed/certified distinction a permanent certification
+  principle, and authorized a narrow deployment of the `EXEC-006` fix
+  to `main`. That deployment (PR #10, squash-merged as `12f82fd`
+  [EV-21]) is now complete, and the 5 required post-deployment
+  verifications all passed [EV-22]. Per that decision, this document
+  is updated **only** to change the verdict from **PARTIALLY
+  CERTIFIED** to **CERTIFIED** and to correct every place this
+  document asserted the now-superseded fact that `main` lacked the
+  fix — no other certification content was rewritten, and no new
+  claim beyond the deployment itself and its verification evidence was
+  added.
+
+---
+
 ## 1. Executive Summary
 
 **Purpose**: `discovery-lab` is an *Ecosystem Observatory* (`PROP-0001`
@@ -32,16 +54,18 @@ output terminates at a human.
 
 **Current maturity**: two operational tools exist and are both merged
 to `main` — **Observation Agent 001** (v0.2, read-only repository
-scanner, scheduled daily via GitHub Actions [EV-06]) and **Ecosystem
-Headquarters v1.0** (human-invoked interpretation and prioritization
-layer that consumes Observation Agent's output and other ecosystem
-artifacts, never re-scanning repositories itself [EV-07]). Both are
-covered by passing automated test suites — 45 tests (Observation
-Agent) and 111 tests (Headquarters), 156 total, verified directly
-against the `main` branch commit for this certification [EV-03, EV-04]
-— including a statically-enforced, self-verifying safety check in each
-tool that no source file can write, delete, commit, push, or merge
-anything outside the tool's own `reports/` directory [EV-05].
+scanner, scheduled daily via GitHub Actions [EV-06], including the
+`EXEC-006` self-observation fix as of `12f82fd` [EV-21]) and
+**Ecosystem Headquarters v1.0** (human-invoked interpretation and
+prioritization layer that consumes Observation Agent's output and
+other ecosystem artifacts, never re-scanning repositories itself
+[EV-07]). Both are covered by passing automated test suites — 58 tests
+(Observation Agent) and 111 tests (Headquarters), 169 total, verified
+directly against the `main` branch commit for this certification
+[EV-03, EV-04, EV-21] — including a statically-enforced, self-verifying
+safety check in each tool that no source file can write, delete,
+commit, push, or merge anything outside the tool's own `reports/`
+directory [EV-05].
 
 **Operational readiness**: Observation Agent runs unattended on a
 daily GitHub Actions schedule against `discovery-lab` itself (the only
@@ -54,17 +78,18 @@ Evolution). Both tools have been run for real against the live
 5-repository ecosystem multiple times, most recently during this
 certification's own evidence-gathering pass [EV-13].
 
-**Certification verdict**: **PARTIALLY CERTIFIED** — see Section 14
-for the precise, evidence-scoped reasoning. In short: every safety,
-human-authority, and recommendation-correctness guarantee this
-baseline claims holds on `main` today, verified directly, with no
-exception found. One specific, precisely-bounded, non-safety defect
-(a self-referential observation feedback loop under repeated local/
-manual combined-tool operation) is present in the `main`-branch code
-as currently deployed; it degrades a downstream display metric only,
-never recommendation identity or safety, and a validated fix already
-exists on an unmerged branch awaiting a routine human merge decision
-[EV-16]. This is why the verdict is *partial* rather than unqualified.
+**Certification verdict**: **CERTIFIED** — see Section 14 for the
+precise, evidence-scoped reasoning. Every safety, human-authority, and
+recommendation-correctness guarantee this baseline claims holds on
+`main` today, verified directly, with no exception found. The one
+specific, precisely-bounded, non-safety defect this certification
+originally found (a self-referential observation feedback loop under
+repeated local/manual combined-tool operation [EV-16]) has since been
+resolved by a narrow, isolated deployment to `main` (`12f82fd`
+[EV-21]), and all 5 human-required post-deployment verifications
+passed [EV-22]. The baseline was issued **PARTIALLY CERTIFIED** on
+2026-07-25 pending exactly this deployment; see the Certification
+Update Log above.
 
 ---
 
@@ -106,13 +131,14 @@ explicitly *not* included here).
 - **Operational status**: ACTIVE — merged to `main` at commit
   `428e18f` [EV-01]; scheduled daily at `06:00 UTC` plus manual
   `workflow_dispatch`, `contents: read` only [EV-06]; two independently
-  confirmed successful real runs on record [EV-11].
-  **Note**: `main`'s current code does not include `EXEC-006`'s
-  self-observation fix (see Section 7, Section 14) — that fix exists,
-  tested and validated, on an unmerged branch [EV-16].
+  confirmed successful real runs on record [EV-11]. `EXEC-006`'s
+  self-observation fix deployed to `main` at commit `12f82fd`
+  (narrow scope, `observation-agent/` only) [EV-21]; all 5 required
+  post-deployment verifications passed [EV-22].
 - **Version**: `v0.2` (implements `AGENT-001` v1.0, built `EXEC-002`,
-  scheduled `EXEC-003`) [EV-07].
-- **Evidence**: 45/45 tests passing on `main` [EV-03]; safety
+  scheduled `EXEC-003`, self-observation defect fixed `EXEC-006`)
+  [EV-07].
+- **Evidence**: 58/58 tests passing on `main` [EV-03, EV-21]; safety
   self-check passing (5/5 tests, including a test that proves the
   forbidden-pattern detector actually detects real violations, not
   just passing vacuously) [EV-05]; workflow file present and correct
@@ -244,9 +270,11 @@ running component.
   EXEC-005 found and its direct consequences — explicitly not a new
   agent, no architectural redesign, no full health-model recalibration.
 - **Outcome**: implemented and merged to `claude/prop-0002-discovery-
-  intake` (commits `0e4acad`, `1217473`) [EV-16] — **not yet merged to
-  `main`**. Human Acceptance recorded: "EXEC-006 / Verdict: PASS," no
-  reservations [EV-16].
+  intake` (commits `0e4acad`, `1217473`) [EV-16]. Human Acceptance
+  recorded: "EXEC-006 / Verdict: PASS," no reservations [EV-16]. At
+  the time this certification was originally issued, this fix had not
+  yet been merged to `main` — see "EXEC-006 Deployment" immediately
+  below for the subsequent narrow release that changed this.
 - **Major findings**: while documenting the fix, the same `[text]`-
   immediately-followed-by-`(path)` adjacency pattern was reintroduced
   three times in new prose describing the defect itself — caught and
@@ -267,11 +295,46 @@ running component.
   the first run (versus the prior 2 → 10 → 58 compounding) [EV-13];
   `HQ-0001` reconfirmed as Headquarters' sole recommendation,
   unaffected [EV-13].
-- **Certification impact**: **this is the pivotal fact for this
-  certification's verdict.** The fix is real, tested, and validated —
-  but it lives on a branch, not on `main`. The `main`-branch baseline
-  being certified here still carries the defect EXEC-005 found. See
-  Section 7 and Section 14.
+- **Certification impact**: at original issuance, this was the
+  pivotal fact behind the **PARTIALLY CERTIFIED** verdict — the fix
+  was real, tested, and validated, but lived on a branch, not on
+  `main`. This has since changed; see immediately below.
+
+### EXEC-006 Deployment — Narrow Release to `main`
+
+- **Objective**: per Petko's "Human Decision — CERT-001" Release
+  Authorization, deploy only the `EXEC-006` self-referential
+  feedback-loop correction and its directly required tests and
+  documentation to `main` — explicitly no unrelated development.
+- **Outcome**: built on a fresh branch off `main`
+  (`claude/exec-006-narrow-deploy`), isolated to exactly the 15 files
+  `EXEC-006` changed under `observation-agent/` (excluding `STATE.md`
+  and `CHANGELOG.md`, which are `claude/prop-0002-discovery-intake`
+  narrative and do not exist on `main`); verified in isolation (58/58
+  tests, safety self-check passing, `git status --short` confirming
+  no other file staged); opened as PR #10 and squash-merged to `main`
+  as `12f82fd` [EV-21].
+- **Post-deployment verification (all 5 required checks, per the
+  Release Authorization)**:
+  1. Real Observation Agent run executed from the newly-merged `main`
+     against the live 5-repository ecosystem: 37 observations found
+     [EV-22].
+  2. Real Headquarters run executed from the newly-merged `main`:
+     completed successfully, Overall Health 71% [EV-22].
+  3. Repeated local executions verified stable: 3 consecutive runs
+     with unchanged repository content held at 37 → 37 → 37, 0 new
+     observations after the first run [EV-22].
+  4. CI execution verified unchanged: `config.ci.json` run from the
+     merged `main` produced the expected `Scanned 1 repositories,
+     skipped 4` / `STATUS: PARTIAL` outcome, matching the documented
+     CI Limitations behavior exactly [EV-22].
+  5. `HQ-0001` verified as Headquarters' sole recommendation,
+     unchanged (score 6, identical evidence) [EV-22].
+- **Defects discovered / resolved**: none new — this was a
+  verification-only deployment of an already-validated fix.
+- **Certification impact**: this deployment is the direct cause of
+  this certification's verdict update from **PARTIALLY CERTIFIED** to
+  **CERTIFIED**. See Section 7, Section 12, and Section 14.
 
 ---
 
@@ -318,27 +381,28 @@ certification, not assumed from prior narrative.
 
 ## 6. Regression Certification
 
-- **Regression suites**: `observation-agent/tests/` (8 files on
-  `main`) and `headquarters/tests/` (13 files on `main`), both
-  `unittest`-based, both including a dedicated `test_safety.py`.
+- **Regression suites**: `observation-agent/tests/` (10 files on
+  `main`, as of the `EXEC-006` deployment) and `headquarters/tests/`
+  (13 files on `main`), both `unittest`-based, both including a
+  dedicated `test_safety.py`.
 - **Current test counts (as deployed on `main`, verified directly for
-  this certification)**: Observation Agent 45 tests, Headquarters 111
-  tests — **156 total, all passing** [EV-03, EV-04].
-- **Current test counts (on the unmerged `EXEC-006` branch, not yet
-  part of the certified `main` baseline)**: Observation Agent 58 tests
-  (+13: `test_scanner.py`, `TestSelfReferentialFeedbackLoop`,
-  `test_cli_stability.py`, `TestExcludedPathsEquivalence`),
-  Headquarters unchanged at 111 — 169 total [EV-12].
+  this certification's update)**: Observation Agent 58 tests
+  (`test_scanner.py`, `TestSelfReferentialFeedbackLoop`,
+  `test_cli_stability.py`, and `TestExcludedPathsEquivalence` all now
+  part of `main`), Headquarters 111 tests, unchanged — **169 total,
+  all passing** [EV-03, EV-04, EV-21].
 - **Operational validation**: beyond unit tests, both tools have been
   run against the real, live 5-repository ecosystem multiple times
-  across `EXEC-002`, `EXEC-004`, `EXEC-005`, and this certification's
-  own evidence pass — not only against synthetic fixtures [EV-13].
+  across `EXEC-002`, `EXEC-004`, `EXEC-005`, `EXEC-006`'s deployment,
+  and this certification's own evidence pass — not only against
+  synthetic fixtures [EV-13, EV-22].
 - **Known regression protections**: `test_safety.py`'s self-check
   guards against the safety detector silently becoming vacuous
-  [EV-20]; `EXEC-006`'s new tests include a negative control
+  [EV-20]; `EXEC-006`'s tests include a negative control
   (`test_without_the_exclusion_the_bug_reproduces`) proving the
   feedback-loop regression tests exercise a real fix, not an
-  already-impossible scenario [EV-12].
+  already-impossible scenario [EV-12], now verified passing on `main`
+  itself rather than only on the branch that originated it [EV-21].
 
 ---
 
@@ -349,15 +413,14 @@ are listed. None are inferred or assumed.
 
 ### Operational
 
-- **The `main`-branch baseline being certified here still contains the
-  self-referential feedback-loop defect `EXEC-005` found.** The fix
-  (`EXEC-006`) is real, tested, and validated, but exists only on
-  `claude/prop-0002-discovery-intake`, not on `main` [EV-01, EV-16].
-  Under repeated local/manual combined-tool operation with unchanged
-  repository content, the currently-deployed code will still compound
-  new false-positive observations run over run, as measured in
-  `EXEC-005` (2 → 10 → 58) [EV-14]. It does **not** affect the
-  scheduled CI path (ephemeral, no memory between runs) [EV-06, EV-14].
+- **Resolved (was: the `main`-branch baseline contained the
+  self-referential feedback-loop defect `EXEC-005` found).** This was
+  the certification-blocking limitation at original issuance. The fix
+  (`EXEC-006`) has since been deployed to `main` at `12f82fd` and all
+  5 required post-deployment verifications passed [EV-21, EV-22] —
+  see "EXEC-006 Deployment" in Section 4. Kept here, marked resolved
+  rather than deleted, so the historical record of what this
+  certification originally found remains intact.
 - The scheduled GitHub Actions run currently covers `discovery-lab`
   only; the other 4 configured repositories are skipped by design, not
   by omission, because the default `GITHUB_TOKEN` cannot read private
@@ -429,7 +492,10 @@ Only risks explicitly accepted by a recorded human decision are listed.
   but does **not** affect recommendation identity, ranking,
   deduplication, or read-only safety — and explicitly stated this was
   **not** a reason to roll back Headquarters. Verdict recorded: "PASS
-  WITH A NAMED LIMITATION." [EV-14]
+  WITH A NAMED LIMITATION." [EV-14] *(Now resolved on `main` by the
+  `EXEC-006` deployment, `12f82fd` [EV-21] — kept here as the
+  historical record of the accepted risk, not as a currently open
+  one.)*
 - **Scheduled coverage limited to `discovery-lab`**: accepted as of
   `EXEC-003`'s Human Acceptance, which confirmed the cross-repository
   credential-provisioning deferral exactly as executed, without
@@ -454,13 +520,12 @@ Only risks explicitly accepted by a recorded human decision are listed.
 | Monitored (configured) repositories | 5 (`project-memory`, `kod`, `discovery-lab`, `generative-discovery-engine`, `trust-engine`) | [EV-13] |
 | Repositories reachable by the *scheduled* CI run | 1 (`discovery-lab`); other 4 documented `SKIP` by design | [EV-06] |
 | Operational agents/tools certified | 2 (Observation Agent 001, Ecosystem Headquarters v1.0) | Section 3 |
-| Validation executions to date | 4 (`EXEC-003`, `EXEC-004`, `EXEC-005`, `EXEC-006`) | Section 4 |
-| Successful narrow-scope deployments to `main` | 2 (`428e18f`, `8726ac1`) | [EV-01] |
-| Regression tests passing on `main` | 156 (45 + 111) | [EV-03, EV-04] |
-| Regression tests passing on the unmerged `EXEC-006` branch | 169 (58 + 111) | [EV-12] |
-| Confirmed successful real Observation Agent runs (CI) | 2 (`workflow_dispatch` at `EXEC-003`; scheduled run #2 at `EXEC-005`) | [EV-11] |
-| Confirmed successful real local combined-tool run pairs | 4+ (3 at `EXEC-005`, 3 more during `EXEC-006`/this certification) | [EV-13, EV-14] |
-| Recommendation stability across all recorded real runs | `HQ-0001`, score 6, identical evidence, every time (`EXEC-004` first appearance through this certification's own run) | [EV-13, EV-14] |
+| Validation executions to date | 4 (`EXEC-003`, `EXEC-004`, `EXEC-005`, `EXEC-006`) plus 1 deployment (`EXEC-006` release) | Section 4 |
+| Successful narrow-scope deployments to `main` | 3 (`428e18f`, `8726ac1`, `12f82fd`) | [EV-01, EV-21] |
+| Regression tests passing on `main` | 169 (58 + 111) | [EV-03, EV-04, EV-21] |
+| Confirmed successful real Observation Agent runs (CI) | 2 (`workflow_dispatch` at `EXEC-003`; scheduled run #2 at `EXEC-005`), plus 1 post-deployment CI-path check (`EXEC-006` release) | [EV-11, EV-22] |
+| Confirmed successful real local combined-tool run pairs | 7+ (3 at `EXEC-005`, 3 more during `EXEC-006`, 1 more post-deployment) | [EV-13, EV-14, EV-22] |
+| Recommendation stability across all recorded real runs | `HQ-0001`, score 6, identical evidence, every time (`EXEC-004` first appearance through the post-deployment verification run) | [EV-13, EV-14, EV-22] |
 | Read-only executions with zero repository modification confirmed | Every recorded run to date (verified by `git status --short` each time) | [EV-17] |
 | Recommendation Ledger entries, status | 6, all `PROPOSED`, none silently advanced | [EV-18] |
 
@@ -545,18 +610,20 @@ each supported by current implementation evidence:
 | Element | Identity |
 |---|---|
 | Certified repository | `discovery-lab`, `main` branch |
-| Certified `main` commit | `8726ac1` (HEAD at certification time) [EV-01] |
+| Certified `main` commit | `12f82fd` (HEAD as of the `EXEC-006` deployment) [EV-21] |
 | Certified initial commit | `7531956` |
-| Certified component: Observation Agent | `observation-agent/`, v0.2, merged at `428e18f` |
+| Certified component: Observation Agent | `observation-agent/`, v0.2, merged at `428e18f`, self-observation fix deployed at `12f82fd` |
 | Certified component: Ecosystem Headquarters | `headquarters/`, v1.0, merged at `8726ac1` |
 | Certified workflow | `.github/workflows/observation-agent.yml`, `contents: read`, daily `0 6 * * *` + `workflow_dispatch` [EV-06] |
 | Certified governance precondition | `PROP-0001`, `ACCEPTED`, Variant B (Ecosystem Observatory), 2026-07-25 [EV-08] |
-| Certified test baseline | 156 tests passing (45 + 111) on the certified commit [EV-03, EV-04] |
+| Certified test baseline | 169 tests passing (58 + 111) on the certified commit [EV-03, EV-04, EV-21] |
 | Cross-referenced (observed, not certified) repositories | `project-memory`, `kod`, `generative-discovery-engine`, `trust-engine` |
-| Known unmerged fix (not part of this baseline) | `EXEC-006` self-observation fix, commits `0e4acad`/`1217473` on `claude/prop-0002-discovery-intake` [EV-16] |
+| Deployment history within this baseline | `428e18f` (Observation Agent activation) → `8726ac1` (Headquarters activation) → `12f82fd` (`EXEC-006` self-observation fix) [EV-01, EV-21] |
 
-Any future certification (e.g. `CERT-002`) that includes the
-`EXEC-006` merge, a scheduling change for Headquarters, or any new
+This fingerprint was updated once, in place, when the verdict changed
+from **PARTIALLY CERTIFIED** to **CERTIFIED** — see the Certification
+Update Log. Any future certification (e.g. `CERT-002`) that includes a
+scheduling change for Headquarters, broader CI coverage, or any new
 component will supersede this fingerprint, not silently replace it —
 this document remains the historical Baseline v1.0 record.
 
@@ -584,15 +651,12 @@ Areas expected to evolve, named without proposing implementation:
   whether Headquarters is ever scheduled, both remain named, explicitly
   deferred, human-authorized decisions — not committed to any
   direction here.
-- Merging `EXEC-006`'s validated fix to `main` — a routine merge
-  decision, already unblocked, not undertaken as part of this
-  certification (see Constraints).
 
 ---
 
 ## 14. Certification Verdict
 
-### Verdict: **PARTIALLY CERTIFIED**
+### Verdict: **CERTIFIED**
 
 ### Reasoning
 
@@ -605,54 +669,55 @@ directly against `main`:**
   with every code path examined [EV-19].
 - Recommendation correctness and stability — `HQ-0001` has never
   changed identity, score, or evidence across every real run recorded,
-  including the runs performed during this certification itself
-  [EV-13, EV-14].
-- The scheduled CI path — unaffected by the one known defect, because
-  it is ephemeral and has no memory between runs [EV-06, EV-14].
-- Test coverage and narrow-deployment discipline — 156/156 tests
-  passing on the certified commit, both merges independently isolated
-  and verified before merge [EV-01, EV-03, EV-04, EV-11].
+  including the post-deployment verification run [EV-13, EV-14, EV-22].
+- The scheduled CI path — unaffected by the one defect this
+  certification found, both because it was always ephemeral with no
+  memory between runs, and because the underlying fix is now deployed
+  and was itself re-verified against the CI path directly [EV-06,
+  EV-14, EV-22].
+- Test coverage and narrow-deployment discipline — 169/169 tests
+  passing on the certified commit, all three merges to `main`
+  independently isolated and verified before merge [EV-01, EV-03,
+  EV-04, EV-11, EV-21].
+- The self-referential feedback-loop defect — resolved on `main` at
+  `12f82fd`, confirmed by all 5 required post-deployment verifications
+  [EV-21, EV-22].
 
-**What is not fully certified:**
+**Historical record — why this certification was originally issued
+PARTIALLY CERTIFIED, and what changed:**
 
-- The `main`-branch code, as currently deployed, still exhibits the
-  self-referential feedback-loop defect `EXEC-005` measured under
-  repeated local/manual combined-tool operation — the exact usage
-  pattern each tool's own `README.md` documents as a supported way to
-  run it. This is a real defect in the currently-deployed baseline,
-  not a hypothetical or future concern: it was measured compounding
-  2 → 10 → 58 new false positives across 3 unchanged-input runs
-  [EV-14]. A complete, tested, validated fix exists — but it has not
-  been merged to `main`, so it is not part of the baseline this
-  certification is evaluating [EV-16].
-
-**Why this is "partially," not "not," certified**: the defect never
-once compromised safety, human authority, or recommendation
-correctness in any recorded run — including the very runs that
-measured it. It is precisely bounded to a downstream display metric
+At original issuance (2026-07-25), `main`'s code (`8726ac1`) still
+exhibited the self-referential feedback-loop defect `EXEC-005`
+measured under repeated local/manual combined-tool operation — the
+exact usage pattern each tool's own `README.md` documents as a
+supported way to run it, measured compounding 2 → 10 → 58 new false
+positives across 3 unchanged-input runs [EV-14]. A complete, tested,
+validated fix existed on `claude/prop-0002-discovery-intake` but had
+not been merged to `main`, so it was not part of the baseline being
+evaluated at that time [EV-16]. That defect never once compromised
+safety, human authority, or recommendation correctness in any recorded
+run — it was precisely bounded to a downstream display metric
 (`Observation Cleanliness`, `Overall Health`) under one specific
-operational mode, already understood, already fixed on a validated
-branch, and blocked only on a routine merge decision — not a redesign,
-not further investigation, not new engineering.
+operational mode — which is why the verdict was *partial* rather than
+*not certified*, and why the fix was correctly described as "a
+routine, low-risk, separately-authorized human decision, not new
+work."
 
-**Why this is not simply "certified"**: doing so would represent the
-`main`-branch baseline as free of a defect it demonstrably still has,
-which the certification's own success criteria ("no future work is
-represented as operational," "another reviewer could independently
-verify the baseline") do not permit. A reviewer who clones `main`
-today and runs both tools locally, repeatedly, against unchanged
-content will reproduce the compounding behavior `EXEC-005` measured —
-this is directly, mechanically reproducible, not a matter of
-interpretation.
-
-### What would upgrade this to CERTIFIED (unqualified)
-
-Merging `EXEC-006`'s already-validated fix to `main` through the same
-narrow-merge discipline both prior components used — itself a routine,
-low-risk, separately-authorized human decision, not new work.
+Petko's "Human Decision — CERT-001" accepted this verdict and its
+evidence, then authorized exactly that deployment: a narrow release of
+`EXEC-006`'s fix to `main`, isolated to `observation-agent/` only, no
+unrelated development. That deployment is now complete (PR #10,
+squash-merged as `12f82fd`) and all 5 required post-deployment checks
+passed — a real Observation Agent run, a real Headquarters run,
+verified run-over-run stability (37 → 37 → 37, 0 new after the first
+run), an unchanged CI-path outcome, and `HQ-0001` reconfirmed as the
+sole recommendation [EV-22]. The condition that made this
+certification partial no longer exists on `main`.
 
 ---
 
 *This document and its evidence appendix are the complete `CERT-001`
-deliverable. No repository other than the addition of these two files
-was modified to produce this certification.*
+deliverable. No repository other than the addition of these two files,
+and the subsequently authorized narrow `EXEC-006` deployment to
+`main` (`12f82fd`), was modified in the course of producing this
+certification.*
