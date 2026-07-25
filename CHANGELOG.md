@@ -1583,3 +1583,66 @@
   review was conducted by the same session/author as everything it
   reviews, same open problem `STATE.md` already names (R4 in the risk
   assessment) — not claimed to be independent in a way it is not.
+
+## 2026-07-25 (ARCH-002 — Unified Coordination Model Extraction)
+
+- Performed a one-off architecture-consolidation task (archaeology, not
+  design, per its own explicit rules) under
+  `docs/proposals/ARCH-002-unified-coordination-model/`, following
+  directly from `ARCH-001`'s finding that the coordination layer had
+  been independently built at least three times.
+- Searched `project-memory`, `kod`, `discovery-lab`, `trust-engine`,
+  and `generative-discovery-engine` by content (not filename) for every
+  document describing coordination, runtime, supervisor, scheduler,
+  dispatcher, execution, workflow, governance, orchestration, control
+  plane, event flow, organization, or operating model. Recorded the
+  exact status of every document found
+  (`1-ARCHITECTURE-INVENTORY.md`) — of roughly 30 documents, 8 carry an
+  explicit `ACCEPTED`/`FROZEN` status; `trust-engine` contributes zero
+  individually-ratified sources, a real asymmetry reported as found.
+- Built the required Component Matrix (`2-COMPONENT-MATRIX.md`) across
+  the 8 fixed component names (Scheduler, Supervisor, Runtime,
+  Dispatch, Queue, Event, Approval, Planning) — no new component names
+  introduced. Approval/Supervisor (the same Formal Gate under four
+  names) and Human Final Authority are the strongest cross-repo
+  convergence found; Scheduler, Event, and Planning are absent
+  everywhere; Runtime is named only in `kod` and, on inspection, means
+  a reasoning/data pipeline there, not task execution.
+- Merge Analysis (`3-MERGE-ANALYSIS.md`): the Formal Gate and Human
+  Final Authority merge cleanly across `project-memory`'s
+  Kernel-as-gate-concept (Stable Core, Ratified), `kod`'s Kernel Review
+  (`ADR-0009`, Accepted), `discovery-lab`'s Adversarial Review
+  (`GOVERNANCE.md`, Ratified), and `trust-engine`'s Proposal Quality
+  Gate. `project-memory`'s literal Dispatcher and `discovery-lab`'s
+  Reality Inbox were explicitly kept separate (same shape, different
+  underlying concern) rather than merged for a cleaner-looking result.
+  `kod`'s "Runtime" was flagged as a false cognate, not a shared
+  concept with the ecosystem's missing execution layer. Zero
+  contradictions found between the four repositories' approval/
+  authority concepts.
+- Produced `Unified Coordination Model v1.0`
+  (`4-UNIFIED-COORDINATION-MODEL.md`) built exclusively from ratified
+  documents or independently-repeated concepts, per the task's own
+  sourcing rule — no new concept introduced. Confirms `ARCH-001`'s
+  central finding at the document level: three specific mechanisms
+  (Contract-Defined Roles, Formal Gate, Human Final Authority) are not
+  merely similar but are the same mechanism, independently ratified
+  three times, in three vocabularies, without cross-reference between
+  the ratifying instruments.
+- Identified five necessary (not merely desirable) remaining gaps
+  (`5-REMAINING-GAPS.md`, `G1`–`G5`): no mechanism anywhere carries out
+  an approved action; the ratified Control Plane concept has no
+  enactment mechanism binding the other repositories to it;
+  `trust-engine` has no ratification vocabulary at all; nothing checks
+  the three ratified instances for drift over time; and
+  `discovery-lab`'s ratified instances still sit on `PROP-0001`, still
+  `DRAFT` (carried over from `ARCH-001`, not re-litigated).
+- **Execution Readiness verdict: `PARTIALLY READY`**
+  (`6-EXECUTION-READINESS-REPORT.md`) — the consolidated model and one
+  clear approved-proposal interface point make a narrow,
+  single-action-type execution experiment startable now (matching
+  `ARCH-001`'s own Month 3–5 roadmap step); a general, ecosystem-wide
+  execution layer is not yet buildable given `G1`–`G5`.
+- `7-EXECUTIVE-SUMMARY.md`: the ecosystem does not need a new
+  coordination architecture designed — it needs the one that already
+  exists, independently ratified three times over, written down once.
