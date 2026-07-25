@@ -1,0 +1,11 @@
+[
+  {
+    "hq_id": "HQ-0001",
+    "key": "finding-duplicate-adr-discovery-lab-0001",
+    "title": "discovery-lab: two files both claim ADR-0001",
+    "first_proposed": "2026-07-25",
+    "last_proposed": "2026-07-25",
+    "status": "proposed",
+    "times_proposed": 2
+  }
+]

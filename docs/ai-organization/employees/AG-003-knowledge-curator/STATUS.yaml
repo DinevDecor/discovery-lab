@@ -1,0 +1,48 @@
+employee_id: AG-003
+role: Knowledge Curator
+version: 1.0
+status: frozen
+freeze_date: 2026-07-24
+freeze_reference: ../../../releases/1.0/RELEASE-1.0.md
+freeze_note: >
+  "frozen" describes architectural stability (Discovery Lab's own
+  GOVERNANCE.md lifecycle), not organizational trust. It is
+  deliberately distinct from adoption_status below, which remains
+  governed by HIRING-LIFECYCLE-DRAFT.md's separate
+  Candidate/Prototype/Probation/Trusted/Retired lifecycle - freezing
+  the architecture does not itself promote the Role past Prototype on
+  that axis. See ../../GOVERNANCE.md, "Freeze vs. adoption."
+adoption_status: not_adopted
+location: discovery-lab
+executor: unassigned
+created_from: task-specified role design ("AG-003 Knowledge Curator",
+  DRAFT, architecture only - no implementation requested). Status set to
+  prototype at v0.1, matching AG-001's and AG-002's existing lifecycle
+  discipline rather than any "production-ready" framing; frozen at v1.0
+  2026-07-24 per RELEASE-1.0.md, after a real Reality Stress Test.
+runs_completed: 3
+reports_reviewed: 0
+known_false_positives: 0
+known_missed_findings: 4 (F-1 through F-4, all found and recorded by the
+  "AG-003 Reality Stress Test," 2026-07-24 - see
+  ../../../proposals/AG-003-reality-stress-test/
+  REALITY-STRESS-TEST-REPORT.md. F-1/F-2/F-3 were architecture-level
+  gaps, since corrected; F-4 is a coverage/completeness note, not a
+  logic defect)
+boundary_violations: 0
+last_run: 2026-07-24
+last_review: null
+open_governance_questions:
+  - permanent organizational owner
+  - authority to promote to trusted
+  - long-term repository location
+  - whether a real Knowledge Base store (memory/knowledge-objects/)
+    should be created now, or only once a second AG-002 Recovery Report
+    exists to curate alongside PILOT-RUN-0002
+  - who conducts the first real Knowledge Review (REVIEW-PROTOCOL.md) -
+    no Reviewer has been assigned yet, shared in kind with AG-002's own
+    open ORB-Reviewer question
+  - whether Candidate Investigation numbering (CI-NNNN) should remain a
+    single global sequence shared with AG-002, or eventually need its
+    own namespace if volume grows - deferred, not decided, in
+    OUTPUTS.md and CURATION-PROTOCOL.md

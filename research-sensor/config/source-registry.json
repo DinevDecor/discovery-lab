@@ -1,0 +1,108 @@
+{
+  "processing_budget": 30,
+  "window_days": 30,
+  "sources": [
+    {
+      "name": "arXiv cs.AI Recent",
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "source_trust": "PRIMARY",
+      "domain_hint": "A"
+    },
+    {
+      "name": "arXiv cs.CL Recent",
+      "url": "https://arxiv.org/list/cs.CL/recent",
+      "source_trust": "PRIMARY",
+      "domain_hint": "C"
+    },
+    {
+      "name": "arXiv cs.MA Recent",
+      "url": "https://arxiv.org/list/cs.MA/recent",
+      "source_trust": "PRIMARY",
+      "domain_hint": "B"
+    },
+    {
+      "name": "arXiv cs.LG Recent",
+      "url": "https://arxiv.org/list/cs.LG/recent",
+      "source_trust": "PRIMARY",
+      "domain_hint": "E"
+    },
+    {
+      "name": "OpenReview",
+      "url": "https://openreview.net/",
+      "source_trust": "PRIMARY",
+      "domain_hint": "D"
+    },
+    {
+      "name": "Nature",
+      "url": "https://www.nature.com/",
+      "source_trust": "PRIMARY",
+      "domain_hint": "A"
+    },
+    {
+      "name": "Science",
+      "url": "https://www.science.org/",
+      "source_trust": "PRIMARY",
+      "domain_hint": "A"
+    },
+    {
+      "name": "ACL Anthology",
+      "url": "https://aclanthology.org/",
+      "source_trust": "PRIMARY",
+      "domain_hint": "C"
+    },
+    {
+      "name": "NeurIPS Proceedings",
+      "url": "https://papers.nips.cc/",
+      "source_trust": "PRIMARY",
+      "domain_hint": "E"
+    },
+    {
+      "name": "ICML Proceedings",
+      "url": "https://proceedings.mlr.press/",
+      "source_trust": "PRIMARY",
+      "domain_hint": "D"
+    },
+    {
+      "name": "ICLR Proceedings (OpenReview)",
+      "url": "https://openreview.net/group?id=ICLR.cc",
+      "source_trust": "PRIMARY",
+      "domain_hint": "E"
+    },
+    {
+      "name": "Google DeepMind Research Blog",
+      "url": "https://deepmind.google/discover/blog/",
+      "source_trust": "SECONDARY",
+      "domain_hint": "A"
+    },
+    {
+      "name": "OpenAI Research",
+      "url": "https://openai.com/research/",
+      "source_trust": "SECONDARY",
+      "domain_hint": "E"
+    },
+    {
+      "name": "Anthropic Research",
+      "url": "https://www.anthropic.com/research",
+      "source_trust": "SECONDARY",
+      "domain_hint": "D"
+    },
+    {
+      "name": "Microsoft Research Blog",
+      "url": "https://www.microsoft.com/en-us/research/blog/",
+      "source_trust": "SECONDARY",
+      "domain_hint": "C"
+    },
+    {
+      "name": "Hacker News (discovery hint only)",
+      "url": "https://news.ycombinator.com/",
+      "source_trust": "COMMUNITY",
+      "domain_hint": ""
+    },
+    {
+      "name": "r/MachineLearning (discovery hint only)",
+      "url": "https://www.reddit.com/r/MachineLearning/",
+      "source_trust": "COMMUNITY",
+      "domain_hint": ""
+    }
+  ]
+}

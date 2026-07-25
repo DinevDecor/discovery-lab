@@ -21,3 +21,14 @@ nothing more.
 ## 2026-07-24 — RUN-0001
 
 First real run executed. Scope: `discovery-lab` only, read-only, baseline commit `dff7810`, target state = branch `claude/ai-org-ag-001-prototype` at commit `bfaa17f`. Report: `runs/RUN-0001-observation-report.md`.
+
+## 2026-07-25 — Bug fix: `STATUS.yaml` did not reflect `RUN-0001`
+
+`STATUS.yaml`'s `runs_completed` and `last_run` fields still read `0`
+and `null` after `RUN-0001` was already recorded above, on 2026-07-24 —
+a bookkeeping gap, not a disputed fact (this file and
+`runs/RUN-0001-observation-report.md` already agreed with each other).
+Found during `AGENT-001`'s preparation
+(`../../../proposals/AGENT-001-observation-agent/README.md`), corrected
+here per `GOVERNANCE.md`'s bug-fix rule (no version bump, no lifecycle
+re-entry): `runs_completed` set to `1`, `last_run` set to `2026-07-24`.

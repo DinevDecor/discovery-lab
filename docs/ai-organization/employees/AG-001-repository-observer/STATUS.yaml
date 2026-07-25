@@ -6,12 +6,12 @@ adoption_status: not_adopted
 location: discovery-lab
 executor: unassigned
 created_from: candidate organizational design
-runs_completed: 0
+runs_completed: 1
 reports_reviewed: 0
 known_false_positives: 0
 known_missed_changes: unknown
 boundary_violations: 0
-last_run: null
+last_run: 2026-07-24
 last_review: null
 open_governance_questions:
   - permanent organizational owner

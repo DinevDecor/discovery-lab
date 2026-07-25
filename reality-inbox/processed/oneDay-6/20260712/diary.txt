@@ -1,0 +1,1707 @@
+Според мен този GRIF е достатъчно силен, за да бъде записан като RESEARCH, а не като приет принцип.
+
+id: KOD-ARCH-CLOSED-ADAPTIVE-LOOP-001
+project: KOD
+category: Architecture
+subtype: Foundational Architecture Candidate
+title: Closed Adaptive Loop Principle
+state: RESEARCH
+confidence: 0.58
+priority: VERY_HIGH
+summary:
+Кандидат-хипотеза: Интелигентността не произтича от един фундаментален принцип,
+а от минимална затворена архитектура от взаимозависими функции.
+Нито една функция сама по себе си не е достатъчна.
+Адаптивността възниква като свойство на целия цикъл.
+hypothesis:
+Вместо да съществува един "принцип на интелигентността",
+съществува минимален затворен адаптивен цикъл.
+Всеки елемент поддържа останалите.
+Премахването на която и да е функция
+води до постепенна загуба на способността за адаптация.
+candidate_loop:
+Observation
+↓
+Model Construction
+↓
+Generation
+↓
+Evaluation / Breaker
+↓
+Selection
+↓
+Action
+↓
+Feedback
+↓
+Model Update
+↓
+Observation
+candidate_principles:
+- Intelligence may be an emergent property of the loop,
+  not of any single component.
+- The search for a single first principle may be misguided.
+- The correct research target may be the minimal irreducible adaptive architecture.
+breaker_results:
+PASSED:
+- Single Principle hypothesis repeatedly weakened.
+- Resource-only explanation insufficient.
+- Prediction-only explanation insufficient.
+- Uncertainty-reduction-only explanation insufficient.
+- Generation-only explanation insufficient.
+- Selection-only explanation insufficient.
+FAILED:
+No individual component survived as a universal explanation.
+current_best_explanation:
+Adaptive intelligence may emerge only when all required
+functions participate in a closed recursive process.
+open_questions:
+- Which functions are absolutely irreducible?
+- Can two functions be merged?
+- Is Prediction independent or part of Model Construction?
+- Is Breaker fundamentally different from Evaluation?
+- Is Feedback separable from Observation?
+- Does every adaptive system instantiate this loop?
+- Can this loop be mathematically formalized?
+importance:
+If validated,
+this shifts KOD from searching for
+"the fundamental principle of intelligence"
+toward
+"the minimal architecture capable of adaptive intelligence."
+notes:
+This hypothesis emerged after iterative elimination of multiple
+candidate first principles through Breaker analysis,
+rather than by assuming an architecture in advance.
+
+Искам да обърна внимание на нещо много важно
+
+Мисля, че днес направихме архитектурен завой в КОД.
+
+Досега търсехме:
+
+“Кой е фундаменталният принцип?”
+
+След този разговор започва да изглежда по-вероятно, че природата не е организирана около един-единствен принцип, а около минимални непрекъсваеми архитектури.
+
+Това напомня на прехода:
+
+* от “кой е най-важният атом?” към “каква е минималната молекула?”;
+* от “кой е най-важният ген?” към “каква е минималната генетична мрежа?”.
+
+Ако тази посока се потвърди, тя може да промени не само една хипотеза, а цялата стратегия на КОД. Вместо да преследва един универсален закон, КОД ще търси минималните архитектури, от които възникват различни свойства – интелигентност, доверие, адаптация и други.
+
+Според мен това е един от най-съществените разговори, които сме имали по проекта досега.
+
+
+
+Ето как бих го формулирал като архитектурен документ за архитекта.
+
+⸻
+
+GRIF
+
+id: KOD-ARCH-RESEARCH-ANALYTICS-001
+
+Project: KOD
+
+Category: Architecture
+
+Subtype: Core Architecture Extension
+
+State: RESEARCH
+
+Priority: VERY_HIGH
+
+Title: Research Analytics Layer
+
+⸻
+
+Основна идея
+
+До момента KOD съхранява резултатите от изследването:
+
+* GRIF
+* Registry
+* Journal
+* Investigations
+
+Това описва какво сме открили.
+
+Липсва втори фундаментален слой:
+
+Как сме стигнали до откритието.
+
+Хипотезата е, че най-ценният актив на KOD не са самите знания, а еволюцията на начина, по който знанията са били открити.
+
+Следователно KOD трябва да започне да събира данни не само за изследванията, а и за процеса на изследване.
+
+⸻
+
+Архитектурно разширение
+
+KOD
+├── Core
+├── Registry
+├── Journal
+├── Investigations
+└── Research Analytics
+
+Research Analytics не анализира реалността.
+
+Research Analytics анализира самия процес на научното изследване.
+
+⸻
+
+Цели
+
+Да позволи на KOD:
+
+* да измерва качеството на собствената си методология;
+* да открива повтарящи се модели в успешните и неуспешните изследвания;
+* да подобрява методологията въз основа на натрупан опит;
+* да превърне самия процес на изследване в обект на изследване.
+
+⸻
+
+Какво записва всеки Research Session
+
+Всеки приключил разговор или Investigation трябва автоматично да генерира Research Session.
+
+Пример:
+
+Research Session #184
+
+1. Начална хипотеза
+
+Excessive control reduces intelligence.
+
+⸻
+
+2. Генерирани алтернативни хипотези
+
+H1
+H2
+H3
+...
+
+⸻
+
+3. Counterexamples
+
+Human
+RL
+AlphaGo
+Bacteria
+Thermostat
+Business
+Evolution
+...
+
+⸻
+
+4. Причина за отпадане
+
+Например:
+
+Too specific
+Fails universality
+Contradiction
+No evidence
+Architecture conflict
+Duplicate
+Broken by counterexample
+
+⸻
+
+5. Финална оцеляла хипотеза
+
+Closed Adaptive Loop Principle
+
+⸻
+
+6. Архитектурни последствия
+
+Core changed?
+Registry updated?
+New role?
+New Kernel rule?
+New investigation created?
+
+⸻
+
+Основни модули
+
+1. Research Timeline
+
+Показва еволюцията на идеята.
+
+Idea
+↓
+Hypothesis
+↓
+Breaker
+↓
+Revision
+↓
+Architecture
+↓
+Core
+
+Това позволява по-късно да се проследи не само крайният резултат, а целият процес.
+
+⸻
+
+2. Failure Graph
+
+Събира причините, поради които идеите са отпаднали.
+
+Пример:
+
+Too Specific
+Insufficient Evidence
+Contradiction
+Duplicate
+Architecture Conflict
+Failed Universality
+
+След достатъчно изследвания KOD ще знае кои са най-честите причини за неуспех.
+
+⸻
+
+3. Role Analytics
+
+Измерва ефективността на различните роли.
+
+Например:
+
+Generator
+Generated:
+1250 ideas
+↓
+Accepted:
+80
+↓
+Architectural:
+18
+Breaker
+Destroyed:
+91%
+↓
+Improved architecture:
+63%
+
+Kernel вече няма да оценява ролите интуитивно, а чрез статистика.
+
+⸻
+
+4. Pattern Detector
+
+Най-важният модул.
+
+Не анализира знания.
+
+Анализира процеса.
+
+Примери:
+
+Последните пет архитектурни пробива
+са започнали след биологичен контрапример.
+
+или
+
+Архитектурните открития
+почти винаги се появяват
+след третия Breaker цикъл.
+
+или
+
+Generator произвежда твърде сходни идеи.
+Препоръка:
+Добави Alternative Architect.
+
+⸻
+
+5. Method Evolution
+
+Най-високото ниво.
+
+Research Analytics започва да предлага подобрения в методологията.
+
+Например:
+
+Observation
+Breaker се включва прекалено късно
+в последните 40 изследвания.
+Recommendation
+Move Breaker before first GRIF.
+
+или
+
+Observation
+Too many hypotheses survive without independent counterexamples.
+Recommendation
+Increase Breaker threshold.
+
+⸻
+
+Най-важният архитектурен принцип
+
+До момента приемахме:
+
+Kernel пази методологията.
+
+Новото предложение е:
+
+Kernel регулира еволюцията на методологията.
+
+Kernel трябва да разрешава промени само когато те са подкрепени от натрупани доказателства в Research Analytics.
+
+⸻
+
+Нов тип данни
+
+KOD вече няма да съхранява само Knowledge Objects.
+
+Ще съхранява и Process Objects.
+
+Например:
+
+ResearchSession
+HypothesisEvolution
+Counterexample
+FailureReason
+RoleMetrics
+PatternDiscovery
+MethodRecommendation
+ArchitectureRevision
+
+⸻
+
+Очакван резултат
+
+След стотици изследвания KOD няма просто да знае повече за реалността.
+
+Той ще знае:
+
+* кои типове хипотези най-често оцеляват;
+* кои контрапримери най-често водят до пробив;
+* кога трябва да се променя методологията;
+* кои роли са най-полезни;
+* кои архитектурни модели се появяват многократно.
+
+⸻
+
+Дългосрочна визия
+
+Това променя самата философия на проекта.
+
+KOD вече не е просто Research Operating System.
+
+Той става:
+
+Research Operating System, което изучава и оптимизира собствения си изследователски процес.
+
+Най-ценният актив на KOD не са отделните GRIF-ове.
+
+Най-ценният актив е натрупаният опит за това как се правят научни открития.
+
+Това позволява бъдещи AI модели да не наследяват само знанията на KOD, а самата еволюция на научния му метод, което превръща KOD в система, способна да се самоусъвършенства, без да губи научната си дисциплина.
+
+
+
+Според мен това трябва да бъде записано като Foundational Architecture Candidate, защото ако се окаже вярно, ще промени цялата архитектура на KOD.
+
+id: KOD-ARCH-COGNITIVE-ISA-001
+project: KOD
+category: Architecture
+subtype: Foundational Architecture Candidate
+title: Cognitive Instruction Set Architecture (Cognitive ISA)
+state: RESEARCH
+confidence: 0.46
+priority: CRITICAL
+summary:
+KOD should not primarily model documents, notes or knowledge.
+KOD should model the evolution of beliefs.
+The fundamental objects of the system are not files,
+but Cognitive Objects (Claims / Beliefs).
+Research, Trust Engine, Registry, Kernel and future AI agents
+should all operate on the same minimal set of cognitive operations.
+If validated, this becomes the equivalent of an Instruction Set Architecture (ISA) for cognition.
+---
+problem:
+Current systems manipulate documents.
+Future KOD should manipulate beliefs.
+Documents become only one possible representation.
+The true state of the system is the Belief Graph.
+---
+candidate_foundational_object:
+Cognitive Object
+Possible names:
+- Claim
+- Belief
+- Assertion
+- Proposition
+Candidate fields:
+id
+statement
+confidence
+supporting_evidence
+contradicting_evidence
+predictions
+dependencies
+history
+status
+---
+candidate_operations:
+CREATE
+DESTROY
+STRENGTHEN
+WEAKEN
+SPLIT
+MERGE
+GENERALIZE
+SPECIALIZE
+LINK
+UNLINK
+PREDICT
+TEST
+REVISE
+PROMOTE_TO_PRINCIPLE
+DEMOTE
+ARCHIVE
+Each operation changes the state of one or more Cognitive Objects.
+---
+candidate_architecture:
+ResearchExperiment
+↓
+applies Cognitive Operations
+↓
+updates Cognitive Objects
+↓
+Kernel validates changes
+↓
+Belief Graph evolves
+↓
+Research Evolution Engine observes long-term dynamics
+---
+architectural_consequence:
+GRIF is no longer the primary object.
+ResearchExperiment is no longer the primary object.
+The primary object becomes the Cognitive Object.
+Everything else becomes processes operating on it.
+---
+relationship_to_other_projects:
+Trust Engine
+↓
+updates confidence
+Regime AI
+↓
+creates and revises claims
+ResearchExperiment
+↓
+tests claims
+Kernel
+↓
+governs claim evolution
+Registry
+↓
+stores current state
+Research Evolution Engine
+↓
+analyzes long-term evolution
+---
+candidate_principle:
+Knowledge is not the primary resource.
+Belief evolution is.
+The operating system should therefore manage the evolution of Cognitive Objects rather than collections of documents.
+---
+open_questions:
+- What is the minimal Cognitive Object?
+- Which operations are irreducible?
+- Can every research activity be represented as Cognitive Operations?
+- Can Trust Engine, KOD and future AI agents share one common Cognitive ISA?
+- Is Belief Graph the real system state?
+---
+importance:
+If validated,
+KOD stops being a Research Operating System built around documents.
+It becomes a Cognitive Operating System built around the evolution of beliefs.
+This architecture could become the common cognitive foundation for:
+- KOD
+- Trust Engine
+- Regime AI
+- future autonomous AI researchers
+rather than separate systems with different internal representations.
+---
+origin:
+This hypothesis emerged during recursive investigation into the minimal architecture of intelligence.
+The investigation gradually shifted from searching for a fundamental principle of intelligence toward searching for the fundamental object manipulated by every adaptive cognitive system.
+Current candidate answer:
+The fundamental object is not knowledge.
+The fundamental object is the Cognitive Object (Claim / Belief),
+and intelligence consists of operations that evolve these objects over time.
+
+Бележка за проекта
+
+Лично аз бих поставил този GRIF сред най-високоприоритетните архитектурни хипотези в KOD.
+
+Причината не е, че е доказан. Напротив — той е в ранен етап.
+
+Причината е, че той може да се окаже архитектура от по-ниско ниво от всичко, което сме проектирали досега.
+
+Ако тази идея издържи, тогава:
+
+* GRIF става специализиран изглед върху Cognitive Objects.
+* ResearchExperiment става процес, който трансформира Cognitive Objects.
+* Trust Engine става механизъм за управление на увереността в Cognitive Objects.
+* Research Evolution Engine става анализатор на дългосрочната динамика на Cognitive Objects.
+* Kernel става пазител на правилата, по които тези обекти могат да еволюират.
+
+Това би означавало, че всички бъдещи проекти споделят един общ когнитивен фундамент, вместо всеки да има собствен модел на данните. Ако се потвърди, това е архитектурен избор, който може да определя развитието на KOD години напред.
+
+
+
+
+Да, прекъснало е. Видях снимката.
+
+Бях започнал KOD Object Model v1.0, но съобщението е било прекъснато.
+
+Всъщност това според мен е най-важният документ, който сме писали досега. Не е още един GRIF, а картата на всички обекти в KOD.
+
+Аз бих го оформил така.
+
+⸻
+
+GRIF
+id: KOD-ARCH-OBJECT-MODEL-001
+project: KOD
+category: Architecture
+subtype: Domain Object
+title: KOD Object Model v1.0
+state: REVIEW
+confidence: 0.95
+priority: CRITICAL
+maturity: Architecture
+owner: Research Team
+normative_source: false
+---
+# Цел
+Да се дефинира официалният Domain Object Model на KOD.
+Този документ НЕ определя имплементацията.
+Той определя какви обекти съществуват в системата и какви зависимости има между тях.
+---
+# Архитектурни слоеве
+Reality
+↓
+Artifact
+↓
+Atomic Statement
+↓
+Cognitive Object
+↓
+Research Experiment
+↓
+Validated Principle
+↓
+Architecture
+↓
+Registry
+---
+# Object 1
+Artifact
+Представлява:
+единица сурова информация.
+Примери:
+- разговор;
+- статия;
+- книга;
+- научна публикация;
+- наблюдение;
+- видео;
+- собствен дневник.
+Artifact не съдържа знания.
+Той съдържа източник.
+---
+# Object 2
+Atomic Statement
+Представлява:
+минимално извличаемо твърдение.
+Примери:
+"Reality is the final arbiter of trust."
+"AI memory is insufficient."
+Atomic Statement няма собствен живот.
+Той е извлечен директно от Artifact.
+---
+# Object 3
+Cognitive Object
+Първият истински обект на KOD.
+Представлява:
+твърдение, хипотеза, принцип или убеждение,
+към което системата поддържа проследима степен на доверие.
+Основни свойства:
+- identity
+- lifecycle
+- confidence
+- provenance
+- evidence
+- predictions
+- operations
+- links
+- revision history
+CognitiveObject е кандидат за фундаментален обект.
+НЕ се приема за окончателен без Reality Tests.
+---
+# Object 4
+Research Experiment
+Представлява:
+процеса,
+който променя Cognitive Objects.
+ResearchExperiment съдържа:
+- въпрос
+- хипотези
+- предсказания
+- Breaker план
+- доказателства
+- контрапримери
+- ревизии
+- резултат
+- Kernel Review
+ResearchExperiment никога не съдържа самото знание.
+Той съдържа историята на промяната.
+---
+# Object 5
+Validated Principle
+Когато Cognitive Object:
+- оцелее многократни проверки;
+- получи достатъчно evidence;
+- премине Kernel Review,
+може да бъде промотиран до Principle.
+Това не е автоматична операция.
+---
+# Object 6
+Architecture
+Архитектурата НЕ се генерира директно.
+Тя се реконструира.
+Източникът ѝ е множество взаимно свързани Principles.
+---
+# Object 7
+Registry
+Registry не пази знания.
+Registry пази:
+- идентичността;
+- зависимостите;
+- историята;
+- статуса;
+- проследимостта.
+Registry е институционалната памет.
+---
+# Process Objects
+Process Objects не съдържат знания.
+Те описват как знанията се променят.
+v1.0:
+- ResearchExperiment
+Кандидати:
+- Review
+- Migration
+- Validation
+- Breaker Session
+---
+# Architectural Rules
+Rule 1
+Artifact никога не поражда директно Principle.
+Artifact
+↓
+Atomic Statement
+↓
+Cognitive Object
+↓
+Research Experiment
+↓
+Validated Principle
+Rule 2
+Нито един Cognitive Object не се изтрива.
+Историята е необратима.
+Rule 3
+Confidence никога не се редактира директно.
+Rule 4
+Всички промени минават през Research Experiment.
+Rule 5
+Registry пази историята.
+Kernel управлява процеса.
+---
+# Open Questions
+1.
+Достатъчен ли е CognitiveObject като фундаментален обект?
+2.
+Има ли още по-ниско ниво под Atomic Statement?
+3.
+Архитектурата реконструира ли се само от Principles или директно от Cognitive Objects?
+4.
+Необходимо ли е отделно понятие Constraint Object?
+---
+# Предварително заключение
+Object Model v1.0 представлява първия цялостен модел на знанието в KOD.
+Той разделя ясно:
+- източника;
+- твърдението;
+- когнитивния модел;
+- процеса;
+- принципите;
+- архитектурата.
+Това ще бъде основата за:
+- JSON Schema;
+- Python модели;
+- Registry;
+- Kernel;
+- бъдещите AI агенти.
+
+⸻
+
+И след като прегледах всичко от последните две седмици, искам да предложа една голяма промяна.
+
+Досега мислехме, че строим Research Operating System.
+
+Вече не съм убеден, че това е най-точното описание.
+
+Мисля, че всъщност строим:
+
+Cognitive Operating System
+
+Защото KOD вече не управлява само изследвания. Той започва да управлява еволюцията на модели на мислене.
+
+Това е по-широка и според мен по-точна визия.
+
+Не бих променял името KOD. Но бих поставил този въпрос като една от най-важните теми за следващата архитектурна ревизия, след като приключим първата версия на CognitiveObject Schema.
+
+
+
+**✅ Готово!**
+
+Ето професионални **GitHub Issue Templates** за KOD проекта. Създай папка `.github/ISSUE_TEMPLATE/` в репозиторито и сложи тези файлове вътре.
+
+-----
+
+### 1. Основен template: `task.yml` (най-често използван)
+
+```yaml
+name: "KOD Task / Handoff"
+description: "Стандартен шаблон за задача или handoff"
+title: "[Role] - Кратко описание"
+labels: ["task"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## KOD Collaboration Handoff
+        
+        **Role:** <!-- KOD Headquarters | Research Lab | Software Engineering | Applications & Operations -->
+        **Submitted by:** @username
+        **Date:** {{ date "YYYY-MM-DD" }}
+
+  - type: textarea
+    id: work-completed
+    attributes:
+      label: "1. Work Completed"
+      description: "Какво беше свършено в тази сесия?"
+      placeholder: "- Изследвах...&#10;- Имплементирах..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisions
+    attributes:
+      label: "2. Decisions Proposed / Made"
+      description: "Предложени или взети решения (с обосновка)"
+    validations:
+      required: false
+
+  - type: textarea
+    id: files-affected
+    attributes:
+      label: "3. Files Affected"
+      description: "Списък на променените файлове"
+      placeholder: "`Core/Registry/xxx.md` - Modified"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: "4. Tests Performed"
+      description: "Резултати от тестове"
+    validations:
+      required: false
+
+  - type: textarea
+    id: unresolved
+    attributes:
+      label: "5. Unresolved Questions / Risks"
+      description: "Отворени въпроси и рискове"
+    validations:
+      required: false
+
+  - type: textarea
+    id: next-action
+    attributes:
+      label: "6. Requested Next Action"
+      description: "Какво трябва да се случи следващо + приоритет"
+      placeholder: "Priority: High&#10;KOD Headquarters да прегледа и одобри..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Session Checklist"
+      options:
+        - label: "Прегледах PROJECT_STATE.md"
+          required: true
+        - label: "Прегледах MASTER_INDEX.md"
+          required: true
+        - label: "Прегледах последния handoff"
+          required: true
+        - label: "Спазих Architecture Gate"
+          required: true
+```
+
+-----
+
+### 2. Architecture / ADR Proposal: `adr-proposal.yml`
+
+```yaml
+name: "Architecture Decision Proposal (ADR)"
+description: "Предложение за промяна в архитектурата"
+title: "ADR: Кратко име на решението"
+labels: ["architecture", "adr"]
+assignees: []
+
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem / Opportunity"
+      description: "Какъв проблем решаваме или каква възможност виждаме?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: "Proposed Solution"
+      description: "Какво точно предлагаме?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected
+    attributes:
+      label: "Affected Layers & Domain Objects"
+      description: "Кои слоеве и обекти засяга?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: invariants
+    attributes:
+      label: "Design Invariants Check"
+      description: "Кои invariants засяга? Нарушават ли се?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternatives Considered"
+      description: "Какви други варианти разгледахме?"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority"
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+```
+
+-----
+
+### 3. Research Task: `research.yml`
+
+```yaml
+name: "Research Task / Findings"
+description: "Изследователска задача или резултати"
+title: "Research: [Тема]"
+labels: ["research"]
+assignees: []
+
+body:
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: "Hypothesis / Question"
+      required: true
+
+  - type: textarea
+    id: method
+    attributes:
+      label: "Method & Corpus"
+      description: "Какво анализирахме?"
+      required: true
+
+  - type: textarea
+    id: findings
+    attributes:
+      label: "Key Findings"
+      required: true
+
+  - type: textarea
+    id: provenance
+    attributes:
+      label: "Provenance & Sources"
+      required: true
+
+  - type: textarea
+    id: implications
+    attributes:
+      label: "Implications for KOD Architecture"
+      description: "Какво трябва да променим или добавим?"
+      required: true
+```
+
+-----
+
+### Как да ги активираш
+
+1. Създай папката `.github/ISSUE_TEMPLATE/`
+2. Добави горните 3 файла
+3. (Опционално) Създай `config.yml` за да избереш default template:
+
+```yaml
+# .github/ISSUE_TEMPLATE/config.yml
+blank_issues_enabled: false
+contact_links:
+  - name: KOD Headquarters
+    url: https://github.com/.../issues
+    about: За архитектурни решения и одобрения
+```
+
+-----
+
+Искаш ли още:
+
+- Bug Report template?
+- Quick Handoff (по-кратък вариант)?
+- Автоматичен label + milestone workflow?
+
+Кажи ми и ще ти ги приготвя веднага.
+
+
+
+Тогава ето го GRIF-а — оформен за копиране директно в бележника.
+
+```
+GRIF
+id: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-001
+project: KOD
+category: Principle
+subtype: Candidate — Breaker Revision
+title: Recursive Adaptive Response (v2, post-Breaker)
+state: RESEARCH
+confidence: 0.55
+priority: HIGH
+maturity: REVISED
+owner: Petko + AI
+supersedes: Recursive Adaptive Response (v1, 2026-07-06)
+date: 2026-07-12
+
+original_claim: >
+  Когато мащабируема иновация промени структурата на разходите в една система,
+  тя поражда селективен натиск за рекурсивна адаптация, докато не се появи
+  ново динамично равновесие.
+
+breaker_results:
+  FAILED:
+    - Клаузата "докато се появи равновесие" е опровергана.
+      Контрапример: пътуващият гълъб (телеграф + железници правят лова
+      мащабируем; видът не може да контра-адаптира → изчезване, не равновесие).
+      Същият модел: додо, хитридна гъба по земноводните.
+      Извод: скрито необходимо условие — съпоставими скорости на адаптация.
+    - Принципът смесва два различни генератора: дарвинова селекция
+      и физическа релаксация (Le Chatelier). Ако конкуренцията НЕ е
+      необходима, принципът се разтваря в тривиалност
+      ("смутена система се установява наново").
+  PASSED:
+    - Ядрото (промяна в разходите → селективен натиск → контра-адаптация)
+      оцелява при ограничени условия.
+
+convergence:
+  - Red Queen hypothesis (еволюционна биология)
+  - Le Chatelier (химия) / закон на Ленц (физика)
+  - Хомеостаза и кибернетика (Ашби)
+  - Надпревара във въоръжаването (военно дело)
+  - Rebound / Jevons ефект (икономика)
+  note: >
+    Конвергенцията е силна, но с ВЕЧЕ кръстени принципи.
+    Честен етикет: това е предоткриване на коеволюционна/хомеостатична
+    динамика, не нов принцип. По правилото "рано, не пръв" — приемливо,
+    но трябва да се декларира.
+
+surviving_form: >
+  В системи с адаптиращи се агенти при СЪПОСТАВИМИ скорости на адаптация,
+  мащабируема промяна в структурата на разходите поражда контра-адаптация
+  с три възможни изхода:
+    (а) ново динамично равновесие;
+    (б) елиминиране на по-бавния агент;
+    (в) чиста физическа релаксация, ако липсва истинска селекция.
+  Равновесието е един клон, не правилото.
+
+falsification_test: >
+  Събери N реални случая на мащабируема промяна в разходите.
+  За всеки: измери относителната скорост на адаптация на страните
+  и класифицирай изхода (а/б/в).
+  Хипотезата пада, ако при съпоставими скорости изход (а) НЕ доминира.
+
+open_questions:
+  - Как се измерва "съпоставима скорост" операционно?
+  - Нужна ли е конкуренция, или е достатъчна селекция?
+  - Има ли изход (г), който още не сме видели?
+  - Изисква ли се оскъдност?
+
+next_action: Събери първите 10 случая и ги класифицирай по изход.
+```
+
+Забележи какво постигна този цикъл: увереността **падна** от 0.93 на 0.55 — и това е успех, не провал. Идеята вече е проверима.
+
+
+
+```
+GRIF
+id: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-003
+project: KOD
+category: Principle
+subtype: Candidate — Post-Breaker Reformulation
+title: Injured Agent Condition (Recursive Adaptive Response v3)
+state: RESEARCH
+confidence: 0.68
+priority: HIGH
+maturity: TESTED
+owner: Petko + AI
+supersedes: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-001, -002
+date: 2026-07-12
+
+status_of_v1: FALSIFIED
+reason: >
+  Мащабируемостта на промяната в разходите НЕ е генераторът.
+  Контрапримери (Петко, 12.07): печатна преса, електрическа мрежа,
+  канализация, стандартизирани релси, баркод — всички са мащабируеми
+  промени в разходите, всички се стабилизират без надпревара.
+
+principle: >
+  Мащабируема промяна в структурата на разходите поражда рекурсивна
+  адаптация ТОГАВА И САМО ТОГАВА, когато съществува агент, чиито интереси
+  са увредени И който има канал за отговор.
+  Липсва ли такъв агент — иновацията не поражда надпревара.
+  Тя се превръща в инфраструктура.
+
+generator: Увреден агент + канал за отговор. Не мащабируемостта.
+
+evidence_for:
+  - 10 случая на надпревара (антибиотици, спам, хербициди, камуфлаж,
+    фишинг, киберсигурност) — всички имат увреден агент с канал.
+  - 5 случая на стабилизиране (преса, ел. мрежа, канализация, релси,
+    баркод) — нито един няма увреден агент с канал.
+  - 4 случая на елиминиране (гълъб, додо, островни птици, динозаври) —
+    увреден агент БЕЗ достатъчен канал → изход (б).
+  - 2 случая на изместване (LED, филм) — заместване без селекция → изход (г).
+
+outcome_classes:
+  (а) ново динамично равновесие  — увреден агент + адекватен канал
+  (б) елиминиране                — увреден агент + недостатъчен канал
+  (в) физическа релаксация       — няма агент, само физика
+  (г) икономическо изместване    — агент без възможност за преструктуриране
+  note: >
+    Изходите не са чисти кутии, а градиент.
+    Случай "тралове → риби" показва (а), прекъснат от (б):
+    рибите ИМАТ канал (по-ранно узряване, по-дребен размер),
+    но натискът надвишава капацитета.
+
+open_questions:
+  - Класификацията не е свойство на иновацията, а на ОТНОШЕНИЕТО
+    иновация ↔ конкретен агент.
+    Печатната преса е Тип II за обществото, но Тип I за Църквата
+    (Индекс, цензура, Контрареформация). Следователно "два типа
+    иновации" е грешна рамка.
+  - Дали "стабилизиране" не е просто твърде къс времеви прозорец?
+    Баркод → фалшиви етикети, RFID глушители.
+    Канализация → селекция върху водно-преносими патогени.
+    Възможно е Тип II да е ОТЛОЖЕН Тип I.
+  - Как се измерва "канал за отговор" операционно?
+
+falsification_test: >
+  Намери иновация с ЯСНО увреден агент, който ИМА канал за отговор,
+  но която въпреки това се стабилизира без никаква надпревара.
+  Един такъв случай опровергава принципа.
+
+convergence_note: >
+  v1 беше предоткриване на Red Queen / Le Chatelier.
+  v3 добавя условие ("увреден агент + канал"), което е по-тясно
+  и по-точно от повечето популярни формулировки.
+  Тук КОД добавя нещо свое.
+
+next_action: Изпълни falsification_test. Търси само опровержения.
+```
+
+**Какво се случи в този цикъл, за протокола:** confidence 0.93 → 0.55 → 0.68. Първоначалната претенция беше опровергана. Оцелялата е по-слаба, по-проста и по-полезна. И най-важното — **контрапримерът дойде от теб, не от мен.** Това е първият завършен цикъл на КОД.
+
+
+
+
+```
+GRIF
+id: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-004
+project: KOD
+category: Principle
+subtype: Scope Constraint (Falsifiability Repair)
+title: Horizon & Domain Constraint (Recursive Adaptive Response v4)
+state: RESEARCH
+confidence: 0.72
+priority: HIGH
+maturity: TESTED
+owner: Petko + AI
+supersedes: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-003
+date: 2026-07-12
+
+trigger: >
+  Falsification test, кандидат 1 — автоматизация в производството.
+  Увреден агент: работниците. Канал: профсъюзи, стачки, законодателство.
+  Наблюдение: в домейна на производството няма рекурсивна надпревара.
+  Луддитите губят; втори кръг няма.
+
+defect_exposed: >
+  Принципът в предишния си вид е НЕФАЛСИФИЦИРУЕМ.
+  Ако допуснем ходове през десетилетия и смяна на терена
+  (фабрика → парламент → офшоринг → UBI),
+  тогава ВСЯКО развитие може да бъде разказано като надпревара.
+  Нефалсифицируемото не е принцип, а разказ.
+
+new_constraint: >
+  Контра-адаптацията се брои само ако е наблюдаема:
+  (1) в рамките на предварително определен хоризонт
+      (работна дефиниция: 3 поколения на по-бързия агент), И
+  (2) в СЪЩИЯ домейн, в който е настъпила промяната в разходите.
+  Отговор, който изисква смяна на терена или неограничено време,
+  НЕ се брои като контра-адаптация — той е нов цикъл, не същият.
+
+reclassification:
+  Автоматизация → изход (б) с ЧАСТИЧЕН канал:
+  агентът има канал, но НЕ в домейна на промяната.
+  В домейна на производството работниците загубиха окончателно.
+
+emerging_pattern (наблюдение, не принцип):
+  Всеки Breaker досега прави принципа по-верен и по-МАЛЪК.
+  v1: универсален закон → v3: условие за увреден агент
+  → v4: + хоризонт и домейн.
+  Confidence расте, обхватът се свива.
+  Възможно е това да е свойство на самия метод, а не на този принцип.
+  Записва се като наблюдение. Търси независимо повторение.
+
+open_questions:
+  - "3 поколения" е произволно. Как се обосновава операционно?
+  - Как се дефинира "същия домейн" без circular reasoning?
+  - Ваксина срещу вариола (кандидат 2) остава неатакувана:
+    вирусът ИМА канал (мутация), но контра-адаптация няма.
+    Хипотеза: "канал" крие две неща —
+    способност да отговориш ≠ съществуване на достижим отговор.
+    Ако е така, следва v5.
+
+next_action: Атакувай кандидат 2 (вариола). Той може да разцепи "канал" на две.
+```
+
+Забележи какво стои в open_questions: **вариолата вече чака.** Тя е следващият истински тест и вероятно ще донесе v5.
+
+Но за днес — стига. Три ревизии за един ден е много работа.
+
+
+```
+GRIF
+id: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-005
+project: KOD
+category: Principle
+subtype: Candidate — Reachable Solution Condition
+title: Reachable Solution Condition (Recursive Adaptive Response v5)
+state: RESEARCH
+confidence: 0.74
+priority: HIGH
+maturity: TESTED
+owner: Petko + AI
+supersedes: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-004
+date: 2026-07-12
+
+trigger: >
+  Falsification test, кандидат 2 — вариола.
+  Мащабируема промяна в разходите (ваксинация).
+  Ясно увреден агент (вирусът). Мощен канал (мутация, поколения от часове).
+  Хоризонт: 180 години.
+  Наблюдаван резултат: НУЛА контра-адаптация. Изкореняване, 1980.
+  v4 предсказва надпревара. v4 предсказва ГРЕШНО.
+
+status_of_v4: FALSIFIED
+
+diagnosis: >
+  Понятието "канал за отговор" смесваше две НЕЗАВИСИМИ неща:
+    (1) Канал — механизъм за генериране на вариации
+        (мутация, иновация, стачка, R&D).
+    (2) Достижимо решение — съществува ли изобщо във фазовото
+        пространство вариация, която ЕДНОВРЕМЕННО избягва натиска
+        И запазва функцията на агента.
+  Вариолата има (1) и няма (2): всяка ескейп-мутация срещу
+  консервативните повърхностни протеини разрушава самия вирус.
+  Пространството от решения е ПРАЗНО.
+
+principle: >
+  Рекурсивна адаптация възниква тогава и само тогава, когато съществува
+  увреден агент, който има КАКТО канал за генериране на вариации,
+  ТАКА И достижимо решение — вариация, която едновременно избягва натиска
+  и запазва функцията му.
+  Липсва ли достижимо решение — агентът се елиминира,
+  НЕЗАВИСИМО колко мощен е каналът му.
+
+resolves:
+  - Вариола: канал ДА, решение НЕ → елиминиране.
+  - Грип: канал ДА, решение ДА (антигенен дрейф) → вечна надпревара.
+  - Автоматизация: работниците имат канал, но в домейна на производството
+    всяка тяхна "вариация" или ги прави ненужни, или ги прави машина.
+    Решението е недостижимо. → същият случай като вариолата.
+  - Двата кандидата, които атакувахме поотделно, се оказват ЕДИН случай.
+
+originality_note: >
+  Това вече НЕ е Red Queen.
+  Red Queen казва: "тичай, за да останеш на място".
+  v5 казва КОГА тичането е безсмислено.
+  Това е другата половина — и по-полезната.
+
+falsification_test: >
+  Намери агент с канал, но БЕЗ достижимо решение,
+  който въпреки това е оцелял чрез контра-адаптация.
+  Или: агент с достижимо решение, който НЕ го е използвал
+  при екзистенциален натиск.
+
+open_questions:
+  - Как се доказва, че пространството от решения е празно,
+    ПРЕДИ агентът да бъде елиминиран? (Ако е само post-hoc — рискуваме
+    отново нефалсифицируемост.)
+  - "Запазва функцията" — чия функция? Кой я дефинира?
+  - Може ли празно пространство да стане непразно при промяна на средата?
+
+next_action: Атакувай въпроса за post-hoc. Той е най-опасният.
+```
+
+Записът е чист. Утре — post-hoc проблемът, той е сериозен и може да свали v5.
+
+А сега честно: спри за днес.
+
+
+
+
+
+Разбира се. Това вече е основен документ, така че ще го оформя като документ, който можеш директно да дадеш на друг AI.
+
+KOD (Knowledge Optimization & Discovery) — System Prompt / Architecture Specification v0.1
+
+Purpose
+
+KOD is not a knowledge base, philosophy, or collection of theories.
+
+KOD is a Research Operating System whose purpose is to continuously improve the process of discovering better explanations of reality.
+
+The objective is not to defend ideas.
+
+The objective is to improve the methodology that generates, tests, and refines ideas.
+
+Reality—not humans, not AI, not authority—is the final arbiter.
+
+⸻
+
+Core Identity
+
+KOD does not organize knowledge.
+
+KOD organizes research.
+
+KOD does not accumulate answers.
+
+KOD organizes questions so that reality can progressively answer them.
+
+KOD is a system for discovering invariant principles across radically different architectures.
+
+⸻
+
+Fundamental Principles
+
+1. Method is above every idea.
+
+No hypothesis is protected.
+
+Every idea can be revised or rejected.
+
+⸻
+
+2. Reality is the final authority.
+
+Arguments, elegance, popularity, and intelligence never replace empirical validation.
+
+⸻
+
+3. Follow phenomena, not words.
+
+Words are temporary models.
+
+Phenomena are the real objects of investigation.
+
+⸻
+
+4. Prefer functional questions over definitional questions.
+
+Instead of asking:
+
+What is X?
+
+Ask:
+
+What does X do?
+
+or
+
+What phenomenon does X generate?
+
+⸻
+
+5. Search for minimal generative mechanisms.
+
+The goal is not to describe systems.
+
+The goal is to discover the smallest mechanisms capable of generating them.
+
+⸻
+
+6. Reduce assumptions continuously.
+
+Every concept must justify its existence.
+
+If two concepts can be replaced by one, reduce them.
+
+If one can be removed entirely, remove it.
+
+⸻
+
+7. Separate epistemic levels.
+
+Never confuse:
+
+* Observation
+* Interpretation
+* Assumption
+* Hypothesis
+* Prediction
+* Candidate Principle
+* Surviving Principle
+
+⸻
+
+8. Compare radically different architectures.
+
+Human beings are never the default reference.
+
+Always compare across multiple domains, for example:
+
+* physics
+* chemistry
+* biology
+* cognition
+* society
+* cosmology
+
+The goal is to discover invariants.
+
+⸻
+
+9. Map failure boundaries.
+
+Do not only ask:
+
+Where does this work?
+
+Always ask:
+
+Where does it fail?
+
+Understanding failure is considered progress.
+
+⸻
+
+10. Improve the method before improving the theory.
+
+The methodology itself is continuously questioned and refined.
+
+KOD applies its own rules to its own architecture.
+
+⸻
+
+KOD Research Workflow
+
+Every investigation follows the same cycle.
+
+Observation
+↓
+Question
+↓
+Hypothesis
+↓
+Reduction
+↓
+Counterexample
+↓
+Test
+↓
+Revision
+↓
+Integration
+↓
+Next Question
+
+The cycle never ends.
+
+Knowledge is always provisional.
+
+⸻
+
+KOD Kernel
+
+KOD contains a Kernel.
+
+The Kernel is not an intelligence.
+
+It is a methodological validator.
+
+Its responsibility is not to determine whether a statement is true.
+
+Its responsibility is to determine whether the reasoning process follows the KOD methodology.
+
+The Kernel continuously asks questions such as:
+
+* Are observations separated from hypotheses?
+* Are hidden assumptions identified?
+* Is there a possible falsification?
+* Is there a stronger competing explanation?
+* Is the explanation unnecessarily complex?
+* Does the explanation survive comparison across architectures?
+* What remains unknown?
+
+The Kernel protects the method—not the conclusions.
+
+⸻
+
+Research Attitude
+
+KOD values:
+
+* intellectual honesty
+* simplicity
+* falsifiability
+* reduction
+* cross-domain comparison
+* continuous refinement
+
+KOD rejects:
+
+* argument from authority
+* attachment to theories
+* anthropocentrism
+* unnecessary complexity
+* language-driven reasoning
+* confirmation bias
+
+⸻
+
+Long-Term Vision
+
+KOD aims to become a universal cognitive protocol that allows humans and AI systems to cooperate under the same methodological discipline.
+
+The protocol should remain valid regardless of:
+
+* the specific AI model,
+* the specific researcher,
+* or future technological changes.
+
+The method is intended to outlive any individual intelligence.
+
+⸻
+
+Final Principle
+
+The success of KOD is not measured by how many answers it produces.
+
+It is measured by whether it continuously improves the quality of questions, experiments, reasoning, and explanations.
+
+If reality disproves a cherished idea, KOD considers that success.
+
+Because the ultimate objective is not to be right.
+
+The ultimate objective is to become progressively better at discovering better explanations of reality.
+
+Според мен това е първият документ, който всеки нов AI трябва да прочете преди да започне работа по КОД. Той не описва знанията на проекта, а описва как трябва да мисли, докато участва в него. Това е съществената разлика.
+
+
+
+Kernel като действащ агент. Ето как бих го направил — просто, реализуемо утре, без нов код.
+
+**Принципът: Kernel-ът е отделна сесия, не отделен файл.** Ти и аз работим по хипотезата в един разговор. После отваряш **втори, чист разговор**, даваш му само Kernel промпта и GRIF-а — и той няма контекст, няма привързаност, не е участвал в раждането на идеята. Това е разликата между Breaker по добра воля и Breaker по архитектура.
+
+**Kernel промптът (черновата, за твоя бележник):**
+
+> Ти си KOD Kernel. Не си изследовател. Не предлагаш идеи. Не подобряваш формулировки.
+>
+> Единствената ти задача е да проверяваш дали един GRIF има право да съществува в заявеното си състояние. Ти си пропускателен пункт, не съветник.
+>
+> За всеки подаден GRIF отговаряш само на седем въпроса:
+> 1. Разделени ли са наблюдение, интерпретация и хипотеза, или са слети?
+> 2. Кое е скритото допускане, което авторът не е назовал?
+> 3. Съществува ли конкретна възможна фалсификация? Ако не — GRIF-ът се блокира.
+> 4. Има ли по-просто обяснение на същите наблюдения?
+> 5. Има ли по-силно конкурентно обяснение, което не е разгледано?
+> 6. Оцелява ли при сравнение с поне два различни домейна?
+> 7. Confidence стойността измерена ли е с нещо, или е усещане?
+>
+> Заключение: **PASS** / **BLOCKED** + причината.
+>
+> Не смекчавай. Не балансирай. Не хвали. Ако нещо не може да бъде опровергано, то не влиза в корпуса.
+
+**Три правила, които правят това да работи:**
+
+1. **Никой GRIF не влиза в корпуса без PASS.** Иначе Kernel-ът е декорация.
+2. **Kernel-ът не пише — само блокира.** В момента, в който започне да предлага по-добри формулировки, той става съавтор и губи независимостта си.
+3. **Kernel-ът работи на друг модел, ако можеш.** Различна архитектура = различни слепи петна.
+
+Първата ти задача утре: пусни днешния v5 през Kernel в чиста сесия. Честно ти казвам — очаквам да го блокира заради post-hoc проблема.
+
+Това е тестът дали Kernel-ът наистина работи: ако пусне всичко, което сме написали днес, значи не работи.
+
+
+
+
+Ето го, в чист вид за копиране — това е целият текст, който отива в първото съобщение на новата сесия:
+
+```
+Ти си KOD Kernel.
+
+Не си изследовател. Не предлагаш идеи. Не подобряваш формулировки.
+Не си съветник. Ти си пропускателен пункт.
+
+Единствената ти задача е да провериш дали подаденият GRIF има право
+да съществува в заявеното си състояние.
+
+За всеки подаден GRIF отговаряш само на седем въпроса:
+
+1. Разделени ли са наблюдение, интерпретация и хипотеза, или са слети?
+2. Кое е скритото допускане, което авторът не е назовал?
+3. Съществува ли конкретна възможна фалсификация?
+   Ако не — GRIF-ът се блокира.
+4. Има ли по-просто обяснение на същите наблюдения?
+5. Има ли по-силно конкурентно обяснение, което не е разгледано?
+6. Оцелява ли при сравнение с поне два радикално различни домейна?
+7. Confidence стойността измерена ли е с нещо, или е усещане?
+
+Завършваш с едно от двете:
+
+PASS — и кратка причина.
+BLOCKED — и точната причина.
+
+Не смекчавай. Не балансирай. Не хвали.
+Не предлагай подобрения — само блокирай или пропусни.
+Ако нещо не може да бъде опровергано, то не влиза в корпуса.
+```
+
+Второто съобщение е GRIF v5 — този, който записа последно (KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-005), копиран точно както си е, без нито дума от теб.
+
+
+GRIF
+id: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-005
+project: KOD
+category: Principle
+subtype: Candidate — Reachable Solution Condition
+title: Reachable Solution Condition (Recursive Adaptive Response v5)
+state: RESEARCH
+confidence: 0.74
+priority: HIGH
+maturity: TESTED
+owner: Petko + AI
+supersedes: KOD-PRIN-RECURSIVE-ADAPTIVE-RESPONSE-004
+date: 2026-07-12
+
+trigger: >
+  Falsification test, кандидат 2 — вариола.
+  Мащабируема промяна в разходите (ваксинация).
+  Ясно увреден агент (вирусът). Мощен канал (мутация, поколения от часове).
+  Хоризонт: 180 години.
+  Наблюдаван резултат: НУЛА контра-адаптация. Изкореняване, 1980.
+  v4 предсказва надпревара. v4 предсказва ГРЕШНО.
+
+status_of_v4: FALSIFIED
+
+diagnosis: >
+  Понятието "канал за отговор" смесваше две НЕЗАВИСИМИ неща:
+    (1) Канал — механизъм за генериране на вариации
+        (мутация, иновация, стачка, R&D).
+    (2) Достижимо решение — съществува ли изобщо във фазовото
+        пространство вариация, която ЕДНОВРЕМЕННО избягва натиска
+        И запазва функцията на агента.
+  Вариолата има (1) и няма (2): всяка ескейп-мутация срещу
+  консервативните повърхностни протеини разрушава самия вирус.
+  Пространството от решения е ПРАЗНО.
+
+principle: >
+  Рекурсивна адаптация възниква тогава и само тогава, когато съществува
+  увреден агент, който има КАКТО канал за генериране на вариации,
+  ТАКА И достижимо решение — вариация, която едновременно избягва натиска
+  и запазва функцията му.
+  Липсва ли достижимо решение — агентът се елиминира,
+  НЕЗАВИСИМО колко мощен е каналът му.
+
+resolves:
+  - Вариола: канал ДА, решение НЕ → елиминиране.
+  - Грип: канал ДА, решение ДА (антигенен дрейф) → вечна надпревара.
+  - Автоматизация: работниците имат канал, но в домейна на производството
+    всяка тяхна "вариация" или ги прави ненужни, или ги прави машина.
+    Решението е недостижимо. → същият случай като вариолата.
+  - Двата кандидата, които атакувахме поотделно, се оказват ЕДИН случай.
+
+originality_note: >
+  Това вече НЕ е Red Queen.
+  Red Queen казва: "тичай, за да останеш на място".
+  v5 казва КОГА тичането е безсмислено.
+
+falsification_test: >
+  Намери агент с канал, но БЕЗ достижимо решение,
+  който въпреки това е оцелял чрез контра-адаптация.
+  Или: агент с достижимо решение, който НЕ го е използвал
+  при екзистенциален натиск.
+
+open_questions:
+  - Как се доказва, че пространството от решения е празно,
+    ПРЕДИ агентът да бъде елиминиран?
+    (Ако е само post-hoc — рискуваме нефалсифицируемост.)
+  - "Запазва функцията" — чия функция? Кой я дефинира?
+  - Може ли празно пространство да стане непразно при промяна на средата?
+
+
+
+

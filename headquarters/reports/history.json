@@ -1,0 +1,30 @@
+[
+  {
+    "timestamp": "2026-07-25T05:49:35.563289+00:00",
+    "overall_health_pct": 71.0,
+    "recommendation_backlog": 6,
+    "decision_backlog": 0,
+    "project_health_scores": {
+      "project-memory": 1.0,
+      "kod": 1.0,
+      "discovery-lab": 0.67,
+      "generative-discovery-engine": 0.83,
+      "trust-engine": 0.67
+    },
+    "top_recommendation_hq_id": "HQ-0001"
+  },
+  {
+    "timestamp": "2026-07-25T05:59:39.201912+00:00",
+    "overall_health_pct": 71.0,
+    "recommendation_backlog": 6,
+    "decision_backlog": 0,
+    "project_health_scores": {
+      "project-memory": 1.0,
+      "kod": 1.0,
+      "discovery-lab": 0.67,
+      "generative-discovery-engine": 0.83,
+      "trust-engine": 0.67
+    },
+    "top_recommendation_hq_id": "HQ-0001"
+  }
+]

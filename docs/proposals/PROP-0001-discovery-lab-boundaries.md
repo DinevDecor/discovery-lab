@@ -1,7 +1,13 @@
 # PROP-0001 — Discovery Lab Mandate: Three Variants and a Recommendation
 
-Status: DRAFT PROPOSAL — not accepted, not an ADR (revision 3, post-adversarial-review)
-Date: 2026-07-24
+Status: **ACCEPTED — Variant B (Ecosystem Observatory) adopted, 2026-07-25.**
+Ratified by Petko Dinev's direct decision ("ACCEPT"), per the
+ratification package at `PROP-0001-ratification-package/` — full
+record: `PROP-0001-ratification-package/9-RATIFICATION-RECORD.md`.
+Remains a `PROP`-numbered document, not renamed into the `docs/adr/`
+sequence — its own text below states it is "not an ADR," and
+acceptance does not change that self-classification.
+Date: 2026-07-24 (drafted); accepted 2026-07-25.
 Author: Implementer session (Claude Code)
 Depends on: `docs/investigations/INV-0001-discovery-lab-mandate.md` and
   `docs/investigations/INV-0002-independent-architecture-passes.md`
@@ -317,9 +323,9 @@ Checked explicitly, since cosmetic renaming was a named risk:
 
 ---
 
-## Recommendation (proposed, not accepted)
+## Recommendation (ACCEPTED 2026-07-25 — see header)
 
-**Recommended: Variant B — Ecosystem Observatory, alone, for now.**
+**Adopted: Variant B — Ecosystem Observatory, alone, for now.**
 
 **1. Evidence basis.** Three independent lines of evidence support this,
 all drawn from `INV-0001` and `INV-0002`:
@@ -383,8 +389,11 @@ evaluates whether a *method* works); trust-engine's context-scoped
 trust-scoring or mutation-ledger pipeline (Observatory never assigns a
 trust score to a model or mechanism).
 
-This recommendation is not an acceptance. It requires a human decision
-before any variant governs how discovery-lab is actually used.
+This recommendation was accepted by Petko Dinev on 2026-07-25 (see
+header). Variant B now governs how discovery-lab is actually used —
+see `PROP-0001-ratification-package/9-RATIFICATION-RECORD.md` for the
+decision record and `6-CONSEQUENCES-ACCEPT.md` for what this
+mechanically unblocks.
 
 ---
 

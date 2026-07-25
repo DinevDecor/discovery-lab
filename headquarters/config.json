@@ -1,0 +1,66 @@
+{
+  "repos": [
+    {
+      "name": "project-memory",
+      "path": "/home/user/project-memory",
+      "state_file": "PROJECT_STATE.md",
+      "adr_dir": "adr",
+      "readme": "README.md",
+      "changelog": null
+    },
+    {
+      "name": "kod",
+      "path": "/workspace/kod",
+      "state_file": "Core/Registry/PROJECT_STATE.md",
+      "adr_dir": "Core/ADR",
+      "readme": null,
+      "changelog": null
+    },
+    {
+      "name": "discovery-lab",
+      "path": "/workspace/discovery-lab",
+      "state_file": "STATE.md",
+      "adr_dir": "docs/adr",
+      "readme": "README.md",
+      "changelog": "CHANGELOG.md"
+    },
+    {
+      "name": "generative-discovery-engine",
+      "path": "/workspace/generative-discovery-engine",
+      "state_file": "STATE.md",
+      "adr_dir": "adr",
+      "readme": "README.md",
+      "changelog": "CHANGELOG.md"
+    },
+    {
+      "name": "trust-engine",
+      "path": "/workspace/trust-engine",
+      "state_file": null,
+      "adr_dir": null,
+      "readme": null,
+      "changelog": null
+    }
+  ],
+  "project_registry": {
+    "repo": "project-memory",
+    "path": "PROJECT_REGISTRY.md"
+  },
+  "recommendation_ledger": {
+    "repo": "discovery-lab",
+    "path": "docs/investigations/RECOMMENDATION-LEDGER.md"
+  },
+  "observation_agent_reports_dir": {
+    "repo": "discovery-lab",
+    "path": "observation-agent/reports"
+  },
+  "governance_doc": {
+    "repo": "discovery-lab",
+    "path": "docs/ai-organization/GOVERNANCE.md"
+  },
+  "proposals_dir": {
+    "repo": "discovery-lab",
+    "path": "docs/proposals"
+  },
+  "decision_backlog_threshold_days": 3,
+  "stale_adr_threshold_days": 30
+}

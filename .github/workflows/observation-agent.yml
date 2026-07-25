@@ -1,0 +1,65 @@
+name: Observation Agent 001
+
+# EXEC-003 — Activate Observation Agent 001.
+#
+# Runs the existing, unmodified observation-agent/ tool on a schedule.
+# This workflow is glue only: it checks out this repository, runs the
+# agent read-only, and uploads whatever it produces as an artifact. It
+# never commits, pushes, opens a PR, or merges anything — see
+# observation-agent/README.md's "CI Limitations" and "Security" sections
+# for why only this repository (not all 5 configured repositories) is
+# scanned in this environment, and what a human needs to do to change
+# that.
+
+on:
+  schedule:
+    # Once daily, 06:00 UTC. To change the schedule, edit this line only.
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+# Minimum permissions: read-only access to this repository's contents.
+# No other permission is requested anywhere in this workflow.
+permissions:
+  contents: read
+
+concurrency:
+  group: observation-agent
+  cancel-in-progress: false
+
+jobs:
+  observe:
+    name: Run Observation Agent (read-only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout discovery-lab
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Observation Agent (CI config — see README's CI Limitations)
+        id: run
+        working-directory: observation-agent
+        run: python3 run_observation_agent.py --config config.ci.json --reports-dir reports-ci
+
+      - name: Publish run summary
+        if: always()
+        working-directory: observation-agent
+        run: python3 ci_summary.py reports-ci
+
+      - name: Upload report + execution log + snapshot as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: observation-agent-report-${{ github.run_number }}
+          path: observation-agent/reports-ci/
+          retention-days: 90
+          if-no-files-found: warn

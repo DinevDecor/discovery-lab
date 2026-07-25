@@ -1,0 +1,34 @@
+{
+  "repos": [
+    {
+      "name": "project-memory",
+      "path": "/home/user/project-memory",
+      "state_file_candidates": ["PROJECT_STATE.md"]
+    },
+    {
+      "name": "kod",
+      "path": "/workspace/kod",
+      "state_file_candidates": ["PROJECT_STATE.md"]
+    },
+    {
+      "name": "discovery-lab",
+      "path": "/workspace/discovery-lab",
+      "state_file_candidates": ["STATE.md"]
+    },
+    {
+      "name": "generative-discovery-engine",
+      "path": "/workspace/generative-discovery-engine",
+      "state_file_candidates": ["STATE.md"]
+    },
+    {
+      "name": "trust-engine",
+      "path": "/workspace/trust-engine",
+      "state_file_candidates": []
+    }
+  ],
+  "stale_threshold_days": 3,
+  "excluded_dirs": [".git", "__pycache__", "node_modules", ".venv"],
+  "excluded_paths": ["observation-agent/reports", "headquarters/reports"],
+  "markdown_extensions": [".md"],
+  "reference_extensions": [".md", ".py", ".yaml", ".yml"]
+}

@@ -1,0 +1,240 @@
+[
+  {
+    "signal_id": "RS-0001",
+    "timestamp": "2026-07-25T09:00:00Z",
+    "source": "Claude Code Changelog",
+    "source_trust": "PRIMARY",
+    "category": "FOUNDATION_MODEL_RELEASES",
+    "affected_capability": "Claude Opus 5 - 1M token context window, new default Opus model",
+    "affected_projects": [
+      "Discovery Lab",
+      "Dinev Assistant"
+    ],
+    "evidence": [
+      {
+        "source_name": "Claude Code Changelog",
+        "source_url": "https://code.claude.com/docs/en/changelog",
+        "source_trust": "PRIMARY",
+        "quoted_text": "Added Claude Opus 5 (claude-opus-5) as the new default Opus model with 1M context window (expanded from previous limits); Fast mode pricing: $10/$50 per Mtok. Removed Opus 4.7 from fast mode; /fast now applies to Opus 5 and Opus 4.8."
+      },
+      {
+        "source_name": "Tech Press Roundup (Axios/9to5Mac/TechCrunch, via search synthesis)",
+        "source_url": "https://www.axios.com/2026/07/24/anthropic-releases-new-model-opus-5",
+        "source_trust": "SECONDARY",
+        "quoted_text": "Claude Opus 5 comes close to the frontier intelligence of Claude Fable 5 at half the price. Opus 5 approaches the capabilities of Claude Fable 5 across many tasks, while costing $5 per million input tokens and $25 per million output tokens, the same price as the prior Opus model release, Opus 4.8. Opus 5 is Anthropic's fourth Claude 5 model release in less than two months."
+      }
+    ],
+    "summary": "Claude Code Changelog: Claude Code 2.1.219: Claude Opus 5 added as default Opus model, 1M context",
+    "practical_impact": "Directly affects any Discovery Lab or Dinev Assistant workflow using Claude Code/Agent SDK with Opus - larger context window and a new fast-mode pricing tier are available immediately, no migration required.",
+    "confidence": "HIGH",
+    "urgency": "MEDIUM",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to Discovery Lab, Dinev Assistant; this sensor takes no action.",
+    "key": "FOUNDATION_MODEL_RELEASES:claude-opus-5-1m-token-context-window-new-default-opus-model",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  },
+  {
+    "signal_id": "RS-0002",
+    "timestamp": "2026-07-25T09:10:00Z",
+    "source": "TechCrunch",
+    "source_trust": "SECONDARY",
+    "category": "FOUNDATION_MODEL_RELEASES",
+    "affected_capability": "Claude voice mode - expanded model support and connected tool actions",
+    "affected_projects": [
+      "Dinev Assistant"
+    ],
+    "evidence": [
+      {
+        "source_name": "TechCrunch",
+        "source_url": "https://techcrunch.com/2026/07/23/anthropic-updates-claude-voice-mode-with-more-capable-models/",
+        "source_trust": "SECONDARY",
+        "quoted_text": "Claude expanded voice mode with Opus and Sonnet, connected tool actions, and support for many more languages. Voice mode now runs on Claude Opus, Claude Sonnet, and Claude Haiku."
+      }
+    ],
+    "summary": "TechCrunch: Anthropic updates Claude voice mode with more capable models",
+    "practical_impact": "Relevant to Dinev Assistant if it uses or could use Claude's voice mode - tool actions during voice sessions are new.",
+    "confidence": "MEDIUM",
+    "urgency": "LOW",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to Dinev Assistant; this sensor takes no action.",
+    "key": "FOUNDATION_MODEL_RELEASES:claude-voice-mode-expanded-model-support-and-connected-tool-actions",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  },
+  {
+    "signal_id": "RS-0003",
+    "timestamp": "2026-07-25T09:15:00Z",
+    "source": "Model Context Protocol Blog",
+    "source_trust": "PRIMARY",
+    "category": "AGENT_INFRASTRUCTURE",
+    "affected_capability": "MCP specification goes stateless - session handshake removed, extensions framework introduced",
+    "affected_projects": [
+      "Discovery Lab"
+    ],
+    "evidence": [
+      {
+        "source_name": "Model Context Protocol Blog",
+        "source_url": "https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/",
+        "source_trust": "PRIMARY",
+        "quoted_text": "The initialize/initialized handshake is eliminated, and the Mcp-Session-Id header and the protocol-level session that came with it are also removed. This enables a plain round-robin load balancer to handle traffic without sticky sessions or shared session stores. Roots, Sampling, and Logging are deprecated, with at least twelve months between deprecation and the earliest possible removal. Release candidate locked May 21, 2026; final specification July 28, 2026."
+      },
+      {
+        "source_name": "The Register",
+        "source_url": "https://www.theregister.com/devops/2026/07/23/model_context_protocol_prepares_to_break_with_its_stateful_past/",
+        "source_trust": "SECONDARY",
+        "quoted_text": "The new protocol revision goes stateless, removing the initialize handshake and the protocol-level session. Features formally marked as deprecated will remain functional for at least 12 months."
+      }
+    ],
+    "summary": "Model Context Protocol Blog: MCP 2026-07-28 Specification Release Candidate: stateless protocol architecture",
+    "practical_impact": "Directly relevant to Discovery Lab's own MCP usage and any future scheduled/multi-instance deployment of Observation Agent-style tools over MCP. 12-month deprecation window means no urgent migration action; worth a WATCH note for when the final spec ships July 28, 2026 (3 days after this capture).",
+    "confidence": "HIGH",
+    "urgency": "HIGH",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to Discovery Lab; this sensor takes no action.",
+    "key": "AGENT_INFRASTRUCTURE:mcp-specification-goes-stateless-session-handshake-removed-extensions-framework-introduced",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  },
+  {
+    "signal_id": "RS-0004",
+    "timestamp": "2026-07-25T09:25:00Z",
+    "source": "Claude Code Changelog",
+    "source_trust": "PRIMARY",
+    "category": "AGENT_INFRASTRUCTURE",
+    "affected_capability": "Claude Code auto mode - no opt-in required on Bedrock/Vertex/Foundry",
+    "affected_projects": [
+      "WATCH"
+    ],
+    "evidence": [
+      {
+        "source_name": "Claude Code Changelog",
+        "source_url": "https://code.claude.com/docs/en/changelog",
+        "source_trust": "PRIMARY",
+        "quoted_text": "Auto mode now available without opt-in on Bedrock, Vertex AI, and Foundry. Bedrock, Vertex, and Claude Platform on AWS default to Claude Opus 4.8."
+      }
+    ],
+    "summary": "Claude Code Changelog: Claude Code 2.1.207: Auto mode available without opt-in on Bedrock, Vertex AI, Foundry",
+    "practical_impact": "Relevant if Observation Agent/Headquarters were ever invoked via Claude Code's own agent harness on these cloud platforms - default behavior changed without requiring configuration.",
+    "confidence": "HIGH",
+    "urgency": "MEDIUM",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to WATCH; this sensor takes no action.",
+    "key": "AGENT_INFRASTRUCTURE:claude-code-auto-mode-no-opt-in-required-on-bedrock-vertex-foundry",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  },
+  {
+    "signal_id": "RS-0005",
+    "timestamp": "2026-07-25T09:30:00Z",
+    "source": "GitHub Changelog",
+    "source_trust": "PRIMARY",
+    "category": "DEVELOPER_PLATFORMS",
+    "affected_capability": "GitHub Code Quality reaches general availability, billing begins",
+    "affected_projects": [
+      "WATCH"
+    ],
+    "evidence": [
+      {
+        "source_name": "GitHub Changelog",
+        "source_url": "https://github.blog/changelog/2026-07-20-code-quality-billing/",
+        "source_trust": "PRIMARY",
+        "quoted_text": "Billing for Code Quality begins automatically at general availability on July 20, 2026."
+      }
+    ],
+    "summary": "GitHub Changelog: GitHub Code Quality billing begins at general availability",
+    "practical_impact": "Operational note only - if any Discovery Lab project uses GitHub Code Quality, billing now applies automatically.",
+    "confidence": "HIGH",
+    "urgency": "MEDIUM",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to WATCH; this sensor takes no action.",
+    "key": "DEVELOPER_PLATFORMS:github-code-quality-reaches-general-availability-billing-begins",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  },
+  {
+    "signal_id": "RS-0006",
+    "timestamp": "2026-07-25T09:35:00Z",
+    "source": "GitHub Changelog",
+    "source_trust": "PRIMARY",
+    "category": "DEVELOPER_PLATFORMS",
+    "affected_capability": "GitHub Copilot usage window - real-time usage-based billing alerts",
+    "affected_projects": [
+      "WATCH"
+    ],
+    "evidence": [
+      {
+        "source_name": "GitHub Changelog",
+        "source_url": "https://github.blog/changelog/2026-07-14-github-copilot-in-visual-studio-june-update/",
+        "source_trust": "PRIMARY",
+        "quoted_text": "The refreshed Copilot Usage window reflects GitHub Copilot's usage-based billing model with real-time updates, and proactive alerts let you know when you're approaching your limit, hitting it, or when overages activate."
+      }
+    ],
+    "summary": "GitHub Changelog: Copilot Usage window reflects usage-based billing in real time",
+    "practical_impact": "Operational note only - relevant to any Discovery Lab contributor using Copilot in Visual Studio.",
+    "confidence": "HIGH",
+    "urgency": "MEDIUM",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to WATCH; this sensor takes no action.",
+    "key": "DEVELOPER_PLATFORMS:github-copilot-usage-window-real-time-usage-based-billing-alerts",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  },
+  {
+    "signal_id": "RS-0007",
+    "timestamp": "2026-07-25T09:40:00Z",
+    "source": "TechCrunch",
+    "source_trust": "SECONDARY",
+    "category": "FOUNDATION_MODEL_RELEASES",
+    "affected_capability": "Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber released",
+    "affected_projects": [
+      "Trust Engine"
+    ],
+    "evidence": [
+      {
+        "source_name": "TechCrunch",
+        "source_url": "https://techcrunch.com/2026/07/21/google-releases-three-new-gemini-models-but-no-3-5-pro/",
+        "source_trust": "SECONDARY",
+        "quoted_text": "Gemini 3.6 Flash is Google's workhorse model that promises improved capabilities in coding, knowledge work, and multimodal performance while reducing token usage by up to 17%, making it cheaper than its predecessor 3.5 Flash. Gemini 3.5 Flash-Lite is the most cost-effective model in the class, and 3.5 Flash Cyber is a specialized model fine-tuned for finding and fixing cybersecurity vulnerabilities."
+      }
+    ],
+    "summary": "TechCrunch: Google releases three new Gemini models - but no 3.5 Pro",
+    "practical_impact": "3.5 Flash Cyber (a cybersecurity-specialized model) is directly relevant to Trust Engine's audit/verification workstreams; Gemini 3.5 Pro remains delayed, which is itself worth a WATCH note.",
+    "confidence": "MEDIUM",
+    "urgency": "HIGH",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to Trust Engine; this sensor takes no action.",
+    "key": "FOUNDATION_MODEL_RELEASES:gemini-3-6-flash-3-5-flash-lite-and-3-5-flash-cyber-released",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  },
+  {
+    "signal_id": "RS-0008",
+    "timestamp": "2026-07-25T09:45:00Z",
+    "source": "arXiv (via search synthesis - see limitations note)",
+    "source_trust": "RESEARCH",
+    "category": "RESEARCH",
+    "affected_capability": "LLM agent memory evaluation - 4-competency benchmark framework proposed",
+    "affected_projects": [
+      "KOD",
+      "Trust Engine"
+    ],
+    "evidence": [
+      {
+        "source_name": "arXiv (via search synthesis - see limitations note)",
+        "source_url": "https://arxiv.org/abs/2507.05257",
+        "source_trust": "RESEARCH",
+        "quoted_text": "This paper identifies four core competencies essential for memory agents: accurate retrieval, test-time learning, long-range understanding, and selective forgetting. Recent benchmarks for LLM agents primarily focus on reasoning, planning, and execution, while memory is under-evaluated due to lack of benchmarks."
+      }
+    ],
+    "summary": "arXiv (via search synthesis - see limitations note): Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions",
+    "practical_impact": "DATE NOT INDEPENDENTLY CONFIRMED: direct WebFetch of arxiv.org was blocked (HTTP 403) in this capture pass, and arXiv's own ID-to-calendar convention could not be cross-checked against this environment's date. Surfaced via search as topically current; treat its within-14-day freshness as unverified - RESEARCH trust already caps this at MEDIUM confidence at most, consistent with that uncertainty. Directly relevant to KOD's and Trust Engine's own memory/retrieval and evaluation interests if the framework proves out.",
+    "confidence": "MEDIUM",
+    "urgency": "LOW",
+    "recommended_action": "Advisory only - a human should review this signal for relevance to KOD, Trust Engine; this sensor takes no action.",
+    "key": "RESEARCH:llm-agent-memory-evaluation-4-competency-benchmark-framework-proposed",
+    "first_seen": "2026-07-25T14:56:01Z",
+    "last_seen": "2026-07-25T14:56:01Z",
+    "times_seen": 1
+  }
+]

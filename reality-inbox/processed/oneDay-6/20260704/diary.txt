@@ -1,0 +1,564 @@
+GRIF
+
+id: KOD-ARCH-OBSIDIAN-001
+project: KOD
+category: Architecture
+subtype: Knowledge Infrastructure
+title: Obsidian as the Knowledge Reconstruction Layer
+state: RESEARCH
+confidence: 0.93
+priority: High
+maturity: Emerging
+evidence:
+  - Andrej Karpathy workflow
+  - Claude Code + Obsidian community practice
+  - Existing KOD architecture
+dependencies:
+  - KOD Registry
+  - Knowledge Reconstruction Protocol
+  - Research Journal
+related:
+  - MASTER INDEX
+  - PROJECT STATE
+  - ACTIVE INVESTIGATION
+next_action:
+  - Design folder structure
+owner: Petko
+
+⸻
+
+Obsidian като слой на KOD
+
+Основна идея
+
+Obsidian не е KOD.
+
+Obsidian е носителят на знанието.
+
+KOD остава методологията.
+
+AI остава изпълнителят.
+
+⸻
+
+Получава се следната архитектура:
+
+Reality
+↓
+Observations
+↓
+RAW Knowledge
+↓
+Obsidian
+↓
+Knowledge Corpus
+↓
+KOD Registry
+↓
+Research Operating System
+↓
+AI Assistant
+↓
+Reasoning
+↓
+Decision
+↓
+Reality
+
+⸻
+
+Разделяне на отговорностите
+
+1. Obsidian
+
+Предназначение:
+
+Да съхранява цялото знание.
+
+Съдържа:
+
+* разговори
+* статии
+* PDF
+* книги
+* идеи
+* бележки
+* връзки между тях
+
+Той НЕ взема решения.
+
+⸻
+
+2. KOD Registry
+
+Предназначение:
+
+Да бъде Single Source of Truth.
+
+Тук НЕ стоят всички знания.
+
+Тук стоят:
+
+* текущото състояние
+* архитектурата
+* активните изследвания
+* backlog
+* changelog
+* traceability
+* зависимости
+
+Registry управлява проекта.
+
+⸻
+
+3. AI
+
+AI не трябва да помни.
+
+AI трябва да реконструира контекста.
+
+Всеки нов разговор започва така:
+
+Read Registry
+↓
+Understand current state
+↓
+Load relevant notes
+↓
+Reason
+↓
+Produce output
+
+⸻
+
+Предложена структура
+
+Vault/
+    RAW/
+        Chats/
+        Articles/
+        PDFs/
+        Videos/
+        Books/
+        Notes/
+    Journal/
+        Daily/
+        Research/
+        Discoveries/
+    Knowledge/
+        Principles/
+        Concepts/
+        Hypotheses/
+        Models/
+        Frameworks/
+    Projects/
+        KOD/
+        Trust Engine/
+        Regime AI/
+        Furniture/
+    Registry/
+        MASTER INDEX.md
+        PROJECT STATE.md
+        ACTIVE INVESTIGATION.md
+        BACKLOG.md
+        CHANGELOG.md
+
+⸻
+
+Research Journal остава центърът
+
+Най-важният документ не е Wiki.
+
+Най-важният документ е Journal.
+
+Причината:
+
+Journal пази
+
+не
+
+какво знаем
+
+а
+
+как стигнахме до него.
+
+Това позволява:
+
+* повторна проверка
+* проследяване на грешките
+* възстановяване на логиката
+
+⸻
+
+AI Workflow
+
+При всяка нова информация
+
+RAW
+↓
+AI Ingestion
+↓
+Classification
+↓
+Linking
+↓
+Knowledge Pages
+↓
+Registry Update Proposal
+↓
+Human Approval
+↓
+Registry Update
+
+Така Registry никога не се променя автоматично.
+
+⸻
+
+Защо това е важно
+
+Паметта на AI е временна.
+
+Историята на разговорите е линейна.
+
+Обемът става огромен.
+
+Obsidian решава това чрез:
+
+* backlinks
+* graph
+* markdown
+* локални файлове
+* версии
+* лесно индексиране
+
+⸻
+
+Какво трябва да прави Claude Code
+
+Claude не трябва просто да отговаря.
+
+Той трябва да бъде Knowledge Engineer.
+
+При команда:
+
+Ingest
+
+той трябва автоматично да:
+
+1. прочете документа;
+2. извлече:
+
+* идеи
+* принципи
+* решения
+* въпроси
+* зависимости
+
+3. създаде wiki страници;
+4. добави връзки;
+5. предложи промени в Registry;
+6. запише всичко в Journal.
+
+⸻
+
+Дългосрочната визия
+
+В момента повечето хора използват AI така:
+
+Question
+↓
+Answer
+↓
+Conversation forgotten
+
+Предложената архитектура е различна:
+
+Question
+↓
+Reasoning
+↓
+Knowledge Extraction
+↓
+Knowledge Graph
+↓
+Registry
+↓
+Future Conversations become smarter
+
+Следователно системата не натрупва просто разговори.
+
+Тя натрупва структурирано знание, което може да бъде реконструирано от всеки бъдещ AI модел.
+
+⸻
+
+Архитектурно заключение
+
+Най-важното прозрение не е използването на Obsidian само по себе си.
+
+То е разделянето на проекта на три ясно разграничени слоя:
+
+* Knowledge Layer (Obsidian) – съхранява цялото знание и неговите връзки.
+* Control Layer (KOD Registry) – управлява състоянието на проекта и служи като единствен източник на истина.
+* Reasoning Layer (AI Assistant) – реконструира контекста, анализира знанията и подпомага вземането на решения.
+
+Тази архитектура премахва зависимостта от паметта на конкретен AI модел и превръща КОД в устойчива, преносима и дългосрочно развиваща се Research Operating System.
+
+
+GRIF
+
+id: TE-RESEARCH-2026-07-04-HISTORICAL-ANALOGY
+project: Trust Engine
+category: Research
+subtype: Methodology
+title: Historical Analogy Engine
+state: RESEARCH
+status: Active
+confidence: Medium
+priority: High
+maturity: Concept
+evidence:
+  - Bitcoin Rainbow Chart discussion
+  - 2022 vs 2026 market comparison
+dependencies:
+  - Regime Engine
+  - Constraint Engine
+  - Narrative Tracker
+related:
+  - Trust Score
+  - Evidence Weighting
+  - Market Regime Detection
+next_action:
+  - Define similarity metrics
+  - Create first prototype
+owner: Petko Dinev
+created: 2026-07-04
+
+⸻
+
+Historical Analogy Engine
+
+Основна идея
+
+Една от най-честите грешки при анализа на финансовите пазари е приемането, че ако две графики изглеждат еднакво, резултатът непременно ще бъде еднакъв.
+
+Това е фундаментално погрешен начин на мислене.
+
+Графиките не движат пазара.
+
+Графиките са следствие.
+
+Пазарът се движи от ограниченията (constraints), които действат върху капитала.
+
+Следователно:
+
+Историята не се повтаря. Повтарят се ограниченията, които движат системата.
+
+⸻
+
+Проблемът
+
+В социалните мрежи постоянно се появяват публикации от типа:
+
+“Това се е случвало само два пъти.”
+
+или
+
+“Последния път след това Bitcoin направи X.”
+
+или
+
+“Тази графика е идентична с тази от 2022.”
+
+Тези твърдения използват историческа аналогия като доказателство.
+
+Но почти никога не проверяват дали причините зад събитието съществуват и днес.
+
+⸻
+
+Принцип на Historical Analogy Engine
+
+Trust Engine не сравнява графики.
+
+Trust Engine сравнява механизмите.
+
+Всяка историческа аналогия преминава през един и същ процес.
+
+⸻
+
+Стъпка 1
+
+Идентифицирай историческото събитие.
+
+Пример:
+
+Bitcoin падна под Rainbow Chart през 2022 г.
+
+⸻
+
+Стъпка 2
+
+Извлечи ограниченията, които са били активни тогава.
+
+Например:
+
+* агресивно повишаване на лихвите
+* свиване на ликвидността
+* масови ликвидации
+* фалити (Terra, Three Arrows, FTX)
+* екстремен страх
+* почти липсващо институционално търсене
+
+Това са механизмите.
+
+Не графиката.
+
+⸻
+
+Стъпка 3
+
+Провери настоящия режим.
+
+Например:
+
+* Каква е ликвидността?
+* Какви са ETF потоците?
+* Какво прави Фед?
+* Има ли кредитен стрес?
+* Има ли forced selling?
+* Има ли системен риск?
+* Какъв е сентиментът?
+
+⸻
+
+Стъпка 4
+
+Изчисли Similarity Score.
+
+Не:
+
+“Изглежда еднакво.”
+
+А:
+
+“До каква степен механизмите съвпадат?”
+
+⸻
+
+Пример
+
+Ограничение	2022	2026
+Паника	✅	✅
+Масови ликвидации	✅	?
+ETF търсене	❌	✅
+Високи лихви	✅	?
+Свиване на ликвидността	✅	?
+Институционални покупки	❌	✅
+
+След това системата изчислява:
+
+Similarity Score = 62%
+
+⸻
+
+Интерпретация
+
+Вместо:
+
+“Това е като 2022.”
+
+Trust Engine казва:
+
+Историческата аналогия има приблизително 62% сходство.
+
+Следователно доказателствената ѝ тежест е средна.
+
+⸻
+
+Връзка с Trust Engine
+
+Historical Analogy Engine не генерира сигнали.
+
+Той оценява доказателства.
+
+Следователно резултатът му влиза като вход към:
+
+* Trust Score
+* Evidence Weight
+* Decision Engine
+
+⸻
+
+Пример с Rainbow Chart
+
+Публикация:
+
+Bitcoin падна под Rainbow Chart.
+
+Това се е случвало само два пъти.
+
+Trust Engine не задава въпроса:
+
+Вярно ли е?
+
+Той задава по-важния въпрос:
+
+Защо тогава пазарът обърна?
+
+След това проверява дали същите механизми действат и днес.
+
+⸻
+
+Основен принцип
+
+Историческите аналогии никога не трябва да бъдат използвани като самостоятелно доказателство.
+
+Те могат единствено да повишават или понижават доверието към дадена хипотеза.
+
+⸻
+
+Архитектурен принцип
+
+Historical Analogy Engine работи върху причините, а не върху последствията.
+
+Следователно той сравнява:
+
+* ограничения
+* режими
+* потоци на капитала
+* стимули
+* ликвидност
+* поведение на участниците
+
+а не:
+
+* форма на графика
+* технически индикатор
+* цветни канали
+* визуални прилики
+
+⸻
+
+Потенциално разширение
+
+С течение на времето Historical Analogy Engine може да изгради собствена библиотека от исторически режими:
+
+* Dot-com Bubble (1999–2002)
+* Global Financial Crisis (2008)
+* Euro Debt Crisis (2011)
+* COVID Liquidity Shock (2020)
+* Inflation & Tightening Cycle (2022)
+* AI Liquidity Regime (2023–2025)
+* и бъдещи режими.
+
+Така, вместо да пита „Прилича ли това на 2022?“, системата ще може да отговаря на по-фундаментален въпрос:
+
+„На кой исторически режим най-много прилича настоящата комбинация от ограничения, и с каква степен на сходство?“
+
+⸻
+
+Извод
+
+Historical Analogy Engine е естествено продължение на философията на Trust Engine.
+
+Той заменя повърхностното сравнение на графики със сравнение на причинно-следствените механизми. Вместо да приема историята като пророчество, той я използва като база от проверени модели, чиято приложимост се оценява чрез сходството на активните ограничения. По този начин историческите аналогии се превръщат от източник на когнитивни заблуди в структурирано доказателство с измерима тежест в процеса на вземане на решения.
