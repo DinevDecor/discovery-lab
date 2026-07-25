@@ -1,5 +1,55 @@
 # Changelog
 
+## 2026-07-25 (EXEC-009 — Universal Sensor Framework v1.0, proposal only)
+
+- Architectural consolidation task, not implementation:
+  `docs/proposals/EXEC-009-universal-sensor-framework/`. No code was
+  written or modified — `observation-agent/` and `reality-sensor/`
+  remain exactly as merged; `main` untouched.
+- Compared both existing sensors across 18 dimensions and found they
+  split into two genuinely different sensor families rather than one
+  shape wearing different domain logic: **Internal/Deterministic**
+  (Observation Agent — no trust question, no duplicate-event question,
+  ephemeral per-run diffing, no persistent ID) and
+  **External/Evidentiary** (Reality Sensor — trust classification and
+  deduplication central, persistent `RS-000N` registry).
+- Applied `EXEC-009`'s own Anti-Abstraction Rule ("every shared
+  component must have evidence from at least two independent
+  implementations") literally against the task's own proposed target
+  architecture, and found it had already over-abstracted once: 3 of
+  its 6 named layers (Trust Classification, Deduplication, Signal
+  Registry) are evidenced by only **one** of the two current sensors,
+  while the single most strongly-evidenced shared component in the
+  whole review — Safety enforcement, independently reinvented three
+  times now across `observation-agent`/`headquarters`/`reality-sensor`'s
+  own `test_safety.py` files — wasn't in the task's diagram at all.
+- Revised architecture (Deliverable 1): Safety enforcement, the
+  JSON-config-loading pattern, and the CLI shim/orchestration shape
+  promoted as mandatory, cross-cutting components (triple-evidenced);
+  Trust Classification and Deduplication demoted to **optional,
+  family-scoped layers**; the persistent Signal Registry pattern
+  promoted **conditionally** (evidenced by 2 convergent
+  implementations — Reality Sensor's `RS-000N` mirrors
+  `headquarters/recommendation.py`'s `HQ-000N`, though both trace to
+  one sensor plus its own executive-layer consumer, not two
+  independent sensors); a single unified Signal/Finding schema and
+  Relevance gating explicitly **not promoted**.
+- Delivered all 7 required items: Framework Specification, Comparative
+  Matrix, Shared Component Inventory (every candidate assessed with
+  its evidence shown), Adapter Contract (a minimal Core Finding schema
+  + what's mandatory/optional/domain-owned), Migration Plan (4
+  additive stages, zero required change to either existing sensor —
+  Observation Agent permanently adopting only the mechanical pieces is
+  named as a success state, not an incomplete migration), Risk
+  Analysis (over-abstraction — including naming that this task's own
+  source material over-abstracted once; future incompatibility;
+  performance, none material found; governance).
+- **Recommendation: PARTIAL.** Accept the architecture and two-family
+  model as the ecosystem's standing design reference; defer building
+  actual `sensor-framework/` code until a real third sensor is
+  authorized, or a human separately decides the 3 triple-evidenced
+  components are worth extracting now on their own merits.
+
 ## 2026-07-25 (Human Acceptance — EXEC-008, narrow merge to `main`)
 
 - Petko accepted `EXEC-008`: the implementation satisfies the
