@@ -1,5 +1,50 @@
 # Changelog
 
+## 2026-07-25 (Human Acceptance — Discovery Lab Phase 1)
+
+- Petko declared Phase 1 complete: **ACCEPTED**. The ecosystem now
+  possesses an operational Observation Layer (Observation Agent 001),
+  an operational Executive Layer (Ecosystem Headquarters v1.0),
+  evidence-based validation (`EXEC-005`), regression discipline
+  (169 tests passing on `main`), certification discipline (`CERT-001`),
+  and a certified operational baseline.
+- Reaffirmed the authoritative baseline: commit `12f82fd`,
+  certification `CERT-001`, status **CERTIFIED**.
+- Explicitly acknowledged the deferred `baseline-v1.0` git tag as an
+  environment limitation — a `git push` of the tag hit an `HTTP 403`
+  from the local git proxy (branch pushes and the PR #10 merge through
+  the same proxy succeeded without issue), and no create-tag/
+  create-release capability exists in this session's GitHub tooling.
+  Reported rather than retried. Confirmed this does **not** affect
+  Baseline v1.0's certification status; to be created manually when a
+  normal git environment is available.
+
+## 2026-07-25 (CERT-001 — Verdict Update: PARTIALLY CERTIFIED → CERTIFIED)
+
+- Per Petko's "Human Decision — CERT-001," authorized and executed a
+  narrow deployment of `EXEC-006`'s self-observation fix to `main`:
+  built on a fresh branch off `main`, isolated to exactly the 15 files
+  under `observation-agent/` (excluding `STATE.md`/`CHANGELOG.md`,
+  which don't exist on `main`), verified in isolation (58/58 tests,
+  safety self-check passing), opened as **PR #10**, squash-merged as
+  **`12f82fd`**.
+- Ran all 5 required post-deployment verifications against the
+  newly-merged `main`: real Observation Agent run (37 observations);
+  real Headquarters run (Overall Health 71%); 3 repeated local runs
+  holding flat at 37 → 37 → 37 (0 new after the first run); CI-path
+  run via `config.ci.json` producing the expected `Scanned 1
+  repositories, skipped 4` / `STATUS: PARTIAL` outcome; `HQ-0001`
+  reconfirmed as Headquarters' sole recommendation (score 6,
+  unchanged).
+- Updated `CERT-001-Ecosystem-Baseline-v1.0.md` and
+  `EVIDENCE-APPENDIX.md`: verdict changed **PARTIALLY CERTIFIED →
+  CERTIFIED**; a Certification Update Log documents both the original
+  issuance and this update; every place the document asserted the
+  now-superseded "`main` lacks the fix" fact was corrected (test
+  counts, Baseline Fingerprint, Known Limitations, Accepted Risks,
+  Section 14's reasoning) — kept as historical record, marked
+  resolved, not deleted. No other certification content was rewritten.
+
 ## 2026-07-25 (EXEC-006 — Narrow Maintenance: Self-Observation Defect Fix)
 
 - Per Petko's "Human Acceptance — EXEC-005" (verdict PASS WITH A NAMED
