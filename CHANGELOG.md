@@ -1702,3 +1702,59 @@
   executed as part of this task — `memory/knowledge-objects/` still
   does not exist, confirmed directly before commit — only specified,
   per the task's own Definition of Done.
+
+## 2026-07-25 (EXEC-001 — Execute ARCH-003 Pilot)
+
+- Actually ran (partially, to its correct blocking point) the pilot
+  `ARCH-003` specified, under
+  `docs/proposals/EXEC-001-arch-003-pilot-execution/`. No architecture
+  changed, no new role/Runtime/Dispatcher/Governance introduced, per
+  this task's own Critical Rule to execute the specification as
+  written.
+- Sourced an independent Knowledge Reviewer by launching a freshly
+  invoked Agent instance with no memory of this session's prior work
+  and no knowledge of `CPP-S3-01`'s authorship or of
+  `ARCH-001`/`ARCH-002`/`ARCH-003`'s existence, explicitly instructed
+  not to read any file bearing those names. It conducted a genuinely
+  critical Knowledge Review, cross-checking every citation in
+  `CPP-S3-01`/`KO-S3-01` word-for-word against
+  `STRESS-RUN-0004-recovery-report.md` rather than trusting the
+  proposal's quotations, and surfaced three concerns beyond the six
+  mandatory questions on its own initiative.
+- **Gate result: PASS.** All six `REVIEW-PROTOCOL.md` questions
+  verdicted `SOUND`; recommendation `ACCEPT`. Filed as the first real
+  Knowledge Review ever conducted under that protocol, at
+  `docs/proposals/AG-003-reality-stress-test/reviews/
+  KR-0001-cpp-s3-01.md` — the exact path `ARCH-003`'s specification
+  named, not a path inside this task's own directory.
+- Recorded, honestly, that the independence achieved is partial: a
+  genuinely separate context with no causal memory of the proposal's
+  authorship, but not a humanly or organizationally distinct reviewer
+  — the same limitation `ARCH-001`'s `R4` and `ARCH-003`'s `Risk 1`
+  already flagged in the abstract, now exercised once, concretely, in
+  the open, rather than resolved.
+- **Human Decision Record: `NOT OBTAINED`**, written before the Gate's
+  result was known and deliberately not revised after seeing a
+  favorable `ACCEPT` recommendation. No message in this session
+  constitutes a real, dated `Accept`/`Reject`/`Defer` from Petko on
+  `CPP-S3-01` specifically; the original `ARCH-003`/`EXEC-001` task
+  instructions were explicitly not treated as a substitute for that
+  decision, per `ARCH-003`'s own Risk 2 and `EXEC-001`'s Critical Rule.
+- Execution step (writing `memory/knowledge-objects/KO-S3-01.md`) was
+  **not attempted** — its precondition (a real `Accept` decision) was
+  absent. Confirmed directly, both before and after this execution,
+  that `memory/knowledge-objects/` still does not exist and
+  `CURATION-0004.md` was never modified.
+- **Final Verdict: `BLOCKED`** — not `FAIL` (every mechanism permitted
+  to run, ran exactly as specified and passed) and not `PASS`
+  (execution was never reached). Documented precisely where (between
+  Gate Decision and Execution) and why (absent Human Final Authority,
+  correctly not fabricated).
+- Lessons Learned: a clean Gate pass creates real pressure to treat it
+  as sufficient, which this execution resisted by writing the Human
+  Decision Record before the Gate's result was known; real
+  citation-checking surfaced defects (an internal prose contradiction
+  in `CURATION-0004.md`, a legitimate spec-amendment-timing question)
+  that no prior specification-only task in this session had found,
+  direct evidence the Knowledge Review mechanism does real work when
+  actually run.
