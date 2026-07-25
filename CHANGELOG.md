@@ -1646,3 +1646,59 @@
 - `7-EXECUTIVE-SUMMARY.md`: the ecosystem does not need a new
   coordination architecture designed — it needs the one that already
   exists, independently ratified three times over, written down once.
+
+## 2026-07-25 (ARCH-003 — Execution Pilot Specification)
+
+- Performed a one-off architecture-implementation-preparation task
+  (specification only, no execution) under
+  `docs/proposals/ARCH-003-execution-pilot-specification/`, building
+  exclusively on `ARCH-001`, `ARCH-002`, and `Unified Coordination
+  Model v1.0` — no new architecture, no new concepts, no `DRAFT`
+  document used as a foundation.
+- Surveyed five real (non-demonstration) candidate pilots, all
+  already-existing artifacts from `AG-003`'s real Reality Stress Test
+  output (all 4 datasets `PASS`) — explicitly excluded the
+  `AG-003-knowledge-curator-walkthrough` material, since every object
+  in it is self-labeled "Demonstration... not filed to a real
+  Knowledge Base." Selected and specified **C1: promote `KO-S3-01`
+  from `Draft` to `Candidate Principle` via the already-filed, real,
+  never-yet-reviewed `CPP-S3-01`** (`AG-003-reality-stress-test/
+  CURATION-0004.md`) — the narrowest candidate (single object, single
+  field change, no unfiled prerequisite objects), ranked above merge
+  and relationship candidates that would have bundled the execution
+  question with a second, unrelated judgment call.
+- Produced a complete Execution Specification (Trigger, Inputs, Roles,
+  Gates, Human approval, Execution, Outputs, Evidence, Success/Failure
+  criteria, Rollback) using only the three required, already-`FROZEN`
+  mechanisms (`AG-003`'s own `REVIEW-PROTOCOL.md` Knowledge Review as
+  the Formal Gate instance, `PROMOTION-RULES.md`'s explicit
+  never-automatic rule as Human Final Authority, `AG-003`'s own
+  `CONTRACT.md` as the Contract-Defined Role). Every artifact the
+  pilot can produce is a new file; no existing ratified document is
+  ever edited.
+- Mapped every specification step to `Unified Coordination Model
+  v1.0`; found one deliberate, reported gap — no component covers who
+  or what physically performs the write once a human accepts — and
+  left it unnamed rather than inventing a Runtime, Dispatcher, or Role
+  to fill it, per the task's own Critical Rules. This makes `ARCH-002`
+  `G1` concrete at the smallest possible scale instead of leaving it
+  abstract.
+- Nine binary/countable Success Metrics defined (gate completion,
+  reviewer independence, human-authorization presence, traceability,
+  reproducibility, zero architectural improvisation, minimal diff,
+  scope containment, clean reversibility).
+- Risk Assessment's top finding: **Reviewer independence cannot be
+  genuinely satisfied if the pilot is run by the same session that
+  produced `CPP-S3-01`** — a concrete, named instance of the
+  self-review limitation `ARCH-001` (`R4`) already flagged in the
+  abstract. Second: the Human Decision step must be a real, dated act
+  by a named human, not inferred from the task instruction that
+  requested this specification.
+- **Recommendation: `GO`, conditional** on genuine Reviewer
+  independence and a real Human Decision — not unconditional, and not
+  `NO-GO`, since the specification itself introduces no new
+  architecture and was checked directly against `Unified Coordination
+  Model v1.0` rather than assumed compliant. The pilot was not
+  executed as part of this task — `memory/knowledge-objects/` still
+  does not exist, confirmed directly before commit — only specified,
+  per the task's own Definition of Done.
