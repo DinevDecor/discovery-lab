@@ -1,0 +1,38 @@
+{
+  "_comment": "CI-only configuration used by .github/workflows/observation-agent.yml. NOT the same as config.json (the local/dev config used for human-invoked runs where all 5 repositories are checked out side by side). The GitHub Actions runner only checks out this one repository (discovery-lab); the other 4 configured repositories are private repos in the same GitHub org and are not reachable from this workflow without a cross-repo read credential this session has no way to provision (see observation-agent/README.md's 'CI Limitations' section for the full explanation). Their paths below are deliberately placeholders that will never exist on the runner, so the agent's existing, already-tested 'SKIP repo: path does not exist' behavior handles them safely — this is not a workaround, it is the documented, intended failure-safe behavior required by EXEC-003. discovery-lab's own path is '..' because the workflow runs this script with working-directory: observation-agent, so '..' is the checked-out repository root.",
+  "repos": [
+    {
+      "name": "discovery-lab",
+      "path": "..",
+      "state_file_candidates": ["STATE.md"]
+    },
+    {
+      "name": "project-memory",
+      "path": "/not-checked-out-in-ci/project-memory",
+      "state_file_candidates": ["PROJECT_STATE.md"],
+      "_note": "Private repo, different org casing (DinevDecor); not checked out by this workflow. Expected to SKIP in every CI run."
+    },
+    {
+      "name": "kod",
+      "path": "/not-checked-out-in-ci/kod",
+      "state_file_candidates": ["PROJECT_STATE.md"],
+      "_note": "Private repo; not checked out by this workflow. Expected to SKIP in every CI run."
+    },
+    {
+      "name": "generative-discovery-engine",
+      "path": "/not-checked-out-in-ci/generative-discovery-engine",
+      "state_file_candidates": ["STATE.md"],
+      "_note": "Private repo; not checked out by this workflow. Expected to SKIP in every CI run."
+    },
+    {
+      "name": "trust-engine",
+      "path": "/not-checked-out-in-ci/trust-engine",
+      "state_file_candidates": [],
+      "_note": "Private repo; not checked out by this workflow. Expected to SKIP in every CI run."
+    }
+  ],
+  "stale_threshold_days": 3,
+  "excluded_dirs": [".git", "__pycache__", "node_modules", ".venv"],
+  "markdown_extensions": [".md"],
+  "reference_extensions": [".md", ".py", ".yaml", ".yml"]
+}
