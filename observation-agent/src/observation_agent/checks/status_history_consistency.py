@@ -45,11 +45,13 @@ _RUN_ENTRY = re.compile(
 
 
 def check_status_history_consistency(
-    repo: RepoConfig, excluded_dirs: list[str]
+    repo: RepoConfig, excluded_dirs: list[str], excluded_paths: list[str] | None = None
 ) -> list[Observation]:
     observations: list[Observation] = []
     status_files = [
-        p for p in walk_files(repo.path, excluded_dirs) if p.name == "STATUS.yaml"
+        p
+        for p in walk_files(repo.path, excluded_dirs, excluded_paths=excluded_paths)
+        if p.name == "STATUS.yaml"
     ]
 
     for status_path in status_files:

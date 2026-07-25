@@ -41,11 +41,14 @@ def _extract_date(text: str) -> str | None:
 
 
 def check_stale_state(
-    repo: RepoConfig, excluded_dirs: list[str], threshold_days: int
+    repo: RepoConfig,
+    excluded_dirs: list[str],
+    threshold_days: int,
+    excluded_paths: list[str] | None = None,
 ) -> list[Observation]:
     observations: list[Observation] = []
     candidates = repo.state_file_candidates or list(_STATE_FILE_NAMES)
-    all_files = walk_files(repo.path, excluded_dirs)
+    all_files = walk_files(repo.path, excluded_dirs, excluded_paths=excluded_paths)
 
     for path in all_files:
         if path.name not in candidates:
