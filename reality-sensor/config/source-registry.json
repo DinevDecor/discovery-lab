@@ -1,0 +1,145 @@
+{
+  "search_budget": 40,
+  "sources": [
+    {
+      "name": "OpenAI News",
+      "url": "https://openai.com/news/",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "OpenAI Platform Changelog",
+      "url": "https://platform.openai.com/docs/changelog",
+      "trust_level": "PRIMARY",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Anthropic News",
+      "url": "https://www.anthropic.com/news",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Anthropic Release Notes",
+      "url": "https://docs.anthropic.com/en/release-notes/overview",
+      "trust_level": "PRIMARY",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Google DeepMind Blog",
+      "url": "https://deepmind.google/discover/blog/",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Meta AI Blog",
+      "url": "https://ai.meta.com/blog/",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "xAI News",
+      "url": "https://x.ai/news",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Mistral AI News",
+      "url": "https://mistral.ai/news",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Qwen Blog",
+      "url": "https://qwenlm.github.io/blog/",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Cohere Blog",
+      "url": "https://cohere.com/blog",
+      "trust_level": "OFFICIAL",
+      "category": "FOUNDATION_MODEL_RELEASES",
+      "domain": "A"
+    },
+    {
+      "name": "Model Context Protocol Specification",
+      "url": "https://modelcontextprotocol.io/specification/",
+      "trust_level": "PRIMARY",
+      "category": "AGENT_INFRASTRUCTURE",
+      "domain": "B"
+    },
+    {
+      "name": "Model Context Protocol Docs",
+      "url": "https://modelcontextprotocol.io/",
+      "trust_level": "PRIMARY",
+      "category": "AGENT_INFRASTRUCTURE",
+      "domain": "B"
+    },
+    {
+      "name": "Claude Agent SDK Docs",
+      "url": "https://docs.claude.com/en/api/agent-sdk/overview",
+      "trust_level": "PRIMARY",
+      "category": "AGENT_INFRASTRUCTURE",
+      "domain": "B"
+    },
+    {
+      "name": "OpenAI Agents SDK Docs",
+      "url": "https://openai.github.io/openai-agents-python/",
+      "trust_level": "PRIMARY",
+      "category": "AGENT_INFRASTRUCTURE",
+      "domain": "B"
+    },
+    {
+      "name": "LangChain Blog",
+      "url": "https://blog.langchain.dev/",
+      "trust_level": "OFFICIAL",
+      "category": "AGENT_INFRASTRUCTURE",
+      "domain": "B"
+    },
+    {
+      "name": "GitHub Blog",
+      "url": "https://github.blog/",
+      "trust_level": "OFFICIAL",
+      "category": "DEVELOPER_PLATFORMS",
+      "domain": "C"
+    },
+    {
+      "name": "GitHub Changelog",
+      "url": "https://github.blog/changelog/",
+      "trust_level": "PRIMARY",
+      "category": "DEVELOPER_PLATFORMS",
+      "domain": "C"
+    },
+    {
+      "name": "arXiv cs.AI Recent",
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "trust_level": "RESEARCH",
+      "category": "RESEARCH",
+      "domain": "D"
+    },
+    {
+      "name": "arXiv cs.CL Recent",
+      "url": "https://arxiv.org/list/cs.CL/recent",
+      "trust_level": "RESEARCH",
+      "category": "RESEARCH",
+      "domain": "D"
+    },
+    {
+      "name": "OpenReview",
+      "url": "https://openreview.net/",
+      "trust_level": "RESEARCH",
+      "category": "RESEARCH",
+      "domain": "D"
+    }
+  ]
+}

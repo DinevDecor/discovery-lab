@@ -1,0 +1,76 @@
+{
+  "_note": "First-draft keyword mapping, grounded in what each project's own README/PROJECT_STATE actually says (see docs/KNOWN-LIMITATIONS.md) - not a deep charter review. Config-editable without any code change; a signal matching none of these rules is reported as WATCH rather than a forced guess.",
+  "rules": [
+    {
+      "project": "KOD",
+      "keywords": [
+        "knowledge management",
+        "knowledge graph",
+        "structured data",
+        "registry",
+        "personal knowledge",
+        "retrieval",
+        "memory api",
+        "long-term memory"
+      ]
+    },
+    {
+      "project": "Discovery Lab",
+      "keywords": [
+        "mcp",
+        "model context protocol",
+        "agent sdk",
+        "agent orchestration",
+        "observability",
+        "evaluation framework",
+        "agent safety",
+        "multi-agent",
+        "tool use",
+        "read-only",
+        "sub-agent",
+        "governance"
+      ]
+    },
+    {
+      "project": "Trust Engine",
+      "keywords": [
+        "trust",
+        "verification",
+        "calibration",
+        "alignment",
+        "guardrail",
+        "audit",
+        "reliability",
+        "uncertainty",
+        "confidence scoring",
+        "decision audit"
+      ]
+    },
+    {
+      "project": "Generative Discovery Engine",
+      "keywords": [
+        "reasoning",
+        "hypothesis generation",
+        "scientific discovery",
+        "research method",
+        "chain of thought",
+        "validation protocol",
+        "generative method",
+        "extended thinking"
+      ]
+    },
+    {
+      "project": "Dinev Assistant",
+      "keywords": [
+        "assistant",
+        "voice",
+        "multimodal",
+        "personal assistant",
+        "consumer agent",
+        "on-device",
+        "computer use",
+        "desktop app"
+      ]
+    }
+  ]
+}
