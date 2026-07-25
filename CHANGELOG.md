@@ -1,5 +1,32 @@
 # Changelog
 
+## 2026-07-25 (Human Acceptance — EXEC-008, narrow merge to `main`)
+
+- Petko accepted `EXEC-008`: the implementation satisfies the
+  architectural intent, the capture/processing separation is accepted
+  as a **permanent design principle**, and the reported limitations
+  are appropriate and honestly documented. Authorized a narrow-scope
+  merge, no unrelated files.
+- Built `claude/exec-008-narrow-deploy` off `main` via `git archive`
+  from `claude/prop-0002-discovery-intake`, isolated to exactly the 37
+  `reality-sensor/` files (no `STATE.md`/`CHANGELOG.md`, which don't
+  exist on `main`) — same isolation method as every prior narrow
+  merge. Verified via `git status --short` and 61/61 tests passing in
+  isolation before opening **PR #11**, squash-merged to `main` as
+  **`acf281f`**.
+- **Post-merge validation**: 61/61 tests passing from a fresh worktree
+  of the merged `main`; a real live run against the committed
+  validation dataset from the merged code reproduced the exact same 8
+  signals, the same `RS-0001`–`RS-0008` IDs, and the same confidence
+  levels as the pre-merge run; `git status --short` confirmed clean on
+  all 5 ecosystem repositories throughout.
+- Reality Intelligence Sensor 001 is now merged operational
+  infrastructure alongside Observation Agent 001 and Ecosystem
+  Headquarters v1.0. `CERT-001`'s own Baseline Fingerprint (commit
+  `12f82fd`) predates this merge and was not updated — whether Reality
+  Sensor 001 joins a future certified baseline is a separate, later
+  certification decision.
+
 ## 2026-07-25 (EXEC-008 — Reality Intelligence Sensor 001)
 
 - Built the ecosystem's first external reality sensor
