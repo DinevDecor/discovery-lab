@@ -64,6 +64,8 @@
   Headquarters itself).
 - Not merged to `main` — stays on `claude/prop-0002-discovery-intake`;
   no merge instruction was given for this narrow maintenance task.
+- Committed and pushed as `0e4acad`. Petko's Human Acceptance: "EXEC-006 /
+  Verdict: PASS." Final determination: **EXEC-006 ACCEPTED**.
 
 ## 2026-07-25 (EXEC-004 Deployment — Human Decision)
 
