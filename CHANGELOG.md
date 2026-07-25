@@ -1843,3 +1843,59 @@
   repository - adoption remains Petko's decision, matching the same
   DRAFT-before-ADR-0001 pattern `project-memory`'s own v1.1 document
   used.
+
+## 2026-07-25 (`PROP-0001` — Ratification Decision Package)
+
+- Performed the roadmap item `ARCH-001` first named
+  (`R1`, "top architectural risk") and `ARCH-002`/`G2` both
+  reconfirmed unresolved: prepared `PROP-0001`
+  (`docs/proposals/PROP-0001-discovery-lab-boundaries.md`) for a human
+  ratification decision, under
+  `docs/proposals/PROP-0001-ratification-package/`. Did not rewrite the
+  source document, create a new version, expand the architecture, or
+  accept/reject anything - confirmed directly, `git diff --stat` on the
+  source document shows zero change.
+- Documented the current state (`DRAFT PROPOSAL`, revision 3,
+  post-adversarial-review, verdict `APPROVE WITH MINOR CHANGES`
+  already applied, recommending Variant B - Ecosystem Observatory
+  alone), quoted the exact operative text (Principle 0, the
+  Recommendation) verbatim rather than paraphrasing, and indexed every
+  provision to its exact section in the 918-line source document.
+- Compiled evidence supporting ratification (8 items: the document's
+  own survived adversarial review, its concrete non-speculative
+  evidence basis, real operational validation since via `AG-002`/
+  `AG-003`'s 7+3 real runs and `EXEC-001`'s real executed pilot, `G2`'s
+  independent structural convergence finding, and that ratifying either
+  way closes `ARCH-001`'s `R1`) and evidence against (7 items: the
+  document's own named unresolved questions - no independent reviewer,
+  untested proposal-routing assumption - plus the ecosystem's general
+  self-review weakness, per `ARCH-001`'s `R4` and `EXEC-001`'s own
+  Reviewer Record, applying to this very ratification process too).
+- Traced dependencies in both directions: `PROP-0001` depends on
+  `INV-0001`/`INV-0002` (diagnosis only); `FOUNDING-CHARTER.md`,
+  `ORGANIZATION-DRAFT.md`, `HIRING-LIFECYCLE-DRAFT.md`,
+  `EMPLOYEE-REGISTRY.md`'s adoption axis, the deferred
+  `project-memory/PROJECT_REGISTRY.md` row, the unpopulated
+  Recommendation Ledger, and `Ecosystem Health Review v0.1` all
+  currently depend on it. Explicitly not dependent either way:
+  `ARCH-001` through `G2`'s own factual content, and `AG-001`'s
+  pre-existing status (`GOVERNANCE.md` "is not applied backward").
+- Consequences of ACCEPT (mechanical: mandate settles, `Ecosystem
+  Health Review v0.1` becomes runnable, `PROJECT_REGISTRY.md` question
+  becomes decidable; for existing work: `AG-002`/`AG-003`'s `FROZEN`
+  status becomes grounded, `EXEC-001`'s pilot settles) and of REJECT
+  (factual work stays real, organizational standing becomes explicitly
+  unauthorized rather than merely `DRAFT`, no fallback mandate is
+  provided by `PROP-0001` itself) both documented, noting both close
+  `R1`'s actual harm (unresolved sequencing) - only continued deferral
+  does not.
+- 8 open questions recorded (5 from `PROP-0001` itself, 3 newly
+  surfaced: which variant exactly is being ratified; whether
+  `AG-002`/`AG-003`'s adoption-axis standing is automatically resolved
+  by mandate ratification or needs a separate decision; sequencing
+  against `G2`'s own pending, separate adoption decision) - none
+  blocking a ratification decision.
+- **Final Output: `READY FOR HUMAN RATIFICATION`.** Not self-ratified,
+  not accepted or rejected by this task, no new governance mechanism
+  introduced. The decision - accept, reject, which variant, on what
+  timeline relative to `G2`'s own pending adoption - is left to Petko.
