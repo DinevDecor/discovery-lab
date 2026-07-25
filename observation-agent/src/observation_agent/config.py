@@ -26,6 +26,7 @@ class AgentConfig:
     repos: list[RepoConfig]
     stale_threshold_days: int
     excluded_dirs: list[str]
+    excluded_paths: list[str]
     markdown_extensions: list[str]
     reference_extensions: list[str]
 
@@ -48,6 +49,7 @@ def load_config(config_path: str | Path) -> AgentConfig:
         repos=repos,
         stale_threshold_days=raw.get("stale_threshold_days", 3),
         excluded_dirs=raw.get("excluded_dirs", [".git"]),
+        excluded_paths=raw.get("excluded_paths", []),
         markdown_extensions=raw.get("markdown_extensions", [".md"]),
         reference_extensions=raw.get(
             "reference_extensions", [".md", ".py", ".yaml", ".yml"]

@@ -1,5 +1,70 @@
 # Changelog
 
+## 2026-07-25 (EXEC-006 — Narrow Maintenance: Self-Observation Defect Fix)
+
+- Per Petko's "Human Acceptance — EXEC-005" (verdict PASS WITH A NAMED
+  LIMITATION, accepted), authorized exactly one narrow maintenance
+  task addressing only the self-referential feedback-loop defect and
+  its direct consequences — explicitly not a new agent, no
+  architectural redesign, no full health-model recalibration.
+- **Configurable, explicit path exclusion** (`observation-agent/src/observation_agent/scanner.py`):
+  added `excluded_paths`, a new, path-segment-aware exclusion
+  mechanism in `walk_files`, distinct from the existing bare-name
+  `excluded_dirs`. A repo-relative path like `observation-agent/reports`
+  excludes exactly that directory and everything nested under it,
+  without matching an unrelated same-named directory elsewhere and
+  without matching a similarly-prefixed sibling like
+  `observation-agent/reports-extra`. Wired through `config.py`
+  (`AgentConfig.excluded_paths`) and every check function's signature
+  (`broken_references`, `orphan_files`, `stale_state`,
+  `status_history_consistency`, `registry_check`) plus `cli.py`'s call
+  site — nothing hardcoded to a single path.
+- Both `config.json` and `config.ci.json` now declare
+  `excluded_paths: ["observation-agent/reports", "headquarters/reports"]`,
+  proven equivalent between local and CI configs by a new test
+  (`tests/test_ci_activation.py::TestExcludedPathsEquivalence`).
+- **Reworded `observation-agent/README.md`'s two prose examples** so
+  `[text]` and `(path)` are no longer written immediately adjacent —
+  verified directly against the actual `broken_references` regex that
+  both `observation-agent/README.md` and `headquarters/README.md` are
+  now clean of any match. Caught and fixed one self-inflicted
+  recurrence of the exact same pattern while documenting this fix in
+  this README's own new Limitations entry and in `STATE.md` — both
+  reworded and reverified clean before commit.
+- **Added regression tests** proving repeated unchanged-input runs
+  stay stable: `tests/test_scanner.py` (5 tests, `excluded_paths`
+  mechanics), a new `TestSelfReferentialFeedbackLoop` class in
+  `tests/test_broken_references.py` (3 tests reproducing the real
+  defect and proving the fix), and new `tests/test_cli_stability.py`
+  (3 tests exercising the full CLI end-to-end via `cli.main()` against
+  a fixture repo whose own `reports/` output directory lives *inside*
+  the scanned repo — exactly like the real layout — including a
+  negative control proving these tests exercise a real fix, not an
+  already-impossible scenario). Full suite grew from 45 to 58 tests,
+  all passing.
+- **Validated against the live 5-repository ecosystem**: 3 repeated
+  real Observation Agent runs held at 39 → 39 → 39 total observations,
+  0 new after the first run (previously this compounded 2 → 10 → 58).
+  A real Headquarters run confirmed `HQ-0001` remains the sole "Most
+  Important Recommendation" (score 6, unchanged), per requirement 6.
+  `git status --short` confirmed all 5 repositories, including
+  `discovery-lab` itself, remained unmodified beyond the intended
+  source/test/doc changes; tool-run artifacts were reverted to their
+  committed state after validation.
+- **Not touched, per explicit instruction**: `health.py`'s formulas —
+  no health-model recalibration in this change.
+- **Named, not fixed (out of this task's narrow scope)**: `STATE.md`,
+  `CHANGELOG.md`, and `INV-0004` itself still contain their own
+  pre-existing `[text]`/`(path)`-shaped prose examples describing this
+  very defect. These are real, stable, non-compounding matches against
+  ordinary repository content — not a recurrence of the `reports/`-
+  directory feedback loop — left for a future, separately-scoped task,
+  along with the other 2 improvement opportunities EXEC-005 named but
+  did not implement (a documented operator convention; scheduling
+  Headquarters itself).
+- Not merged to `main` — stays on `claude/prop-0002-discovery-intake`;
+  no merge instruction was given for this narrow maintenance task.
+
 ## 2026-07-25 (EXEC-004 Deployment — Human Decision)
 
 - Petko accepted EXEC-004 for review and issued the deployment

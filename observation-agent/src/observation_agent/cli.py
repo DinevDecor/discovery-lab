@@ -52,7 +52,7 @@ def run_all_checks(config: AgentConfig) -> tuple[list[Observation], list[str], l
         ]:
             start = time.monotonic()
             try:
-                found = check_fn(repo, config.excluded_dirs, *extra_args)
+                found = check_fn(repo, config.excluded_dirs, *extra_args, excluded_paths=config.excluded_paths)
             except Exception as exc:  # a check failing must not crash the whole run
                 log.append(f"  ERROR in {check_name} for {repo.name}: {exc!r}")
                 continue

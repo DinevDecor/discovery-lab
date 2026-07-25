@@ -28,6 +28,7 @@
   ],
   "stale_threshold_days": 3,
   "excluded_dirs": [".git", "__pycache__", "node_modules", ".venv"],
+  "excluded_paths": ["observation-agent/reports", "headquarters/reports"],
   "markdown_extensions": [".md"],
   "reference_extensions": [".md", ".py", ".yaml", ".yml"]
 }
