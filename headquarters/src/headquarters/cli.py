@@ -17,6 +17,7 @@ from .collector import collect
 from .config import load_config
 from .drift import detect_drift
 from .history import RunSnapshot, load_history, previous_scores, save_history
+from .inconsistency import classify_all
 from .opportunity import detect_opportunities
 from .portfolio import build_portfolio
 from .health import compute_health
@@ -32,6 +33,7 @@ def run(config_path: Path, reports_dir: Path) -> dict:
 
     drift_findings = detect_drift(collected, config)
     opportunity_findings = detect_opportunities(collected, config)
+    inconsistencies = classify_all(drift_findings)
     health = compute_health(collected, drift_findings, config.decision_backlog_threshold_days)
 
     history_path = reports_dir / "history.json"
@@ -68,6 +70,7 @@ def run(config_path: Path, reports_dir: Path) -> dict:
         other_candidates=other_candidates,
         drift_findings=drift_findings,
         opportunity_findings=opportunity_findings,
+        inconsistencies=inconsistencies,
         human_decisions_required=human_decisions,
         previous_snapshot=previous_snapshot,
         evaluation=evaluation,

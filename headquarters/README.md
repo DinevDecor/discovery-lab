@@ -14,8 +14,9 @@ modifies a repository, and never self-approves anything. See
 
 ```
 collector.py     -> reads existing artifacts (no repository scanning of its own)
-drift.py         -> Strategic Drift Detector (5 mechanical checks)
-opportunity.py   -> Opportunity Detector (3 DRAFT-only heuristics)
+drift.py         -> Strategic Drift Detector (6 mechanical checks)
+opportunity.py   -> Opportunity Detector (3 DRAFT-only heuristics, generically discovered)
+inconsistency.py -> classifies every Drift finding into one of 5 taxonomy categories
 health.py        -> Ecosystem Health Engine (8 documented metrics)
 portfolio.py     -> Portfolio Engine (one entry per configured repo)
 prioritizer.py   -> Attention Engine (selects exactly one recommendation)
@@ -79,6 +80,72 @@ Headquarters never re-walks a repository the way observation-agent
 does — every one of the paths above is a specific, named artifact
 location, configured once in `config.json`, read directly.
 
+## Inconsistency Classification
+
+Per the Additional Execution Directive, Headquarters adapts to the
+ecosystem — it does not reshape the ecosystem to satisfy itself.
+Whenever a Drift check surfaces a real inconsistency, `inconsistency.py`
+records and classifies it rather than silently fixing anything (nothing
+in this tool has write access to any observed repository regardless).
+Every classified inconsistency carries all four required fields —
+affected artifact, observed evidence, operational impact, recommended
+future action — plus the rationale for its category assignment, and
+appears in the Executive Brief's own "Inconsistencies" section.
+
+Five categories, one fixed mapping from each Drift check (made once,
+documented, not re-derived per run):
+
+| Category | Populated by |
+|---|---|
+| Governance Issue | duplicate ADR IDs, registry gaps, decision backlog |
+| Documentation Issue | stale ADRs |
+| Data Quality Issue | a configured state file that exists but doesn't parse into a meaningful shape |
+| Unknown | possibly-abandoned proposals (genuinely ambiguous from the available signal) |
+| Implementation Issue | *no v1.0 check maps here* — reserved for a future check comparing documented capability against actual implementation status; not fabricated to fill the category |
+
+Opportunities are never classified as inconsistencies — they are
+positive, optional suggestions, not problems (see `inconsistency.py`'s
+`classify_all`, which only ever processes Drift findings).
+
+If a run has no Ledger entry, Drift finding, or Opportunity to
+recommend from, the Executive Brief's "Most Important Recommendation"
+section says exactly **`INSUFFICIENT EVIDENCE`**, per the Design
+Philosophy — Headquarters never invents an assumption to fill an
+evidence gap.
+
+## Extensibility (Robustness Requirement)
+
+New repositories, agents, registries, and documents should be
+discoverable with minimal changes to this tool:
+
+- **New repository**: add one entry to `config.json`'s `repos` list.
+  Every module (`portfolio.py`, `health.py`, all 6 `drift.py` checks)
+  already iterates the configured repo list generically — no code
+  change is needed for the new repo to appear in the Portfolio, Health
+  metrics, or any Drift check.
+- **New registry file, in a repo already configured**: nothing to do.
+  `opportunity.py`'s `discover_registry_files` finds any `*.md` file
+  whose name contains "registry" (case-insensitive) via a bounded,
+  shallow, excluded-dir-aware walk — it no longer hard-codes a
+  per-repo file list.
+- **New tool with its own safety scanner**: nothing to do.
+  `discover_safety_scanners` matches any `<tool>/tests/test_safety.py`
+  found under a configured repo's top-level subdirectories, without
+  naming `observation-agent` or `headquarters` specifically.
+- **New artifact type entirely** (a new kind of registry, a new
+  governance document shape): requires a code change — this tool
+  cannot discover a *shape* of artifact it has never been told to look
+  for, only new *instances* of shapes it already knows. That is a
+  real, honest limit, not a gap this README papers over.
+
+Both generic discovery functions are still bounded and narrow —
+filename-pattern matching within a depth limit, never reading or
+interpreting file content — which keeps them distinct from
+Observation Agent's own deep content-scanning checks (broken links,
+orphan files, etc.). Extensibility here means "less hard-coded
+per-repo knowledge," not "Headquarters starts scanning repository
+content the way Observation Agent does."
+
 ## The Attention Engine
 
 Every run assembles a candidate pool from three sources: the
@@ -132,11 +199,13 @@ write this tool's own output (`cli.py`, `recommendation.py`,
   config, but nothing here fabricates a relationship.
 - **Drift Detection** implements 5 of the 10 categories EXEC-004 names
   (duplicate ADR IDs, stale ADRs, registry gaps, decision backlog,
-  possibly-abandoned proposals). Overlapping projects,
-  execution-without-specification, specification-without-execution,
-  and architectural contradictions are not attempted — each would
-  require semantic judgment across free-text documents this tool has
-  no honest way to automate yet.
+  possibly-abandoned proposals), plus a sixth check
+  (`unparseable_state_files`) added to give the Inconsistency
+  taxonomy's Data Quality Issue category real coverage. Overlapping
+  projects, execution-without-specification,
+  specification-without-execution, and architectural contradictions
+  are not attempted — each would require semantic judgment across
+  free-text documents this tool has no honest way to automate yet.
 - **Health metrics are simple, stated formulas**, not a validated
   model. `Overall Health`'s 71% (as of this task's own real run) means
   exactly what its formula says and nothing more — it is not a
@@ -150,9 +219,17 @@ write this tool's own output (`cli.py`, `recommendation.py`,
   `reports/recommendation-decisions.json` — until then it honestly
   reports `INSUFFICIENT_EVIDENCE`, not a fabricated score.
 - **Opportunity Detector** ships 3 heuristics, not an open-ended list —
-  each was chosen because it is mechanically verifiable (two specific
-  files both existing, a table row count, a line count), not because
-  it is the most valuable opportunity the ecosystem might have.
+  each was chosen because it is mechanically verifiable (a bounded
+  filename-pattern discovery finding 2+ matches, a line count), not
+  because it is the most valuable opportunity the ecosystem might
+  have.
+- **Generic discovery is filename-pattern matching only.** A registry
+  or safety scanner that doesn't follow the naming conventions
+  `discover_registry_files`/`discover_safety_scanners` look for (a
+  `.md` file with "registry" in its name; a `tests/test_safety.py`
+  path) will not be found. This is a real, stated boundary of the
+  Robustness Requirement's implementation, not a claim of unlimited
+  discovery.
 
 ## Future evolution
 
@@ -175,5 +252,8 @@ write this tool's own output (`cli.py`, `recommendation.py`,
 
 Implements `EXEC-004 — Ecosystem Headquarters v1.0`, consuming
 `observation-agent`'s output (`EXEC-002`/`EXEC-003`) directly rather
-than duplicating its repository scanning. See `CONTRACT.md` for the
-tool's operating contract.
+than duplicating its repository scanning, plus EXEC-004's Additional
+Execution Directive (Inconsistency Classification, the Robustness
+Requirement's extensibility approach, and the explicit
+`INSUFFICIENT EVIDENCE` reporting discipline). See `CONTRACT.md` for
+the tool's operating contract.

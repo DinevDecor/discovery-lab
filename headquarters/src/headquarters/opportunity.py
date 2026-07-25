@@ -3,86 +3,138 @@ none is ever auto-approved, escalated, or acted on — Headquarters is
 advisory only (see CONTRACT.md). v1.0 implements three mechanical,
 low-overreach heuristics rather than a larger, fuzzier set; each is
 named honestly as a candidate for a human to consider, not a claim
-that the opportunity is definitely worth taking."""
+that the opportunity is definitely worth taking.
+
+Per the Additional Execution Directive's Robustness Requirement
+("new repositories, agents, registries and documents should be
+discoverable with minimal Headquarters changes"), the two heuristics
+below that used to hard-code specific repo/file names now discover
+their targets by a bounded, shallow filename-pattern search instead —
+a new repo or a new registry file needs a `config.json` entry, never
+a code change, to be picked up here. This is still narrower than
+Observation Agent's own deep content scanning: these searches only
+ever match file *names* against a fixed pattern, within a small,
+excluded-dir-aware depth bound — they never read or interpret file
+content the way a repository-scanning check would."""
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from .collector import Collected
 from .config import HeadquartersConfig
 from .models import Confidence, Evidence, Finding
 
+_EXCLUDED_DIRS = {".git", "__pycache__", "node_modules", ".venv"}
+_MAX_DEPTH = 4
+_REGISTRY_NAME = re.compile(r"registry", re.IGNORECASE)
+
+
+def _bounded_walk(root: Path, max_depth: int):
+    """Yield files under `root` up to `max_depth` directory levels
+    deep, skipping known-noise directories. Bounded and shallow on
+    purpose — a discovery aid, not a general repository scanner."""
+    if not root.is_dir():
+        return
+    stack: list[tuple[Path, int]] = [(root, 0)]
+    while stack:
+        current, depth = stack.pop()
+        try:
+            entries = list(current.iterdir())
+        except OSError:
+            continue
+        for entry in entries:
+            if entry.is_dir():
+                if entry.name in _EXCLUDED_DIRS or depth + 1 > max_depth:
+                    continue
+                stack.append((entry, depth + 1))
+            elif entry.is_file():
+                yield entry
+
+
+def discover_registry_files(repo_root: Path) -> list[Path]:
+    """Any `.md` file whose name contains "registry" (case-insensitive),
+    found within a bounded, shallow walk of the repository."""
+    return sorted(
+        p for p in _bounded_walk(repo_root, _MAX_DEPTH)
+        if p.suffix == ".md" and _REGISTRY_NAME.search(p.name)
+    )
+
+
+def discover_safety_scanners(config: HeadquartersConfig) -> list[tuple[str, Path]]:
+    """Any `tests/test_safety.py` file one level below a top-level
+    subdirectory of each configured repo — matches the
+    `<tool>/tests/test_safety.py` shape both observation-agent and
+    headquarters use, without naming either tool specifically."""
+    found: list[tuple[str, Path]] = []
+    for repo in config.repos:
+        root = Path(repo.path)
+        if not root.is_dir():
+            continue
+        for match in sorted(root.glob("*/tests/test_safety.py")):
+            found.append((repo.name, match))
+    return found
+
 
 def shared_safety_pattern(config: HeadquartersConfig) -> list[Finding]:
-    """Both observation-agent and headquarters implement their own
-    static write/commit/push/subprocess-detection safety scanner
-    (tests/test_safety.py). Real duplication, cheaply verifiable by
-    checking both files exist."""
-    dl = config.repo_by_name("discovery-lab")
-    if not dl:
+    """More than one `<tool>/tests/test_safety.py` exists anywhere in
+    the configured repos — real duplication of the same static
+    forbidden-pattern / write-mode scanner, discovered generically
+    rather than by naming observation-agent and headquarters directly."""
+    matches = discover_safety_scanners(config)
+    if len(matches) < 2:
         return []
-    base = Path(dl.path)
-    oa_safety = base / "observation-agent" / "tests" / "test_safety.py"
-    hq_safety = base / "headquarters" / "tests" / "test_safety.py"
-    if oa_safety.is_file() and hq_safety.is_file():
-        return [
-            Finding(
-                finding_id="opportunity-shared-safety-scanner",
-                category="reusable_component",
-                title="Extract the shared safety scanner used by both tools",
-                description=(
-                    "observation-agent and headquarters each maintain their own "
-                    "copy of a static forbidden-pattern / write-mode scanner "
-                    "(same forbidden-pattern list, same self-check discipline). "
-                    "DRAFT candidate: factor the detector into a small shared "
-                    "module both tools' test suites import, rather than two "
-                    "independently-maintained copies drifting apart over time."
-                ),
-                confidence=Confidence.INSUFFICIENT_EVIDENCE,
-                evidence=[
-                    Evidence("discovery-lab", str(oa_safety.relative_to(base))),
-                    Evidence("discovery-lab", str(hq_safety.relative_to(base))),
-                ],
-                affected=["discovery-lab"],
-                is_opportunity=True,
-            )
-        ]
-    return []
+    affected = sorted({repo_name for repo_name, _ in matches})
+    evidence = [
+        Evidence(repo_name, str(path.relative_to(Path(config.repo_by_name(repo_name).path))))
+        for repo_name, path in matches
+    ]
+    return [
+        Finding(
+            finding_id="opportunity-shared-safety-scanner",
+            category="reusable_component",
+            title=f"{len(matches)} tools each maintain their own copy of a safety scanner",
+            description=(
+                "Each `<tool>/tests/test_safety.py` found implements the same "
+                "static forbidden-pattern / write-mode detector independently "
+                "(same forbidden-pattern list, same self-check discipline). "
+                "DRAFT candidate: factor the detector into a small shared "
+                "module every tool's test suite imports, rather than "
+                "independently-maintained copies drifting apart over time."
+            ),
+            confidence=Confidence.INSUFFICIENT_EVIDENCE,
+            evidence=evidence,
+            affected=affected,
+            is_opportunity=True,
+        )
+    ]
 
 
 def registry_consolidation(collected: Collected) -> list[Finding]:
-    """More than one non-project-level registry exists with no
-    cross-index between them (kod: PRINCIPLE_REGISTRY + IDEA_REGISTRY;
-    discovery-lab: ORB-REGISTRY + EMPLOYEE-REGISTRY + MEMORY-SOURCE
-    registry). Not a defect — just an opportunity to consider."""
-    known_registries = {
-        "kod": ["Knowledge/PRINCIPLE_REGISTRY.md", "Knowledge/IDEA_REGISTRY.md"],
-        "discovery-lab": [
-            "docs/ai-organization/ORB/ORB-REGISTRY.md",
-            "docs/ai-organization/EMPLOYEE-REGISTRY.md",
-        ],
-    }
+    """A repository has 2+ files whose name matches "*registry*.md",
+    discovered generically rather than from a hard-coded per-repo
+    list, with no single index pointing between them. Not a defect —
+    just an opportunity to consider."""
     findings: list[Finding] = []
-    for repo_name, paths in known_registries.items():
-        snap = collected.repos.get(repo_name)
-        if not snap:
-            continue
-        existing = [p for p in paths if (Path(snap.path) / p).is_file()]
-        if len(existing) >= 2:
+    for repo_name, snap in collected.repos.items():
+        matches = discover_registry_files(Path(snap.path))
+        if len(matches) >= 2:
+            rel_paths = [str(p.relative_to(Path(snap.path))) for p in matches]
             findings.append(
                 Finding(
                     finding_id=f"opportunity-registry-index-{repo_name}",
                     category="workflow_consolidation",
-                    title=f"{repo_name} maintains {len(existing)} separate registries with no cross-index",
+                    title=f"{repo_name} maintains {len(matches)} separate registries with no cross-index",
                     description=(
-                        f"{repo_name} has {len(existing)} distinct registry files "
-                        f"({', '.join(existing)}) with no single index pointing "
-                        "between them. DRAFT candidate: a lightweight index page, "
-                        "at the repository's own maintainers' discretion."
+                        f"{repo_name} has {len(matches)} files matching "
+                        f"'*registry*.md' ({', '.join(rel_paths)}) with no single "
+                        "index pointing between them. DRAFT candidate: a "
+                        "lightweight index page, at the repository's own "
+                        "maintainers' discretion."
                     ),
                     confidence=Confidence.INSUFFICIENT_EVIDENCE,
-                    evidence=[Evidence(repo_name, p) for p in existing],
+                    evidence=[Evidence(repo_name, p) for p in rel_paths],
                     affected=[repo_name],
                     is_opportunity=True,
                 )

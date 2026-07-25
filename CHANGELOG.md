@@ -1,5 +1,78 @@
 # Changelog
 
+## 2026-07-25 (EXEC-004 — Additional Execution Directive)
+
+- Petko approved the background survey (STATE.md formats, registries,
+  ADRs, the Recommendation Ledger's schema) as Headquarters' factual
+  foundation and directed continued execution under an explicit
+  Working Rule: Headquarters adapts to the ecosystem, never the
+  reverse; inconsistencies get recorded and classified, never silently
+  fixed; no automatic repository modification.
+- Added `inconsistency.py`: a five-category taxonomy (Implementation /
+  Documentation / Governance / Data Quality / Unknown Issue), with a
+  fixed, documented mapping from each Drift check to a category, and
+  every classified inconsistency carrying all four required fields
+  (affected artifact, observed evidence, operational impact,
+  recommended future action) plus its category rationale.
+  Opportunities are never classified as inconsistencies — only Drift
+  findings are, since Opportunities are positive suggestions, not
+  problems.
+- Added a sixth Drift check, `unparseable_state_files`, specifically
+  to give the taxonomy's Data Quality Issue category real coverage
+  (a configured state file that exists on disk but yields fewer than
+  2 parseable fields) rather than leaving that bucket theoretical.
+  `Implementation Issue` stays unpopulated in v1.0, documented
+  honestly as reserved for a future check, not filled with an invented
+  example.
+- Added an "Inconsistencies" section to the Executive Brief showing
+  every classified finding, and changed the no-recommendation message
+  to lead with the literal phrase **`INSUFFICIENT EVIDENCE`**, per the
+  directive's Design Philosophy — Headquarters never invents an
+  assumption to fill an evidence gap.
+- **Robustness Requirement**: replaced two hard-coded per-repo lookups
+  with generic, bounded discovery, so a new repository, registry, or
+  tool needs a `config.json` entry, not a code change:
+  - `opportunity.py`'s `registry_consolidation` used to hard-code
+    exactly which registry files exist in `kod` and `discovery-lab`;
+    now `discover_registry_files` finds any `*.md` file whose name
+    contains "registry" via a bounded, shallow, excluded-dir-aware
+    walk (depth-limited and filename-only — still narrower than
+    Observation Agent's own deep content scanning).
+  - `opportunity.py`'s `shared_safety_pattern` used to hard-code the
+    exact paths to `observation-agent`'s and `headquarters`' own
+    `test_safety.py` files; now `discover_safety_scanners` matches any
+    `<tool>/tests/test_safety.py` under a configured repo, without
+    naming either tool.
+  - `drift.py`'s `proposals_without_state_reference` used to hard-code
+    `discovery-lab` as the only possible owner of `docs/proposals/`;
+    now it reads the owning repository from `config.proposals_dir`
+    dynamically.
+  - Added tests proving genuine extensibility, not just backward
+    compatibility — fixtures use repo and file names that appear
+    nowhere in the source (`a-brand-new-repo-name`,
+    `WIDGET_REGISTRY.md`, `brand-new-tool-a`), so passing tests can't
+    be explained by a hidden hard-coded match.
+- Full suite grew from 90 to 111 tests, all passing (16 new: 10 for
+  the classification taxonomy, 3 for the new Data Quality check, 5 for
+  genuinely-generic discovery, 2 for the Inconsistencies brief
+  section, plus signature-update fixes to existing Drift tests).
+- Reran the tool for real against the live ecosystem: 15 inconsistencies
+  classified this run (3 Governance Issue, 12 Unknown, 0 Data Quality —
+  every configured state file parsed fine this run, 0 Documentation —
+  no ADR exceeded the staleness threshold, 0 Implementation — no check
+  maps there yet, as documented). `HQ-0001` (the duplicate ADR-0001
+  finding) recurred and correctly kept its existing ID rather than
+  being reassigned a new one (`times_proposed` incremented to 2 in
+  `recommendation-log.json`), demonstrating the traceability system's
+  own cross-run behavior on real, not fixture, data. Confirmed via
+  `git status --short` that all 4 other repositories and discovery-lab
+  itself were unmodified beyond Headquarters' own source/tests/reports.
+- Updated README.md with the Inconsistency Classification taxonomy
+  table, the Extensibility section (what's now generic vs. what still
+  requires a code change — a new *shape* of artifact, not a new
+  instance of a known shape), and the `INSUFFICIENT EVIDENCE`
+  reporting discipline.
+
 ## 2026-07-25 (EXEC-004)
 
 - Executed `EXEC-004 — Ecosystem Headquarters v1.0`: the ecosystem's

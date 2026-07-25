@@ -1,7 +1,9 @@
 import _pathsetup  # noqa: F401
+import tempfile
 import time
 import unittest
 from datetime import date
+from pathlib import Path
 
 from headquarters.collector import Collected, LedgerEntry, ObservationAgentSnapshot, RepoSnapshot
 from headquarters.config import ArtifactRef, HeadquartersConfig, RepoConfig
@@ -11,14 +13,28 @@ from headquarters.drift import (
     proposals_without_state_reference,
     registry_gaps,
     stale_adrs,
+    unparseable_state_files,
 )
 from headquarters.models import Confidence
 
 
-def _repo(name, fields=None, adr=None) -> RepoSnapshot:
+def _repo(name, fields=None, adr=None, path=None) -> RepoSnapshot:
     return RepoSnapshot(
-        name=name, path=f"/fake/{name}", state_fields=fields or {}, state_file_path="STATE.md",
+        name=name, path=path or f"/fake/{name}", state_fields=fields or {}, state_file_path="STATE.md",
         purpose=None, adr_files=adr or [], changelog_lines=None,
+    )
+
+
+def _make_config(repos=None, proposals_repo="discovery-lab") -> HeadquartersConfig:
+    return HeadquartersConfig(
+        repos=repos or [RepoConfig("discovery-lab", "/x", "STATE.md", None, None, None)],
+        project_registry=ArtifactRef("discovery-lab", "x"),
+        recommendation_ledger=ArtifactRef("discovery-lab", "x"),
+        observation_agent_reports_dir=ArtifactRef("discovery-lab", "x"),
+        governance_doc=ArtifactRef("discovery-lab", "x"),
+        proposals_dir=ArtifactRef(proposals_repo, "docs/proposals"),
+        decision_backlog_threshold_days=3,
+        stale_adr_threshold_days=30,
     )
 
 
@@ -118,12 +134,48 @@ class TestProposalsWithoutStateReference(unittest.TestCase):
     def test_flags_unmentioned_proposal_dir(self):
         repos = {"discovery-lab": _repo("discovery-lab", fields={"current_step": "EXEC-002 done, see docs/proposals/EXEC-002-observation-agent"})}
         c = _collected(repos=repos, proposal_dirs=["EXEC-002-observation-agent", "ARCH-999-unmentioned"])
-        findings = proposals_without_state_reference(c)
+        findings = proposals_without_state_reference(c, _make_config())
         titles = [f.title for f in findings]
         self.assertTrue(any("ARCH-999-unmentioned" in t for t in titles))
         self.assertFalse(any("EXEC-002-observation-agent" in t for t in titles))
         for f in findings:
             self.assertEqual(f.confidence, Confidence.INSUFFICIENT_EVIDENCE)
+
+    def test_uses_the_configured_proposals_repo_not_a_hardcoded_name(self):
+        # Extensibility check: a different repo owning proposals_dir
+        # must be respected, not silently ignored in favor of
+        # "discovery-lab" being hardcoded somewhere.
+        repos = {"some-other-repo": _repo("some-other-repo", fields={"status": "ACTIVE"})}
+        c = _collected(repos=repos, proposal_dirs=["UNMENTIONED-INITIATIVE"])
+        findings = proposals_without_state_reference(c, _make_config(proposals_repo="some-other-repo"))
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].affected, ["some-other-repo"])
+
+
+class TestUnparseableStateFiles(unittest.TestCase):
+    def test_flags_state_file_with_fewer_than_two_fields(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            (base / "STATE.md").write_text("just some prose, no recognizable fields at all\n")
+            config = _make_config(repos=[RepoConfig("r", str(base), "STATE.md", None, None, None)])
+            repos = {"r": _repo("r", fields={}, path=str(base))}
+            findings = unparseable_state_files(_collected(repos=repos), config)
+            self.assertEqual(len(findings), 1)
+            self.assertEqual(findings[0].category, "data_quality")
+            self.assertEqual(findings[0].confidence, Confidence.INSUFFICIENT_EVIDENCE)
+
+    def test_no_finding_when_state_file_parses_fine(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            (base / "STATE.md").write_text("```yaml\nstatus: ACTIVE\nx: y\n```\n")
+            config = _make_config(repos=[RepoConfig("r", str(base), "STATE.md", None, None, None)])
+            repos = {"r": _repo("r", fields={"status": "ACTIVE", "x": "y"}, path=str(base))}
+            self.assertEqual(unparseable_state_files(_collected(repos=repos), config), [])
+
+    def test_no_finding_when_state_file_does_not_exist_on_disk(self):
+        config = _make_config(repos=[RepoConfig("r", "/nonexistent", "STATE.md", None, None, None)])
+        repos = {"r": _repo("r", fields={}, path="/nonexistent")}
+        self.assertEqual(unparseable_state_files(_collected(repos=repos), config), [])
 
 
 if __name__ == "__main__":

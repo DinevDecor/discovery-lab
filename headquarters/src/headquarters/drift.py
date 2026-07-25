@@ -6,16 +6,25 @@ specification-without-execution, architectural contradictions,
 duplicated infrastructure beyond the registry-gap case below) would
 require semantic judgment across free-text documents that no check
 here can honestly claim, so v1.0 does not attempt them. See README's
-Limitations.
+Limitations. `unparseable_state_files` is a sixth check, added by the
+Additional Execution Directive's Data Quality Issue category — it
+does not detect a new drift *category* EXEC-004 named, it gives real
+coverage to a classification bucket the Inconsistency taxonomy
+otherwise had no check for.
 
 Every finding cites the exact file(s) it came from. `MISMATCH` means
 mechanically confirmed; `INSUFFICIENT_EVIDENCE` means a real signal
-that still needs human interpretation to call a defect."""
+that still needs human interpretation to call a defect. Every finding
+here (never an Opportunity) also gets classified by
+`inconsistency.py` into Implementation / Documentation / Governance /
+Data Quality / Unknown, per the Additional Execution Directive — this
+module never silently fixes anything, only records and classifies."""
 
 from __future__ import annotations
 
 import re
 from datetime import date, datetime, timezone
+from pathlib import Path
 
 from .collector import Collected
 from .config import HeadquartersConfig
@@ -149,14 +158,17 @@ def decision_backlog_findings(collected: Collected, threshold_days: int, now: da
     return findings
 
 
-def proposals_without_state_reference(collected: Collected) -> list[Finding]:
-    """docs/proposals/ subdirectories never mentioned anywhere in
-    discovery-lab's own STATE.md — a proxy for "possibly abandoned,"
-    not proof of it: a finished initiative that was folded into later
-    work without a name-check is indistinguishable from a forgotten
-    one using only this signal, so this is always INSUFFICIENT_EVIDENCE."""
-    dl = collected.repos.get("discovery-lab")
-    state_text = " ".join(dl.state_fields.values()) if dl else ""
+def proposals_without_state_reference(collected: Collected, config: HeadquartersConfig) -> list[Finding]:
+    """proposals_dir-shaped subdirectories (wherever config points —
+    not hardcoded to any one repository) never mentioned anywhere in
+    that same repository's own state file — a proxy for "possibly
+    abandoned," not proof of it: a finished initiative folded into
+    later work without a name-check is indistinguishable from a
+    forgotten one using only this signal, so this is always
+    INSUFFICIENT_EVIDENCE."""
+    owner_repo_name = config.proposals_dir.repo
+    owner = collected.repos.get(owner_repo_name)
+    state_text = " ".join(owner.state_fields.values()) if owner else ""
     findings: list[Finding] = []
     for dirname in collected.proposal_dirs:
         if dirname.lower() not in state_text.lower():
@@ -164,15 +176,51 @@ def proposals_without_state_reference(collected: Collected) -> list[Finding]:
                 Finding(
                     finding_id=f"unreferenced-proposal-{dirname}",
                     category="possibly_abandoned_initiative",
-                    title=f"docs/proposals/{dirname} is not mentioned in discovery-lab/STATE.md",
+                    title=f"{config.proposals_dir.path}/{dirname} is not mentioned in {owner_repo_name}'s own state file",
                     description=(
-                        "STATE.md's current_step/last_completed/next_action fields do not "
-                        "name this directory. May simply predate the current STATE.md "
-                        "narrative window rather than being abandoned."
+                        "The state file's own narrative fields do not name this "
+                        "directory. May simply predate the current narrative window "
+                        "rather than being abandoned."
                     ),
                     confidence=Confidence.INSUFFICIENT_EVIDENCE,
-                    evidence=[Evidence("discovery-lab", f"docs/proposals/{dirname}/")],
-                    affected=["discovery-lab"],
+                    evidence=[Evidence(owner_repo_name, f"{config.proposals_dir.path}/{dirname}/")],
+                    affected=[owner_repo_name],
+                )
+            )
+    return findings
+
+
+def unparseable_state_files(collected: Collected, config: HeadquartersConfig) -> list[Finding]:
+    """A repo has a state file configured and the file exists on disk,
+    but this tool's tolerant parsers extracted fewer than 2 fields
+    from it — the artifact does not fit the shape any tooling in this
+    ecosystem currently expects. A Data Quality signal, not a
+    governance one: the file exists, it is just not shaped the way
+    `parse_state_fields` can make sense of."""
+    findings: list[Finding] = []
+    for repo in config.repos:
+        if not repo.state_file:
+            continue
+        path = Path(repo.path) / repo.state_file
+        if not path.is_file():
+            continue
+        snap = collected.repos.get(repo.name)
+        if snap and len(snap.state_fields) < 2:
+            findings.append(
+                Finding(
+                    finding_id=f"unparseable-state-{repo.name}",
+                    category="data_quality",
+                    title=f"{repo.name}/{repo.state_file} exists but yielded fewer than 2 parseable fields",
+                    description=(
+                        "The file is present but neither the fenced-block nor the "
+                        "loose key:value parser could extract a meaningful state "
+                        "from it. This may be a genuinely different, valid format "
+                        "this tool's parsers simply don't recognize yet — not "
+                        "necessarily a defect in the file itself."
+                    ),
+                    confidence=Confidence.INSUFFICIENT_EVIDENCE,
+                    evidence=[Evidence(repo.name, repo.state_file)],
+                    affected=[repo.name],
                 )
             )
     return findings
@@ -187,5 +235,6 @@ def detect_drift(
     findings += stale_adrs(collected, config.stale_adr_threshold_days, now)
     findings += registry_gaps(collected, config)
     findings += decision_backlog_findings(collected, config.decision_backlog_threshold_days, now)
-    findings += proposals_without_state_reference(collected)
+    findings += proposals_without_state_reference(collected, config)
+    findings += unparseable_state_files(collected, config)
     return findings

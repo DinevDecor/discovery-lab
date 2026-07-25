@@ -7,6 +7,7 @@ selected, per the "never Top 10" rule."""
 from __future__ import annotations
 
 from .history import RunSnapshot, trend_line
+from .inconsistency import Inconsistency
 from .models import HealthMetric, PortfolioEntry, Recommendation
 from .prioritizer import Candidate
 
@@ -22,6 +23,7 @@ def render_brief(
     other_candidates: list[Candidate],
     drift_findings: list,
     opportunity_findings: list,
+    inconsistencies: list[Inconsistency],
     human_decisions_required: list[str],
     previous_snapshot: RunSnapshot | None,
     evaluation: dict,
@@ -51,7 +53,12 @@ def render_brief(
 
     lines.append("## Most Important Recommendation")
     if top_recommendation is None:
-        lines.append("No candidate recommendation exists this run (no Ledger entries, drift findings, or opportunities were found).")
+        lines.append(
+            "**INSUFFICIENT EVIDENCE** — no candidate recommendation exists "
+            "this run (no Ledger entries, drift findings, or opportunities "
+            "were found). Per this tool's own design philosophy, no "
+            "assumption is invented to fill this gap."
+        )
     else:
         r = top_recommendation
         lines.append(f"**{r.hq_id}**: {r.title}")
@@ -113,6 +120,26 @@ def render_brief(
     else:
         lines.append("(none detected this run)")
     lines.append("")
+
+    lines.append(
+        "## Inconsistencies (recorded and classified, not fixed — "
+        "the ecosystem is not reshaped to satisfy Headquarters)"
+    )
+    if inconsistencies:
+        for inc in inconsistencies:
+            lines.append(f"### [{inc.category}] {inc.title}")
+            lines.append(f"- Affected artifact: {inc.affected_artifact}")
+            lines.append(
+                "- Observed evidence: "
+                + "; ".join(e.citation() for e in inc.observed_evidence)
+            )
+            lines.append(f"- Operational impact: {inc.operational_impact}")
+            lines.append(f"- Recommended future action: {inc.recommended_future_action}")
+            lines.append(f"- Category rationale: {inc.category_rationale}")
+            lines.append("")
+    else:
+        lines.append("(none this run)")
+        lines.append("")
 
     lines.append("## Human Decisions Required")
     combined = list(human_decisions_required)
