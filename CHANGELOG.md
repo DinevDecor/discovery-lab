@@ -1449,3 +1449,78 @@
   small and explicitly incomplete, backed by the strongest evidence the
   material offers, with no idea forced to fit and the strongest
   available counter-argument reported in full rather than softened.
+
+## 2026-07-24 (continued) — META-001 Cross-Domain Meta-Theory Validation
+
+- Tested whether the `RI-0002` emerging meta-theory
+  (`docs/proposals/AG-003-meta-theory-RI-0002/`) is genuinely
+  cross-domain or an artifact of the diary material, against 16 real,
+  independently-created documents across four other repositories:
+  `kod` (ADRs `0005`/`0006`/`0007`/`0009` plus four Research Kernel
+  specifications), `trust-engine` (architecture, review protocol, and
+  proposal-quality-gate specs), `project-memory` (its own "Handover"
+  field-service architecture — a genuinely different business domain —
+  plus its AI Collaboration Architecture and Protocol), and
+  `discovery-lab`'s own `GOVERNANCE.md`/`ARCHITECTURE-MAP.md` (plus
+  `ADR-0001`, reused from the Reality Stress Test and flagged as such).
+  **The original diary was not read**; `RI-0002` was used only to state
+  the candidate theory under test, per the task's own rule.
+- Ran the full five-phase protocol at `docs/proposals/
+  META-001-cross-domain-validation/`: blind classification of each
+  source *before* revealing the candidate theory, independent pattern
+  extraction, comparison, an active falsification attempt, and
+  survivability ratings.
+- **Verdict: `PARTIALLY CROSS-DOMAIN`.** One specific principle —
+  named uncertainty states, never silently resolved (`BLOCKED`+
+  criterion in `kod`, `UNKNOWN`/`INSUFFICIENT_EVIDENCE` in
+  `trust-engine`, an `unresolved` list and `Architecture–Implementation
+  Drift` in `project-memory`, a four-category Organizational Principle
+  in `discovery-lab`) — independently earned the top rating,
+  `Cross-domain Stable`, found in all four independent domains using
+  four structurally distinct mechanisms, not shared vocabulary.
+  `RI-0002`'s other stated principle, generative abstraction, has
+  **zero** independent support anywhere in the sample — rated
+  `Unsupported`, stated plainly, not softened to protect the theory.
+- **Four new principles discovered** that the diary never suggested:
+  named artifact/task ownership (`kod`'s Writer Matrix,
+  `project-memory`'s owner-per-object rule); a numeric score gating an
+  escalation *tier* without ever authorizing the final action itself
+  (`trust-engine`'s Experience Quality Score, `project-memory`'s
+  confidence threshold); a two-layer authority model with a named
+  mismatch state (`project-memory`'s `Architecture–Implementation
+  Drift`); and an explicit "anti-theater" self-check (`project-memory`'s
+  rule that twenty consecutive `PASS` results is a red flag, not a
+  success) — the closest any independently-created document comes to
+  addressing `RI-0002`'s own unexamined hidden assumption about the
+  validator never being validated itself.
+- **Zero contradictions confirmed**, after three candidates actively
+  checked against source text (human-in-loop-as-permanent vs.
+  -as-temporary; automatic scoring vs. "never automatic" state
+  mutation; the theory's own silence on generative abstraction, which
+  is an absence, not a contradiction).
+- **Strongest counter-case, reported in full**: `kod`'s two document
+  groups and `project-memory`'s two document groups each share one
+  author and repository — if they are each closer to one design
+  decision than two, and if structural similarity partly reflects
+  shared AI-assisted drafting defaults rather than independent
+  discovery, the "four independent domains" this validation relies on
+  could realistically be two or three. What limits this counter-case:
+  the winning principle's four domain-specific mechanisms are
+  structurally distinct (different state counts, different triggers),
+  not a single template applied four times.
+- **On the task's own conditional next step**: the requesting task
+  described freezing the result as `DLOS-CORE-0001 — Foundational
+  Principles`, binding on every future agent, *if and only if* this
+  validation returned `Cross-Domain Stable` or `Foundational
+  Architecture` for the theory as a whole. It returned neither — **no
+  such freeze was created.** The final verdict document notes, without
+  recommending action, that a narrower future freeze (scoped to the one
+  principle that did earn `Cross-domain Stable` individually, not the
+  full two-principle theory) is a real option the evidence would
+  support, left for a human decision per Discovery Lab's own Principle
+  0 — not decided here.
+- **Verdict: PASS** — the task's own Critical Rule ("architectural
+  similarity is evidence, shared vocabulary is not") is honored
+  throughout: every claim traces to a specific mechanism, not a shared
+  word, and the one principle with genuinely zero support is reported
+  as such rather than rounded up.
