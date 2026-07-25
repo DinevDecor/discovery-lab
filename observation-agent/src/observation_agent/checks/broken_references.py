@@ -36,10 +36,13 @@ def _is_checkable(target: str) -> bool:
 
 
 def check_broken_references(
-    repo: RepoConfig, excluded_dirs: list[str], markdown_extensions: list[str]
+    repo: RepoConfig,
+    excluded_dirs: list[str],
+    markdown_extensions: list[str],
+    excluded_paths: list[str] | None = None,
 ) -> list[Observation]:
     observations: list[Observation] = []
-    for path in walk_files(repo.path, excluded_dirs, markdown_extensions):
+    for path in walk_files(repo.path, excluded_dirs, markdown_extensions, excluded_paths):
         text = read_text(path)
         if text is None:
             continue

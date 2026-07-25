@@ -20,6 +20,7 @@ from observation_agent.config import load_config
 
 _OBSERVATION_AGENT_ROOT = Path(__file__).resolve().parents[1]
 _CI_CONFIG_PATH = _OBSERVATION_AGENT_ROOT / "config.ci.json"
+_LOCAL_CONFIG_PATH = _OBSERVATION_AGENT_ROOT / "config.json"
 _WORKFLOW_PATH = (
     _OBSERVATION_AGENT_ROOT.parent / ".github" / "workflows" / "observation-agent.yml"
 )
@@ -169,6 +170,28 @@ class TestWorkflowFile(unittest.TestCase):
 
     def test_checkout_does_not_persist_credentials(self):
         self.assertIn("persist-credentials: false", self.text)
+
+
+class TestExcludedPathsEquivalence(unittest.TestCase):
+    """EXEC-006 — local and CI configs must agree on which tool
+    output directories to exclude, so a local run and a scheduled CI
+    run of the same check produce equivalent logical findings (never
+    flagging either tool's own report output as repository content),
+    even though only the local config actually encounters the
+    scenario in practice (CI never commits its own output, so has no
+    memory between runs to rediscover)."""
+
+    def test_both_configs_exclude_observation_agents_own_reports_dir(self):
+        local = load_config(_LOCAL_CONFIG_PATH)
+        ci = load_config(_CI_CONFIG_PATH)
+        self.assertIn("observation-agent/reports", local.excluded_paths)
+        self.assertIn("observation-agent/reports", ci.excluded_paths)
+
+    def test_both_configs_exclude_headquarters_reports_dir(self):
+        local = load_config(_LOCAL_CONFIG_PATH)
+        ci = load_config(_CI_CONFIG_PATH)
+        self.assertIn("headquarters/reports", local.excluded_paths)
+        self.assertIn("headquarters/reports", ci.excluded_paths)
 
 
 if __name__ == "__main__":

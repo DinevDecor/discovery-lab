@@ -14,9 +14,11 @@ from ..models import Confidence, Evidence, Observation
 from ..scanner import file_size, walk_files
 
 
-def check_orphan_files(repo: RepoConfig, excluded_dirs: list[str]) -> list[Observation]:
+def check_orphan_files(
+    repo: RepoConfig, excluded_dirs: list[str], excluded_paths: list[str] | None = None
+) -> list[Observation]:
     observations = []
-    for path in walk_files(repo.path, excluded_dirs):
+    for path in walk_files(repo.path, excluded_dirs, excluded_paths=excluded_paths):
         size = file_size(path)
         if size == 0:
             rel = str(path.relative_to(repo.path))

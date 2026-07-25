@@ -11,8 +11,8 @@ anything and does not write to any repository it observes.
 
 Each run walks every configured repository and runs five checks:
 
-- **`broken_references`** — Markdown `[text](path)` links whose target
-  does not resolve to a real file.
+- **`broken_references`** — Markdown links (`[text]` immediately
+  followed by `(path)`) whose target does not resolve to a real file.
 - **`orphan_files`** — zero-byte files.
 - **`stale_state`** — a declared state-file date far older than every
   other file's modification time in the repo (`INSUFFICIENT_EVIDENCE`,
@@ -65,6 +65,20 @@ skipped, not treated as an error (see the report's own Skipped list
 and the execution log). `config.ci.json` is a second, separate config
 used only by the scheduled GitHub Actions run — see "Scheduled
 Activation" and "CI Limitations" below.
+
+- **`excluded_dirs`** — directory *names* skipped wherever they occur
+  in the tree (e.g. `.git`, `__pycache__`), matched by bare name only.
+- **`excluded_paths`** (`EXEC-006`) — repo-relative directory *paths*
+  skipped, matched by path segment rather than by name — e.g.
+  `"observation-agent/reports"` excludes exactly that directory (and
+  everything nested under it) without also hiding an unrelated
+  `reports/` directory elsewhere in the same repo, and without
+  matching a similarly-prefixed sibling like
+  `observation-agent/reports-extra`. This exists specifically so a
+  tool's own output directory can be excluded from the very scan that
+  produces it: both `config.json` and `config.ci.json` list
+  `observation-agent/reports` and `headquarters/reports` here — see
+  "Limitations" below for why that matters.
 
 ## Scheduled Activation (`EXEC-003`)
 
@@ -148,10 +162,11 @@ These are documented scope boundaries, not bugs to be silently
 tightened away — each was chosen deliberately to avoid the tool
 overclaiming certainty it doesn't have:
 
-- **`broken_references`** only recognizes Markdown `[text](path)`
-  links, not bare inline-code paths or other reference styles. This
-  trades recall for precision: a check that flags every string that
-  merely looks like a path would produce far more false positives.
+- **`broken_references`** only recognizes Markdown links shaped
+  `[text]` immediately followed by `(path)`, not bare inline-code
+  paths or other reference styles. This trades recall for precision:
+  a check that flags every string that merely looks like a path would
+  produce far more false positives.
 - **`stale_state`** reports `INSUFFICIENT_EVIDENCE`, never `MISMATCH`,
   because file modification times are known to be unreliable in
   shallow clones and after certain git operations (a lesson this
@@ -185,6 +200,33 @@ overclaiming certainty it doesn't have:
   finding — that no *other* action anywhere in this ecosystem is
   triggered by anything but a human message — is unaffected; this
   workflow only ever produces a report, never an action.
+- **Self-referential feedback loop across repeated local runs**:
+  found and root-caused during `EXEC-005`'s Operational Validation
+  (`docs/investigations/INV-0004-ecosystem-operational-validation.md`),
+  fixed in `EXEC-006`. Both tools' `reports/` directories live inside
+  `discovery-lab`, one of the 5 scanned repositories, so a local run's
+  own output was becoming the next local run's new input — root cause
+  traced specifically to two literal examples of `[text]` immediately
+  followed by `(path)` syntax that used to sit in this README's own
+  prose, which `broken_references` could not distinguish from a real
+  link once a report quoted them. Fixed by (1) excluding each tool's
+  own `reports/` directory from scanning via the new, configurable
+  `excluded_paths` (see Configuration above), and (2) rewording this
+  README's two examples so they no longer parse as a literal
+  `[text]` immediately followed by `(path)` match. Regression tests
+  (`tests/test_scanner.py`, `tests/test_broken_references.py`,
+  `tests/test_cli_stability.py`) reproduce the original bug as a
+  negative control and prove repeated unchanged-input runs now stay
+  stable. Not addressed by this fix, and out of this task's scope: any
+  *other* file in the ecosystem whose own prose happens to contain a
+  literal `[text]` immediately followed by `(path)`-shaped example (a
+  handful exist in `STATE.md`, `CHANGELOG.md`, and `INV-0004` itself,
+  describing this very defect) will still be flagged — these are
+  real, stable,
+  non-compounding matches against ordinary repository content, not a
+  recurrence of the reports/-directory feedback loop, so excluding or
+  rewording them was left to a future, separately-scoped task rather
+  than folded into this one.
 
 ### CI Limitations (why the schedule only fully scans `discovery-lab`)
 
