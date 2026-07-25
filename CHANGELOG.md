@@ -1,5 +1,93 @@
 # Changelog
 
+## 2026-07-25 (EXEC-002)
+
+- Executed `EXEC-002 — Build Observation Agent 001`, the session's first
+  real implementation task (not an architecture/proposal exercise): built
+  and ran a working, human-invoked, technically read-only Python tool
+  implementing `AGENT-001`'s proposal, at `observation-agent/`.
+- Built `src/observation_agent/`: `models.py` (the `AGENT-001` 7-field
+  Observation schema plus `Evidence`), `config.py` (JSON config, no
+  PyYAML dependency), `scanner.py` (read-only filesystem walking), five
+  check modules (`broken_references`, `orphan_files`, `stale_state`,
+  `status_history_consistency`, `registry_check`), `report.py`
+  (Markdown report rendering + run-over-run diffing via a JSON snapshot),
+  `cli.py` (orchestration and the only two write-capable modules, both
+  scoped to this tool's own `reports/` directory).
+- Built a 30-test suite (`tests/`, stdlib `unittest` only), including
+  `tests/test_safety.py` — a static scan of the actual source text for
+  forbidden patterns (`subprocess.`, `os.remove(`, `shutil.rmtree(`,
+  `.commit(`, `.push(`, `.merge(`, etc.) and for writing-mode file opens
+  outside the two allowed modules, with a self-check proving the
+  detector catches real violations rather than passing vacuously. Found
+  and fixed two false-positive failures during development (a
+  too-permissive word-boundary regex, then a docstring's own prose
+  incidentally matching a tightened pattern) by rewording the prose
+  rather than further complicating the regex.
+- Ran the tool for real against all 5 configured repositories
+  (`project-memory`, `kod`, `discovery-lab`, `generative-discovery-engine`,
+  `trust-engine`) - the required "example execution." The first real run
+  surfaced two previously-unknown `STATUS.yaml`/`HISTORY.md` mismatches
+  inside `discovery-lab` itself (`AG-001`, `AG-002`) not found anywhere
+  earlier in this session, plus a matching one in `AG-003`.
+- Independently verified those three findings by hand (`grep`/`ls`
+  against the real files) before trusting them, per this session's
+  established practice. Found: the `AG-001` finding was a genuine false
+  positive in `status_history_consistency`'s own regex (a bug-fix
+  `HISTORY.md` heading's explanatory prose incidentally contained the
+  substring "RUN-0001," and the original pattern (`##.*?RUN-\d+`)
+  counted it as a second run entry). The `AG-002`/`AG-003` findings were
+  real regex undercounts (run identifiers not using a literal "RUN-N"
+  primary subject, e.g. `MIRROR-VERIFY-0001`; and a single heading
+  bundling three run IDs, e.g. `STRESS-RUN-0003, -0004, -0005`).
+- Fixed `status_history_consistency.py`: tightened the run-entry regex
+  to require the `RUN-N` token as a heading's primary subject
+  immediately after the date and dash (fixes the `AG-001` false
+  positive precisely, without weakening detection of real run
+  headings), and downgraded a declared/counted mismatch's confidence
+  from `MISMATCH` to `INSUFFICIENT_EVIDENCE` (the check cannot
+  mechanically distinguish a real bookkeeping gap from an unrecognized
+  heading convention — consistent with how `stale_state` and
+  `registry_check` already handle the same kind of proxy question).
+  Added two regression tests reproducing the exact real-world `AG-001`
+  and `AG-002` scenarios. Full 30-test suite passes.
+- Reran the real example execution with the fix: the `AG-001` finding
+  now correctly appears under Resolved Findings (present in the
+  previous run, not found in this one); `AG-002` and `AG-003` now
+  correctly report `INSUFFICIENT_EVIDENCE` with a recommendation for
+  human review, not a false `MISMATCH` claim. Replaced the earlier,
+  known-defective report output with this corrected run
+  (`reports/observation-report-20260725T044728Z.md`,
+  `reports/execution-log-20260725T044728Z.md`).
+- Wrote `observation-agent/README.md` (what it is, how to run it, safety
+  guarantees, and an explicit Limitations section naming every check's
+  scope boundary, including the one just found and fixed) and
+  `observation-agent/CONTRACT.md` (a lightweight tool contract —
+  deliberately not a full Employee Role document set, since `EXEC-002`
+  forbade adding new governance or starting a new review cycle for this
+  task).
+- Noted, not yet resolved: `kod/Infrastructure/python/registry.py` is
+  33 bytes, not 0 bytes as recorded from an earlier manual `DL-001`
+  assessment — a minor discrepancy in that earlier finding's precision,
+  not something this task's scope required fixing.
+- Constraints honored: no additional governance, no new architecture, no
+  new proposal, no new review cycle; reused the exact `AGENT-001` schema
+  and `PROP-0001`'s existing vocabulary and rules (including the "no
+  single aggregate score" rule, enforced by its own test); zero writes
+  to any observed repository (`project-memory`, `kod`,
+  `generative-discovery-engine`, `trust-engine`, or `discovery-lab`
+  outside this tool's own `observation-agent/` directory and this
+  changelog/state update).
+- Verdict: **the Observation Agent is fully operational.** It runs
+  end-to-end against all 5 real repositories, produces a real,
+  evidence-cited report with correctly-calibrated confidence levels, is
+  covered by a passing test suite that includes an enforced (not just
+  documented) safety guarantee, and every discrepancy the tool itself
+  surfaced about its own first output was investigated and either fixed
+  (the `AG-001` false positive) or honestly downgraded to
+  `INSUFFICIENT_EVIDENCE` rather than hidden (the `AG-002`/`AG-003`
+  undercount). No external blocker was found; none is being claimed.
+
 ## 2026-07-24
 
 - Verified remote access to `DinevDecor/discovery-lab` (previously untested;

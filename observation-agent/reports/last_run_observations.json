@@ -1,0 +1,558 @@
+{
+  "orphan_files::templates/TASK_TEMPLATE.md::templates/TASK_TEMPLATE.md is a 0-byte file": {
+    "event": "templates/TASK_TEMPLATE.md is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "templates/TASK_TEMPLATE.md",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove templates/TASK_TEMPLATE.md, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::docs/specs/WORKFLOW.md::docs/specs/WORKFLOW.md is a 0-byte file": {
+    "event": "docs/specs/WORKFLOW.md is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "docs/specs/WORKFLOW.md",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove docs/specs/WORKFLOW.md, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "registry_check::PROJECT_REGISTRY.md::PROJECT_REGISTRY.md: row for 'Project Memory' claims an ACTIVE-shaped status with no in-row citation": {
+    "event": "PROJECT_REGISTRY.md: row for 'Project Memory' claims an ACTIVE-shaped status with no in-row citation",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "PROJECT_REGISTRY.md",
+        "line_number": 7,
+        "quoted_text": "| Project Memory | `project-memory` | ACTIVE | Phase 1 setup and Fast-track Pilot 0 | `project-memory/PROJECT_STATE.md` | AI Collaboration Architecture v1.1 \u2014 PILOT |"
+      }
+    ],
+    "verification_method": "Structural table parse only \u2014 this check cannot read the claim's real-world truth, only whether it cites supporting evidence",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "The claim may be entirely correct and simply uncited, or it may be stale/contradicted elsewhere (as DL-001 found for a different subject in this same file) \u2014 this check cannot distinguish the two",
+    "recommended_action": "A human or judgment-capable review should verify 'Project Memory' against citable evidence before treating this row as current.",
+    "human_needed": true,
+    "check_name": "registry_check"
+  },
+  "registry_check::PROJECT_REGISTRY.md::PROJECT_REGISTRY.md: row for 'KOD' claims an ACTIVE-shaped status with no in-row citation": {
+    "event": "PROJECT_REGISTRY.md: row for 'KOD' claims an ACTIVE-shaped status with no in-row citation",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "PROJECT_REGISTRY.md",
+        "line_number": 8,
+        "quoted_text": "| KOD | KOD repository | ACTIVE | Sprint 23; display Next Action and ART-0001 during boot | `KOD/Core/Registry/PROJECT_STATE.md` | Binding to be created during pilot preparation |"
+      }
+    ],
+    "verification_method": "Structural table parse only \u2014 this check cannot read the claim's real-world truth, only whether it cites supporting evidence",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "The claim may be entirely correct and simply uncited, or it may be stale/contradicted elsewhere (as DL-001 found for a different subject in this same file) \u2014 this check cannot distinguish the two",
+    "recommended_action": "A human or judgment-capable review should verify 'KOD' against citable evidence before treating this row as current.",
+    "human_needed": true,
+    "check_name": "registry_check"
+  },
+  "registry_check::PROJECT_REGISTRY.md::PROJECT_REGISTRY.md: row for 'Trust Engine' claims an ACTIVE-shaped status with no in-row citation": {
+    "event": "PROJECT_REGISTRY.md: row for 'Trust Engine' claims an ACTIVE-shaped status with no in-row citation",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "PROJECT_REGISTRY.md",
+        "line_number": 9,
+        "quoted_text": "| Trust Engine | Trust Engine repository | ACTIVE | Not part of Pilot 0 | Project-specific path to be confirmed | Not yet bound |"
+      }
+    ],
+    "verification_method": "Structural table parse only \u2014 this check cannot read the claim's real-world truth, only whether it cites supporting evidence",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "The claim may be entirely correct and simply uncited, or it may be stale/contradicted elsewhere (as DL-001 found for a different subject in this same file) \u2014 this check cannot distinguish the two",
+    "recommended_action": "A human or judgment-capable review should verify 'Trust Engine' against citable evidence before treating this row as current.",
+    "human_needed": true,
+    "check_name": "registry_check"
+  },
+  "registry_check::PROJECT_REGISTRY.md::PROJECT_REGISTRY.md: row for 'Regime AI' claims an ACTIVE-shaped status with no in-row citation": {
+    "event": "PROJECT_REGISTRY.md: row for 'Regime AI' claims an ACTIVE-shaped status with no in-row citation",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "PROJECT_REGISTRY.md",
+        "line_number": 10,
+        "quoted_text": "| Regime AI | Regime AI repository | ACTIVE / RESEARCH | Not part of Pilot 0 | Project-specific path to be confirmed | Not yet bound |"
+      }
+    ],
+    "verification_method": "Structural table parse only \u2014 this check cannot read the claim's real-world truth, only whether it cites supporting evidence",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "The claim may be entirely correct and simply uncited, or it may be stale/contradicted elsewhere (as DL-001 found for a different subject in this same file) \u2014 this check cannot distinguish the two",
+    "recommended_action": "A human or judgment-capable review should verify 'Regime AI' against citable evidence before treating this row as current.",
+    "human_needed": true,
+    "check_name": "registry_check"
+  },
+  "registry_check::PROJECT_REGISTRY.md::PROJECT_REGISTRY.md: row for 'Dinev Decor Systems' claims an ACTIVE-shaped status with no in-row citation": {
+    "event": "PROJECT_REGISTRY.md: row for 'Dinev Decor Systems' claims an ACTIVE-shaped status with no in-row citation",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "PROJECT_REGISTRY.md",
+        "line_number": 11,
+        "quoted_text": "| Dinev Decor Systems | Repository or operational system to be established | ACTIVE / DISCOVERY | Operational memory and workflow systems | Project-specific path to be confirmed | Not yet bound |"
+      }
+    ],
+    "verification_method": "Structural table parse only \u2014 this check cannot read the claim's real-world truth, only whether it cites supporting evidence",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "The claim may be entirely correct and simply uncited, or it may be stale/contradicted elsewhere (as DL-001 found for a different subject in this same file) \u2014 this check cannot distinguish the two",
+    "recommended_action": "A human or judgment-capable review should verify 'Dinev Decor Systems' against citable evidence before treating this row as current.",
+    "human_needed": true,
+    "check_name": "registry_check"
+  },
+  "stale_state::PROJECT_STATE.md::PROJECT_STATE.md declares date 2026-07-16, but other files in project-memory were modified as recently as 2026-07-24": {
+    "event": "PROJECT_STATE.md declares date 2026-07-16, but other files in project-memory were modified as recently as 2026-07-24",
+    "evidence": [
+      {
+        "repo": "project-memory",
+        "file_path": "PROJECT_STATE.md",
+        "line_number": null,
+        "quoted_text": "declared date: 2026-07-16"
+      }
+    ],
+    "verification_method": "Declared date compared against the newest filesystem mtime elsewhere in the repository",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "Either the state file is genuinely stale, or filesystem mtimes in this checkout do not reflect true edit history (a known limitation \u2014 see module docstring). This check alone cannot distinguish the two.",
+    "recommended_action": "A human or a content-based check (not mtime alone) should confirm whether PROJECT_STATE.md is actually stale before treating this as a defect.",
+    "human_needed": true,
+    "check_name": "stale_state"
+  },
+  "orphan_files::ROS_ARCHITECTURE.md::ROS_ARCHITECTURE.md is a 0-byte file": {
+    "event": "ROS_ARCHITECTURE.md is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "ROS_ARCHITECTURE.md",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove ROS_ARCHITECTURE.md, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Knowledge/EXCAVATION_PROTOCOL.md::Knowledge/EXCAVATION_PROTOCOL.md is a 0-byte file": {
+    "event": "Knowledge/EXCAVATION_PROTOCOL.md is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Knowledge/EXCAVATION_PROTOCOL.md",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Knowledge/EXCAVATION_PROTOCOL.md, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Knowledge/.gitkeep::Knowledge/.gitkeep is a 0-byte file": {
+    "event": "Knowledge/.gitkeep is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Knowledge/.gitkeep",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Knowledge/.gitkeep, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Products/.gitkeep::Products/.gitkeep is a 0-byte file": {
+    "event": "Products/.gitkeep is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Products/.gitkeep",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Products/.gitkeep, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Core/IDENTITY.md::Core/IDENTITY.md is a 0-byte file": {
+    "event": "Core/IDENTITY.md is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Core/IDENTITY.md",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Core/IDENTITY.md, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Core/WORKFLOW.md::Core/WORKFLOW.md is a 0-byte file": {
+    "event": "Core/WORKFLOW.md is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Core/WORKFLOW.md",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Core/WORKFLOW.md, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Core/.gitkeep::Core/.gitkeep is a 0-byte file": {
+    "event": "Core/.gitkeep is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Core/.gitkeep",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Core/.gitkeep, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Core/Registry/TRACEABILITY.md::Core/Registry/TRACEABILITY.md is a 0-byte file": {
+    "event": "Core/Registry/TRACEABILITY.md is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Core/Registry/TRACEABILITY.md",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Core/Registry/TRACEABILITY.md, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/.gitkeep::Infrastructure/.gitkeep is a 0-byte file": {
+    "event": "Infrastructure/.gitkeep is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/.gitkeep",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/.gitkeep, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/python/kod/__init__.py::Infrastructure/python/kod/__init__.py is a 0-byte file": {
+    "event": "Infrastructure/python/kod/__init__.py is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/python/kod/__init__.py",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/python/kod/__init__.py, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/python/kod/validator.py::Infrastructure/python/kod/validator.py is a 0-byte file": {
+    "event": "Infrastructure/python/kod/validator.py is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/python/kod/validator.py",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/python/kod/validator.py, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/python/kod/services/__init__.py::Infrastructure/python/kod/services/__init__.py is a 0-byte file": {
+    "event": "Infrastructure/python/kod/services/__init__.py is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/python/kod/services/__init__.py",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/python/kod/services/__init__.py, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/python/kod/parsers/__init__.py::Infrastructure/python/kod/parsers/__init__.py is a 0-byte file": {
+    "event": "Infrastructure/python/kod/parsers/__init__.py is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/python/kod/parsers/__init__.py",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/python/kod/parsers/__init__.py, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/python/kod/models/__init__.py::Infrastructure/python/kod/models/__init__.py is a 0-byte file": {
+    "event": "Infrastructure/python/kod/models/__init__.py is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/python/kod/models/__init__.py",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/python/kod/models/__init__.py, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/python/kod/models/project_state.py::Infrastructure/python/kod/models/project_state.py is a 0-byte file": {
+    "event": "Infrastructure/python/kod/models/project_state.py is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/python/kod/models/project_state.py",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/python/kod/models/project_state.py, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::Infrastructure/python/tests/__init__.py::Infrastructure/python/tests/__init__.py is a 0-byte file": {
+    "event": "Infrastructure/python/tests/__init__.py is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "kod",
+        "file_path": "Infrastructure/python/tests/__init__.py",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove Infrastructure/python/tests/__init__.py, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::reality-inbox/processed/oneDay-6/20251117/diary.txt::reality-inbox/processed/oneDay-6/20251117/diary.txt is a 0-byte file": {
+    "event": "reality-inbox/processed/oneDay-6/20251117/diary.txt is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "reality-inbox/processed/oneDay-6/20251117/diary.txt",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove reality-inbox/processed/oneDay-6/20251117/diary.txt, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::reality-inbox/processed/oneDay-6/20251101/diary.txt::reality-inbox/processed/oneDay-6/20251101/diary.txt is a 0-byte file": {
+    "event": "reality-inbox/processed/oneDay-6/20251101/diary.txt is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "reality-inbox/processed/oneDay-6/20251101/diary.txt",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove reality-inbox/processed/oneDay-6/20251101/diary.txt, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::reality-inbox/processed/oneDay-6/20251118/diary.txt::reality-inbox/processed/oneDay-6/20251118/diary.txt is a 0-byte file": {
+    "event": "reality-inbox/processed/oneDay-6/20251118/diary.txt is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "reality-inbox/processed/oneDay-6/20251118/diary.txt",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove reality-inbox/processed/oneDay-6/20251118/diary.txt, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::reality-inbox/processed/oneDay-6/20251212/diary.txt::reality-inbox/processed/oneDay-6/20251212/diary.txt is a 0-byte file": {
+    "event": "reality-inbox/processed/oneDay-6/20251212/diary.txt is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "reality-inbox/processed/oneDay-6/20251212/diary.txt",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove reality-inbox/processed/oneDay-6/20251212/diary.txt, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::reality-inbox/processed/oneDay-6/20260111/diary.txt::reality-inbox/processed/oneDay-6/20260111/diary.txt is a 0-byte file": {
+    "event": "reality-inbox/processed/oneDay-6/20260111/diary.txt is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "reality-inbox/processed/oneDay-6/20260111/diary.txt",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove reality-inbox/processed/oneDay-6/20260111/diary.txt, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "orphan_files::reality-inbox/processed/oneDay-6/20260212/diary.txt::reality-inbox/processed/oneDay-6/20260212/diary.txt is a 0-byte file": {
+    "event": "reality-inbox/processed/oneDay-6/20260212/diary.txt is a 0-byte file",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "reality-inbox/processed/oneDay-6/20260212/diary.txt",
+        "line_number": null,
+        "quoted_text": "(file exists, 0 bytes)"
+      }
+    ],
+    "verification_method": "Direct file size check",
+    "confidence": "MISMATCH",
+    "possible_interpretation": "An orphaned placeholder, an incomplete artifact, or a deliberately empty stub \u2014 not distinguishable from file content alone",
+    "recommended_action": "Populate or remove reality-inbox/processed/oneDay-6/20260212/diary.txt, at the repository's own maintainers' discretion \u2014 flagged as orphan content, not assumed to be a defect.",
+    "human_needed": true,
+    "check_name": "orphan_files"
+  },
+  "status_history_consistency::docs/ai-organization/employees/AG-002-discovery-archaeologist/STATUS.yaml::docs/ai-organization/employees/AG-002-discovery-archaeologist/STATUS.yaml declares runs_completed=7, but docs/ai-organization/employees/AG-002-discovery-archaeologist/HISTORY.md records 5 run entr(y/ies)": {
+    "event": "docs/ai-organization/employees/AG-002-discovery-archaeologist/STATUS.yaml declares runs_completed=7, but docs/ai-organization/employees/AG-002-discovery-archaeologist/HISTORY.md records 5 run entr(y/ies)",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "docs/ai-organization/employees/AG-002-discovery-archaeologist/STATUS.yaml",
+        "line_number": null,
+        "quoted_text": "runs_completed: 7"
+      },
+      {
+        "repo": "discovery-lab",
+        "file_path": "docs/ai-organization/employees/AG-002-discovery-archaeologist/HISTORY.md",
+        "line_number": null,
+        "quoted_text": "5 '## ... RUN-N' entries found"
+      }
+    ],
+    "verification_method": "Direct cross-reference between a STATUS.yaml field and its sibling HISTORY.md's own '## YYYY-MM-DD \u2014 RUN-N'-shaped headings",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "Either STATUS.yaml was not updated when a run was recorded in HISTORY.md (a bookkeeping gap), or HISTORY.md records real runs under a heading convention this check's heuristic does not recognize (no literal 'RUN-N' token as the heading's primary subject, or several run IDs bundled into one heading) \u2014 this check counts headings mechanically and cannot distinguish the two on its own",
+    "recommended_action": "A human familiar with discovery-lab's docs/ai-organization/employees/AG-002-discovery-archaeologist/HISTORY.md should confirm whether 7 is the correct count; if so, either update HISTORY.md's heading convention or treat this as a false positive. If 5 is correct, update docs/ai-organization/employees/AG-002-discovery-archaeologist/STATUS.yaml's runs_completed field, or correct HISTORY.md if it over-counts.",
+    "human_needed": true,
+    "check_name": "status_history_consistency"
+  },
+  "status_history_consistency::docs/ai-organization/employees/AG-003-knowledge-curator/STATUS.yaml::docs/ai-organization/employees/AG-003-knowledge-curator/STATUS.yaml declares runs_completed=3, but docs/ai-organization/employees/AG-003-knowledge-curator/HISTORY.md records 0 run entr(y/ies)": {
+    "event": "docs/ai-organization/employees/AG-003-knowledge-curator/STATUS.yaml declares runs_completed=3, but docs/ai-organization/employees/AG-003-knowledge-curator/HISTORY.md records 0 run entr(y/ies)",
+    "evidence": [
+      {
+        "repo": "discovery-lab",
+        "file_path": "docs/ai-organization/employees/AG-003-knowledge-curator/STATUS.yaml",
+        "line_number": null,
+        "quoted_text": "runs_completed: 3"
+      },
+      {
+        "repo": "discovery-lab",
+        "file_path": "docs/ai-organization/employees/AG-003-knowledge-curator/HISTORY.md",
+        "line_number": null,
+        "quoted_text": "0 '## ... RUN-N' entries found"
+      }
+    ],
+    "verification_method": "Direct cross-reference between a STATUS.yaml field and its sibling HISTORY.md's own '## YYYY-MM-DD \u2014 RUN-N'-shaped headings",
+    "confidence": "INSUFFICIENT_EVIDENCE",
+    "possible_interpretation": "Either STATUS.yaml was not updated when a run was recorded in HISTORY.md (a bookkeeping gap), or HISTORY.md records real runs under a heading convention this check's heuristic does not recognize (no literal 'RUN-N' token as the heading's primary subject, or several run IDs bundled into one heading) \u2014 this check counts headings mechanically and cannot distinguish the two on its own",
+    "recommended_action": "A human familiar with discovery-lab's docs/ai-organization/employees/AG-003-knowledge-curator/HISTORY.md should confirm whether 3 is the correct count; if so, either update HISTORY.md's heading convention or treat this as a false positive. If 0 is correct, update docs/ai-organization/employees/AG-003-knowledge-curator/STATUS.yaml's runs_completed field, or correct HISTORY.md if it over-counts.",
+    "human_needed": true,
+    "check_name": "status_history_consistency"
+  }
+}
