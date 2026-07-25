@@ -1,6 +1,7 @@
 # Contract — Observation Agent 001 (`observation-agent/`)
 
-Version: **v0.1** (implements `AGENT-001` v1.0, task `EXEC-002`)
+Version: **v0.2** (implements `AGENT-001` v1.0; built under `EXEC-002`,
+activated on a schedule under `EXEC-003`)
 Core Principle: **Observe. Report evidence. Do not decide, do not act.**
 
 This is a **tool contract**, not an Employee Role contract. `EXEC-002`
@@ -14,13 +15,20 @@ not implied or pre-approved by this document.
 
 ## Scope of authority
 
-Read-only observation of the repositories listed in `config.json`, run
-only when a human invokes `run_observation_agent.py` or
-`python3 -m observation_agent.cli`. No authority beyond producing a
-report is granted. Nothing in this codebase schedules or triggers a
-run on its own — per `DL-002`'s finding, no ratified trigger mechanism
-exists anywhere in this ecosystem, and this tool does not attempt to
-create one.
+Read-only observation of the repositories listed in `config.json` (a
+human-invoked run) or `config.ci.json` (the scheduled run — see
+README's "CI Limitations": only `discovery-lab` itself is reachable
+from the scheduled workflow today, by design, not by omission). No
+authority beyond producing a report is granted, whether invoked by a
+human running `run_observation_agent.py` directly or by the daily
+GitHub Actions schedule in `.github/workflows/observation-agent.yml`.
+The schedule is itself scoped to `contents: read` only and never
+performs any action beyond running the agent and uploading its output
+as a workflow artifact — it does not grant this tool any authority the
+human-invoked path didn't already have. `DL-002`'s wider finding that
+no *other* action anywhere in this ecosystem is triggered by anything
+but a human message is otherwise unaffected: this schedule produces
+reports, never actions.
 
 ## Rights
 

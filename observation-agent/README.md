@@ -62,7 +62,70 @@ findings are reported separately).
 remove a repository by editing this file; nothing in the code needs to
 change. A repository whose configured path does not exist on disk is
 skipped, not treated as an error (see the report's own Skipped list
-and the execution log).
+and the execution log). `config.ci.json` is a second, separate config
+used only by the scheduled GitHub Actions run — see "Scheduled
+Activation" and "CI Limitations" below.
+
+## Scheduled Activation (`EXEC-003`)
+
+Per `DL-002`'s finding that no ratified trigger/scheduling mechanism
+existed anywhere in this ecosystem, `EXEC-003` activated one for this
+tool specifically: `.github/workflows/observation-agent.yml`, a
+GitHub Actions workflow that runs the unmodified agent automatically.
+
+- **Mechanism**: GitHub Actions, chosen because it is repository-native
+  and can be configured with genuinely read-only permissions — no
+  separate service, credential store, or daemon needed.
+- **Schedule**: once daily, `06:00 UTC` (cron `0 6 * * *`, the
+  workflow's `on.schedule` block). To change it, edit that one line
+  and push — no other change is needed.
+- **Manual run**: GitHub → this repository → **Actions** tab →
+  **Observation Agent 001** → **Run workflow**. This uses the exact
+  same job the schedule uses (`workflow_dispatch` on the same
+  workflow file), so a manual run is a faithful test of what the
+  schedule will do.
+- **Permissions**: `contents: read`, declared at both the workflow
+  level and the job level, and nothing else — no `issues`, no
+  `pull-requests`, no `write` of any kind, anywhere in the file.
+  `actions/checkout` is called with `persist-credentials: false`, so
+  no token is even left on disk for the job to (mis)use after
+  checkout. No repository secret is required for the workflow to run
+  at all (see CI Limitations for what a secret would additionally
+  unlock).
+- **Artifact location**: every run — scheduled or manual — uploads
+  `observation-agent/reports-ci/` (the report, the execution log, and
+  the run's JSON snapshot) as a workflow artifact named
+  `observation-agent-report-<run number>`, retained 90 days, visible
+  under that run's **Summary** page in the Actions tab.
+- **Failure behavior**: the workflow's run step fails (turns the
+  Actions run red) only if the agent itself cannot complete — a real
+  crash, not a finding. `MISMATCH` and `INSUFFICIENT_EVIDENCE`
+  findings are expected output, never a failure. A short **Run
+  Summary** (`SUCCESS` / `PARTIAL` / `FAILURE`, plus the Confidence
+  breakdown) is published to the Actions run's own Job Summary by
+  `ci_summary.py`, so the outcome is visible without opening the
+  artifact. `PARTIAL` covers both "a repository was skipped" (expected
+  every run, see CI Limitations) and "a check itself errored" (not
+  expected — worth reading the execution log if it appears).
+- **Disabling the schedule immediately**: GitHub → **Actions** tab →
+  **Observation Agent 001** → **⋯** menu → **Disable workflow**. This
+  takes effect immediately, requires no commit, and is fully
+  reversible from the same menu. Editing or deleting the `schedule:`
+  block in the workflow file is an equivalent, code-level alternative,
+  but the UI toggle is faster for an urgent stop.
+- **How a human transfers an accepted finding into the Recommendation
+  Ledger**: this tool never writes to the Ledger itself — that is a
+  deliberate safety boundary, not an oversight (see Safety
+  guarantees). To act on a finding: open the report artifact from the
+  relevant run, decide whether the finding is worth recording, and if
+  so, add a new entry to
+  `docs/investigations/RECOMMENDATION-LEDGER.md` by hand, following
+  its existing schema (`recommendation_id`, `source_investigation` —
+  cite the specific report filename and run — `destination_repository`,
+  `date_proposed`, `status: PROPOSED`, `summary`). This is the same
+  manual process `STRATEGIC-001` used to populate the Ledger's first
+  entries; the scheduled agent only ever supplies evidence for that
+  human step, never performs it.
 
 ## Safety guarantees
 
@@ -116,11 +179,61 @@ overclaiming certainty it doesn't have:
   reports on. It has no independent reviewer. This is disclosed, not
   solved — consistent with how `ARCH-001`, `EXEC-001`, `DL-002`, and
   `AGENT-001` each already disclosed the same unresolved limitation.
-- **No trigger/scheduling mechanism.** Per `DL-002`'s finding, none
-  exists anywhere in this ecosystem. This tool is invoked by a human
-  running a command; it does not run itself.
+- **Trigger/scheduling mechanism**: resolved by `EXEC-003` for this
+  tool specifically (see Scheduled Activation above) — this no longer
+  describes a gap for the Observation Agent itself. `DL-002`'s wider
+  finding — that no *other* action anywhere in this ecosystem is
+  triggered by anything but a human message — is unaffected; this
+  workflow only ever produces a report, never an action.
+
+### CI Limitations (why the schedule only fully scans `discovery-lab`)
+
+All 5 configured repositories
+(`project-memory`, `kod`, `discovery-lab`, `generative-discovery-engine`,
+`trust-engine`) are separate, **private** repositories in the same
+GitHub org. `actions/checkout`'s default `GITHUB_TOKEN` only has read
+access to the repository the workflow itself runs in
+(`discovery-lab`) — it cannot check out the other 4 without an
+additional credential, because GitHub does not extend a workflow's
+default token across private repositories, even within the same org,
+without an explicit grant.
+
+Getting that access would require either:
+
+1. A fine-grained personal access token scoped to **read-only**
+   `contents` on the other 4 repos, stored as a repository secret and
+   referenced by the workflow's checkout steps for those repos; or
+2. Each of the other 4 repos' own **Settings → Actions → General →
+   Access** page explicitly allowing `discovery-lab`'s workflows to
+   read them.
+
+Both are provisioning/administrative actions on repositories this
+session has no path to configure (secret creation and cross-repo
+Actions-access settings are both write/admin-level operations on
+those repositories, not read-only observation) — exactly the
+situation the task's own Security requirements anticipated: *"Do not
+use credentials with write access unless technically unavoidable. If
+unavoidable, stop and report the blocker rather than proceeding."*
+Rather than escalate to a write-capable credential to force full
+coverage, the scheduled workflow does what it safely can with zero
+additional credentials: it fully scans `discovery-lab` and reports the
+other 4 as `SKIP`ped, using the agent's existing, already-tested
+"repository path does not exist" failure-safe behavior (see
+`config.ci.json`) — not a new workaround, the same mechanism a human
+run already relies on when a configured repository isn't cloned
+locally.
+
+**Full 5-repository coverage remains available today** the way it
+always has: a human running `python3 run_observation_agent.py` (the
+default `config.json`) in an environment where all 5 repositories are
+already checked out side by side, exactly as `EXEC-002`'s original
+run and this task's own validation both did. Extending the *scheduled*
+run to all 5 repositories is a separate, later, human-authorized step
+(provisioning one of the two credentials above) — named here as a
+remaining human action, not attempted.
 
 ## Provenance
 
-Implements `docs/proposals/AGENT-001-observation-agent/` under task
-`EXEC-002`. See `CONTRACT.md` for the tool's operating contract.
+Implements `docs/proposals/AGENT-001-observation-agent/` under tasks
+`EXEC-002` (build) and `EXEC-003` (schedule). See `CONTRACT.md` for
+the tool's operating contract.

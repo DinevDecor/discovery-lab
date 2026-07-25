@@ -89,11 +89,14 @@ destination_repository: KOD
 date_proposed: 2026-07-25
 status: PROPOSED
 date_status_recorded: 2026-07-25
-summary: Three 0-byte files found (ROS_ARCHITECTURE.md,
-  Infrastructure/python/kod/validator.py,
-  Infrastructure/python/registry.py). Suggested action: either populate
-  or remove, at KOD maintainers' own discretion — flagged as orphan
-  content, not assumed to be a defect.
+summary: Two 0-byte files found (ROS_ARCHITECTURE.md,
+  Infrastructure/python/kod/validator.py). Suggested action: either
+  populate or remove, at KOD maintainers' own discretion — flagged as
+  orphan content, not assumed to be a defect.
+  CORRECTION (EXEC-003, 2026-07-25): a third file originally listed
+  here, Infrastructure/python/registry.py, is not empty — it is 33
+  bytes (a single import line), a non-empty stub rather than an
+  orphan file, and is removed from this recommendation.
 ```
 
 ```

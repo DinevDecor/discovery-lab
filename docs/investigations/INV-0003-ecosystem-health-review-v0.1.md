@@ -69,9 +69,17 @@ evidence_coverage: Checked PROJECT_STATE.md, ROADMAP.md, SPRINT-024.md,
     Infrastructure/python/ file listing, DOMAIN_MODEL.md. Shallow
     clone (1 commit visible) limited git-history verification.
 repo_verdict: FAIL
-notes: Also found, low severity: 3 empty (0-byte) files
-    (ROS_ARCHITECTURE.md, Infrastructure/python/kod/validator.py,
-    Infrastructure/python/registry.py).
+notes: Also found, low severity: 2 empty (0-byte) files
+    (ROS_ARCHITECTURE.md, Infrastructure/python/kod/validator.py).
+    CORRECTION (EXEC-003, 2026-07-25): a third file originally listed
+    here as empty, Infrastructure/python/registry.py, is not empty —
+    it is 33 bytes, containing a single import line
+    ("from kod.registry import Registry"). It is a non-empty stub, a
+    different and less severe finding than a genuinely empty file, and
+    is removed from this empty-files count. This correction was found
+    and applied by the Observation Agent's own orphan_files check
+    (which only flags true 0-byte files) surfacing the discrepancy
+    against this investigation's original manual finding.
 ```
 
 ```
