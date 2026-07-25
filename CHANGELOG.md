@@ -1,5 +1,101 @@
 # Changelog
 
+## 2026-07-25 (EXEC-004 Deployment — Human Decision)
+
+- Petko accepted EXEC-004 for review and issued the deployment
+  decision: narrow-merge Headquarters onto `main`, do not implement
+  `HQ-0001` (advisory only), validate after merging.
+- Built the narrow changeset on a fresh branch off `main`
+  (`claude/activate-headquarters`): exactly 32 files, `headquarters/`
+  in full minus `reports/` — same isolation method as the Observation
+  Agent's own `EXEC-003` narrow merge. Confirmed via `git status
+  --short` nothing else was staged; confirmed via 111 tests passing in
+  isolation that no excluded file (`docs/investigations/`, `docs/adr/`,
+  `docs/proposals/`, `docs/ai-organization/`, `STATE.md`,
+  `CHANGELOG.md`) is actually a code dependency — no
+  stop-and-report-dependency-chain scenario was hit.
+- Opened PR #9, merged (squash) to `main` as `8726ac1`.
+- Validated against the actual merged commit via an isolated
+  `git worktree` (so the shared working directory's own branch state
+  didn't interfere): ran `headquarters/run_headquarters.py` from the
+  worktree, using `config.json`'s real absolute repo paths — meaning
+  the *code* came from `main`, but the *data* it read was the real,
+  full ecosystem state, exactly as a real deployment would see it.
+  Confirmed: runs successfully; "Scanned: project-memory, kod,
+  discovery-lab, generative-discovery-engine, trust-engine" (real
+  Observation Agent consumption); exactly one recommendation
+  (`HQ-0001`) under "Most Important Recommendation"; `test_safety.py`
+  and the full 111-test suite both pass from the merged code; `git
+  status --short` clean on all 5 repositories after the run.
+- Wrote the requested `HQ-0001` supporting analysis (advisory only,
+  not implemented): the two "duplicate" ADR-0001 files are not a
+  careless collision — `ADR-0001-human-authority-gates.md`'s own
+  closing section explicitly names `ADR-0001-migration-plan.md` as its
+  companion execution plan, deliberately deferred. Presented three
+  options (merge, supersede/rename, retain-both-with-documented-
+  convention) and a recommendation (supersede/rename), left the actual
+  decision to Petko.
+- Delivered the first live report generated from `main`'s own merged
+  code as a file to the user.
+
+## 2026-07-25 (EXEC-005 — Ecosystem Operational Validation)
+
+- Executed `EXEC-005`: validated the *combined* operation of
+  Observation Agent 001 and Ecosystem Headquarters v1.0 under real
+  operating conditions. No code was changed in either tool — pure
+  evidence gathering and reporting, per the task's own explicit "no
+  new features, no architectural redesign" instruction.
+- Ran 3 full local pairs (Observation Agent → Headquarters, no manual
+  intervention between them) plus 1 real GitHub Actions scheduled
+  Observation Agent run on `main`
+  ([run #2](https://github.com/DinevDecor/discovery-lab/actions/runs/30148534238),
+  `conclusion: success`). Timed every step.
+- **Found a genuine, real defect**: a self-referential feedback loop
+  in repeated local runs. Both tools' `reports/` directories live
+  inside `discovery-lab`, one of the 5 scanned repositories; each
+  local run's own output becomes new input for the *next* local run.
+  Root cause traced precisely: `observation-agent/README.md`'s own
+  prose contains two literal examples of `[text](path)` syntax
+  (explaining the `broken_references` check itself), which the check
+  cannot distinguish from a real link — and once flagged, the
+  citation propagates into every subsequent report, compounding.
+  Measured: 2 → 10 → 58 new false-positive observations across 3
+  unchanged-input runs; `Human Decisions Required` list length 35 →
+  45 → 103. Confirmed absent from the CI/scheduled path (which never
+  commits its own output, so has no memory between runs) — the defect
+  is scoped specifically to repeated local runs that don't clear their
+  own `reports/` directory.
+- **Verified recommendation selection is robust to this noise**:
+  across all 3 runs, Headquarters produced exactly one recommendation
+  (`HQ-0001`, score 6, identical evidence/reasoning) every time — no
+  duplicate ID was ever minted, confirmed directly via
+  `recommendation-log.json` (`times_proposed` incrementing 2→3→4,
+  same `first_proposed`). The growing noise degraded a downstream
+  display metric (`Overall Health`: 71% → 70% → 67%) without ever
+  affecting which recommendation was selected, because the Attention
+  Engine's candidate pool draws from the Ledger and Headquarters' own
+  Drift/Opportunity findings, not from Observation Agent's raw
+  observations directly.
+- Confirmed via `git status --short` on all 5 repositories, after
+  every one of the 4 executions, that nothing outside each tool's own
+  `reports/` directory was ever modified — the read-only guarantee
+  held throughout, exactly as contracted.
+- Assessed all 4 of EXEC-005's Success Criteria explicitly: 3 clean
+  PASS, 1 PARTIAL (output stability — the decision-facing
+  recommendation was perfectly stable, a secondary metric was not, for
+  a precisely identified and scoped reason). Determination: **PASS
+  WITH A NAMED LIMITATION**, not a blocking FAIL.
+- Named four improvement opportunities (excluding each tool's own
+  `reports/` from relevant scans; rewording the two literal syntax
+  examples; a documented operator convention; scheduling Headquarters
+  itself) — explicitly **not implemented**, per the task's own
+  instruction.
+- Delivered as `docs/investigations/INV-0004-ecosystem-operational-validation.md`.
+  All report/log/snapshot files generated during the 3 local
+  executions were inspected for evidence, then removed or reverted to
+  their pre-validation committed state — the investigation document is
+  the durable record, not a raw dump of validation-run exhaust.
+
 ## 2026-07-25 (EXEC-004 — Additional Execution Directive)
 
 - Petko approved the background survey (STATE.md formats, registries,
