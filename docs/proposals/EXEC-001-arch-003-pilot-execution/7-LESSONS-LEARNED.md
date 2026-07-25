@@ -64,9 +64,32 @@ it — rather than burying it inside a one-off execution log where it
 would be easy to miss on a later, unrelated pass through the
 repository.
 
-## 6. What this pilot did not, and could not, test
+## 6. What this pilot did test, once the real decision arrived
 
-Whether a real human decision — once obtained — leads cleanly into the
-execution step as specified. That remains untested. This session
-cannot manufacture that test without violating the exact rule this
-whole exercise was designed to respect.
+A real human decision did arrive, the same day, and led cleanly into
+the execution step exactly as `3-EXECUTION-SPECIFICATION.md`
+specified: one field changed, every reference path recomputed
+correctly for the new file location, no other file touched. The
+gap identified in `ARCH-003/4-COMPONENT-MAPPING.md` (no ratified
+component names who performs the physical write) did not turn out to
+need one — the write was small and specific enough that "an Executor,
+acting only after Human Final Authority" was sufficient in practice,
+without inventing a Runtime or Dispatcher to fill it. Whether this
+holds for a larger or more complex action (a merge, a relationship
+proposal, a higher promotion threshold) is still untested — this run
+tested exactly the one narrow case `ARCH-003` scoped it to, no more.
+
+## 7. Writing the Human Decision Record before knowing the Gate's outcome, and updating rather than rewriting it afterward, was the right call
+
+Because `3-HUMAN-DECISION-RECORD.md` was written and committed with
+status `NOT OBTAINED` *before* the Gate's `ACCEPT` recommendation was
+known, the later real decision could be checked against criteria set
+in advance, not criteria adjusted to fit what arrived. When the real
+decision came in, updating the same document (preserving the original
+`NOT OBTAINED` record as history rather than deleting it) kept the
+full sequence — blocked, then unblocked, with the block's reasoning
+still visible — inspectable by anyone reading the file later. The same
+discipline was applied to `6-FINAL-VERDICT.md`. This is a pattern
+worth keeping for any future execution: record the block honestly
+before knowing whether it will resolve, and when it resolves, append
+rather than overwrite.

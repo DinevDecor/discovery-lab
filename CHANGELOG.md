@@ -1758,3 +1758,37 @@
   that no prior specification-only task in this session had found,
   direct evidence the Knowledge Review mechanism does real work when
   actually run.
+- **Same day, after `EXEC-001` reached `BLOCKED`**: Petko Dinev sent a
+  real, dated Human Decision — `Subject: CPP-S3-01`, `Decision:
+  ACCEPT`, `Decision Maker: Petko Dinev`, `Date: 2026-07-25`, rationale
+  citing `KR-0001` by name. This satisfied every element
+  `3-HUMAN-DECISION-RECORD.md` had specified in advance as required to
+  unblock the pilot, checked against those pre-stated criteria rather
+  than criteria adjusted to fit what arrived.
+- Execution proceeded exactly as `ARCH-003/3-EXECUTION-SPECIFICATION.md`
+  specified: created `memory/knowledge-objects/` for the first time
+  (previously open governance question, now closed) and wrote
+  `memory/knowledge-objects/KO-S3-01.md` — `discovery-lab`'s first real
+  filed Knowledge Object — with exactly one field changed relative to
+  the `CURATION-0004.md` source (`status: Draft → Candidate
+  Principle`); `provenance[].report` paths mechanically recomputed to
+  remain correct references from the new file's location (same three
+  target files, verified by direct `realpath -m`/`test -e` check on
+  all seven referenced paths before commit); a promotion-record prose
+  note added beneath the YAML block, in the same convention
+  `CURATION-0004.md` itself already uses, citing `CPP-S3-01`, `KR-0001`,
+  and the Human Decision. `CURATION-0004.md` itself was never touched.
+- **Final Verdict updated: `BLOCKED` → `PASS`.** The original `BLOCKED`
+  reasoning and the original `NOT OBTAINED` Human Decision status were
+  both preserved as history in their respective documents (appended to,
+  not overwritten), keeping the full timeline - blocked, then unblocked
+  the same day - honestly inspectable. This is the first time
+  `Unified Coordination Model v1.0` has governed a real action from
+  proposal through to an actually-filed artifact anywhere in the
+  ecosystem, under the correct sequencing and with no step skipped or
+  inferred. N=1 caveat stated explicitly: this does not generalize to
+  merges, relationship proposals, higher thresholds, or other
+  repositories, and reviewer independence achieved remains partial
+  (a memoryless but not organizationally distinct Agent instance) -
+  `ARCH-002`'s `G1` (no *general* execution mechanism exists anywhere)
+  is unchanged by this one narrow, human-gated instance.

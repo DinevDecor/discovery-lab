@@ -19,26 +19,36 @@ collected in one place with its disposition.
 | Artifact | Status |
 |---|---|
 | `docs/proposals/AG-003-reality-stress-test/reviews/KR-0001-cpp-s3-01.md` | **Created** — the Knowledge Review itself, filed at the exact path `ARCH-003/3-EXECUTION-SPECIFICATION.md` specified |
+| `memory/knowledge-objects/` (directory) | **Created** — first real instantiation, following `Accept`; did not exist before |
+| `memory/knowledge-objects/KO-S3-01.md` | **Created** — the executed write, following the real Human Decision (`3-HUMAN-DECISION-RECORD.md`'s "Update" section) |
 | `docs/proposals/EXEC-001-arch-003-pilot-execution/*` (this deliverable set) | **Created** — the execution record |
 
-## Artifact deliberately NOT produced
+## Minimal-diff verification for `KO-S3-01.md`
 
-| Artifact | Status | Why |
-|---|---|---|
-| `memory/knowledge-objects/KO-S3-01.md` | **Not created** | Execution step's precondition (a real `Accept` Human Decision) was not met — see `3-HUMAN-DECISION-RECORD.md` and `6-FINAL-VERDICT.md` |
-| `memory/knowledge-objects/` (the directory itself) | **Not created** | Same reason — confirmed absent both before and after this execution by direct `ls` check |
+Direct field-by-field comparison against the `CURATION-0004.md` source
+object: every field identical except `status`
+(`Draft → Candidate Principle`, the one specified change) and
+`provenance[].report` path prefixes, mechanically recomputed to remain
+correct references from the new file's location — same three target
+files in every entry, not new or different sources. All seven paths
+the new file references (five governing/source documents plus the two
+new deliverables it cites) were checked with `realpath -m` + `test -e`
+before commit; all seven resolved correctly.
 
 ## Direct confirmations performed
 
 - `ls memory/knowledge-objects/` → "No such file or directory," checked
-  both before Step 1 and again after the Gate ran — the directory was
-  never created at any point during this execution.
+  both before Step 1 and again after the Gate ran (confirming the
+  `BLOCKED` state was real, not assumed) — the directory was created
+  only after the real Human Decision arrived, in Step 11.
 - `git diff --stat docs/proposals/AG-003-reality-stress-test/
-  CURATION-0004.md` → empty — the source proposal and object were never
-  edited.
-- `git status --short`, checked throughout — only new files appear
-  (the Knowledge Review and this deliverable set); no existing tracked
-  file was modified.
+  CURATION-0004.md` → empty, checked at both the blocked point and
+  after execution — the source proposal and object were never edited,
+  at any point.
+- `git status --short`, checked throughout — only new files appear at
+  every check (the Knowledge Review, the deliverable set, and finally
+  the two `memory/knowledge-objects/` artifacts); no existing tracked
+  file was ever modified.
 
 ## Chain of custody for the Gate's evidence
 

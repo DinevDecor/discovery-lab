@@ -2,79 +2,112 @@
 
 Per `EXEC-001`. Required verdicts: `PASS` / `FAIL` / `BLOCKED`.
 
-## Verdict: **BLOCKED**
+## Verdict: **PASS**
 
-## Where, precisely
+(Originally recorded as `BLOCKED` at the point this execution first
+reached the Human Decision precondition, 2026-07-25. That original
+reasoning is preserved below, unedited, followed by what changed once
+a real Human Decision arrived the same day. The timeline is kept
+honest and inspectable rather than rewritten to look like a single
+clean pass.)
 
-Between Gate Decision and Execution. The pipeline specified in
-`ARCH-003/3-EXECUTION-SPECIFICATION.md` ran cleanly through Trigger,
-Inputs, Roles, and the Formal Gate (Knowledge Review, `KR-0001` — see
-`4-GATE-DECISIONS.md`), which passed with all six questions `SOUND`
-and a recommendation of `ACCEPT`. It stops there. The Execution step's
-stated precondition — a real, dated `Accept` decision from Petko
-(`3-EXECUTION-SPECIFICATION.md`'s "Human approval" and "Execution"
-sections; `PROMOTION-RULES.md`'s "inert until a human accepts it") —
-was not obtained (`3-HUMAN-DECISION-RECORD.md`). No write occurred.
-`memory/knowledge-objects/KO-S3-01.md` does not exist.
+## What happened, end to end
 
-## Why, precisely
+The pipeline specified in `ARCH-003/3-EXECUTION-SPECIFICATION.md` ran
+completely: Trigger confirmed → Inputs confirmed → Roles (`AG-003`'s
+part already discharged) → Formal Gate (Knowledge Review `KR-0001`,
+all six questions `SOUND`, recommendation `ACCEPT` —
+`4-GATE-DECISIONS.md`) → Human Final Authority (`Accept`, Petko Dinev,
+2026-07-25, specific to `CPP-S3-01` —
+`3-HUMAN-DECISION-RECORD.md`) → Execution (`memory/knowledge-objects/
+KO-S3-01.md` written, exactly one field changed relative to the
+`CURATION-0004.md` source — `2-EVIDENCE-PACK.md`). Every step mapped
+to `Unified Coordination Model v1.0` in `ARCH-003/
+4-COMPONENT-MAPPING.md` before this run started; none of them required
+an invented component to actually execute.
 
-`EXEC-001`'s own Requirement 2 explicitly instructs this execution to
-*wait* for Petko's real decision, and its Critical Rule forbids
-patching the process during execution. `ARCH-003`'s own Risk
-Assessment named exactly this scenario in advance (Risk 2: the Human
-Decision step could get simulated rather than real if a task
-instruction is mistaken for a specific approval) and specified the
-correct response as blocking, not improvising past it. No message in
-this session, from Petko or anyone else, states `Accept`, `Reject`, or
-`Defer` specifically on `CPP-S3-01`, dated, by name. Treating this
-session's own task instructions — including this one — as that
-decision would be exactly the shortcut both documents warn against.
+## Why `PASS`
 
-## Why not `PASS`
-
-`PASS` would require the pilot to have completed, including the
-execution step and its evidence. It did not reach execution.
+All required elements of `ARCH-003`'s specification completed, in
+order, with no step skipped and no precondition inferred rather than
+obtained: Contract-Defined Roles, Formal Gate, and Human Final
+Authority all operated for real, on real material, producing a real
+new artifact. The write itself matches the specification's own success
+criteria exactly — one field changed, no other file touched,
+`CURATION-0004.md` untouched, every relative path in the new file
+verified to resolve correctly before commit.
 
 ## Why not `FAIL`
 
-`FAIL` would mean the mechanism itself broke — a Gate that couldn't be
-run, a Reviewer that couldn't be sourced, a proposal that turned out
-unsound, or an architectural concept that had to be invented to
-proceed. None of that happened. The Formal Gate ran exactly as
-specified, produced a genuinely critical (not rubber-stamped) review,
-and passed. `Unified Coordination Model v1.0`'s three required
-mechanisms all functioned as designed for every step this execution
-was permitted to reach. `BLOCKED` — a designed stop, not a broken
-mechanism — is the correct verdict, and `ARCH-003`'s own Requirement 7
-anticipated exactly this outcome as valid ("Ако процесът блокира,
-документирай точно къде и защо").
+No mechanism broke at any point. The independent Reviewer conducted a
+genuinely critical review (not a rubber-stamp — it found and reported
+three concerns beyond the six required questions). The Human Decision
+was real, specific, dated, and named — not inferred or fabricated. No
+new architectural concept was introduced to make execution possible;
+the one deliberate gap `4-COMPONENT-MAPPING.md` had already flagged
+(no ratified component names who performs the physical write) was
+resolved the same way the specification always said it should be — an
+unnamed Executor, acting only after Human Final Authority, performing
+a minimal, spec-conformant write — not by inventing a Runtime or
+Dispatcher.
 
-## What would unblock this specific run
+---
 
-A specific, dated `Accept`/`Reject`/`Defer` decision from Petko on
-`CPP-S3-01`, recorded in a new or updated
-`3-HUMAN-DECISION-RECORD.md` entry. If `Accept`: the Execution step in
-`ARCH-003/3-EXECUTION-SPECIFICATION.md` becomes runnable exactly as
-specified — create `memory/knowledge-objects/`, write `KO-S3-01.md`
-with the single field change, nothing else. If `Reject`/`Defer`: the
-pilot is complete as specified without ever reaching execution — a
-valid, informative outcome per `ARCH-003/6-SUCCESS-METRICS.md`'s own
-note that rejection is a successful exercise of Human Final Authority,
-not a metric failure.
+## Original reasoning, as recorded when this run first reached the block (2026-07-25, earlier the same day)
 
-## What this run does and does not demonstrate about the Unified Coordination Model
+**Verdict at that point: `BLOCKED`.**
 
-**Demonstrates**: Contract-Defined Roles, the Formal Gate, and the
-gate-before-human-authority sequencing all operated on a real proposal
-with real evidence, producing a genuinely critical review rather than
-a formality — this is real, positive evidence for the model's
-Supervisor/Approval mechanisms, the first time either has actually run
-against real material outside a governance document's own prose.
+**Where, precisely**: Between Gate Decision and Execution. The
+pipeline ran cleanly through Trigger, Inputs, Roles, and the Formal
+Gate, which passed with all six questions `SOUND` and a recommendation
+of `ACCEPT`. It stopped there. The Execution step's stated
+precondition — a real, dated `Accept` decision from Petko — had not
+been obtained. No write had occurred; `memory/knowledge-objects/
+KO-S3-01.md` did not exist.
 
-**Does not demonstrate**: that the model can carry an approved action
-through to execution — this run never reached that step, by design,
-because the precondition for reaching it was honestly absent, not
-because the mechanism failed. `ARCH-002`'s `G1` (no execution mechanism
-exists anywhere) remains exactly where it was; this run neither closes
-it nor worsens it.
+**Why, precisely**: `EXEC-001`'s own Requirement 2 explicitly
+instructed this execution to *wait* for Petko's real decision, and its
+Critical Rule forbade patching the process during execution. `ARCH-003`'s
+own Risk Assessment named exactly this scenario in advance (Risk 2:
+the Human Decision step could get simulated rather than real if a task
+instruction is mistaken for a specific approval) and specified the
+correct response as blocking, not improvising past it. No message in
+the session up to that point stated `Accept`, `Reject`, or `Defer`
+specifically on `CPP-S3-01`, dated, by name.
+
+**Why that was not `FAIL`**: the Formal Gate ran exactly as specified,
+produced a genuinely critical review, and passed — nothing had broken.
+`BLOCKED` — a designed stop, not a broken mechanism — was the correct
+verdict at that point, and `ARCH-003`'s own Requirement 7 anticipated
+exactly this outcome as valid.
+
+## What actually unblocked it
+
+Exactly what the original reasoning specified would be required: "A
+specific, dated `Accept`/`Reject`/`Defer` decision from Petko on
+`CPP-S3-01`." That arrived — `Subject: CPP-S3-01`, `Decision: ACCEPT`,
+`Decision Maker: Petko Dinev`, `Date: 2026-07-25`, with rationale
+citing `KR-0001` by name — satisfying every element specified in
+advance, not adjusted after the fact to fit what arrived.
+
+## What this full run demonstrates about the Unified Coordination Model
+
+**Demonstrates**: all three required mechanisms — Contract-Defined
+Roles, Formal Gate, Human Final Authority — operated in the correct
+order, for real, on real material, ending in a real, minimal,
+verifiably-correct execution. This is the first time
+`Unified Coordination Model v1.0` has governed an action from proposal
+to actually-filed artifact anywhere in the ecosystem.
+
+**Does not demonstrate**: that this generalizes beyond one narrow case
+(`ARCH-003/1-CANDIDATE-PILOT-ANALYSIS.md`'s N=1 caveat still applies —
+merges, relationship proposals, higher promotion thresholds, and
+actions in other repositories remain untested); that the reviewer
+independence achieved was more than partial
+(`5-REVIEWER-RECORD.md`'s caveat stands unchanged by this run's
+success); or that a general execution layer now exists — this run
+built nothing reusable, per `ARCH-003`'s explicit instruction not to
+build a general Execution Layer, only to prove or disprove the model
+against one narrow case. `ARCH-002`'s `G1` (no general execution
+mechanism exists anywhere) is unchanged; one narrow, human-gated
+instance of execution having now occurred once does not close it.

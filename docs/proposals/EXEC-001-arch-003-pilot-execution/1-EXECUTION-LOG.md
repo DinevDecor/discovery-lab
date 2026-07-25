@@ -109,3 +109,43 @@ changes to the specification, no attempt to "help" the process reach
 completion by treating the Gate's `ACCEPT` recommendation, or this
 task's own instruction, as a substitute for Petko's decision — per
 `EXEC-001`'s Critical Rule.
+
+---
+
+## Step 9 — real Human Decision received (2026-07-25, after Step 8)
+
+Petko Dinev sent a specific, dated decision: `Subject: CPP-S3-01`,
+`Decision: ACCEPT`, `Decision Maker: Petko Dinev`, `Date: 2026-07-25`,
+rationale citing `KR-0001` by name. Recorded in
+`3-HUMAN-DECISION-RECORD.md`'s "Update" section, appended below the
+original `NOT OBTAINED` record rather than overwriting it — the
+timeline (blocked, then unblocked) is kept honest and inspectable.
+
+## Step 10 — precondition re-checked before acting
+
+Confirmed, before writing anything: the decision names `CPP-S3-01`
+specifically (not a general instruction), is dated, and is attributed
+to Petko Dinev by name — the exact four elements
+`3-HUMAN-DECISION-RECORD.md` specified in advance as required to
+resolve the block. Precondition met.
+
+## Step 11 — execution performed
+
+Created `memory/knowledge-objects/` (did not exist before this
+moment — first real instantiation) and wrote
+`memory/knowledge-objects/KO-S3-01.md`, copying every field from the
+`CURATION-0004.md` source unchanged except `status`
+(`Draft → Candidate Principle`), with `provenance[].report` paths
+mechanically recomputed to remain correct relative references from the
+new file location (same target files in every case — verified by
+direct `realpath -m` + `test -e` check on all seven paths the new file
+references, all resolved correctly, before commit). A "Promotion
+record" section was added beneath the YAML block, in the same
+prose-under-YAML convention `CURATION-0004.md` itself already uses for
+`KO-S3-01`'s Finding F-2 — not a new field, not a new convention.
+`CURATION-0004.md` itself was not touched.
+
+## Step 12 — verdict updated
+
+`6-FINAL-VERDICT.md` updated from `BLOCKED` to `PASS`. See that
+document for full reasoning.

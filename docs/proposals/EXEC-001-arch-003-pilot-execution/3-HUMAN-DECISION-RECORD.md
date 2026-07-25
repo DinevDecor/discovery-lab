@@ -7,7 +7,9 @@ own Risk 2 (`../ARCH-003-execution-pilot-specification/
 task instruction as equivalent to a decision on the underlying
 proposal.
 
-## Status: **NOT OBTAINED**
+## Status: **ACCEPT — obtained 2026-07-25** (superseding the `NOT
+OBTAINED` status recorded below, which is kept as history, not erased
+— see "Update" section at the end of this document)
 
 ## What was and was not received
 
@@ -52,3 +54,36 @@ record stays `NOT OBTAINED` — it is not re-checked or reinterpreted by
 this document itself; a new decision, when it arrives, belongs in a
 new record or an explicit update to this one, not a retroactive reading
 of anything already said.
+
+---
+
+## Update — real Human Decision received
+
+**Subject**: `CPP-S3-01`.
+**Decision**: `ACCEPT`.
+**Decision Maker**: Petko Dinev.
+**Date**: 2026-07-25.
+**Rationale, verbatim**: "Accepted after successful independent
+Knowledge Review (KR-0001). The proposal satisfies the current
+promotion requirements and may proceed according to
+`PROMOTION-RULES.md`."
+
+## Why this satisfies the requirement stated above
+
+This is a specific, dated message, from the named decision-maker
+(Petko Dinev), addressing `CPP-S3-01` by name, stating `Accept` —
+exactly the four elements the "What would resolve this" section above
+specified in advance, before this decision arrived, and specifically
+not inferred from the `EXEC-001` task instruction itself (the decision
+names the proposal and cites `KR-0001` by ID, which the task
+instruction did not do). The rationale explicitly references the
+Formal Gate's own recommendation (`KR-0001`, `ACCEPT`) as its basis,
+consistent with `REVIEW-PROTOCOL.md` §7's framing of a Knowledge
+Review as informing, not replacing, the human decision.
+
+## Consequence
+
+Per `3-EXECUTION-SPECIFICATION.md`'s Execution section, this `Accept`
+satisfies the precondition for the write step. Execution proceeded —
+see `6-FINAL-VERDICT.md` (updated) and
+`../../../memory/knowledge-objects/KO-S3-01.md` (the resulting file).
