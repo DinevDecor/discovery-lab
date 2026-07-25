@@ -1,0 +1,74 @@
+{
+  "_note": "Keyword mapping tailored to the 5 research domains (A-E) EXEC-010 names, cross-referenced against each project's own available README/PROJECT_STATE content the same way reality-sensor/config/relevance-gate.json was built - see docs/KNOWN-LIMITATIONS.md. Config-editable without any code change; a signal matching none of these rules is reported as WATCH.",
+  "rules": [
+    {
+      "project": "KOD",
+      "keywords": [
+        "knowledge graph",
+        "knowledge management",
+        "provenance",
+        "traceability",
+        "memory architecture",
+        "long-term memory",
+        "structured knowledge",
+        "retrieval"
+      ]
+    },
+    {
+      "project": "Discovery Lab",
+      "keywords": [
+        "multi-agent",
+        "agent orchestration",
+        "reviewer system",
+        "consensus",
+        "adversarial evaluation",
+        "autonomous research workflow",
+        "debate",
+        "critique",
+        "governance",
+        "observability"
+      ]
+    },
+    {
+      "project": "Trust Engine",
+      "keywords": [
+        "falsification",
+        "reproducibility",
+        "benchmarking",
+        "evaluation methodology",
+        "scientific rigor",
+        "evidence quality",
+        "uncertainty representation",
+        "peer review",
+        "replication",
+        "calibration"
+      ]
+    },
+    {
+      "project": "Generative Discovery Engine",
+      "keywords": [
+        "hypothesis generation",
+        "automated discovery",
+        "scientific reasoning",
+        "experiment planning",
+        "discovery system",
+        "scientific discovery",
+        "novel hypothesis",
+        "research automation"
+      ]
+    },
+    {
+      "project": "Dinev Assistant",
+      "keywords": [
+        "reasoning",
+        "planning",
+        "self-improvement",
+        "reflection",
+        "meta-reasoning",
+        "cognitive architecture",
+        "personal assistant",
+        "memory consolidation"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,57 @@
 # Changelog
 
+## 2026-07-25 (EXEC-010 — Research Reality Sensor 001, implementation/validation/docs)
+
+- Built `research-sensor/`, the second External Evidentiary Sensor per
+  `EXEC-009`'s two-family model, implementing `EXEC-010`'s spec:
+  `src/research_sensor/` (models — the 14-field Research Signal Model;
+  config; `trust.py` — publication-tier confidence, stricter than
+  `reality-sensor`'s own: `COMMUNITY_HINT`-only evidence can never
+  produce an accepted signal at all; `relevance.py`; `dedup.py` —
+  idea-based clustering; `experiments.py` — Experiment Extraction,
+  structurally incapable of an implementation plan; `registry.py` —
+  idempotent `RES-000N` IDs; `brief.py`; `cli.py`), plus
+  `config/source-registry.json` (17 sources, 5 domains) and
+  `config/relevance-gate.json`. Every shared pattern (safety
+  enforcement, config loading, CLI shape, evidence discipline,
+  reporting conventions) independently reimplemented, never imported
+  from `reality-sensor/`, per `EXEC-009`'s binding "patterns, not
+  modules" ruling.
+- 67 tests across all 12 `EXEC-010`-required categories, all passing
+  on first run.
+- Real external capture within the fixed 30-day window
+  (2026-06-25–2026-07-25): 14 real operations (12 `WebSearch`, 2
+  `WebFetch` — both blocked HTTP 403, a stricter block than `EXEC-008`
+  encountered), producing 7 real, sourced, quoted captures across all
+  5 domains, committed as
+  `validation-dataset/raw-captures-2026-06-25-to-2026-07-25.json`.
+  Includes one genuine `COMMUNITY`-trust discovery hint (a Hacker News
+  benchmark-gaming discussion), deliberately kept to exercise the
+  "never accepted from `COMMUNITY` alone" path on real data.
+- Real processing: 7 clusters, 1 discovery hint correctly excluded, 6
+  registered signals (`RES-0001`–`RES-0006`) — 5 `LOW` confidence, 1
+  `MEDIUM` (`RES-0006`, Google DeepMind's "Conjecture Machines" piece,
+  `Trust Engine`-relevant, the one signal carrying a real possible
+  experiment).
+- Operational validation: 3 repeated executions against fresh,
+  isolated `reports-dir`s produced byte-identical
+  `research-registry.json` content every time; 1 live run wrote real
+  `reports/research-registry.json` plus Daily/Weekly briefs. `git
+  status --short` confirmed clean (only the new, untracked
+  `research-sensor/` itself) after every run.
+- Headquarters compatibility proven structurally
+  (`research-registry.json` is a flat, tolerant-JSON-readable list);
+  `headquarters/` itself untouched.
+- Wrote all 8 required deliverable docs (`CONTRACT.md`, `README.md`,
+  `docs/RESEARCH-SCHEMA.md`, `TRUST-POLICY.md`,
+  `EXPERIMENT-EXTRACTION-POLICY.md`, `SOURCE-REGISTRY.md`,
+  `VALIDATION-REPORT.md`, `KNOWN-LIMITATIONS.md`), each honestly naming
+  this pass's own real limitations.
+- **PASS** verdict per `EXEC-010`'s own 8 named criteria. Explicitly
+  **not merged to main** — `EXEC-010`'s own "No merge without explicit
+  human approval" instruction. Final Report delivered to Petko as this
+  task's own closing message.
+
 ## 2026-07-25 (Human Acceptance — EXEC-009)
 
 - Petko accepted `EXEC-009`: the submitted **PARTIAL** recommendation
