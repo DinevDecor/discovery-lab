@@ -1,5 +1,106 @@
 # Changelog
 
+## 2026-07-25 (EXEC-003)
+
+- Executed `EXEC-003 — Activate Observation Agent 001`: built a genuine
+  scheduled-trigger mechanism for the existing, unmodified Observation
+  Agent, without redesigning the agent, writing another readiness
+  report, or introducing another agent.
+- **Before Activation — resolved both named factual items**: (1)
+  confirmed `AG-002`/`AG-003` remain `INSUFFICIENT_EVIDENCE` — no new
+  human-provided evidence arrived to resolve their run-count
+  convention, so `EXEC-002`'s corrected behavior is unchanged; (2)
+  corrected `INV-0003` and `RECOMMENDATION-LEDGER.md`'s
+  `REC-0005` entry: `kod/Infrastructure/python/registry.py` is not a
+  0-byte empty file, it is a 33-byte non-empty stub (a single
+  `from kod.registry import Registry` import line) — distinguished
+  from the two files that really are 0 bytes
+  (`ROS_ARCHITECTURE.md`, `Infrastructure/python/kod/validator.py`).
+- **Mechanism selected**: GitHub Actions
+  (`.github/workflows/observation-agent.yml`), because it is
+  repository-native and can run with genuinely read-only permissions —
+  `contents: read` only, declared at both workflow and job level;
+  `actions/checkout` called with `persist-credentials: false`.
+  Schedule: daily, `06:00 UTC` (cron `0 6 * * *`), plus
+  `workflow_dispatch` for manual runs through the identical job.
+- Investigated cross-repo access for the other 4 configured
+  repositories (`project-memory`, `kod`, `generative-discovery-engine`,
+  `trust-engine`) and confirmed via the GitHub API that all 5
+  configured repositories are private repos in the same org; the
+  workflow's default token cannot read the other 4 without either a
+  scoped read-only PAT stored as a repository secret, or each of
+  those repos' own Actions-access setting explicitly allowing this
+  workflow to read them — both are provisioning/administrative
+  actions this session has no path to perform. Rather than escalate
+  to a write-capable credential to force full coverage (forbidden by
+  the task's own Security requirements), added `config.ci.json`
+  (discovery-lab scanned fully via its own checkout; the other 4
+  left as documented placeholder paths that safely `SKIP`, using the
+  agent's existing, already-tested failure-safe behavior — not a new
+  workaround). Named as remaining human actions in README's new "CI
+  Limitations" section.
+- Added `observation-agent/ci_summary.py` (CI-only, outside
+  `src/observation_agent`, deliberately not part of the agent itself)
+  to publish a `SUCCESS`/`PARTIAL`/`FAILURE` run summary plus the
+  Confidence breakdown to the Actions run's Job Summary, so a run's
+  outcome — including "repositories were skipped" versus "a check
+  itself errored" — is visible without opening the artifact.
+- Added `tests/test_ci_activation.py` (15 tests): `config.ci.json`
+  loads correctly and points `discovery-lab` at its own checkout path
+  (`..`, correct for the workflow's `working-directory:
+  observation-agent`); `ci_summary.py`'s status classification for a
+  clean run, a run with skipped repositories, a run with a check
+  error, and a run that produced no report at all; and static checks
+  — reusing `test_safety.py`'s own forbidden-pattern detector — that
+  the workflow file declares `contents: read` only and never contains
+  a write/commit/push/pull-request action. Full suite: **45 tests, all
+  passing** (30 from `EXEC-002` + 15 new).
+- Ran a local dry-run of the exact CI invocation
+  (`python3 run_observation_agent.py --config config.ci.json
+  --reports-dir <tmp>` from within `observation-agent/`, matching the
+  workflow's own `working-directory`) before trusting the config: it
+  correctly scanned `discovery-lab` in full (10 observations) and
+  reported the other 4 repositories as `SKIP`, exactly as designed —
+  caught and fixed one real bug in the process (an initial `"."` path
+  for `discovery-lab` resolved to the `observation-agent/`
+  subdirectory only, not the repository root, given the workflow's
+  `working-directory` step; corrected to `".."`).
+- **Attempted to trigger one real workflow run through the exact
+  mechanism the schedule will use, per the task's own Validation
+  requirement, and hit a concrete external blocker**: GitHub Actions
+  does not recognize, schedule, or allow `workflow_dispatch` for a
+  workflow file that exists only on a non-default branch. Confirmed
+  empirically — `actions_list` (`list_workflows`) on `DinevDecor/
+  discovery-lab` returned `total_count: 0` even after this commit was
+  pushed to `claude/prop-0002-discovery-intake`, and a direct
+  `workflow_dispatch` API call against `observation-agent.yml` on that
+  branch returned `404 Not Found`. This is a real GitHub platform
+  behavior (both the `schedule` trigger and `workflow_dispatch`
+  require the workflow file to be present on the repository's default
+  branch, `main`), not a bug in this workflow or a permissions gap
+  this session can route around.
+- Did **not** merge this branch (or otherwise push the workflow file)
+  to `main` to work around this — merging to the default branch would
+  be a hard-to-reverse action on shared state that would immediately
+  activate a real, recurring daily cron in the user's live GitHub
+  infrastructure, and this task's own instructions describe the
+  deliverable in terms of a commit and branch, not a merge. This
+  matches the Human Final Authority boundary this entire engagement
+  has honored throughout (`PROP-0001`'s explicit "ACCEPT" before any
+  status change; `G2`'s spec staying "Candidate for Adoption" pending
+  its own separate ratification) — activating a live schedule in
+  production is exactly the kind of decision reserved for an explicit
+  human "ACCEPT," not inferred from this task's instructions to
+  "activate."
+- Verdict: **BLOCKED** — on merging `.github/workflows/
+  observation-agent.yml` (or this branch) into `main`, a one-line
+  human decision, not a technical rebuild. Everything within current
+  authority is complete and verified: the workflow is correct (proven
+  by an exact local dry-run and 45 passing tests, 15 of them new for
+  this task), both named factual corrections are made, and the two
+  cross-repo-coverage options are documented as remaining human
+  actions independent of this blocker.
+
 ## 2026-07-25 (EXEC-002)
 
 - Executed `EXEC-002 — Build Observation Agent 001`, the session's first
