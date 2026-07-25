@@ -1939,3 +1939,94 @@
   created for Discovery Lab's own investigation reports (still open);
   `G2`'s own Unified Control Plane Specification adoption remains a
   separate, still-pending decision.
+
+## 2026-07-25 (`DL-001` — Ecosystem Health Review v0.1, and `DL-002` — Autonomy Readiness Assessment v1.0)
+
+- `DL-001` executed `PROP-0001`'s own first specified experiment
+  (`Ecosystem Health Review v0.1`) for real, across all five fixed
+  repositories, one pass each, within one sitting - delivered as a chat
+  report only, per its own "observation only, no file edits, no
+  commits" constraint (no file was written for this task). Flagged,
+  rather than followed, three ways the task's own instructions diverged
+  from what `PROP-0001` actually froze (scope expansion to unratified
+  repositories, a different 5-dimension criteria framework, a single
+  aggregate verdict `PROP-0001` explicitly forbids) - executed the
+  ratified design instead, per the task's own stated Mission
+  ("according to the already-ratified mandate").
+- Found real `MISMATCH`es: `project-memory/PROJECT_STATE.md` stale by 9
+  days; `PROJECT_REGISTRY.md`'s "Dinev Decor Systems: ACTIVE" claim
+  contradicted by the repo's own 2026-07-19 investigation; `kod`'s
+  `PROJECT_STATE.md` claiming `Corpus Status: NOT_STARTED` while real
+  implemented code exists (`Infrastructure/python/kod/artifact.py` et
+  al., traced to an `APPROVED` `SPRINT-024`); `kod/DOMAIN_MODEL.md`'s
+  known internal self-contradiction (from `G2`, still present); three
+  empty files in `kod`. **Revised `ARCH-002`'s own `G1` finding**: that
+  conclusion rested on `kod`'s self-reported status, not a direct code
+  check - the correction is narrow (small internal scaffolding, not a
+  general coordination runtime; `G1`'s broader claim still holds) but
+  reported openly as a correction to earlier work in this session, not
+  hidden. Final Verdict: `PASS` (process-completion sense only, per
+  `PROP-0001`'s own procedural/content distinction - not a single
+  ecosystem-health number, which `PROP-0001` forbids producing).
+- `DL-002` assessed autonomy readiness across the ecosystem: mapped
+  Human Authority Boundaries (including a newly-named live tension -
+  this entire session has performed git commit/push as an AI executor
+  throughout, sitting in unexamined tension with `project-memory`'s
+  `INV-4` taken literally); catalogued 9 real candidate autonomous
+  tasks grounded in `DL-001`'s own findings; classified them against
+  the given Agent Classes (explicitly declined to force-fit a
+  "Coordination Agent" - no candidate justified it, and doing so would
+  risk reintroducing the unratified `Dispatch`/`Runtime` concept
+  `ARCH-002` deliberately excluded); assigned Autonomy Levels (nothing
+  reached Level 4; one narrow candidate reached Level 3). **Central
+  finding**: no ratified trigger or scheduling mechanism exists
+  anywhere in this ecosystem - every action in this session's entire
+  history happened because a human sent a message. Final Verdict:
+  `NOT READY FOR FIRST AUTONOMY PILOT`, narrowly - blocked on that one
+  specific, nameable gap, not a broad rejection.
+
+## 2026-07-25 (`AGENT-001` — Observation Agent, PROPOSAL)
+
+- Designed the first Observation Agent proposal, under
+  `docs/proposals/AGENT-001-observation-agent/` - Idea-stage only, per
+  `GOVERNANCE.md`'s own lifecycle; no `CONTRACT.md`/`ROLE.md`/etc.
+  written, no Employee ID actually assigned.
+- **Recognized rather than reinvented**: `AG-001-repository-observer`
+  already exists with nearly the same Core Principle ("Observe changes.
+  Report evidence. Do not decide") and the same read-only discipline.
+  Proposed this agent as a new, smaller Role built on `AG-001`'s
+  proven observation discipline plus the one capability `AG-001`
+  explicitly excludes by design (a `Recommended Action` step, already
+  specified but never built in `PROP-0001`'s own Variant B
+  information-flow map) - not a competing concept, and not a revision
+  to `AG-001` itself (which would be a `GOVERNANCE.md` Major Revision).
+- **Found a real, live governance gap while checking this**:
+  `AG-001/STATUS.yaml` states `runs_completed: 0`, `last_run: null`,
+  but `HISTORY.md` and `runs/RUN-0001-observation-report.md` show a
+  real run was executed 2026-07-24 - missed by `DL-001`'s own
+  discovery-lab self-check. Reported, not corrected (this task's own
+  Forbidden Actions include "change status").
+- Specified the full Observation Loop (`Reality -> Observation ->
+  Evidence -> Verification -> Finding -> Report -> Recommendation ->
+  Human`, no step after Human - stated as an architectural property,
+  not just a rule) and a 7-field Observation Model schema, demonstrated
+  against three real, already-verified findings (the `AG-001` mismatch
+  above; `DL-001`'s `project-memory` registry finding; a clean `MATCH`
+  from `generative-discovery-engine`).
+- Classified all 7 required Event Source categories: every one exists
+  as an observable fact; none except Human Events currently functions
+  as a trigger anywhere in this ecosystem - the same finding `DL-002`
+  reached, reconfirmed per-category.
+- Safety Analysis grounded each claim (read-only, cannot drift
+  governance, cannot self-improve, cannot become an execution agent,
+  Human Final Authority intact) in an already-ratified mechanism, not
+  an assertion.
+- Recommended exactly one pilot: a single, human-invoked run on
+  `discovery-lab` alone, re-verifying the `AG-001` finding and
+  re-expressing `DL-001`'s five real findings in the new schema -
+  deliberately scoped to not require `DL-002`'s named missing trigger
+  mechanism.
+- **Verdict: `READY FOR OBSERVATION PILOT`** - scoped explicitly to the
+  human-invoked pilot, not to autonomous/self-triggered operation,
+  which `DL-002` already found not ready and this proposal does not
+  contradict.
