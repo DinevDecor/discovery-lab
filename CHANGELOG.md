@@ -2030,3 +2030,54 @@
   human-invoked pilot, not to autonomous/self-triggered operation,
   which `DL-002` already found not ready and this proposal does not
   contradict.
+
+## 2026-07-25 (`STRATEGIC-001` — Close the Evidence-and-Accountability Loop)
+
+- Self-directed initiative: reviewed `ARCH-001` through `AGENT-001`,
+  identified the ecosystem's largest *unmanaged* risk as
+  `PROP-0001`'s own stated invalidation conditions for Variant B being
+  currently uncheckable (no record exists of what Discovery Lab has
+  found or what became of it), and chose to close that gap as the
+  single highest-value next step - ahead of the `AGENT-001` Observation
+  Pilot, a trigger/scheduling mechanism, an Independent Reviewer role,
+  and other registry improvements, each explicitly named and deferred
+  with reasons in `docs/proposals/STRATEGIC-001-close-evidence-loop/
+  DECISION-REPORT.md`.
+- Filed `DL-001`'s real findings, previously chat-only, as
+  `docs/investigations/INV-0003-ecosystem-health-review-v0.1.md` - the
+  durable artifact type `PROP-0001`'s own Variant B design specifies,
+  with the provenance (originally delivered as chat text under that
+  task's own "no file edits" constraint) stated explicitly, not hidden.
+- Built `docs/investigations/RECOMMENDATION-LEDGER.md` for the first
+  time - `PROP-0001` fully specified this interface in its own text and
+  explicitly deferred creating it until a real recommendation existed;
+  populated with 6 real entries (`REC-0001`-`REC-0006`), each citing
+  `INV-0003` and a specific destination repository (`project-memory`
+  x2, `KOD` x3, `trust-engine` x1), every one filed `status: PROPOSED`
+  - none inferred as accepted or rejected, per `PROP-0001`'s own
+  explicit status discipline.
+- **Caught and fixed one real instance of this session's own recurring
+  cross-repository relative-path bug** during pre-commit verification:
+  both new files initially cited `project-memory`'s
+  `notes/2026-07-19-...` investigation as if it were reachable by a
+  same-repository relative path from `discovery-lab` - it is not.
+  Fixed to explicit prose in both files, same fix pattern this session
+  used for the identical bug during the Reality Stress Test.
+- Applied one small, separate, self-authorized correction: `AG-001`'s
+  `STATUS.yaml` (`runs_completed: 0 -> 1`, `last_run: null ->
+  2026-07-24`) did not match its own `HISTORY.md`/`runs/
+  RUN-0001-observation-report.md` - found during `AGENT-001`'s
+  preparation, corrected here per `GOVERNANCE.md`'s own bug-fix-tier
+  rule (no version bump, no lifecycle re-entry, no new human decision
+  required by that already-accepted rule).
+- Constraints honored: no new governance model (both new documents use
+  `PROP-0001`'s own already-specified formats verbatim); Human Final
+  Authority not bypassed (every recommendation stays `PROPOSED`;
+  nothing written to `project-memory`, `kod`, `trust-engine`, or
+  `generative-discovery-engine` - confirmed directly, all four clean);
+  no architecture changed beyond what `GOVERNANCE.md`'s own
+  already-accepted bug-fix rule explicitly allows.
+- **Verdict: `EXECUTED`.** What remains, named honestly: delivering the
+  six `PROPOSED` recommendations to `project-memory`'s and `kod`'s own
+  maintainers is outside Discovery Lab's authority (Principle 0) and is
+  the one human step this initiative could not itself complete.
