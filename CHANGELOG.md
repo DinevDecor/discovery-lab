@@ -1,5 +1,74 @@
 # Changelog
 
+## 2026-07-25 (EXEC-008 — Reality Intelligence Sensor 001)
+
+- Built the ecosystem's first external reality sensor
+  (`reality-sensor/`): `External Reality -> Reality Sensor 001 ->
+  Signal Registry -> Observation Layer -> Headquarters -> Human
+  Decision`, never bypassing Headquarters. Phase 0 discovery reused
+  `observation-agent/`'s and `headquarters/`'s own conventions
+  throughout (`CONTRACT.md` template, `test_safety.py`'s
+  forbidden-pattern discipline, config-driven fixed lists,
+  `recommendation.py`'s `HQ-000N` persistent-ID pattern) rather than
+  inventing parallel architecture.
+- **The one load-bearing design decision**: `EXEC-008` requires both
+  "continuously observe live external reality" and "3 identical
+  repeated executions produce identical output" - genuinely in
+  tension, since live network calls cannot guarantee byte-identical
+  repeated output. Resolved by splitting **capture** (external,
+  point-in-time, executor-mediated via `WebFetch`/`WebSearch` against
+  a fixed Source Registry, producing a raw-captures JSON file) from
+  **processing** (this package's entire checked-in source - 100%
+  pure Python, 100% network-free, fully deterministic, enforced by a
+  new `tests/test_safety.py` check scanning for any network-client
+  reference). See `reality-sensor/ARCHITECTURE.md`.
+- Built `src/reality_sensor/`: Signal/Evidence/RawCapture models, a
+  Trust Policy enforcing "never `HIGH` confidence from `COMMUNITY`
+  alone" (`EXEC-008`'s one explicit hard rule), a config-driven
+  Relevance Gate against the 5 named Discovery Lab projects
+  (`WATCH` when none apply, never forced), deterministic duplicate
+  clustering, and an idempotent `RS-000N` Signal Registry mirroring
+  `recommendation.py`'s own `HQ-000N` reuse-by-key pattern. Plus
+  `config/source-registry.json` (20 fixed sources across the 4 named
+  domains, each trust-classified) and `config/relevance-gate.json`
+  (a first-draft, honestly-flagged keyword mapping).
+- 61 tests covering all 12 of `EXEC-008`'s required categories (source
+  validation, malformed feeds, duplicate suppression, evidence
+  enforcement, trust classification, fact-vs-interpretation
+  structural separation, stable IDs, repeated identical runs, empty
+  result handling, read-only verification, Headquarters compatibility,
+  regression against self-generated reports), all passing.
+- **Real, bounded external capture**: 14 `WebSearch`/`WebFetch`
+  operations (3 blocked with `HTTP 403` by `anthropic.com`/
+  `openai.com`/`arxiv.org`'s own bot protection, documented honestly
+  rather than hidden) produced 10 real, sourced, quoted raw captures
+  across all 4 domains - including a genuine `PRIMARY`-trust direct
+  fetch of Claude Opus 5's 1M-context-window changelog entry, the MCP
+  specification's stateless rewrite, Gemini 3.6 Flash's release, and
+  GitHub Copilot/Code-Quality billing changes - committed as
+  `validation-dataset/raw-captures-2026-07-11-to-2026-07-25.json`.
+- **Validated**: 3 repeated executions against this fixed dataset held
+  signals/IDs/evidence completely stable (`8 -> 0 new/8 updated ->
+  0 new/8 updated`, `times_seen` incrementing `1->2->3` correctly, zero
+  duplicate evidence, zero ID churn), both in accumulating and
+  fresh-directory modes. 1 real live run produced the tool's first
+  genuine `reports/signal-registry.json` plus Daily/Weekly briefs,
+  including 2 real duplicate-source clusters (Opus 5 and the MCP spec
+  change, each independently confirmed by 2 real sources) proving
+  duplicate suppression on real, not synthetic, data. `git status
+  --short` confirmed clean on all 5 ecosystem repositories throughout.
+- Headquarters compatibility proven structurally (`signal-registry
+  .json` is a flat, tolerant-JSON-readable list matching
+  `headquarters/collector.py`'s own reading style) but **not** wired
+  into `collector.py` itself - `EXEC-008` says not to redesign the
+  existing ecosystem and does not list a Headquarters code change
+  among its required deliverables; named as separate follow-on work.
+- **Verdict: PASS**, per `EXEC-008`'s own 9 named criteria - see
+  `reality-sensor/docs/VALIDATION-REPORT.md`.
+- Not merged to `main` - `EXEC-008` itself instructs "Do not merge
+  without explicit human approval"; stays on
+  `claude/prop-0002-discovery-intake` awaiting that decision.
+
 ## 2026-07-25 (Human Acceptance — Discovery Lab Phase 1)
 
 - Petko declared Phase 1 complete: **ACCEPTED**. The ecosystem now
