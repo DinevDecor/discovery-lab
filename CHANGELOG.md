@@ -1,5 +1,82 @@
 # Changelog
 
+## 2026-07-25 (EXEC-004)
+
+- Executed `EXEC-004 — Ecosystem Headquarters v1.0`: the ecosystem's
+  strategic interpreter, built at `headquarters/`. Reuses
+  `observation-agent`'s output directly rather than duplicating its
+  repository scanning — every artifact Headquarters reads is a
+  specific, pre-configured location (a state file, a registry, an ADR
+  directory listing, the Observation Agent's own latest report), never
+  an open-ended directory walk.
+- Built a tolerant parsing layer (`parsing.py`) after discovering, via
+  a background survey, that the ecosystem's `STATE.md`-equivalent
+  files actually use three genuinely different real shapes across the
+  five repositories (fenced ```yaml, fenced plain-text, and no fence
+  at all under plain markdown headings) — rather than forcing one
+  schema, the parser tries a fenced-block reading first and falls back
+  to a loose `key : value` scan, degrading to an empty result (never a
+  crash) for a file it cannot make sense of.
+- Implemented the full suggested module architecture: `collector.py`,
+  `health.py` (8 documented metrics, each with its formula stated in
+  its own docstring and echoed into the rendered brief), `portfolio.py`
+  (one entry per the same fixed 5-repo scope `observation-agent`
+  already uses), `drift.py` (5 of the 10 named categories — duplicate
+  ADR IDs, stale ADRs, registry gaps, decision backlog, possibly-
+  abandoned proposals — the other 5 named as explicit v1.0 scope
+  limits, not silently skipped), `opportunity.py` (3 mechanical,
+  always-DRAFT heuristics), `prioritizer.py` (the Attention Engine),
+  `recommendation.py` (`HQ-000N` traceability + Recommendation
+  Evaluation), `history.py` (run-over-run trend), `brief.py` (the
+  Executive Brief renderer), `cli.py` (orchestration).
+- The Attention Engine's scoring rubric is fully shown, not a black
+  box: `+3`/`+1`/`+0` by confidence tier, `+2` for being small and
+  mechanical to finish, `+2` for unblocking the Recommendation
+  Ledger's own `acceptance_rate` metric, `+1`-per-repo breadth capped
+  at `+2`, and — this is where the task's own guiding principle is
+  operationalized directly in the weights, not just stated in a
+  comment — `-1` for being a new-work Opportunity rather than a
+  finish-existing-work item. Exactly one candidate is ever selected;
+  `brief.py` enforces "never Top 10" by construction, listing every
+  other candidate separately under "Other Candidates Considered,"
+  explicitly not as a second priority list.
+- Built a 90-test suite: unit tests for every module plus a real
+  end-to-end CLI integration test against a fabricated fixture
+  ecosystem (proving the whole pipeline runs together and touches
+  nothing outside its own reports directory), and a safety scanner
+  reusing `observation-agent/tests/test_safety.py`'s own
+  forbidden-pattern detector, extended with a Headquarters-specific
+  check that no source file references any HTTP/network client
+  (Headquarters must never reach out to GitHub's API or any network
+  endpoint — filesystem artifacts only). All 90 passing on the first
+  full run.
+- Ran the tool for real against the live 5-repository ecosystem. The
+  first real run genuinely selected a concrete finding — discovery-lab
+  has two files both claiming `ADR-0001`
+  (`ADR-0001-human-authority-gates.md` and
+  `ADR-0001-migration-plan.md`) — as `HQ-0001`, the single
+  highest-value next action, correctly outscoring the Recommendation
+  Ledger's 6 `PROPOSED` entries (none yet overdue under the 3-day
+  threshold used) and three DRAFT Opportunities (correctly scored
+  lowest, per the guiding principle). `Overall Health` computed as
+  71%, formula shown.
+- Confirmed via `git status --short` that all 4 other repositories and
+  `discovery-lab` itself were unmodified by the run — the only new
+  content is `headquarters/` itself (source, tests, docs, and its own
+  `reports/` output: an Executive Brief, `recommendation-log.json`,
+  `history.json`).
+- Constraints honored: no repository modification of any kind
+  (enforced, not just documented); no self-approval anywhere (every
+  Opportunity stays `DRAFT`, every Recommendation stays `proposed`
+  until a human hand-edits `recommendation-decisions.json`);
+  `observation-agent`'s own repository-scanning was not duplicated.
+- Verdict: **PASS** on all ten of `EXEC-004`'s named Success Criteria —
+  runs successfully, consumes Observation Agent outputs, produces
+  ecosystem health, evaluates portfolio, selects exactly one
+  highest-priority recommendation, explains its reasoning, generates
+  an Executive Brief, remains read-only (enforced), passes tests,
+  completed one verified operational execution.
+
 ## 2026-07-25 (EXEC-003 — Human Decision: narrow merge, activation, acceptance)
 
 - Petko's response to the BLOCKED verdict below: **APPROVED** merging the
