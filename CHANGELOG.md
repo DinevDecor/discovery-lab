@@ -1899,3 +1899,43 @@
   not accepted or rejected by this task, no new governance mechanism
   introduced. The decision - accept, reject, which variant, on what
   timeline relative to `G2`'s own pending adoption - is left to Petko.
+
+## 2026-07-25 (`PROP-0001` — RATIFIED)
+
+- **Petko Dinev responded `ACCEPT`.** Real, dated decision, recorded in
+  `docs/proposals/PROP-0001-ratification-package/
+  9-RATIFICATION-RECORD.md`. The message did not itself name a variant
+  (`8-OPEN-QUESTIONS.md` item 6's anticipated ambiguity); resolved by
+  reading it against the ratification package's own structure, which
+  presented Variant B - Ecosystem Observatory throughout as the single
+  operative recommendation - `PROP-0001` itself recommends only
+  Variant B. This reading was stated explicitly at the moment of
+  acting on it, so it could be corrected immediately if wrong.
+- `docs/proposals/PROP-0001-discovery-lab-boundaries.md`'s own status
+  header updated from `DRAFT PROPOSAL - not accepted, not an ADR` to
+  `ACCEPTED - Variant B (Ecosystem Observatory) adopted, 2026-07-25` -
+  a minimal, status-field-level change, the same discipline
+  `EXEC-001`'s `KO-S3-01.md` promotion used. The Recommendation
+  section's own framing updated to match ("Recommended" to "Adopted";
+  "not an acceptance" to "was accepted... on 2026-07-25"). No other
+  line touched - not the three variant definitions, the evidence
+  basis, the self-critique, the Adversarial Review record, or the
+  Unresolved Questions - confirmed directly via `git diff`, exactly
+  the 3 status-framing edits and nothing else. The document's own
+  self-classification ("not an ADR") was preserved, not moved into
+  `docs/adr/`.
+- **This closes `ARCH-001`'s `R1`** - "Frozen implementation on an
+  unratified mandate," the ecosystem's own top-ranked architectural
+  risk, reconfirmed unresolved through `ARCH-002` (`G5`), `ARCH-003`,
+  `EXEC-001`, and `G2` without ever being re-litigated, now closed by
+  a real human decision rather than restated a sixth time. `AG-002`
+  and `AG-003`'s `FROZEN v1.0` status is now grounded in an accepted
+  mandate.
+- **What this does not do, named explicitly, not assumed done**:
+  `Ecosystem Health Review v0.1` is now authorized but was not run by
+  this task; `discovery-lab` is not yet added to
+  `project-memory/PROJECT_REGISTRY.md` (that edit belongs to
+  `project-memory`'s own process); no independent reviewer role was
+  created for Discovery Lab's own investigation reports (still open);
+  `G2`'s own Unified Control Plane Specification adoption remains a
+  separate, still-pending decision.

@@ -38,12 +38,26 @@ five completed tasks (`ARCH-001`, `ARCH-002`, `ARCH-003`, `EXEC-001`,
    3 newly surfaced by this preparation (which variant exactly; whether
    `AG-002`/`AG-003`'s standing is automatically resolved; sequencing
    against `G2`'s own pending adoption decision) — none blocking.
+9. `9-RATIFICATION-RECORD.md` — added after the decision arrived: the
+   real, dated `ACCEPT` decision, how the variant question (open
+   question 6) was resolved, and exactly what was mechanically changed
+   in `PROP-0001` itself in response.
 
-## Final Output
+## Final Output (as issued)
 
 # **READY FOR HUMAN RATIFICATION**
 
-## Why
+## Update — decision received
+
+Petko Dinev responded **`ACCEPT`** on 2026-07-25. Full record:
+`9-RATIFICATION-RECORD.md`. `PROP-0001` itself has been updated — a
+minimal, status-field-level change only, not a rewrite — to reflect
+`ACCEPTED — Variant B (Ecosystem Observatory)`. This package's own
+Deliverables 1–8 remain unchanged below as the record of what was
+prepared before the decision; they are not retroactively edited to
+match the outcome.
+
+## Why (as originally assessed, before the decision)
 
 Every required deliverable is complete, and every claim in this
 package traces to `PROP-0001`'s own text or to a specific, cited,
