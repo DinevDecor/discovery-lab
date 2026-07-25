@@ -1792,3 +1792,54 @@
   (a memoryless but not organizationally distinct Agent instance) -
   `ARCH-002`'s `G1` (no *general* execution mechanism exists anywhere)
   is unchanged by this one narrow, human-gated instance.
+
+## 2026-07-25 (G2 — Control Plane Reconciliation)
+
+- Performed the `G2` roadmap item `ARCH-002` specified (and `ARCH-001`'s
+  own Month 1-3 roadmap step), under
+  `docs/proposals/G2-control-plane-reconciliation/`: reconciled the
+  three independently-ratified coordination models
+  (`project-memory/adr/ADR-0001` + the Stable Core of
+  `AI-Collaboration-Architecture-v1_1.md` it accepts, `kod/Core/ADR/
+  ADR-0009`, `discovery-lab/GOVERNANCE.md`) into one Unified Control
+  Plane Specification - reconciliation only, no new architecture, no
+  chat/note sources used.
+- Stated the scope reading explicitly before reconciling: since
+  `project-memory`'s literal `ADR-0001` file is short (a ratifying
+  instrument), "the source" was read as `ADR-0001` plus the specific
+  Stable-Core sections of `v1_1.md` it names as `ACCEPTED` (7
+  invariants, Control Plane architecture, Authority/Truth Model,
+  Kernel Governance Layer, contract format) - not the Operational
+  Defaults/Experimental layers of the same document, which `ADR-0001`
+  itself marks `UNDER_TEST`.
+- Produced a Unified Control Plane Specification organized by 7 shared
+  concepts (Source of Truth, Contract-Defined Roles, Formal Gate,
+  Human Final Authority, Drift, Communication/Handoff, Staged
+  Lifecycle), each with canonical statement and full source citations;
+  a Cross-Reference Matrix (14 rows); a section-by-section Document
+  Mapping; a Conflict Resolution Log (5 real divergences found, 2
+  resolved as scope/layer differences not contradictions, 3 left
+  explicitly open rather than invented past); and a clean Final
+  Canonical Version (v0.1, marked `DRAFT - Candidate for Adoption`, not
+  self-ratified).
+- **Most significant single finding (`C3`)**: `kod`'s `ADR-0009` never
+  states that its "Headquarters" role-acceptance act must be performed
+  by a human, unlike `project-memory`'s `INV-4` and `discovery-lab`'s
+  `GOVERNANCE.md`, which both state this explicitly. Left open, not
+  resolved by assuming agreement - flagged as the real gap most worth
+  a human decision if these three governance instruments are ever
+  formally merged.
+- Two other real gaps found and left unfilled: PM's named
+  "Architecture-Implementation Drift" state and "anti-theater" clause
+  have no stated counterpart in `kod` or `discovery-lab`'s cited
+  documents - recorded as one-sided, not imported into the other two
+  by this reconciliation (which would itself have been inventing new
+  architecture, forbidden by the task's own rules).
+- **Verdict: PASS.** No new Runtime, Governance model, Role, process,
+  or principle introduced anywhere; both of `G2`'s Definition-of-Done
+  conditions (consolidation without new architecture, no roadmap
+  deviation) checked directly. Explicitly not claimed: that the
+  resulting specification is `ACCEPTED` or binding on any
+  repository - adoption remains Petko's decision, matching the same
+  DRAFT-before-ADR-0001 pattern `project-memory`'s own v1.1 document
+  used.
