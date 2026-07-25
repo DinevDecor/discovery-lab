@@ -1,5 +1,39 @@
 # Changelog
 
+## 2026-07-25 (Human Acceptance — EXEC-009)
+
+- Petko accepted `EXEC-009`: the submitted **PARTIAL** recommendation
+  is correct. Made several standing decisions explicit, narrowing and
+  binding this session's own analysis:
+  1. The ecosystem adopts the **two-family sensor model** — Internal
+     State Sensors and External Evidentiary Sensors — as a standing
+     architectural reference.
+  2. **No universal sensor framework code shall be implemented at
+     this stage.**
+  3. Five items (safety enforcement, configuration loading, CLI/
+     orchestration shape, evidence-and-citation discipline, reporting
+     conventions) are **shared architectural patterns, not yet shared
+     runtime modules** — a more precise framing than this session's
+     own `PROMOTE` verdict on the first three: the pattern
+     documentation stands, but no importable module exists or is
+     authorized.
+  4. Trust classification, deduplication, and persistent registries
+     remain **optional capabilities belonging primarily to the
+     External Evidentiary Sensor family**.
+  5. **No unified signal schema or unified confidence vocabulary
+     shall be introduced** — reconfirms `3-SHARED-COMPONENT-
+     INVENTORY.md`'s own "DO NOT PROMOTE" verdict as explicit, binding
+     human policy.
+  6. `docs/proposals/EXEC-009-universal-sensor-framework/` remains
+     **the reference for future sensor design**.
+  7. Code extraction is reconsidered only when a third real sensor is
+     implemented and provides additional evidence, or a separate
+     human decision explicitly authorizes extraction of the
+     triple-evidenced mechanical components — restates
+     `5-MIGRATION-PLAN.md`'s own two triggers as binding.
+- Operational baseline (`main`) untouched — nothing beyond `STATE.md`/
+  `CHANGELOG.md` was modified to record this acceptance.
+
 ## 2026-07-25 (EXEC-009 — Universal Sensor Framework v1.0, proposal only)
 
 - Architectural consolidation task, not implementation:
