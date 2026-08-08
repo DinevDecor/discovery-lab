@@ -1,0 +1,66 @@
+name: Install Claude discovery-lab bundle
+
+on:
+  push:
+    branches:
+      - claude/reality-observatory-slice-01
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify and unpack bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f discovery-lab-bundle.tar.gz
+          rm -rf /tmp/discovery-bundle
+          mkdir -p /tmp/discovery-bundle
+          tar -xzf discovery-lab-bundle.tar.gz -C /tmp/discovery-bundle --strip-components=1
+
+          # Claude's INSTALL.md says these three paths need special treatment if
+          # already present. They were checked on main before this bootstrap
+          # commit; fail rather than overwrite if a concurrent change added one.
+          for p in CLAUDE.md constraint-archaeology-agents/same_mechanism_gate.py tests/test_same_mechanism_gate.py; do
+            if git ls-files --error-unmatch "$p" >/dev/null 2>&1; then
+              echo "Refusing to overwrite existing protected path: $p"
+              exit 1
+            fi
+          done
+
+          # All other bundle paths are documented as new. Abort on any unexpected
+          # tracked collision instead of overwriting repository state.
+          while IFS= read -r f; do
+            rel="${f#/tmp/discovery-bundle/}"
+            if git ls-files --error-unmatch "$rel" >/dev/null 2>&1; then
+              echo "Unexpected tracked collision: $rel"
+              exit 1
+            fi
+          done < <(find /tmp/discovery-bundle -type f | sort)
+
+          cp -a /tmp/discovery-bundle/. .
+
+      - name: Run bundle tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=constraint-archaeology-agents python tests/test_findings_ledger.py
+          PYTHONPATH=constraint-archaeology-agents python tests/test_same_mechanism_gate.py
+
+      - name: Commit installed tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f discovery-lab-bundle.tar.gz
+          rm -f .github/workflows/install-discovery-bundle.yml
+          git config user.name "constraint-archaeology-bot"
+          git config user.email "constraint-archaeology-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "docs: freeze method v0.5, protocols, controls; add findings ledger (unwired)"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
