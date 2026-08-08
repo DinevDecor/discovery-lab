@@ -1,0 +1,44 @@
+[
+  {
+    "anomaly_id": "ANOM-0001",
+    "canonical_pattern": "Developing probabilistic programming language with exact inference for loops — Performance was too abysmal to be practical, preventing publicizing of working prototype for years",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0004-19a7bc"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0002",
+    "canonical_pattern": "Email service providers automatically send notifications and receipts to customers using standardized 'no-reply@' sender addresses — Organizations unknowingly expose customer PII, account details, and transaction data to unintended third-party recipients through typos in no-reply addresses",
+    "hidden_function_class": "rare_decision_trust",
+    "observation_ids": [
+      "OBS-20260808-0025-7dd032"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0003",
+    "canonical_pattern": "Operating public bug tracking infrastructure under load from automated scrapers — AI bot scrapers consuming enough resources to force complete service shutdown, blocking legitimate developer access to critical bug tracking",
+    "hidden_function_class": "variability_buffering",
+    "observation_ids": [
+      "OBS-20260808-0032-6afe87"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  }
+]
