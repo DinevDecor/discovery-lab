@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - claude/reality-observatory-slice-01
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -14,6 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: claude/reality-observatory-slice-01
           fetch-depth: 0
 
       - name: Install only missing bundle files
@@ -25,9 +29,6 @@ jobs:
           mkdir -p /tmp/discovery-bundle
           tar -xzf discovery-lab-bundle.tar.gz -C /tmp/discovery-bundle --strip-components=1
 
-          # The integrated gate and its regression fixtures already live in the
-          # working package under src/ca_agents and constraint-archaeology-agents/tests.
-          # Keep those authoritative versions; do not add the package-level duplicates.
           rm -f /tmp/discovery-bundle/constraint-archaeology-agents/same_mechanism_gate.py
           rm -f /tmp/discovery-bundle/tests/test_same_mechanism_gate.py
 
@@ -42,7 +43,6 @@ jobs:
             fi
           done < <(find /tmp/discovery-bundle -type f | sort)
 
-          # Remove bootstrap-only artifacts and the duplicate gate previously staged.
           rm -f constraint-archaeology-agents/same_mechanism_gate.py
           rm -f discovery-lab-bundle.tar.gz
 
@@ -66,4 +66,4 @@ jobs:
             exit 0
           fi
           git commit -m "docs: complete Reality Observatory bundle installation"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push origin HEAD:claude/reality-observatory-slice-01
