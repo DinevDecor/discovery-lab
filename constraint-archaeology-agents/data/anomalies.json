@@ -4,7 +4,8 @@
     "canonical_pattern": "Developing probabilistic programming language with exact inference for loops — Performance was too abysmal to be practical, preventing publicizing of working prototype for years",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260808-0004-19a7bc"
+      "OBS-20260808-0004-19a7bc",
+      "OBS-20260808-0038-066520"
     ],
     "independent_sources": [
       "hacker_news"
@@ -36,6 +37,202 @@
     ],
     "independent_sources": [
       "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0004",
+    "canonical_pattern": "Building and deploying LLM-based applications — High inference costs make LLM features economically unviable or require constant optimization, constraining what can be built and deployed",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0003-3145f2"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0005",
+    "canonical_pattern": "Manufacturing and delivering water bomber aircraft to meet wildfire season demand — Global demand for water bombers exceeds production capacity - customers need aircraft faster than manufacturing timelines allow",
+    "hidden_function_class": "variability_buffering",
+    "observation_ids": [
+      "OBS-20260808-0004-16d3cd"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0006",
+    "canonical_pattern": "Coordinating work across multiple concurrent Claude Code sessions — Context switching and manual information transfer between separate AI coding sessions breaks flow and loses state",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260808-0005-3dbb67"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0007",
+    "canonical_pattern": "Developer wants to build hardware projects after seeing examples on Reddit — Gap between seeing inspiring hardware projects and having hands-on reference implementations to learn from",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0014-09bdda"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0008",
+    "canonical_pattern": "Installing and running legacy CD-ROM software on modern operating systems — Legacy software (1998 CD-ROM) requires technical workarounds to function on modern OS (Windows 11) - 23 year gap",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0022-db0bcd"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0009",
+    "canonical_pattern": "Coordinating grid power supply adjustments to compensate for predictable temporary solar generation drops during solar eclipses — Predictable astronomical events create planned capacity drops requiring manual coordination across multiple grids and backup power sources",
+    "hidden_function_class": "variability_buffering",
+    "observation_ids": [
+      "OBS-20260808-0027-55f97e"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0010",
+    "canonical_pattern": "Newspaper typesetting and printing — All specialized knowledge acquired over 26 years becoming obsolete, replaced by computer automation",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0048-d3c471"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0011",
+    "canonical_pattern": "Developing distributed systems with static safety guarantees — Rust's type system provides memory safety but does not prevent distributed deadlocks, cross-service correctness issues, or protocol mismatches",
+    "hidden_function_class": "exception_handling",
+    "observation_ids": [
+      "OBS-20260808-0052-1a5703"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0012",
+    "canonical_pattern": "CPU performance optimization and assembly code review — Performance degradation from suboptimal compiler output requires manual assembly inspection and optimization",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260808-0055-564c80"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0013",
+    "canonical_pattern": "SAT solver optimization — General-purpose SAT solvers are suboptimal for domain-specific problems; expertise required to tune solvers for specific problem classes",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0057-4c5bc8"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0014",
+    "canonical_pattern": "Engineering team self-assessment through cross-team interviewing — Cannot determine if workflow problems originate from own team or are organization-wide without external comparison",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0058-37b988"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0015",
+    "canonical_pattern": "Scientific researchers profile and optimize data processing code for simulation outputs — Grad student spent months building processing tool that takes an hour to run; performance debugging capability exists in standard toolchain but unknown to domain experts",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0060-8cdf93"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0016",
+    "canonical_pattern": "Risk analysis and compliance documentation — Need to support multiple risk analysis methodologies simultaneously with different formats and requirements",
+    "hidden_function_class": "lost_information_reconstruction",
+    "observation_ids": [
+      "OBS-20260808-0063-555895"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0017",
+    "canonical_pattern": "Using AI coding tools to generate code within existing software projects — AI tools lack persistent memory of project-specific context, requiring repeated manual context provision for every coding task",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0072-fe18e5"
+    ],
+    "independent_sources": [
+      "dev:discuss"
     ],
     "first_seen": "2026-08-08",
     "last_seen": "2026-08-08",
