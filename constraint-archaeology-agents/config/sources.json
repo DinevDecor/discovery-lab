@@ -1,6 +1,10 @@
 {
   "sources": [
     {"name":"Hacker News newest","type":"hacker_news","limit":40},
+    {"name":"Lobsters newest","type":"lobsters","limit":30},
+    {"name":"DEV discuss","type":"dev","tag":"discuss","limit":25},
+    {"name":"DEV startup","type":"dev","tag":"startup","limit":25},
+    {"name":"DEV entrepreneurship","type":"dev","tag":"entrepreneurship","limit":25},
     {"name":"Reddit startups","type":"reddit","subreddit":"startups","limit":20},
     {"name":"Reddit Entrepreneur","type":"reddit","subreddit":"Entrepreneur","limit":20},
     {"name":"Reddit smallbusiness","type":"reddit","subreddit":"smallbusiness","limit":20},
