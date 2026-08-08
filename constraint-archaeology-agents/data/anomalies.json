@@ -75,7 +75,8 @@
     "canonical_pattern": "Coordinating work across multiple concurrent Claude Code sessions — Context switching and manual information transfer between separate AI coding sessions breaks flow and loses state",
     "hidden_function_class": "state_verification",
     "observation_ids": [
-      "OBS-20260808-0005-3dbb67"
+      "OBS-20260808-0005-3dbb67",
+      "OBS-20260808-0033-263c93"
     ],
     "independent_sources": [
       "hacker_news"
@@ -229,7 +230,204 @@
     "canonical_pattern": "Using AI coding tools to generate code within existing software projects — AI tools lack persistent memory of project-specific context, requiring repeated manual context provision for every coding task",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260808-0072-fe18e5"
+      "OBS-20260808-0072-fe18e5",
+      "OBS-20260808-0072-acb4f1"
+    ],
+    "independent_sources": [
+      "dev:discuss"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0018",
+    "canonical_pattern": "Managing multiple AI coding agents simultaneously within terminal multiplexer environments — Developers need to manually orchestrate and track multiple AI coding agents across terminal sessions",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260808-0005-32894d"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0019",
+    "canonical_pattern": "Geographic arbitrage decision-making for remote workers with cross-border residency requirements — Decision paralysis from comparing incommensurable factors (family proximity, residency activation requirements, property investment, marriage prospects) across three countries without clear optimization framework",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0016-056670"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0020",
+    "canonical_pattern": "Installing apps from alternative sources (F-Droid, sideloading) on Android devices — Banking apps and apps requiring Play Integrity refuse to work without Google Play Services. Installing unverified packages requires: clicking build number 7 times, enabling special setting, entering device PIN, then mandatory 24-hour wait",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0028-98b004"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0021",
+    "canonical_pattern": "Software developers managing AI inference costs — Cannot predict or control inference costs before bills arrive; no feedback loop between prompt design and actual token/cost impact",
+    "hidden_function_class": "unknown_scope_pricing",
+    "observation_ids": [
+      "OBS-20260808-0031-b9be3e"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0022",
+    "canonical_pattern": "Manufacturing and delivering Canadair water bomber aircraft to global customers — Global demand for water bombers exceeds manufacturing capacity; customers face multi-year wait times for aircraft delivery amid increasing wildfire frequency",
+    "hidden_function_class": "variability_buffering",
+    "observation_ids": [
+      "OBS-20260808-0032-784dab"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0023",
+    "canonical_pattern": "Hot metal typesetting knowledge transfer from human craftspeople to computerized systems — Complete skillset obsolescence as domain knowledge gets transferred to and locked inside computer systems",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0048-21984d"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0024",
+    "canonical_pattern": "Building distributed systems with compile-time safety guarantees — Rust type system prevents memory safety issues but provides no guarantees against distributed deadlocks, cross-service correctness problems, or protocol mismatches between independent nodes",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260808-0052-00adb2"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0025",
+    "canonical_pattern": "CPU performance benchmarking and optimization — Time spent optimizing code based on benchmarks that don't reflect actual production performance characteristics",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0055-e12cc3"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0026",
+    "canonical_pattern": "SAT solver optimization through domain-specific code generation — Generic SAT solvers waste computation on irrelevant branches and checks for specific problem domains",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0057-bca60e"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0027",
+    "canonical_pattern": "Developer self-assessment during difficult team dynamics — Uncertainty about whether one is source of team dysfunction vs victim of dysfunctional team environment",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0058-2e10b9"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0028",
+    "canonical_pattern": "Scientific computing grad students processing large simulation outputs (200GB-TB scale) to construct analysis trees — Hour-long processing runs on 200GB data; repeated file reads; inefficient nested dictionary structures simulating trees; difficulty understanding own code",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0060-32e1cf"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0029",
+    "canonical_pattern": "Payment payout processing with timeout handling — Timeout errors misinterpreted as failures, risking duplicate payouts or requiring manual status verification",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260808-0068-906e1b"
+    ],
+    "independent_sources": [
+      "dev:discuss"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0030",
+    "canonical_pattern": "Writing and distributing postmortem incident reports after production defects — Each incident investigation requires custom writeup effort; format and completeness varies; knowledge of 'how it was invisible' and 'how it was found' must be deliberately captured",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0079-d36979"
+    ],
+    "independent_sources": [
+      "dev:discuss"
+    ],
+    "first_seen": "2026-08-08",
+    "last_seen": "2026-08-08",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0031",
+    "canonical_pattern": "Deploying changes to disable or modify AI features in production — Cannot immediately disable problematic AI features without going through full deployment process",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0080-96de59"
     ],
     "independent_sources": [
       "dev:discuss"
