@@ -1,6 +1,7 @@
 from __future__ import annotations
 import datetime as dt, json, os, re
 from .models import Anomaly, Observation, to_dict
+from .same_mechanism_gate import GateAnomaly, EdgeType, gate_pair
 
 FUNCTIONS = {
  "state_verification": ["state","condition","handoff","verify","inspection","proof"],
@@ -32,24 +33,55 @@ def append_jsonl(path, rows):
     with open(path,"a",encoding="utf-8") as f:
         for r in rows: f.write(json.dumps(r,ensure_ascii=False)+"\n")
 
-def rebuild_anomalies(observations, threshold=.22):
-    anomalies=[]
+def _gate_obs(obs, evidence_count=1):
+    return GateAnomaly(
+        id=obs.observation_id, source=obs.source, process=obs.process,
+        pain=obs.pain, current_carrier=obs.current_carrier,
+        failure_mode=obs.failure_mode, evidence_count=evidence_count,
+        confidence=obs.confidence,
+    )
+
+def rebuild_anomalies(observations, threshold=.22, judge=None, return_decisions=False):
+    """Rebuild clusters from observations.
+
+    Lexical/function similarity only proposes candidate pairs. When a judge is
+    supplied, a pair may merge only after the symmetric same-mechanism gate.
+    RELATED_DISTINCT and UNRESOLVED decisions are retained for audit.
+    """
+    anomalies=[]; decisions=[]; byid={}
     for o in observations:
         obs=Observation(**o) if isinstance(o,dict) else o
+        byid[obs.observation_id]=obs
         best=None; bests=0
         for a in anomalies:
             if a.hidden_function_class != classify_function(obs): continue
             s=_sim(a.canonical_pattern,obs.process+" "+obs.pain)
             if s>bests: best,bests=a,s
-        if best and bests>=threshold:
+        may_merge=best is not None and bests>=threshold
+        if may_merge and judge is not None:
+            rep=byid.get(best.observation_ids[0])
+            if rep is None:
+                may_merge=False
+            else:
+                decision=gate_pair(
+                    _gate_obs(rep,len(best.observation_ids)),
+                    _gate_obs(obs,1), judge
+                )
+                decisions.append(decision.to_dict())
+                may_merge=decision.edge is EdgeType.MERGED
+        if may_merge:
             best.observation_ids.append(obs.observation_id)
             if obs.source not in best.independent_sources: best.independent_sources.append(obs.source)
             best.last_seen=dt.date.today().isoformat()
         else:
             aid=f"ANOM-{len(anomalies)+1:04d}"
             anomalies.append(Anomaly(aid,obs.process+" — "+obs.pain,classify_function(obs),[obs.observation_id],[obs.source],dt.date.today().isoformat(),dt.date.today().isoformat(),"WATCH"))
-    return anomalies
+    return (anomalies,decisions) if return_decisions else anomalies
 
 def persist_anomalies(path, anomalies):
     os.makedirs(os.path.dirname(path),exist_ok=True)
     with open(path,"w",encoding="utf-8") as f: json.dump([to_dict(a) for a in anomalies],f,ensure_ascii=False,indent=2)
+
+def persist_gate_decisions(path, decisions):
+    os.makedirs(os.path.dirname(path),exist_ok=True)
+    with open(path,"w",encoding="utf-8") as f: json.dump(decisions,f,ensure_ascii=False,indent=2)
