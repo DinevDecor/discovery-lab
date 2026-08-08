@@ -1,0 +1,10 @@
+{
+  "sources": [
+    {"name":"Hacker News newest","type":"hacker_news","limit":40},
+    {"name":"Reddit startups","type":"reddit","subreddit":"startups","limit":20},
+    {"name":"Reddit Entrepreneur","type":"reddit","subreddit":"Entrepreneur","limit":20},
+    {"name":"Reddit smallbusiness","type":"reddit","subreddit":"smallbusiness","limit":20},
+    {"name":"Reddit SaaS","type":"reddit","subreddit":"SaaS","limit":20},
+    {"name":"Reddit SideProject","type":"reddit","subreddit":"SideProject","limit":20}
+  ]
+}
