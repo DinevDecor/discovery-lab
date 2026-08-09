@@ -627,7 +627,8 @@
     "canonical_pattern": "Real-time graph querying at scale — Need to build and maintain custom distributed graph infrastructure instead of using off-the-shelf solutions",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260809-0013-94dc66"
+      "OBS-20260809-0013-94dc66",
+      "OBS-20260809-0025-b03870"
     ],
     "independent_sources": [
       "hacker_news"
@@ -851,20 +852,6 @@
   },
   {
     "anomaly_id": "ANOM-0061",
-    "canonical_pattern": "Querying distributed graph data in real-time across Netflix infrastructure — Need for specialized infrastructure to handle graph queries at Netflix scale - standard solutions insufficient for real-time distributed graph access patterns",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0025-b03870"
-    ],
-    "independent_sources": [
-      "hacker_news"
-    ],
-    "first_seen": "2026-08-09",
-    "last_seen": "2026-08-09",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0062",
     "canonical_pattern": "Building standalone ClojureScript scripting tools — Node.js dependency adds significant size overhead for distributing ClojureScript scripts as standalone tools",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -878,7 +865,7 @@
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0063",
+    "anomaly_id": "ANOM-0062",
     "canonical_pattern": "Syndicating RSS/Atom feed content to Nostr social network — Content publishers must implement separate integration to reach Nostr audience; RSS feeds don't natively speak Nostr protocol",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -892,7 +879,7 @@
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0064",
+    "anomaly_id": "ANOM-0063",
     "canonical_pattern": "Industrial LLM prompt engineering and output refinement — Iterative manual revision cycles required to achieve acceptable LLM output quality in production",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -906,7 +893,7 @@
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0065",
+    "anomaly_id": "ANOM-0064",
     "canonical_pattern": "Regression testing AI agents against predefined scenario packs — Integration complexity exceeded expectations while scenario definition (YAML writing, scoring logic) proved straightforward",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -920,7 +907,7 @@
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0066",
+    "anomaly_id": "ANOM-0065",
     "canonical_pattern": "Grid operators curtail (discard) excess solar power generation when supply exceeds demand or grid capacity — Industry debate over whether 2.4 TWh annual solar curtailment represents waste or acceptable grid management cost",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -934,7 +921,7 @@
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0067",
+    "anomaly_id": "ANOM-0066",
     "canonical_pattern": "API field deprecation and removal — Cannot actually remove deprecated API fields despite announcing deprecation; must maintain indefinitely",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -948,11 +935,123 @@
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0068",
+    "anomaly_id": "ANOM-0067",
     "canonical_pattern": "payment/payout processing with timeout handling — duplicate payouts executed when timeout interpreted as failure and operation retried",
     "hidden_function_class": "unclassified",
     "observation_ids": [
       "OBS-20260809-0077-c224e9"
+    ],
+    "independent_sources": [
+      "dev:discuss"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0068",
+    "canonical_pattern": "Setting up consistent VSCode development environment configuration across team members — PR review inefficiency due to formatting differences; AI assistant won't reliably create/update .vscode files without repeated prompting due to protected directory status",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0002-a7f89a"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0069",
+    "canonical_pattern": "distributing large payloads (images, files, binaries) to multiple downstream consumers in event-driven/messaging architectures — producer cannot know when all consumers have retrieved the object; no built-in coordination for safe cleanup timing across N consumers",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0007-2987fa"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0070",
+    "canonical_pattern": "mobile app monetization in India — developers unable to charge Indian users directly despite growing spending power",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0010-920008"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0071",
+    "canonical_pattern": "Entry/exit through commercial double doors — Customers must wait/queue at single door during high traffic; reduced throughput during peak entry/exit times",
+    "hidden_function_class": "variability_buffering",
+    "observation_ids": [
+      "OBS-20260809-0030-89de45"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0072",
+    "canonical_pattern": "Running multi-model LLM consensus for newsletter generation — Council models disagree unpredictably; tie-breaking and coherence management across 9 outputs becomes manual overhead",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0040-dc24da"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0073",
+    "canonical_pattern": "transaction reconciliation between systems — exact amount matching fails when multiple transactions share the same amount (one-to-many relationships)",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0070-e9d5f2"
+    ],
+    "independent_sources": [
+      "dev:discuss"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0074",
+    "canonical_pattern": "Solar power generation curtailment in Japan's electricity grid — 2.4 TWh of generated solar electricity is curtailed (thrown away) annually, representing operational mismatch between generation timing and grid capacity/demand",
+    "hidden_function_class": "variability_buffering",
+    "observation_ids": [
+      "OBS-20260809-0071-d4f28a"
+    ],
+    "independent_sources": [
+      "dev:discuss"
+    ],
+    "first_seen": "2026-08-09",
+    "last_seen": "2026-08-09",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0075",
+    "canonical_pattern": "API field deprecation and removal — Cannot actually remove deprecated API fields because unknown downstream dependencies break when removed",
+    "hidden_function_class": "lost_information_reconstruction",
+    "observation_ids": [
+      "OBS-20260809-0074-432f5e"
     ],
     "independent_sources": [
       "dev:discuss"
