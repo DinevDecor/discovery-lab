@@ -1,0 +1,313 @@
+{
+  "test_pack_version": "v1",
+  "purpose": "First systematic end-to-end measurement of the real same-mechanism gate (constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py) against 10 pre-labeled synthetic pairs. This file is written and frozen BEFORE the gate is run on any case in it. It is not modified after execution; actual outcomes go to results.json.",
+  "frozen_before_execution": true,
+  "gate_under_test": "constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py::gate_pair",
+  "judge_used": "isolated_subagent_judge (see README.md - real ClaudeMechanismJudge requires ANTHROPIC_API_KEY, unavailable in this sandbox; substituted with genuinely independent, blind Claude subagent calls per prompt, same JudgeProtocol contract)",
+  "distribution": {
+    "same_mechanism": 3,
+    "related_distinct": 4,
+    "unresolved": 2,
+    "adversarial_near_match": 1
+  },
+  "cases": [
+    {
+      "test_case_id": "TP-01",
+      "category": "same_mechanism",
+      "cross_domain": true,
+      "domains": ["software", "medicine"],
+      "note": "Cross-domain mandatory case: mechanism proven across strongly different domains, deliberately different vocabulary on each side.",
+      "left": {
+        "id": "TP-01-L",
+        "source": "test_pack_v1",
+        "process": "an on-call engineer handing off an active production incident to the next on-call engineer at shift change",
+        "pain": "the incoming engineer re-diagnoses steps the outgoing engineer already ruled out",
+        "current_carrier": "a verbal handoff call between the two engineers",
+        "failure_mode": "decisions already made during the incident are repeated or contradicted by the next engineer",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-01-R",
+        "source": "test_pack_v1",
+        "process": "a nurse handing off a ward patient's pending care tasks to the nurse starting the next shift",
+        "pain": "the incoming nurse re-asks the family questions the previous nurse already resolved",
+        "current_carrier": "a spoken bedside report between the two nurses",
+        "failure_mode": "care decisions already agreed with the patient are forgotten or redone by the next shift",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "ground_truth_rationale": "Both are the same structural failure: an actor carries open decisions only in personal memory across a handoff boundary, with no durable record. The minimal repair (a structured record handed to the next actor) removes both failures symmetrically. Domains and vocabulary are deliberately unrelated (incident response vs. bedside nursing)."
+    },
+    {
+      "test_case_id": "TP-02",
+      "category": "same_mechanism",
+      "cross_domain": true,
+      "domains": ["aviation", "logistics"],
+      "left": {
+        "id": "TP-02-L",
+        "source": "test_pack_v1",
+        "process": "an MRO shop supplying a wear part for an aircraft-on-ground repair",
+        "pain": "the shop holds no stock of the part beyond the average monthly draw",
+        "current_carrier": "a purchase order raised only after the part is requested",
+        "failure_mode": "when demand exceeds the average, the part is sourced by paid emergency air freight from another region",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-02-R",
+        "source": "test_pack_v1",
+        "process": "a regional distribution center fulfilling retail store replenishment orders",
+        "pain": "the center holds inventory sized to average weekly sell-through only",
+        "current_carrier": "a replenishment order triggered by the prior week's actual sales",
+        "failure_mode": "when a store's sales spike above average, the shortfall is covered by paid next-day courier shipments from a distant hub",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "ground_truth_rationale": "Both carry zero buffer against normal demand variance, so every above-average draw is absorbed through an expensive reactive/expedite channel instead of planned capacity. The minimal repair (hold a variance-sized buffer, replacing reactive expediting) removes both failures symmetrically."
+    },
+    {
+      "test_case_id": "TP-03",
+      "category": "same_mechanism",
+      "cross_domain": true,
+      "domains": ["finance", "construction"],
+      "left": {
+        "id": "TP-03-L",
+        "source": "test_pack_v1",
+        "process": "releasing an outbound wire transfer requested near the end of the banking day",
+        "pain": "the beneficiary account details are keyed once and sent without a second person checking them",
+        "current_carrier": "the single operator who receives and enters the wire instruction",
+        "failure_mode": "funds are sent to a mistyped or fraudulent account and the error surfaces only when the intended recipient reports non-receipt days later",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-03-R",
+        "source": "test_pack_v1",
+        "process": "pouring concrete for a structural slab on a schedule-pressured site",
+        "pain": "the rebar placement is checked by the same crew that installed it, with no independent hold point before the pour",
+        "current_carrier": "the installing crew's own visual check",
+        "failure_mode": "rebar is out of position or missing in a section and the defect surfaces only when a later structural inspection cores the slab",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "ground_truth_rationale": "Both skip an independent verification step before an action becomes irreversible under time/schedule pressure, so an error propagates and is discovered only much later at higher cost. The minimal repair (a hard independent-verification gate before the irreversible step, no override under pressure) removes both failures symmetrically."
+    },
+    {
+      "test_case_id": "TP-04",
+      "category": "related_distinct",
+      "subtype": "false_positive_trap",
+      "cross_domain": true,
+      "domains": ["aviation", "medicine"],
+      "note": "MANDATORY false-positive trap. Case A: the needed fact does not exist yet. Case B: the fact exists and is known somewhere but was never transmitted. Both superficially read as 'missing information' at decision time.",
+      "left": {
+        "id": "TP-04-L",
+        "source": "test_pack_v1",
+        "process": "finalizing a flight's weight-and-balance calculation before dispatch release",
+        "pain": "dispatch is asked to release the flight before cargo loading is complete",
+        "current_carrier": "the load sheet, which can only be completed once loading finishes",
+        "failure_mode": "the release is delayed or reworked because the final loaded weight needed for the calculation does not exist yet at the time it is requested",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-04-R",
+        "source": "test_pack_v1",
+        "process": "a hospital admitting team deciding on a new medication for an incoming patient",
+        "pain": "the admitting team is asked to prescribe before the patient's allergy history arrives",
+        "current_carrier": "a paper allergy record held at the patient's regular clinic",
+        "failure_mode": "the prescription is delayed or reworked because the allergy history, though already recorded elsewhere, was never requested or sent to the admitting team",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "ground_truth_rationale": "Case A's fact (final loaded weight) is ontologically unavailable until an event happens later in the process; the only repair is re-sequencing (calculate after loading). Case B's fact (allergy history) already exists in full at decision time; the only repair is transmission/integration (fetch and deliver the existing record). Re-sequencing does not fix a transmission gap and building a data feed does not fix a fact that doesn't exist yet, so the repairs do not transfer in either direction even though both present as 'missing information'. A gate that merges these has made the exact false-merge error this pack exists to catch."
+    },
+    {
+      "test_case_id": "TP-05",
+      "category": "related_distinct",
+      "cross_domain": true,
+      "domains": ["software", "manufacturing"],
+      "left": {
+        "id": "TP-05-L",
+        "source": "test_pack_v1",
+        "process": "running the automated test suite in continuous integration",
+        "pain": "tests fail intermittently depending on which other tests ran before them",
+        "current_carrier": "a shared in-memory database fixture reused across test cases",
+        "failure_mode": "one test's leftover state causes a later, unrelated test to assert against the wrong value",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-05-R",
+        "source": "test_pack_v1",
+        "process": "stamping sheet-metal brackets on a production line using a dedicated jig",
+        "pain": "an increasing fraction of brackets fail dimensional inspection as a production run continues",
+        "current_carrier": "the stamping jig's locating pins, unchanged since the run began",
+        "failure_mode": "the jig's locating pins wear during the run, so later brackets drift out of tolerance while early brackets in the same run passed",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "ground_truth_rationale": "Both present as 'intermittent quality failures that get worse under some condition', but the left is interference between concurrent actors sharing mutable state (a conflict), while the right is monotonic physical degradation of a single carrier over time (corruption/drift). Isolating shared test state does not fix jig wear, and recalibrating a jig does not fix shared mutable test state."
+    },
+    {
+      "test_case_id": "TP-06",
+      "category": "related_distinct",
+      "cross_domain": true,
+      "domains": ["logistics", "construction"],
+      "left": {
+        "id": "TP-06-L",
+        "source": "test_pack_v1",
+        "process": "clearing an imported container through customs at the destination port",
+        "pain": "the container sits at the port past its free time and starts accruing charges",
+        "current_carrier": "the customs entry paperwork, which is only started after the vessel arrives",
+        "failure_mode": "clearance is delayed because the required import documentation was not prepared in advance, and the delay is billed as demurrage",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-06-R",
+        "source": "test_pack_v1",
+        "process": "obtaining a municipal inspection sign-off before covering a completed foundation",
+        "pain": "the crew sits idle waiting for the inspection to happen",
+        "current_carrier": "the municipal inspector's visit queue",
+        "failure_mode": "the sign-off is delayed because the inspection department has more requests that week than it has inspectors, regardless of how early the contractor requested it",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "ground_truth_rationale": "Both present as 'costly delay waiting on paperwork/approval', but the left is a controllable absence (the contractor's own document was not prepared in time) while the right is an external capacity constraint (approval throughput is fixed regardless of the contractor's own preparation). Pre-filing documents earlier does not fix a queue that is capacity-bound, and adding inspection capacity is not the same repair as pre-filing paperwork."
+    },
+    {
+      "test_case_id": "TP-07",
+      "category": "adversarial_near_match",
+      "cross_domain": false,
+      "domains": ["software", "software"],
+      "note": "Adversarial trap: same domain, deliberately shared vocabulary ('stale/out of date data'), designed to look like an easy merge. Tests whether the gate resists a false merge under maximal surface similarity.",
+      "left": {
+        "id": "TP-07-L",
+        "source": "test_pack_v1",
+        "process": "serving product prices from a read-through cache in front of the pricing database",
+        "pain": "customers occasionally see a price that is already out of date",
+        "current_carrier": "cache entries that are not touched when the underlying price is updated",
+        "failure_mode": "a price update in the database does not trigger removal of the old cached value, so the stale price is served until it expires on its own",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-07-R",
+        "source": "test_pack_v1",
+        "process": "displaying same-day revenue on an internal analytics dashboard",
+        "pain": "viewers occasionally see a number that is already out of date",
+        "current_carrier": "a nightly batch job that recalculates the dashboard's figures once per day",
+        "failure_mode": "same-day transactions are not reflected until the next scheduled batch run, so the dashboard lags true activity by up to a day even though the pipeline is working exactly as designed",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "ground_truth_rationale": "Same domain, same words ('out of date'), same surface shape (viewer sees an old number). But the left is a broken write-path signal (a specific defect: invalidation never fires) while the right is an inherent batch-cadence limit with no defect (the system is working as designed, just coarse-grained). Adding event-driven invalidation does not shrink batch latency, and running the batch more often does not fix a missing invalidation signal. A gate that merges these because the words match has failed on structure vs. vocabulary."
+    },
+    {
+      "test_case_id": "TP-08",
+      "category": "unresolved",
+      "subtype": "thin_evidence",
+      "cross_domain": true,
+      "domains": ["finance", "medicine"],
+      "note": "Genuinely insufficient evidence: left side is a single vague, non-specific fragment with no discernible failure mechanism, not merely a 'hard' case.",
+      "left": {
+        "id": "TP-08-L",
+        "source": "test_pack_v1",
+        "process": "a handoff between two people in a finance operations team",
+        "pain": "things reportedly get lost sometimes",
+        "current_carrier": "a person, no further detail available",
+        "failure_mode": "not clearly described; one team member mentioned it happens occasionally but gave no specifics",
+        "evidence_count": 1,
+        "confidence": 0.3
+      },
+      "right": {
+        "id": "TP-08-R",
+        "source": "test_pack_v1",
+        "process": "a hospital ward pharmacist reviewing a patient's medication list at admission",
+        "pain": "duplicate doses are occasionally given for a home medication",
+        "current_carrier": "the admission medication reconciliation form, filled in from patient interview",
+        "failure_mode": "the reconciliation form lists the home medication by brand name, and the prescribing system does not flag it as identical to the hospital formulary's generic-name entry",
+        "evidence_count": 3,
+        "confidence": 0.85
+      },
+      "expected_verdict": "insufficient_data",
+      "expected_edge": "unresolved",
+      "ground_truth_rationale": "The left report contains no discernible failure mechanism at all (no process detail, no described failure beyond 'things get lost sometimes', single unverified anecdote). No reliable mechanism profile can be built from it regardless of how well-specified the right side is, so no confident same/different verdict is possible. The correct answer is INSUFFICIENT_DATA, not a guess in either direction."
+    },
+    {
+      "test_case_id": "TP-09",
+      "category": "unresolved",
+      "subtype": "unverified_repair_effect",
+      "cross_domain": true,
+      "domains": ["construction", "maintenance"],
+      "note": "Genuinely insufficient evidence of a different kind: each side is a single incident report where the source material itself states the proposed fix's effect has never been assessed.",
+      "left": {
+        "id": "TP-09-L",
+        "source": "test_pack_v1",
+        "process": "coordinating framing completion with the start of electrical rough-in on a renovation",
+        "pain": "electrical work has started late on some floors",
+        "current_carrier": "a text message the framing lead sends when he believes his crew is done",
+        "failure_mode": "on two floors the text was sent before framing was actually complete, so electricians began work in areas that still needed framing changes; site management has floated requiring a walkthrough sign-off instead of a text, but this has not been tried yet and nobody has assessed whether a walkthrough would actually have caught the two incidents",
+        "evidence_count": 1,
+        "confidence": 0.6
+      },
+      "right": {
+        "id": "TP-09-R",
+        "source": "test_pack_v1",
+        "process": "coordinating diagnostic completion with the start of a repair step on a multi-step overhaul",
+        "pain": "repair work has started before diagnostics were finished on some jobs",
+        "current_carrier": "a shared whiteboard mark the diagnostic technician updates when a step is believed finished",
+        "failure_mode": "on a few jobs the whiteboard was marked before diagnostics were actually complete, so repair started on the wrong assumption; a supervisor has suggested replacing the whiteboard mark with a signed checklist, but nobody has reviewed the incident records closely enough to say whether a signed checklist would have prevented those specific cases",
+        "evidence_count": 1,
+        "confidence": 0.6
+      },
+      "expected_verdict": "insufficient_data",
+      "expected_edge": "unresolved",
+      "ground_truth_rationale": "Both sides describe only a single small cluster of incidents (no independent replication) and explicitly state that whether the proposed fix would have prevented the specific incidents has never been checked. A reliable same/different mechanism verdict needs evidence that the proposed repair's effect is at least assessed once; asserting symmetry or asymmetry from two unverified, single-instance anecdotes is over-claiming. The correct answer is INSUFFICIENT_DATA; a confident verdict either way would be evidence-threshold failure, not genuine discrimination."
+    },
+    {
+      "test_case_id": "TP-10",
+      "category": "related_distinct",
+      "cross_domain": true,
+      "domains": ["maintenance", "finance"],
+      "left": {
+        "id": "TP-10-L",
+        "source": "test_pack_v1",
+        "process": "replacing a failed component on a machine with the part the parts desk has on hand",
+        "pain": "the same machine keeps failing at the same location a few weeks after each repair",
+        "current_carrier": "a lower-spec substitute part that fits the same mounting but is rated below the original manufacturer's tolerance",
+        "failure_mode": "the substitute part wears out faster than the original design tolerance, so the same failure recurs on a shortened cycle",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right": {
+        "id": "TP-10-R",
+        "source": "test_pack_v1",
+        "process": "extending trade credit terms to a customer segment at account opening",
+        "pain": "the same customer segment keeps going delinquent a few weeks after each collections cleanup",
+        "current_carrier": "a standard credit-term offer applied to the segment regardless of the segment's typical cash conversion cycle",
+        "failure_mode": "the credit term extended exceeds the segment's actual payment capacity, so the same delinquency recurs on a repeating cycle",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "ground_truth_rationale": "Both are the same abstract shape (a standardized substitute is systematically inadequate relative to a real requirement, producing a recurring failure that looks like an operational problem) and would likely both classify under a capacity-type failure. But the concrete repairs do not transfer in either direction: fitting an OEM-spec part does not change a customer's payment capacity, and tightening credit terms does not fix a machine's mounting tolerance. This tests whether the gate distinguishes same abstract shape from same mechanism."
+    }
+  ]
+}
