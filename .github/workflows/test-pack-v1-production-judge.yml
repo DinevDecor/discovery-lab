@@ -1,35 +1,54 @@
-name: Test Pack v1 - Production Judge (manual, isolated)
+name: Test Pack v1 - Production Judge (isolated, temporary push trigger)
 
-# RESTORED to workflow_dispatch-only after the one-time production-judge run
-# captured in results-production-judge.json (GitHub Actions run 31300689766,
-# triggered via commit d4bd4a6's temporary push trigger, since
-# workflow_dispatch cannot be dispatched for a workflow that has never
-# existed on the default branch, and this workflow intentionally never
-# lands on main). workflow_dispatch here is therefore functionally inert
-# going forward — kept for documentation/reproducibility rather than as a
-# live trigger — which is the point: it no longer fires on ordinary edits
-# under evaluation/test-pack-v1/.
+# TEMPORARY trigger, for the PROD-R2..PROD-R6 variance experiment. Same
+# rationale as the original PROD-R1 run (see git history on this file):
+# workflow_dispatch only activates for workflow files that already exist on
+# the default branch, and this workflow intentionally never lands on main.
+# So this is triggered by push, scoped as tightly as possible:
+#   - only the Test Pack branch (see branches: below, and the job-level
+#     github.ref guard, a second redundant safety check)
+#   - only paths under evaluation/test-pack-v1/** or this file itself
+#   - no schedule, no pull_request
+# After this run's results are captured, this trigger is reverted back to
+# workflow_dispatch-only (functionally inert, never registered on main) in a
+# follow-up commit, exactly as after PROD-R1, so later edits under
+# evaluation/test-pack-v1/ do not accidentally cause further API spend.
 #
 # Runs the frozen Constraint Archaeology Test Pack v1
-# (evaluation/test-pack-v1/) through the real production ClaudeMechanismJudge,
-# reusing the same ANTHROPIC_API_KEY secret the daily pipeline already uses.
+# (evaluation/test-pack-v1/) through the real production ClaudeMechanismJudge
+# FIVE independent times (PROD-R2..PROD-R6; PROD-R1 already exists from the
+# prior run and is never overwritten), reusing the same ANTHROPIC_API_KEY
+# secret the daily pipeline already uses. Purpose: a verdict distribution per
+# case across 6 total production samples, not another single point sample.
 #
 # Scope is deliberately narrow: this workflow only ever writes
-# evaluation/test-pack-v1/results-production-judge.json, and only ever
-# commits to the Test Pack branch, never main. It does not run
+# evaluation/test-pack-v1/results-production-judge-PROD-R*.json, and only
+# ever commits to the Test Pack branch, never main. It does not run
 # run_daily.py, does not touch constraint-archaeology-agents/data/ or
 # reports/, does not modify same_mechanism_gate.py or any frozen document,
 # and is independent of constraint-archaeology-daily.yml.
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - claude/constraint-archaeology-test-pack-n4xmv4
+    paths:
+      - 'evaluation/test-pack-v1/**'
+      - '.github/workflows/test-pack-v1-production-judge.yml'
 
 permissions:
   contents: write
 
 jobs:
   run-production-judge:
-    if: github.ref == 'refs/heads/claude/constraint-archaeology-test-pack-n4xmv4'
+    # Second guard: the results-commit step below pushes back to this same
+    # branch under evaluation/test-pack-v1/**, which would otherwise
+    # re-trigger this very workflow on its own output and re-run the real
+    # API experiment in a loop. Skip if the triggering commit is that
+    # self-commit (identified by its fixed message prefix).
+    if: >-
+      github.ref == 'refs/heads/claude/constraint-archaeology-test-pack-n4xmv4' &&
+      !startsWith(github.event.head_commit.message, 'Test Pack v1: production ClaudeMechanismJudge run')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,21 +61,49 @@ jobs:
         working-directory: constraint-archaeology-agents
         run: python3 -m unittest discover -s tests -v
 
-      - name: Run Test Pack v1 against production ClaudeMechanismJudge
+      - name: PROD-R2
         working-directory: evaluation/test-pack-v1
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python3 run_test_pack_production.py
+        run: python3 run_test_pack_production.py PROD-R2
 
-      - name: Commit production-judge results (this file only)
+      - name: PROD-R3
+        working-directory: evaluation/test-pack-v1
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 run_test_pack_production.py PROD-R3
+
+      - name: PROD-R4
+        working-directory: evaluation/test-pack-v1
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 run_test_pack_production.py PROD-R4
+
+      - name: PROD-R5
+        working-directory: evaluation/test-pack-v1
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 run_test_pack_production.py PROD-R5
+
+      - name: PROD-R6
+        working-directory: evaluation/test-pack-v1
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 run_test_pack_production.py PROD-R6
+
+      - name: Commit production-judge variance results (these files only)
         run: |
           git config user.name "test-pack-v1-bot"
           git config user.email "test-pack-v1-bot@users.noreply.github.com"
-          git add evaluation/test-pack-v1/results-production-judge.json
+          git add evaluation/test-pack-v1/results-production-judge-PROD-R2.json \
+                  evaluation/test-pack-v1/results-production-judge-PROD-R3.json \
+                  evaluation/test-pack-v1/results-production-judge-PROD-R4.json \
+                  evaluation/test-pack-v1/results-production-judge-PROD-R5.json \
+                  evaluation/test-pack-v1/results-production-judge-PROD-R6.json
           if git diff --cached --quiet; then
             echo "No changes to commit."
             exit 0
           fi
-          git commit -m "Test Pack v1: production ClaudeMechanismJudge run"
+          git commit -m "Test Pack v1: production ClaudeMechanismJudge runs PROD-R2..PROD-R6 (variance experiment)"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"

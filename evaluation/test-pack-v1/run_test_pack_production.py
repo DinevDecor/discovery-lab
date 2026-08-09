@@ -10,13 +10,21 @@ from same_mechanism_gate.py, never copied or edited).
 This script is intended to run only inside the isolated,
 manual-trigger-only GitHub Actions workflow
 (.github/workflows/test-pack-v1-production-judge.yml), which supplies
-ANTHROPIC_API_KEY from the existing repository secret. It writes only
-results-production-judge.json in this directory. It does not touch
+ANTHROPIC_API_KEY from the existing repository secret. It does not touch
 constraint-archaeology-agents/data/, does not call run_daily.py, and does not
 modify same_mechanism_gate.py or any frozen document.
 
 Ground truth (expected verdict/edge) is read from ground-truth.json unchanged
 — not re-derived, not adjusted after seeing output.
+
+Usage: python3 run_test_pack_production.py [RUN_ID]
+  RUN_ID defaults to "PROD-R1" (the original single production run) and
+  selects the output filename: results-production-judge.json for PROD-R1
+  (unchanged, so the original file is never overwritten), or
+  results-production-judge-<RUN_ID>.json for any other RUN_ID — used for the
+  repeated-sampling variance experiment (PROD-R2..PROD-R6). Each run_id is a
+  fresh, independent set of profile()/counterfactual() calls; no run reuses
+  or overwrites another run's file.
 """
 from __future__ import annotations
 
@@ -53,6 +61,8 @@ def profile_to_dict(profile) -> dict:
 
 
 def main():
+    run_id = sys.argv[1] if len(sys.argv) > 1 else "PROD-R1"
+
     with open(os.path.join(ROOT, "ground-truth.json"), encoding="utf-8") as f:
         ground_truth = json.load(f)
 
@@ -116,6 +126,7 @@ def main():
 
     output = {
         "run_metadata": {
+            "run_id": run_id,
             "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "gate_module": "constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py",
             "gate_unmodified": True,
@@ -130,12 +141,14 @@ def main():
         "results": results,
     }
 
-    out_path = os.path.join(ROOT, "results-production-judge.json")
+    filename = "results-production-judge.json" if run_id == "PROD-R1" else f"results-production-judge-{run_id}.json"
+    out_path = os.path.join(ROOT, filename)
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     total = len(results)
     passed = sum(1 for r in results if r["pass"])
+    print(f"run_id: {run_id}")
     print(f"model: {ca_llm.DEFAULT_MODEL}")
     print(f"{passed}/{total} passed")
     for r in results:
