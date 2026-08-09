@@ -23,6 +23,23 @@ It is deliberately **not** an idea generator. The Sensor is forbidden to recomme
 
 The collector is deliberately multi-source. A blocked or unavailable community is recorded as an error in the daily report but does not stop the pipeline. Reddit is therefore a supplementary sensor, not a single point of failure.
 
+## Capture budget is source-balanced, not first-come-first-served
+
+`run_daily.py --max-captures` (default 80) bounds how many fetched captures reach the
+sensor each day. Every source is still fetched in full (subject to its own per-source
+`limit` in `config/sources.json`), but admission into that shared 80-item budget is a
+round-robin draw across sources (`ca_agents/budget.py`), not a slice of the
+source-order-concatenated list. Before this existed, `HN(40) + Lobsters(30) + one DEV
+tag(25)` alone exceeded 80, so every source configured after them — all of Reddit,
+Product Hunt, and every Discourse forum — silently received zero captures in every real
+run, regardless of whether their own fetch succeeded. Their historical zero-observation
+count was **starvation, not a signal-quality finding** — see
+`tests/test_budget.py::test_reproduces_real_sources_json_shape` and
+`tests/test_collector.py::test_high_volume_early_source_cannot_starve_product_hunt_or_discourse`
+for the regression coverage. The daily report's new "Source telemetry" table shows
+`fetched`/`admitted`/`observations`/`duplicates`/`errors` per source so this can't go
+unnoticed again.
+
 ## Source adapter access notes
 
 ### Product Hunt

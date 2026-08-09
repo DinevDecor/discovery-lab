@@ -1,7 +1,8 @@
 from __future__ import annotations
 import datetime as dt, html, json, os, re, urllib.parse, urllib.request
+from .budget import allocate_by_source
 from .dedup import assign_story_groups
-from .models import Capture
+from .models import Capture, SourceTelemetry
 
 UA = "constraint-archaeology-agents/0.2 research bot"
 
@@ -295,31 +296,79 @@ def collect_discourse(base_url: str, community: str, limit: int = 20):
     return out
 
 
-def collect_from_config(path: str):
+DEFAULT_CAPTURE_BUDGET = 80
+
+
+def _source_label(src: dict) -> str:
+    """The label a config entry's captures will carry as Capture.source,
+    computed the same way regardless of whether collection succeeds - so a
+    source that errors before returning anything still gets a telemetry row
+    instead of silently vanishing from the report."""
+    t = src.get("type")
+    if t == "dev":
+        return f"dev:{src.get('tag', '?')}"
+    if t == "reddit":
+        return f"reddit:{src.get('subreddit', '?')}"
+    if t == "discourse":
+        return f"discourse:{src.get('community', '?')}"
+    if t in ("hacker_news", "lobsters", "product_hunt"):
+        return t
+    return src.get("name", t or "unknown")
+
+
+def collect_from_config(path: str, budget: int = DEFAULT_CAPTURE_BUDGET):
+    """Fetches every configured source, then admits captures into the daily
+    sensor budget with source-balanced round-robin allocation (see
+    budget.py) instead of a first-come-first-served slice - so a
+    high-volume early source (Hacker News, Lobsters) cannot exhaust the
+    budget before a later one (Product Hunt, each Discourse forum) is ever
+    considered. Each source's own `limit` in config is still respected as
+    its individual fetch cap; `budget` is the separate, global cap on how
+    many of those fetched captures collectively reach the sensor.
+
+    Returns (admitted_captures, errors, telemetry) where telemetry is
+    {source_label: SourceTelemetry} with `fetched`/`admitted`/`duplicates`
+    filled in - `observations`/`errors` (sensor-stage) are the caller's to
+    fill in as extraction proceeds.
+    """
     cfg = json.load(open(path, "r", encoding="utf-8"))
-    captures = []
     errors = []
+    telemetry: dict[str, SourceTelemetry] = {}
+    fetched_by_source: dict[str, list[Capture]] = {}
+
     for src in cfg.get("sources", []):
+        label = _source_label(src)
+        telemetry.setdefault(label, SourceTelemetry())
         try:
             if src["type"] == "hacker_news":
-                captures += collect_hacker_news(src.get("limit", 40))
+                fetched = collect_hacker_news(src.get("limit", 40))
             elif src["type"] == "lobsters":
-                captures += collect_lobsters(src.get("limit", 30))
+                fetched = collect_lobsters(src.get("limit", 30))
             elif src["type"] == "dev":
-                captures += collect_dev(src["tag"], src.get("limit", 30))
+                fetched = collect_dev(src["tag"], src.get("limit", 30))
             elif src["type"] == "reddit":
-                captures += collect_reddit(src["subreddit"], src.get("limit", 25))
+                fetched = collect_reddit(src["subreddit"], src.get("limit", 25))
             elif src["type"] == "product_hunt":
-                captures += collect_product_hunt(src.get("limit", 20))
+                fetched = collect_product_hunt(src.get("limit", 20))
             elif src["type"] == "discourse":
-                captures += collect_discourse(src["base_url"], src["community"], src.get("limit", 20))
+                fetched = collect_discourse(src["base_url"], src["community"], src.get("limit", 20))
             else:
                 errors.append({"source": src.get("name", src.get("type")), "error": "unsupported source type"})
+                continue
         except Exception as e:
             errors.append({"source": src.get("name", src.get("type")), "error": str(e)})
+            continue
 
-    groups = assign_story_groups(captures)
+        telemetry[label].fetched += len(fetched)
+        fetched_by_source.setdefault(label, []).extend(fetched)
+
+    admitted = allocate_by_source(fetched_by_source, budget)
+    for c in admitted:
+        telemetry[c.source].admitted += 1
+
+    groups = assign_story_groups(admitted)
     for i, group_id in groups.items():
-        captures[i].story_group = group_id
+        admitted[i].story_group = group_id
+        telemetry[admitted[i].source].duplicates += 1
 
-    return captures, errors
+    return admitted, errors, telemetry

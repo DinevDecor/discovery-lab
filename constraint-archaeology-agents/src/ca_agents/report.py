@@ -1,9 +1,15 @@
 from __future__ import annotations
 import datetime as dt, os
 
-def render(path, stats, evaluations, errors):
+def render(path, stats, evaluations, errors, telemetry=None):
     os.makedirs(os.path.dirname(path),exist_ok=True)
     lines=[f"# Constraint Archaeology Daily — {dt.date.today().isoformat()}","",f"Scanned: **{stats['captures']}** · Observations: **{stats['observations']}** · Anomalies: **{stats['anomalies']}** · Mature evaluated: **{stats['evaluated']}**",""]
+    if telemetry:
+        lines += ["## Source telemetry", "", "| source | fetched | admitted | observations | duplicates | errors |", "|---|---|---|---|---|---|"]
+        for source in telemetry:
+            t = telemetry[source]
+            lines += [f"| {source} | {t.fetched} | {t.admitted} | {t.observations} | {t.duplicates} | {t.errors} |"]
+        lines += [""]
     if errors:
         lines += ["## Source errors"]+[f"- {e['source']}: {e['error']}" for e in errors]+[""]
     for action in ("INVESTIGATE","WATCH","KILL"):
