@@ -1,0 +1,24 @@
+{
+  "panel_item_id": "C3-001",
+  "source": "provider_a_automationdirect",
+  "source_url": "https://www.automationdirect.com/adc/shopping/catalog/example-plc-cpu",
+  "fetched_at": "2026-08-09T15:00:00Z",
+  "capture_outcome": "ok",
+  "executor": "human:jane-doe",
+  "raw_content": "<html><body><h1>Example PLC CPU</h1><span class=\"price\">$149.00</span><span class=\"stock\">In Stock</span><span class=\"leadtime\">Ships same day</span></body></html>",
+  "notes": "Manual capture via browser, page loaded normally.",
+  "observation": {
+    "price": 149.0,
+    "currency": "USD",
+    "unit": "each",
+    "quantity_basis": "each_qty1",
+    "lead_time_days": 0,
+    "availability": "in_stock",
+    "quote_type": "list_price",
+    "identity_values": {
+      "manufacturer": "Example Automation Co",
+      "mpn": "PLC-CPU-100",
+      "io_count": 16
+    }
+  }
+}
