@@ -1,0 +1,10 @@
+{
+  "panel_item_id": "C3-010",
+  "source": "provider_d_digikey",
+  "source_url": "https://www.digikey.com/en/products/example-mcu",
+  "fetched_at": "2026-08-09T15:05:00Z",
+  "capture_outcome": "access_blocked",
+  "executor": "human:jane-doe",
+  "raw_content": "<html><body>Access to this page has been denied. Please verify you are a human.</body></html>",
+  "notes": "Bot-detection interstitial returned instead of the product page."
+}
