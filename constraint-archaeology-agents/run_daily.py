@@ -18,15 +18,17 @@ def main():
     root=os.path.dirname(__file__)
     data=os.path.join(root,"data")
     reports=os.path.join(root,"reports")
-    captures,errors=collect_from_config(os.path.join(root,a.config))
-    captures=captures[:a.max_captures]
+    captures,errors,telemetry=collect_from_config(os.path.join(root,a.config),budget=a.max_captures)
     obs=[]
     for i,c in enumerate(captures,1):
         try:
             o=extract_observation(c,i)
-            if o: obs.append(o)
+            if o:
+                obs.append(o)
+                telemetry[c.source].observations+=1
         except Exception as e:
             errors.append({"source":c.source,"error":f"sensor: {e}"})
+            telemetry[c.source].errors+=1
     append_jsonl(os.path.join(data,"observations.jsonl"),[to_dict(o) for o in obs])
     allobs=load_jsonl(os.path.join(data,"observations.jsonl"))
     judge=ClaudeMechanismJudge()
@@ -44,7 +46,7 @@ def main():
         except Exception as e:
             errors.append({"source":an.anomaly_id,"error":f"archaeologist: {e}"})
     stamp=dt.date.today().isoformat()
-    render(os.path.join(reports,f"daily-{stamp}.md"),{"captures":len(captures),"observations":len(obs),"anomalies":len(anomalies),"evaluated":len(evals),"gate_decisions":len(gate_decisions)},evals,errors)
+    render(os.path.join(reports,f"daily-{stamp}.md"),{"captures":len(captures),"observations":len(obs),"anomalies":len(anomalies),"evaluated":len(evals),"gate_decisions":len(gate_decisions)},evals,errors,telemetry)
     with open(os.path.join(data,"latest-evaluations.json"),"w",encoding="utf-8") as f:
         json.dump([to_dict(e) for e in evals],f,ensure_ascii=False,indent=2)
     print(json.dumps({"captures":len(captures),"observations":len(obs),"anomalies":len(anomalies),"evaluated":len(evals),"gate_decisions":len(gate_decisions),"errors":len(errors)}))

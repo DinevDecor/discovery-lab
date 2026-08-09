@@ -128,12 +128,16 @@ class TestCollectFromConfigDispatch(unittest.TestCase):
             json.dump(cfg, f)
             path = f.name
         try:
-            captures, errors = collector.collect_from_config(path)
+            captures, errors, telemetry = collector.collect_from_config(path)
         finally:
             os.unlink(path)
         self.assertEqual(captures, [])
         self.assertEqual(len(errors), 1)
         self.assertEqual(errors[0]["error"], "unsupported source type")
+        # Still gets a telemetry row (all zero) rather than vanishing -
+        # a misconfigured source should be visible in the report, not silent.
+        self.assertIn("mystery", telemetry)
+        self.assertEqual(telemetry["mystery"].fetched, 0)
 
     def test_product_hunt_missing_token_recorded_as_error_not_raised(self):
         import json, tempfile
@@ -143,12 +147,18 @@ class TestCollectFromConfigDispatch(unittest.TestCase):
             path = f.name
         try:
             with patch.dict(os.environ, {}, clear=True):
-                captures, errors = collector.collect_from_config(path)
+                captures, errors, telemetry = collector.collect_from_config(path)
         finally:
             os.unlink(path)
         self.assertEqual(captures, [])
         self.assertEqual(len(errors), 1)
         self.assertIn("PRODUCT_HUNT_TOKEN", errors[0]["error"])
+        # A source that errors before fetching anything still gets a
+        # telemetry row (fetched=admitted=0), so it's never silently
+        # missing from the daily report.
+        self.assertIn("product_hunt", telemetry)
+        self.assertEqual(telemetry["product_hunt"].fetched, 0)
+        self.assertEqual(telemetry["product_hunt"].admitted, 0)
 
     def test_crosspost_across_sources_gets_shared_story_group(self):
         import json, tempfile
@@ -174,7 +184,7 @@ class TestCollectFromConfigDispatch(unittest.TestCase):
 
         try:
             with patch.object(collector, "_get_json", side_effect=fake_get_json):
-                captures, errors = collector.collect_from_config(path)
+                captures, errors, telemetry = collector.collect_from_config(path)
         finally:
             os.unlink(path)
 
@@ -183,6 +193,99 @@ class TestCollectFromConfigDispatch(unittest.TestCase):
         groups = {c.story_group for c in captures}
         self.assertEqual(len(groups), 1)
         self.assertNotEqual(list(groups)[0], "")
+        self.assertEqual(telemetry["hacker_news"].duplicates, 1)
+        self.assertEqual(telemetry["lobsters"].duplicates, 1)
+
+    def test_high_volume_early_source_cannot_starve_product_hunt_or_discourse(self):
+        """Regression test for the real production bug: with sources.json's
+        actual ordering (HN, Lobsters, DEV x3, Reddit x5, Product Hunt,
+        Discourse x5), HN+Lobsters+one DEV tag alone exceeds the default
+        budget of 80, and every source after them - Product Hunt and all 5
+        Discourse forums - got zero captures admitted in every real run to
+        date. This reproduces that shape with mocked fetches and asserts
+        Product Hunt and Discourse now get their fair share."""
+        import json, tempfile
+        cfg = {
+            "sources": [
+                {"name": "hn", "type": "hacker_news", "limit": 40},
+                {"name": "lob", "type": "lobsters", "limit": 30},
+                {"name": "dev-discuss", "type": "dev", "tag": "discuss", "limit": 25},
+                {"name": "dev-startup", "type": "dev", "tag": "startup", "limit": 25},
+                {"name": "dev-entrepreneurship", "type": "dev", "tag": "entrepreneurship", "limit": 25},
+                {"name": "ph", "type": "product_hunt", "limit": 20},
+                {"name": "discourse-a", "type": "discourse", "base_url": "https://a.example.test", "community": "a", "limit": 20},
+                {"name": "discourse-b", "type": "discourse", "base_url": "https://b.example.test", "community": "b", "limit": 20},
+            ]
+        }
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as f:
+            json.dump(cfg, f)
+            path = f.name
+
+        def hn_hits(n):
+            return {"hits": [{"url": f"https://hn.example/{i}", "title": f"HN {i}", "story_text": "text", "created_at": "t", "objectID": str(i)} for i in range(n)]}
+
+        def lobsters_items(n):
+            return [{"url": f"https://lobsters.example/{i}", "title": f"Lobsters {i}", "description": "text", "created_at": "t"} for i in range(n)]
+
+        def dev_items(n, tag):
+            return [{"url": f"https://dev.example/{tag}/{i}", "title": f"Dev {tag} {i}", "description": "text", "published_at": "t"} for i in range(n)]
+
+        def ph_response(n):
+            return {"data": {"posts": {"edges": [{"node": {"id": str(i), "name": f"Product {i}", "tagline": "does a thing", "slug": f"p{i}", "createdAt": "t"}} for i in range(n)]}}}
+
+        def discourse_listing(n):
+            return {"topic_list": {"topics": [{"id": i, "slug": f"t{i}", "title": f"Topic {i}", "created_at": "t"} for i in range(n)]}}
+
+        discourse_detail = {"post_stream": {"posts": [{"cooked": "<p>a real problem description</p>"}]}}
+
+        def fake_get_json(url, headers=None):
+            if "hn.algolia.com" in url:
+                return hn_hits(40)
+            if "lobste.rs" in url:
+                return lobsters_items(30)
+            if "dev.to" in url:
+                if "tag=discuss" in url:
+                    return dev_items(25, "discuss")
+                if "tag=startup" in url:
+                    return dev_items(25, "startup")
+                return dev_items(25, "entrepreneurship")
+            if "a.example.test" in url and "latest.json" in url:
+                return discourse_listing(20)
+            if "b.example.test" in url and "latest.json" in url:
+                return discourse_listing(20)
+            if "/t/" in url:
+                return discourse_detail
+            raise AssertionError(f"unexpected url {url}")
+
+        def fake_post_graphql(url, token, query, variables=None):
+            return ph_response(20)
+
+        try:
+            with patch.dict(os.environ, {"PRODUCT_HUNT_TOKEN": "tok"}):
+                with patch.object(collector, "_get_json", side_effect=fake_get_json), \
+                     patch.object(collector, "_post_graphql", side_effect=fake_post_graphql):
+                    captures, errors, telemetry = collector.collect_from_config(path, budget=80)
+        finally:
+            os.unlink(path)
+
+        self.assertEqual(errors, [])
+        # Total fetched across all 8 sources vastly exceeds the budget -
+        # exactly the real-world shape that used to starve later sources.
+        total_fetched = sum(t.fetched for t in telemetry.values())
+        self.assertGreater(total_fetched, 80)
+
+        # The actual regression: these must NOT be zero anymore.
+        self.assertGreater(telemetry["product_hunt"].admitted, 0)
+        self.assertGreater(telemetry["discourse:a"].admitted, 0)
+        self.assertGreater(telemetry["discourse:b"].admitted, 0)
+
+        # Fairness: no source should be admitted more than one capture
+        # ahead of the least-admitted source among those with supply.
+        admitted_counts = [t.admitted for t in telemetry.values() if t.fetched > 0]
+        self.assertLessEqual(max(admitted_counts) - min(admitted_counts), 1)
+
+        self.assertEqual(sum(t.admitted for t in telemetry.values()), 80)
+        self.assertEqual(len(captures), 80)
 
 
 if __name__ == "__main__":

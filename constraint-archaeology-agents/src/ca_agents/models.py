@@ -45,6 +45,19 @@ class Anomaly:
     status: str = "WATCH"
 
 @dataclass
+class SourceTelemetry:
+    """Per-source accounting for one daily run - not persisted, report-only.
+    `fetched` and `admitted` are set by collector.py at collection time;
+    `observations` and `errors` are filled in by run_daily.py as the sensor
+    processes each admitted capture. `duplicates` counts admitted captures
+    the crosspost-dedup layer matched to another capture in this same run."""
+    fetched: int = 0
+    admitted: int = 0
+    observations: int = 0
+    duplicates: int = 0
+    errors: int = 0
+
+@dataclass
 class Evaluation:
     anomaly_id: str
     mechanism_verdict: str
