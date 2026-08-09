@@ -49,6 +49,13 @@ def rebuild_anomalies(observations, threshold=.22, judge=None, return_decisions=
     RELATED_DISTINCT and UNRESOLVED decisions are retained for audit.
     """
     anomalies=[]; decisions=[]; byid={}
+    # Per-anomaly set of crosspost_group ids already counted toward
+    # independent_sources. A second observation whose story_group is already
+    # here is the same underlying event reposted elsewhere - it stays in
+    # observation_ids for audit, but must not inflate independence. Local to
+    # this rebuild; nothing persisted on Anomaly, since anomalies.json is
+    # fully recomputed from observations.jsonl every run.
+    seen_groups: dict[str, set[str]] = {}
     for o in observations:
         obs=Observation(**o) if isinstance(o,dict) else o
         byid[obs.observation_id]=obs
@@ -71,11 +78,16 @@ def rebuild_anomalies(observations, threshold=.22, judge=None, return_decisions=
                 may_merge=decision.edge is EdgeType.MERGED
         if may_merge:
             best.observation_ids.append(obs.observation_id)
-            if obs.source not in best.independent_sources: best.independent_sources.append(obs.source)
+            groups=seen_groups.setdefault(best.anomaly_id,set())
+            is_crosspost=bool(obs.crosspost_group) and obs.crosspost_group in groups
+            if obs.crosspost_group: groups.add(obs.crosspost_group)
+            if not is_crosspost and obs.source not in best.independent_sources:
+                best.independent_sources.append(obs.source)
             best.last_seen=dt.date.today().isoformat()
         else:
             aid=f"ANOM-{len(anomalies)+1:04d}"
             anomalies.append(Anomaly(aid,obs.process+" — "+obs.pain,classify_function(obs),[obs.observation_id],[obs.source],dt.date.today().isoformat(),dt.date.today().isoformat(),"WATCH"))
+            if obs.crosspost_group: seen_groups[aid]={obs.crosspost_group}
     return (anomalies,decisions) if return_decisions else anomalies
 
 def persist_anomalies(path, anomalies):

@@ -1,20 +1,58 @@
 from __future__ import annotations
-import datetime as dt, json, urllib.parse, urllib.request
+import datetime as dt, html, json, os, re, urllib.parse, urllib.request
+from .dedup import assign_story_groups
 from .models import Capture
 
 UA = "constraint-archaeology-agents/0.2 research bot"
 
 
-def _get_json(url: str):
+class CollectorError(RuntimeError):
+    """Raised for a source-level failure that must reach the daily report's
+    error list rather than silently producing no captures - e.g. a missing
+    credential for a source whose official access method requires one.
+    Never caught internally to fabricate empty-but-successful output."""
+
+
+def _get_json(url: str, headers: dict | None = None):
     req = urllib.request.Request(
         url,
         headers={
             "User-Agent": UA,
             "Accept": "application/json",
+            **(headers or {}),
         },
     )
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.load(r)
+
+
+def _post_graphql(url: str, token: str, query: str, variables: dict | None = None):
+    payload = json.dumps({"query": query, "variables": variables or {}}).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        method="POST",
+        headers={
+            "User-Agent": UA,
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)
+
+
+_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def _strip_html(text: str) -> str:
+    """Discourse's `cooked` field is rendered HTML. This is a plain-text
+    approximation for the sensor, not a sanitizer - good enough because the
+    result is only ever read by the LLM extraction step, never rendered."""
+    if not text:
+        return ""
+    return html.unescape(_TAG_RE.sub(" ", text)).strip()
 
 
 def collect_hacker_news(limit: int = 40):
@@ -117,6 +155,146 @@ def collect_reddit(subreddit: str, limit: int = 25):
     return out
 
 
+_PH_GRAPHQL_URL = "https://api.producthunt.com/v2/api/graphql"
+
+_PH_QUERY = """
+query NewestPosts($first: Int!) {
+  posts(first: $first, order: NEWEST) {
+    edges {
+      node {
+        id
+        name
+        tagline
+        slug
+        website
+        createdAt
+        comments(first: 3) {
+          edges { node { body } }
+        }
+      }
+    }
+  }
+}
+"""
+
+
+def collect_product_hunt(limit: int = 20):
+    """Collect newly launched products via Product Hunt's official GraphQL v2
+    API (https://api.producthunt.com/v2/api/graphql). This is a solution /
+    emerging-market sensor, not a firsthand problem-report source - see
+    ca_agents.sensor.cap_confidence_for_source, which structurally caps the
+    confidence this source can ever reach, and README.md's adapter notes.
+
+    Requires a Product Hunt developer token (env PRODUCT_HUNT_TOKEN) minted
+    from a registered OAuth application at
+    https://www.producthunt.com/v2/oauth/applications - there is no
+    unauthenticated public endpoint for post listings. Raises CollectorError
+    rather than returning an empty list when the token is absent, so a
+    missing credential shows up as a source error in the daily report
+    instead of silently looking like "no new products today".
+
+    Upvote/comment counts are intentionally never read into a Capture -
+    popularity must not be able to inflate evidence strength. The first few
+    comments are folded into the capture's text as context (the task's
+    "available public discussion"), not emitted as separate per-comment
+    captures, so one launch thread cannot masquerade as several independent
+    sources.
+    """
+    token = os.environ.get("PRODUCT_HUNT_TOKEN")
+    if not token:
+        raise CollectorError(
+            "PRODUCT_HUNT_TOKEN is not set; Product Hunt's official API "
+            "(GraphQL v2) requires an OAuth developer token, there is no "
+            "public unauthenticated endpoint for post listings"
+        )
+    data = _post_graphql(_PH_GRAPHQL_URL, token, _PH_QUERY, {"first": limit})
+    if "errors" in data:
+        raise CollectorError(f"Product Hunt API error: {data['errors']}")
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    out = []
+    edges = data.get("data", {}).get("posts", {}).get("edges", [])
+    for edge in edges[:limit]:
+        node = edge.get("node", {})
+        name = (node.get("name") or "").strip()
+        tagline = (node.get("tagline") or "").strip()
+        if not name:
+            continue
+        comment_bodies = [
+            (c.get("node", {}).get("body") or "").strip()
+            for c in node.get("comments", {}).get("edges", [])
+        ]
+        comment_bodies = [c for c in comment_bodies if c]
+        text = f"{name}: {tagline}".strip(": ")
+        if comment_bodies:
+            text += "\n\nDiscussion:\n" + "\n".join(f"- {c}" for c in comment_bodies)
+        slug = node.get("slug") or ""
+        url = f"https://www.producthunt.com/posts/{slug}" if slug else (node.get("website") or "")
+        out.append(
+            Capture(
+                "product_hunt",
+                url,
+                name,
+                text,
+                node.get("createdAt") or "",
+                now,
+            )
+        )
+    return out
+
+
+def collect_discourse(base_url: str, community: str, limit: int = 20):
+    """Collect newest topics from a public Discourse forum's JSON API.
+
+    Sampling is newest-first by creation time (`/latest.json?order=created`),
+    never by popularity and never filtered by a pre-set problem-keyword list
+    - matching the task's requirement that Discourse sampling stay
+    keyword-and-popularity-agnostic. For each topic, fetches the topic detail
+    endpoint to get the opening post's actual text (not just the title) plus
+    the first reply as light context, when present, so the sensor has enough
+    to judge whether a real problem is being described.
+
+    No authentication is required for a public Discourse category's JSON
+    API. `community` becomes part of the source label
+    (`discourse:<community>`) so each forum stays a distinct, identifiable
+    origin - never merged with another forum or with any other source type.
+    """
+    base = base_url.rstrip("/")
+    listing = _get_json(f"{base}/latest.json?order=created")
+    topics = listing.get("topic_list", {}).get("topics", [])[:limit]
+    now = dt.datetime.now(dt.timezone.utc).isoformat()
+    out = []
+    for t in topics:
+        topic_id = t.get("id")
+        slug = t.get("slug", "")
+        title = (t.get("title") or "").strip()
+        if topic_id is None or not title:
+            continue
+        detail = _get_json(f"{base}/t/{topic_id}.json")
+        posts = detail.get("post_stream", {}).get("posts", [])
+        if not posts:
+            continue  # no opening post fetched - a title alone isn't evidence
+        op_text = _strip_html(posts[0].get("cooked", ""))
+        parts = [title, op_text]
+        if len(posts) > 1:
+            reply_text = _strip_html(posts[1].get("cooked", ""))
+            if reply_text:
+                parts.append(f"First reply: {reply_text[:600]}")
+        text = "\n\n".join(p for p in parts if p).strip()
+        if not text:
+            continue
+        out.append(
+            Capture(
+                f"discourse:{community}",
+                f"{base}/t/{slug}/{topic_id}" if slug else f"{base}/t/{topic_id}",
+                title,
+                text,
+                t.get("created_at") or "",
+                now,
+            )
+        )
+    return out
+
+
 def collect_from_config(path: str):
     cfg = json.load(open(path, "r", encoding="utf-8"))
     captures = []
@@ -131,8 +309,17 @@ def collect_from_config(path: str):
                 captures += collect_dev(src["tag"], src.get("limit", 30))
             elif src["type"] == "reddit":
                 captures += collect_reddit(src["subreddit"], src.get("limit", 25))
+            elif src["type"] == "product_hunt":
+                captures += collect_product_hunt(src.get("limit", 20))
+            elif src["type"] == "discourse":
+                captures += collect_discourse(src["base_url"], src["community"], src.get("limit", 20))
             else:
                 errors.append({"source": src.get("name", src.get("type")), "error": "unsupported source type"})
         except Exception as e:
             errors.append({"source": src.get("name", src.get("type")), "error": str(e)})
+
+    groups = assign_story_groups(captures)
+    for i, group_id in groups.items():
+        captures[i].story_group = group_id
+
     return captures, errors
