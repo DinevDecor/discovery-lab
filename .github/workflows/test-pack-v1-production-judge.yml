@@ -1,17 +1,14 @@
-name: Test Pack v1 - Production Judge (isolated, temporary push trigger)
+name: Test Pack v1 - Production Judge (manual, isolated)
 
-# TEMPORARY trigger. workflow_dispatch cannot be used here: GitHub only
-# activates workflow_dispatch for files that already exist on the default
-# branch, and this workflow intentionally never lands on main. So this is
-# triggered by push, scoped as tightly as possible:
-#   - only the Test Pack branch (see branches: below, and the job-level
-#     github.ref guard, which is a second, redundant safety check)
-#   - only paths under evaluation/test-pack-v1/** or this file itself
-#   - no schedule, no pull_request
-# Once the production-judge run has been captured, this trigger is reverted
-# back to workflow_dispatch-only (functionally inert, since it is still
-# never registered on main) in a follow-up commit, so later edits under
-# evaluation/test-pack-v1/ do not keep re-firing it.
+# RESTORED to workflow_dispatch-only after the one-time production-judge run
+# captured in results-production-judge.json (GitHub Actions run 31300689766,
+# triggered via commit d4bd4a6's temporary push trigger, since
+# workflow_dispatch cannot be dispatched for a workflow that has never
+# existed on the default branch, and this workflow intentionally never
+# lands on main). workflow_dispatch here is therefore functionally inert
+# going forward — kept for documentation/reproducibility rather than as a
+# live trigger — which is the point: it no longer fires on ordinary edits
+# under evaluation/test-pack-v1/.
 #
 # Runs the frozen Constraint Archaeology Test Pack v1
 # (evaluation/test-pack-v1/) through the real production ClaudeMechanismJudge,
@@ -25,26 +22,14 @@ name: Test Pack v1 - Production Judge (isolated, temporary push trigger)
 # and is independent of constraint-archaeology-daily.yml.
 
 on:
-  push:
-    branches:
-      - claude/constraint-archaeology-test-pack-n4xmv4
-    paths:
-      - 'evaluation/test-pack-v1/**'
-      - '.github/workflows/test-pack-v1-production-judge.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   run-production-judge:
-    # Second guard: the results-commit step below pushes back to this same
-    # branch under evaluation/test-pack-v1/**, which would otherwise
-    # re-trigger this very workflow on its own output and re-run the real
-    # API experiment in a loop. Skip if the triggering commit is that
-    # self-commit (identified by its exact, fixed message).
-    if: >-
-      github.ref == 'refs/heads/claude/constraint-archaeology-test-pack-n4xmv4' &&
-      !startsWith(github.event.head_commit.message, 'Test Pack v1: production ClaudeMechanismJudge run')
+    if: github.ref == 'refs/heads/claude/constraint-archaeology-test-pack-n4xmv4'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

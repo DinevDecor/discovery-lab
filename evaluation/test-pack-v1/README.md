@@ -65,6 +65,26 @@ of `ClaudeMechanismJudge` specifically. `report.md` §10 recommends the
 smallest next experiment to isolate whether the observed bias belongs to the
 gate's decision rule or to this judge substitution.
 
+## Follow-up: production-judge validation
+
+That follow-up experiment was run: the same 10 frozen pairs through the real
+`ca_agents.mechanism_judge.ClaudeMechanismJudge` (actual Anthropic API,
+`claude-sonnet-4-5`), via a temporary, narrowly-scoped GitHub Actions
+workflow (`.github/workflows/test-pack-v1-production-judge.yml`, now reverted
+to inert `workflow_dispatch`) that reused the repo's existing
+`ANTHROPIC_API_KEY` secret. See:
+
+- `run_test_pack_production.py` — harness, same unmodified gate functions
+- `results-production-judge.json` — raw output (model/provider info in `run_metadata`)
+- `production-judge-comparison.md` — side-by-side isolated-vs-production table,
+  metrics, per-case diagnostics, and a `GATE_DEFECT` / `JUDGE_ARTIFACT` / `MIXED`
+  / `INSUFFICIENT_DATA` classification
+
+Headline: **6/10 correct, 0 false merges (both runs), 2 false splits (down from
+3), but 2 new incorrectly-resolved UNRESOLVED cases** that did not occur with
+the isolated substitute — the production judge is measurably less willing to
+self-report low confidence on thin evidence than the substitute was.
+
 ## Distribution
 
 - 3 × SAME_MECHANISM (all cross-domain; one — TP-01 — deliberately across
