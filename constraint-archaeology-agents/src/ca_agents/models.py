@@ -10,6 +10,9 @@ class Capture:
     text: str
     published_at: str
     captured_at: str
+    # Set by dedup.assign_story_groups() after all sources are collected.
+    # Empty means "no crosspost detected" - the capture is its own story.
+    story_group: str = ""
 
 @dataclass
 class Observation:
@@ -25,6 +28,10 @@ class Observation:
     evidence_quote: str
     confidence: float
     fingerprint: str
+    # Carried over from Capture.story_group so memory.py can tell a crosspost
+    # apart from a genuinely independent second source. Empty for observations
+    # captured before this field existed - old JSONL rows deserialize fine.
+    crosspost_group: str = ""
 
 @dataclass
 class Anomaly:

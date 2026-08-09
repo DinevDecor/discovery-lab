@@ -29,6 +29,7 @@ jobs:
         working-directory: constraint-archaeology-agents
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PRODUCT_HUNT_TOKEN: ${{ secrets.PRODUCT_HUNT_TOKEN }}
         run: python3 run_daily.py
       - name: Commit generated evidence and report
         run: |

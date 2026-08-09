@@ -9,6 +9,12 @@
     {"name":"Reddit Entrepreneur","type":"reddit","subreddit":"Entrepreneur","limit":20},
     {"name":"Reddit smallbusiness","type":"reddit","subreddit":"smallbusiness","limit":20},
     {"name":"Reddit SaaS","type":"reddit","subreddit":"SaaS","limit":20},
-    {"name":"Reddit SideProject","type":"reddit","subreddit":"SideProject","limit":20}
+    {"name":"Reddit SideProject","type":"reddit","subreddit":"SideProject","limit":20},
+    {"name":"Product Hunt newest","type":"product_hunt","limit":20},
+    {"name":"Discourse: Python","type":"discourse","base_url":"https://discuss.python.org","community":"python","limit":20},
+    {"name":"Discourse: Home Assistant","type":"discourse","base_url":"https://community.home-assistant.io","community":"home-assistant","limit":20},
+    {"name":"Discourse: OpenAI Developer Community","type":"discourse","base_url":"https://community.openai.com","community":"openai-devs","limit":20},
+    {"name":"Discourse: Level1Techs","type":"discourse","base_url":"https://forum.level1techs.com","community":"level1techs","limit":20},
+    {"name":"Discourse: Fly.io Community","type":"discourse","base_url":"https://community.fly.io","community":"fly-io","limit":20}
   ]
 }
