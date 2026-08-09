@@ -1,0 +1,17 @@
+{
+  "panel_item_id": "C3-009",
+  "provider": "provider_c_mcmaster",
+  "requested_url": "https://www.mcmaster.com/6655K131/",
+  "fetched_at": "2026-08-16T15:05:00Z",
+  "executor": "human:jane-doe",
+  "outcome": "ok",
+  "raw_evidence_reference": "screenshots/2026-08-16-C3-009-mcmaster.png",
+  "price": 214.71,
+  "currency": "USD",
+  "unit": "each",
+  "quantity_basis": "each_qty1",
+  "lead_time_days": 2,
+  "availability": "in_stock",
+  "identity_values": {"manufacturer": "Example Drives Co", "mpn": "VFD-1HP-230", "power_rating_hp": 1},
+  "notes": "Manual capture via browser, page loaded normally."
+}

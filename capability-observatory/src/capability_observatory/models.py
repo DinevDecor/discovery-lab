@@ -22,12 +22,39 @@ from typing import Any, Dict, Optional
 
 #: Closed vocabulary. A capture is always exactly one of these -- never
 #: inferred after the fact from whether an Observation happened to result.
-CAPTURE_OUTCOMES = ("ok", "unavailable", "access_blocked", "parse_error", "source_missing")
+#:
+#: "access_blocked" is LEGACY as of Slice 03 -- kept, never removed, because
+#: the first 20 real captures (week of 2026-08-09) already used it and
+#: findings/captures are append-only; those records are never rewritten
+#: (see docs/decisions/003-c3-capture-outcome-vocabulary-extended.md for the
+#: full rationale and how to read pre-extension records). New submissions
+#: should prefer the specific value below instead of "access_blocked":
+#:   - "provider_access_blocked": confirmed vendor-side denial (CAPTCHA, WAF
+#:     challenge page, explicit 403-with-denial-body, robots.txt disallow).
+#:   - "executor_network_blocked": the request never reached the provider at
+#:     all (DNS/TLS/connection failure, an egress policy on the executor's
+#:     own network -- this is what actually happened in the week-2026-08-09
+#:     incident, misfiled as "access_blocked" because this distinction did
+#:     not exist yet).
+#:   - "timeout": request sent, no response within budget.
+#:   - "credentials_error": an API-backed capture whose credentials were
+#:     missing, invalid, or expired.
+#:   - "api_quota_error": an API-backed capture that was itself reachable
+#:     and authenticated, but refused for exceeding a rate/quota limit.
+#: All five new values are, like "access_blocked", evidence that no
+#: trustworthy content was obtained -- none of them may produce an
+#: Observation (see OBSERVATION_PRODUCING_OUTCOMES below). Infrastructure
+#: failure must never be counted as market state.
+CAPTURE_OUTCOMES = (
+    "ok", "unavailable", "access_blocked", "parse_error", "source_missing",
+    "provider_access_blocked", "executor_network_blocked", "timeout",
+    "credentials_error", "api_quota_error",
+)
 
-#: Only these outcomes may produce an Observation. "access_blocked",
-#: "parse_error" and "source_missing" mean we have no trustworthy content
-#: to assert anything from -- the Capture record is still written (failure
-#: is evidence), but no Observation follows it.
+#: Only these outcomes may produce an Observation. Every other value in
+#: CAPTURE_OUTCOMES -- legacy and new alike -- means we have no trustworthy
+#: content to assert anything from: the Capture record is still written
+#: (failure is evidence), but no Observation follows it.
 OBSERVATION_PRODUCING_OUTCOMES = ("ok", "unavailable")
 
 AVAILABILITY_VALUES = (

@@ -1,0 +1,82 @@
+name: C3 Capture Executor (Slice 03)
+
+# External Capture Executor for C3 -- see
+# docs/architecture/reality-observatory-slice-03-executor-design.md and
+# capability-observatory-executor/README.md.
+#
+# workflow_dispatch ONLY -- no cron yet, per instructions. This workflow
+# FETCHES (DigiKey/Mouser official APIs, AutomationDirect probe+HTML) and
+# packages submissions, then hands off to the EXISTING, unmodified
+# capability-observatory/run_capability_observatory.py process to
+# validate/record/report -- this job never writes to
+# capability-observatory/data/*.jsonl itself, and never touches
+# constraint-archaeology-agents/ or constraint-archaeology-daily.yml.
+#
+# McMaster-Carr and Grainger are never fetched here (human fallback only,
+# per the design doc's Section 4) -- no automated attempt, no anti-bot
+# workaround, no CAPTCHA/auth/paywall circumvention anywhere in this job.
+
+on:
+  workflow_dispatch:
+    inputs:
+      note:
+        description: 'Optional note for this run (e.g. "first real Slice 03 executor experiment")'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capability-observatory-executor-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run C3 unit tests (existing, unmodified package)
+        working-directory: capability-observatory
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run executor unit tests (offline, no live network)
+        working-directory: capability-observatory-executor
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run capture executor
+        working-directory: capability-observatory-executor
+        env:
+          DIGIKEY_CLIENT_ID: ${{ secrets.DIGIKEY_CLIENT_ID }}
+          DIGIKEY_CLIENT_SECRET: ${{ secrets.DIGIKEY_CLIENT_SECRET }}
+          MOUSER_API_KEY: ${{ secrets.MOUSER_API_KEY }}
+        run: python3 run_executor.py run
+
+      - name: Upload executor health report as a build artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capability-observatory-executor-health-${{ github.run_id }}
+          path: capability-observatory-executor/reports/
+          retention-days: 90
+
+      - name: Commit evidence and reports
+        if: always()
+        run: |
+          git config user.name "capability-observatory-executor-bot"
+          git config user.email "capability-observatory-executor-bot@users.noreply.github.com"
+          git add capability-observatory/data capability-observatory/reports capability-observatory/incoming capability-observatory-executor/reports
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "C3 capture executor run ($(date -u +%Y-%m-%dT%H:%M:%SZ))"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
