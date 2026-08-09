@@ -1,24 +1,24 @@
 [
   {
-    "verdict": "same_mechanism",
-    "edge": "merged",
+    "verdict": "different_mechanisms",
+    "edge": "related_distinct",
     "left_id": "OBS-20260808-0004-19a7bc",
     "right_id": "OBS-20260808-0038-066520",
     "reasons": [
-      "each repair removes the other's failure"
+      "counterfactual fails: OBS-20260808-0004-19a7bc->OBS-20260808-0038-066520: The proposed change addresses computational capacity for exact loop inference or reducing its complexity class, while the failure involves exact probabilistic inference tools requiring problem-specific optimizations, algorithmic refinements, and data structure choices. The failure mechanism is fundamentally about insufficient search bandwidth to explore the optimization space that bridges theory to practice - it's a human exploration/discovery bottleneck, not a computational capacity constraint. Even with faster exact loop inference, the developer would still face the same 6+ year iteration problem of manually discovering which specific optimizations, refinements, and data structures achieve the necessary speedup for probabilistic inference. The proposed change targets a different inference domain (loop inference) than the failure domain (probabilistic inference), and doesn't address the core constraint of manual optimization space exploration bandwidth.; OBS-20260808-0038-066520->OBS-20260808-0004-19a7bc: The failure mechanism is fundamentally computational: exact inference for loops requires tracking exponentially-growing state spaces that scale super-polynomially with loop depth and iteration count. This is an inherent mathematical complexity barrier, not an implementation efficiency problem. Parallelized exploration of optimization space could find better algorithms, data structures, and implementation techniques that improve constant factors and polynomial terms, but cannot overcome the super-polynomial/exponential scaling barrier. Even with perfect optimization, programs with sufficient loop depth or iteration count will still exceed practical time thresholds because the fundamental computational complexity class of the problem remains unchanged. The constraint is mathematical tractability, not implementation quality."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0004-19a7bc",
         "applied_to": "OBS-20260808-0038-066520",
-        "removes_failure": true,
-        "reason": "The failure mechanism is a causal chain triggered by execution latency exceeding practical use thresholds, specifically for loop structures in probabilistic inference. The proposed change directly targets the root cause by reducing inference execution time for loop structures to levels that permit practical demonstration. If this reduction is achieved to 'practical demonstration' levels, it breaks the causal chain at its origin: execution becomes fast enough → can test on realistic problems → can discover viable use cases → can validate practical value. The failure explicitly identifies that performance is 'too abysmal to be practical despite theoretical soundness' and that slow execution prevents validation. Reducing execution time to practical levels eliminates this bottleneck entirely, allowing the theoretical soundness to be demonstrated in practice."
+        "removes_failure": false,
+        "reason": "The proposed change addresses computational capacity for exact loop inference or reducing its complexity class, while the failure involves exact probabilistic inference tools requiring problem-specific optimizations, algorithmic refinements, and data structure choices. The failure mechanism is fundamentally about insufficient search bandwidth to explore the optimization space that bridges theory to practice - it's a human exploration/discovery bottleneck, not a computational capacity constraint. Even with faster exact loop inference, the developer would still face the same 6+ year iteration problem of manually discovering which specific optimizations, refinements, and data structures achieve the necessary speedup for probabilistic inference. The proposed change targets a different inference domain (loop inference) than the failure domain (probabilistic inference), and doesn't address the core constraint of manual optimization space exploration bandwidth."
       },
       {
         "repair_from": "OBS-20260808-0038-066520",
         "applied_to": "OBS-20260808-0004-19a7bc",
-        "removes_failure": true,
-        "reason": "The failure mechanism is explicitly that exact inference for loops requires computational resources (time) that exceed practical usability thresholds, with execution times orders of magnitude beyond tolerable levels. The proposed change directly addresses this by achieving 'execution speed sufficient for the creator to complete validation cycles...within acceptable timeframes' and specifically requires 'order-of-magnitude performance improvement.' If execution speed becomes sufficient for acceptable timeframes (moving from 'abysmal' performance to practical usability), then the computational time would no longer exceed practical thresholds, the system could be demonstrated, and the developer would no longer need to withhold the prototype due to performance concerns. The change directly eliminates the causal mechanism (excessive execution time) that prevented publicizing the working prototype."
+        "removes_failure": false,
+        "reason": "The failure mechanism is fundamentally computational: exact inference for loops requires tracking exponentially-growing state spaces that scale super-polynomially with loop depth and iteration count. This is an inherent mathematical complexity barrier, not an implementation efficiency problem. Parallelized exploration of optimization space could find better algorithms, data structures, and implementation techniques that improve constant factors and polynomial terms, but cannot overcome the super-polynomial/exponential scaling barrier. Even with perfect optimization, programs with sufficient loop depth or iteration count will still exceed practical time thresholds because the fundamental computational complexity class of the problem remains unchanged. The constraint is mathematical tractability, not implementation quality."
       }
     ],
     "short_circuited": false
@@ -29,20 +29,20 @@
     "left_id": "OBS-20260808-0004-16d3cd",
     "right_id": "OBS-20260808-0032-784dab",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0004-16d3cd->OBS-20260808-0032-784dab: The failure explicitly states that aircraft manufacturing requires sequential certification-gated processes that cannot be parallelized or accelerated without compromising safety standards. The proposed change relies on parallelization (adding production lines, shifts, or stations) as its core mechanism. Even if perfectly implemented, this change directly conflicts with the constraint that certification-gated aerospace processes must remain sequential. Additionally, the failure identifies fundamental bottlenecks (skilled labor availability, specialized tooling stations, facility space, supplier lead times) that cannot be overcome simply by adding parallel capacity - these represent systemic constraints in aerospace manufacturing. The mismatch between linear production capability and exponential demand growth would persist because the sequential, certification-dependent nature of aircraft assembly prevents the throughput multiplication that parallelization assumes."
+      "counterfactual fails: OBS-20260808-0004-16d3cd->OBS-20260808-0032-784dab: The proposed change (adding parallel capacity) is exactly what the failure mechanism identifies as constrained. The failure explicitly states that production cannot be scaled quickly enough because: (1) aerospace certification limits process changes, (2) skilled labor pool is limited and cannot be instantly expanded, (3) capital-intensive tooling/facility multiplication is required but constrained, (4) supply chain lead times for specialized components create bottlenecks, and (5) serial processes require facility/tooling multiplication which faces the aforementioned constraints. While adding parallel capacity is theoretically the solution, the failure mechanism describes why this cannot be achieved fast enough to meet demand growth - the constraint is not lack of desire to add capacity, but fundamental limits on how quickly aerospace manufacturing capacity can be scaled given certification, labor, capital, and supply chain realities. The proposal doesn't address these underlying rate-limiters that prevent capacity addition from keeping pace with demand growth.; OBS-20260808-0032-784dab->OBS-20260808-0004-16d3cd: The failure mechanism is driven by demand spikes that exceed maximum sustainable manufacturing velocity during wildfire season. While the proposed change increases baseline throughput capacity (higher μ), it does not address the temporal mismatch between seasonal demand spikes and production lead times. Water bomber demand is highly seasonal and concentrated during wildfire season, but aircraft manufacturing has multi-year lead times with sequential dependencies that cannot be compressed beyond physical/regulatory constraints. Even with expanded capacity, the fundamental constraint remains: customers need aircraft 'faster than manufacturing timelines allow' - the cycle time compression is bounded by fabrication→assembly→testing→certification sequences regardless of parallel production lines. The proposal increases steady-state capacity but does not eliminate the backlog growth during acute demand spikes, as λ during wildfire season can still exceed the new μ, just at a higher threshold. Complete failure removal would require either: (1) compressing cycle time below seasonal demand duration, (2) building speculative inventory pre-season, or (3) demand smoothing mechanisms - none of which are guaranteed by throughput expansion alone."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0004-16d3cd",
         "applied_to": "OBS-20260808-0032-784dab",
         "removes_failure": false,
-        "reason": "The failure explicitly states that aircraft manufacturing requires sequential certification-gated processes that cannot be parallelized or accelerated without compromising safety standards. The proposed change relies on parallelization (adding production lines, shifts, or stations) as its core mechanism. Even if perfectly implemented, this change directly conflicts with the constraint that certification-gated aerospace processes must remain sequential. Additionally, the failure identifies fundamental bottlenecks (skilled labor availability, specialized tooling stations, facility space, supplier lead times) that cannot be overcome simply by adding parallel capacity - these represent systemic constraints in aerospace manufacturing. The mismatch between linear production capability and exponential demand growth would persist because the sequential, certification-dependent nature of aircraft assembly prevents the throughput multiplication that parallelization assumes."
+        "reason": "The proposed change (adding parallel capacity) is exactly what the failure mechanism identifies as constrained. The failure explicitly states that production cannot be scaled quickly enough because: (1) aerospace certification limits process changes, (2) skilled labor pool is limited and cannot be instantly expanded, (3) capital-intensive tooling/facility multiplication is required but constrained, (4) supply chain lead times for specialized components create bottlenecks, and (5) serial processes require facility/tooling multiplication which faces the aforementioned constraints. While adding parallel capacity is theoretically the solution, the failure mechanism describes why this cannot be achieved fast enough to meet demand growth - the constraint is not lack of desire to add capacity, but fundamental limits on how quickly aerospace manufacturing capacity can be scaled given certification, labor, capital, and supply chain realities. The proposal doesn't address these underlying rate-limiters that prevent capacity addition from keeping pace with demand growth."
       },
       {
         "repair_from": "OBS-20260808-0032-784dab",
         "applied_to": "OBS-20260808-0004-16d3cd",
-        "removes_failure": true,
-        "reason": "The failure mechanism is explicitly that demand rate exceeds production throughput capacity, causing queue accumulation and extended lead times beyond customer urgency windows. The proposed change directly addresses this by 'expanding bottleneck constraint' and 'increasing aircraft production throughput rate to match current order velocity.' If throughput rate perfectly matches order velocity, the queue stops growing and will eventually clear. Additional parallel assembly lines, workforce scaling, and supplier capacity expansion for longest-lead components directly eliminate the serial bottleneck and fixed cycle time constraints that prevent production from clearing the queue. With production rate ≥ demand rate, queue time approaches zero and lead time reduces to cycle time alone, bringing delivery within customer urgency windows."
+        "removes_failure": false,
+        "reason": "The failure mechanism is driven by demand spikes that exceed maximum sustainable manufacturing velocity during wildfire season. While the proposed change increases baseline throughput capacity (higher μ), it does not address the temporal mismatch between seasonal demand spikes and production lead times. Water bomber demand is highly seasonal and concentrated during wildfire season, but aircraft manufacturing has multi-year lead times with sequential dependencies that cannot be compressed beyond physical/regulatory constraints. Even with expanded capacity, the fundamental constraint remains: customers need aircraft 'faster than manufacturing timelines allow' - the cycle time compression is bounded by fabrication→assembly→testing→certification sequences regardless of parallel production lines. The proposal increases steady-state capacity but does not eliminate the backlog growth during acute demand spikes, as λ during wildfire season can still exceed the new μ, just at a higher threshold. Complete failure removal would require either: (1) compressing cycle time below seasonal demand duration, (2) building speculative inventory pre-season, or (3) demand smoothing mechanisms - none of which are guaranteed by throughput expansion alone."
       }
     ],
     "short_circuited": false
@@ -60,37 +60,37 @@
         "repair_from": "OBS-20260808-0005-3dbb67",
         "applied_to": "OBS-20260808-0033-263c93",
         "removes_failure": true,
-        "reason": "The proposed change directly provides the missing architectural pathway for cross-session communication. By implementing inter-session communication capability that allows sessions to directly read state/context from and send messages to other active sessions, it eliminates all three architectural absences identified in the failure mechanism: (1) sessions can now broadcast state changes to others, (2) sessions can query current activity/outputs of parallel sessions, and (3) sessions can establish coordination for interdependent tasks. This removes the architectural isolation that forces manual human-mediated serialization, enabling direct session-to-session coordination and eliminating the synchronization bottleneck."
+        "reason": "The proposed shared state layer directly addresses the root cause mechanism. The failure occurs because 'no mechanism exists for sessions to share state, communicate changes, or coordinate actions' and 'each Claude Code editor session operates with independent, isolated context.' The proposed change implements exactly what's missing: a persistent store accessible across concurrent sessions that allows reading and writing state updates. This would eliminate information isolation by providing the infrastructure for sessions to detect overlapping work, understand dependencies, and access shared context without manual human transfer. The architecture would shift from treating sessions as 'separate, stateless interactions' to having coordinated state visibility across instances."
       },
       {
         "repair_from": "OBS-20260808-0033-263c93",
         "applied_to": "OBS-20260808-0005-3dbb67",
         "removes_failure": true,
-        "reason": "The failure mechanism is the complete absence of inter-session communication capability, forcing manual human-mediated information transfer. The proposed change directly addresses this by implementing: (1) automatic state change broadcasting (eliminating manual extraction of 'files modified, tasks completed'), (2) programmatic status queries (replacing manual summarization of 'active files, current task'), and (3) dependency checking (preventing coordination errors). With this communication layer in place, sessions can automatically share state without human intervention as information carrier. The core mechanism—'no automatic state transfer mechanism'—would be replaced by an explicit inter-session communication channel. The manual copy-paste, incomplete transfer, and cognitive overhead of mental mapping all stem from the missing communication layer, which would now exist."
+        "reason": "The proposed change directly addresses the root cause mechanism. The failure exists because 'the carrier (cross-session messaging) does not exist' - sessions are architecturally isolated with 'no mechanism for state sharing or inter-process communication.' The proposed change implements exactly this missing carrier: a shared context layer that allows multiple sessions to 'read/write state updates about code changes, active tasks, and relevant decisions.' This creates the technical pathway that currently does not exist, eliminating the architectural isolation that forces manual serialization through the user. With sessions able to directly access shared state, information from session A becomes automatically available to session B without user intervention as the transfer medium."
       }
     ],
     "short_circuited": false
   },
   {
-    "verdict": "different_mechanisms",
-    "edge": "related_distinct",
+    "verdict": "same_mechanism",
+    "edge": "merged",
     "left_id": "OBS-20260808-0057-4c5bc8",
     "right_id": "OBS-20260808-0057-bca60e",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0057-4c5bc8->OBS-20260808-0057-bca60e: The proposed change maps problem features to solver configuration parameters, which adjusts how the existing generic solver operates. However, the failure mechanism specifically states that the solver 'cannot generate or switch to specialized code paths' and lacks the capability to 'skip irrelevant branches or apply domain-appropriate propagation rules.' Configuration parameter tuning still executes the same generic solver code with different settings - it does not generate domain-specific code paths, does not create specialized branches that skip irrelevant computation, and does not implement domain-appropriate propagation rules that would be fundamentally different from the generic implementation. The failure requires code-level specialization (domain-specific code generation), while the proposed change provides configuration-level adaptation."
+      "each repair removes the other's failure"
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0057-4c5bc8",
         "applied_to": "OBS-20260808-0057-bca60e",
-        "removes_failure": false,
-        "reason": "The proposed change maps problem features to solver configuration parameters, which adjusts how the existing generic solver operates. However, the failure mechanism specifically states that the solver 'cannot generate or switch to specialized code paths' and lacks the capability to 'skip irrelevant branches or apply domain-appropriate propagation rules.' Configuration parameter tuning still executes the same generic solver code with different settings - it does not generate domain-specific code paths, does not create specialized branches that skip irrelevant computation, and does not implement domain-appropriate propagation rules that would be fundamentally different from the generic implementation. The failure requires code-level specialization (domain-specific code generation), while the proposed change provides configuration-level adaptation."
+        "removes_failure": true,
+        "reason": "The proposed change directly addresses the core mechanism of the failure. The failure occurs because generic SAT solvers cannot detect or exploit domain-specific structural patterns (temporal constraints, circuit symmetries, resource patterns), causing wasted computation on irrelevant branches and checks. The proposed automated detection of problem structure features (constraint graph topology, variable interaction patterns, clause size distributions) with automatic parameter selection would create the missing mechanism to recognize these exploitable patterns. By detecting the actual problem topology and configuring the solver accordingly, it would eliminate the mismatch between universal worst-case algorithms and structured problem instances. The solver would no longer apply random-3SAT-optimized heuristics to planning or verification problems, and would not execute branching decisions uniformly across variables with different structural roles. This removes the fundamental absence of pattern detection and exploitation that causes the computational waste."
       },
       {
         "repair_from": "OBS-20260808-0057-bca60e",
         "applied_to": "OBS-20260808-0057-4c5bc8",
         "removes_failure": true,
-        "reason": "The proposed pattern recognition layer directly addresses the core failure mechanism. The failure occurs because general-purpose SAT solvers lack the function to automatically detect problem-specific structure and translate it into optimal solver configurations. The proposed change adds exactly this missing function: a pattern recognition layer that detects problem structure signatures (the structural patterns that distinguish industrial verification from random 3-SAT from planning problems) and selects or generates specialized solver routines matching those signatures (the optimal configurations for each problem class). This eliminates the need for manual expert tuning and removes the performance gap between general and problem-optimal configurations that the failure describes. The pattern recognition layer would automatically perform the detection and configuration selection that currently requires scarce expertise and time-consuming experimental cycles."
+        "reason": "The failure mechanism is the absence of automatic mapping from problem structure patterns to optimal solver configurations. The proposed change directly implements this missing function: it automatically analyzes problem structure to identify exploitable patterns (symmetries, variable dependencies, constraint topology) and automatically generates domain-specific branching rules and propagation shortcuts tailored to those patterns. This eliminates the manual recognition step, the manual selection/tuning step, and enables automatic scaling across diverse problem classes. The preprocessing stage performs exactly the structure-to-configuration mapping that currently requires expert manual effort."
       }
     ],
     "short_circuited": false
@@ -108,13 +108,85 @@
         "repair_from": "OBS-20260808-0072-fe18e5",
         "applied_to": "OBS-20260808-0072-acb4f1",
         "removes_failure": true,
-        "reason": "The proposed change directly addresses the root cause mechanism. The failure occurs because 'context persistence mechanism does not exist between AI tool sessions' and 'without persistent storage accessible to the AI tool across sessions, the context must be recreated each time.' The proposed change establishes exactly this missing mechanism: persistent storage of project-specific context (architecture decisions, coding standards, established patterns) that automatically loads into AI tool sessions within the same project scope. This eliminates the need for manual retransmission, removes the dependency on developer memory as the sole carrier, and ensures previously communicated architectural decisions and conventions are available to the AI tool in new sessions, preventing generated code from deviating from established patterns."
+        "reason": "The failure mechanism is that AI coding tools operate statelessly between sessions and lack a persistence mechanism to store/retrieve project-specific context, causing accumulated knowledge loss at session boundaries. The proposed change directly addresses this by adding a persistent storage layer that retains project-specific context (architecture patterns, standards, previous interactions) across sessions and automatically retrieves it when working within the same project. This eliminates the stateless operation that causes the failure - the AI would now have access to previous session information, preventing the loss of accumulated project knowledge at session boundaries and removing the need for developers to repeatedly re-explain the same information."
       },
       {
         "repair_from": "OBS-20260808-0072-acb4f1",
         "applied_to": "OBS-20260808-0072-fe18e5",
         "removes_failure": true,
-        "reason": "The failure mechanism is precisely that AI tools operate statelessly with no persistence mechanism for project-specific context, forcing manual re-explanation which is incomplete and unsustainable. The proposed change directly addresses this by adding persistent storage that captures and retrieves project-specific context (architectural decisions, conventions, patterns) across sessions, eliminating manual re-explanation. This removes the root cause: the stateless operation and absence of a persistence mechanism. With perfect implementation, the AI would retrieve complete project context automatically, eliminating both the manual re-explanation requirement and the incomplete knowledge transfer that causes constraint violations."
+        "reason": "The failure mechanism is explicitly the absence of a persistent storage and retrieval mechanism for project context, causing session isolation and context loss. The proposed change directly addresses this by adding persistent storage and retrieval for project context (architectural decisions, conventions) that AI tools can access across sessions. This eliminates the root cause: sessions would no longer initialize without access to previously provided context, removing the need for repeated manual re-explanation, the reliance on imperfect human recall, and the inability to scale to accumulated project knowledge. With persistent context access, the AI tool would have continuity of project-specific information across sessions."
+      }
+    ],
+    "short_circuited": false
+  },
+  {
+    "verdict": "different_mechanisms",
+    "edge": "related_distinct",
+    "left_id": "OBS-20260808-0048-21984d",
+    "right_id": "OBS-20260808-0062-43c9ec",
+    "reasons": [
+      "counterfactual fails: OBS-20260808-0048-21984d->OBS-20260808-0062-43c9ec: The failure mechanism is the discontinuous economic devaluation of operator expertise when function migrates to a software carrier that no longer requires embodied skills. Maintaining parallel human capacity preserves the knowledge and validates outputs, but does not prevent the core mechanism: (1) rules are still encoded into algorithms rather than held as tacit knowledge, (2) the physical manipulation interface requiring years to master is still eliminated in the computerized system, (3) composition remains separated from casting in the new carrier, and (4) the economic value drop still occurs because the software performs transformations without requiring apprenticeship-developed skills. The parallel human workers become validators/preservers rather than economically necessary operators - their expertise is no longer coupled to production function delivery. The job displacement for skilled craftspeople whose value derived from being the only carrier of the production function still occurs.; OBS-20260808-0062-43c9ec->OBS-20260808-0048-21984d: The proposed change preserves the interface and operational paradigms familiar to Linotype operators, allowing them to continue applying their judgment to control computerized systems. However, this does not solve the tacit knowledge transfer failure. The failure mechanism describes tacit knowledge that cannot be articulated or encoded (embodied skills, aesthetic intuition, accumulated heuristics) disappearing when human carriers retire. The proposed interface layer still requires computerized systems to execute the actual typesetting - it merely changes how operators input their decisions. The tacit knowledge remains unextracted and uncodified in the computer systems themselves. When operators eventually retire, their tacit knowledge still disappears because it was never transferred to the computerized systems, only their ability to control those systems through familiar paradigms. The interface preserves operational continuity but does not address the fundamental inability to capture and transfer tacit knowledge into computational logic."
+    ],
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260808-0048-21984d",
+        "applied_to": "OBS-20260808-0062-43c9ec",
+        "removes_failure": false,
+        "reason": "The failure mechanism is the discontinuous economic devaluation of operator expertise when function migrates to a software carrier that no longer requires embodied skills. Maintaining parallel human capacity preserves the knowledge and validates outputs, but does not prevent the core mechanism: (1) rules are still encoded into algorithms rather than held as tacit knowledge, (2) the physical manipulation interface requiring years to master is still eliminated in the computerized system, (3) composition remains separated from casting in the new carrier, and (4) the economic value drop still occurs because the software performs transformations without requiring apprenticeship-developed skills. The parallel human workers become validators/preservers rather than economically necessary operators - their expertise is no longer coupled to production function delivery. The job displacement for skilled craftspeople whose value derived from being the only carrier of the production function still occurs."
+      },
+      {
+        "repair_from": "OBS-20260808-0062-43c9ec",
+        "applied_to": "OBS-20260808-0048-21984d",
+        "removes_failure": false,
+        "reason": "The proposed change preserves the interface and operational paradigms familiar to Linotype operators, allowing them to continue applying their judgment to control computerized systems. However, this does not solve the tacit knowledge transfer failure. The failure mechanism describes tacit knowledge that cannot be articulated or encoded (embodied skills, aesthetic intuition, accumulated heuristics) disappearing when human carriers retire. The proposed interface layer still requires computerized systems to execute the actual typesetting - it merely changes how operators input their decisions. The tacit knowledge remains unextracted and uncodified in the computer systems themselves. When operators eventually retire, their tacit knowledge still disappears because it was never transferred to the computerized systems, only their ability to control those systems through familiar paradigms. The interface preserves operational continuity but does not address the fundamental inability to capture and transfer tacit knowledge into computational logic."
+      }
+    ],
+    "short_circuited": false
+  },
+  {
+    "verdict": "same_mechanism",
+    "edge": "merged",
+    "left_id": "OBS-20260808-0080-96de59",
+    "right_id": "OBS-20260808-0078-9b48b0",
+    "reasons": [
+      "each repair removes the other's failure"
+    ],
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260808-0080-96de59",
+        "applied_to": "OBS-20260808-0078-9b48b0",
+        "removes_failure": true,
+        "reason": "The proposed change directly decouples configuration state from code artifacts by introducing a runtime configuration layer that allows AI feature activation states to be toggled independently of the deployment pipeline. This eliminates the root cause: configuration mutation being treated as a code change requiring full CI/CD cycle. With runtime toggles that bypass build/test/deploy cycles, kill-switches can propagate state changes immediately without deployment coupling, removing the mandatory latency between decision and effect. The mechanism failure is completely resolved because configuration state transitions become runtime operations rather than code changes."
+      },
+      {
+        "repair_from": "OBS-20260808-0078-9b48b0",
+        "applied_to": "OBS-20260808-0080-96de59",
+        "removes_failure": true,
+        "reason": "The proposed change eliminates the deployment pipeline as the carrier for AI feature state changes. By separating configuration state storage from code artifacts and providing runtime read capability, feature toggles can propagate directly to running processes without invoking the deployment pipeline. This removes the mandatory delay mechanism (build + test + deploy cycle time) that creates the temporal gap between control intent and control effect. The AI feature can now be disabled immediately upon decision, eliminating the latency window during which harmful or incorrect behavior continues executing."
+      }
+    ],
+    "short_circuited": false
+  },
+  {
+    "verdict": "same_mechanism",
+    "edge": "merged",
+    "left_id": "OBS-20260808-0072-fe18e5",
+    "right_id": "OBS-20260808-0080-ad7da6",
+    "reasons": [
+      "each repair removes the other's failure"
+    ],
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260808-0072-fe18e5",
+        "applied_to": "OBS-20260808-0080-ad7da6",
+        "removes_failure": true,
+        "reason": "The failure mechanism is explicitly that 'the AI tool has no persistent storage mechanism for project-specific context between sessions' and 'each new session begins with a blank context state.' The proposed change directly implements 'persistent storage and retrieval mechanism that captures project context' and 'automatically loads it at AI session initialization.' This precisely addresses the root cause: the absence of persistent storage is replaced with persistent storage, and the blank context state at session start is replaced with automatic loading of stored context. The mechanism that caused context loss between sessions would be eliminated."
+      },
+      {
+        "repair_from": "OBS-20260808-0080-ad7da6",
+        "applied_to": "OBS-20260808-0072-fe18e5",
+        "removes_failure": true,
+        "reason": "The failure mechanism is explicitly that AI tool sessions are stateless with no mechanism to persist project context between sessions, forcing the human developer to serve as the only persistent carrier and manually reconstruct context each time. The proposed change directly eliminates this mechanism by adding persistent storage that retains project-specific context across session boundaries and automatically loads it when new interactions begin. This removes both the statelessness (context now persists) and the need for manual context provision (context automatically loads). The failure would stop occurring because the root cause—absence of persistence mechanism—would be eliminated."
       }
     ],
     "short_circuited": false
