@@ -1,0 +1,10 @@
+{
+  "panel_item_id": "C3-005",
+  "source": "provider_a_automationdirect",
+  "source_url": "https://www.automationdirect.com/adc/shopping/catalog/communications/industrial_ethernet_switches/managed/gigabit/se-sw8mg-4p",
+  "fetched_at": "2026-08-09T07:30:00Z",
+  "capture_outcome": "access_blocked",
+  "executor": "ai:claude-code-web-session-01Rj4BPwXrprhL4qiWbAZKMG",
+  "raw_content": "HTTPS fetch to www.automationdirect.com refused by the executing session's own network egress policy (WebFetch tool error_type=EGRESS_BLOCKED, message=\"Access to www.automationdirect.com is blocked by the network egress proxy.\"). No content was returned by www.automationdirect.com itself -- the block occurred before the request reached the provider.",
+  "notes": "First real weekly capture attempt, week of 2026-08-09. This session's organizational network egress policy blocks all five panel provider domains outright (confirmed via the session's own proxy status/README, which explicitly instructs not to route around such a block). This is NOT a vendor bot-detection event -- distinct from a normal access_blocked case, but recorded under the same closed-vocabulary outcome since no trustworthy content was obtained either way. Recorded as real, honest evidence of a failed capture attempt, not fabricated."
+}

@@ -1,0 +1,95 @@
+{
+  "capture_success": {
+    "meets_target": false,
+    "ok_count": 0,
+    "rate": 0.0,
+    "total_attempted": 20
+  },
+  "generated_at": "2026-08-09T07:39:38Z",
+  "identity_backlog": {
+    "exceeds_trigger": false,
+    "unresolved_item_count": 0,
+    "unresolved_panel_item_ids": []
+  },
+  "observability": {
+    "meets_target": false,
+    "observed_count": 0,
+    "observed_panel_item_ids": [],
+    "panel_size": 20,
+    "unobserved_panel_item_ids": [
+      "C3-001",
+      "C3-002",
+      "C3-003",
+      "C3-004",
+      "C3-005",
+      "C3-006",
+      "C3-007",
+      "C3-008",
+      "C3-009",
+      "C3-010",
+      "C3-011",
+      "C3-012",
+      "C3-013",
+      "C3-014",
+      "C3-015",
+      "C3-016",
+      "C3-017",
+      "C3-018",
+      "C3-019",
+      "C3-020"
+    ]
+  },
+  "provider_parse_failure": {
+    "per_provider": {
+      "provider_a_automationdirect": {
+        "exceeds_alert_threshold": false,
+        "parse_error_count": 0,
+        "rate": 0.0,
+        "total": 13
+      },
+      "provider_b_grainger": {
+        "exceeds_alert_threshold": false,
+        "parse_error_count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
+      "provider_c_mcmaster": {
+        "exceeds_alert_threshold": false,
+        "parse_error_count": 0,
+        "rate": 0.0,
+        "total": 1
+      },
+      "provider_d_digikey": {
+        "exceeds_alert_threshold": false,
+        "parse_error_count": 0,
+        "rate": 0.0,
+        "total": 4
+      },
+      "provider_e_mouser": {
+        "exceeds_alert_threshold": false,
+        "parse_error_count": 0,
+        "rate": 0.0,
+        "total": 1
+      }
+    },
+    "providers_exceeding_threshold": []
+  },
+  "state_changes": {
+    "identity_breaks": 0,
+    "limitation": "Raw, unfiltered change count -- any differing price, availability, or lead_time_days between chronologically adjacent observations for the same item counts as one change. Not adjusted for noise, measurement rounding, or economic significance.",
+    "per_panel_item": {},
+    "raw_field_changes": 0,
+    "total_raw_state_changes": 0
+  },
+  "stop_rules": {
+    "kill_or_redesign": true,
+    "note": "state_changes is deliberately excluded from this decision. Zero interesting price/lead-time movement in the first 30 days does not, by itself, trigger kill or redesign.",
+    "rule_a_capture_mechanism_failing": true,
+    "rule_b_identity_design_failing": false
+  },
+  "totals": {
+    "captures": 20,
+    "identity_breaks": 0,
+    "observations": 0
+  }
+}
