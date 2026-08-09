@@ -1,0 +1,52 @@
+name: Test Pack v1 - Production Judge (manual, isolated)
+
+# Manual-trigger-only. Runs the frozen Constraint Archaeology Test Pack v1
+# (evaluation/test-pack-v1/) through the real production ClaudeMechanismJudge,
+# reusing the same ANTHROPIC_API_KEY secret the daily pipeline already uses.
+#
+# Scope is deliberately narrow: this workflow only ever writes
+# evaluation/test-pack-v1/results-production-judge.json, and only ever
+# commits to whatever branch it is dispatched on (intended to be the Test
+# Pack branch, never main). It does not run run_daily.py, does not touch
+# constraint-archaeology-agents/data/ or reports/, does not modify
+# same_mechanism_gate.py or any frozen document, and is independent of
+# constraint-archaeology-daily.yml.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-production-judge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run frozen regression fixtures (sanity check only, no changes made)
+        working-directory: constraint-archaeology-agents
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run Test Pack v1 against production ClaudeMechanismJudge
+        working-directory: evaluation/test-pack-v1
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 run_test_pack_production.py
+
+      - name: Commit production-judge results (this file only)
+        run: |
+          git config user.name "test-pack-v1-bot"
+          git config user.email "test-pack-v1-bot@users.noreply.github.com"
+          git add evaluation/test-pack-v1/results-production-judge.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Test Pack v1: production ClaudeMechanismJudge run"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
