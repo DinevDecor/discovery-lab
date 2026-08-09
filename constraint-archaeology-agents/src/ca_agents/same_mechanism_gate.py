@@ -76,11 +76,29 @@ class JudgeProtocol(Protocol):
     def profile(self, prompt: str) -> Dict[str, Any]: ...
     def counterfactual(self, prompt: str) -> Dict[str, Any]: ...
 
+def _coerce_confidence(value) -> float:
+    """A real run crashed on judge.profile() returning confidence as "85%"
+    instead of 0.85 - float() has no idea what to do with a percent sign.
+    Same defensive shape as the failure_class fallback just above: try the
+    natural conversion, and only fall back to the existing 0.0 default if it
+    genuinely can't be read as a number. Doesn't change what confidence
+    MEANS or how the evidence-floor check uses it - only what input shapes
+    survive to reach that check instead of crashing before it runs."""
+    if isinstance(value, (int, float)):
+        return float(value)
+    try:
+        text = str(value).strip()
+        if text.endswith("%"):
+            return float(text[:-1]) / 100.0
+        return float(text)
+    except (TypeError, ValueError):
+        return 0.0
+
 def profile_anomaly(anomaly: GateAnomaly, judge: JudgeProtocol) -> MechanismProfile:
     raw=judge.profile(PROFILE_PROMPT.format(process=anomaly.process,pain=anomaly.pain,current_carrier=anomaly.current_carrier,failure_mode=anomaly.failure_mode))
     try: fclass=FailureClass(str(raw.get("failure_class","other")).lower())
     except ValueError: fclass=FailureClass.OTHER
-    return MechanismProfile(anomaly.id,raw.get("hidden_function",""),raw.get("inputs",""),raw.get("outputs",""),raw.get("carrier",anomaly.current_carrier),fclass,raw.get("failure_mechanism",""),raw.get("repair",""),float(raw.get("confidence",0.0)),anomaly.evidence_count)
+    return MechanismProfile(anomaly.id,raw.get("hidden_function",""),raw.get("inputs",""),raw.get("outputs",""),raw.get("carrier",anomaly.current_carrier),fclass,raw.get("failure_mechanism",""),raw.get("repair",""),_coerce_confidence(raw.get("confidence",0.0)),anomaly.evidence_count)
 
 def _cross_test(repair_profile,target,target_profile,judge):
     raw=judge.counterfactual(COUNTERFACTUAL_PROMPT.format(repair=repair_profile.repair,process=target.process,pain=target.pain,failure_mechanism=target_profile.failure_mechanism))
