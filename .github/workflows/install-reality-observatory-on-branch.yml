@@ -1,74 +1,11 @@
-name: Install Reality Observatory bundle on branch
+name: Temporary Reality Observatory installer (disabled)
 
 on:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
-  install:
+  disabled:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: claude/reality-observatory-slice-01
-          fetch-depth: 0
-
-      - name: Reconstruct original Claude bundle
-        shell: bash
-        run: |
-          set -euo pipefail
-          cat .bundle-parts/*.b64 | base64 -d > /tmp/discovery-lab-bundle.tar.gz
-          test "$(stat -c%s /tmp/discovery-lab-bundle.tar.gz)" -eq 152875
-          tar -tzf /tmp/discovery-lab-bundle.tar.gz >/dev/null
-
-      - name: Install missing historical controls
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf /tmp/discovery-bundle
-          mkdir -p /tmp/discovery-bundle
-          tar -xzf /tmp/discovery-lab-bundle.tar.gz -C /tmp/discovery-bundle --strip-components=1
-          for p in \
-            docs/method/controls/00-initial-analysis.md \
-            docs/method/controls/01-process-scan-v2.md \
-            docs/method/controls/02-negative-control-modular-housing.md \
-            docs/method/controls/03-positive-control-containerization.md \
-            docs/method/controls/04-false-negative-control-foundry.md \
-            docs/method/controls/05a-false-positive-candidate.md \
-            docs/method/controls/05b-false-positive-control-fiber.md; do
-            if git ls-files --error-unmatch "$p" >/dev/null 2>&1; then
-              echo "Keeping existing: $p"
-            else
-              mkdir -p "$(dirname "$p")"
-              cp "/tmp/discovery-bundle/$p" "$p"
-              echo "Installed: $p"
-            fi
-          done
-
-      - name: Validate installed package
-        shell: bash
-        run: |
-          set -euo pipefail
-          PYTHONPATH=constraint-archaeology-agents python tests/test_findings_ledger.py
-          (cd constraint-archaeology-agents && python3 -m unittest discover -s tests -v)
-
-      - name: Commit completed installation
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf .bundle-parts
-          rm -f .github/workflows/finalize-reality-observatory.yml
-          rm -f .trigger-finalize docs/architecture/.finalize-trigger-2
-          git config user.name 'constraint-archaeology-bot'
-          git config user.email 'constraint-archaeology-bot@users.noreply.github.com'
-          git add -A
-          if git diff --cached --quiet; then
-            echo 'No changes to commit.'
-            exit 0
-          fi
-          git commit -m 'docs: complete Reality Observatory installation'
-          git push origin HEAD:claude/reality-observatory-slice-01
+      - run: echo "Disabled. Remove this file after PR #13 is finalized."
