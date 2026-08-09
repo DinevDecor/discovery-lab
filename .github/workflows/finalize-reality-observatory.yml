@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - claude/reality-observatory-slice-01
-  pull_request:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -24,13 +21,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -fL --retry 3 --retry-delay 2 \
-            'https://drive.usercontent.google.com/download?id=1V5gOwmdk702PuuGCccX4MFlk54y1amcR&export=download&confirm=t' \
-            -o /tmp/discovery-lab-bundle.tar.gz
-          test "$(stat -c%s /tmp/discovery-lab-bundle.tar.gz)" -gt 100000
+          python -m pip install --quiet gdown
+          gdown --id 1V5gOwmdk702PuuGCccX4MFlk54y1amcR --output /tmp/discovery-lab-bundle.tar.gz
+          test "$(stat -c%s /tmp/discovery-lab-bundle.tar.gz)" -eq 152875
           tar -tzf /tmp/discovery-lab-bundle.tar.gz >/dev/null
 
-      - name: Install only missing historical controls
+      - name: Install missing historical controls
         shell: bash
         run: |
           set -euo pipefail
@@ -65,13 +61,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          rm -rf .bundle-parts
           rm -f .github/workflows/finalize-reality-observatory.yml
           git config user.name 'constraint-archaeology-bot'
           git config user.email 'constraint-archaeology-bot@users.noreply.github.com'
           git add -A
-          if git diff --cached --quiet; then
-            echo 'No changes to commit.'
-            exit 0
-          fi
           git commit -m 'docs: complete Reality Observatory installation'
           git push origin HEAD:claude/reality-observatory-slice-01
