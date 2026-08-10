@@ -1,6 +1,13 @@
 # Business Candidate Analyst
 
-A downstream, read-only analyst over Constraint Archaeology's published evidence:
+A downstream, read-only analyst over Constraint Archaeology's published evidence, with
+two conceptually separate analytical modes sharing one registry:
+
+- **Mode A — New Opportunity Discovery** (`analyst.py`): missing function / unmet need
+  → business candidate. `candidate_type = NEW_MARKET`.
+- **Mode B — Legacy Business Rearchitecture** (`rearchitecture/`): existing business →
+  historical constraint → whether that constraint still binds → candidate.
+  `candidate_type = OLD_BUSINESS_REARCHITECTURE`. See "Mode B" section below.
 
 ```
 Sources -> Captures -> Observations -> Anomalies -> Constraint Archaeologist
@@ -28,18 +35,22 @@ heuristic over fields the Sensor Agent already extracted (`pain`, `current_carri
 ## Run
 
 ```bash
-python3 run_business_candidate_analyst.py
+python3 run_business_candidate_analyst.py          # runs Mode A, then Mode B
+python3 run_business_candidate_analyst.py --skip-mode-b   # Mode A only
 ```
 
 Reads from `../constraint-archaeology-agents/data` by default (`--ca-data-dir` to
 override), writes to `./data` and `./reports`. Safe to re-run: idempotent on
-unchanged evidence (see `tests/test_registry.py`).
+unchanged evidence for both modes (see `tests/test_registry.py`,
+`tests/test_rearchitecture_integration.py`). Mode B reads whatever registry state
+Mode A just wrote and continues its `BC-XXXX` id sequence — the two modes never
+allocate colliding candidate ids.
 
 ```bash
 python3 -m unittest discover -s tests
 ```
 
-67+ offline, deterministic tests. No network, no model calls, no fixtures larger than
+106 offline, deterministic tests. No network, no model calls, no fixtures larger than
 a handful of synthetic observations.
 
 ## The fourteen evaluation dimensions
@@ -178,6 +189,121 @@ either one.
 They deliberately were **not** merged into one candidate — see "False-positive
 controls" above for exactly why the deterministic gate stops at three.
 
+## Mode B — Legacy Business Rearchitecture
+
+The question this mode exists to answer, per the task verbatim: **"What historical
+constraint shaped this business, and does that constraint still exist today?"** AI is
+deliberately just one of sixteen possible enablers (`config/rearchitecture_thresholds.
+json`'s `enabler_taxonomy`) — cheaper sensors, smartphones, GPS, cloud infra, robotics,
+better materials, cheaper energy, faster logistics, digital payments, standardization,
+regulation change, demographic change, consumer behavior, financing models, cheaper
+compute, and AI, weighted identically. Nothing in this mode assumes AI caused anything.
+
+### Why this needed a different design than Mode A
+
+Mode A works because Constraint Archaeology's Sensor Agent already extracts exactly
+the fields Mode A's rubric needs (`pain`, `current_carrier`, `failure_mode`) from
+present-tense pain reports. Mode B asks a harder question — a *historical causal*
+claim ("why did this structure exist, and is that reason gone") — that raw tech-forum
+text rarely states explicitly. Before writing any code, the real corpus was grepped
+for constraint-shaped language; almost nothing existed (`used to`, `historically`,
+`no longer necessary`, etc. — 9 coincidental hits, none of them real business
+narratives). A handful of genuine business/industry observations existed (solar-grid
+curtailment vs. battery storage cost, aircraft manufacturing capacity, mobile app
+payment adoption in India, vending-machine site selection) and became the ground truth
+this whole mode's taxonomy was validated against, the same way Mode A's taxonomy was
+validated against real observations before being trusted.
+
+### The eight-item checklist and the three-valued evidence scale
+
+`rearchitecture/dimensions.py` answers: existing business/job-to-be-done, historical
+constraint, evidence the constraint existed, evidence it may be weakened, legacy
+structure, proposed rearchitecture, why now, potential economic effect. Every claim is
+`OBSERVED` (the text itself states it), `INFERRED` (a structural pattern matched
+without explicit causal language), or `INSUFFICIENT_DATA` — a three-valued scale,
+not Mode A's binary `EVIDENCED`/`INSUFFICIENT_DATA`, because collapsing OBSERVED and
+INFERRED together would hide exactly the distinction the lifecycle depends on.
+`proposed_rearchitecture` is explicitly **framing only** (mirrors Mode A's
+`potential_product_function`) — a templated hypothesis, never itself evidence, never a
+gating condition.
+
+**The most important honesty case this mode has to get right**: text mentioning the
+old constraint is not evidence it has weakened. A real observation about Japanese
+solar curtailment states, in the industry insider's own words, *"the batteries
+everyone suggests aren't free"* — an explicit argument that the old constraint
+(battery storage cost) **still binds**. `taxonomy.py` keeps `still_binding_markers`
+and `weakening_markers` as separate marker sets so this case reports
+`evidence_constraint_weakened: INSUFFICIENT_DATA` with the note *"text argues the
+constraint is STILL binding, not weakened — this is not a gap to fill, it is evidence
+against the candidate"*, rather than false-positiving on the mere mention of batteries.
+
+### Lifecycle and the no-AI-bias rule
+
+Same five states as Mode A, reused rather than duplicated, but every rung is stricter
+because historical-causal evidence is harder to confirm than a present-tense pain
+report:
+
+| Transition | Requires |
+|---|---|
+| create at WATCH | `historical_constraint` at least INFERRED AND `legacy_structure` OBSERVED |
+| → VALIDATING | `historical_constraint` OBSERVED AND `evidence_constraint_weakened` at least INFERRED AND **at least one non-AI enabler identified** |
+| → INVESTIGATE | `evidence_constraint_weakened` OBSERVED AND `why_now` OBSERVED AND `potential_economic_effect` OBSERVED AND **at least one non-AI enabler identified** |
+| → PROMISING | entire evidence chain OBSERVED (nothing merely INFERRED) AND ≥2 distinct sources |
+| → REJECTED | same trigger as Mode A: every evaluated Constraint Archaeology anomaly backing this candidate returned `KILL` |
+
+The no-AI-bias rule lives in `lifecycle.py`, not `dimensions.py`, because it is a
+**lifecycle** decision, not an evidence-quality one: `why_now` can honestly be
+OBSERVED with "ai" as the only enabler in the text — that's an accurate reading. What
+must not happen is treating that alone as sufficient to advance past WATCH. Both
+required regression tests live in `tests/test_rearchitecture_lifecycle.py::
+NoAIBiasTests`: a candidate with **zero** AI-related evidence reaches VALIDATING on a
+non-AI enabler (`test_no_ai_bias_positive_case_reaches_validating_with_zero_ai_
+evidence`), and an otherwise-identical candidate whose only enabler evidence is "AI
+could automate this" is capped at WATCH with an explicit gap
+(`test_ai_only_justification_is_not_sufficient`). A third test confirms AI is not
+disqualifying when it appears *alongside* a real structural enabler — only "AI alone"
+is refused.
+
+### Grouping: simpler than Mode A, and why
+
+Two anomalies group into one Mode B candidate only when they share an observation
+URL (`rearchitecture/analyst.py::_build_groups`, a union-find over shared URLs) — not
+Mode A's buyer/function signature gate. A historical-constraint claim is grounded in
+one narrative source; it isn't a pattern expected to recur worded differently across
+independent sources the way a business opportunity is. Concretely: the real corpus's
+solar-curtailment story was split by Constraint Archaeology's own mechanism gate into
+two separate anomalies (`ANOM-0067`, `ANOM-0101`) — different technical failure
+mechanisms, same article. Mode B's URL grouping recombines them into one candidate;
+Mode A's dedup logic would not (nor should it — they're not a recurring business
+pattern across sources).
+
+### False-positive controls specific to Mode B
+
+Iterating against the real corpus caught a second, distinct class of false positive
+from Mode A's: **bare single-word technical homonyms**. `agent` collided with "AI
+agent" (this corpus's single most common phrase) and false-positived a dozen unrelated
+dev-tool observations into `intermediation_trust`. `branch` collided with git/code
+"branch" (a SAT-solver optimization post was misclassified `physical_presence` via
+"branch and bound"). `buffer` collided with HTTP request buffering. `broker` collided
+with MQTT message brokers. Fix: removed the bare ambiguous words, kept or added
+multi-word phrases (`branch network`, `branch office`, `business broker`) that don't
+collide with tech vocabulary. Regression tests:
+`test_rearchitecture_taxonomy.py::test_physical_presence_requires_specific_phrase_
+not_bare_branch`, `::test_intermediation_trust_does_not_fire_on_bare_agent`.
+
+**Residual risk, reported honestly per the task's request**: several WATCH-level
+candidates in the real run below (e.g. `continuous_oversight` classifications on
+"coordinating multiple AI agent sessions," "AI agent regression testing") are
+semantically real pattern matches (the text does describe manual coordination because
+state isn't continuously observable) but describe **dev-tool UX friction, not an
+existing business/industry** in the sense the task means. The taxonomy cannot
+currently distinguish "this text describes a business" from "this text describes a
+programming task that happens to use business-shaped words." Nothing in the lifecycle
+promotes these past WATCH (they all lack `evidence_constraint_weakened` and `why_now`
+entirely), so the blast radius is contained to the weakest, most-visibly-caveated
+state — but a human reviewing the WATCH list should expect to discard some of these as
+not-really-business-stories, not treat WATCH membership alone as a signal of quality.
+
 ## Limitations
 
 - Keyword-based classification is coarse and will misclassify some observations (e.g.
@@ -191,3 +317,63 @@ controls" above for exactly why the deterministic gate stops at three.
 - No historical backfill: candidates are only ever created going forward from the
   first run that produced `data/candidate_events.jsonl`, mirroring
   `constraint-archaeology-agents/FINDINGS_LEDGER.md`'s own no-backfill rule.
+- Mode B's `constraint_taxonomy` (seven categories) and `enabler_taxonomy` (sixteen
+  categories) are, like Mode A's, necessarily coarse keyword buckets over a corpus that
+  is overwhelmingly dev/tech content, not business-history writing — see Mode B's
+  "false-positive controls" section for the concrete residual risk this produces and
+  why the lifecycle's stricter bars contain it.
+
+## Review questions (Mode B)
+
+1. **Can Mode B be implemented meaningfully with the current deterministic
+   architecture?** Partially, and unevenly across the eight fields. `legacy_structure`
+   and `existing_business_or_jtbd` are as reliable as Mode A's equivalent fields
+   (direct reuse of Sensor Agent extraction). `historical_constraint` and `why_now`
+   are meaningful *when they fire OBSERVED* (explicit causal/change language), which
+   the real run shows happens for genuine cases (the India-payments candidate) — but
+   the INFERRED case (pattern matched, no stated reason) is a much weaker signal that
+   a human should treat as a hypothesis prompt, not a finding. `evidence_constraint_
+   weakened`'s still-binding-vs-weakening distinction works well and was the single
+   most important honesty check to get right. Nothing here required an LLM call, and
+   per the task's instruction not to force one, none was added — but this is a
+   narrower, more caveated result than Mode A's, not an equally strong one.
+2. **Are heuristics producing semantic false positives?** Yes, two distinct classes,
+   both described above with real examples and both mitigated: (a) bare-word
+   technical/business homonyms (`agent`, `branch`, `buffer`, `broker`) before the
+   taxonomy cleanup — fixed; (b) genuine structural-pattern matches on text that
+   describes dev-tool friction rather than an actual business/industry — not fully
+   fixable with keyword matching alone, contained by capping these at WATCH since they
+   never produce `evidence_constraint_weakened` or `why_now` evidence.
+3. **Candidates found in the real corpus** (146 anomalies, 157 observations, as of
+   2026-08-10): **12 candidates**, all `WATCH` except one `VALIDATING`. See
+   `reports/business-candidates-2026-08-10.md`'s "Legacy Business Rearchitecture
+   Candidates" section for the full eleven-field breakdown of each. Zero were forced;
+   95 anomaly groups were considered and rejected at the WATCH bar for lack of any
+   structural-constraint pattern.
+4. **Which candidates genuinely depend on an expired/weakening constraint rather than
+   generic "automation"?** One: **BC-0058**, the mobile-app-payments-in-India candidate
+   (`payment_or_market_access`) — `historical_constraint` OBSERVED, `evidence_
+   constraint_weakened` OBSERVED, enablers `digital_payments` + `demographic_change`,
+   zero AI involvement anywhere in its evidence. It is the only candidate in the real
+   run whose full chain (constraint existed → constraint weakened → non-AI enabler
+   named) is OBSERVED rather than INFERRED, which is why it is the only one to reach
+   VALIDATING. The solar-curtailment and aircraft-manufacturing candidates have
+   OBSERVED historical constraints but explicitly do **not** have weakening evidence
+   (the former argues the opposite) — correctly capped at WATCH, not silently dropped.
+5. **What evidence is missing?** For the VALIDATING candidate: a second,
+   independently-sourced report of the same specific constraint (only one source,
+   `hacker_news`) and any explicit cost/speed/margin/etc. language (`potential_
+   economic_effect` is its only INSUFFICIENT_DATA field). For the WATCH-level
+   candidates: overwhelmingly, `evidence_constraint_weakened` and `why_now` — the
+   corpus documents present-tense pains and, occasionally, why a legacy structure
+   exists, but essays explaining *why a known constraint is going away* are rare in
+   forum/HN-style content. This is a property of the source corpus, not a fixable gap
+   in the code.
+6. **Should Mode B remain inside this agent or become a separate agent later?**
+   Remain inside, for now. It shares the registry, candidate-id space, provenance
+   model, and safety boundary with Mode A, and reuses Mode A's `evidence_reader.py`
+   and `rejection_trigger` outright — splitting it out today would duplicate all of
+   that infrastructure for a mode that produced 12 candidates from one corpus pass.
+   Revisit if Mode B's own taxonomy grows enough (more constraint categories, a
+   genuinely different grouping strategy) that it stops being a thin sibling of Mode A
+   and starts needing its own release cadence or its own data-quality guarantees.

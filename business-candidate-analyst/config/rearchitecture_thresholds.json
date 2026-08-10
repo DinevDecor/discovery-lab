@@ -1,0 +1,78 @@
+{
+  "analyst_version": "0.1.0",
+
+  "_comment": "Config for Mode B (Legacy Business Rearchitecture) only. Separate file from thresholds.json (Mode A) deliberately - the two modes reason about different evidence and must not share thresholds by accident. Every keyword list is a GENERIC REASONING CATEGORY, not a specific industry or company - see README's Mode B section for why (task requirement: do not hard-code industries or outcomes).",
+
+  "_comment_constraint_taxonomy": "Each bucket names the SHAPE of a historical constraint, generalized from the task's own examples (warehouse inventory, intermediaries, branch networks, manual coordination, vertical integration, safety buffers) without hard-coding those industries. `legacy_markers` describe the WORKAROUND/STRUCTURE a business built because of the constraint (usually present in current_carrier/process). `reason_markers` are words that, when they appear NEAR a legacy_marker, suggest the text itself is stating WHY the structure exists (pushes evidence from INFERRED toward OBSERVED).",
+  "constraint_taxonomy": {
+    "buffer_inventory": {
+      "legacy_markers": ["warehouse", "inventory", "stockpile", "backlog", "excess capacity", "safety stock", "battery storage", "storage capacity", "curtailment"],
+      "reason_markers": ["unreliable", "slow", "uncertain", "unpredictable", "shortage", "lead time", "long lead", "delay"]
+    },
+    "payment_or_market_access": {
+      "legacy_markers": ["ad-supported", "ad supported", "free-only", "free only", "alternative revenue", "workaround revenue", "cannot charge directly", "unable to charge"],
+      "reason_markers": ["payment infrastructure", "cannot pay directly", "low willingness to pay", "cannot process payment", "no direct payment", "user behavior patterns"]
+    },
+    "intermediation_trust": {
+      "legacy_markers": ["intermediary", "business broker", "middleman", "reseller", "distributor", "gatekeeping", "gatekeeper"],
+      "reason_markers": ["trust", "verify", "verification", "reputation", "expensive to check", "hard to verify", "no way to confirm"]
+    },
+    "physical_presence": {
+      "legacy_markers": ["branch network", "branch office", "bank branch", "in-person", "in person", "physical presence", "physical location", "storefront", "office visit"],
+      "reason_markers": ["signature", "identity", "notariz", "id verification", "id submission", "required presence"]
+    },
+    "continuous_oversight": {
+      "legacy_markers": ["manual coordination", "manual monitoring", "manual oversight", "manually forecast", "manually track", "manually watch"],
+      "reason_markers": ["cannot observe", "no visibility", "not observable", "no real-time", "no telemetry", "no remote"]
+    },
+    "vertical_integration": {
+      "legacy_markers": ["in-house", "vertically integrated", "vertical integration", "own fleet", "own factory", "proprietary infrastructure", "build our own"],
+      "reason_markers": ["no standard", "no interface", "unreliable supplier", "no external", "not available externally"]
+    },
+    "capacity_lead_time": {
+      "legacy_markers": ["production capacity", "manufacturing capacity", "lead time", "multi-year wait", "production timeline", "delivery timeline"],
+      "reason_markers": ["cannot scale", "scale fast enough", "long lead times", "bottleneck", "long timelines"]
+    },
+    "manual_dispute_resolution": {
+      "legacy_markers": ["manual verification", "manual review", "manual reconciliation", "manual dispute", "manual audit"],
+      "reason_markers": ["cannot verify", "cannot access", "cannot validate", "no records", "unresolvable"]
+    }
+  },
+
+  "_comment_enabler_taxonomy": "AI is one bucket among many, deliberately weighted the same as every other - the point of this whole mode is to not assume AI is the cause. Matches the task's explicit enabler list.",
+  "enabler_taxonomy": {
+    "sensors": ["cheap sensor", "cheaper sensor", "iot sensor", "low-cost sensor"],
+    "mobile": ["smartphone", "mobile app", "mobile phone", "mobile-first"],
+    "gps_location": ["gps", "geolocation", "location data", "location tracking"],
+    "cloud_infra": ["cloud infrastructure", "cloud computing", "cloud platform", "serverless"],
+    "robotics": ["robot", "robotics", "automation hardware", "autonomous vehicle"],
+    "materials": ["new material", "better material", "material science", "lighter material", "cheaper material"],
+    "energy_cost": ["cheaper energy", "energy cost", "falling energy price", "renewable energy cost"],
+    "logistics_speed": ["faster shipping", "faster logistics", "same-day delivery", "overnight delivery", "faster fulfillment"],
+    "digital_payments": ["digital payment", "mobile payment", "online payment", "payment infrastructure", "starting to pay"],
+    "standardization": ["standard interface", "standardization", "industry standard", "open standard", "common protocol"],
+    "regulation_change": ["new regulation", "deregulation", "regulatory change", "new legislation", "law now allows", "legalized"],
+    "demographic_change": ["demographic shift", "aging population", "urbanization", "population growth", "spending power", "growing income"],
+    "consumer_behavior": ["consumer behavior", "changing preferences", "new expectation", "willingness-to-pay", "willingness to pay"],
+    "financing_models": ["new financing", "subscription model", "financing option", "buy now pay later", "leasing model"],
+    "compute_cost": ["cheaper compute", "compute cost", "falling compute price", "compute got cheaper"],
+    "ai": ["artificial intelligence", " ai ", "ai-powered", "machine learning", "llm", "large language model", "generative ai"]
+  },
+
+  "_comment_evidence_markers": "Two DIRECTIONS of change language. A text can mention the old constraint (e.g. 'batteries aren't free') while explicitly arguing it is STILL BINDING - that must not be read as weakening. Only explicit weakening/change language, ideally co-located with an enabler_taxonomy hit, counts as evidence the constraint has weakened.",
+  "still_binding_markers": ["aren't free", "isn't free", "not free", "still requires", "still needs", "still require",
+    "remains expensive", "cost-prohibitive", "cannot yet", "not yet viable", "not viable", "not economical",
+    "too expensive", "still binding", "working correctly", "acceptable cost", "considered cost-prohibitive"],
+  "weakening_markers": ["now possible", "now that", "now allow", "now allows", "cheaper now", "getting cheaper",
+    "have fallen", "has fallen", "prices have dropped", "no longer need", "no longer necessary",
+    "no longer require", "no longer required", "not necessary anymore", "not required anymore",
+    "increasingly affordable", "increasingly optional", "increasingly common", "emerging", "starting to",
+    "growing adoption", "enabled by", "thanks to", "made possible by", "is starting to", "growing spending power",
+    "spending power emerges", "spending power emerging"],
+
+  "economic_effect_markers": ["cost", "margin", "speed", "faster", "capital", "quality", "convenience",
+    "trust", "accessibility", "accessible", "scalability", "scalable", "cheaper", "efficient"],
+
+  "buyer_min_len": 4,
+  "min_sources_validating": 2
+}

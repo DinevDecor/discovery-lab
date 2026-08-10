@@ -110,10 +110,12 @@ def rebuild_snapshot(events: List[Dict[str, Any]]) -> List[Candidate]:
                     state=payload.get("state", "WATCH"),
                     created_at=e["recorded_at"],
                     updated_at=e["recorded_at"],
+                    candidate_type=payload.get("candidate_type", "NEW_MARKET"),
                     anomaly_ids=list(payload.get("anomaly_ids", [])),
                     observation_ids=list(payload.get("observation_ids", [])),
                     signature=payload.get("signature"),
                     dimensions=payload.get("dimensions", {}),
+                    rearchitecture=payload.get("rearchitecture"),
                 )
             if cand is None:
                 continue
@@ -126,6 +128,7 @@ def rebuild_snapshot(events: List[Dict[str, Any]]) -> List[Candidate]:
             if etype == "state_changed":
                 cand.state = payload["to_state"]
                 cand.dimensions = payload.get("dimensions", cand.dimensions)
+                cand.rearchitecture = payload.get("rearchitecture", cand.rearchitecture)
                 cand.anomaly_ids = sorted(set(cand.anomaly_ids) | set(payload.get("anomaly_ids", [])))
                 cand.observation_ids = sorted(set(cand.observation_ids) | set(payload.get("observation_ids", [])))
                 if cand.state == "REJECTED":
@@ -136,6 +139,7 @@ def rebuild_snapshot(events: List[Dict[str, Any]]) -> List[Candidate]:
                     cand.merged_from = sorted(set(cand.merged_from) | set(items))
             elif etype == "evidence_reassessed":
                 cand.dimensions = payload.get("dimensions", cand.dimensions)
+                cand.rearchitecture = payload.get("rearchitecture", cand.rearchitecture)
                 cand.anomaly_ids = sorted(set(cand.anomaly_ids) | set(payload.get("anomaly_ids", [])))
                 cand.observation_ids = sorted(set(cand.observation_ids) | set(payload.get("observation_ids", [])))
                 merged_from = payload.get("merged_from")

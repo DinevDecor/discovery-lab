@@ -30,7 +30,7 @@ from .config import load_thresholds
 from .dimensions import assess_all
 from .evidence_reader import load_ca_evidence
 from .lifecycle import decide_state, meets_watch_bar
-from .models import CandidateEvent
+from .models import CandidateEvent, NEW_MARKET
 from .registry import CandidateRegistry, make_event_id, persist_snapshot, rebuild_snapshot
 from .signature import same_opportunity, signature_for_group
 
@@ -162,7 +162,8 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
                 reason=f"created at {decision['state']}: {decision['reason']}",
                 derived_from=derived_from,
                 payload={
-                    "state": decision["state"], "anomaly_ids": sorted(g["anomaly_ids"]),
+                    "state": decision["state"], "candidate_type": NEW_MARKET,
+                    "anomaly_ids": sorted(g["anomaly_ids"]),
                     "observation_ids": sorted(g["observation_ids"]), "signature": g["signature"].to_dict(),
                     "dimensions": dims_dicts, "merge_reasons": g["merge_reasons"],
                 },

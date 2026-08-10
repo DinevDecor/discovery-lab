@@ -1,9 +1,22 @@
-# Contract — Business Candidate Analyst v0.1 (`business-candidate-analyst/`)
+# Contract — Business Candidate Analyst v0.2 (`business-candidate-analyst/`)
 
 Core Principle: **Read published evidence. Classify. Never sense, never invent, never gate upstream.**
 
 This is a **tool contract**, matching the precedent of `observation-agent/CONTRACT.md`
 and `headquarters/CONTRACT.md` — not a governance/Employee Role contract.
+
+## Two analytical modes, one contract
+
+- **Mode A — New Opportunity Discovery**: missing function / unmet need → candidate.
+  `candidate_type = NEW_MARKET`.
+- **Mode B — Legacy Business Rearchitecture**: existing business → historical
+  constraint → whether that constraint still binds → candidate.
+  `candidate_type = OLD_BUSINESS_REARCHITECTURE`.
+
+Both write into the same registry and are bound by the same hard boundary below.
+They are never merged conceptually — see README's Mode B section for why, and for
+Mode B's own evidence-quality scale (`OBSERVED` / `INFERRED` / `INSUFFICIENT_DATA`,
+distinct from Mode A's `EVIDENCED` / `INSUFFICIENT_DATA`).
 
 ## Position in the pipeline
 
@@ -48,7 +61,17 @@ enforced by `tests/test_safety.py`, not just this document.
 - promote a candidate because the underlying pattern sounds like a good product —
   every state transition is driven by the dimension rubric in `lifecycle.py`, cites
   the observation/anomaly ids it used, and a transition with unmet criteria simply
-  does not fire, regardless of how compelling the pattern reads.
+  does not fire, regardless of how compelling the pattern reads;
+- assume AI is the cause of a weakened constraint (Mode B). `why_now` cites whichever
+  of sixteen enabler categories the text actually names, and
+  `rearchitecture/lifecycle.py` hard-refuses to advance a candidate past `WATCH` when
+  the only enabler found is `ai` — enforced by
+  `tests/test_rearchitecture_lifecycle.py::NoAIBiasTests`, not just this document;
+- invent a historical constraint from intuition (Mode B). A constraint claim is
+  `OBSERVED` only when the text itself states a reason, `INFERRED` when only a
+  structural pattern matched without stated causation, and `INSUFFICIENT_DATA`
+  otherwise — never asserted past what `rearchitecture/taxonomy.py`'s keyword match
+  supports.
 
 ## Rights
 
@@ -59,6 +82,11 @@ enforced by `tests/test_safety.py`, not just this document.
   a goal this tool optimizes for.
 - The right to refuse a merge between two evidence groups (`signature.py`) even when
   their surface wording is similar, if the buyer/function signature does not match.
+- The right (Mode B) to report that a historical constraint is evidenced but still
+  binding, not weakened, and cap a candidate at `WATCH` accordingly — mentioning the
+  old constraint is not the same as evidence it has changed.
+- The right (Mode B) to return zero rearchitecture candidates for a given corpus. Mode
+  B does not force a result.
 
 ## Responsibilities
 
