@@ -1,0 +1,82 @@
+{
+  "analyst_version": "0.1.0",
+  "registry_schema_version": "1",
+
+  "_comment_signature": "Deterministic dedup gate thresholds for signature.py. Two anomalies merge into one Business Candidate only if buyer_bucket and function_class both match AND (at least min_shared_function_keywords of the matched function_class's own keywords appear in both groups' text, OR one of the Jaccard floors below is met on workaround/failure wording). min_shared_function_keywords=2 (not 1) because a single generic shared word like 'cost' or 'budget' recurs across unrelated topics often enough to be coincidence rather than corroboration - see README's false-positive controls section.",
+  "job_term_min_len": 4,
+  "min_shared_function_keywords": 2,
+  "workaround_jaccard_min": 0.12,
+  "failure_jaccard_min": 0.12,
+
+  "_comment_lifecycle": "Minimum distinct-source counts required to advance state. min_sources_investigate intentionally matches Constraint Archaeology's own --min-independent-sources default (3), so a candidate cannot reach INVESTIGATE on less independent corroboration than CA itself requires before evaluating an anomaly.",
+  "min_sources_validating": 2,
+  "min_sources_investigate": 3,
+
+  "_comment_severity": "Keyword buckets are intentionally generic (not tuned to any one theme, e.g. AI/quota) so the same rubric applies to any future evidence domain.",
+  "severity_strong_markers": [
+    "cannot", "can't", "unresolvable", "denied", "deny", "refused", "lost",
+    "blocked", "blocking", "fails", "failed", "stuck", "wasted", "waste",
+    "disappeared", "deadlock", "unable", "no way to", "impossible"
+  ],
+  "severity_moderate_markers": [
+    "difficult", "manual", "manually", "delay", "friction", "tedious",
+    "workaround", "annoying", "frustrat"
+  ],
+
+  "economic_markers": [
+    "$", "cost", "costs", "costly", "bill", "billing", "billed", "budget",
+    "spend", "spending", "revenue", "expense", "purchased", "refund",
+    "credit", "credits", "price", "pricing", "paid", "pay ", "invoice"
+  ],
+
+  "willingness_to_pay_markers": [
+    "purchased", "paid", "subscription", "pro plan", "premium", "refund",
+    "credits fell", "spent", "subscriber", "upgraded", "bought"
+  ],
+
+  "frequency_markers": [
+    "every", "each ", "again", "repeatedly", "recurring", "recurs",
+    "daily", "weekly", "every session", "every time", "every reset",
+    "every cycle", "constantly", "ongoing"
+  ],
+
+  "contradiction_markers": [
+    "not a problem", "no issue", "works fine", "no longer an issue",
+    "resolved now", "fixed now", "never happens"
+  ],
+
+  "vendor_mentions": [
+    "openai", "anthropic", "claude", "codex", "chatgpt", "gemini", "google",
+    "microsoft", "azure", "aws", "amazon", "github", "gitlab", "stripe",
+    "vercel", "cloudflare", "meta", "mistral", "cohere"
+  ],
+
+  "buyer_taxonomy": {
+    "api_consumer": ["developer", "developers", "user", "users", "customer",
+      "customers", "coder", "coders", "engineer", "engineers", "subscriber",
+      "subscribers", "consumer", "consumers", "client", "clients", "member",
+      "members", "purchaser", "purchasers", "founder", "founders", "team",
+      "teams"],
+    "operator": ["operator", "operators", "admin", "admins", "homeowner",
+      "homeowners", "host", "hosts", "owner", "owners", "support", "staff",
+      "maintainer", "maintainers"]
+  },
+
+  "_comment_taxonomy_dedup": "Every function_taxonomy list below is deduplicated so no entry is a literal substring of another entry in the SAME bucket (e.g. 'credit' is dropped in favor of keeping just 'credit', which already substring-matches 'credits' too; 'manually' is dropped because 'manual' already matches it). Without this, a single word like 'manually' would silently satisfy min_shared_function_keywords=2 on its own by counting as both 'manual' and 'manually' - exactly the false-merge bug the real corpus run caught (see README's false-positive controls section). Substring matching still catches every inflected form; only the redundant duplicate list entries are removed.",
+  "function_taxonomy": {
+    "resource_visibility": ["quota", "credit", "usage", "cost", "billing",
+      "spend", "budget", "token", "consumption", "meter", "allocation",
+      "balance", "limit", "overage", "rate limit"],
+    "trust_dispute": ["refund", "dispute", "verify", "audit", "discrepancy",
+      "support", "evidence", "prove", "unresolved", "deny", "denied",
+      "unverifiable", "acknowledge"],
+    "access_gating": ["tier", "plan", "premium", "default", "gating",
+      "restrict", "unlock", "permission", "subscription"],
+    "workaround_labor": ["manual", "track", "log", "spreadsheet",
+      "screenshot", "calculate", "monitor", "watch"],
+    "state_recovery": ["stuck", "error", "timeout", "recover", "corrupt",
+      "reset", "crash", "retry"],
+    "capacity_timing": ["schedule", "timing", "cycle", "window", "delay",
+      "queue", "throttle"]
+  }
+}
