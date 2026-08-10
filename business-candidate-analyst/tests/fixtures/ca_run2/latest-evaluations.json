@@ -1,0 +1,16 @@
+[
+  {
+    "anomaly_id": "ANOM-K1",
+    "mechanism_verdict": "FAIL",
+    "capture_verdict": "WEAK PASS",
+    "k1": "no durable surviving value beyond dispatcher convenience",
+    "k2": "load structure does not concentrate a scarce capability",
+    "k3": "minimum viable configuration already exists as a paper board",
+    "k4": "no compounding function identified",
+    "k5": "no customer substitute level evidenced",
+    "k6": "no supply overshoot evidenced",
+    "rationale": "single-source anecdote with no durable compounding function found under v0.5",
+    "evidence_used": ["OBS-K1"],
+    "action": "KILL"
+  }
+]

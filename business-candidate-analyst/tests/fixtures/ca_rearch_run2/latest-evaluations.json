@@ -1,0 +1,16 @@
+[
+  {
+    "anomaly_id": "ANOM-KILL",
+    "mechanism_verdict": "FAIL",
+    "capture_verdict": "WEAK PASS",
+    "k1": "no durable surviving value",
+    "k2": "no scarce capability",
+    "k3": "minimum viable configuration already exists",
+    "k4": "no compounding function identified",
+    "k5": "no customer substitute level evidenced",
+    "k6": "no supply overshoot evidenced",
+    "rationale": "single-source anecdote with no durable compounding function found under v0.5",
+    "evidence_used": ["OBS-KILL1"],
+    "action": "KILL"
+  }
+]

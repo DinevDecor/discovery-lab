@@ -1,0 +1,42 @@
+[
+  {
+    "anomaly_id": "ANOM-Q1",
+    "canonical_pattern": "Developers managing AI inference costs — Cannot predict inference costs before the bill arrives",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-Q1"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-01",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-Q2",
+    "canonical_pattern": "Tracking purchased API credits against actual consumption — credits disappeared with no explanation",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-Q2", "OBS-Q2b"],
+    "independent_sources": ["discourse:openai-devs"],
+    "first_seen": "2026-08-02",
+    "last_seen": "2026-08-02",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-HOME",
+    "canonical_pattern": "Homeowners manually calculating when to run bathroom extractor fans — inconsistent humidity control",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-H1"],
+    "independent_sources": ["discourse:home-assistant"],
+    "first_seen": "2026-08-02",
+    "last_seen": "2026-08-02",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-K1",
+    "canonical_pattern": "Operators manually scheduling on-call repair technician dispatch — missed service windows",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-K1"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-02",
+    "last_seen": "2026-08-02",
+    "status": "WATCH"
+  }
+]
