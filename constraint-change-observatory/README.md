@@ -207,7 +207,14 @@ each docstring) — including all four seed records validating cleanly
   reference lists, not validated against) — matching the design doc's own reasoning:
   a fixed enum would force a schema change for every new constraint family a
   researcher legitimately encounters (§4/§5).
-- **This is a four-record corpus.** The design doc's own recommendation (§17 step 4)
-  is 10–15 more manually-researched records across constraint families this probe
-  didn't touch before revisiting whether the THEN/CHANGE-vs-NOW sourcing asymmetry
-  (§11) generalizes. See the final report's recommendation for next records.
+- **This is now a 14-record corpus** (the original 4-record PR #24 probe plus a
+  10-case falsification-study batch added 2026-08-10, `ccov-0005`..`ccov-0014`).
+  The design doc's own recommendation (§17 step 4) — more manually-researched
+  records across constraint families the original probe didn't touch — has been
+  partially fulfilled; see
+  `docs/reviews/2026-08-10-constraint-change-observatory-10case-falsification.md`
+  for the cross-case analysis, including corpus-level cautions (case-selection
+  bias, evidence-status conflation between OBSERVED and INFERRED, frontier-vs-
+  whole-domain conflation in several `SHIFTED` calls) that should inform how the
+  *next* batch is analyzed before this corpus is treated as large enough to
+  establish a base rate.

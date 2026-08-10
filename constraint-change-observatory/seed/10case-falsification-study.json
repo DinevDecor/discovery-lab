@@ -1,0 +1,1145 @@
+[
+  {
+    "record_id": "ccov-0005",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "labor_cost",
+    "domain": "maritime freight / port logistics",
+    "constrained_activity": "loading and unloading break-bulk cargo at a port",
+    "historical_constraint": {
+      "statement": "Break-bulk cargo required manual loading/unloading by longshore gangs, costing about $5.83 per ton in 1956, with ships spending roughly as much time in port as at sea.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "Marc Levinson, 'The Box' (cost figures via maketecheasier.com)",
+        "value": 5.83,
+        "unit": "USD per ton",
+        "as_of_date": "1956",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "businesssolutionsus.com / Henson Heritage & Training Center, port:sea time-ratio summary",
+        "value": "~1:1 port:sea time ratio",
+        "unit": "n/a",
+        "as_of_date": "1950s (break-bulk era)",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Longshore unions built work-rule structures (gang-based crew sizes, hiring-hall dispatch) around break-bulk labor demand; when containerization threatened man-hours, the ILWU's 1960 Mechanization and Modernization Agreement and the ILA's container royalty / Guaranteed Annual Income funds were created to compensate dockworkers for lost man-hours.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "technological_improvement",
+      "statement": "Malcolm McLean's container ship Ideal-X sailed in 1956; containerized handling scaled through the 1960s-70s, cutting loading cost to roughly $0.16/ton and raising Pacific Coast longshore productivity roughly 5x (0.837 to 4.234 tons/man-hour) between 1960 and 1976.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "Levinson, 'The Box' (via maketecheasier.com)",
+        "value": 0.16,
+        "unit": "USD per ton",
+        "as_of_date": "1956 (Ideal-X estimate)",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "businesssolutionsus.com, Pacific Coast longshore productivity summary",
+        "value": "0.837 to 4.234 tons/man-hour",
+        "unit": "tons per man-hour",
+        "as_of_date": "1960-1976",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "CNBC reporting on 2024 ILA strike, statement by ILA President Harold Daggett",
+        "value": "automation at one LA terminal eliminated 800 longshoremen jobs; automation was the central unresolved issue in the 2024 ILA/USMX contract fight",
+        "unit": "n/a",
+        "as_of_date": "2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Bridgman, 'Why Containerization Didn't Reduce Ocean Shipping Costs, At First'; Hummels (2007), Journal of Economic Perspectives",
+        "value": "non-wage compensation (container royalty/GAI) that offset dockworkers' productivity loss was reduced/eliminated through the 1980s; aggregate ad-valorem ocean freight cost was not much lower in the mid-2000s than in the 1950s",
+        "unit": "n/a",
+        "as_of_date": "1980s-2007",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "labor_productivity": {
+        "then_value": 0.837,
+        "now_value": 4.234,
+        "unit": "tons per man-hour",
+        "ratio": 5.058542413381123,
+        "magnitude_class": "MULTIPLE_X",
+        "evidence_ids": []
+      }
+    },
+    "replacement_constraint": {
+      "family": "infrastructure_availability",
+      "statement": "Landside drayage trucking capacity and chassis availability, not dockside handling labor, is now cited as the binding constraint on container flow through major US gateways, with chassis shortages reported to push container dwell times past 20 days at ports like LA-Long Beach and Memphis (trade-press sourcing, moderate confidence).",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "Marc Levinson, 'The Box' (cost figures via maketecheasier.com)",
+      "businesssolutionsus.com / Henson Heritage & Training Center, port:sea time-ratio summary",
+      "Levinson, 'The Box' (via maketecheasier.com)",
+      "businesssolutionsus.com, Pacific Coast longshore productivity summary",
+      "CNBC reporting on 2024 ILA strike, statement by ILA President Harold Daggett",
+      "Bridgman, 'Why Containerization Didn't Reduce Ocean Shipping Costs, At First'; Hummels (2007), Journal of Economic Perspectives"
+    ],
+    "unresolved_questions": [
+      "Several core THEN/NOW figures ($5.83/$0.16 per ton, 0.837/4.234 tons/man-hour, port:sea time ratio) came through secondary aggregators rather than Levinson's book or PMA/ILWU primary data directly; a follow-up pass should verify against primary sources.",
+      "No government/FMC/BTS source was found for the current landside drayage/chassis bottleneck claim; it rests on trade-press reporting only.",
+      "No current-decade $/ton labor-cost figure was found for container handling to directly compare against the 1956 baseline."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0006",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "search_cost",
+    "domain": "urban taxi and ride-hailing transportation",
+    "constrained_activity": "matching a vacant taxi/vehicle to a waiting passenger in real time",
+    "historical_constraint": {
+      "statement": "Taxi dispatch relied on drivers cruising and passengers street-hailing with no shared location information; Buchholz (2022) estimates roughly 53,000 NYC riders/day failed to find a cab due to this search friction, and London's 'The Knowledge' (required since 1865) required drivers to memorize ~25,000 streets as a substitute for navigation technology.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "Buchholz (2022), 'Spatial Equilibrium, Search Frictions, and Dynamic Efficiency in the Taxi Industry', Review of Economic Studies 89(2)",
+        "value": "~53,000 daily NYC riders failed to find a cab; ~$5.7M/day market welfare (~$27/trip)",
+        "unit": "n/a",
+        "as_of_date": "2022 (NYC medallion-era data)",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "taxi-point.co.uk / crystalcm.co.uk, TfL 'The Knowledge' requirement",
+        "value": "required since 1865, ~25,000 streets",
+        "unit": "n/a",
+        "as_of_date": "1865",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Cities created medallion/vehicle-cap licensing systems (NYC 1937, similarly Boston and Chicago) and fixed/metered fare regulation to control the chaos and wage-dilution of unregulated street-hail matching; London required 'The Knowledge' as a driver-side navigational credential.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "smartphones_gps_connectivity",
+      "statement": "GPS-equipped smartphones enabled app-based e-hailing (Uber launched 2010-2012 rollout) that shares real-time driver/rider location; NYC medallion prices, the priced signal of matching/entry exclusivity, rose to a $1.3M peak in 2013 then collapsed to roughly $160,000 by 2018 as app-based dispatch scaled.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "Fideres; CBS News, NYC medallion price history",
+        "value": "$1.3M (2013 peak) -> ~$160,000 (2018)",
+        "unit": "USD",
+        "as_of_date": "2013-2018",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "Cramer & Krueger (2016), 'Disruptive Change in the Taxi Business: The Case of Uber', AER Papers & Proceedings 106",
+        "value": "UberX drivers show significantly higher capacity utilization (share of time/miles carrying a paying passenger) than taxi drivers in most of 5 cities studied",
+        "unit": "n/a",
+        "as_of_date": "2016",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Forbes (2014) reporting a ride-hail wait-time study",
+        "value": "~90% of ride-hail pickups within 10 minutes vs <40% of taxi pickups within 10 minutes on weekdays",
+        "unit": "n/a",
+        "as_of_date": "2014",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "NYC TLC 2024 minimum-pay rules; amNewYork/PYMNTS reporting",
+        "value": "regulators set a 53% minimum driver-utilization threshold and Uber/Lyft algorithmically lock out drivers to stay above it, cutting some drivers' earnings by up to 50%",
+        "unit": "n/a",
+        "as_of_date": "2024",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "weekday_pickups_within_10min": {
+        "then_value": 40,
+        "now_value": 90,
+        "unit": "percent of pickups within 10 minutes",
+        "ratio": 2.25,
+        "magnitude_class": "MULTIPLE_X",
+        "evidence_ids": []
+      }
+    },
+    "replacement_constraint": {
+      "family": "labor_cost",
+      "statement": "Regulatory utilization-rate rules and algorithmic wage-setting on the driver/labor side (NYC TLC's 2024 minimum-pay rule and its 53% utilization threshold; documented algorithmic lockouts) are now the actively contested constraint, replacing rider-side search friction as the industry's binding problem.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "Buchholz (2022), 'Spatial Equilibrium, Search Frictions, and Dynamic Efficiency in the Taxi Industry', Review of Economic Studies 89(2)",
+      "taxi-point.co.uk / crystalcm.co.uk, TfL 'The Knowledge' requirement",
+      "Fideres; CBS News, NYC medallion price history",
+      "Cramer & Krueger (2016), 'Disruptive Change in the Taxi Business: The Case of Uber', AER Papers & Proceedings 106",
+      "Forbes (2014) reporting a ride-hail wait-time study",
+      "NYC TLC 2024 minimum-pay rules; amNewYork/PYMNTS reporting"
+    ],
+    "unresolved_questions": [
+      "Buchholz's 53,000/day figure could not be directly re-measured in the same units post-app-saturation; the 'NOW' comparison bridges a different methodology (Cramer-Krueger utilization study, a separate wait-time study), not an apples-to-apples remeasurement.",
+      "Cramer & Krueger and Frechette/Lizzeri/Salz both attribute Uber's efficiency edge to multiple simultaneous factors (matching technology, platform scale, deregulated entry, surge pricing), so GPS/matching technology alone cannot be cleanly isolated as the sole cause of the improvement.",
+      "Research is US/UK-centric (NYC, London); non-Anglophone taxi/dispatch markets were not examined."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0007",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "capital_requirements",
+    "domain": "enterprise IT infrastructure",
+    "constrained_activity": "provisioning compute/server capacity for a business workload",
+    "historical_constraint": {
+      "statement": "Running a workload required buying/building servers, racks, power, and cooling ahead of demand, with provisioning taking IBM-benchmarked 'weeks' per resource and typical enterprise data-center utilization around 20%, driving chronic overprovisioning for peak loads.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "IBM Benchmark and Learning Center whitepaper (public.dhe.ibm.com)",
+        "value": "provisioning took weeks pre-cloud vs. about a day post-automation",
+        "unit": "n/a",
+        "as_of_date": "pre-2006",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "LBL/Uptime Institute TCO paper (datacenters.lbl.gov)",
+        "value": "~20% typical enterprise data-center utilization, rising to ~60% after a decade of virtualization effort",
+        "unit": "percent utilization",
+        "as_of_date": "2000s decade",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Enterprises built IT departments around multi-week/multi-month procurement cycles, internal chargeback models, and fixed-capacity ownership; Amazon itself built AWS internally because ad hoc procurement for each new team had become the bottleneck.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "cloud_infrastructure",
+      "statement": "AWS EC2 launched in public beta August 25, 2006 and reached general availability October 23, 2008, shifting provisioning from weeks to minutes and payment from upfront capex to metered pay-per-hour opex; global public cloud end-user spend grew from near zero to a forecast $723.4B by 2025.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "AWS 'Our Origins'; Grokipedia EC2 timeline",
+        "value": "EC2 beta Aug 25 2006, GA Oct 23 2008",
+        "unit": "n/a",
+        "as_of_date": "2006-2008",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Gartner, Nov 2024 public cloud spending forecast",
+        "value": 723400000000,
+        "unit": "USD (global public cloud end-user spend forecast)",
+        "as_of_date": "2025",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "DataCenterDynamics / The Register, 37signals (Basecamp/HEY) cloud-repatriation case",
+        "value": "37signals cut annual infrastructure spend from ~$3.2M (2022, AWS) to ~$1.3M (2024, owned Dell hardware) after moving off cloud for a stable, well-understood workload",
+        "unit": "USD/year",
+        "as_of_date": "2022-2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Harness 'FinOps in Focus' 2025",
+        "value": "21-32% of cloud spend wasted; ~$44.5B projected 2025 enterprise cloud waste; 51% of organizations now have a dedicated FinOps team",
+        "unit": "n/a",
+        "as_of_date": "2025",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "DataCenterDynamics; Microsoft executive statements",
+        "value": "AI GPUs reported sitting in inventory in 2024-2025 for lack of data-center electrical power to install them, following ~12-month H100 wait lists in 2023",
+        "unit": "n/a",
+        "as_of_date": "2023-2025",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "infra_spend_37signals_case": {
+        "then_value": 3200000,
+        "now_value": 1300000,
+        "unit": "USD per year",
+        "ratio": 0.40625,
+        "magnitude_class": "MULTIPLE_X",
+        "evidence_ids": []
+      }
+    },
+    "replacement_constraint": {
+      "family": "cost",
+      "statement": "FinOps-quantified cloud waste (~$44.5B projected 2025 enterprise waste), hyperscaler egress-fee lock-in serious enough to trigger a formal UK CMA investigation (opened Oct 2023), and GPU/data-center power scarcity for AI workloads are now cited as the binding constraints, replacing capex/provisioning-lead-time as the dominant problem.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "IBM Benchmark and Learning Center whitepaper (public.dhe.ibm.com)",
+      "LBL/Uptime Institute TCO paper (datacenters.lbl.gov)",
+      "AWS 'Our Origins'; Grokipedia EC2 timeline",
+      "Gartner, Nov 2024 public cloud spending forecast",
+      "DataCenterDynamics / The Register, 37signals (Basecamp/HEY) cloud-repatriation case",
+      "Harness 'FinOps in Focus' 2025",
+      "DataCenterDynamics; Microsoft executive statements"
+    ],
+    "unresolved_questions": [
+      "Capex/lead-time was never the sole historical constraint: AWS's own origin narrative foregrounds scarce engineering/operational expertise as much as capital, and utilization/waste was a distinct co-occurring problem even before cloud existed.",
+      "No independent, non-vendor TCO comparison across workload types was found; the 37signals case is a single, well-documented data point, not a representative sample.",
+      "Whether GPU/power scarcity is a temporary supply-chain condition or a structural new bottleneck was not resolved."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0008",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "cost",
+    "domain": "consumer and professional photography",
+    "constrained_activity": "capturing and processing a photographic image",
+    "historical_constraint": {
+      "statement": "A 36-exposure roll of film plus 1-hour processing cost about $12.99 in 1994 (~$28 today), with no in-field feedback until the film was developed; Kodak controlled roughly 90% of the US film market and 85% of camera sales at its peak.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "Fstoppers / rangefinderforum, 1994 film-processing pricing",
+        "value": 12.99,
+        "unit": "USD per 36-exposure roll + 1hr processing",
+        "as_of_date": "1994",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "mikeeckman.com, Kodak Royal Gold 200 pricing",
+        "value": 5.65,
+        "unit": "USD per roll (pre-processing)",
+        "as_of_date": "1995",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Eastman Kodak built a razor-and-blades business model ('you press the button, we do the rest', 1888): sell cameras cheap and monetize recurring film and processing purchases, giving Kodak dominant market share built entirely around the consumable-film constraint.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "technological_improvement",
+      "statement": "Solid-state image sensors (~$20-25 each, early 1990s), the Apple QuickTake 100 (1994), CMOS sensor invention (1995), and the Canon EOS 300D (2003, first sub-$1,000 CMOS DSLR) drove a shift from chemical to electronic image capture; US film sales were near their ~800M-roll/year peak in 1999 just as digital capture began scaling.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "PetaPixel / azosensors / kentfaith, sensor and digital-camera timeline",
+        "value": "QuickTake 100 (1994); CMOS invented 1995; EOS 300D (2003)",
+        "unit": "n/a",
+        "as_of_date": "1994-2003",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Aggregated historical film-sales data",
+        "value": 800000000,
+        "unit": "rolls per year (US)",
+        "as_of_date": "1999",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "Market-size aggregators, global photographic film sales",
+        "value": 20000000,
+        "unit": "rolls per year (global)",
+        "as_of_date": "2023",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "CIPA data via PetaPixel / Photo Rumors",
+        "value": "worldwide camera shipments fell ~94% between 2010 and 2023; ~92.5% of all photographs are now taken on smartphones",
+        "unit": "n/a",
+        "as_of_date": "2023",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "DPReview, Kodak Ektachrome revival; artbypino.com Gen Z film-use survey",
+        "value": "Kodak restarted Ektachrome production due to a documented sales increase; 68% of surveyed Gen Z hobbyist photographers reported active film use in 2023 (lower-confidence source)",
+        "unit": "n/a",
+        "as_of_date": "2023",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "film_roll_sales": {
+        "then_value": 800000000,
+        "now_value": 20000000,
+        "unit": "rolls per year",
+        "ratio": 0.025,
+        "magnitude_class": "ORDER_OF_MAGNITUDE",
+        "evidence_ids": []
+      }
+    },
+    "replacement_constraint": {
+      "family": "consumer_behavior",
+      "statement": "Curation/attention overload (Popsa's 8,000-consumer survey found the large majority of smartphone photos never revisited) and image authenticity/verification concerns (AI-generated/deepfake incidents up roughly 900% 2023-2025, prompting the C2PA provenance-standard effort) are cited as replacement constraints, though both rest on weaker source tiers (a vendor consumer-report and a vendor consortium) than the cloud or banking cases in this corpus.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "Fstoppers / rangefinderforum, 1994 film-processing pricing",
+      "mikeeckman.com, Kodak Royal Gold 200 pricing",
+      "PetaPixel / azosensors / kentfaith, sensor and digital-camera timeline",
+      "Aggregated historical film-sales data",
+      "Market-size aggregators, global photographic film sales",
+      "CIPA data via PetaPixel / Photo Rumors",
+      "DPReview, Kodak Ektachrome revival; artbypino.com Gen Z film-use survey"
+    ],
+    "unresolved_questions": [
+      "The then/now film-sales comparison mixes a US-only 1999 baseline (800M rolls/year) with a global 2023 figure (20M rolls/year); a true apples-to-apples US-only or global-only series was not found.",
+      "The actual mass-market camera collapse (94% shipment decline 2010-2023) was driven by smartphones displacing dedicated digital cameras - a second, later, distinct disruption from the original film-to-digital transition; this case may really be two separate constraint migrations compressed into one.",
+      "The 'new bottleneck' sourcing (curation overload, authenticity/deepfakes) is weaker-tier (vendor survey, vendor consortium) than other cases in this corpus and deserves independent replication.",
+      "Kodak's decline is attributed by retrospectives to a mix of factors (cannibalization fear, R&D mismanagement, pension burden), not the film constraint alone - the popular 'Kodak was blind to digital' story is oversimplified."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0009",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "regulation",
+    "domain": "retail/consumer banking",
+    "constrained_activity": "opening and servicing a consumer bank account or loan relationship",
+    "historical_constraint": {
+      "statement": "Banking required in-person branch visits for identity verification, cash handling, and complex-transaction advice, and this was reinforced by regulation: the McFadden Act (1927) and state-level branching restrictions confined most banks to intrastate branching into the 1970s-1990s.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "Federal Reserve History / EBSCO Research Starters, 'McFadden Act of 1927'",
+        "value": "branching confined to home state; most states retained restrictions into the 1970s",
+        "unit": "n/a",
+        "as_of_date": "1927",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Federal Reserve History, 'Riegle-Neal Interstate Banking and Branching Efficiency Act of 1994'",
+        "value": "between 1970 and 1994 most states relaxed branching restrictions before the federal ban was lifted",
+        "unit": "n/a",
+        "as_of_date": "1970-1994",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Banks competed on branch density/location as their primary customer-acquisition and deposit-gathering channel (a record ~15,000 new branches were built 2004-2008 to fuel deposit growth), and the Community Reinvestment Act (1977) was built directly around physical branch footprints as the unit of lending accountability.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "technological_improvement",
+      "statement": "Automated teller machines in the early 1970s were the first technological shock to the branching constraint, reducing smaller banks' incentive to defend geographic protections years before the internet; online and mobile banking later enabled account opening and most servicing without a branch visit.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "Search synthesis of Federal Reserve/NBER banking-deregulation histories, on ATM effects on branching-restriction politics",
+        "value": "ATMs (early 1970s) reduced smaller banks' willingness to defend branching restrictions",
+        "unit": "n/a",
+        "as_of_date": "1970s",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "corporateinsight.com / consumer-banking research synthesis, digital account opening",
+        "value": "many banks now complete identity verification (photo ID + selfie) and account opening entirely online, in minutes",
+        "unit": "n/a",
+        "as_of_date": "2020s",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "FDIC, Interagency Overview of the Community Reinvestment Act Final Rule (Oct 2023)",
+        "value": "regulators built new Retail Lending Assessment Areas specifically because banks no longer serve customers exclusively through branch-based networks; some banks operate with one branch or none while still lending at large scale",
+        "unit": "n/a",
+        "as_of_date": "2023",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "S&P Global Market Intelligence; U.S. News, US bank branch-closure tracking",
+        "value": "US bank branches fell from a ~99,550 peak (2009) to 73,649 (2025, industry count) / 68,632 (2024, FDIC-insured commercial-bank count); 1,409 net closures in 2023 alone",
+        "unit": "branches",
+        "as_of_date": "2009-2025",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "us_bank_branches": {
+        "then_value": 99550,
+        "now_value": 73649,
+        "unit": "branches",
+        "ratio": 0.7398191863385234,
+        "magnitude_class": "INCREMENTAL",
+        "evidence_ids": []
+      }
+    },
+    "replacement_constraint": {
+      "family": "trust",
+      "statement": "Account-takeover/fraud risk that scales with digital-only access (Sift's Q3 2025 index found a 2.5% attack rate, up year-over-year, with $2.9B in losses and financial services the top-targeted sector) is now cited as the binding constraint, alongside a persistent, still-growing legacy problem: 3,629 'banking deserts' affecting 12.3 million Americans as of mid-2024, up from 2019, with majority-Black areas losing branches at nearly double the national closure rate.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "Federal Reserve History / EBSCO Research Starters, 'McFadden Act of 1927'",
+      "Federal Reserve History, 'Riegle-Neal Interstate Banking and Branching Efficiency Act of 1994'",
+      "Search synthesis of Federal Reserve/NBER banking-deregulation histories, on ATM effects on branching-restriction politics",
+      "corporateinsight.com / consumer-banking research synthesis, digital account opening",
+      "FDIC, Interagency Overview of the Community Reinvestment Act Final Rule (Oct 2023)",
+      "S&P Global Market Intelligence; U.S. News, US bank branch-closure tracking"
+    ],
+    "unresolved_questions": [
+      "The two branch-count series used here (73,649 industry-wide for 2025 vs. 68,632 FDIC-insured-commercial-only for 2024) disagree in absolute level, likely due to differing institutional scope; a primary FDIC BankFind/Summary of Deposits pull would resolve this.",
+      "No pre-2020 baseline for account-takeover fraud rate was found, so the 'how much did fraud risk grow relative to the branch era' comparison is qualitative, not quantitative.",
+      "The unbanked-household rate (4.2% in 2023) is attributed mainly to insufficient funds, not digital-access barriers, complicating a clean 'digital replaced physical access' narrative for that specific sub-population."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0010",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "minimum_economic_scale",
+    "domain": "discrete parts manufacturing",
+    "constrained_activity": "producing a plastic part at production volume (thousands to tens of thousands of units)",
+    "historical_constraint": {
+      "statement": "Injection-molding tooling (mold) non-recurring cost ranges from roughly $100 for simple molds to $100,000+ for complex multi-cavity steel molds, driving minimum order quantities typically between 500 and 50,000 pieces and multi-week lead times before any part exists.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "Xometry / Formlabs / Protolabs / rapiddirect.com, injection-molding cost-guide synthesis",
+        "value": "$100 to $100,000+",
+        "unit": "USD tooling cost",
+        "as_of_date": "ongoing (current industry pricing guides)",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "zetarmold.com, injection-molding minimum order quantity",
+        "value": "500-50,000 pieces",
+        "unit": "units",
+        "as_of_date": "2024-2025",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Manufacturers organized around amortizing tooling cost across large production runs, driving an offshoring-to-China tooling supply chain: the global market for injection-molding machines nearly tripled from 33,700 to 94,320 machines/year between 1990 and 2011, with China alone growing from 4,000 to over 50,000 machines/year.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "technological_improvement",
+      "statement": "Additive manufacturing (3D printing) matured through the 2010s-2020s as a tool-free production method; the global AM industry grew 9.1% to $21.8 billion in 2024, though material producers drove most of that growth while machine-manufacturer revenue declined and industrial printer shipments fell 24% in Q3 2024.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "Wohlers Report 2025 (via 3dnatives.com, metal-am.com)",
+        "value": 21800000000,
+        "unit": "USD (global AM market size)",
+        "as_of_date": "2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Industry adoption-statistics synthesis (workinsiders.com)",
+        "value": "-24%",
+        "unit": "change in industrial 3D printer shipments",
+        "as_of_date": "2024 (Q3)",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "STILL_BINDING",
+    "current_evidence": [
+      {
+        "citation": "Protolabs, '3D Printing Trend Report 2024' (700+ engineers/designers/manufacturers surveyed)",
+        "value": "67% use 3D printing for prototyping vs. only 21% for end-use production parts",
+        "unit": "percent of surveyed users",
+        "as_of_date": "2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Formlabs / hlhrapid.com cost-comparison synthesis",
+        "value": "at 10,000 units, injection molding costs ~$0.78/piece vs. ~$5.60/piece for 3D printing",
+        "unit": "USD per part",
+        "as_of_date": "2024-2025",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "am_end_use_production_adoption": {
+        "then_value": null,
+        "now_value": 21,
+        "unit": "percent of surveyed AM users using it for end-use production parts",
+        "ratio": null,
+        "magnitude_class": "DIRECTION_ONLY",
+        "evidence_ids": [
+          "protolabs-2024"
+        ]
+      }
+    },
+    "replacement_constraint": null,
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "Xometry / Formlabs / Protolabs / rapiddirect.com, injection-molding cost-guide synthesis",
+      "zetarmold.com, injection-molding minimum order quantity",
+      "Wohlers Report 2025 (via 3dnatives.com, metal-am.com)",
+      "Industry adoption-statistics synthesis (workinsiders.com)",
+      "Protolabs, '3D Printing Trend Report 2024' (700+ engineers/designers/manufacturers surveyed)",
+      "Formlabs / hlhrapid.com cost-comparison synthesis"
+    ],
+    "unresolved_questions": [
+      "Break-even volume between 3D printing and injection molding varies roughly 50x across sources (250 to 13,050 parts) depending on assumed part complexity and tooling cost; a single controlled study, not aggregated industry-blog claims, is needed for a precise figure.",
+      "Two AM-specific technical limitations were found that likely explain persistence of the tooling constraint rather than replace it: material anisotropy (printed parts show 3-4x lower compressive strength than cast/molded parts in some materials-science literature) and fixed, non-scaling throughput per part - these keep AM out of high-volume production regardless of price, but are not modeled here as a replacement_constraint since the original tooling/MOQ constraint has not itself been displaced.",
+      "Metal AM (distinct from polymer/FFF) was not researched separately and may show a different trajectory - aerospace's reported 74% AM adoption in 2024 hints at this.",
+      "No time series was found showing how the AM-vs-injection-molding break-even point has moved over time (e.g., 2015 vs. 2020 vs. 2025); only cross-sectional snapshots exist."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0011",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "energy",
+    "domain": "residential and commercial lighting",
+    "constrained_activity": "producing visible light from electrical energy",
+    "historical_constraint": {
+      "statement": "Incandescent bulbs converted less than 5% of consumed energy into visible light (13-18 lumens/watt) and lasted only about 1,000 hours, requiring frequent replacement and generating significant waste heat that constrained fixture and HVAC design.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "DOE energy.gov, 'History of the Light Bulb'",
+        "value": "<5% of energy converted to light, rest to heat",
+        "unit": "n/a",
+        "as_of_date": "incandescent era",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "EIA, 'LED bulb efficiency expected to continue improving as cost declines'",
+        "value": "13-18",
+        "unit": "lumens per watt (incandescent)",
+        "as_of_date": "incandescent baseline",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Sunco Lighting, bulb-longevity comparison",
+        "value": 1000,
+        "unit": "hours (incandescent lifespan)",
+        "as_of_date": "incandescent baseline",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "A commercial 'group relamping' industry arose specifically to manage the labor cost of frequent bulb failure: scheduled bulk replacement (at roughly $4-8 per lamp including disposal) cut labor costs versus one-bulb-at-a-time replacement, with contractors taking on inventory and disposal responsibilities.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "technological_improvement",
+      "statement": "LED efficacy rose from under 75 lm/W in 2010 to 107 lm/W by 2020 (with best-in-class exceeding 200 lm/W), and lifespan reached 25,000-50,000 hours; the Energy Independence and Security Act of 2007 simultaneously mandated efficiency improvements and phased out standard incandescent bulbs in 2012-2014, so regulation and technology adoption were concurrent, not cleanly separable.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "EIA, 'LED light bulbs keep improving in efficiency and quality'",
+        "value": "75 (2010) -> 107 (2020) lm/W, avg; 200+ lm/W best-in-class",
+        "unit": "lumens per watt",
+        "as_of_date": "2010-2020",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "DOE, 'Debunking Myths about Phasing Out the Incandescent Light Bulb' (EISA 2007)",
+        "value": "100W/40W standard incandescents phased out 2012-2014 under a 2007 federal law",
+        "unit": "n/a",
+        "as_of_date": "2007-2014",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "DOE, 'US Department of Energy Publishes New Energy Savings Forecast for Solid-State Lighting'",
+        "value": "LED energy savings projected to top 569 TWh/year by 2035; over 87 million LED installations already in place",
+        "unit": "n/a",
+        "as_of_date": "current DOE forecast",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "AAS reporting on Kyba et al. (2023) citizen-science study",
+        "value": "global sky brightness increased at an average 9.6%/year, 2011-2022, driven by the blue-rich emission spectrum of white LEDs",
+        "unit": "percent per year",
+        "as_of_date": "2011-2022",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "AMA, 2016 report on LED street lighting",
+        "value": "recommended capping color temperature at 3000K due to blue-light-driven melatonin suppression and circadian disruption",
+        "unit": "n/a",
+        "as_of_date": "2016",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "luminous_efficacy": {
+        "then_value": 15,
+        "now_value": 107,
+        "unit": "lumens per watt",
+        "ratio": 7.133333333333334,
+        "magnitude_class": "MULTIPLE_X",
+        "evidence_ids": []
+      }
+    },
+    "replacement_constraint": {
+      "family": "light_pollution",
+      "statement": "Rising light pollution (9.6%/year global sky-brightness growth per peer-reviewed citizen-science data) and circadian/health effects from blue-rich LED spectra (AMA 2016) are now cited as the binding externality, replacing per-lumen energy/labor cost as the constraint industry and regulators are actively responding to.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "DOE energy.gov, 'History of the Light Bulb'",
+      "EIA, 'LED bulb efficiency expected to continue improving as cost declines'",
+      "Sunco Lighting, bulb-longevity comparison",
+      "EIA, 'LED light bulbs keep improving in efficiency and quality'",
+      "DOE, 'Debunking Myths about Phasing Out the Incandescent Light Bulb' (EISA 2007)",
+      "DOE, 'US Department of Energy Publishes New Energy Savings Forecast for Solid-State Lighting'",
+      "AAS reporting on Kyba et al. (2023) citizen-science study",
+      "AMA, 2016 report on LED street lighting"
+    ],
+    "unresolved_questions": [
+      "A precise, authoritative year-by-year LED retail price curve was not obtained (a specific OSTI/CLASP dataset exists but could not be fetched in this pass).",
+      "No clean decomposition was found for how much 2012-2020 LED adoption is attributable to the EISA 2007 mandate versus organic market/cost dynamics - the two ran concurrently.",
+      "Lighting still accounts for roughly 17% (2018 CBECS-based EIA estimate) to 30-40% (other industry estimates) of commercial building electricity use; a rebound effect (Fouquet & Pearson 2006 found ~40,000x growth in lighting consumption 1800-2000 as price fell) means aggregate lighting energy use has not fallen proportionally even as per-lumen cost collapsed.",
+      "Incandescent's historical dominance was itself not purely efficiency-driven - gas-lighting infrastructure competition and low manufacturing cost were at least co-equal factors, per DOE and industry-history sourcing."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0012",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "distribution_access",
+    "domain": "recorded music",
+    "constrained_activity": "manufacturing, distributing, and promoting a recorded music release to reach a paying audience",
+    "historical_constraint": {
+      "statement": "Physical-format manufacturing, distribution, and radio-airplay gatekeeping bundled the constraint on getting music to listeners; CD manufacturing cost roughly $1-4.50 per disc against $15.99-18.99 retail prices in the 1990s, with radio airplay functioning as the primary discovery gatekeeper for new artists.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "Spokesman-Review 1995 CD pricing coverage; industry cost-breakdown synthesis",
+        "value": "$1-4.50 mfg vs $15.99-18.99 retail",
+        "unit": "USD per CD",
+        "as_of_date": "1995",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Recording Fund, 'The Influence of Gatekeepers'",
+        "value": "radio airplay functioned as the make-or-break gatekeeper for breaking new artists",
+        "unit": "n/a",
+        "as_of_date": "pre-streaming era",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "The 'album' (roughly 10-12 tracks bundled onto one manufactured, distributed, shelved unit) amortized fixed manufacturing/distribution/marketing costs across multiple songs, and major-label vertical control of manufacturing, distribution, and radio-promotion relationships became the industry's core structure.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "technological_improvement",
+      "statement": "Napster (launched June 1999, 26.4M users by Feb 2001), iTunes (2003, $0.99/track), and streaming services (proliferating from the mid-2000s) shifted distribution from manufactured physical units to zero-marginal-cost digital delivery; US recorded music revenue fell from a $14.6B peak in 1999 to roughly half that by around 2015 before streaming-driven recovery.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "Music Business Research, 'The US recorded music market in a long-term perspective, 1990-2016'",
+        "value": "US revenue peaked at $14.6B in 1999, fell to roughly half by ~2015",
+        "unit": "USD",
+        "as_of_date": "1999-2015",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Search synthesis of Napster/iTunes historical timeline (Open Oregon and others)",
+        "value": "Napster launched June 1999, reached 26.4M users by Feb 2001; iTunes launched 2003 at $0.99/track",
+        "unit": "n/a",
+        "as_of_date": "1999-2003",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "RIAA 2023 year-end data (via search synthesis); MIDiA Research, 'Recorded music market 2024'",
+        "value": "streaming reached 84% of US recorded-music revenue (2023) and 61.3% of global revenue (2024, down slightly from 62.4% in 2023)",
+        "unit": "percent of revenue",
+        "as_of_date": "2023-2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "MIDiA Research / Music Week, 'Global music growth slows in 2024'",
+        "value": "non-major-label global market share rose from 29.2% (2023) to 29.7% (2024), the third consecutive year of gains, growing streaming revenue faster than the majors",
+        "unit": "percent of global revenue",
+        "as_of_date": "2023-2024",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "streaming_share_of_us_revenue": {
+        "then_value": 0,
+        "now_value": 84,
+        "unit": "percent of US recorded-music revenue",
+        "ratio": null,
+        "magnitude_class": "ORDER_OF_MAGNITUDE",
+        "evidence_ids": [
+          "riaa-2023"
+        ]
+      }
+    },
+    "replacement_constraint": {
+      "family": "algorithmic_curation_control",
+      "statement": "Algorithmic/platform gatekeeping (peer-reviewed literature documents Spotify's hybrid editorial-algorithmic curation acting as a discovery gatekeeper) and per-stream royalty economics ($0.003-$0.005/stream, per Spotify's own published rates) are now cited as the binding constraint on whether music-making is economically viable, replacing physical manufacturing/distribution access.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "Spokesman-Review 1995 CD pricing coverage; industry cost-breakdown synthesis",
+      "Recording Fund, 'The Influence of Gatekeepers'",
+      "Music Business Research, 'The US recorded music market in a long-term perspective, 1990-2016'",
+      "Search synthesis of Napster/iTunes historical timeline (Open Oregon and others)",
+      "RIAA 2023 year-end data (via search synthesis); MIDiA Research, 'Recorded music market 2024'",
+      "MIDiA Research / Music Week, 'Global music growth slows in 2024'"
+    ],
+    "unresolved_questions": [
+      "Whether piracy (Napster) actually caused the 1999-2015 revenue collapse is a live, unresolved academic dispute: Oberholzer-Gee & Strumpf (2007, Journal of Political Economy) found file-sharing's effect on album sales statistically indistinguishable from zero, but a published rebuttal (Econ Journal Watch) argues their methodology is flawed - the 'Napster killed the industry' story cannot be taken as settled.",
+      "Physical distribution has not fully disappeared: US vinyl revenue reached ~$1.4B in 2024, its 18th consecutive year of growth and the highest since 1984, and Asia (particularly Japan) retains a much larger physical-format share than the US/UK-centric narrative implies.",
+      "Manufacturing cost was a minor share (roughly 5-25%) of 1990s CD retail price, suggesting distribution/marketing/radio-gatekeeping access - not raw manufacturing cost - was the more dominant historical constraint; the 'CD manufacturing was expensive' framing may itself be an oversimplification.",
+      "No single authoritative RIAA historical revenue-by-format time series was directly retrieved (riaa.com fetch blocked); figures here are search-synthesized from secondary reporting."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0013",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "infrastructure_availability",
+    "domain": "electric grid operations",
+    "constrained_activity": "integrating distributed, inverter-based generation (rooftop/distributed solar, batteries) into the electric grid without compromising stability",
+    "historical_constraint": {
+      "statement": "The electric grid was engineered for one-way power flow from centralized, dispatchable generators to passive loads, with IEEE 1547-2003 written for a low-penetration scenario where distributed generation was insignificant enough to simply disconnect if it threatened stability.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "NREL, 'An Overview of Distributed Energy Resource Interconnection'; solarbuildermag.com IEEE 1547 history",
+        "value": "IEEE 1547-2003 written for low-penetration DER, allowing disconnection without compromising grid stability",
+        "unit": "n/a",
+        "as_of_date": "2003",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Utilities built centralized dispatch, one-way-flow-optimized distribution planning, and retail net-metering tariffs assuming exports were rare and low-value; interconnection screening still runs on FERC Order 2006's 'ten screens', a procedural framework built for a low-penetration paradigm.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "infrastructure_deployment",
+      "statement": "Distributed PV grew from a negligible base to 41 GW in 2024 (residential PV alone reaching 32.9 GWac by end of 2023); IEEE 1547-2018 added mandatory grid-support functions that the 2003 version lacked (required in California from September 2017); CAISO battery storage grew from 500 MW (2020) to over 13 GW (early 2025); FERC Order 2222 (Sept 2020) was issued specifically to remove wholesale-market barriers to aggregated distributed energy resources.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "NREL Standard Scenarios Mid-case (docs.nrel.gov); LBNL 'Tracking the Sun' 2024",
+        "value": "distributed PV: 41 GW (2024, US); residential PV: 32.9 GWac (end of 2023)",
+        "unit": "GW",
+        "as_of_date": "2023-2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Atlantic Council / EIA, CAISO battery storage growth",
+        "value": "500 (2020) -> 13,000+ (early 2025)",
+        "unit": "MW",
+        "as_of_date": "2020-2025",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "FERC, Order No. 2222 Fact Sheet",
+        "value": "issued Sept 17, 2020 to remove wholesale-market barriers to aggregated DERs",
+        "unit": "n/a",
+        "as_of_date": "2020",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "INVERTED",
+    "current_evidence": [
+      {
+        "citation": "EIA, 'Solar and wind power curtailments are increasing in California'",
+        "value": "CAISO curtailed 3.4 million MWh of utility-scale wind/solar in 2024, a 29% increase over 2023, with solar responsible for 93% of curtailed energy",
+        "unit": "million MWh per year",
+        "as_of_date": "2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "LBNL, 'Queued Up' 2025 edition",
+        "value": "~2,300 GW of generation/storage capacity actively queued for interconnection at end of 2024; a project reaching commercial operation in 2024 spent an average 55 months in the queue",
+        "unit": "GW / months",
+        "as_of_date": "2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "NERC, 'Inverter-Based Resource Performance Issues' white paper (2023); Utility Dive reporting",
+        "value": "NERC documented bulk-system reliability incidents caused by inverter-based resources failing fault ride-through, including the 2022 Odessa event (2,555 MW unexpectedly lost) and an April 2023 Western Interconnection event (921 MW lost); less than one-third of inverter settings reported are configured based on equipment capability",
+        "unit": "n/a",
+        "as_of_date": "2022-2023",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "caiso_curtailment": {
+        "then_value": null,
+        "now_value": 3.4,
+        "unit": "million MWh curtailed per year (CAISO solar+wind)",
+        "ratio": null,
+        "magnitude_class": "DIRECTION_ONLY",
+        "evidence_ids": [
+          "eia-curtailment-2024"
+        ]
+      },
+      "distributed_pv_capacity": {
+        "then_value": 0,
+        "now_value": 41,
+        "unit": "GW (US distributed PV)",
+        "ratio": null,
+        "magnitude_class": "ORDER_OF_MAGNITUDE",
+        "evidence_ids": [
+          "nrel-2024"
+        ]
+      }
+    },
+    "replacement_constraint": {
+      "family": "infrastructure_availability",
+      "statement": "Interconnection-queue/hosting-capacity backlog (LBNL: ~2,300 GW queued nationally, 55-month median wait) and inverter-based-resource fault-ride-through reliability (NERC-documented 2022 Odessa and 2023 Western Interconnection disturbance events) are the new binding constraints created by the abundance of distributed, inverter-connected generation the grid was never engineered for.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "NREL, 'An Overview of Distributed Energy Resource Interconnection'; solarbuildermag.com IEEE 1547 history",
+      "NREL Standard Scenarios Mid-case (docs.nrel.gov); LBNL 'Tracking the Sun' 2024",
+      "Atlantic Council / EIA, CAISO battery storage growth",
+      "FERC, Order No. 2222 Fact Sheet",
+      "EIA, 'Solar and wind power curtailments are increasing in California'",
+      "LBNL, 'Queued Up' 2025 edition",
+      "NERC, 'Inverter-Based Resource Performance Issues' white paper (2023); Utility Dive reporting"
+    ],
+    "unresolved_questions": [
+      "No precise pre-2010 baseline for interconnection-queue wait times was found, so the exact scale of the 55-month current median wait relative to history is not established.",
+      "Whether 'grid stability' was ever the sole dominant historical constraint is questionable: institutional/regulatory conservatism (AEI/Knowledge Problem commentary on utility incentives) appears to be a co-cause alongside genuine inverter-based-generation physics, not physics alone.",
+      "Smart inverters demonstrably relieved the constraint in at least one documented local case (Hawaiian Electric cleared over 2,500 Oahu interconnection applications using Enphase smart microinverters), showing the technology can work - the aggregate curtailment/reliability picture is nonetheless still getting worse, not better, as of the most recent (2024) data.",
+      "No source was found directly comparing the cost of achieving grid stability at high DER penetration today versus under the old centralized-dispatch model."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  },
+  {
+    "record_id": "ccov-0014",
+    "protocol_version": "ccov0.1",
+    "supersedes": null,
+    "constraint_family": "distribution_access",
+    "domain": "consumer retail",
+    "constrained_activity": "offering and selling a physical product to a consumer, bounded by store shelf space and geographic reach",
+    "historical_constraint": {
+      "statement": "Finite shelf/floor space per store bounded how large a catalog a retailer could stock, and geographic reach was limited to a store's drive-time catchment area; slotting fees (averaging ~$1,500 per store per SKU, originating in the 1980s) are a direct market response to this scarcity, significant enough to draw a formal 2003 FTC industry study.",
+      "evidence_status": "OBSERVED"
+    },
+    "historical_evidence": [
+      {
+        "citation": "FTC, 2003 grocery slotting allowance report",
+        "value": "slotting fees arise because retailers cannot profitably carry more products than their shelf space allows",
+        "unit": "n/a",
+        "as_of_date": "2003",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Vanderbilt / paralleldots.com, slotting-fee economics synthesis",
+        "value": 1500,
+        "unit": "USD per store per SKU (average slotting fee)",
+        "as_of_date": "1980s origin",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "historical_adaptation": {
+      "statement": "Retailers formalized category management, SKU rationalization, and slotting-fee/pay-to-stock arrangements as the standard mechanism for allocating scarce shelf position among competing suppliers.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_driver": {
+      "category": "new_distribution_channels",
+      "statement": "E-commerce share of total US retail sales grew from 0.9% ($29B) in 2000 to roughly 16.4-16.9% by Q1 2026, and Amazon's fulfillment-center footprint grew from ~200-300k sq ft (largest facility, late 1990s) to ~150-200 million sq ft globally across 175+ facilities.",
+      "evidence_status": "OBSERVED"
+    },
+    "change_evidence": [
+      {
+        "citation": "Census Bureau, 'E-commerce 2000' report; Census/FRED Q1 2026 release",
+        "value": "0.9 -> ~16.4-16.9",
+        "unit": "percent of total US retail sales",
+        "as_of_date": "2000-2026",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "BigRentz / Damotech, Amazon fulfillment-network growth",
+        "value": "~200-300k sq ft (late 1990s) -> ~150-200 million sq ft (current, global)",
+        "unit": "square feet",
+        "as_of_date": "1990s-2020s",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "current_constraint_state": "SHIFTED",
+    "current_evidence": [
+      {
+        "citation": "dataexplained.com aggregation of Census/FRED data",
+        "value": "83-85% of US retail dollars still transact in physical stores as of 2025; e-commerce reached 16.4% of total US retail sales in Q3 2025, up from 11.9% pre-pandemic",
+        "unit": "percent",
+        "as_of_date": "2025",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "racklify.com, citing Target's CEO",
+        "value": "Target fulfilled more than 97% of its online orders through its physical stores in 2024",
+        "unit": "percent",
+        "as_of_date": "2024",
+        "deployment_context": "unknown",
+        "note": ""
+      },
+      {
+        "citation": "Elberse, 'Should You Invest in the Long Tail?', Harvard Business Review, 2008",
+        "value": "in digital-catalog channels (Rhapsody music, Quickflix DVD) where the shelf-space constraint was fully removed, sales concentration among hits increased, not decreased - the number of titles in the top 10% of weekly sales dropped by more than half from 2000 to 2005",
+        "unit": "n/a",
+        "as_of_date": "2008",
+        "deployment_context": "unknown",
+        "note": ""
+      }
+    ],
+    "constraint_delta": {
+      "ecommerce_share_of_us_retail": {
+        "then_value": 0.9,
+        "now_value": 16.4,
+        "unit": "percent of total US retail sales",
+        "ratio": 18.22222222222222,
+        "magnitude_class": "ORDER_OF_MAGNITUDE",
+        "evidence_ids": []
+      }
+    },
+    "replacement_constraint": {
+      "family": "logistics_speed_cost",
+      "statement": "Last-mile delivery cost (50-53% of total e-commerce shipping cost, per Dropoff/Radial industry data) and 'digital shelf space' - Amazon's paid-placement advertising generated over $46 billion in 2023, with an independent study finding roughly half of the first 25 Amazon search results were paid placements - are now cited as the binding replacement constraints, direct successors to physical slotting fees.",
+      "evidence_status": "OBSERVED"
+    },
+    "first_seen": "2026-08-10",
+    "last_updated": "2026-08-10",
+    "provenance": [
+      "FTC, 2003 grocery slotting allowance report",
+      "Vanderbilt / paralleldots.com, slotting-fee economics synthesis",
+      "Census Bureau, 'E-commerce 2000' report; Census/FRED Q1 2026 release",
+      "BigRentz / Damotech, Amazon fulfillment-network growth",
+      "dataexplained.com aggregation of Census/FRED data",
+      "racklify.com, citing Target's CEO",
+      "Elberse, 'Should You Invest in the Long Tail?', Harvard Business Review, 2008"
+    ],
+    "unresolved_questions": [
+      "At the whole-economy level, 83-85% of US retail dollars still transact in physical stores as of 2025, and even a leading e-commerce-forward retailer (Target) fulfills the overwhelming majority of its 'online' orders through its physical store network; STILL_BINDING is a defensible alternate read of this case at the aggregate-economy level rather than SHIFTED.",
+      "Intermediate-year e-commerce-share figures are inconsistent across sources (e.g. one aggregator's '15.5% for 2019' vs. '19.1% for 2021'); this was not reconciled against a raw Census MRTS historical series, which could not be fetched directly in this research pass.",
+      "No category-by-category longitudinal (2000-2025) dataset was found, only recent-year snapshots; category-level online penetration varies enormously (electronics ~54-56% vs. grocery ~26% or less).",
+      "Last-mile delivery cost, return-rate/reverse-logistics cost, and digital-ad-driven visibility scarcity are all simultaneously cited as new frictions in the sources found, so clean single-factor attribution for 'the' new bottleneck is not really possible.",
+      "Whether slotting-fee dollar amounts have risen, fallen, or stayed flat in real terms since the 1980s baseline was not found - only that the practice persists essentially unchanged."
+    ],
+    "analyst": "Claude (directed research pass), human review pending per design doc \u00a718"
+  }
+]
