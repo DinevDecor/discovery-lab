@@ -1,0 +1,32 @@
+[
+  {
+    "anomaly_id": "ANOM-ACC1",
+    "canonical_pattern": "no real-time cost telemetry during API usage",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-ACC1"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-10",
+    "last_seen": "2026-08-10",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-UNREL",
+    "canonical_pattern": "warehouse operations — buffer stock against unreliable supply",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-UNREL"],
+    "independent_sources": ["product_hunt"],
+    "first_seen": "2026-08-10",
+    "last_seen": "2026-08-10",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-ACC2",
+    "canonical_pattern": "no real-time cost telemetry during API usage — independent report",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-ACC2"],
+    "independent_sources": ["lobsters"],
+    "first_seen": "2026-08-11",
+    "last_seen": "2026-08-11",
+    "status": "WATCH"
+  }
+]
