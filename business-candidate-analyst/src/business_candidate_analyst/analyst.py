@@ -17,6 +17,18 @@ runs first, purely from current CA evidence, before any comparison
 against registry history - so the gate itself is never biased by what
 this tool has decided before. History only decides IDENTITY, never
 whether a merge is evidence-warranted.
+
+Identity lookup is scoped to this mode's own NEW_MARKET candidates only,
+mirroring rearchitecture/analyst.py's identical scoping to
+OLD_BUSINESS_REARCHITECTURE - the same anomaly_id can legitimately seed
+both a NEW_MARKET and an OLD_BUSINESS_REARCHITECTURE candidate (two
+different candidates, two different lenses on the same evidence), and
+`rebuild_snapshot` returns candidates sorted by candidate_id, so an
+unscoped lookup would silently resolve a shared anomaly_id to whichever
+mode happens to hold the higher candidate_id - overwriting the other
+mode's candidate with this mode's dimensions/lifecycle logic and losing
+track of its own. That bug shipped and was caught on the real corpus
+(see git history); this scoping is the fix.
 """
 
 from __future__ import annotations
@@ -114,13 +126,15 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
     registry = CandidateRegistry(events_path)
     prior_candidates = rebuild_snapshot(registry.all_events())
     prior_by_id = {c.candidate_id: c for c in prior_candidates}
+    mode_a_prior = [c for c in prior_candidates if c.candidate_type == NEW_MARKET]
+    mode_a_prior_by_id = {c.candidate_id: c for c in mode_a_prior}
 
     anomaly_to_candidate: Dict[str, str] = {}
-    for c in prior_candidates:
+    for c in mode_a_prior:
         target, seen = c.candidate_id, set()
-        while prior_by_id.get(target) and prior_by_id[target].merged_into and target not in seen:
+        while mode_a_prior_by_id.get(target) and mode_a_prior_by_id[target].merged_into and target not in seen:
             seen.add(target)
-            target = prior_by_id[target].merged_into
+            target = mode_a_prior_by_id[target].merged_into
         for aid in c.anomaly_ids:
             anomaly_to_candidate[aid] = target
 
@@ -194,7 +208,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
             group_reports.append({"candidate_id": other, "kind": "merged", "merged_into": canonical,
                                    "anomaly_ids": sorted(g["anomaly_ids"]), "dims": {}, "audit": {}})
 
-        prior = prior_by_id.get(canonical)
+        prior = mode_a_prior_by_id.get(canonical)
         prior_state = prior.state if prior else "WATCH"
         state_changed = decision["state"] != prior_state
         dims_changed = prior is None or _dims_key(prior.dimensions) != _dims_key(dims_dicts)
@@ -242,8 +256,9 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
 
     appended = registry.append_many(events_to_append)
     all_events = registry.all_events()
-    candidates = rebuild_snapshot(all_events)
-    persist_snapshot(snapshot_path, candidates)
+    all_candidates = rebuild_snapshot(all_events)
+    persist_snapshot(snapshot_path, all_candidates)
+    mode_a_candidates = [c for c in all_candidates if c.candidate_type == NEW_MARKET]
 
     return {
         "now": now,
@@ -252,7 +267,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
         "groups_formed": len(groups),
         "events_appended": appended,
         "group_reports": group_reports,
-        "candidates": candidates,
+        "candidates": mode_a_candidates,
         "prior_candidates_by_id": prior_by_id,
         "snapshot_path": snapshot_path,
         "events_path": events_path,
