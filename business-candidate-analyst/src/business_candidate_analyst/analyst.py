@@ -4,13 +4,29 @@ dimension assessment -> lifecycle decision -> registry events.
 Candidate identity is stable across runs the same way Constraint
 Archaeology's own anomalies are stable across runs: not by re-hashing
 current membership (which changes as evidence accumulates), but by
-tracking which anomaly_ids a candidate already owns and looking up
-overlap on each new run. A brand-new anomaly set with no overlap becomes
-a new candidate; overlap with exactly one existing candidate continues
-it; overlap with more than one existing candidate means this run's
-evidence has bridged two previously-separate candidates, which is
+tracking which observation_ids a candidate already owns and looking up
+overlap on each new run. A brand-new observation set with no overlap
+becomes a new candidate; overlap with exactly one existing candidate
+continues it; overlap with more than one existing candidate means this
+run's evidence has bridged two previously-separate candidates, which is
 recorded as an explicit `candidates_merged` event, never a silent
 overwrite.
+
+Identity is keyed on observation_id, not anomaly_id. Constraint
+Archaeology's anomaly_id is assigned positionally during its own
+non-append-only rebuild of anomalies.json (`ANOM-{len(anomalies)+1:04d}`
+in ca_agents.memory.rebuild_anomalies) and is not a stable identifier
+across CA runs - the same real observations can land under a different
+ANOM-#### label as the corpus grows or CA's clustering reorders. A
+reverse lookup keyed on anomaly_id would silently fail to find a
+candidate's own evidence after a CA rebuild reshuffles its numbering,
+risking a duplicate candidate for evidence this tool has already seen.
+observation_id, assigned once by the Sensor Agent and referenced
+append-only in observations.jsonl, does not have this problem, so it is
+the identity bridge; anomaly_id remains present on candidates purely as
+current-snapshot grouping metadata (still useful to correlate against
+this run's own CA evaluations, which are loaded from the same snapshot
+and so share its numbering for this run only).
 
 The one non-obvious ordering rule: grouping (signature.py's gate) always
 runs first, purely from current CA evidence, before any comparison
@@ -20,15 +36,15 @@ whether a merge is evidence-warranted.
 
 Identity lookup is scoped to this mode's own NEW_MARKET candidates only,
 mirroring rearchitecture/analyst.py's identical scoping to
-OLD_BUSINESS_REARCHITECTURE - the same anomaly_id can legitimately seed
-both a NEW_MARKET and an OLD_BUSINESS_REARCHITECTURE candidate (two
+OLD_BUSINESS_REARCHITECTURE - the same observation_id can legitimately
+seed both a NEW_MARKET and an OLD_BUSINESS_REARCHITECTURE candidate (two
 different candidates, two different lenses on the same evidence), and
 `rebuild_snapshot` returns candidates sorted by candidate_id, so an
-unscoped lookup would silently resolve a shared anomaly_id to whichever
-mode happens to hold the higher candidate_id - overwriting the other
-mode's candidate with this mode's dimensions/lifecycle logic and losing
-track of its own. That bug shipped and was caught on the real corpus
-(see git history); this scoping is the fix.
+unscoped lookup would silently resolve a shared observation_id to
+whichever mode happens to hold the higher candidate_id - overwriting the
+other mode's candidate with this mode's dimensions/lifecycle logic and
+losing track of its own. That bug shipped and was caught on the real
+corpus (see git history); this scoping is the fix, preserved here.
 
 A candidate is reassessed AT MOST ONCE per run, from its full unioned
 evidence for this run - never once per fresh group that happens to touch
@@ -132,7 +148,7 @@ def _build_groups(anomalies: List[Dict[str, Any]], obs_by_id: Dict[str, Any],
 
 
 def _resolve_and_union_groups(groups: List[Dict[str, Any]],
-                               anomaly_to_candidate: Dict[str, str]) -> List[Dict[str, Any]]:
+                               observation_to_candidate: Dict[str, str]) -> List[Dict[str, Any]]:
     """Resolves every fresh group to the candidate_id(s) it touches, then
     unions any groups that resolve to overlapping candidate identities
     (directly or transitively) into one combined group, so a candidate
@@ -140,9 +156,15 @@ def _resolve_and_union_groups(groups: List[Dict[str, Any]],
     reassessed exactly once, from the union of all of them. Groups that
     resolve to no existing candidate at all (brand-new evidence) are
     returned unchanged, one per group, since `_build_groups` has already
-    decided they are not the same opportunity as each other."""
-    resolved = [{"group": g, "existing_ids": sorted({anomaly_to_candidate[aid] for aid in g["anomaly_ids"]
-                                                       if aid in anomaly_to_candidate})}
+    decided they are not the same opportunity as each other.
+
+    Resolution is keyed on observation_id, not anomaly_id (see module
+    docstring): CA's anomaly_id is reassigned positionally on every CA
+    rebuild, so looking a fresh group's own anomaly_ids up in a map built
+    from a candidate's PAST anomaly_ids can silently miss a match after CA
+    renumbers - observation_id doesn't move."""
+    resolved = [{"group": g, "existing_ids": sorted({observation_to_candidate[oid] for oid in g["observation_ids"]
+                                                       if oid in observation_to_candidate})}
                 for g in groups]
 
     parent: Dict[str, str] = {}
@@ -216,17 +238,17 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
     mode_a_prior = [c for c in prior_candidates if c.candidate_type == NEW_MARKET]
     mode_a_prior_by_id = {c.candidate_id: c for c in mode_a_prior}
 
-    anomaly_to_candidate: Dict[str, str] = {}
+    observation_to_candidate: Dict[str, str] = {}
     for c in mode_a_prior:
         target, seen = c.candidate_id, set()
         while mode_a_prior_by_id.get(target) and mode_a_prior_by_id[target].merged_into and target not in seen:
             seen.add(target)
             target = mode_a_prior_by_id[target].merged_into
-        for aid in c.anomaly_ids:
-            anomaly_to_candidate[aid] = target
+        for oid in c.observation_ids:
+            observation_to_candidate[oid] = target
 
     groups = _build_groups(evidence.anomalies, obs_by_id, thresholds)
-    unioned_groups = _resolve_and_union_groups(groups, anomaly_to_candidate)
+    unioned_groups = _resolve_and_union_groups(groups, observation_to_candidate)
 
     events_to_append: List[CandidateEvent] = []
     absorbed_this_run: set = set()

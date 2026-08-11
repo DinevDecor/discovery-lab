@@ -1,0 +1,22 @@
+[
+  {
+    "anomaly_id": "ANOM-0030",
+    "canonical_pattern": "token consumption and billing visibility missing",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-PA"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-02",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0031",
+    "canonical_pattern": "balance and meter allocation tracking missing",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-PB"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-02",
+    "status": "WATCH"
+  }
+]

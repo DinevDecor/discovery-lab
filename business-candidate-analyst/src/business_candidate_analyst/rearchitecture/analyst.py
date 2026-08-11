@@ -17,11 +17,14 @@ recurs worded differently across independent sources, so that dedup
 concern does not apply the same way here.
 
 Candidate identity persistence follows the same overlap-tracking approach
-as Mode A's analyst.py (anomaly_id -> existing candidate_id, followed
-through merges), scoped to only this mode's own OLD_BUSINESS_REARCHITECTURE
-candidates so it can never collide with Mode A's tracking of the same
-anomaly_id - the same anomaly can legitimately seed both a NEW_MARKET and
-an OLD_BUSINESS_REARCHITECTURE candidate; they are different candidates.
+as Mode A's analyst.py (observation_id -> existing candidate_id, followed
+through merges - not anomaly_id, which CA reassigns positionally on every
+rebuild of anomalies.json and so cannot be trusted as a stable cross-run
+key; see Mode A's module docstring for the full reasoning), scoped to
+only this mode's own OLD_BUSINESS_REARCHITECTURE candidates so it can
+never collide with Mode A's tracking of the same evidence - the same
+observation can legitimately seed both a NEW_MARKET and an
+OLD_BUSINESS_REARCHITECTURE candidate; they are different candidates.
 
 Like Mode A, a candidate is reassessed AT MOST ONCE per run, from its full
 unioned evidence for this run. Mode B's own URL-union-find grouping is
@@ -64,7 +67,7 @@ def _field_dicts(fields: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _resolve_and_union_groups(groups: List[Dict[str, Any]],
-                               anomaly_to_candidate: Dict[str, str]) -> List[Dict[str, Any]]:
+                               observation_to_candidate: Dict[str, str]) -> List[Dict[str, Any]]:
     """Identical in shape and purpose to analyst.py's helper of the same
     name (see its docstring) - resolves every fresh group to the
     candidate_id(s) it touches, then unions groups that resolve to
@@ -72,9 +75,13 @@ def _resolve_and_union_groups(groups: List[Dict[str, Any]],
     this run, from the union of all fresh groups that touch it. Not
     imported from analyst.py to keep the two modes' orchestration free of
     cross-mode coupling, matching this file's existing pattern of small
-    duplicated helpers (_dims_key/_field_dicts vs. Mode A's own)."""
-    resolved = [{"group": g, "existing_ids": sorted({anomaly_to_candidate[aid] for aid in g["anomaly_ids"]
-                                                       if aid in anomaly_to_candidate})}
+    duplicated helpers (_dims_key/_field_dicts vs. Mode A's own).
+
+    Resolution is keyed on observation_id, not anomaly_id - see Mode A's
+    analyst.py module docstring for why anomaly_id cannot be trusted as a
+    stable cross-run key."""
+    resolved = [{"group": g, "existing_ids": sorted({observation_to_candidate[oid] for oid in g["observation_ids"]
+                                                       if oid in observation_to_candidate})}
                 for g in groups]
 
     parent: Dict[str, str] = {}
@@ -186,17 +193,17 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str, config: Dict[str, Any],
     mode_b_prior = [c for c in all_prior_candidates if c.candidate_type == OLD_BUSINESS_REARCHITECTURE]
     mode_b_prior_by_id = {c.candidate_id: c for c in mode_b_prior}
 
-    anomaly_to_candidate: Dict[str, str] = {}
+    observation_to_candidate: Dict[str, str] = {}
     for c in mode_b_prior:
         target, seen = c.candidate_id, set()
         while mode_b_prior_by_id.get(target) and mode_b_prior_by_id[target].merged_into and target not in seen:
             seen.add(target)
             target = mode_b_prior_by_id[target].merged_into
-        for aid in c.anomaly_ids:
-            anomaly_to_candidate[aid] = target
+        for oid in c.observation_ids:
+            observation_to_candidate[oid] = target
 
     groups = _build_groups(evidence.anomalies, obs_by_id)
-    unioned_groups = _resolve_and_union_groups(groups, anomaly_to_candidate)
+    unioned_groups = _resolve_and_union_groups(groups, observation_to_candidate)
 
     events_to_append: List[CandidateEvent] = []
     absorbed_this_run: set = set()

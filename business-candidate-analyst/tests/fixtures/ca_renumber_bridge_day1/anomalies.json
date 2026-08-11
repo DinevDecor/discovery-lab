@@ -1,0 +1,22 @@
+[
+  {
+    "anomaly_id": "ANOM-Q100",
+    "canonical_pattern": "no real-time billing telemetry during API usage",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-Q1"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-01",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-Q200",
+    "canonical_pattern": "session recovery after unexpected crash",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-Q2"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-01",
+    "status": "WATCH"
+  }
+]

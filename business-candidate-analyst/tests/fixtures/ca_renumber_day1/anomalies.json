@@ -1,0 +1,12 @@
+[
+  {
+    "anomaly_id": "ANOM-0007",
+    "canonical_pattern": "no real-time cost telemetry during API usage",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-A", "OBS-B"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-01",
+    "status": "WATCH"
+  }
+]
