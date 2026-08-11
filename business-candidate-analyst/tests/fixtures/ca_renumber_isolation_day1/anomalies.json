@@ -1,0 +1,22 @@
+[
+  {
+    "anomaly_id": "ANOM-BANK1",
+    "canonical_pattern": "opening a bank account — branch office required for signature",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-IBANK1"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-01",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-BANK2",
+    "canonical_pattern": "verifying customer identity — notarized branch visit",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-IBANK2"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-01",
+    "status": "WATCH"
+  }
+]

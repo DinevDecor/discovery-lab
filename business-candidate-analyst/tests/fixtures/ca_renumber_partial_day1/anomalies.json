@@ -1,0 +1,12 @@
+[
+  {
+    "anomaly_id": "ANOM-0010",
+    "canonical_pattern": "resource visibility gap across two related phrasings",
+    "hidden_function_class": "unclassified",
+    "observation_ids": ["OBS-PA", "OBS-PB"],
+    "independent_sources": ["hacker_news"],
+    "first_seen": "2026-08-01",
+    "last_seen": "2026-08-01",
+    "status": "WATCH"
+  }
+]
