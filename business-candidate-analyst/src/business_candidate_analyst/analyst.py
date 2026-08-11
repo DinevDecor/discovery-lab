@@ -29,6 +29,27 @@ mode happens to hold the higher candidate_id - overwriting the other
 mode's candidate with this mode's dimensions/lifecycle logic and losing
 track of its own. That bug shipped and was caught on the real corpus
 (see git history); this scoping is the fix.
+
+A candidate is reassessed AT MOST ONCE per run, from its full unioned
+evidence for this run - never once per fresh group that happens to touch
+it. `_build_groups` deliberately compares each anomaly only against a
+group's fixed anchor (see its own docstring), so a candidate that
+accumulated anomaly_ids across several past `candidates_merged` events can
+easily fragment back into two or more disjoint fresh groups this run (the
+anchor of one no longer matches the anchor of the other, even though both
+still resolve to the same registered candidate). Processing each such
+fresh group independently - the original design - reassessed the
+candidate from whichever PARTIAL slice of its evidence one group
+happened to carry, repeatedly, sometimes with contradictory conclusions
+in the same run, and was never a true fixed point: re-running against
+unchanged evidence kept re-fragmenting and re-emitting events for several
+runs before stabilizing. The fix is a resolve-then-union step between
+grouping and processing: every fresh group is first resolved to the
+candidate_id(s) it touches, groups that resolve to overlapping candidate
+identities (directly or transitively, through a chain of shared ids) are
+merged into one cluster, and each cluster is processed exactly once from
+the union of its anomaly_ids/observation_ids - so `RUN(state, corpus)`
+is now a true fixed point of itself.
 """
 
 from __future__ import annotations
@@ -110,6 +131,72 @@ def _build_groups(anomalies: List[Dict[str, Any]], obs_by_id: Dict[str, Any],
     return groups
 
 
+def _resolve_and_union_groups(groups: List[Dict[str, Any]],
+                               anomaly_to_candidate: Dict[str, str]) -> List[Dict[str, Any]]:
+    """Resolves every fresh group to the candidate_id(s) it touches, then
+    unions any groups that resolve to overlapping candidate identities
+    (directly or transitively) into one combined group, so a candidate
+    that fragments into several disjoint fresh groups this run is still
+    reassessed exactly once, from the union of all of them. Groups that
+    resolve to no existing candidate at all (brand-new evidence) are
+    returned unchanged, one per group, since `_build_groups` has already
+    decided they are not the same opportunity as each other."""
+    resolved = [{"group": g, "existing_ids": sorted({anomaly_to_candidate[aid] for aid in g["anomaly_ids"]
+                                                       if aid in anomaly_to_candidate})}
+                for g in groups]
+
+    parent: Dict[str, str] = {}
+
+    def find(x: str) -> str:
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a: str, b: str) -> None:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            # Deterministic root: the numerically/lexically lower candidate_id
+            # wins, matching the existing "canonical = lowest sorted id" rule.
+            if ra < rb:
+                parent[rb] = ra
+            else:
+                parent[ra] = rb
+
+    for r in resolved:
+        for other in r["existing_ids"][1:]:
+            union(r["existing_ids"][0], other)
+
+    clusters: Dict[str, Dict[str, Any]] = {}
+    unresolved: List[Dict[str, Any]] = []
+    for r in resolved:
+        if not r["existing_ids"]:
+            unresolved.append(r["group"])
+            continue
+        root = find(r["existing_ids"][0])
+        g = r["group"]
+        if root not in clusters:
+            clusters[root] = {
+                "anomaly_ids": set(g["anomaly_ids"]), "observation_ids": set(g["observation_ids"]),
+                "merge_reasons": list(g["merge_reasons"]), "existing_ids": set(r["existing_ids"]),
+            }
+        else:
+            c = clusters[root]
+            c["anomaly_ids"] |= g["anomaly_ids"]
+            c["observation_ids"] |= g["observation_ids"]
+            c["merge_reasons"].extend(g["merge_reasons"])
+            c["existing_ids"] |= set(r["existing_ids"])
+
+    unioned = [{"anomaly_ids": c["anomaly_ids"], "observation_ids": c["observation_ids"],
+                "merge_reasons": c["merge_reasons"], "existing_ids": sorted(c["existing_ids"])}
+               for c in clusters.values()]
+    for g in unresolved:
+        unioned.append({"anomaly_ids": g["anomaly_ids"], "observation_ids": g["observation_ids"],
+                         "merge_reasons": g["merge_reasons"], "existing_ids": []})
+    return unioned
+
+
 def run_analysis(ca_data_dir: str, bca_data_dir: str,
                   thresholds: Optional[Dict[str, Any]] = None,
                   now: Optional[str] = None) -> Dict[str, Any]:
@@ -139,6 +226,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
             anomaly_to_candidate[aid] = target
 
     groups = _build_groups(evidence.anomalies, obs_by_id, thresholds)
+    unioned_groups = _resolve_and_union_groups(groups, anomaly_to_candidate)
 
     events_to_append: List[CandidateEvent] = []
     absorbed_this_run: set = set()
@@ -151,7 +239,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
         next_seq += 1
         return cid
 
-    for g in groups:
+    for g in unioned_groups:
         obs = [obs_by_id[oid] for oid in sorted(g["observation_ids"]) if oid in obs_by_id]
         dims = assess_all(obs, thresholds)
         distinct_sources = dims["evidence_diversity"].value["distinct_sources"]
@@ -159,7 +247,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
         decision = decide_state(dims, distinct_sources, ca_evals, thresholds)
         dims_dicts = _dims_dicts(dims)
 
-        existing_ids = sorted({anomaly_to_candidate[aid] for aid in g["anomaly_ids"] if aid in anomaly_to_candidate})
+        existing_ids = g["existing_ids"]
 
         if not existing_ids:
             watch_ok, watch_missing = meets_watch_bar(dims)
@@ -170,6 +258,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
                 continue
             cid = new_candidate_id()
             derived_from = sorted(g["anomaly_ids"] | g["observation_ids"])
+            group_signature = signature_for_group(obs, thresholds)
             ev = CandidateEvent(
                 event_id=make_event_id("candidate_created", cid, {"anomaly_ids": sorted(g["anomaly_ids"])}),
                 event_type="candidate_created", candidate_id=cid, recorded_at=now,
@@ -178,7 +267,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str,
                 payload={
                     "state": decision["state"], "candidate_type": NEW_MARKET,
                     "anomaly_ids": sorted(g["anomaly_ids"]),
-                    "observation_ids": sorted(g["observation_ids"]), "signature": g["signature"].to_dict(),
+                    "observation_ids": sorted(g["observation_ids"]), "signature": group_signature.to_dict(),
                     "dimensions": dims_dicts, "merge_reasons": g["merge_reasons"],
                 },
                 analyst_version=thresholds["analyst_version"],

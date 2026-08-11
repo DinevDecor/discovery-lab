@@ -92,7 +92,24 @@ class CandidateRegistry:
 def rebuild_snapshot(events: List[Dict[str, Any]]) -> List[Candidate]:
     """Pure function: replays the append-only log into the current-state
     view. Order of `events` must be file order (chronological, since the
-    log is append-only)."""
+    log is append-only).
+
+    `anomaly_ids`/`observation_ids` on `state_changed`/`evidence_reassessed`
+    are REPLACED by each event's own payload, not unioned with the
+    candidate's prior membership. Analyst.py (both modes) always resolves
+    every fresh group touching a candidate and unions them BEFORE emitting
+    an event (see analyst.py's `_resolve_and_union_groups`), so a payload's
+    anomaly_ids/observation_ids is already the complete, correct picture
+    for that run - unioning it with history on top would mean a candidate
+    could accumulate but never shrink, e.g. never let go of an anomaly a
+    later run correctly determines was a false merge (see git history: a
+    real-corpus false merge stayed permanently "stuck" to its candidate's
+    snapshot even after the merge itself stopped recurring, keeping the
+    candidate perpetually reassessed every run - a second, independent
+    source of the same non-idempotency the union-before-reassess fix in
+    analyst.py was meant to close). Full history is never lost either way:
+    every event's own `derived_from` and `history` entry is preserved
+    append-only regardless of what the snapshot's current fields say."""
     by_candidate: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for e in events:
         by_candidate[e["candidate_id"]].append(e)
@@ -129,8 +146,8 @@ def rebuild_snapshot(events: List[Dict[str, Any]]) -> List[Candidate]:
                 cand.state = payload["to_state"]
                 cand.dimensions = payload.get("dimensions", cand.dimensions)
                 cand.rearchitecture = payload.get("rearchitecture", cand.rearchitecture)
-                cand.anomaly_ids = sorted(set(cand.anomaly_ids) | set(payload.get("anomaly_ids", [])))
-                cand.observation_ids = sorted(set(cand.observation_ids) | set(payload.get("observation_ids", [])))
+                cand.anomaly_ids = sorted(payload.get("anomaly_ids", cand.anomaly_ids))
+                cand.observation_ids = sorted(payload.get("observation_ids", cand.observation_ids))
                 if cand.state == "REJECTED":
                     cand.rejected_reason = e.get("reason", "")
                 merged_from = payload.get("merged_from")
@@ -140,8 +157,8 @@ def rebuild_snapshot(events: List[Dict[str, Any]]) -> List[Candidate]:
             elif etype == "evidence_reassessed":
                 cand.dimensions = payload.get("dimensions", cand.dimensions)
                 cand.rearchitecture = payload.get("rearchitecture", cand.rearchitecture)
-                cand.anomaly_ids = sorted(set(cand.anomaly_ids) | set(payload.get("anomaly_ids", [])))
-                cand.observation_ids = sorted(set(cand.observation_ids) | set(payload.get("observation_ids", [])))
+                cand.anomaly_ids = sorted(payload.get("anomaly_ids", cand.anomaly_ids))
+                cand.observation_ids = sorted(payload.get("observation_ids", cand.observation_ids))
                 merged_from = payload.get("merged_from")
                 if merged_from:
                     items = merged_from if isinstance(merged_from, list) else [merged_from]

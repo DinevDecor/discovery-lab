@@ -122,7 +122,28 @@ def same_opportunity(
          "false-positive controls" section for the real run that caught
          this;
       2. failing that, generic workaround/failure wording overlap above a
-         floor (same fallback CA's own dedup-adjacent code uses).
+         floor (same fallback CA's own dedup-adjacent code uses) - BUT,
+         and this is the fix for a second real-corpus false-positive class
+         (see README's false-positive controls section, "single-field
+         Jaccard coincidence"), BOTH the workaround_jaccard AND the
+         failure_jaccard must independently clear that floor, not either
+         alone. A same-day human review of the real corpus found that
+         every merge relying on this fallback with only one of the two
+         fields passing (the other sitting at exactly 0.0 shared tokens)
+         was a false merge: e.g. "keeping a livestream broadcasting on
+         game-store pages" merged into a financial-transaction-
+         reconciliation candidate purely because both failure_mode texts
+         happened to contain the generic phrase "requiring manual
+         intervention" (failure_jaccard 0.148, workaround_jaccard 0.0 -
+         the actual workaround context, accounting reconciliation vs.
+         local streaming software, shared nothing). Requiring both fields
+         is the direct structural analogue of requiring 2 shared keywords
+         instead of 1 above: a single field's overlap is exactly as prone
+         to generic-phrase coincidence as a single shared keyword is: the
+         workaround and failure_mode fields describe different aspects of
+         the opportunity (what the buyer currently does vs. how it
+         breaks), so genuine corroboration should show up in both, not
+         survive on a coincidental phrase in only one.
 
     A whole-document token Jaccard was tried and rejected here: two
     genuinely related real-world reports about the same missing function
@@ -177,12 +198,13 @@ def same_opportunity(
     w_min = thresholds.get("workaround_jaccard_min", 0.12)
     f_min = thresholds.get("failure_jaccard_min", 0.12)
 
-    if len(shared_keywords) < min_shared and w_j < w_min and f_j < f_min:
+    jaccard_fallback_ok = w_j >= w_min and f_j >= f_min
+    if len(shared_keywords) < min_shared and not jaccard_fallback_ok:
         reasons.append(
             f"buyer/function bucket match ({sig_a.buyer_bucket}/{sig_a.function_class}) but only "
             f"{len(shared_keywords)} shared {sig_a.function_class} keyword(s) {shared_keywords} "
-            f"(<{min_shared} required) and workaround_jaccard={w_j:.2f} (<{w_min}), "
-            f"failure_jaccard={f_j:.2f} (<{f_min}) - same bucket, not evidenced as same missing function"
+            f"(<{min_shared} required) and workaround_jaccard={w_j:.2f}, failure_jaccard={f_j:.2f} "
+            f"(need >={w_min} on BOTH, not either alone) - same bucket, not evidenced as same missing function"
         )
         return False, reasons
 
