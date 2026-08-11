@@ -72,7 +72,7 @@
       "unverifiable", "acknowledge"],
     "access_gating": ["tier", "plan", "premium", "default", "gating",
       "restrict", "unlock", "permission", "subscription"],
-    "workaround_labor": ["manual", "track", "log", "spreadsheet",
+    "workaround_labor": ["track", "spreadsheet",
       "screenshot", "calculate", "monitor", "watch"],
     "state_recovery": ["stuck", "error", "timeout", "recover", "corrupt",
       "reset", "crash", "retry"],

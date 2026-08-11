@@ -183,10 +183,7 @@ class JaccardFallbackBothFieldsRequiredTests(unittest.TestCase):
         livestream = [livestream_obs]
         sig_a = signature_for_group(reconciliation, self.th)
         sig_b = signature_for_group(livestream, self.th)
-        # Sanity: this pair only reaches the jaccard fallback because the
-        # taxonomy-keyword signal is already weak (1 shared word: "manual").
         self.assertEqual(sig_a.buyer_bucket, sig_b.buyer_bucket)
-        self.assertEqual(sig_a.function_class, sig_b.function_class)
         ok, reasons = same_opportunity(sig_a, reconciliation, sig_b, livestream, self.th)
         self.assertFalse(ok, f"must not merge - reasons: {reasons}")
 
@@ -249,6 +246,58 @@ class JaccardFallbackBothFieldsRequiredTests(unittest.TestCase):
         ok, reasons = same_opportunity(sig_a, [a], sig_b, [b], self.th)
         self.assertTrue(ok, f"must still merge - reasons: {reasons}")
         self.assertGreaterEqual(len(reasons), 1)
+
+
+class GenericWorkaroundLaborKeywordTests(unittest.TestCase):
+    """Regression test for the real-corpus false-merge class the
+    workaround_labor bucket's own generic keywords used to admit: 'manual'
+    and 'log' are everyday troubleshooting-process words, not domain-
+    specific signal, so any two unrelated 'someone manually checked logs'
+    stories could clear min_shared_function_keywords=2 on that alone. Text
+    below is transcribed verbatim from the real Constraint Archaeology
+    corpus observations that produced this false merge (BC-0042, DAY N+1
+    manual validation run): a Home Assistant / Node-RED crash-diagnostics
+    story merged with an unrelated small-local-LLM output-quality-testing
+    story purely because both mention 'manual' and 'log'
+    (workaround_jaccard=0.03, failure_jaccard=0.06 - both far under the
+    0.12 floor, confirming the texts are not otherwise similar)."""
+
+    def setUp(self):
+        self.th = load_thresholds()
+
+    def test_node_red_crash_vs_small_model_qa_must_not_merge(self):
+        node_red = obs(
+            process="Home automation system runtime stability management on Raspberry Pi",
+            hidden_function_hint="Manual monitoring and troubleshooting of Node-RED crashes after core "
+                                  "system updates; correlating error logs with system stability",
+            current_carrier="User manually reviewing error logs, searching forums, adjusting log levels "
+                             "to trace crashes that occur 'every now and then'",
+            pain="Node-RED integration crashes intermittently after HA Core update to 2026.8; MQTT "
+                 "broker disconnects; trace-level logging provides no additional diagnostic information",
+            failure_mode="UnhandledPromiseRejection errors with no actionable details even at highest "
+                         "logging verbosity; user cannot isolate root cause",
+        )
+        small_model_qa = obs(
+            process="Using small local AI models (8b-27b parameters) for structured output generation "
+                    "(XML, code snippets)",
+            hidden_function_hint="Manual quality control and error pattern detection across multiple "
+                                  "model sizes to identify which models fail on which prompts, "
+                                  "discovering that smaller models produce predictable but inconsistent "
+                                  "errors in structured output",
+            current_carrier="Developer running thousands of identical prompts across different model "
+                             "sizes, manually tracking which prompts fail on which models, testing "
+                             "temperature=0 for consistency",
+            pain="Smaller models make predictable but different errors than medium models (missing XML "
+                 "tags, logic errors in C++ code); 12b model cannot fix conceptual errors even when "
+                 "pointed out; requires manual testing of 15k prompts to map error patterns",
+            failure_mode="Small model cannot grasp concept needed for task, middle model makes different "
+                         "errors than small model, errors deterministic per model-prompt pair but "
+                         "require extensive testing to discover",
+        )
+        sig_a, sig_b = signature_for_group([node_red], self.th), signature_for_group([small_model_qa], self.th)
+        self.assertEqual(sig_a.buyer_bucket, sig_b.buyer_bucket)
+        ok, reasons = same_opportunity(sig_a, [node_red], sig_b, [small_model_qa], self.th)
+        self.assertFalse(ok, f"must not merge - reasons: {reasons}")
 
 
 if __name__ == "__main__":
