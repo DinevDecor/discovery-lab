@@ -22,6 +22,15 @@ through merges), scoped to only this mode's own OLD_BUSINESS_REARCHITECTURE
 candidates so it can never collide with Mode A's tracking of the same
 anomaly_id - the same anomaly can legitimately seed both a NEW_MARKET and
 an OLD_BUSINESS_REARCHITECTURE candidate; they are different candidates.
+
+Like Mode A, a candidate is reassessed AT MOST ONCE per run, from its full
+unioned evidence for this run. Mode B's own URL-union-find grouping is
+transitive within a single run, but a candidate that accumulated its
+anomaly_ids across several past `candidates_merged` events can still
+present as more than one disjoint fresh group this run if those past
+merges were bridged by shared candidate_id overlap rather than a shared
+URL this run's evidence still carries - the resolve-then-union step below
+(mirroring analyst.py's identical fix) guards against that the same way.
 """
 
 from __future__ import annotations
@@ -52,6 +61,69 @@ def _dims_key(fields: Dict[str, Any]) -> Dict[str, Any]:
 
 def _field_dicts(fields: Dict[str, Any]) -> Dict[str, Any]:
     return {name: (v.to_dict() if hasattr(v, "to_dict") else v) for name, v in fields.items()}
+
+
+def _resolve_and_union_groups(groups: List[Dict[str, Any]],
+                               anomaly_to_candidate: Dict[str, str]) -> List[Dict[str, Any]]:
+    """Identical in shape and purpose to analyst.py's helper of the same
+    name (see its docstring) - resolves every fresh group to the
+    candidate_id(s) it touches, then unions groups that resolve to
+    overlapping identities so each candidate is reassessed exactly once
+    this run, from the union of all fresh groups that touch it. Not
+    imported from analyst.py to keep the two modes' orchestration free of
+    cross-mode coupling, matching this file's existing pattern of small
+    duplicated helpers (_dims_key/_field_dicts vs. Mode A's own)."""
+    resolved = [{"group": g, "existing_ids": sorted({anomaly_to_candidate[aid] for aid in g["anomaly_ids"]
+                                                       if aid in anomaly_to_candidate})}
+                for g in groups]
+
+    parent: Dict[str, str] = {}
+
+    def find(x: str) -> str:
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a: str, b: str) -> None:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            if ra < rb:
+                parent[rb] = ra
+            else:
+                parent[ra] = rb
+
+    for r in resolved:
+        for other in r["existing_ids"][1:]:
+            union(r["existing_ids"][0], other)
+
+    clusters: Dict[str, Dict[str, Any]] = {}
+    unresolved: List[Dict[str, Any]] = []
+    for r in resolved:
+        if not r["existing_ids"]:
+            unresolved.append(r["group"])
+            continue
+        root = find(r["existing_ids"][0])
+        g = r["group"]
+        if root not in clusters:
+            clusters[root] = {
+                "anomaly_ids": set(g["anomaly_ids"]), "observation_ids": set(g["observation_ids"]),
+                "existing_ids": set(r["existing_ids"]),
+            }
+        else:
+            c = clusters[root]
+            c["anomaly_ids"] |= g["anomaly_ids"]
+            c["observation_ids"] |= g["observation_ids"]
+            c["existing_ids"] |= set(r["existing_ids"])
+
+    unioned = [{"anomaly_ids": c["anomaly_ids"], "observation_ids": c["observation_ids"],
+                "existing_ids": sorted(c["existing_ids"])}
+               for c in clusters.values()]
+    for g in unresolved:
+        unioned.append({"anomaly_ids": g["anomaly_ids"], "observation_ids": g["observation_ids"],
+                         "existing_ids": []})
+    return unioned
 
 
 def _build_groups(anomalies: List[Dict[str, Any]], obs_by_id: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -124,6 +196,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str, config: Dict[str, Any],
             anomaly_to_candidate[aid] = target
 
     groups = _build_groups(evidence.anomalies, obs_by_id)
+    unioned_groups = _resolve_and_union_groups(groups, anomaly_to_candidate)
 
     events_to_append: List[CandidateEvent] = []
     absorbed_this_run: set = set()
@@ -136,7 +209,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str, config: Dict[str, Any],
         next_seq += 1
         return cid
 
-    for g in groups:
+    for g in unioned_groups:
         obs = [obs_by_id[oid] for oid in sorted(g["observation_ids"]) if oid in obs_by_id]
         fields = assess_all(obs, config)
         field_dicts = _field_dicts(fields)
@@ -145,7 +218,7 @@ def run_analysis(ca_data_dir: str, bca_data_dir: str, config: Dict[str, Any],
         decision = decide_state(fields, obs, distinct_sources, ca_evals, config)
         gaps = evidence_gaps(fields)
 
-        existing_ids = sorted({anomaly_to_candidate[aid] for aid in g["anomaly_ids"] if aid in anomaly_to_candidate})
+        existing_ids = g["existing_ids"]
 
         if not existing_ids:
             watch_ok, watch_missing = meets_watch_bar(fields)
