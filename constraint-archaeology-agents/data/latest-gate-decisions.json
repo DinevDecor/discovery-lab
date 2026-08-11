@@ -5,44 +5,44 @@
     "left_id": "OBS-20260808-0004-19a7bc",
     "right_id": "OBS-20260808-0038-066520",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0004-19a7bc->OBS-20260808-0038-066520: The proposed change addresses computational complexity for exact inference on loops specifically, which would improve performance for that algorithmic component. However, the failure mechanism describes a systemic validation deadlock where the tool cannot be tested on real problems to discover which performance bottlenecks actually matter for real use cases. Even with perfect loop inference optimization, the fundamental problem remains: without real-world validation, the creator doesn't know if loop performance was the critical bottleneck, or if other components (variable elimination, junction tree operations, I/O, memory management, etc.) dominate actual use case latency. The 6+ year manual iteration pattern suggests performance problems extend beyond any single algorithmic component. Optimizing loops perfectly might still leave the tool too slow for practical use if other bottlenecks dominate, and the validation deadlock persists because real-world testing is still blocked by overall system latency.; OBS-20260808-0038-066520->OBS-20260808-0004-19a7bc: The failure mechanism is fundamentally theoretical: exact inference for loops has inherent computational complexity (exponential or worse) that scales beyond practical limits regardless of implementation efficiency. Profiling and eliminating bottlenecks can only optimize constant factors and implementation overhead, but cannot overcome the underlying algorithmic complexity class. The constraint is mathematical—exact inference must consider all possible loop execution paths—not implementational. No amount of profiling infrastructure or bottleneck elimination can make an exponential-time algorithm tractable for non-trivial problem sizes when the exponential complexity is inherent to the correctness requirement itself."
+      "counterfactual fails: OBS-20260808-0004-19a7bc->OBS-20260808-0038-066520: The proposed change addresses a symptom (reducing computation time) but not the core failure mechanism. The fundamental problem is the inability to distinguish between inherent computational hardness and poor architectural choices, coupled with lack of systematic profiling infrastructure and external validation. Even if computation time were reduced to acceptable thresholds, the failure mechanism would persist: the carrier would still lack the systematic profiling infrastructure to understand WHY it's fast or slow, still have no external validation from real use cases, and still be unable to distinguish theoretical limitations from implementation problems. The 6+ years of speculative optimization would continue because the diagnostic capability gap remains unfilled. Achieving the performance target without addressing the underlying diagnostic and validation deficits means the next problem or scaling challenge would encounter the same systemic inability to debug root causes.; OBS-20260808-0038-066520->OBS-20260808-0004-19a7bc: Performance profiling would only reveal that exact inference guarantees (exhaustive enumeration/symbolic computation of all loop paths) consume the time, confirming what is already known. The fundamental mechanism - that exact inference over loops requires exponential state space exploration - is a theoretical requirement, not a suboptimal implementation decision. Profiling isolates where time is spent but cannot eliminate the inherent computational intractability of exact inference for loops with complexity."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0004-19a7bc",
         "applied_to": "OBS-20260808-0038-066520",
         "removes_failure": false,
-        "reason": "The proposed change addresses computational complexity for exact inference on loops specifically, which would improve performance for that algorithmic component. However, the failure mechanism describes a systemic validation deadlock where the tool cannot be tested on real problems to discover which performance bottlenecks actually matter for real use cases. Even with perfect loop inference optimization, the fundamental problem remains: without real-world validation, the creator doesn't know if loop performance was the critical bottleneck, or if other components (variable elimination, junction tree operations, I/O, memory management, etc.) dominate actual use case latency. The 6+ year manual iteration pattern suggests performance problems extend beyond any single algorithmic component. Optimizing loops perfectly might still leave the tool too slow for practical use if other bottlenecks dominate, and the validation deadlock persists because real-world testing is still blocked by overall system latency."
+        "reason": "The proposed change addresses a symptom (reducing computation time) but not the core failure mechanism. The fundamental problem is the inability to distinguish between inherent computational hardness and poor architectural choices, coupled with lack of systematic profiling infrastructure and external validation. Even if computation time were reduced to acceptable thresholds, the failure mechanism would persist: the carrier would still lack the systematic profiling infrastructure to understand WHY it's fast or slow, still have no external validation from real use cases, and still be unable to distinguish theoretical limitations from implementation problems. The 6+ years of speculative optimization would continue because the diagnostic capability gap remains unfilled. Achieving the performance target without addressing the underlying diagnostic and validation deficits means the next problem or scaling challenge would encounter the same systemic inability to debug root causes."
       },
       {
         "repair_from": "OBS-20260808-0038-066520",
         "applied_to": "OBS-20260808-0004-19a7bc",
         "removes_failure": false,
-        "reason": "The failure mechanism is fundamentally theoretical: exact inference for loops has inherent computational complexity (exponential or worse) that scales beyond practical limits regardless of implementation efficiency. Profiling and eliminating bottlenecks can only optimize constant factors and implementation overhead, but cannot overcome the underlying algorithmic complexity class. The constraint is mathematical—exact inference must consider all possible loop execution paths—not implementational. No amount of profiling infrastructure or bottleneck elimination can make an exponential-time algorithm tractable for non-trivial problem sizes when the exponential complexity is inherent to the correctness requirement itself."
+        "reason": "Performance profiling would only reveal that exact inference guarantees (exhaustive enumeration/symbolic computation of all loop paths) consume the time, confirming what is already known. The fundamental mechanism - that exact inference over loops requires exponential state space exploration - is a theoretical requirement, not a suboptimal implementation decision. Profiling isolates where time is spent but cannot eliminate the inherent computational intractability of exact inference for loops with complexity."
       }
     ],
     "short_circuited": false
   },
   {
-    "verdict": "same_mechanism",
-    "edge": "merged",
+    "verdict": "different_mechanisms",
+    "edge": "related_distinct",
     "left_id": "OBS-20260808-0004-16d3cd",
     "right_id": "OBS-20260808-0032-784dab",
     "reasons": [
-      "each repair removes the other's failure"
+      "counterfactual fails: OBS-20260808-0004-16d3cd->OBS-20260808-0032-784dab: The proposed change addresses throughput scaling through parallel capacity or cycle time reduction, but the failure mechanism explicitly identifies that 'increasing capacity requires years of capital investment, facility expansion, workforce development, and supplier coordination.' Even if perfectly implemented, the change cannot overcome the fundamental constraint that aerospace manufacturing capacity cannot elastically scale—the multi-year timescales required for (1) specialized labor training, (2) facility/tooling design and construction, (3) certification processes, (4) supplier coordination for low-volume specialized components, and (5) capital investment mean that manufacturing throughput cannot be increased quickly enough to match urgent wildfire demand growth. The change assumes capacity can be added or optimized, but the failure mechanism is that such additions take years to realize in aerospace manufacturing, creating an inherent temporal mismatch with demand."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0004-16d3cd",
         "applied_to": "OBS-20260808-0032-784dab",
-        "removes_failure": true,
-        "reason": "The failure mechanism is explicitly 'Production throughput ceiling' caused by 'fixed capacity constraints (facility space, tooling, workforce size, supplier capacity, certification throughput) that cannot elastically scale to meet demand spikes.' The proposed change directly addresses every identified constraint: expanding facilities/tooling removes facility space and tooling limits, increasing specialized labor pool removes workforce size constraints, parallelizing certification processes removes certification throughput bottlenecks, and securing higher-volume component supply commitments removes supplier capacity constraints. By expanding all limiting bottlenecks in parallel, the manufacturing system's capacity would no longer be rigidly constrained and could scale to meet demand, eliminating queue accumulation and multi-year wait times. The change removes the structural inability to scale that constitutes the failure mechanism."
+        "removes_failure": false,
+        "reason": "The proposed change addresses throughput scaling through parallel capacity or cycle time reduction, but the failure mechanism explicitly identifies that 'increasing capacity requires years of capital investment, facility expansion, workforce development, and supplier coordination.' Even if perfectly implemented, the change cannot overcome the fundamental constraint that aerospace manufacturing capacity cannot elastically scale—the multi-year timescales required for (1) specialized labor training, (2) facility/tooling design and construction, (3) certification processes, (4) supplier coordination for low-volume specialized components, and (5) capital investment mean that manufacturing throughput cannot be increased quickly enough to match urgent wildfire demand growth. The change assumes capacity can be added or optimized, but the failure mechanism is that such additions take years to realize in aerospace manufacturing, creating an inherent temporal mismatch with demand."
       },
       {
         "repair_from": "OBS-20260808-0032-784dab",
         "applied_to": "OBS-20260808-0004-16d3cd",
         "removes_failure": true,
-        "reason": "The failure mechanism is explicitly defined as a fixed manufacturing throughput ceiling caused by bottlenecks in specialized labor, tooling/facility constraints, supply chain serialization, and certification serialization - resulting in production rate structurally lower than demand rate. The proposed change directly addresses expanding 'one or more capacity-limiting factors: production line capacity, parallel assembly capability, workforce size, supplier output, or certification processing speed' to 'match or exceed demand rate.' These interventions precisely target the four identified bottlenecks: workforce size addresses specialized labor availability, production line capacity and parallel assembly capability address tooling/facility constraints, supplier output addresses supply chain serialization, and certification processing speed addresses certification serialization. If perfectly implemented such that throughput rate matches or exceeds demand rate, the expanding backlog would stop growing and the structural capacity constraint would be eliminated."
+        "reason": "The failure mechanism is explicitly that manufacturing throughput ceiling is structurally lower than demand rate due to fixed-capacity serial production constraints (cycle time, facility limits, tooling). The proposed change directly addresses this by expanding bottleneck resources to increase manufacturing throughput rate to match or exceed demand rate - adding assembly lines, parallel facilities, enlarged workforce, expedited supplier capacity, and faster certification. If perfectly implemented, this removes the structural capacity ceiling that creates the throughput-demand gap. The failure would stop occurring because production capacity would no longer be the limiting factor preventing aircraft from being delivered at the rate customers need them."
       }
     ],
     "short_circuited": false
@@ -60,37 +60,37 @@
         "repair_from": "OBS-20260808-0005-3dbb67",
         "applied_to": "OBS-20260808-0033-263c93",
         "removes_failure": true,
-        "reason": "The proposed change directly eliminates the architectural isolation causing the failure. By providing sessions with read access to conversation history and outputs of other concurrent sessions, each session would gain awareness of: (1) changes being made in other sessions (via outputs), (2) decisions and reasoning from other sessions (via conversation history), and (3) current task status in other sessions (via both history and outputs). This removes the forcing function that routes all cross-session information transfer through manual user intervention. The sessions would no longer be informationally isolated, enabling the distributed coordination required for parallel interdependent work without manual context transfer."
+        "reason": "The proposed change directly eliminates the core mechanism causing the failure. The failure occurs because 'each Claude Code editor session operates as an isolated process with independent context and memory' with 'no shared memory space' or 'cross-session data pathway.' The proposed change provides exactly what is missing: 'persistent shared memory accessible to multiple Claude Code sessions' for 'reading/writing of tagged context and state.' This creates the shared memory space and cross-session data pathway that the architecture currently lacks, allowing sessions to autonomously exchange state updates, dependency signals, and context without requiring manual user transfer as the coordination bottleneck. The information islands would be eliminated because sessions could directly read and write shared state."
       },
       {
         "repair_from": "OBS-20260808-0033-263c93",
         "applied_to": "OBS-20260808-0005-3dbb67",
         "removes_failure": true,
-        "reason": "The proposed change directly eliminates the root cause of the failure. The failure mechanism states 'No mechanism exists for sessions to share state or communicate' and 'The user must act as the sole information transport layer.' The proposed change implements exactly such a mechanism: a shared context space that is readable and writable by multiple concurrent sessions, allowing them to persist and retrieve coordination state, decisions, and work-in-progress information. This removes the requirement for the user to manually extract and re-input information between sessions, eliminating both the mandatory context switching overhead and the state loss that occurs during manual transfer. The sessions would now have direct access to each other's state without user mediation, which is the complete opposite of the current isolation that causes the failure."
+        "reason": "The proposed shared context store directly eliminates the carrier capacity constraint. Instead of human working memory + manual transfer (limited capacity, lossy), the carrier becomes the shared context store with read/write primitives for session state, active tasks, and code artifact metadata. This provides sufficient capacity to reliably store and transmit full context between sessions. Session isolation is removed - sessions can now read previously established state rather than requiring reconstruction. The information loss at session boundaries is eliminated because context persists in the shared store and can be accessed by any session, removing dependence on incomplete human memory and manual copying."
       }
     ],
     "short_circuited": false
   },
   {
-    "verdict": "different_mechanisms",
-    "edge": "related_distinct",
+    "verdict": "same_mechanism",
+    "edge": "merged",
     "left_id": "OBS-20260808-0057-4c5bc8",
     "right_id": "OBS-20260808-0057-bca60e",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0057-4c5bc8->OBS-20260808-0057-bca60e: The proposed change maps problem features to existing solver configurations based on historical performance, but the failure mechanism requires the solver to generate domain-specific code that eliminates irrelevant branches and checks. Configuration selection cannot remove computation paths that exist in the generic solver - it can only choose between pre-existing parameter settings and heuristics. The failure specifically states the solver 'has no mechanism to generate specialized code paths that bypass unnecessary computation.' Historical performance mapping would help select better existing strategies, but would not create new specialized code paths or eliminate the irrelevant branches and checks from the solver's execution, which is what the domain-specific code generation is meant to address."
+      "each repair removes the other's failure"
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0057-4c5bc8",
         "applied_to": "OBS-20260808-0057-bca60e",
-        "removes_failure": false,
-        "reason": "The proposed change maps problem features to existing solver configurations based on historical performance, but the failure mechanism requires the solver to generate domain-specific code that eliminates irrelevant branches and checks. Configuration selection cannot remove computation paths that exist in the generic solver - it can only choose between pre-existing parameter settings and heuristics. The failure specifically states the solver 'has no mechanism to generate specialized code paths that bypass unnecessary computation.' Historical performance mapping would help select better existing strategies, but would not create new specialized code paths or eliminate the irrelevant branches and checks from the solver's execution, which is what the domain-specific code generation is meant to address."
+        "removes_failure": true,
+        "reason": "The failure mechanism is that the generic SAT solver lacks a mechanism to detect and exploit domain-specific structural patterns, applying uniform strategies and executing irrelevant branches/checks. The proposed change provides automated detection of problem structure features and selection/tuning of solver configuration based on recognized problem class patterns. This directly addresses the root cause: it gives the solver the missing pattern recognition capability to identify domain-specific structures and the mechanism to adapt solver behavior accordingly. With perfect implementation, the solver would detect the domain's constraint structure patterns and configure itself to skip irrelevant branches and checks, eliminating the wasted computation that constitutes the failure."
       },
       {
         "repair_from": "OBS-20260808-0057-bca60e",
         "applied_to": "OBS-20260808-0057-4c5bc8",
         "removes_failure": true,
-        "reason": "The failure mechanism is that general-purpose solvers use fixed heuristics that cannot adapt to domain-specific patterns, and manual expertise cannot scale to map problem structure to optimal configurations. The proposed change directly addresses this by adding pattern detection that analyzes problem structure and automatically generates domain-specialized decision heuristics. This eliminates the need for manual expertise to perform the mapping, as the system itself detects structural patterns and adapts its pruning heuristics accordingly. The capability to automatically generate domain-specialized heuristics from problem structure analysis removes both the fixed-heuristic limitation and the scalability constraint of manual expert tuning."
+        "reason": "The proposed change directly addresses the core mechanism: it adds capability to analyze problem domain structure pre-solve and generate/select specialized branching and propagation rules. This eliminates both the fixed-heuristic limitation (by generating domain-specific rules) and the manual expert tuning bottleneck (by automating the detection of structural features like symmetries, backbone variables, and constraint topology, then automatically mapping them to appropriate specialized strategies). The capability to 'exclude irrelevant computational paths for that domain' specifically addresses the inability to adapt to domain-specific structural regularities. With this change fully in place, the solver would automatically detect problem class signatures and select/generate appropriate specialized search strategies without requiring expert knowledge."
       }
     ],
     "short_circuited": false
@@ -108,13 +108,13 @@
         "repair_from": "OBS-20260808-0072-fe18e5",
         "applied_to": "OBS-20260808-0072-acb4f1",
         "removes_failure": true,
-        "reason": "The failure mechanism is that AI coding assistants lack persistent storage of project-specific context between sessions, causing accumulated project knowledge to be lost when sessions end. The proposed change directly addresses this by adding persistent storage and retrieval of project-specific context that the AI tool can access across sessions without requiring manual re-input. If perfectly implemented, the AI would retain architectural decisions and conventions across sessions, eliminating the stateless nature that causes the failure. The root cause (lack of persistent context storage) would be completely resolved."
+        "reason": "The failure mechanism is explicitly the absence of persistent memory substrate to store project context between sessions, forcing developers to manually reconstruct and transmit context each time. The proposed change directly addresses this by adding persistent storage that retains project-specific context (architecture patterns, standards, conventions) across session boundaries and automatically retrieves it in subsequent sessions. This eliminates both the missing substrate and the manual reconstruction requirement. With automatic retrieval of stored project context, the AI would have access to architectural decisions and conventions without developer re-explanation, enabling it to generate code using project-specific patterns rather than generic ones. The mechanism causing the failure would be completely removed."
       },
       {
         "repair_from": "OBS-20260808-0072-acb4f1",
         "applied_to": "OBS-20260808-0072-fe18e5",
         "removes_failure": true,
-        "reason": "The failure mechanism is explicitly that 'the AI coding tool operates statelessly between sessions with no persistent storage or retrieval mechanism for project-specific context' and 'each new session begins with zero knowledge of project architecture, standards, or patterns.' The proposed change directly addresses this by adding persistent storage that retains project-specific architectural decisions, conventions, and patterns between sessions AND automatically loads this context at session start. This eliminates the statelessness, removes the dependency on developer working memory as the only carrier of context, and prevents the AI from starting with zero knowledge. With project-specific context automatically loaded, the AI would no longer generate code based solely on generic patterns, but rather on the stored project-specific requirements. The failure's root cause—lack of persistent storage and automatic retrieval—is completely eliminated by the proposed change."
+        "reason": "The failure mechanism is precisely the absence of persistent storage for project-specific context across AI assistant sessions. The proposed change directly addresses this by adding persistent storage that captures and retrieves project-specific context (architectural decisions, conventions, patterns, past corrections) across sessions. With this infrastructure in place, the AI tool would no longer operate statelessly - it would have access to accumulated project knowledge at session initialization, eliminating the need for manual re-explanation as the sole carrier of context. The session boundary would no longer cause complete context loss because the persistent storage mechanism would preserve and restore the required project-specific knowledge. This removes the root cause completely."
       }
     ],
     "short_circuited": false
@@ -125,44 +125,44 @@
     "left_id": "OBS-20260808-0048-21984d",
     "right_id": "OBS-20260808-0062-43c9ec",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0048-21984d->OBS-20260808-0062-43c9ec: The failure mechanism has two components: (1) tacit knowledge algorithmically replicated in software, and (2) physical substrate replaced by digital representation eliminating the carrier role. The proposed change addresses only component (1) by creating bidirectional validation that would keep human experts engaged in refining edge cases. However, it does nothing to address component (2) - the physical hot metal casting process would still be eliminated and replaced by digital representation. Even with perfect bidirectional feedback, the Linotype operators' physical craft of manipulating molten metal, casting type, and handling physical matrices would be completely obsolete. The operators cannot 'flow into new roles' of validating edge cases because those roles require different skills (analytical judgment) than their embodied craft skills (physical manipulation of metal casting machinery). The substrate replacement alone makes the carrier functionally redundant regardless of how knowledge transfer occurs.; OBS-20260808-0062-43c9ec->OBS-20260808-0048-21984d: The proposed change creates bidirectional transfer and computational literacy for operators, but does not solve the fundamental representational capacity mismatch. The failure mechanism is that tacit, embodied knowledge (sensorimotor patterns, physical intuition, contextual judgment from material interaction) has higher dimensionality than machine-readable formats can represent. While bidirectionality allows operators to maintain some role in edge cases and quality control, this preserves access to expertise but does not prevent the lossy compression at the human-to-machine conversion boundary. The tacit knowledge still cannot be externalized into machine-readable form without information loss, as the proposal acknowledges knowledge will be 'externalized' but provides no mechanism to capture unconscious embodied expertise that exists below the threshold of articulation. The operators may gain computational literacy and retain judgment authority, but the core problem—that physical intuition and sensorimotor patterns fundamentally exceed the representational capacity of software logic—remains unsolved."
+      "counterfactual fails: OBS-20260808-0048-21984d->OBS-20260808-0062-43c9ec: The failure mechanism is economic non-competitiveness: digital systems provide faster, cheaper integration of typography knowledge and physical production than human Linotype operators. The proposed change would successfully capture the craftspeople's decision-making processes and tacit knowledge before workforce transition, but this documentation does not alter the economic calculus. The digital typesetting systems would still be faster, cheaper, and require less specialized training than human operators. Knowledge capture preserves information about how the craft worked, but does not make human Linotype operation economically competitive with algorithmic typesetting. The displacement occurs because computers offer a superior integration path for the production function itself, not because the knowledge was lost—capturing that knowledge doesn't restore economic viability to the obsolete production method.; OBS-20260808-0062-43c9ec->OBS-20260808-0048-21984d: The proposed change preserves aesthetic decision-making through digital interfaces, but does not address the core failure mechanism: the inability of computerized systems to capture tacit knowledge that exists as embodied skill, perceptual intuition, and sensorimotor neural patterns. Digital interfaces for applying typographic judgment still require that judgment to be translatable into explicit digital controls and parameters. The tacit knowledge that craftspeople cannot fully articulate—the 'feel' of metal type, the physical feedback from machinery, the embodied understanding developed through years of manual practice—remains uncapturable regardless of interface design. The change shifts the locus of control but does not solve the representational insufficiency of code/algorithms for encoding knowledge stored in situated practice contexts and embodied expertise. Operators may retain decision-making authority, but the transfer of their complete skillset (including its tacit dimensions) to computerized systems would still fail for the same structural reasons."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0048-21984d",
         "applied_to": "OBS-20260808-0062-43c9ec",
         "removes_failure": false,
-        "reason": "The failure mechanism has two components: (1) tacit knowledge algorithmically replicated in software, and (2) physical substrate replaced by digital representation eliminating the carrier role. The proposed change addresses only component (1) by creating bidirectional validation that would keep human experts engaged in refining edge cases. However, it does nothing to address component (2) - the physical hot metal casting process would still be eliminated and replaced by digital representation. Even with perfect bidirectional feedback, the Linotype operators' physical craft of manipulating molten metal, casting type, and handling physical matrices would be completely obsolete. The operators cannot 'flow into new roles' of validating edge cases because those roles require different skills (analytical judgment) than their embodied craft skills (physical manipulation of metal casting machinery). The substrate replacement alone makes the carrier functionally redundant regardless of how knowledge transfer occurs."
+        "reason": "The failure mechanism is economic non-competitiveness: digital systems provide faster, cheaper integration of typography knowledge and physical production than human Linotype operators. The proposed change would successfully capture the craftspeople's decision-making processes and tacit knowledge before workforce transition, but this documentation does not alter the economic calculus. The digital typesetting systems would still be faster, cheaper, and require less specialized training than human operators. Knowledge capture preserves information about how the craft worked, but does not make human Linotype operation economically competitive with algorithmic typesetting. The displacement occurs because computers offer a superior integration path for the production function itself, not because the knowledge was lost—capturing that knowledge doesn't restore economic viability to the obsolete production method."
       },
       {
         "repair_from": "OBS-20260808-0062-43c9ec",
         "applied_to": "OBS-20260808-0048-21984d",
         "removes_failure": false,
-        "reason": "The proposed change creates bidirectional transfer and computational literacy for operators, but does not solve the fundamental representational capacity mismatch. The failure mechanism is that tacit, embodied knowledge (sensorimotor patterns, physical intuition, contextual judgment from material interaction) has higher dimensionality than machine-readable formats can represent. While bidirectionality allows operators to maintain some role in edge cases and quality control, this preserves access to expertise but does not prevent the lossy compression at the human-to-machine conversion boundary. The tacit knowledge still cannot be externalized into machine-readable form without information loss, as the proposal acknowledges knowledge will be 'externalized' but provides no mechanism to capture unconscious embodied expertise that exists below the threshold of articulation. The operators may gain computational literacy and retain judgment authority, but the core problem—that physical intuition and sensorimotor patterns fundamentally exceed the representational capacity of software logic—remains unsolved."
+        "reason": "The proposed change preserves aesthetic decision-making through digital interfaces, but does not address the core failure mechanism: the inability of computerized systems to capture tacit knowledge that exists as embodied skill, perceptual intuition, and sensorimotor neural patterns. Digital interfaces for applying typographic judgment still require that judgment to be translatable into explicit digital controls and parameters. The tacit knowledge that craftspeople cannot fully articulate—the 'feel' of metal type, the physical feedback from machinery, the embodied understanding developed through years of manual practice—remains uncapturable regardless of interface design. The change shifts the locus of control but does not solve the representational insufficiency of code/algorithms for encoding knowledge stored in situated practice contexts and embodied expertise. Operators may retain decision-making authority, but the transfer of their complete skillset (including its tacit dimensions) to computerized systems would still fail for the same structural reasons."
       }
     ],
     "short_circuited": false
   },
   {
-    "verdict": "same_mechanism",
-    "edge": "merged",
+    "verdict": "insufficient_data",
+    "edge": "unresolved",
     "left_id": "OBS-20260808-0080-96de59",
     "right_id": "OBS-20260808-0078-9b48b0",
     "reasons": [
-      "each repair removes the other's failure"
+      "counterfactual undecidable"
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0080-96de59",
         "applied_to": "OBS-20260808-0078-9b48b0",
         "removes_failure": true,
-        "reason": "The failure mechanism is the structural coupling between kill-switch activation and deployment pipeline latency. The proposed change directly decouples these by implementing runtime configuration (dynamic feature flags evaluated at inference time) that bypasses the deployment pipeline entirely. This eliminates the causal path: kill-switch changes would no longer traverse build-test-deploy stages, removing the inherited deployment cycle latency. The configuration plane operates at runtime, allowing feature state changes to take effect at the timescale of configuration propagation rather than code deployment, which resolves the core structural coupling causing the failure."
+        "reason": "The proposed change directly eliminates the causal mechanism of the failure. The failure occurs because kill-switch commands must traverse the entire deployment pipeline (build, test, approval, release) before reaching running systems, creating multi-step dependencies that extend time-to-disable beyond acceptable windows. The proposed change explicitly decouples AI feature activation state from deployment artifacts by introducing runtime configuration control with immediate propagation, allowing feature state toggles without requiring code deployment. This removes the artificial coupling to deployment infrastructure that creates the critical path extension. With runtime configuration control and immediate propagation in place, kill-switch commands would no longer need to traverse build/test/approval/release pipelines or require service restarts—they would propagate directly to running systems as state flag updates, eliminating the multi-step dependencies and reducing time-to-disable to within acceptable response windows."
       },
       {
         "repair_from": "OBS-20260808-0078-9b48b0",
         "applied_to": "OBS-20260808-0080-96de59",
-        "removes_failure": true,
-        "reason": "The proposed change directly eliminates the causal mechanism of the failure. The failure occurs because feature state changes are structurally coupled to the full deployment cycle (build, test, deploy stages), forcing changes through compilation, integration testing, staging validation, and progressive rollout. The proposed change explicitly decouples feature activation state from deployment artifacts by introducing a runtime configuration system that propagates kill-switch changes without code redeployment. This removes the structural coupling that creates the mandatory latency window. Feature state would become dynamically evaluated configuration rather than being materialized in deployed artifacts, eliminating the critical path through build/test/deploy stages. The AI system could be immediately disabled via runtime configuration propagation, bypassing the deployment cycle entirely."
+        "removes_failure": null,
+        "reason": "judge response unparseable: Unterminated string starting at: line 3 column 13 (char 41)"
       }
     ],
     "short_circuited": false
@@ -180,13 +180,13 @@
         "repair_from": "OBS-20260808-0072-fe18e5",
         "applied_to": "OBS-20260808-0080-ad7da6",
         "removes_failure": true,
-        "reason": "The failure mechanism is explicitly that the AI tool's memory architecture is session-scoped with no persistent storage layer, causing all project-specific knowledge to be discarded when sessions terminate. The proposed change directly addresses this by adding a persistent storage and retrieval system that maintains project-specific context across sessions and automatically loads it when working within the same project. This eliminates the root cause: the lack of persistent storage for project context. With perfect implementation, the AI would retain architecture patterns, standards, and previous decisions across sessions, eliminating the need for developers to repeatedly re-establish context verbally."
+        "reason": "The proposed change directly addresses the root cause mechanism. The failure occurs because: (1) the AI tool lacks persistent storage for project context, causing knowledge to be discarded between sessions, and (2) the developer's manual re-provisioning cannot reliably transfer complete context. The proposed change adds persistent storage that retains project-specific context (architecture, standards, patterns, previous interactions) across sessions and automatically loads it when operating in the same project. This eliminates both failure components: context is no longer discarded (stored persistently), and manual re-provisioning is no longer required (automatic loading). The carrier mechanism that failed (developer memory + manual re-provision) is replaced with an automated persistent storage and retrieval system that maintains complete context continuity."
       },
       {
         "repair_from": "OBS-20260808-0080-ad7da6",
         "applied_to": "OBS-20260808-0072-fe18e5",
         "removes_failure": true,
-        "reason": "The proposed change directly addresses the root cause mechanism. The failure occurs because AI tools lack persistent storage for project-specific context and operate statelessly, forcing developers to manually reconstruct context each session. The proposed change implements persistent storage that retains project-specific context (conventions, architecture patterns, prior decisions) across sessions and automatically loads it when working on the same project. This eliminates the stateless operation, removes the need for manual context reconstruction and retransmission by the developer, and ensures the AI tool has awareness of project-specific information in every session. The failure mechanism would be completely resolved."
+        "reason": "The proposed change directly addresses the complete causal chain of the failure. The failure mechanism is: (1) AI tools operate statelessly between sessions, (2) no mechanism exists to persist learned project context, (3) each session begins tabula rasa, (4) developer must manually reconstruct context, (5) architecturally inconsistent code is generated. The proposed change implements persistent storage that retains project-specific context across sessions and automatically retrieves it when generating code. This breaks the causal chain at step (2) by creating the missing persistence mechanism, which prevents step (3) - sessions no longer begin tabula rasa. With context automatically retrieved, step (4) is eliminated - no manual reconstruction needed. This prevents step (5) - the AI has the necessary context to generate architecturally consistent code. The failure would stop occurring because the root cause (stateless operation with no persistence) is eliminated."
       }
     ],
     "short_circuited": false
@@ -197,55 +197,44 @@
     "left_id": "OBS-20260808-0051-ad4aaf",
     "right_id": "OBS-20260809-0054-74634d",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0051-ad4aaf->OBS-20260809-0054-74634d: The proposed change adds RSS feed subscription to Mastodon (ActivityPub protocol), enabling Mastodon accounts to automatically post RSS content to Mastodon timelines. The failure involves the absence of native RSS-to-Nostr translation. These are completely different protocols and networks. Mastodon operates on ActivityPub/the fediverse, while Nostr is a separate protocol with its own relay architecture. Adding RSS features to Mastodon does nothing to enable RSS content to reach Nostr relays or generate Nostr events. The protocol translation gap between RSS/Atom and Nostr remains entirely unaddressed, as does the dependency on external bridging tooling for Nostr specifically.; OBS-20260809-0054-74634d->OBS-20260808-0051-ad4aaf: The proposed change embeds Nostr event generation into RSS/Atom publishing systems, creating automatic distribution to the Nostr network. The failure describes absence of native RSS ingestion capability in Mastodon's platform architecture. These are orthogonal mechanisms: the proposed change creates an outbound publishing pathway from RSS systems to Nostr relays, while the failure concerns Mastodon's inability to inbound consume RSS feeds. The proposed change does not modify Mastodon's architecture to add RSS parsing, feed polling, or automated posting pipelines. Content creators would still lack native integration between RSS feeds and Mastodon, still requiring intermediary services or manual posting. The proposal addresses a different protocol (Nostr) and different dataflow direction (RSS→Nostr vs RSS→Mastodon)."
+      "counterfactual fails: OBS-20260808-0051-ad4aaf->OBS-20260809-0054-74634d: The proposed change enables Mastodon servers to consume RSS feeds and publish to Mastodon timelines. The failure describes the absence of mechanisms to publish RSS/Atom content to the Nostr network. These are entirely separate protocols and networks. Mastodon publishing to Mastodon does nothing to address the gap between RSS/Atom and Nostr. The bridging function between RSS/Atom and Nostr relays would remain completely absent. Content creators would still need external bridge infrastructure to reach Nostr audiences, exactly as before.; OBS-20260809-0054-74634d->OBS-20260808-0051-ad4aaf: The proposed change targets RSS-to-Nostr translation, creating Nostr events from RSS feeds for the Nostr protocol ecosystem. The failure describes RSS-to-Mastodon syndication, where Mastodon (using ActivityPub protocol) lacks native RSS ingestion. These are entirely separate protocol ecosystems (Nostr vs ActivityPub). Even with perfect RSS-to-Nostr translation capability, Mastodon servers would still lack RSS ingestion because they operate on ActivityPub, not Nostr. The proposed change does not modify Mastodon implementations, add ActivityPub RSS ingestion, or bridge RSS to ActivityPub in any way."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0051-ad4aaf",
         "applied_to": "OBS-20260809-0054-74634d",
         "removes_failure": false,
-        "reason": "The proposed change adds RSS feed subscription to Mastodon (ActivityPub protocol), enabling Mastodon accounts to automatically post RSS content to Mastodon timelines. The failure involves the absence of native RSS-to-Nostr translation. These are completely different protocols and networks. Mastodon operates on ActivityPub/the fediverse, while Nostr is a separate protocol with its own relay architecture. Adding RSS features to Mastodon does nothing to enable RSS content to reach Nostr relays or generate Nostr events. The protocol translation gap between RSS/Atom and Nostr remains entirely unaddressed, as does the dependency on external bridging tooling for Nostr specifically."
+        "reason": "The proposed change enables Mastodon servers to consume RSS feeds and publish to Mastodon timelines. The failure describes the absence of mechanisms to publish RSS/Atom content to the Nostr network. These are entirely separate protocols and networks. Mastodon publishing to Mastodon does nothing to address the gap between RSS/Atom and Nostr. The bridging function between RSS/Atom and Nostr relays would remain completely absent. Content creators would still need external bridge infrastructure to reach Nostr audiences, exactly as before."
       },
       {
         "repair_from": "OBS-20260809-0054-74634d",
         "applied_to": "OBS-20260808-0051-ad4aaf",
         "removes_failure": false,
-        "reason": "The proposed change embeds Nostr event generation into RSS/Atom publishing systems, creating automatic distribution to the Nostr network. The failure describes absence of native RSS ingestion capability in Mastodon's platform architecture. These are orthogonal mechanisms: the proposed change creates an outbound publishing pathway from RSS systems to Nostr relays, while the failure concerns Mastodon's inability to inbound consume RSS feeds. The proposed change does not modify Mastodon's architecture to add RSS parsing, feed polling, or automated posting pipelines. Content creators would still lack native integration between RSS feeds and Mastodon, still requiring intermediary services or manual posting. The proposal addresses a different protocol (Nostr) and different dataflow direction (RSS→Nostr vs RSS→Mastodon)."
+        "reason": "The proposed change targets RSS-to-Nostr translation, creating Nostr events from RSS feeds for the Nostr protocol ecosystem. The failure describes RSS-to-Mastodon syndication, where Mastodon (using ActivityPub protocol) lacks native RSS ingestion. These are entirely separate protocol ecosystems (Nostr vs ActivityPub). Even with perfect RSS-to-Nostr translation capability, Mastodon servers would still lack RSS ingestion because they operate on ActivityPub, not Nostr. The proposed change does not modify Mastodon implementations, add ActivityPub RSS ingestion, or bridge RSS to ActivityPub in any way."
       }
     ],
     "short_circuited": false
   },
   {
-    "verdict": "insufficient_data",
-    "edge": "unresolved",
-    "left_id": "OBS-20260808-0068-906e1b",
-    "right_id": "OBS-20260809-0077-c5c933",
-    "reasons": [
-      "evidence below floor for ['OBS-20260808-0068-906e1b']"
-    ],
-    "counterfactuals": [],
-    "short_circuited": false
-  },
-  {
     "verdict": "same_mechanism",
     "edge": "merged",
-    "left_id": "OBS-20260809-0010-f4880b",
-    "right_id": "OBS-20260809-0022-84c392",
+    "left_id": "OBS-20260808-0068-906e1b",
+    "right_id": "OBS-20260809-0077-c5c933",
     "reasons": [
       "each repair removes the other's failure"
     ],
     "counterfactuals": [
       {
-        "repair_from": "OBS-20260809-0010-f4880b",
-        "applied_to": "OBS-20260809-0022-84c392",
+        "repair_from": "OBS-20260808-0068-906e1b",
+        "applied_to": "OBS-20260809-0077-c5c933",
         "removes_failure": true,
-        "reason": "The failure mechanism is specifically that recovery data requires active retrieval through a secondary device, creating friction between data availability and the decision point. The proposed change adds an always-on display showing recovery state directly on the wearable, eliminating both the need for active retrieval and the dependency on a secondary device. The user can now passively view recovery metrics at the decision point (morning routine) without any interaction, completely removing the temporal and cognitive friction that constituted the failure."
+        "reason": "The proposed change directly addresses the core failure mechanism by introducing an explicit 'unknown/pending-verification' state that prevents the system from treating timeout as a definitive failure signal. This blocks the problematic automatic retry logic until verification completes, preventing duplicate payouts. The state enforces querying actual transaction state before taking action, eliminating both the duplicate-creation path (non-idempotent retry on assumed failure) and the incorrect-state path (assuming success without verification). The timeout ambiguity still exists at the signal level, but the mechanism that converts this ambiguity into incorrect actions (automatic classification + unverified retry) is removed."
       },
       {
-        "repair_from": "OBS-20260809-0022-84c392",
-        "applied_to": "OBS-20260809-0010-f4880b",
+        "repair_from": "OBS-20260809-0077-c5c933",
+        "applied_to": "OBS-20260808-0068-906e1b",
         "removes_failure": true,
-        "reason": "The failure mechanism is that recovery state information is trapped in the device without visual output, forcing users to initiate a separate phone retrieval workflow that introduces friction at the critical morning decision point. The proposed change directly eliminates this mechanism by adding an always-on display showing recovery score/status on the wearable itself. This removes the screenless form factor constraint, provides the visual output channel, eliminates the phone retrieval workflow requirement, and allows recovery state information to be consumed at the point of awareness (wrist) without context switching. The glanceable display enables time-critical morning decisions to complete in the bedroom routine without phone interaction friction."
+        "reason": "The proposed change directly addresses the core mechanism by introducing explicit query capability to resolve transaction state before retry decisions and treating timeout as 'unknown' rather than 'failed'. This eliminates the conflation problem: instead of binary classification (success/failure), the system now implements ternary state space (success/failure/unknown) with timeout mapped to 'unknown'. The query mechanism (via idempotency key or transaction ID) provides the missing capability to distinguish 'no response received' from 'transaction definitely failed' by actively verifying actual completion state. This removes the forced binary classification that caused the failure mechanism."
       }
     ],
     "short_circuited": false
@@ -253,23 +242,34 @@
   {
     "verdict": "different_mechanisms",
     "edge": "related_distinct",
+    "left_id": "OBS-20260809-0010-f4880b",
+    "right_id": "OBS-20260809-0022-84c392",
+    "reasons": [
+      "failure_class differs: latency vs absence"
+    ],
+    "counterfactuals": [],
+    "short_circuited": true
+  },
+  {
+    "verdict": "different_mechanisms",
+    "edge": "related_distinct",
     "left_id": "OBS-20260809-0013-94dc66",
     "right_id": "OBS-20260809-0025-b03870",
     "reasons": [
-      "counterfactual fails: OBS-20260809-0013-94dc66->OBS-20260809-0025-b03870: The proposed change addresses only one dimension of the multi-dimensional failure mechanism: query latency optimization through partition coordination elimination or subgraph co-location. However, the failure mechanism explicitly identifies three concurrent requirements that standard solutions cannot satisfy: (1) multi-region distribution with Netflix's specific sharding patterns, (2) sub-100ms latency at millions of QPS, and (3) Netflix's specific microservice graph access patterns. The proposed change does not address multi-region distribution architecture, does not specify how millions of QPS throughput is achieved beyond latency optimization, and does not address Netflix's specific sharding patterns or microservice-specific access patterns. Additionally, the failure mentions that off-the-shelf systems 'sacrifice latency for consistency in distributed scenarios' - the proposed change does not address the consistency model required in distributed scenarios. The proposed change would at best partially mitigate the latency component while leaving the distributed coordination, throughput scaling, and Netflix-specific pattern matching problems unsolved."
+      "counterfactual fails: OBS-20260809-0013-94dc66->OBS-20260809-0025-b03870: The proposed change provides configuration flexibility (pluggable partitioning, tunable consistency, extensible cost models, custom caching) but does not fundamentally redesign the underlying architectural components that create Netflix's performance ceiling. Netflix's failure stems from off-the-shelf systems having fixed architectures for storage engines, query planners, network protocols, and partition strategies that cannot simultaneously achieve their three requirements at scale. While the proposed pluggable APIs allow customization of partitioning logic and consistency models, they still operate within the constraints of the base graph database's fundamental architecture. The core issues remain: (1) the underlying storage engine and network protocol are still the product's defaults, not rebuilt for Netflix's distributed infrastructure, (2) query planner extensibility adds optimization rules but doesn't replace the planner's core graph traversal execution model that may be unsuitable for cross-datacenter operations, (3) pluggable partitioning helps co-locate subgraphs but doesn't address the fundamental challenge of partition-aware query routing across Netflix's specific distributed topology. Configuration flexibility is insufficient when the baseline architectural choices themselves are the constraint."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260809-0013-94dc66",
         "applied_to": "OBS-20260809-0025-b03870",
         "removes_failure": false,
-        "reason": "The proposed change addresses only one dimension of the multi-dimensional failure mechanism: query latency optimization through partition coordination elimination or subgraph co-location. However, the failure mechanism explicitly identifies three concurrent requirements that standard solutions cannot satisfy: (1) multi-region distribution with Netflix's specific sharding patterns, (2) sub-100ms latency at millions of QPS, and (3) Netflix's specific microservice graph access patterns. The proposed change does not address multi-region distribution architecture, does not specify how millions of QPS throughput is achieved beyond latency optimization, and does not address Netflix's specific sharding patterns or microservice-specific access patterns. Additionally, the failure mentions that off-the-shelf systems 'sacrifice latency for consistency in distributed scenarios' - the proposed change does not address the consistency model required in distributed scenarios. The proposed change would at best partially mitigate the latency component while leaving the distributed coordination, throughput scaling, and Netflix-specific pattern matching problems unsolved."
+        "reason": "The proposed change provides configuration flexibility (pluggable partitioning, tunable consistency, extensible cost models, custom caching) but does not fundamentally redesign the underlying architectural components that create Netflix's performance ceiling. Netflix's failure stems from off-the-shelf systems having fixed architectures for storage engines, query planners, network protocols, and partition strategies that cannot simultaneously achieve their three requirements at scale. While the proposed pluggable APIs allow customization of partitioning logic and consistency models, they still operate within the constraints of the base graph database's fundamental architecture. The core issues remain: (1) the underlying storage engine and network protocol are still the product's defaults, not rebuilt for Netflix's distributed infrastructure, (2) query planner extensibility adds optimization rules but doesn't replace the planner's core graph traversal execution model that may be unsuitable for cross-datacenter operations, (3) pluggable partitioning helps co-locate subgraphs but doesn't address the fundamental challenge of partition-aware query routing across Netflix's specific distributed topology. Configuration flexibility is insufficient when the baseline architectural choices themselves are the constraint."
       },
       {
         "repair_from": "OBS-20260809-0025-b03870",
         "applied_to": "OBS-20260809-0013-94dc66",
         "removes_failure": true,
-        "reason": "The proposed change directly addresses all four simultaneous bottlenecks specified in the failure mechanism. It solves (1) by being distributed rather than single-node, (2) by achieving sub-100ms p99 latency while distributed (proving coordination protocols don't introduce incompatible latency), (3) by executing distributed graph queries across Netflix's specific sharding topology at production volume (proving cross-partition traversals don't multiply latency unacceptably), and (4) by maintaining both the latency requirement and query flexibility across the multi-region topology. The change explicitly satisfies the constraint space of scale (Netflix production volume), latency (sub-100ms p99 < sub-second requirement), and distributed architecture. Since an off-the-shelf solution now satisfies all critical requirements simultaneously, the need to build and maintain custom infrastructure is eliminated."
+        "reason": "The proposed change directly addresses all four simultaneous constraints in the failure mechanism: (1) partition-local query optimization and co-designed partitioning strategy would eliminate excessive cross-partition hops by aligning partitioning with Netflix's actual query patterns, (2) the co-designed architecture allows bypassing standard consistency protocols with custom solutions optimized for Netflix's mutation patterns, avoiding Raft/Paxos coordination overhead, (3) distributed query planning explicitly optimized for Netflix's topology would generate optimal execution plans for their bipartite/tripartite graph structures, and (4) storage layer explicitly optimized for Netflix's access patterns would efficiently exploit temporal locality and read-heavy workloads without memory exhaustion or cache misses. The co-design approach fundamentally resolves the architectural impedance mismatch that forces the custom infrastructure build."
       }
     ],
     "short_circuited": false
@@ -287,37 +287,37 @@
         "repair_from": "OBS-20260809-0014-8a84f6",
         "applied_to": "OBS-20260809-0026-5dadf1",
         "removes_failure": true,
-        "reason": "The failure mechanism has three components: (1) cognitive capacity exhaustion from scanning hundreds of posts, (2) fatigue-induced attention degradation causing missed relevant posts, and (3) inability to develop efficient scanning heuristics due to inconsistent location formatting. The proposed change directly eliminates all three: automated location extraction handles the inconsistent formatting problem that prevents heuristic development; filtering reduces the search space from O(n) hundreds of posts to O(k) geographically relevant subset; this reduction brings the task within stated human attention capacity limits, preventing cognitive exhaustion and fatigue-induced degradation. The human now operates only on the pre-filtered geographically relevant subset, so the failure mode of missing relevant posts while scanning irrelevant ones cannot occur."
+        "reason": "The failure mechanism is cognitive capacity depletion from sequential processing of high-volume unstructured data with inconsistent formatting. Automated text filtering that extracts and displays only location-matching comments completely eliminates the need for human sequential processing, pattern recognition attempts, and sustained attention across the full thread volume. The human never engages cognitively with non-matching entries, preventing the accumulation of fatigue and working memory load that causes missed items. The automation handles format inconsistency programmatically rather than requiring per-item cognitive engagement. The failure's root cause—human cognitive limits during exhaustive manual scanning—is removed entirely by delegating the filtering task to automation."
       },
       {
         "repair_from": "OBS-20260809-0026-5dadf1",
         "applied_to": "OBS-20260809-0014-8a84f6",
         "removes_failure": true,
-        "reason": "The failure mechanism is cognitive capacity degradation during O(n) manual scanning operations where signal density is low for non-US locations. Pre-parsing location data into standardized format enabling direct filtering eliminates the serial reading requirement entirely - users can filter for specific locations upfront, transforming the task from O(n) manual scanning to O(k) review where k = only relevant posts. This removes the sustained attention demand, eliminates pattern-matching cognitive load, and prevents fatigue-induced attention lapses since users never encounter the irrelevant posts that constitute the low signal density problem. The root cause (human cognitive limits during high-volume manual scanning) is eliminated by removing the need for manual scanning altogether."
+        "reason": "The failure mechanism is human cognitive exhaustion from manual scanning and pattern matching across hundreds of unstructured entries, with quality degradation from sustained attention demands. Automated parsing and indexing of location fields with direct geographic lookup completely eliminates the requirement for human sequential scanning and pattern matching - the cognitive load is offloaded to the automated system. Job seekers would query by geographic criteria directly rather than processing thread volume manually, removing both the sustained attention demand and the fatigue-induced discrimination degradation that causes missed matches."
       }
     ],
     "short_circuited": false
   },
   {
-    "verdict": "different_mechanisms",
-    "edge": "related_distinct",
+    "verdict": "same_mechanism",
+    "edge": "merged",
     "left_id": "OBS-20260809-0015-c3920d",
     "right_id": "OBS-20260809-0027-9e1ddd",
     "reasons": [
-      "counterfactual fails: OBS-20260809-0027-9e1ddd->OBS-20260809-0015-c3920d: The proposed change enables update delivery through network-local endpoints and unidirectional push mechanisms, which addresses the absence of internet connectivity and removes the requirement for client-initiated outbound connections. However, the failure mechanism explicitly states that secured networks enforce policies that eliminate 'both inbound update delivery channels and outbound telemetry channels' and that 'the security boundary blocks both the update delivery path (server-to-device) and the telemetry return path (device-to-server)'. The proposed change only addresses the outbound client-initiated requirement and provides local endpoints, but does not address the fundamental blocking of inbound update delivery channels by the security policy. Even with unidirectional push mechanisms, if the security architecture blocks inbound delivery paths entirely (air-gap or strict firewall policies that prevent server-to-device communication), the carrier topology remains structurally absent. The change provides the mechanism for local updates without client-initiated connections, but cannot overcome security policies that block all inbound delivery channels to the secured network zone."
+      "each repair removes the other's failure"
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260809-0015-c3920d",
         "applied_to": "OBS-20260809-0027-9e1ddd",
         "removes_failure": true,
-        "reason": "The failure mechanism is that expo-updates requires bidirectional HTTP/HTTPS connectivity to cloud-accessible servers, which fails in network-isolated environments due to DNS resolution failures, connection timeouts, and violated internet reachability invariants. The proposed asynchronous carrier mechanism explicitly decouples update distribution from synchronous network connectivity and enables updates to traverse security boundaries through approved physical media transfer, synchronized local repositories, or unidirectional network segments. This directly eliminates the dependency on bidirectional internet connectivity that causes the failure. Updates could be delivered via physical media or local repositories within the secured network perimeter, removing the requirement for TCP connections to external cloud endpoints entirely."
+        "reason": "The failure mechanism is that the update service endpoint is architecturally positioned outside the security perimeter and unreachable from within restricted networks due to blocked outbound connections. The proposed change directly addresses this by enabling expo-updates protocol components (manifest serving, bundle distribution, telemetry collection) to operate entirely within the network perimeter using only locally-routable addresses. This eliminates the architectural dependency on external cloud endpoints and provides the alternative transport path that is currently absent. With all update protocol components operating on local addresses inside the security perimeter, the carrier mechanism no longer assumes unrestricted internet connectivity, and the update process can complete without requiring any outbound connections to public cloud services."
       },
       {
         "repair_from": "OBS-20260809-0027-9e1ddd",
         "applied_to": "OBS-20260809-0015-c3920d",
-        "removes_failure": false,
-        "reason": "The proposed change enables update delivery through network-local endpoints and unidirectional push mechanisms, which addresses the absence of internet connectivity and removes the requirement for client-initiated outbound connections. However, the failure mechanism explicitly states that secured networks enforce policies that eliminate 'both inbound update delivery channels and outbound telemetry channels' and that 'the security boundary blocks both the update delivery path (server-to-device) and the telemetry return path (device-to-server)'. The proposed change only addresses the outbound client-initiated requirement and provides local endpoints, but does not address the fundamental blocking of inbound update delivery channels by the security policy. Even with unidirectional push mechanisms, if the security architecture blocks inbound delivery paths entirely (air-gap or strict firewall policies that prevent server-to-device communication), the carrier topology remains structurally absent. The change provides the mechanism for local updates without client-initiated connections, but cannot overcome security policies that block all inbound delivery channels to the secured network zone."
+        "removes_failure": true,
+        "reason": "The failure mechanism is the absence of network path topology to cloud endpoints - specifically no outbound HTTPS to external update servers and no inbound telemetry channels. The proposed change directly addresses this by introducing an intermediary endpoint deployable within the restricted network perimeter that can receive updates through approved channels and serve them internally. This creates the required network path topology within the air-gapped/firewalled environment: devices gain outbound connectivity to the local proxy/mirror instead of external servers, and the proxy bridges the isolation gap through approved channels. The protocol's cloud infrastructure dependency is fulfilled by the local proxy substituting for cloud endpoints, eliminating the topology absence that caused update propagation to halt."
       }
     ],
     "short_circuited": false
@@ -328,20 +328,20 @@
     "left_id": "OBS-20260808-0051-ad4aaf",
     "right_id": "OBS-20260809-0054-3a9a8f",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0051-ad4aaf->OBS-20260809-0054-3a9a8f: The proposed change targets Mastodon instances (ActivityPub/Fediverse protocol) while the failure concerns Nostr social network (Nostr protocol). These are distinct, incompatible protocols. The change would enable RSS→ActivityPub transformation and publication to Mastodon's outbox, but does nothing to address the RSS→Nostr gap. Nostr clients expect signed JSON events delivered through WebSocket relays using Nostr Event format (NIP-01), not ActivityPub activities. Even with perfect RSS→Mastodon integration, the fundamental protocol incompatibility between RSS/Atom and Nostr remains unaddressed: RSS content would still not be transformed into signed Nostr events, would still not be published to Nostr relays, and Nostr clients would still be unable to discover or consume the content. The translation layer needed is RSS→Nostr, not RSS→ActivityPub.; OBS-20260809-0054-3a9a8f->OBS-20260808-0051-ad4aaf: The proposed change addresses RSS-to-Nostr and Nostr-to-RSS integration, creating protocol bridges between RSS/Atom feeds and the Nostr protocol. The failure involves RSS-to-Mastodon integration, requiring protocol bridges between RSS/Atom feeds and ActivityPub. These are completely separate protocol domains: Nostr uses signed events with public key cryptography, while ActivityPub uses JSON-LD with HTTP-based federation. Adding Nostr event emission to RSS generation or RSS parsing to Nostr relays does not create any mechanism for Mastodon instances (which exclusively understand ActivityPub) to ingest RSS feeds. The protocol translation gap would remain unchanged because Mastodon instances would still lack native RSS feed ingestion capability and RSS-to-ActivityPub conversion functionality."
+      "counterfactual fails: OBS-20260808-0051-ad4aaf->OBS-20260809-0054-3a9a8f: The proposed change implements RSS-to-Mastodon conversion (RSS XML → Mastodon posts via ActivityPub protocol), while the failure describes RSS-to-Nostr syndication. These are completely separate protocols and networks: Mastodon uses ActivityPub (JSON-LD over HTTP) while Nostr uses cryptographically-signed events over WebSocket relays. A bridge that converts RSS to Mastodon posts would not address the protocol incompatibility between RSS and Nostr, nor would it make RSS content accessible to Nostr clients. The failure would continue unchanged because no translation mechanism between RSS and Nostr would exist.; OBS-20260809-0054-3a9a8f->OBS-20260808-0051-ad4aaf: The proposed change adds Nostr event encoding to RSS/Atom generators, creating RSS-to-Nostr capability. The failure involves Mastodon/ActivityPub lacking RSS ingestion capability. These are completely separate protocols (Nostr vs ActivityPub). Adding Nostr support to RSS generators does not add ActivityPub transformation logic to Mastodon servers, does not create RSS polling capability in Mastodon, and does not implement RSS-to-ActivityPub conversion. The protocol boundary between RSS and ActivityPub remains unbridged. The failure mechanism explicitly states Mastodon lacks native RSS ingestion and ActivityPub lacks RSS transformation logic - neither of which would be addressed by adding Nostr capabilities to feed generators."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0051-ad4aaf",
         "applied_to": "OBS-20260809-0054-3a9a8f",
         "removes_failure": false,
-        "reason": "The proposed change targets Mastodon instances (ActivityPub/Fediverse protocol) while the failure concerns Nostr social network (Nostr protocol). These are distinct, incompatible protocols. The change would enable RSS→ActivityPub transformation and publication to Mastodon's outbox, but does nothing to address the RSS→Nostr gap. Nostr clients expect signed JSON events delivered through WebSocket relays using Nostr Event format (NIP-01), not ActivityPub activities. Even with perfect RSS→Mastodon integration, the fundamental protocol incompatibility between RSS/Atom and Nostr remains unaddressed: RSS content would still not be transformed into signed Nostr events, would still not be published to Nostr relays, and Nostr clients would still be unable to discover or consume the content. The translation layer needed is RSS→Nostr, not RSS→ActivityPub."
+        "reason": "The proposed change implements RSS-to-Mastodon conversion (RSS XML → Mastodon posts via ActivityPub protocol), while the failure describes RSS-to-Nostr syndication. These are completely separate protocols and networks: Mastodon uses ActivityPub (JSON-LD over HTTP) while Nostr uses cryptographically-signed events over WebSocket relays. A bridge that converts RSS to Mastodon posts would not address the protocol incompatibility between RSS and Nostr, nor would it make RSS content accessible to Nostr clients. The failure would continue unchanged because no translation mechanism between RSS and Nostr would exist."
       },
       {
         "repair_from": "OBS-20260809-0054-3a9a8f",
         "applied_to": "OBS-20260808-0051-ad4aaf",
         "removes_failure": false,
-        "reason": "The proposed change addresses RSS-to-Nostr and Nostr-to-RSS integration, creating protocol bridges between RSS/Atom feeds and the Nostr protocol. The failure involves RSS-to-Mastodon integration, requiring protocol bridges between RSS/Atom feeds and ActivityPub. These are completely separate protocol domains: Nostr uses signed events with public key cryptography, while ActivityPub uses JSON-LD with HTTP-based federation. Adding Nostr event emission to RSS generation or RSS parsing to Nostr relays does not create any mechanism for Mastodon instances (which exclusively understand ActivityPub) to ingest RSS feeds. The protocol translation gap would remain unchanged because Mastodon instances would still lack native RSS feed ingestion capability and RSS-to-ActivityPub conversion functionality."
+        "reason": "The proposed change adds Nostr event encoding to RSS/Atom generators, creating RSS-to-Nostr capability. The failure involves Mastodon/ActivityPub lacking RSS ingestion capability. These are completely separate protocols (Nostr vs ActivityPub). Adding Nostr support to RSS generators does not add ActivityPub transformation logic to Mastodon servers, does not create RSS polling capability in Mastodon, and does not implement RSS-to-ActivityPub conversion. The protocol boundary between RSS and ActivityPub remains unbridged. The failure mechanism explicitly states Mastodon lacks native RSS ingestion and ActivityPub lacks RSS transformation logic - neither of which would be addressed by adding Nostr capabilities to feed generators."
       }
     ],
     "short_circuited": false
@@ -359,13 +359,13 @@
         "repair_from": "OBS-20260808-0051-ad4aaf",
         "applied_to": "OBS-20260809-0063-43ed14",
         "removes_failure": true,
-        "reason": "The proposed change directly implements the missing protocol translation layer that causes the failure. By adding native RSS feed subscription capability to Mastodon server software that can accept RSS/Atom URLs, poll feeds, parse the feed format, and automatically create posts, the mechanism removes all components of the failure: (1) eliminates protocol incompatibility by implementing RSS parsing within Mastodon, (2) removes need for intermediary translation service by making the translation native, (3) provides the missing protocol adapter that maps RSS fields to Mastodon post structure, (4) handles authentication and posting operations internally. The failure mechanism explicitly states the absence of this exact capability as the cause, and the proposed change provides precisely that capability."
+        "reason": "The proposed change directly eliminates the failure mechanism by implementing native RSS-to-ActivityPub translation within Mastodon server software itself. The failure occurs because RSS (read-only XML, pull-based) and Mastodon's ActivityPub API (authenticated POST operations, specific JSON payloads) are incompatible protocols with no native translation layer. The proposed change creates exactly this missing translation layer by: (1) enabling Mastodon servers to natively poll RSS feeds (solving the pull-based access), (2) transforming RSS items into ActivityPub Create activities (solving the XML-to-JSON semantic gap), and (3) processing these transformations internally as native activities (eliminating the need for external authentication and API calls). With this capability built directly into Mastodon server software, RSS content would flow into Mastodon without requiring any intermediary translation service, completely removing the reported protocol incompatibility barrier."
       },
       {
         "repair_from": "OBS-20260809-0063-43ed14",
         "applied_to": "OBS-20260808-0051-ad4aaf",
         "removes_failure": true,
-        "reason": "The proposed change directly eliminates the reported failure mechanism. The failure exists because Mastodon lacks native RSS feed ingestion capability - specifically the ability to subscribe to feeds, poll for updates, parse RSS/Atom formats, and automatically convert entries into posts. The proposed change adds exactly these missing capabilities: accepting RSS feed URLs, periodically fetching/parsing feeds, mapping entries to post format, and publishing to timelines using existing internal posting mechanisms. With this feature fully implemented, content creators would no longer need intermediary services or manual copy-paste workflows, as Mastodon itself would perform the polling-parsing-posting loop internally. The structural dependency on third-party availability and the friction in the content distribution pathway would be eliminated, as the platform integration gap would be closed by native functionality."
+        "reason": "The proposed change directly eliminates the identified failure mechanism. The failure occurs because Mastodon lacks native RSS-to-ActivityPub transformation capability, creating mandatory dependency on external bridging services. The proposed RSS feed ingestion endpoint with automatic post creation implements exactly this missing translation mechanism server-side. By accepting RSS URLs, polling feeds, and creating Mastodon posts (ActivityPub objects) from RSS entries using server authentication, it provides the built-in RSS-to-ActivityPub transformation that the current architecture lacks. This removes the protocol incompatibility gap and eliminates the mandatory dependency on intermediary services, allowing content creators to reach Mastodon audiences directly from RSS feeds through native platform functionality."
       }
     ],
     "short_circuited": false
@@ -376,10 +376,23 @@
     "left_id": "OBS-20260809-0066-3f0c58",
     "right_id": "OBS-20260809-0066-1a311d",
     "reasons": [
-      "failure_class differs: capacity vs unverified"
+      "counterfactual fails: OBS-20260809-0066-1a311d->OBS-20260809-0066-3f0c58: The complexity probe would reveal and quantify the integration surface area (YAML parsing, agent API patterns, state management, I/O mapping, orchestration) before effort allocation, but does not remove the underlying cause: the absence of pre-built connectors/adapters. The developer would still need to manually implement all the custom plumbing code after the probe completes. The probe provides visibility into complexity but does not provide the standardized integration layer that would actually eliminate the scaffolding work. The failure mechanism persists unchanged—the carrier still lacks the connectors that would absorb this complexity."
     ],
-    "counterfactuals": [],
-    "short_circuited": true
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260809-0066-3f0c58",
+        "applied_to": "OBS-20260809-0066-1a311d",
+        "removes_failure": true,
+        "reason": "The failure mechanism centers on integration complexity being invisible during planning, causing developers to misallocate cognitive resources and encounter breakdown when the true integration surface area exceeded capacity allocated to 'easy' tasks. The standardized adapter layer directly eliminates the integration complexity itself for standard cases - there would be no manual integration code to write, no system boundaries to navigate, no state synchronization to implement, and no error handling paths to discover. With integration reduced to configuration rather than implementation, the actual work surface area would align with the developer's assumption of straightforwardness, preventing the capacity mismatch that triggered the failure. The root cause is not improved visibility of complexity, but rather removal of the complexity that was invisible."
+      },
+      {
+        "repair_from": "OBS-20260809-0066-1a311d",
+        "applied_to": "OBS-20260809-0066-3f0c58",
+        "removes_failure": false,
+        "reason": "The complexity probe would reveal and quantify the integration surface area (YAML parsing, agent API patterns, state management, I/O mapping, orchestration) before effort allocation, but does not remove the underlying cause: the absence of pre-built connectors/adapters. The developer would still need to manually implement all the custom plumbing code after the probe completes. The probe provides visibility into complexity but does not provide the standardized integration layer that would actually eliminate the scaffolding work. The failure mechanism persists unchanged—the carrier still lacks the connectors that would absorb this complexity."
+      }
+    ],
+    "short_circuited": false
   },
   {
     "verdict": "same_mechanism",
@@ -394,13 +407,13 @@
         "repair_from": "OBS-20260809-0072-47030f",
         "applied_to": "OBS-20260809-0072-7e7517",
         "removes_failure": true,
-        "reason": "The failure mechanism is precisely that the algorithm lacks capability to test whether single_amount = sum(related_amounts) or sum(subset_A) = sum(subset_B). The proposed change adds exactly this missing capability: evaluating whether a transaction amount equals the sum of multiple candidate transaction amounts (set aggregation matching). This directly provides the pattern repertoire needed to detect amount equality preservation in 1:N and N:1 cardinality cases, eliminating the structural constraint that causes matching to break when transaction granularity differs between systems."
+        "reason": "The proposed change directly addresses the causal mechanism of failure by implementing grouped transaction set evaluation with SUM(source_amounts) = SUM(target_amounts). This provides the exact combinatorial matching capability that is currently absent. When a single transaction X splits into multiple transactions or multiple transactions combine into one, the grouping logic with sum equality testing would detect these N:1 and 1:N relationships within the configured windows. The failure mechanism explicitly states the algorithm 'lacks the combinatorial matching capability required to detect valid N:1 or 1:N amount relationships' - the proposed change implements precisely this missing capability through sum-based matching of grouped sets, eliminating the constraint that causes mathematically valid reconciliations to fail."
       },
       {
         "repair_from": "OBS-20260809-0072-7e7517",
         "applied_to": "OBS-20260809-0072-47030f",
         "removes_failure": true,
-        "reason": "The failure mechanism is the algorithm's inability to evaluate combinatorial amount relationships across transaction sets - it can only test single-transaction-to-single-transaction exact equality. The proposed change directly addresses this by adding cardinality-flexible matching rules that test both one-to-many (single transaction amount equals sum of candidate group) and many-to-one (sum of source group equals sum of target group) amount relationships. This eliminates the binding constraint that caused matching failure, as the algorithm would now possess the capability to evaluate the precise combinatorial amount relationships (sums across sets) that were previously impossible to test."
+        "reason": "The sum-based matching rule directly addresses the cardinality constraint that causes the failure. It enables the algorithm to establish correspondence for 1:N relationships (single transaction matching multiple transactions that sum to its amount) and N:1 relationships (multiple transactions matching a single transaction equal to their sum). By testing whether any combination of unmatched transactions equals a single unmatched transaction amount, the algorithm gains the cardinality-flexible matching capability that was absent. This eliminates the routing to exception handling for these previously unmatchable transaction patterns."
       }
     ],
     "short_circuited": false
@@ -422,20 +435,20 @@
     "left_id": "OBS-20260809-0070-e9d5f2",
     "right_id": "OBS-20260809-0047-003644",
     "reasons": [
-      "counterfactual fails: OBS-20260809-0070-e9d5f2->OBS-20260809-0047-003644: The proposed change adds composite keys to distinguish between same-amount transactions, which addresses scenarios where multiple individual transactions have identical amounts. However, the failure mechanism describes a fundamentally different problem: one transaction in system A matching to MULTIPLE transactions in system B whose SUM equals the system A amount (a partition problem). Adding secondary criteria like timestamp or transaction ID to individual transactions does not resolve the combinatorial ambiguity of selecting which subset of system B transactions {t1, t2, t3...} correctly corresponds to the system A transaction when multiple valid subsets sum to the same amount. The underconstrained optimization problem persists because the issue is not distinguishing individual same-amount transactions, but rather determining the correct many-to-one grouping when multiple groupings are mathematically valid."
+      "counterfactual fails: OBS-20260809-0070-e9d5f2->OBS-20260809-0047-003644: The proposed change adds discriminating fields to differentiate transactions with identical amounts, but the failure mechanism involves a fundamentally different problem: one transaction in system A corresponding to multiple transactions in system B that sum to the same total (a one-to-many cardinality problem with combinatorial partitioning). Adding timestamp, transaction ID, merchant, account number, or sequence number to individual transactions does not resolve the structural ambiguity when T_A must match against multiple distinct subsets {T_B1, T_B2, ..., T_Bn} that sum to amount X. The discriminating fields would help distinguish T_B1 from T_B2 from each other, but they don't solve the algorithmic problem of determining which specific subset of B transactions corresponds to the single A transaction. The mechanism requires aggregation logic and subset selection criteria, not just additional per-transaction matching fields."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260809-0070-e9d5f2",
         "applied_to": "OBS-20260809-0047-003644",
         "removes_failure": false,
-        "reason": "The proposed change adds composite keys to distinguish between same-amount transactions, which addresses scenarios where multiple individual transactions have identical amounts. However, the failure mechanism describes a fundamentally different problem: one transaction in system A matching to MULTIPLE transactions in system B whose SUM equals the system A amount (a partition problem). Adding secondary criteria like timestamp or transaction ID to individual transactions does not resolve the combinatorial ambiguity of selecting which subset of system B transactions {t1, t2, t3...} correctly corresponds to the system A transaction when multiple valid subsets sum to the same amount. The underconstrained optimization problem persists because the issue is not distinguishing individual same-amount transactions, but rather determining the correct many-to-one grouping when multiple groupings are mathematically valid."
+        "reason": "The proposed change adds discriminating fields to differentiate transactions with identical amounts, but the failure mechanism involves a fundamentally different problem: one transaction in system A corresponding to multiple transactions in system B that sum to the same total (a one-to-many cardinality problem with combinatorial partitioning). Adding timestamp, transaction ID, merchant, account number, or sequence number to individual transactions does not resolve the structural ambiguity when T_A must match against multiple distinct subsets {T_B1, T_B2, ..., T_Bn} that sum to amount X. The discriminating fields would help distinguish T_B1 from T_B2 from each other, but they don't solve the algorithmic problem of determining which specific subset of B transactions corresponds to the single A transaction. The mechanism requires aggregation logic and subset selection criteria, not just additional per-transaction matching fields."
       },
       {
         "repair_from": "OBS-20260809-0047-003644",
         "applied_to": "OBS-20260809-0070-e9d5f2",
         "removes_failure": true,
-        "reason": "The failure mechanism is that amount-only matching creates ambiguity when multiple transactions share identical amounts, causing arbitrary or incorrect pairing. The proposed change explicitly incorporates secondary matching features (timestamp proximity, transaction metadata, sequence ordering, reference identifiers) to establish total ordering over candidate match sets, eliminating ambiguity. By definition, a total ordering removes ambiguity in one-to-many relationships - when multiple transactions have the same amount, the secondary features deterministically distinguish between them and establish unique pairings. This directly addresses the root cause: the carrier (amount value) failing as a unique identifier. With secondary features providing additional discrimination and total ordering, the matching algorithm no longer assumes amount uniqueness and can resolve previously ambiguous cases deterministically rather than arbitrarily."
+        "reason": "The failure mechanism is that amount-only matching cannot discriminate between multiple transactions with identical amounts (T1 cannot be uniquely matched to either T2 or T3 when both are $100). The proposed change adds at least one additional discriminating dimension (timestamp proximity, transaction reference identifier, counterparty name, or description text similarity) beyond amount. This directly addresses the root cause by breaking the assumption that amount alone serves as a unique identifier. With additional discriminating dimensions, the algorithm can distinguish between T2 and T3 based on their timestamps, references, counterparty names, or descriptions, eliminating the many-to-many mapping problem. The carrier no longer assumes amount uniqueness because it has additional fields to establish correspondence."
       }
     ],
     "short_circuited": false
@@ -446,44 +459,44 @@
     "left_id": "OBS-20260808-0022-db0bcd",
     "right_id": "OBS-20260809-0054-ac3b7a",
     "reasons": [
-      "counterfactual fails: OBS-20260808-0022-db0bcd->OBS-20260809-0054-ac3b7a: The proposed change targets deprecated 1998-era Windows API calls, but the failure mechanism specifically involves DirectX 8/9 (released 2000-2005) runtime translation and deprecated network protocols. DirectX is a distinct API layer from Windows API calls - it's a graphics/multimedia framework that requires specialized runtime translation (shader compatibility, graphics pipeline differences, render target handling). While there may be some overlap in underlying Windows API dependencies, the core failure mechanism is the lack of DirectX 8/9-to-modern-DirectX translation, not general Windows API compatibility. The shim layer as described would not provide the graphics pipeline translation, shader model conversion, or network protocol adaptation that constitute the primary compatibility barriers for these games."
+      "counterfactual fails: OBS-20260808-0022-db0bcd->OBS-20260809-0054-ac3b7a: The proposed change only provides documentation/information about which specific API endpoints, libraries, and translation layers the 1998 software invokes. However, the failure mechanism indicates that modern operating systems have deliberately removed or changed these legacy interfaces, and no automatic translation layer exists. Simply knowing which legacy APIs are being called does not create the missing compatibility shims, wrappers, or translation layers needed to bridge between the hardcoded legacy calls and modern API surfaces. The manual effort would shift from 'discovering which APIs are used' to 'still manually constructing compatibility solutions for those known APIs' - the construction work remains. Documentation of the problem is not the same as solving the architectural incompatibility."
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260808-0022-db0bcd",
         "applied_to": "OBS-20260809-0054-ac3b7a",
         "removes_failure": false,
-        "reason": "The proposed change targets deprecated 1998-era Windows API calls, but the failure mechanism specifically involves DirectX 8/9 (released 2000-2005) runtime translation and deprecated network protocols. DirectX is a distinct API layer from Windows API calls - it's a graphics/multimedia framework that requires specialized runtime translation (shader compatibility, graphics pipeline differences, render target handling). While there may be some overlap in underlying Windows API dependencies, the core failure mechanism is the lack of DirectX 8/9-to-modern-DirectX translation, not general Windows API compatibility. The shim layer as described would not provide the graphics pipeline translation, shader model conversion, or network protocol adaptation that constitute the primary compatibility barriers for these games."
+        "reason": "The proposed change only provides documentation/information about which specific API endpoints, libraries, and translation layers the 1998 software invokes. However, the failure mechanism indicates that modern operating systems have deliberately removed or changed these legacy interfaces, and no automatic translation layer exists. Simply knowing which legacy APIs are being called does not create the missing compatibility shims, wrappers, or translation layers needed to bridge between the hardcoded legacy calls and modern API surfaces. The manual effort would shift from 'discovering which APIs are used' to 'still manually constructing compatibility solutions for those known APIs' - the construction work remains. Documentation of the problem is not the same as solving the architectural incompatibility."
       },
       {
         "repair_from": "OBS-20260809-0054-ac3b7a",
         "applied_to": "OBS-20260808-0022-db0bcd",
         "removes_failure": true,
-        "reason": "The failure mechanism is that the 1998 executable contains hardcoded calls to API endpoints/system calls/functions that no longer exist in Windows 11, preventing symbol resolution and initialization. The proposed change automates detection of these legacy API dependencies and automatically applies compatibility interventions including wrapper selection (which provides the missing API endpoints by translating or emulating them), configuration templates, and system setting adjustments. If perfectly implemented, this system would detect all missing API dependencies in the executable and apply appropriate wrappers/shims that restore the API contracts the software expects, allowing the loader to resolve all symbols and the software to initialize successfully. This directly addresses the root cause: the absence of expected API endpoints."
+        "reason": "The failure mechanism is that 1998 CD-ROM software attempts to invoke non-existent system functions (16-bit subsystem, legacy DirectX versions, deprecated API endpoints) that Windows 11 no longer provides. The proposed change creates automated detection of these exact legacy API dependencies in game executables and automatically applies appropriate compatibility translations/wrappers. This directly addresses the root cause: when the software attempts to call removed/deprecated system calls and library versions, the automated wrapper layer would intercept those calls and translate them to modern equivalents without requiring manual configuration. The mechanism that causes failure (missing expected interfaces) would be systematically eliminated by the automatic compatibility translation layer."
       }
     ],
     "short_circuited": false
   },
   {
-    "verdict": "different_mechanisms",
-    "edge": "related_distinct",
+    "verdict": "same_mechanism",
+    "edge": "merged",
     "left_id": "OBS-20260809-0031-5d79c8",
     "right_id": "OBS-20260809-0031-4ede94",
     "reasons": [
-      "counterfactual fails: OBS-20260809-0031-4ede94->OBS-20260809-0031-5d79c8: The proposed change adds observability (warning/error signal) when compaction is skipped, allowing developers to detect the silent failure earlier. However, it does not fix the underlying mechanism: the compaction logic would still contain the implicit ordering assumption (sequential tool execution), still fail to match patterns in parallel execution ordering (call₁, call₂, output₁, output₂), and still skip compaction. The failure would become visible rather than silent, but long tool loops would still hit context limits because compaction would still not occur. Detection is not prevention—the accumulation of items across turns would continue until the hard context limit is reached."
+      "each repair removes the other's failure"
     ],
     "counterfactuals": [
       {
         "repair_from": "OBS-20260809-0031-5d79c8",
         "applied_to": "OBS-20260809-0031-4ede94",
         "removes_failure": true,
-        "reason": "The failure occurs because the compaction algorithm enforces strict adjacency (call_i immediately followed by output_i) and silently skips batches that violate this structural precondition. The proposed change eliminates this adjacency requirement by matching tool calls to outputs via tool_call_id instead of position-based pairing. This directly removes the structural precondition that parallel execution violates. With ID-based matching, the pattern (call_0, call_1, output_0, output_1) would successfully match call_0 to output_0 and call_1 to output_1 regardless of interleaving, allowing compaction to proceed rather than silently skip. The root cause—adjacency enforcement—is completely eliminated by the ID-based matching mechanism."
+        "reason": "The failure mechanism is that the compaction validator enforces sequential ordering (call_N immediately followed by output_N) and aborts when parallel execution produces interleaved patterns (call_0, call_1, output_0, output_1). The proposed change directly addresses this by modifying the pattern matcher to use call identifiers rather than sequential position for pairing. This means call_0 and output_0 would be correctly paired regardless of call_1 appearing between them. Since the failure occurs purely due to order-dependent pairing logic (as evidenced by sequential ordering working correctly), and the change eliminates the sequential position requirement entirely by introducing identifier-based pairing, the validator would successfully pair all calls with outputs in the parallel execution pattern, allowing compaction to proceed rather than aborting silently."
       },
       {
         "repair_from": "OBS-20260809-0031-4ede94",
         "applied_to": "OBS-20260809-0031-5d79c8",
-        "removes_failure": false,
-        "reason": "The proposed change adds observability (warning/error signal) when compaction is skipped, allowing developers to detect the silent failure earlier. However, it does not fix the underlying mechanism: the compaction logic would still contain the implicit ordering assumption (sequential tool execution), still fail to match patterns in parallel execution ordering (call₁, call₂, output₁, output₂), and still skip compaction. The failure would become visible rather than silent, but long tool loops would still hit context limits because compaction would still not occur. Detection is not prevention—the accumulation of items across turns would continue until the hard context limit is reached."
+        "removes_failure": true,
+        "reason": "The failure mechanism is that compaction logic requires sequential pairing (call immediately followed by output) and silently fails when parallel execution produces grouped ordering (call,call,output,output). The proposed change explicitly removes the sequential adjacency requirement and instead verifies tool_call_id matching anywhere in the segment regardless of position. This directly eliminates the pattern matching conflict that causes compaction to skip processing interleaved messages. With position-independent matching, the compaction would successfully recognize and process the (call,call,output,output) pattern, preventing unconsumed message accumulation and context limit failures."
       }
     ],
     "short_circuited": false
@@ -494,23 +507,10 @@
     "left_id": "OBS-20260809-0022-8aefd1",
     "right_id": "OBS-20260809-0033-38ea99",
     "reasons": [
-      "counterfactual fails: OBS-20260809-0022-8aefd1->OBS-20260809-0033-38ea99: The proposed change addresses schema version and media type acceptance at the registry endpoint level, determining whether the registry will accept a particular manifest format from a Docker client. The failure mechanism, however, is a distributed systems consistency problem where different registry nodes have divergent state about tag metadata during reuse operations. Even with perfect schema version and media type handling, the HEAD request could still return stale metadata from one node while push operations go to updated nodes, causing the same validation conflict. The root cause is temporal inconsistency across distributed registry nodes during tag reuse, not manifest format acceptance or validation.; OBS-20260809-0033-38ea99->OBS-20260809-0022-8aefd1: The proposed change addresses consistency of tag metadata routing within a registry during push sessions, ensuring the same node handles requests or synchronous propagation occurs. The failure mechanism is manifest format validation rejection - the registry's validation logic is rejecting a manifest schema/media type that was previously accepted. Consistent routing does not change validation rules or make an incompatible manifest format suddenly valid. The registry would consistently reject the incompatible manifest on whichever node processes it."
+      "failure_class differs: corruption vs conflict"
     ],
-    "counterfactuals": [
-      {
-        "repair_from": "OBS-20260809-0022-8aefd1",
-        "applied_to": "OBS-20260809-0033-38ea99",
-        "removes_failure": false,
-        "reason": "The proposed change addresses schema version and media type acceptance at the registry endpoint level, determining whether the registry will accept a particular manifest format from a Docker client. The failure mechanism, however, is a distributed systems consistency problem where different registry nodes have divergent state about tag metadata during reuse operations. Even with perfect schema version and media type handling, the HEAD request could still return stale metadata from one node while push operations go to updated nodes, causing the same validation conflict. The root cause is temporal inconsistency across distributed registry nodes during tag reuse, not manifest format acceptance or validation."
-      },
-      {
-        "repair_from": "OBS-20260809-0033-38ea99",
-        "applied_to": "OBS-20260809-0022-8aefd1",
-        "removes_failure": false,
-        "reason": "The proposed change addresses consistency of tag metadata routing within a registry during push sessions, ensuring the same node handles requests or synchronous propagation occurs. The failure mechanism is manifest format validation rejection - the registry's validation logic is rejecting a manifest schema/media type that was previously accepted. Consistent routing does not change validation rules or make an incompatible manifest format suddenly valid. The registry would consistently reject the incompatible manifest on whichever node processes it."
-      }
-    ],
-    "short_circuited": false
+    "counterfactuals": [],
+    "short_circuited": true
   },
   {
     "verdict": "different_mechanisms",
@@ -518,7 +518,7 @@
     "left_id": "OBS-20260809-0042-373fa0",
     "right_id": "OBS-20260809-0042-205461",
     "reasons": [
-      "failure_class differs: capacity vs absence"
+      "failure_class differs: capacity vs latency"
     ],
     "counterfactuals": [],
     "short_circuited": true
@@ -551,10 +551,23 @@
     "left_id": "OBS-20260809-0055-e8b18d",
     "right_id": "OBS-20260809-0066-43433f",
     "reasons": [
-      "failure_class differs: absence vs corruption"
+      "counterfactual fails: OBS-20260809-0055-e8b18d->OBS-20260809-0066-43433f: The proposed change addresses only the stale negative cache entry hypothesis by flushing cache and retrying/bypassing cache. However, the failure mechanism includes two other distinct root causes: (1) resolver consistently selecting upstream DNS servers that cannot resolve this hostname due to selection algorithm incompatibility with government DNS infrastructure, and (2) resolver being blocked/filtered by intermediate infrastructure when querying authoritative nameservers. If either of these alternative mechanisms is the actual cause, flushing the cache will not prevent the failure from recurring—the resolver will simply re-query, encounter the same upstream selection problem or blocking/filtering issue, and recreate the negative cache entry or fail again. The change only eliminates one of three potential causal pathways."
     ],
-    "counterfactuals": [],
-    "short_circuited": true
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260809-0055-e8b18d",
+        "applied_to": "OBS-20260809-0066-43433f",
+        "removes_failure": false,
+        "reason": "The proposed change addresses only the stale negative cache entry hypothesis by flushing cache and retrying/bypassing cache. However, the failure mechanism includes two other distinct root causes: (1) resolver consistently selecting upstream DNS servers that cannot resolve this hostname due to selection algorithm incompatibility with government DNS infrastructure, and (2) resolver being blocked/filtered by intermediate infrastructure when querying authoritative nameservers. If either of these alternative mechanisms is the actual cause, flushing the cache will not prevent the failure from recurring—the resolver will simply re-query, encounter the same upstream selection problem or blocking/filtering issue, and recreate the negative cache entry or fail again. The change only eliminates one of three potential causal pathways."
+      },
+      {
+        "repair_from": "OBS-20260809-0066-43433f",
+        "applied_to": "OBS-20260809-0055-e8b18d",
+        "removes_failure": true,
+        "reason": "The failure mechanism is that the platform DNS resolver returns invalid/negative responses for enoad.nvmc.uscg.gov specifically while the hostname actually resolves upstream (proven by manual IP override working). The proposed change directly addresses all three possible causes: (1) If a negative/invalid response is cached, forced cache invalidation removes it; (2) If the cache contains a negative entry with improper TTL, ensuring negative cache TTL compliance prevents stale negative responses; (3) If the primary resolver chain returns SERVFAIL/NXDOMAIN incorrectly (due to upstream delegation issues or filtering), the fallback to alternative resolvers provides a working resolution path. Since the hostname demonstrably resolves correctly in the real DNS system (manual override works), either clearing bad cache state or routing around the failing resolver chain will restore functionality. Both branches of the OR statement independently address the complete failure."
+      }
+    ],
+    "short_circuited": false
   },
   {
     "verdict": "different_mechanisms",
@@ -573,23 +586,10 @@
     "left_id": "OBS-20260809-0054-ac3b7a",
     "right_id": "OBS-20260809-0076-9439f6",
     "reasons": [
-      "counterfactual fails: OBS-20260809-0054-ac3b7a->OBS-20260809-0076-9439f6: Automated API call mapping addresses only one component of the multi-faceted failure mechanism. While it would eliminate the need for manual per-game DirectX 8/9 wrapper configuration, it does not resolve: (1) absent 16-bit subsystem support required by many legacy games, (2) deprecated color format incompatibilities at the driver level, (3) conflicts between legacy code assumptions and mandatory security features (ASLR, DEP), (4) missing or changed non-graphics system libraries and dependencies. The failure mechanism explicitly identifies that modern OSes have 'removed or fundamentally changed' multiple API surfaces and system components beyond DirectX. Automated detection and mapping of DirectX and network APIs represents partial mitigation of the graphics/network subset only, leaving other blocking incompatibilities unaddressed."
+      "failure_class differs: absence vs conflict"
     ],
-    "counterfactuals": [
-      {
-        "repair_from": "OBS-20260809-0054-ac3b7a",
-        "applied_to": "OBS-20260809-0076-9439f6",
-        "removes_failure": false,
-        "reason": "Automated API call mapping addresses only one component of the multi-faceted failure mechanism. While it would eliminate the need for manual per-game DirectX 8/9 wrapper configuration, it does not resolve: (1) absent 16-bit subsystem support required by many legacy games, (2) deprecated color format incompatibilities at the driver level, (3) conflicts between legacy code assumptions and mandatory security features (ASLR, DEP), (4) missing or changed non-graphics system libraries and dependencies. The failure mechanism explicitly identifies that modern OSes have 'removed or fundamentally changed' multiple API surfaces and system components beyond DirectX. Automated detection and mapping of DirectX and network APIs represents partial mitigation of the graphics/network subset only, leaving other blocking incompatibilities unaddressed."
-      },
-      {
-        "repair_from": "OBS-20260809-0076-9439f6",
-        "applied_to": "OBS-20260809-0054-ac3b7a",
-        "removes_failure": true,
-        "reason": "The failure mechanism is: (1) modern OS removed native DirectX 8/9 support, (2) no automatic translation layer exists to map old API calls to modern equivalents, (3) manual identification and configuration of wrappers/shims required per game. The proposed change directly addresses all three components: it provides automatic detection (eliminating manual identification), activates appropriate compatibility shims/translation layers (providing the missing automatic translation), and bundles necessary DirectX 8/9 runtimes and system DLLs (restoring the removed dependencies). With automatic detection triggering the correct translation layer and bundled runtimes for each legacy executable, the manual configuration expertise barrier is eliminated and games would run without user intervention."
-      }
-    ],
-    "short_circuited": false
+    "counterfactuals": [],
+    "short_circuited": true
   },
   {
     "verdict": "same_mechanism",
@@ -604,13 +604,61 @@
         "repair_from": "OBS-20260809-0011-344019",
         "applied_to": "OBS-20260810-0033-5f4253",
         "removes_failure": true,
-        "reason": "The failure mechanism is the mandatory 3-second wait state triggered when request body exceeds the 10MB buffer capacity threshold. The proposed change explicitly removes 'the buffer size threshold that triggers the read-pause behavior' and eliminates 'timeout-based delays', allowing 'continuous streaming' instead. This directly eliminates the causal mechanism: the buffer-full condition would no longer trigger the 3-second timer, and flow would proceed without the artificial synchronization gap. The fixed time-to-first-byte penalty would cease to exist as the threshold-based pause mechanism is removed entirely."
+        "reason": "The failure mechanism is explicitly caused by the proxy stopping reads from the client socket when the 10MB buffer fills and implementing a fixed 3-second time-based wait. The proposed change directly eliminates this exact mechanism by requiring the proxy to 'continue reading from client socket after 10MB buffer fills' and explicitly 'eliminating the stop-and-wait condition that creates the mandatory 3-second stall'. With streaming passthrough or dynamic buffer expansion, the proxy would no longer implement time-based flow control but would instead maintain continuous data flow, removing the unconditional 3-second penalty that triggers for all requests over 10MB. The failure would stop occurring because the causative stop-and-wait condition would no longer exist."
       },
       {
         "repair_from": "OBS-20260810-0033-5f4253",
         "applied_to": "OBS-20260809-0011-344019",
         "removes_failure": true,
-        "reason": "The failure mechanism is: proxy buffers 10MB, stops reading from client when buffer fills, then waits 3 seconds with timeout before continuing. The proposed change replaces the hardcoded 3-second timer with immediate application polling or event-driven notification when buffer fills, allowing the application to signal readiness. This directly eliminates the 3-second artificial delay that creates the latency cliff. When the buffer fills at 10MB, instead of waiting 3 seconds, the proxy would immediately poll/notify the application and proceed based on application readiness rather than timeout expiration. The causal mechanism of 'buffer fills → 3-second timeout → continue' becomes 'buffer fills → immediate application check → continue', removing the fixed 3-second stall."
+        "reason": "The failure mechanism is caused by the 3-second hardcoded timeout that expires while waiting for the application to consume buffered data. The proposed change replaces this 3-second delay with event-driven backpressure that pauses client reads when the buffer fills and resumes immediately when the application consumes data. This eliminates the timeout entirely - instead of waiting a fixed 3 seconds, the proxy would pause client reads at the 10MB boundary, allow the application to consume buffered data, and resume reading from the client immediately upon consumption. This drops to zero-latency flow control, removing the fixed 3-second penalty that currently manifests on every >10MB request. The application still requires the complete body before responding, but data flow continues immediately as buffer space becomes available rather than blocking for 3 seconds."
+      }
+    ],
+    "short_circuited": false
+  },
+  {
+    "verdict": "same_mechanism",
+    "edge": "merged",
+    "left_id": "OBS-20260809-0033-daa67d",
+    "right_id": "OBS-20260810-0066-c486c4",
+    "reasons": [
+      "each repair removes the other's failure"
+    ],
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260809-0033-daa67d",
+        "applied_to": "OBS-20260810-0066-c486c4",
+        "removes_failure": true,
+        "reason": "The failure mechanism is that the detach function is bound to a single immutable key sequence causing conflicts, and users cannot modify the binding. The proposed change directly addresses this by accepting detach intent from multiple configurable input pathways with user-definable keybinding alternatives. This eliminates the immutability constraint and allows users to configure bindings that avoid conflicts with their workflows and muscle memory, removing the need for terminal emulator-level workarounds. The root cause (single immutable binding) is completely eliminated by making bindings configurable."
+      },
+      {
+        "repair_from": "OBS-20260810-0066-c486c4",
+        "applied_to": "OBS-20260809-0033-daa67d",
+        "removes_failure": true,
+        "reason": "The failure mechanism is that a hardcoded keybinding creates a single rigid pathway for detach intent, which gets blocked when intermediate layers intercept the key sequence or it conflicts with user workflows. Making the detach key sequence user-configurable directly removes this rigidity by allowing users to specify alternative keybindings that avoid interception by intermediate layers and align with their workflows. This creates alternative pathways for routing detach intent to the system, eliminating the root cause of the failure."
+      }
+    ],
+    "short_circuited": false
+  },
+  {
+    "verdict": "same_mechanism",
+    "edge": "merged",
+    "left_id": "OBS-20260809-0044-0ab55d",
+    "right_id": "OBS-20260810-0077-4c9621",
+    "reasons": [
+      "each repair removes the other's failure"
+    ],
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260809-0044-0ab55d",
+        "applied_to": "OBS-20260810-0077-4c9621",
+        "removes_failure": true,
+        "reason": "The failure mechanism is that the static 8GB default limit falls below typical concurrent workload requirements, forcing human-mediated exception handling for normal use cases. The proposed change directly addresses both components: (1) raising the default to 16GB eliminates the artificial scarcity for most cases, and (2) automatic approval up to 32GB based on workload type classification removes the human-mediated exception handling requirement for the remaining cases. Since development workloads (coding agents, dev servers, e2e tests, browsers) would be classified as eligible workload types, developers would either receive adequate resources by default or obtain them automatically without approval cycles. The causal chain producing the failure—static limit below requirements forcing approval workflow—would be broken."
+      },
+      {
+        "repair_from": "OBS-20260810-0077-4c9621",
+        "applied_to": "OBS-20260809-0044-0ab55d",
+        "removes_failure": true,
+        "reason": "The proposed change directly eliminates the causal mechanism by raising the default RAM limit to accommodate the exact workload pattern (coding agents + dev servers + e2e tests + browsers) that currently triggers the failure. By positioning the new default above the threshold required for these common development tooling combinations, the change removes the mismatch between automated provisioning capacity and actual workload requirements. This eliminates the manual approval gate for typical concurrent developer tooling workloads, resolving both the insufficient RAM access issue and the latency/friction from human intervention for this predictable, legitimate use case."
       }
     ],
     "short_circuited": false
@@ -618,23 +666,60 @@
   {
     "verdict": "different_mechanisms",
     "edge": "related_distinct",
-    "left_id": "OBS-20260809-0033-daa67d",
-    "right_id": "OBS-20260810-0066-c486c4",
+    "left_id": "OBS-20260810-0072-81eb3c",
+    "right_id": "OBS-20260811-0017-06f96a",
     "reasons": [
-      "failure_class differs: conflict vs absence"
+      "failure_class differs: absence vs unverified"
     ],
     "counterfactuals": [],
     "short_circuited": true
   },
   {
-    "verdict": "different_mechanisms",
-    "edge": "related_distinct",
-    "left_id": "OBS-20260809-0044-0ab55d",
-    "right_id": "OBS-20260810-0077-4c9621",
+    "verdict": "same_mechanism",
+    "edge": "merged",
+    "left_id": "OBS-20260810-0011-8ce390",
+    "right_id": "OBS-20260811-0066-9087db",
     "reasons": [
-      "failure_class differs: capacity vs latency"
+      "each repair removes the other's failure"
     ],
-    "counterfactuals": [],
-    "short_circuited": true
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260810-0011-8ce390",
+        "applied_to": "OBS-20260811-0066-9087db",
+        "removes_failure": true,
+        "reason": "The failure mechanism is that the BAA scope enumeration is implicit/ambiguous, requiring customers to seek written confirmation about whether specific components (Machines and Postgres) are covered. The proposed change directly addresses this by making the BAA documentation explicitly list all covered services by their marketed product names (e.g., 'Fly Machines', 'Managed Postgres'). With explicit enumeration of 'Fly Machines' and 'Managed Postgres' in the BAA documentation, the customer would no longer need to seek written confirmation - they could self-service verify that both components storing PHI are covered by consulting the explicit component list. This eliminates the human-mediated support interaction dependency and removes the interpretation/ambiguity issue entirely."
+      },
+      {
+        "repair_from": "OBS-20260811-0066-9087db",
+        "applied_to": "OBS-20260810-0011-8ce390",
+        "removes_failure": true,
+        "reason": "The failure mechanism is the inability to independently verify BAA coverage for specific platform components (Fly Machines, Managed Postgres) due to non-explicit enumeration in contract language. The proposed change directly addresses this by requiring either explicit enumeration of all covered infrastructure component types OR a machine-readable scope definition for programmatic verification. Either implementation method would eliminate the ambiguity about whether 'Managed Postgres' and 'Fly Machines' are covered, and would remove the dependency on vendor interpretation and the associated response latency risk. The customer could independently verify coverage without support ticket submission, eliminating the deployment risk window caused by verification uncertainty."
+      }
+    ],
+    "short_circuited": false
+  },
+  {
+    "verdict": "same_mechanism",
+    "edge": "merged",
+    "left_id": "OBS-20260810-0007-e1ac2d",
+    "right_id": "OBS-20260811-0073-650eef",
+    "reasons": [
+      "each repair removes the other's failure"
+    ],
+    "counterfactuals": [
+      {
+        "repair_from": "OBS-20260810-0007-e1ac2d",
+        "applied_to": "OBS-20260811-0073-650eef",
+        "removes_failure": true,
+        "reason": "The proposed syntax extension directly addresses the reported failure mechanism. The failure occurs because Python's from-import syntax operates at module granularity, forcing developers to write separate import statements when importing different names from different modules within the same package. The proposed change introduces exactly the capability that is missing: 'from package import (name1 from submodule1, name2 from submodule2)' allows specification of source module per imported name within a single statement. This eliminates the need to serialize logically parallel imports into sequential statements, transforming 'three import lines instead of one' into a single declaration that expresses 'import these specific names from this set of sibling modules' - which is precisely what the failure mechanism identifies as lacking."
+      },
+      {
+        "repair_from": "OBS-20260811-0073-650eef",
+        "applied_to": "OBS-20260810-0007-e1ac2d",
+        "removes_failure": true,
+        "reason": "The proposed change directly addresses the core mechanism: Python's lack of syntax for binding names from multiple source modules in a single statement. If the syntax were extended to accept multiple (module, names) pairs—e.g., 'from module1 import a, module2 import b'—then users could express imports from multiple modules in one declaration without requiring separate statements for each module or manual __init__.py re-export aggregation. This eliminates both the repetitive statement problem and the __init__.py maintenance burden by providing native syntax for the exact pattern currently missing."
+      }
+    ],
+    "short_circuited": false
   }
 ]
