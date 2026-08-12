@@ -1,4 +1,4 @@
-# Business Candidate Analyst — 2026-08-12T05:28:49Z
+# Business Candidate Analyst — 2026-08-12T23:10:27Z
 
 This report is produced by a downstream, read-only consumer of Constraint Archaeology's published evidence (`observations.jsonl`, `anomalies.json`, `latest-evaluations.json`). It never modifies that evidence, never calls a model, and never searches the web — see `CONTRACT.md`. Two analytical modes are reported separately and are not merged conceptually.
 
@@ -6,525 +6,236 @@ This report is produced by a downstream, read-only consumer of Constraint Archae
 
 Mode A: Constraint Archaeology evidence → missing function / unmet need → business candidate.
 
-Anomalies considered: **253** · Opportunity groups formed: **192** · Registry events appended: **34** · Candidates on file: **79**
+Anomalies considered: **291** · Opportunity groups formed: **225** · Registry events appended: **16** · Candidates on file: **92**
 
 - **PROMISING**: 0
 - **INVESTIGATE**: 0
 - **VALIDATING**: 0
-- **WATCH**: 79 — BC-0001, BC-0002, BC-0003, BC-0004, BC-0005, BC-0006, BC-0007, BC-0008, BC-0009, BC-0010, BC-0011, BC-0012, BC-0013, BC-0014, BC-0015, BC-0016, BC-0017, BC-0018, BC-0019, BC-0020, BC-0021, BC-0022, BC-0023, BC-0024, BC-0025, BC-0026, BC-0027, BC-0028, BC-0029, BC-0030, BC-0031, BC-0032, BC-0033, BC-0034, BC-0035, BC-0036, BC-0037, BC-0038, BC-0039, BC-0040, BC-0041, BC-0042, BC-0043, BC-0044, BC-0045, BC-0046, BC-0047, BC-0048, BC-0049, BC-0062, BC-0063, BC-0064, BC-0065, BC-0066, BC-0067, BC-0068, BC-0069, BC-0070, BC-0071, BC-0072, BC-0073, BC-0074, BC-0075, BC-0076, BC-0077, BC-0078, BC-0079, BC-0080, BC-0081, BC-0082, BC-0083, BC-0084, BC-0085, BC-0086, BC-0087, BC-0088, BC-0089, BC-0090, BC-0091
+- **WATCH**: 92 — BC-0001, BC-0002, BC-0003, BC-0004, BC-0005, BC-0006, BC-0007, BC-0008, BC-0009, BC-0010, BC-0011, BC-0012, BC-0013, BC-0014, BC-0015, BC-0016, BC-0017, BC-0018, BC-0019, BC-0020, BC-0021, BC-0022, BC-0023, BC-0024, BC-0025, BC-0026, BC-0027, BC-0028, BC-0029, BC-0030, BC-0031, BC-0032, BC-0033, BC-0034, BC-0035, BC-0036, BC-0037, BC-0038, BC-0039, BC-0040, BC-0041, BC-0042, BC-0043, BC-0044, BC-0045, BC-0046, BC-0047, BC-0048, BC-0049, BC-0062, BC-0063, BC-0064, BC-0065, BC-0066, BC-0067, BC-0068, BC-0069, BC-0070, BC-0071, BC-0072, BC-0073, BC-0074, BC-0075, BC-0076, BC-0077, BC-0078, BC-0079, BC-0080, BC-0081, BC-0082, BC-0083, BC-0084, BC-0085, BC-0086, BC-0087, BC-0088, BC-0089, BC-0090, BC-0091, BC-0101, BC-0102, BC-0103, BC-0104, BC-0105, BC-0106, BC-0107, BC-0108, BC-0109, BC-0110, BC-0111, BC-0112, BC-0113
 - **REJECTED**: 0
 
-### New candidates (30)
+### New candidates (13)
 
-### BC-0062 — WATCH
-From anomalies: `ANOM-0113`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Fly-proxy buffers first 10MB of request body for retry/replay capability, then pauses reading from client; fly-proxy buffers request bodies up to 10MB for retry/replay capability, blocking read from client for 3 seconds once buffer fills if app hasn't responded _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260810-0033-5f4253)_
-  - ✓ **economic_consequence**: EVIDENCED — pay  _(evidence: OBS-20260809-0011-344019)_
-  - ✓ **frequency**: EVIDENCED — every; every time _(evidence: OBS-20260809-0011-344019)_
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0033-5f4253)_
-  - ✓ **current_workaround**: EVIDENCED — Application developers forced to either accept 3-second latency penalty, redesign API to use <10MB chunks, or switch to TLS-only service losing HTTP features; Fly.io http_service proxy layer with hardcoded 10MB buffer and 3-second timeout _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Proxy stops reading from client after 10MB buffer fills, waits 3s for app response; apps needing complete body before responding pay full pause every time; Proxy stops reading from client when 10MB buffer fills, waits hardcoded 3 seconds for app response before continuing. No configuration to disable. 103 Early Hints workaround ineffective. _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **potential_product_function**: EVIDENCED — Fly-proxy buffers first 10MB of request body for retry/replay capability, then pauses reading from client; fly-proxy buffers request bodies up to 10MB for retry/replay capability, blocking read from client for 3 seconds once buffer fills if app hasn't responded _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.95, min=0.95, bucket=HIGH _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-
-### BC-0063 — WATCH
-From anomalies: `ANOM-0144`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Users must run vendor app (SuperLive Plus) with P2P cloud service to view recordings stored locally on camera SD cards, creating dependency on external intermediary for accessing local data _(evidence: OBS-20260810-0008-98061b)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0008-98061b)_
+### BC-0101 — WATCH
+From anomalies: `ANOM-0201, ANOM-0244, ANOM-0280`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Database administrators need to migrate from MPGv1 to MPGv2 clusters while preserving existing backup data; Version migration requires backup/restore workflow; users need to create backup, then restore to new version cluster rather than in-place upgrade; database version migration through backup-restore cycle _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0008-98061b)_
-  - ✓ **current_workaround**: EVIDENCED — SuperLive Plus app with P2P service as mandatory intermediary between user and their own camera's local storage _(evidence: OBS-20260810-0008-98061b)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Local data requires cloud intermediary - recordings physically present on SD card in local network unreachable without vendor's remote service _(evidence: OBS-20260810-0008-98061b)_
-  - ✓ **potential_product_function**: EVIDENCED — Users must run vendor app (SuperLive Plus) with P2P cloud service to view recordings stored locally on camera SD cards, creating dependency on external intermediary for accessing local data _(evidence: OBS-20260810-0008-98061b)_
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0055-249475)_
+  - ✓ **current_workaround**: EVIDENCED — Fly.io managed Postgres backup/restore UI (flyctl CLI support pending); Manual migration requiring separate backup restoration and data transfer between different PostgreSQL versions; manual backup restoration UI workflow, soon flyctl CLI _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **why_solutions_fail**: EVIDENCED — MPGv1 users stuck on old version until manual backup-restore migration completed; CLI-dependent workflows blocked until flyctl update; Migration blocked or required manual data export/import between incompatible cluster versions; inability to restore old version backups into new architecture without this feature _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **potential_product_function**: EVIDENCED — Database administrators need to migrate from MPGv1 to MPGv2 clusters while preserving existing backup data; Version migration requires backup/restore workflow; users need to create backup, then restore to new version cluster rather than in-place upgrade; database version migration through backup-restore cycle _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260810-0008-98061b)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0008-98061b)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=3, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260810-0008-98061b)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.733, min=0.7, bucket=MODERATE _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
 
-### BC-0064 — WATCH
-From anomalies: `ANOM-0145`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Consumer bears all cross-border shipping costs, customs, and tariffs to return defective product to manufacturer in China, making warranty economically unviable for low-value items _(evidence: OBS-20260810-0010-806a97)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0010-806a97)_
-  - ✓ **economic_consequence**: EVIDENCED — $; cost _(evidence: OBS-20260810-0010-806a97)_
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0010-806a97)_
-  - ✓ **current_workaround**: EVIDENCED — Customer self-ships defective GPU to China, pays shipping costs, customs, tariffs; manufacturer provides warranty replacement _(evidence: OBS-20260810-0010-806a97)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Both GPUs died within months showing artifacts; warranty process cost exceeds replacement value making it a total loss _(evidence: OBS-20260810-0010-806a97)_
-  - ✓ **potential_product_function**: EVIDENCED — Consumer bears all cross-border shipping costs, customs, and tariffs to return defective product to manufacturer in China, making warranty economically unviable for low-value items _(evidence: OBS-20260810-0010-806a97)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260810-0010-806a97)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0010-806a97)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260810-0010-806a97)_
-
-### BC-0065 — WATCH
-From anomalies: `ANOM-0146, ANOM-0208, ANOM-0252`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Customers must obtain explicit written confirmation that compliance agreements (BAA) cover all infrastructure components (compute + database) before storing protected health information; Legal compliance verification requires explicit written confirmation that specific infrastructure components are covered by regulatory agreements; Obtaining written legal confirmation that Business Associate Agreement covers all infrastructure components (compute and database) before deploying protected health information _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+### BC-0102 — WATCH
+From anomalies: `ANOM-0262`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Device requires initial WiFi pairing via vendor app to update firmware before Zigbee pairing will succeed _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0019-a59e9c)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **current_workaround**: EVIDENCED — Forum post requesting written confirmation from cloud provider support; Manual inquiry to hosting provider support team to confirm BAA scope across multiple service types; Support ticket / forum inquiry to cloud platform vendor for legal/compliance scope clarification _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Deploying healthcare application with PHI on infrastructure not covered by BAA, creating HIPAA compliance violation; Launching HIPAA-covered application without explicit written confirmation of BAA scope across all infrastructure components risks compliance violation; Risk of HIPAA violation if BAA scope is misunderstood or if database component is excluded from coverage _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **potential_product_function**: EVIDENCED — Customers must obtain explicit written confirmation that compliance agreements (BAA) cover all infrastructure components (compute + database) before storing protected health information; Legal compliance verification requires explicit written confirmation that specific infrastructure components are covered by regulatory agreements; Obtaining written legal confirmation that Business Associate Agreement covers all infrastructure components (compute and database) before deploying protected health information _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **current_workaround**: EVIDENCED — User must manually connect via WiFi, download Shelly App, update firmware, then attempt Zigbee pairing _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Zigbee2MQTT finds device but loads auto-generated profile; pairing fails even after firmware update via WiFi/app _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **potential_product_function**: EVIDENCED — Device requires initial WiFi pairing via vendor app to update firmware before Zigbee pairing will succeed _(evidence: OBS-20260812-0019-a59e9c)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=3, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0019-a59e9c)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.797, min=0.75, bucket=MODERATE _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0019-a59e9c)_
 
-### BC-0066 — WATCH
-From anomalies: `ANOM-0149`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Manually coordinating device discovery across multiple isolated Zigbee networks, each requiring separate MQTT topic namespaces and discovery configurations _(evidence: OBS-20260810-0019-661f5e)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260810-0019-661f5e)_
+### BC-0103 — WATCH
+From anomalies: `ANOM-0263`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Corporate AI tool access requires personal identity verification that employees may not want to provide with personal credentials _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0020-9cb4c5)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0019-661f5e)_
-  - ✓ **current_workaround**: EVIDENCED — User must diagnose why newly paired Zigbee devices appear in zigbee2mqtt but fail to propagate through MQTT integration to Home Assistant device registry _(evidence: OBS-20260810-0019-661f5e)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Silent discovery failure - devices paired to one of three parallel Zigbee networks stop appearing in Home Assistant despite identical configuration that worked previously, requiring manual troubleshooting of MQTT topic routing _(evidence: OBS-20260810-0019-661f5e)_
-  - ✓ **potential_product_function**: EVIDENCED — Manually coordinating device discovery across multiple isolated Zigbee networks, each requiring separate MQTT topic namespaces and discovery configurations _(evidence: OBS-20260810-0019-661f5e)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **current_workaround**: EVIDENCED — Phone number verification for Mac app and model access _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Authentication gate blocks access even for paying team plan members who lack company phones or refuse to link personal numbers _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **potential_product_function**: EVIDENCED — Corporate AI tool access requires personal identity verification that employees may not want to provide with personal credentials _(evidence: OBS-20260812-0020-9cb4c5)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260810-0019-661f5e)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0019-661f5e)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0020-9cb4c5)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260810-0019-661f5e)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0020-9cb4c5)_
 
-### BC-0067 — WATCH
-From anomalies: `ANOM-0151`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual quality control and error pattern detection across multiple model sizes to identify which models fail on which prompts, discovering that smaller models produce predictable but inconsistent errors in structured output _(evidence: OBS-20260810-0021-7e8921)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0021-7e8921)_
+### BC-0104 — WATCH
+From anomalies: `ANOM-0264`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Operating system must multiplex hardware interrupt handling and deferred procedure calls (DPC) across GPU driver, USB controller, Wi-Fi, and Bluetooth stack while maintaining sub-millisecond audio buffer timing _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0021-64547b)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0021-7e8921)_
-  - ✓ **current_workaround**: EVIDENCED — Developer running thousands of identical prompts across different model sizes, manually tracking which prompts fail on which models, testing temperature=0 for consistency _(evidence: OBS-20260810-0021-7e8921)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Small model cannot grasp concept needed for task, middle model makes different errors than small model, errors deterministic per model-prompt pair but require extensive testing to discover _(evidence: OBS-20260810-0021-7e8921)_
-  - ✓ **potential_product_function**: EVIDENCED — Manual quality control and error pattern detection across multiple model sizes to identify which models fail on which prompts, discovering that smaller models produce predictable but inconsistent errors in structured output _(evidence: OBS-20260810-0021-7e8921)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **current_workaround**: EVIDENCED — User performing iterative driver troubleshooting, BIOS configuration changes, clean OS reinstalls, and engaging repair shop diagnostics over 4-month period _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **why_solutions_fail**: EVIDENCED — DPC latency spikes from NVIDIA driver/USB/Wi-Fi cause Bluetooth audio buffer underruns during system load; no diagnostic tool or configuration isolates the conflicting component; professional repair shop also unable to diagnose _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **potential_product_function**: EVIDENCED — Operating system must multiplex hardware interrupt handling and deferred procedure calls (DPC) across GPU driver, USB controller, Wi-Fi, and Bluetooth stack while maintaining sub-millisecond audio buffer timing _(evidence: OBS-20260812-0021-64547b)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260810-0021-7e8921)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0021-7e8921)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0021-64547b)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260810-0021-7e8921)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0021-64547b)_
 
-### BC-0068 — WATCH
-From anomalies: `ANOM-0152, ANOM-0215`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Maintaining application availability while underlying physical hosts require maintenance or rebalancing; Platform automatically migrates VMs between physical hosts for maintenance/rebalancing _(evidence: OBS-20260810-0022-5ad829, OBS-20260811-0077-2ace4f)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0022-5ad829)_
+### BC-0105 — WATCH
+From anomalies: `ANOM-0268`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — users want health metrics (steps, heart rate, sleep stages, workouts) available as sensors in their home automation system, requiring continuous background data transfer from a locked iOS health database _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0030-759779)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260811-0077-2ace4f)_
-  - ✓ **current_workaround**: EVIDENCED — Cloud platform operators performing unscheduled migrations; Manual architecture planning around platform migration behavior and volume attachment constraints _(evidence: OBS-20260810-0022-5ad829, OBS-20260811-0077-2ace4f)_
-  - ✓ **why_solutions_fail**: EVIDENCED — App offline for varying durations (sometimes multiple hours) when platform migrates machine to different physical host or during deployment stops; Application becomes unreachable for extended periods (multiple hours reported) during platform-initiated migrations or congestion events; standard high-availability pattern (second machine) blocked by inability to share volume state _(evidence: OBS-20260810-0022-5ad829, OBS-20260811-0077-2ace4f)_
-  - ✓ **potential_product_function**: EVIDENCED — Maintaining application availability while underlying physical hosts require maintenance or rebalancing; Platform automatically migrates VMs between physical hosts for maintenance/rebalancing _(evidence: OBS-20260810-0022-5ad829, OBS-20260811-0077-2ace4f)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **current_workaround**: EVIDENCED — third-party iOS apps polling HealthKit and forwarding data via webhook to self-hosted Home Assistant instance _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **why_solutions_fail**: EVIDENCED — manual tapping required for sync unless paying for background delivery; data stays locked in Apple's walled garden; no native HA integration _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **potential_product_function**: EVIDENCED — users want health metrics (steps, heart rate, sleep stages, workouts) available as sensors in their home automation system, requiring continuous background data transfer from a locked iOS health database _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **willingness_to_pay**: EVIDENCED — subscription _(evidence: OBS-20260812-0030-759779)_
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260810-0022-5ad829, OBS-20260811-0077-2ace4f)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0022-5ad829, OBS-20260811-0077-2ace4f)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0030-759779)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260810-0022-5ad829, OBS-20260811-0077-2ace4f)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.45, min=0.45, bucket=LOW _(evidence: OBS-20260812-0030-759779)_
 
-### BC-0069 — WATCH
-From anomalies: `ANOM-0156`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Integration relies on stable API contracts from TV firmware; volume control entity mapping broke when TV auto-updated firmware, requiring re-pairing but entities never recreated _(evidence: OBS-20260810-0030-9e8e94)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0030-9e8e94)_
+### BC-0106 — WATCH
+From anomalies: `ANOM-0270`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — System administrators must piece together configuration files from scattered documentation across multiple forums and docs pages to understand and set resource control thresholds _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0032-867bfa)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0030-9e8e94)_
-  - ✓ **current_workaround**: EVIDENCED — User manually removes/re-installs integration, checks logs for KeyError, tries alternative pairing methods (HomeKit), but volume entities remain unavailable while power/mute still work _(evidence: OBS-20260810-0030-9e8e94)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Firmware update changed API surface (KeyError: 'volume' in audio_settings), breaking existing integration contract without user control over update timing or rollback path _(evidence: OBS-20260810-0030-9e8e94)_
-  - ✓ **potential_product_function**: EVIDENCED — Integration relies on stable API contracts from TV firmware; volume control entity mapping broke when TV auto-updated firmware, requiring re-pairing but entities never recreated _(evidence: OBS-20260810-0030-9e8e94)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **current_workaround**: EVIDENCED — Manual assembly of limits.conf files for pam_limits and user-.slice.d by reading fragmented documentation sources _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Administrator can make configurations work but cannot explain them well to others due to incomplete mental model of the underlying technology _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **potential_product_function**: EVIDENCED — System administrators must piece together configuration files from scattered documentation across multiple forums and docs pages to understand and set resource control thresholds _(evidence: OBS-20260812-0032-867bfa)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260810-0030-9e8e94)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0030-9e8e94)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0032-867bfa)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260810-0030-9e8e94)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0032-867bfa)_
 
-### BC-0070 — WATCH
-From anomalies: `ANOM-0157`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Authorized security professionals need to discover vulnerabilities and validate exploits before attackers do, requiring access to frontier AI capabilities calibrated for offensive security work _(evidence: OBS-20260810-0031-e55cc9)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260810-0031-e55cc9)_
+### BC-0107 — WATCH
+From anomalies: `ANOM-0271`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manually context-switching between terminal windows to synchronize or coordinate work happening in parallel AI-assisted coding sessions _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0039-1744cd)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - ✓ **frequency**: EVIDENCED — each  _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **current_workaround**: EVIDENCED — Developer switching between terminal windows/tabs to check status or manually copy information between independent OpenCode sessions _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Sessions run in isolation; developer must manually bridge information between parallel sessions that may be working on related changes _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **potential_product_function**: EVIDENCED — Manually context-switching between terminal windows to synchronize or coordinate work happening in parallel AI-assisted coding sessions _(evidence: OBS-20260812-0039-1744cd)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260812-0039-1744cd)_
+
+### BC-0108 — WATCH
+From anomalies: `ANOM-0275`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Getting specialized server hardware with many GPUs to recognize all cards requires matching exact BIOS versions and PCIe lane configurations _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0043-33e95b)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0031-e55cc9)_
-  - ✓ **current_workaround**: EVIDENCED — Manual vulnerability research, code review, malware analysis, and incident response workflows by security teams _(evidence: OBS-20260810-0031-e55cc9)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Defense teams lack access to frontier AI models capable of advanced vulnerability discovery and exploit validation, while the attack surface expands _(evidence: OBS-20260810-0031-e55cc9)_
-  - ✓ **potential_product_function**: EVIDENCED — Authorized security professionals need to discover vulnerabilities and validate exploits before attackers do, requiring access to frontier AI capabilities calibrated for offensive security work _(evidence: OBS-20260810-0031-e55cc9)_
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **current_workaround**: EVIDENCED — Manual BIOS version hunting across GPU rental platforms and vendor support channels to resolve hardware initialization failures _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **why_solutions_fail**: EVIDENCED — System initialization failure at 16 GPUs (debug code 99) despite working with 8 GPUs; vendor BIOS unavailable, forcing search on rental platforms _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **potential_product_function**: EVIDENCED — Getting specialized server hardware with many GPUs to recognize all cards requires matching exact BIOS versions and PCIe lane configurations _(evidence: OBS-20260812-0043-33e95b)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260810-0031-e55cc9)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0031-e55cc9)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260810-0031-e55cc9)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **contradictory_evidence**: EVIDENCED — contradiction_present _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0043-33e95b)_
 
-### BC-0071 — WATCH
-From anomalies: `ANOM-0162`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Conversational AI already generates contextual responses but cannot trigger its own UI animation states on demand; animation control and conversation logic are separated _(evidence: OBS-20260810-0042-be7d71)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0042-be7d71)_
+### BC-0109 — WATCH
+From anomalies: `ANOM-0279`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — VPS acts as forwarding proxy to hide home IP while routing encrypted traffic through WireGuard tunnel _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0054-992663)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0042-be7d71)_
-  - ✓ **current_workaround**: EVIDENCED — Android ChatGPT app displays pet animations only during system states (thinking/processing), not in response to conversation content or user requests _(evidence: OBS-20260810-0042-be7d71)_
-  - ✓ **why_solutions_fail**: EVIDENCED — User wants pet to react to conversation context ("I'm tired" → sleepy animation) but animations are hardcoded to system states, not conversation semantics _(evidence: OBS-20260810-0042-be7d71)_
-  - ✓ **potential_product_function**: EVIDENCED — Conversational AI already generates contextual responses but cannot trigger its own UI animation states on demand; animation control and conversation logic are separated _(evidence: OBS-20260810-0042-be7d71)_
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **current_workaround**: EVIDENCED — Manual multi-layer configuration: VPS with WireGuard tunnel, iptables NAT rules, Apache SSL config, Let's Encrypt cert issuance, DNS pointing to VPS _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Port 443 traffic forwarded through tunnel returns SSL protocol errors; certificate appears valid at origin but connection fails at client; Cloudflare proxy shows only client-to-proxy encryption working, not proxy-to-origin _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **potential_product_function**: EVIDENCED — VPS acts as forwarding proxy to hide home IP while routing encrypted traffic through WireGuard tunnel _(evidence: OBS-20260812-0054-992663)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260810-0042-be7d71)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0042-be7d71)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0054-992663)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260810-0042-be7d71)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0054-992663)_
 
-### BC-0072 — WATCH
-From anomalies: `ANOM-0165`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual stream supervision: running OBS on local PC 24/7, restarting after connection drops at unpredictable times, encoding to platform-specific specs _(evidence: OBS-20260810-0050-a85c0d)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0050-a85c0d)_
+### BC-0110 — WATCH
+From anomalies: `ANOM-0281`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual review and testing of AI-written code to catch silent bugs, reliability issues, and long-term breakage before shipping _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260812-0056-feba32)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0050-a85c0d)_
-  - ✓ **current_workaround**: EVIDENCED — Local PC running OBS software continuously, monitored manually, restarted when crashes occur _(evidence: OBS-20260810-0050-a85c0d)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Stream goes offline during unmanned hours when connection drops or software crashes, requiring manual intervention to restart _(evidence: OBS-20260810-0050-a85c0d)_
-  - ✓ **potential_product_function**: EVIDENCED — Manual stream supervision: running OBS on local PC 24/7, restarting after connection drops at unpredictable times, encoding to platform-specific specs _(evidence: OBS-20260810-0050-a85c0d)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **current_workaround**: EVIDENCED — Developer manual inspection (beginner asking community for verification methods) _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **why_solutions_fail**: EVIDENCED — AI-generated code contains hidden bugs that aren't caught until after deployment; verification burden blocks shipping _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual review and testing of AI-written code to catch silent bugs, reliability issues, and long-term breakage before shipping _(evidence: OBS-20260812-0056-feba32)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260810-0050-a85c0d)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0050-a85c0d)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['hacker_news'] _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0056-feba32)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.55, min=0.55, bucket=MODERATE _(evidence: OBS-20260810-0050-a85c0d)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0056-feba32)_
 
-### BC-0073 — WATCH
-From anomalies: `ANOM-0170`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — feature requests arrive through multiple disconnected channels requiring manual aggregation _(evidence: OBS-20260810-0059-3de8ff)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0059-3de8ff)_
+### BC-0111 — WATCH
+From anomalies: `ANOM-0282`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — manual tracking across multiple tools (DMs, spreadsheets, payment platforms) with high coordination cost between client communication and administrative state updates _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0061-720bd7)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0059-3de8ff)_
-  - ✓ **current_workaround**: EVIDENCED — support tickets, sales calls, Slack threads, app store reviews _(evidence: OBS-20260810-0059-3de8ff)_
-  - ✓ **why_solutions_fail**: EVIDENCED — requests lost, duplicated, or deprioritized due to fragmentation across communication channels _(evidence: OBS-20260810-0059-3de8ff)_
-  - ✓ **potential_product_function**: EVIDENCED — feature requests arrive through multiple disconnected channels requiring manual aggregation _(evidence: OBS-20260810-0059-3de8ff)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **current_workaround**: EVIDENCED — direct messages, informal follow-up systems, separate payment tools _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **why_solutions_fail**: EVIDENCED — leads go cold in DMs during life interruptions; clients lost due to administrative gaps not coaching quality _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **potential_product_function**: EVIDENCED — manual tracking across multiple tools (DMs, spreadsheets, payment platforms) with high coordination cost between client communication and administrative state updates _(evidence: OBS-20260812-0061-720bd7)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['dev:startup'] _(evidence: OBS-20260810-0059-3de8ff)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0059-3de8ff)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0061-720bd7)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260810-0059-3de8ff)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260812-0061-720bd7)_
 
-### BC-0074 — WATCH
-From anomalies: `ANOM-0171`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual device commissioning indoors, physical transport to outbuilding, power cycling to reconnect, device loss after hours _(evidence: OBS-20260810-0063-c6c32e)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0063-c6c32e)_
+### BC-0112 — WATCH
+From anomalies: `ANOM-0289`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Engineers manually synthesize conflicting AI outputs, assess evidence quality, determine relevance to constraints, and decide which model answer to trust _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0075-528ae4)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0063-c6c32e)_
-  - ✓ **current_workaround**: EVIDENCED — User physically carrying devices between buildings, manually restarting equipment, enabling/disabling network protocols to maintain connectivity _(evidence: OBS-20260810-0063-c6c32e)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Door sensors stop working after couple hours in outbuilding; temperature sensors also lost connection after IPv6 changes; all thread devices dropped when restarting _(evidence: OBS-20260810-0063-c6c32e)_
-  - ✓ **potential_product_function**: EVIDENCED — Manual device commissioning indoors, physical transport to outbuilding, power cycling to reconnect, device loss after hours _(evidence: OBS-20260810-0063-c6c32e)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **current_workaround**: EVIDENCED — Engineer judgment after querying ChatGPT, other models, documentation, blog posts, and developer examples _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Multiple AI models can agree for the same wrong reason; no systematic way to evaluate evidence quality, disagreement, uncertainty, or counterfactuals _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **potential_product_function**: EVIDENCED — Engineers manually synthesize conflicting AI outputs, assess evidence quality, determine relevance to constraints, and decide which model answer to trust _(evidence: OBS-20260812-0075-528ae4)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260810-0063-c6c32e)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0063-c6c32e)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0075-528ae4)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260810-0063-c6c32e)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0075-528ae4)_
 
-### BC-0075 — WATCH
-From anomalies: `ANOM-0176`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Developer must manually coordinate prompt_cache_key values across parallel API calls to prevent unintended cache sharing or guarantee cache isolation between logically distinct requests _(evidence: OBS-20260810-0075-fddfed)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260810-0075-fddfed)_
-  - ✓ **economic_consequence**: EVIDENCED — bill; billing _(evidence: OBS-20260810-0075-fddfed)_
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0075-fddfed)_
-  - ✓ **current_workaround**: EVIDENCED — Developer setting unique prompt_cache_key parameter per request to control cache routing behavior _(evidence: OBS-20260810-0075-fddfed)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Without explicit cache key management, parallel requests with same prefix may unpredictably share cached tokens, affecting performance expectations or billing _(evidence: OBS-20260810-0075-fddfed)_
-  - ✓ **potential_product_function**: EVIDENCED — Developer must manually coordinate prompt_cache_key values across parallel API calls to prevent unintended cache sharing or guarantee cache isolation between logically distinct requests _(evidence: OBS-20260810-0075-fddfed)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260810-0075-fddfed)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0075-fddfed)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.72, min=0.72, bucket=MODERATE _(evidence: OBS-20260810-0075-fddfed)_
-
-### BC-0076 — WATCH
-From anomalies: `ANOM-0179, ANOM-0217`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Phone answering competes with physical kennel work (cleaning runs, grooming); calls during operational tasks go to voicemail and lose bookings; Real-time calendar coordination between phone calls and in-person facility operations (cleaning runs, grooming) _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - ✓ **economic_consequence**: EVIDENCED — revenue _(evidence: OBS-20260811-0006-ba7232)_
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - ✓ **current_workaround**: EVIDENCED — Kennel owner answering phone manually while performing other tasks, voicemail for missed calls; Kennel owner interrupting physical work to answer phone, or voicemail leading to delayed/lost bookings _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Calls go to voicemail during cleaning/grooming work or concurrent calls, resulting in booking abandonment; Calls to voicemail when owner is cleaning runs or on another line; bookings lost to competitors who answer _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - ✓ **potential_product_function**: EVIDENCED — Phone answering competes with physical kennel work (cleaning runs, grooming); calls during operational tasks go to voicemail and lose bookings; Real-time calendar coordination between phone calls and in-person facility operations (cleaning runs, grooming) _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
-
-### BC-0077 — WATCH
-From anomalies: `ANOM-0180, ANOM-0224`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Developers must manually discover and copy the process ID, then attach debugging tools before the target code executes; manually inserting os.getpid() calls and coordinating debugger attachment to running Python processes _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0018-9d4497)_
+### BC-0113 — WATCH
+From anomalies: `ANOM-0290`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual deletion of system junk and app caches to reclaim disk space _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0076-dbc0c2)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0018-9d4497)_
-  - ✓ **current_workaround**: EVIDENCED — Manual workflow: run Python, find PID through external tools (ps/task manager), quickly attach debugger before relevant code runs; developers manually add print statements or code to expose process ID for external debugger attachment _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Timing race - target code may execute before developer can find PID and attach debugger; requires external tools to discover PID; contributors learning CPython internals must manually instrument code to enable debugging workflows _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-  - ✓ **potential_product_function**: EVIDENCED — Developers must manually discover and copy the process ID, then attach debugging tools before the target code executes; manually inserting os.getpid() calls and coordinating debugger attachment to running Python processes _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **current_workaround**: EVIDENCED — User manually identifying and removing temporary files, caches, and system artifacts OR third-party cleaning applications _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **why_solutions_fail**: EVIDENCED — System runs out of disk space, triggering warnings; users lack visibility into what consumes storage or what can be safely deleted _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual deletion of system junk and app caches to reclaim disk space _(evidence: OBS-20260812-0076-dbc0c2)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0076-dbc0c2)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.675, min=0.6, bucket=MODERATE _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-
-### BC-0078 — WATCH
-From anomalies: `ANOM-0190, ANOM-0253`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — manual human-driven failure detection through downstream absence signals; teams rely on downstream effects (e.g. lead flow) to notice workflow failures rather than having automated monitoring alerts _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - ✓ **current_workaround**: EVIDENCED — ad-hoc user inquiries asking about missing expected outputs; manual checking by downstream consumers noticing missing data or asking colleagues if data pipeline is still working _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - ✓ **why_solutions_fail**: EVIDENCED — silent automation failure with no alerting - discovery only happens when humans notice absence of expected results; silent automation failure with no alerting mechanism triggering detection _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - ✓ **potential_product_function**: EVIDENCED — manual human-driven failure detection through downstream absence signals; teams rely on downstream effects (e.g. lead flow) to notice workflow failures rather than having automated monitoring alerts _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['dev:discuss'] _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
-
-### BC-0079 — WATCH
-From anomalies: `ANOM-0195, ANOM-0229`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual research, cross-referencing clinical literature, dosage calculations, product sourcing across vendors, formatting into client-deliverable documents; Manual research, dosage calculation, brand comparison, and protocol documentation for individualized supplement recommendations _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260811-0039-553676)_
-  - ✓ **economic_consequence**: EVIDENCED — spend _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **frequency**: EVIDENCED — each  _(evidence: OBS-20260811-0039-553676)_
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **current_workaround**: EVIDENCED — Manual analysis taking 2-3 hours per client protocol; Practitioner manual work over 2-3 hours per client protocol _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Practitioners cannot scale client volume due to hours spent on each supplement protocol; clients may receive delayed or less thorough recommendations; Practitioners spend 2-3 hours per client on repetitive protocol creation instead of higher-value clinical work _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **potential_product_function**: EVIDENCED — Manual research, cross-referencing clinical literature, dosage calculations, product sourcing across vendors, formatting into client-deliverable documents; Manual research, dosage calculation, brand comparison, and protocol documentation for individualized supplement recommendations _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **willingness_to_pay**: EVIDENCED — spent _(evidence: OBS-20260811-0039-553676)_
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.35, min=0.3, bucket=LOW _(evidence: OBS-20260811-0039-553676, OBS-20260812-0028-4c3246)_
-
-### BC-0080 — WATCH
-From anomalies: `ANOM-0196, ANOM-0241`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Binary compatibility layer allows single compiled extension to work across Python versions, avoiding recompilation; Maintaining binary compatibility across Python versions so one compiled extension works with multiple releases _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-  - ✓ **economic_consequence**: EVIDENCED — cost; costs _(evidence: OBS-20260812-0051-30b1b2)_
-  - ✓ **frequency**: EVIDENCED — again _(evidence: OBS-20260811-0040-4b27bb)_
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0051-30b1b2)_
-  - ✓ **current_workaround**: EVIDENCED — Projects building abi3 wheels with stable ABI - compiling separate binaries for different version ranges; Stable ABI (Application Binary Interface) - macros and function signatures frozen across versions _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-  - ✓ **why_solutions_fail**: EVIDENCED — ABI breaks force recompilation and redistribution - single binary cannot support both old and new Python versions across the break; Core interpreter improvements blocked by ABI stability guarantees; workarounds like pointer tagging instead of cleaner bit fields; separate codepaths for platforms _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-  - ✓ **potential_product_function**: EVIDENCED — Binary compatibility layer allows single compiled extension to work across Python versions, avoiding recompilation; Maintaining binary compatibility across Python versions so one compiled extension works with multiple releases _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
-
-### BC-0081 — WATCH
-From anomalies: `ANOM-0203`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Database administrators manually track timestamps before running risky operations, then navigate to dashboard to restore cluster when something goes wrong; Database operators need to recover from operational mistakes (bad migrations, accidental deletes) by restoring to specific timestamps rather than discrete backup snapshots _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260811-0055-876113)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0066-f32c7d)_
-  - ✓ **current_workaround**: EVIDENCED — Dashboard UI for point-in-time restore (previously not available in CLI), manual timestamp tracking; Manual restoration using backup IDs from dashboard UI; lacking CLI support for point-in-time recovery and custom naming _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Accidental delete, bad migration causing data loss or corruption requiring rollback to earlier state; Operators couldn't script or automate recovery workflows that needed timestamp-based restoration or custom cluster naming without switching to web dashboard _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **potential_product_function**: EVIDENCED — Database administrators manually track timestamps before running risky operations, then navigate to dashboard to restore cluster when something goes wrong; Database operators need to recover from operational mistakes (bad migrations, accidental deletes) by restoring to specific timestamps rather than discrete backup snapshots _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.735, min=0.72, bucket=MODERATE _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-
-### BC-0082 — WATCH
-From anomalies: `ANOM-0205`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Coordinating type annotation semantics across different Python versions (pre-3.14 vs 3.14+) requires maintaining different code paths or accepting breaking changes; Library maintainers must manually manage conditional imports and annotation behavior across Python versions, with a hard cutoff date (EOL of Python 3.13) forcing simultaneous changes _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - ✓ **current_workaround**: EVIDENCED — Manual tracking of Python version compatibility; conditional code branches; migration timing coordinated with Python EOL dates; Python library maintainers manually managing __future__ import compatibility flags and dealing with flag-day version transitions _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Migration creates warnings, forces flag-day transitions at version EOL, makes it impossible to write version-conditional future imports; Migration requires coordinated changes across all supported Python versions simultaneously; impossible to gradually migrate; warnings accumulate until EOL cutoff _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - ✓ **potential_product_function**: EVIDENCED — Coordinating type annotation semantics across different Python versions (pre-3.14 vs 3.14+) requires maintaining different code paths or accepting breaking changes; Library maintainers must manually manage conditional imports and annotation behavior across Python versions, with a hard cutoff date (EOL of Python 3.13) forcing simultaneous changes _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.835, min=0.82, bucket=HIGH _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
-
-### BC-0083 — WATCH
-From anomalies: `ANOM-0219`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Users manually configure camera hardware settings per device instead of automating based on ambient conditions _(evidence: OBS-20260812-0008-2cf7ed)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260812-0008-2cf7ed)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0008-2cf7ed)_
-  - ✓ **current_workaround**: EVIDENCED — Periodic API polling to cloud platform to refresh device state _(evidence: OBS-20260812-0008-2cf7ed)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Entity state becomes stale when polling disabled to save quota; must choose between quota consumption and state accuracy _(evidence: OBS-20260812-0008-2cf7ed)_
-  - ✓ **potential_product_function**: EVIDENCED — Users manually configure camera hardware settings per device instead of automating based on ambient conditions _(evidence: OBS-20260812-0008-2cf7ed)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260812-0008-2cf7ed)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0008-2cf7ed)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.72, min=0.72, bucket=MODERATE _(evidence: OBS-20260812-0008-2cf7ed)_
-
-### BC-0084 — WATCH
-From anomalies: `ANOM-0221`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — home users want to run accessible servers but ISP uses CGNAT (Carrier-Grade NAT) blocking incoming connections _(evidence: OBS-20260812-0010-73ef1b)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260812-0010-73ef1b)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0010-73ef1b)_
-  - ✓ **current_workaround**: EVIDENCED — VPS provider acting as reverse proxy tunnel endpoint to bypass ISP's CGNAT restrictions _(evidence: OBS-20260812-0010-73ef1b)_
-  - ✓ **why_solutions_fail**: EVIDENCED — IPv4 address shortage forces ISPs to put multiple customers behind shared IP addresses, breaking traditional server hosting from home _(evidence: OBS-20260812-0010-73ef1b)_
-  - ✓ **potential_product_function**: EVIDENCED — home users want to run accessible servers but ISP uses CGNAT (Carrier-Grade NAT) blocking incoming connections _(evidence: OBS-20260812-0010-73ef1b)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0010-73ef1b)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0010-73ef1b)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260812-0010-73ef1b)_
-
-### BC-0085 — WATCH
-From anomalies: `ANOM-0222`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual human processes for storing, accessing, and rotating cryptographic keys used to sign software releases _(evidence: OBS-20260812-0012-55a608)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260812-0012-55a608)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0012-55a608)_
-  - ✓ **current_workaround**: EVIDENCED — Developers managing signing keys, GitHub repositories storing credentials, certificate revocation and reissuance workflows _(evidence: OBS-20260812-0012-55a608)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Unencrypted private signing key exposed in GitHub repository, forcing Mozilla to revoke and rotate keys affecting all Firefox installations _(evidence: OBS-20260812-0012-55a608)_
-  - ✓ **potential_product_function**: EVIDENCED — Manual human processes for storing, accessing, and rotating cryptographic keys used to sign software releases _(evidence: OBS-20260812-0012-55a608)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['hacker_news'] _(evidence: OBS-20260812-0012-55a608)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0012-55a608)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0012-55a608)_
-
-### BC-0086 — WATCH
-From anomalies: `ANOM-0225`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Determining customer refund eligibility when third-party API rejects requests after potential billing _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **economic_consequence**: EVIDENCED — bill; billing; credit … _(evidence: OBS-20260812-0020-71982b)_
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **current_workaround**: EVIDENCED — Developer manually tracking which API rejections warrant refunds versus legitimate blocks _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Uncertainty whether moderation-blocked API calls consume billable credits, blocking automated refund policy _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **potential_product_function**: EVIDENCED — Determining customer refund eligibility when third-party API rejects requests after potential billing _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **willingness_to_pay**: EVIDENCED — refund _(evidence: OBS-20260812-0020-71982b)_
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0020-71982b)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0020-71982b)_
-
-### BC-0087 — WATCH
-From anomalies: `ANOM-0226`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual interpretation of cryptic motherboard diagnostic codes (D6) to troubleshoot hardware compatibility/initialization issues during first boot _(evidence: OBS-20260812-0021-62804b)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0021-62804b)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0021-62804b)_
-  - ✓ **current_workaround**: EVIDENCED — User referencing printed motherboard manual or on-screen POST code definitions, trial-and-error component swapping _(evidence: OBS-20260812-0021-62804b)_
-  - ✓ **why_solutions_fail**: EVIDENCED — System hangs at POST code D6 (reserved for future AMI SEC error codes), unable to boot despite trying different RAM slots, GPU slots, and BIOS update _(evidence: OBS-20260812-0021-62804b)_
-  - ✓ **potential_product_function**: EVIDENCED — Manual interpretation of cryptic motherboard diagnostic codes (D6) to troubleshoot hardware compatibility/initialization issues during first boot _(evidence: OBS-20260812-0021-62804b)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0021-62804b)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0021-62804b)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0021-62804b)_
-
-### BC-0088 — WATCH
-From anomalies: `ANOM-0228`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Developer forced to work with 128MB RAM device, likely requiring constant memory management, tool selection workarounds, and inability to run standard development environments _(evidence: OBS-20260812-0025-2712b1)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0025-2712b1)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0025-2712b1)_
-  - ✓ **current_workaround**: EVIDENCED — 128MB RAM device for software engineering work _(evidence: OBS-20260812-0025-2712b1)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Standard development tools and workflows fail or become unusable under 128MB RAM constraint, forcing workarounds and limiting productivity _(evidence: OBS-20260812-0025-2712b1)_
-  - ✓ **potential_product_function**: EVIDENCED — Developer forced to work with 128MB RAM device, likely requiring constant memory management, tool selection workarounds, and inability to run standard development environments _(evidence: OBS-20260812-0025-2712b1)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['dev:discuss'] _(evidence: OBS-20260812-0025-2712b1)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0025-2712b1)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.65, min=0.65, bucket=MODERATE _(evidence: OBS-20260812-0025-2712b1)_
-
-### BC-0089 — WATCH
-From anomalies: `ANOM-0232`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Hardware vendor ships device with Windows; user must wait for kernel patches upstream, distribution compilation, or manually build custom kernel image to run alternative OS _(evidence: OBS-20260812-0032-d9a3b3)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0032-d9a3b3)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0032-d9a3b3)_
-  - ✓ **current_workaround**: EVIDENCED — Manual kernel compilation or waiting for distribution maintainers to package ARM support for new chipset _(evidence: OBS-20260812-0032-d9a3b3)_
-  - ✓ **why_solutions_fail**: EVIDENCED — New ARM hardware not supported by existing distribution build pipelines despite upstream kernel patches being available _(evidence: OBS-20260812-0032-d9a3b3)_
-  - ✓ **potential_product_function**: EVIDENCED — Hardware vendor ships device with Windows; user must wait for kernel patches upstream, distribution compilation, or manually build custom kernel image to run alternative OS _(evidence: OBS-20260812-0032-d9a3b3)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0032-d9a3b3)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0032-d9a3b3)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0032-d9a3b3)_
-
-### BC-0090 — WATCH
-From anomalies: `ANOM-0244`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Reconciling ownership and physical location of gold bars across multiple custodian vaults and intermediaries after trades _(evidence: OBS-20260812-0056-323acd)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0056-323acd)_
-  - ✓ **economic_consequence**: EVIDENCED — cost; costs _(evidence: OBS-20260812-0056-323acd)_
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0056-323acd)_
-  - ✓ **current_workaround**: EVIDENCED — Paper-based records and manual reconciliation between vault operators, custodians, and counterparties _(evidence: OBS-20260812-0056-323acd)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Multi-day settlement cycles with manual paperwork creating reconciliation breaks when gold ownership changes hands but physical bars remain in same vault _(evidence: OBS-20260812-0056-323acd)_
-  - ✓ **potential_product_function**: EVIDENCED — Reconciling ownership and physical location of gold bars across multiple custodian vaults and intermediaries after trades _(evidence: OBS-20260812-0056-323acd)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['hacker_news'] _(evidence: OBS-20260812-0056-323acd)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0056-323acd)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.3, min=0.3, bucket=LOW _(evidence: OBS-20260812-0056-323acd)_
-
-### BC-0091 — WATCH
-From anomalies: `ANOM-0249`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Different household members have different bathroom routines (shower vs non-shower use) requiring context-aware automation rules _(evidence: OBS-20260812-0074-4971ed)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0074-4971ed)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0074-4971ed)_
-  - ✓ **current_workaround**: EVIDENCED — Light switch patterns as proxy signal for shower vs non-shower bathroom usage _(evidence: OBS-20260812-0074-4971ed)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Automation either runs fan when user isn't showering (noise complaint) or fails to run fan when user forgets to turn it on before showering _(evidence: OBS-20260812-0074-4971ed)_
-  - ✓ **potential_product_function**: EVIDENCED — Different household members have different bathroom routines (shower vs non-shower use) requiring context-aware automation rules _(evidence: OBS-20260812-0074-4971ed)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260812-0074-4971ed)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0074-4971ed)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0074-4971ed)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0076-dbc0c2)_
 
 ### Strengthened (0)
 
@@ -551,31 +262,31 @@ _None this run._
 _None this run._
 
 
-### Evidence seen but not yet a WATCH candidate (112)
+### Evidence seen but not yet a WATCH candidate (132)
 
 Anomaly groups that did not clear the minimum bar (identifiable buyer + current workaround + why existing solutions fail, all EVIDENCED). Recorded here for transparency only — nothing is written to the registry for these.
 
-- anomalies `ANOM-0006` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0006, ANOM-0024` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0008` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0013, ANOM-0026` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0015, ANOM-0028` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0016` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0018` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0014` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0016, ANOM-0029` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0017` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0019` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0020` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0031` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0034` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0021` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0032` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0035` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0036` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0038` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0037` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0039` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0041` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0042, ANOM-0058` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0040` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0042` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0043, ANOM-0059` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0044` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0045, ANOM-0060` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0044, ANOM-0060` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0045` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0046` — missing: ['identifiable_buyer']
-- … and 92 more
+- anomalies `ANOM-0047` — missing: ['identifiable_buyer']
+- … and 112 more
 
 ### Why — full dimension detail for every touched candidate
 
@@ -1251,6 +962,22 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
   - ✓ **confidence_quality**: EVIDENCED — mean=0.8, min=0.75, bucket=MODERATE _(evidence: OBS-20260809-0010-413045, OBS-20260810-0065-122be8)_
 
+### BC-0062 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Fly-proxy buffers first 10MB of request body for retry/replay capability, then pauses reading from client; fly-proxy buffers request bodies up to 10MB for retry/replay capability, blocking read from client for 3 seconds once buffer fills if app hasn't responded _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260810-0033-5f4253)_
+  - ✓ **economic_consequence**: EVIDENCED — pay  _(evidence: OBS-20260809-0011-344019)_
+  - ✓ **frequency**: EVIDENCED — every; every time _(evidence: OBS-20260809-0011-344019)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0033-5f4253)_
+  - ✓ **current_workaround**: EVIDENCED — Application developers forced to either accept 3-second latency penalty, redesign API to use <10MB chunks, or switch to TLS-only service losing HTTP features; Fly.io http_service proxy layer with hardcoded 10MB buffer and 3-second timeout _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Proxy stops reading from client after 10MB buffer fills, waits 3s for app response; apps needing complete body before responding pay full pause every time; Proxy stops reading from client when 10MB buffer fills, waits hardcoded 3 seconds for app response before continuing. No configuration to disable. 103 Early Hints workaround ineffective. _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
+  - ✓ **potential_product_function**: EVIDENCED — Fly-proxy buffers first 10MB of request body for retry/replay capability, then pauses reading from client; fly-proxy buffers request bodies up to 10MB for retry/replay capability, blocking read from client for 3 seconds once buffer fills if app hasn't responded _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.95, min=0.95, bucket=HIGH _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
+
 ### BC-0043 — WATCH
   - ✓ **underlying_job_or_problem**: EVIDENCED — performance testing assumes high-bandwidth conditions; developers lack awareness or tooling for realistic low-bandwidth scenarios _(evidence: OBS-20260809-0014-8b390a)_
   - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260809-0014-8b390a)_
@@ -1363,22 +1090,6 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
   - ✓ **confidence_quality**: EVIDENCED — mean=0.82, min=0.82, bucket=HIGH _(evidence: OBS-20260809-0074-cf2174)_
 
-### BC-0062 — WATCH
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Fly-proxy buffers first 10MB of request body for retry/replay capability, then pauses reading from client; fly-proxy buffers request bodies up to 10MB for retry/replay capability, blocking read from client for 3 seconds once buffer fills if app hasn't responded _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260810-0033-5f4253)_
-  - ✓ **economic_consequence**: EVIDENCED — pay  _(evidence: OBS-20260809-0011-344019)_
-  - ✓ **frequency**: EVIDENCED — every; every time _(evidence: OBS-20260809-0011-344019)_
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260810-0033-5f4253)_
-  - ✓ **current_workaround**: EVIDENCED — Application developers forced to either accept 3-second latency penalty, redesign API to use <10MB chunks, or switch to TLS-only service losing HTTP features; Fly.io http_service proxy layer with hardcoded 10MB buffer and 3-second timeout _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Proxy stops reading from client after 10MB buffer fills, waits 3s for app response; apps needing complete body before responding pay full pause every time; Proxy stops reading from client when 10MB buffer fills, waits hardcoded 3 seconds for app response before continuing. No configuration to disable. 103 Early Hints workaround ineffective. _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **potential_product_function**: EVIDENCED — Fly-proxy buffers first 10MB of request body for retry/replay capability, then pauses reading from client; fly-proxy buffers request bodies up to 10MB for retry/replay capability, blocking read from client for 3 seconds once buffer fills if app hasn't responded _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.95, min=0.95, bucket=HIGH _(evidence: OBS-20260809-0011-344019, OBS-20260810-0033-5f4253)_
-
 ### BC-0063 — WATCH
   - ✓ **underlying_job_or_problem**: EVIDENCED — Users must run vendor app (SuperLive Plus) with P2P cloud service to view recordings stored locally on camera SD cards, creating dependency on external intermediary for accessing local data _(evidence: OBS-20260810-0008-98061b)_
   - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260810-0008-98061b)_
@@ -1412,20 +1123,20 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260810-0010-806a97)_
 
 ### BC-0065 — WATCH
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Customers must obtain explicit written confirmation that compliance agreements (BAA) cover all infrastructure components (compute + database) before storing protected health information; Legal compliance verification requires explicit written confirmation that specific infrastructure components are covered by regulatory agreements; Obtaining written legal confirmation that Business Associate Agreement covers all infrastructure components (compute and database) before deploying protected health information _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Customers must obtain explicit written confirmation that compliance agreements (BAA) cover all infrastructure components (compute + database) before storing protected health information; Legal compliance verification before deploying regulated workloads - developers must confirm regulatory coverage scope across infrastructure components before launch; Legal compliance verification requires explicit written confirmation that specific infrastructure components are covered by regulatory agreements … _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
   - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **current_workaround**: EVIDENCED — Forum post requesting written confirmation from cloud provider support; Manual inquiry to hosting provider support team to confirm BAA scope across multiple service types; Support ticket / forum inquiry to cloud platform vendor for legal/compliance scope clarification _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Deploying healthcare application with PHI on infrastructure not covered by BAA, creating HIPAA compliance violation; Launching HIPAA-covered application without explicit written confirmation of BAA scope across all infrastructure components risks compliance violation; Risk of HIPAA violation if BAA scope is misunderstood or if database component is excluded from coverage _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **potential_product_function**: EVIDENCED — Customers must obtain explicit written confirmation that compliance agreements (BAA) cover all infrastructure components (compute + database) before storing protected health information; Legal compliance verification requires explicit written confirmation that specific infrastructure components are covered by regulatory agreements; Obtaining written legal confirmation that Business Associate Agreement covers all infrastructure components (compute and database) before deploying protected health information _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+  - ✓ **current_workaround**: EVIDENCED — Forum post requesting written confirmation from cloud provider support; Manual forum inquiry to confirm Business Associate Agreement scope covers both compute and database services; Manual inquiry to hosting provider support team to confirm BAA scope across multiple service types … _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Deploying healthcare application with PHI on infrastructure not covered by BAA, creating HIPAA compliance violation; Launching HIPAA-covered application without explicit written confirmation of BAA scope across all infrastructure components risks compliance violation; Launching with incomplete BAA coverage could result in HIPAA violation, regulatory penalties, or need to rebuild on different infrastructure … _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
+  - ✓ **potential_product_function**: EVIDENCED — Customers must obtain explicit written confirmation that compliance agreements (BAA) cover all infrastructure components (compute + database) before storing protected health information; Legal compliance verification before deploying regulated workloads - developers must confirm regulatory coverage scope across infrastructure components before launch; Legal compliance verification requires explicit written confirmation that specific infrastructure components are covered by regulatory agreements … _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=3, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=4, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.797, min=0.75, bucket=MODERATE _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.802, min=0.75, bucket=MODERATE _(evidence: OBS-20260810-0011-8ce390, OBS-20260811-0066-9087db, OBS-20260812-0077-1ef5de, OBS-20260812-0077-72806e)_
 
 ### BC-0066 — WATCH
   - ✓ **underlying_job_or_problem**: EVIDENCED — Manually coordinating device discovery across multiple isolated Zigbee networks, each requiring separate MQTT topic namespaces and discovery configurations _(evidence: OBS-20260810-0019-661f5e)_
@@ -1604,20 +1315,20 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8)_
 
 ### BC-0077 — WATCH
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Developers must manually discover and copy the process ID, then attach debugging tools before the target code executes; manually inserting os.getpid() calls and coordinating debugger attachment to running Python processes _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Developers must manually discover and copy the process ID, then attach debugging tools before the target code executes; developer must manually insert os.getpid() calls and rebuild/restart process to get PID for attaching external debugging tools; manually inserting os.getpid() calls and coordinating debugger attachment to running Python processes _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
   - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0018-9d4497)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0018-9d4497)_
-  - ✓ **current_workaround**: EVIDENCED — Manual workflow: run Python, find PID through external tools (ps/task manager), quickly attach debugger before relevant code runs; developers manually add print statements or code to expose process ID for external debugger attachment _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Timing race - target code may execute before developer can find PID and attach debugger; requires external tools to discover PID; contributors learning CPython internals must manually instrument code to enable debugging workflows _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-  - ✓ **potential_product_function**: EVIDENCED — Developers must manually discover and copy the process ID, then attach debugging tools before the target code executes; manually inserting os.getpid() calls and coordinating debugger attachment to running Python processes _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
+  - ✓ **current_workaround**: EVIDENCED — Manual workflow: run Python, find PID through external tools (ps/task manager), quickly attach debugger before relevant code runs; developer manually adds print(os.getpid()) code, notes PID from output, then attaches debugger/profiler to that PID; developers manually add print statements or code to expose process ID for external debugger attachment _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Timing race - target code may execute before developer can find PID and attach debugger; requires external tools to discover PID; contributors learning CPython internals must manually instrument code to enable debugging workflows; developers wanting to profile or debug CPython internals must modify code to print PID or find PID through system tools before attaching _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
+  - ✓ **potential_product_function**: EVIDENCED — Developers must manually discover and copy the process ID, then attach debugging tools before the target code executes; developer must manually insert os.getpid() calls and rebuild/restart process to get PID for attaching external debugging tools; manually inserting os.getpid() calls and coordinating debugger attachment to running Python processes _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=3, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.675, min=0.6, bucket=MODERATE _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.683, min=0.6, bucket=MODERATE _(evidence: OBS-20260811-0007-35031d, OBS-20260812-0018-9d4497, OBS-20260812-0073-d6c040)_
 
 ### BC-0078 — WATCH
   - ✓ **underlying_job_or_problem**: EVIDENCED — manual human-driven failure detection through downstream absence signals; teams rely on downstream effects (e.g. lead flow) to notice workflow failures rather than having automated monitoring alerts _(evidence: OBS-20260811-0025-002dfb, OBS-20260812-0080-9c07cb)_
@@ -1668,20 +1379,20 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260811-0040-4b27bb, OBS-20260812-0051-30b1b2)_
 
 ### BC-0081 — WATCH
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Database administrators manually track timestamps before running risky operations, then navigate to dashboard to restore cluster when something goes wrong; Database operators need to recover from operational mistakes (bad migrations, accidental deletes) by restoring to specific timestamps rather than discrete backup snapshots _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Database administrators manually track timestamps before running risky operations, then navigate to dashboard to restore cluster when something goes wrong; Database operators need to recover from operational mistakes (bad migrations, accidental deletes) by restoring to specific timestamps rather than discrete backup snapshots; database administrators need to recover from accidental data loss or schema changes by restoring to specific timestamps within a recovery window _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
   - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260811-0055-876113)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
   - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0066-f32c7d)_
-  - ✓ **current_workaround**: EVIDENCED — Dashboard UI for point-in-time restore (previously not available in CLI), manual timestamp tracking; Manual restoration using backup IDs from dashboard UI; lacking CLI support for point-in-time recovery and custom naming _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Accidental delete, bad migration causing data loss or corruption requiring rollback to earlier state; Operators couldn't script or automate recovery workflows that needed timestamp-based restoration or custom cluster naming without switching to web dashboard _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **potential_product_function**: EVIDENCED — Database administrators manually track timestamps before running risky operations, then navigate to dashboard to restore cluster when something goes wrong; Database operators need to recover from operational mistakes (bad migrations, accidental deletes) by restoring to specific timestamps rather than discrete backup snapshots _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ✓ **current_workaround**: EVIDENCED — Dashboard UI for point-in-time restore (previously not available in CLI), manual timestamp tracking; Manual restoration using backup IDs from dashboard UI; lacking CLI support for point-in-time recovery and custom naming; flyctl CLI command-line tool with backup IDs or point-in-time timestamps _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Accidental delete, bad migration causing data loss or corruption requiring rollback to earlier state; Operators couldn't script or automate recovery workflows that needed timestamp-based restoration or custom cluster naming without switching to web dashboard; accidental deletes and bad migrations that require restoration to previous state _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
+  - ✓ **potential_product_function**: EVIDENCED — Database administrators manually track timestamps before running risky operations, then navigate to dashboard to restore cluster when something goes wrong; Database operators need to recover from operational mistakes (bad migrations, accidental deletes) by restoring to specific timestamps rather than discrete backup snapshots; database administrators need to recover from accidental data loss or schema changes by restoring to specific timestamps within a recovery window _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=3, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.735, min=0.72, bucket=MODERATE _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.74, min=0.72, bucket=MODERATE _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
 
 ### BC-0082 — WATCH
   - ✓ **underlying_job_or_problem**: EVIDENCED — Coordinating type annotation semantics across different Python versions (pre-3.14 vs 3.14+) requires maintaining different code paths or accepting breaking changes; Library maintainers must manually manage conditional imports and annotation behavior across Python versions, with a hard cutoff date (EOL of Python 3.13) forcing simultaneous changes _(evidence: OBS-20260811-0062-08a4d7, OBS-20260812-0073-5d55f3)_
@@ -1843,16 +1554,224 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
   - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0074-4971ed)_
 
+### BC-0101 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Database administrators need to migrate from MPGv1 to MPGv2 clusters while preserving existing backup data; Version migration requires backup/restore workflow; users need to create backup, then restore to new version cluster rather than in-place upgrade; database version migration through backup-restore cycle _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0055-249475)_
+  - ✓ **current_workaround**: EVIDENCED — Fly.io managed Postgres backup/restore UI (flyctl CLI support pending); Manual migration requiring separate backup restoration and data transfer between different PostgreSQL versions; manual backup restoration UI workflow, soon flyctl CLI _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **why_solutions_fail**: EVIDENCED — MPGv1 users stuck on old version until manual backup-restore migration completed; CLI-dependent workflows blocked until flyctl update; Migration blocked or required manual data export/import between incompatible cluster versions; inability to restore old version backups into new architecture without this feature _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **potential_product_function**: EVIDENCED — Database administrators need to migrate from MPGv1 to MPGv2 clusters while preserving existing backup data; Version migration requires backup/restore workflow; users need to create backup, then restore to new version cluster rather than in-place upgrade; database version migration through backup-restore cycle _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=3, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.733, min=0.7, bucket=MODERATE _(evidence: OBS-20260811-0044-6c7732, OBS-20260812-0055-249475, OBS-20260812-0055-7cc6eb)_
+
+### BC-0102 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Device requires initial WiFi pairing via vendor app to update firmware before Zigbee pairing will succeed _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0019-a59e9c)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **current_workaround**: EVIDENCED — User must manually connect via WiFi, download Shelly App, update firmware, then attempt Zigbee pairing _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Zigbee2MQTT finds device but loads auto-generated profile; pairing fails even after firmware update via WiFi/app _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **potential_product_function**: EVIDENCED — Device requires initial WiFi pairing via vendor app to update firmware before Zigbee pairing will succeed _(evidence: OBS-20260812-0019-a59e9c)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0019-a59e9c)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0019-a59e9c)_
+
+### BC-0103 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Corporate AI tool access requires personal identity verification that employees may not want to provide with personal credentials _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0020-9cb4c5)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **current_workaround**: EVIDENCED — Phone number verification for Mac app and model access _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Authentication gate blocks access even for paying team plan members who lack company phones or refuse to link personal numbers _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **potential_product_function**: EVIDENCED — Corporate AI tool access requires personal identity verification that employees may not want to provide with personal credentials _(evidence: OBS-20260812-0020-9cb4c5)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0020-9cb4c5)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0020-9cb4c5)_
+
+### BC-0104 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Operating system must multiplex hardware interrupt handling and deferred procedure calls (DPC) across GPU driver, USB controller, Wi-Fi, and Bluetooth stack while maintaining sub-millisecond audio buffer timing _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0021-64547b)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **current_workaround**: EVIDENCED — User performing iterative driver troubleshooting, BIOS configuration changes, clean OS reinstalls, and engaging repair shop diagnostics over 4-month period _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **why_solutions_fail**: EVIDENCED — DPC latency spikes from NVIDIA driver/USB/Wi-Fi cause Bluetooth audio buffer underruns during system load; no diagnostic tool or configuration isolates the conflicting component; professional repair shop also unable to diagnose _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **potential_product_function**: EVIDENCED — Operating system must multiplex hardware interrupt handling and deferred procedure calls (DPC) across GPU driver, USB controller, Wi-Fi, and Bluetooth stack while maintaining sub-millisecond audio buffer timing _(evidence: OBS-20260812-0021-64547b)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0021-64547b)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0021-64547b)_
+
+### BC-0105 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — users want health metrics (steps, heart rate, sleep stages, workouts) available as sensors in their home automation system, requiring continuous background data transfer from a locked iOS health database _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0030-759779)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **current_workaround**: EVIDENCED — third-party iOS apps polling HealthKit and forwarding data via webhook to self-hosted Home Assistant instance _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **why_solutions_fail**: EVIDENCED — manual tapping required for sync unless paying for background delivery; data stays locked in Apple's walled garden; no native HA integration _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **potential_product_function**: EVIDENCED — users want health metrics (steps, heart rate, sleep stages, workouts) available as sensors in their home automation system, requiring continuous background data transfer from a locked iOS health database _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **willingness_to_pay**: EVIDENCED — subscription _(evidence: OBS-20260812-0030-759779)_
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0030-759779)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.45, min=0.45, bucket=LOW _(evidence: OBS-20260812-0030-759779)_
+
+### BC-0106 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — System administrators must piece together configuration files from scattered documentation across multiple forums and docs pages to understand and set resource control thresholds _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0032-867bfa)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **current_workaround**: EVIDENCED — Manual assembly of limits.conf files for pam_limits and user-.slice.d by reading fragmented documentation sources _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Administrator can make configurations work but cannot explain them well to others due to incomplete mental model of the underlying technology _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **potential_product_function**: EVIDENCED — System administrators must piece together configuration files from scattered documentation across multiple forums and docs pages to understand and set resource control thresholds _(evidence: OBS-20260812-0032-867bfa)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0032-867bfa)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0032-867bfa)_
+
+### BC-0107 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manually context-switching between terminal windows to synchronize or coordinate work happening in parallel AI-assisted coding sessions _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0039-1744cd)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - ✓ **frequency**: EVIDENCED — each  _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **current_workaround**: EVIDENCED — Developer switching between terminal windows/tabs to check status or manually copy information between independent OpenCode sessions _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Sessions run in isolation; developer must manually bridge information between parallel sessions that may be working on related changes _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **potential_product_function**: EVIDENCED — Manually context-switching between terminal windows to synchronize or coordinate work happening in parallel AI-assisted coding sessions _(evidence: OBS-20260812-0039-1744cd)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0039-1744cd)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260812-0039-1744cd)_
+
+### BC-0108 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Getting specialized server hardware with many GPUs to recognize all cards requires matching exact BIOS versions and PCIe lane configurations _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0043-33e95b)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **current_workaround**: EVIDENCED — Manual BIOS version hunting across GPU rental platforms and vendor support channels to resolve hardware initialization failures _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **why_solutions_fail**: EVIDENCED — System initialization failure at 16 GPUs (debug code 99) despite working with 8 GPUs; vendor BIOS unavailable, forcing search on rental platforms _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **potential_product_function**: EVIDENCED — Getting specialized server hardware with many GPUs to recognize all cards requires matching exact BIOS versions and PCIe lane configurations _(evidence: OBS-20260812-0043-33e95b)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **contradictory_evidence**: EVIDENCED — contradiction_present _(evidence: OBS-20260812-0043-33e95b)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0043-33e95b)_
+
+### BC-0109 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — VPS acts as forwarding proxy to hide home IP while routing encrypted traffic through WireGuard tunnel _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0054-992663)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **current_workaround**: EVIDENCED — Manual multi-layer configuration: VPS with WireGuard tunnel, iptables NAT rules, Apache SSL config, Let's Encrypt cert issuance, DNS pointing to VPS _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Port 443 traffic forwarded through tunnel returns SSL protocol errors; certificate appears valid at origin but connection fails at client; Cloudflare proxy shows only client-to-proxy encryption working, not proxy-to-origin _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **potential_product_function**: EVIDENCED — VPS acts as forwarding proxy to hide home IP while routing encrypted traffic through WireGuard tunnel _(evidence: OBS-20260812-0054-992663)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0054-992663)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260812-0054-992663)_
+
+### BC-0110 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual review and testing of AI-written code to catch silent bugs, reliability issues, and long-term breakage before shipping _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260812-0056-feba32)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **current_workaround**: EVIDENCED — Developer manual inspection (beginner asking community for verification methods) _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **why_solutions_fail**: EVIDENCED — AI-generated code contains hidden bugs that aren't caught until after deployment; verification burden blocks shipping _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual review and testing of AI-written code to catch silent bugs, reliability issues, and long-term breakage before shipping _(evidence: OBS-20260812-0056-feba32)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['hacker_news'] _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0056-feba32)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0056-feba32)_
+
+### BC-0111 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — manual tracking across multiple tools (DMs, spreadsheets, payment platforms) with high coordination cost between client communication and administrative state updates _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260812-0061-720bd7)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **current_workaround**: EVIDENCED — direct messages, informal follow-up systems, separate payment tools _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **why_solutions_fail**: EVIDENCED — leads go cold in DMs during life interruptions; clients lost due to administrative gaps not coaching quality _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **potential_product_function**: EVIDENCED — manual tracking across multiple tools (DMs, spreadsheets, payment platforms) with high coordination cost between client communication and administrative state updates _(evidence: OBS-20260812-0061-720bd7)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0061-720bd7)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260812-0061-720bd7)_
+
+### BC-0112 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Engineers manually synthesize conflicting AI outputs, assess evidence quality, determine relevance to constraints, and decide which model answer to trust _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0075-528ae4)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **current_workaround**: EVIDENCED — Engineer judgment after querying ChatGPT, other models, documentation, blog posts, and developer examples _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Multiple AI models can agree for the same wrong reason; no systematic way to evaluate evidence quality, disagreement, uncertainty, or counterfactuals _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **potential_product_function**: EVIDENCED — Engineers manually synthesize conflicting AI outputs, assess evidence quality, determine relevance to constraints, and decide which model answer to trust _(evidence: OBS-20260812-0075-528ae4)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0075-528ae4)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0075-528ae4)_
+
+### BC-0113 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual deletion of system junk and app caches to reclaim disk space _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260812-0076-dbc0c2)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **current_workaround**: EVIDENCED — User manually identifying and removing temporary files, caches, and system artifacts OR third-party cleaning applications _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **why_solutions_fail**: EVIDENCED — System runs out of disk space, triggering warnings; users lack visibility into what consumes storage or what can be safely deleted _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual deletion of system junk and app caches to reclaim disk space _(evidence: OBS-20260812-0076-dbc0c2)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260812-0076-dbc0c2)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260812-0076-dbc0c2)_
+
 ## Legacy Business Rearchitecture Candidates
 
 Mode B: existing business / industry → historical constraint → organizational adaptation → constraint weakened or still binding → new business architecture (if defensible). AI is one of sixteen possible enablers considered, never assumed - see README's Mode B section.
 
-Anomalies considered: **253** · URL-connected groups formed: **192** · Registry events appended: **9** · Candidates on file: **21**
+Anomalies considered: **291** · URL-connected groups formed: **225** · Registry events appended: **3** · Candidates on file: **23**
 
 - **PROMISING**: 0
 - **INVESTIGATE**: 0
 - **VALIDATING**: 1 — BC-0058
-- **WATCH**: 20 — BC-0050, BC-0051, BC-0052, BC-0053, BC-0054, BC-0055, BC-0056, BC-0057, BC-0059, BC-0060, BC-0061, BC-0092, BC-0093, BC-0094, BC-0095, BC-0096, BC-0097, BC-0098, BC-0099, BC-0100
+- **WATCH**: 22 — BC-0050, BC-0051, BC-0052, BC-0053, BC-0054, BC-0055, BC-0056, BC-0057, BC-0059, BC-0060, BC-0061, BC-0092, BC-0093, BC-0094, BC-0095, BC-0096, BC-0097, BC-0098, BC-0099, BC-0100, BC-0114, BC-0115
 - **REJECTED**: 0
 
 ### Candidates
@@ -2112,7 +2031,7 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0093 — WATCH
 **Provenance**: anomalies `ANOM-0153` · observations `OBS-20260810-0026-63ae1f`
@@ -2132,7 +2051,7 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0094 — WATCH
 **Provenance**: anomalies `ANOM-0163` · observations `OBS-20260810-0043-3af3b1`
@@ -2152,7 +2071,7 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0095 — WATCH
 **Provenance**: anomalies `ANOM-0174` · observations `OBS-20260810-0072-81eb3c`
@@ -2172,7 +2091,7 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_weakened: no weakening language found in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0096 — WATCH
 **Provenance**: anomalies `ANOM-0179, ANOM-0217` · observations `OBS-20260811-0006-ba7232, OBS-20260812-0006-9984d8`
@@ -2192,21 +2111,21 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0097 — WATCH
-**Provenance**: anomalies `ANOM-0203` · observations `OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d`
-  - ✓ **Existing business / job-to-be-done** [OBSERVED]: Restoring PostgreSQL database to state before bad migration or accidental delete; Restoring a PostgreSQL database cluster to a specific point in time after accidental data deletion or bad migration _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+**Provenance**: anomalies `ANOM-0205` · observations `OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d`
+  - ✓ **Existing business / job-to-be-done** [OBSERVED]: Restoring PostgreSQL database to state before bad migration or accidental delete; Restoring a PostgreSQL database cluster to a specific point in time after accidental data deletion or bad migration; restoring a managed Postgres database to state before bad migration or accidental delete _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
     _verbatim `process` extracted upstream by the Sensor Agent_
-  - ~ **Historical constraint** [INFERRED]: continuous_oversight _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ~ **Historical constraint** [INFERRED]: continuous_oversight _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
     _legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact_
-  - ~ **Evidence the constraint existed** [INFERRED]: manually track _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ~ **Evidence the constraint existed** [INFERRED]: manually track _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
     _only the legacy structure itself was found, not an explicit stated reason for it_
   - · **Current evidence it may be weakened** [INSUFFICIENT_DATA]: None
     _no weakening language found in the grouped evidence_
-  - ✓ **Legacy structure created by the constraint** [OBSERVED]: Dashboard UI for point-in-time restore (previously not available in CLI), manual timestamp tracking; Manual restoration using backup IDs from dashboard UI; lacking CLI support for point-in-time recovery and custom naming _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ✓ **Legacy structure created by the constraint** [OBSERVED]: Dashboard UI for point-in-time restore (previously not available in CLI), manual timestamp tracking; Manual restoration using backup IDs from dashboard UI; lacking CLI support for point-in-time recovery and custom naming; flyctl CLI command-line tool with backup IDs or point-in-time timestamps _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
     _verbatim current_carrier extracted upstream by the Sensor Agent_
-  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If an unidentified structural change has genuinely weakened manual monitoring held against a lack of continuous/remote observability, then Dashboard UI for point-in-time restore (previously not available in CLI), manual timestamp tracking; Manual restoration using backup IDs from dashboard UI; lacking CLI support for point-in-time recovery and custom naming may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-f32c7d)_
+  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If an unidentified structural change has genuinely weakened manual monitoring held against a lack of continuous/remote observability, then Dashboard UI for point-in-time restore (previously not available in CLI), manual timestamp tracking; Manual restoration using backup IDs from dashboard UI; lacking CLI support for point-in-time recovery and custom naming; flyctl CLI command-line tool with backup IDs or point-in-time timestamps may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260811-0055-876113, OBS-20260812-0066-d82a23, OBS-20260812-0066-f32c7d)_
     _FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition_
   - · **Why now** [INSUFFICIENT_DATA]: None
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
@@ -2232,7 +2151,7 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_weakened: no weakening language found in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0099 — WATCH
 **Provenance**: anomalies `ANOM-0242` · observations `OBS-20260812-0052-edc9ef`
@@ -2252,7 +2171,7 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0100 — WATCH
 **Provenance**: anomalies `ANOM-0244` · observations `OBS-20260812-0056-323acd`
@@ -2271,7 +2190,47 @@ Anomalies considered: **253** · URL-connected groups formed: **192** · Registr
   - · **Why now** [INSUFFICIENT_DATA]: None
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - ✓ **Potential economic effect** [OBSERVED]: cost _(evidence: OBS-20260812-0056-323acd)_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
+
+#### BC-0114 — WATCH
+**Provenance**: anomalies `ANOM-0281` · observations `OBS-20260812-0056-feba32`
+  - ✓ **Existing business / job-to-be-done** [OBSERVED]: Verifying AI-generated code before deployment _(evidence: OBS-20260812-0056-feba32)_
+    _verbatim `process` extracted upstream by the Sensor Agent_
+  - ~ **Historical constraint** [INFERRED]: manual_dispute_resolution _(evidence: OBS-20260812-0056-feba32)_
+    _legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact_
+  - ~ **Evidence the constraint existed** [INFERRED]: manual review _(evidence: OBS-20260812-0056-feba32)_
+    _only the legacy structure itself was found, not an explicit stated reason for it_
+  - · **Current evidence it may be weakened** [INSUFFICIENT_DATA]: None
+    _no weakening language found in the grouped evidence_
+  - ✓ **Legacy structure created by the constraint** [OBSERVED]: Developer manual inspection (beginner asking community for verification methods) _(evidence: OBS-20260812-0056-feba32)_
+    _verbatim current_carrier extracted upstream by the Sensor Agent_
+  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If ai has genuinely weakened manual verification/reconciliation held against unavailable automated records, then Developer manual inspection (beginner asking community for verification methods) may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260812-0056-feba32)_
+    _FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition_
+  - ✓ **Why now** [OBSERVED]: ai=[' ai '] _(evidence: OBS-20260812-0056-feba32)_
+    _specific enabler categories named in the text, not defaulted to AI_
+  - · **Potential economic effect** [INSUFFICIENT_DATA]: None
+    _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
+  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+
+#### BC-0115 — WATCH
+**Provenance**: anomalies `ANOM-0285` · observations `OBS-20260812-0069-1bc5cf`
+  - ✓ **Existing business / job-to-be-done** [OBSERVED]: Provisioning electrical power infrastructure for AI data centers _(evidence: OBS-20260812-0069-1bc5cf)_
+    _verbatim `process` extracted upstream by the Sensor Agent_
+  - ~ **Historical constraint** [INFERRED]: intermediation_trust _(evidence: OBS-20260812-0069-1bc5cf)_
+    _legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact_
+  - ~ **Evidence the constraint existed** [INFERRED]: gatekeeper _(evidence: OBS-20260812-0069-1bc5cf)_
+    _only the legacy structure itself was found, not an explicit stated reason for it_
+  - · **Current evidence it may be weakened** [INSUFFICIENT_DATA]: None
+    _no weakening language found in the grouped evidence_
+  - ✓ **Legacy structure created by the constraint** [OBSERVED]: Large electrical transformers with three-year manufacturing lead times _(evidence: OBS-20260812-0069-1bc5cf)_
+    _verbatim current_carrier extracted upstream by the Sensor Agent_
+  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If ai has genuinely weakened an intermediary held against expensive trust/verification, then Large electrical transformers with three-year manufacturing lead times may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260812-0069-1bc5cf)_
+    _FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition_
+  - ✓ **Why now** [OBSERVED]: ai=[' ai '] _(evidence: OBS-20260812-0069-1bc5cf)_
+    _specific enabler categories named in the text, not defaulted to AI_
+  - · **Potential economic effect** [INSUFFICIENT_DATA]: None
+    _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
+  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
 
 ### Merged (0)
 
@@ -2283,29 +2242,29 @@ _None this run._
 _None this run._
 
 
-### Evidence seen but not yet a WATCH candidate (171)
+### Evidence seen but not yet a WATCH candidate (202)
 
 Anomaly groups where no structural-constraint pattern matched, or the legacy structure itself was not evidenced. Nothing is written to the registry for these.
 
-- anomalies `ANOM-0001` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0001, ANOM-0010` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0002` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0003` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0004, ANOM-0021` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0006` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0004, ANOM-0022` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0006, ANOM-0024` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0007` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0008` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0010, ANOM-0023, ANOM-0040` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0011, ANOM-0024` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0012, ANOM-0025` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0013, ANOM-0026` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0014, ANOM-0027` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0011, ANOM-0025, ANOM-0041` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0012, ANOM-0026` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0013, ANOM-0027` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0014` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0015, ANOM-0028` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0016` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0016, ANOM-0029` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0017` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0019` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0030` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0018` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0020` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0031` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0032` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0033` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- … and 151 more
+- anomalies `ANOM-0034` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- … and 182 more
 
