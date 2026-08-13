@@ -9,8 +9,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -23,8 +23,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -37,8 +37,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -51,8 +51,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -65,8 +65,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -74,13 +74,14 @@
     "canonical_pattern": "Coordinating work across multiple concurrent Claude Code sessions — Context switching and manual information transfer between separate AI coding sessions breaks flow and loses state",
     "hidden_function_class": "state_verification",
     "observation_ids": [
-      "OBS-20260808-0005-3dbb67"
+      "OBS-20260808-0005-3dbb67",
+      "OBS-20260808-0033-263c93"
     ],
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -93,8 +94,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -102,13 +103,15 @@
     "canonical_pattern": "Installing and running legacy CD-ROM software on modern operating systems — Legacy software (1998 CD-ROM) requires technical workarounds to function on modern OS (Windows 11) - 23 year gap",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260808-0022-db0bcd"
+      "OBS-20260808-0022-db0bcd",
+      "OBS-20260809-0054-ac3b7a"
     ],
     "independent_sources": [
-      "hacker_news"
+      "hacker_news",
+      "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -121,8 +124,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -135,8 +138,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -149,8 +152,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -163,8 +166,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -177,8 +180,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -186,14 +189,13 @@
     "canonical_pattern": "SAT solver optimization — General-purpose SAT solvers are suboptimal for domain-specific problems; expertise required to tune solvers for specific problem classes",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260808-0057-4c5bc8",
-      "OBS-20260808-0057-bca60e"
+      "OBS-20260808-0057-4c5bc8"
     ],
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -206,8 +208,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -220,8 +222,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -234,8 +236,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -250,8 +252,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -264,8 +266,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -278,8 +280,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -292,8 +294,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -306,8 +308,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -320,26 +322,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
     "anomaly_id": "ANOM-0024",
-    "canonical_pattern": "Coordinating work across multiple concurrent Claude Code editor sessions — Information isolation between concurrent AI coding sessions requires manual context transfer and prevents distributed task coordination",
-    "hidden_function_class": "state_verification",
-    "observation_ids": [
-      "OBS-20260808-0033-263c93"
-    ],
-    "independent_sources": [
-      "hacker_news"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0025",
     "canonical_pattern": "Hot metal typesetting knowledge transfer from human craftspeople to computerized systems — Complete skillset obsolescence as domain knowledge gets transferred to and locked inside computer systems",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -348,12 +336,12 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0026",
+    "anomaly_id": "ANOM-0025",
     "canonical_pattern": "Building distributed systems with compile-time safety guarantees — Rust type system prevents memory safety issues but provides no guarantees against distributed deadlocks, cross-service correctness problems, or protocol mismatches between independent nodes",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -362,12 +350,12 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0027",
+    "anomaly_id": "ANOM-0026",
     "canonical_pattern": "CPU performance benchmarking and optimization — Time spent optimizing code based on benchmarks that don't reflect actual production performance characteristics",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -376,8 +364,22 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0027",
+    "canonical_pattern": "SAT solver optimization through domain-specific code generation — Generic SAT solvers waste computation on irrelevant branches and checks for specific problem domains",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260808-0057-bca60e"
+    ],
+    "independent_sources": [
+      "lobsters"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -390,8 +392,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -404,8 +406,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -419,8 +421,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -433,8 +435,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -448,8 +450,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -462,8 +464,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -476,8 +478,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -490,8 +492,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -504,8 +506,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -518,8 +520,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -532,8 +534,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -546,8 +548,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -561,8 +563,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -575,8 +577,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -589,8 +591,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -603,8 +605,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -617,8 +619,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -626,14 +628,13 @@
     "canonical_pattern": "Daily recovery metric checking to make running/rest decisions — No always-on glanceable display for recovery metrics requiring active device checking",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260809-0010-f4880b",
-      "OBS-20260809-0022-84c392"
+      "OBS-20260809-0010-f4880b"
     ],
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -647,8 +648,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -662,8 +663,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -677,8 +678,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -691,8 +692,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -705,8 +706,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -719,8 +720,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -733,8 +734,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -747,8 +748,8 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -761,8 +762,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -776,8 +777,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -790,8 +791,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -804,8 +805,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -818,8 +819,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -832,8 +833,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -846,12 +847,26 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
     "anomaly_id": "ANOM-0061",
+    "canonical_pattern": "Daily morning routine to check recovery metrics before deciding whether to run or rest — No always-on glanceable display for recovery metrics - must actively check device/app to inform daily training decisions",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0022-84c392"
+    ],
+    "independent_sources": [
+      "hacker_news"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0062",
     "canonical_pattern": "Building standalone ClojureScript scripting tools — Node.js dependency adds significant size overhead for distributing ClojureScript scripts as standalone tools",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -860,12 +875,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0062",
+    "anomaly_id": "ANOM-0063",
     "canonical_pattern": "Syndicating RSS/Atom feed content to Nostr social network — Content publishers must implement separate integration to reach Nostr audience; RSS feeds don't natively speak Nostr protocol",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -874,12 +889,12 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0063",
+    "anomaly_id": "ANOM-0064",
     "canonical_pattern": "Industrial LLM prompt engineering and output refinement — Iterative manual revision cycles required to achieve acceptable LLM output quality in production",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -888,12 +903,12 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0064",
+    "anomaly_id": "ANOM-0065",
     "canonical_pattern": "Regression testing AI agents against predefined scenario packs — Integration complexity exceeded expectations while scenario definition (YAML writing, scoring logic) proved straightforward",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -902,12 +917,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0065",
+    "anomaly_id": "ANOM-0066",
     "canonical_pattern": "Grid operators curtail (discard) excess solar power generation when supply exceeds demand or grid capacity — Industry debate over whether 2.4 TWh annual solar curtailment represents waste or acceptable grid management cost",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -916,12 +931,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0066",
+    "anomaly_id": "ANOM-0067",
     "canonical_pattern": "API field deprecation and removal — Cannot actually remove deprecated API fields despite announcing deprecation; must maintain indefinitely",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -930,12 +945,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0067",
+    "anomaly_id": "ANOM-0068",
     "canonical_pattern": "payment/payout processing with timeout handling — duplicate payouts executed when timeout interpreted as failure and operation retried",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -944,12 +959,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0068",
+    "anomaly_id": "ANOM-0069",
     "canonical_pattern": "Setting up consistent VSCode development environment configuration across team members — PR review inefficiency due to formatting differences; AI assistant won't reliably create/update .vscode files without repeated prompting due to protected directory status",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -958,12 +973,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0069",
+    "anomaly_id": "ANOM-0070",
     "canonical_pattern": "distributing large payloads (images, files, binaries) to multiple downstream consumers in event-driven/messaging architectures — producer cannot know when all consumers have retrieved the object; no built-in coordination for safe cleanup timing across N consumers",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -972,12 +987,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0070",
+    "anomaly_id": "ANOM-0071",
     "canonical_pattern": "mobile app monetization in India — developers unable to charge Indian users directly despite growing spending power",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -986,12 +1001,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0071",
+    "anomaly_id": "ANOM-0072",
     "canonical_pattern": "Entry/exit through commercial double doors — Customers must wait/queue at single door during high traffic; reduced throughput during peak entry/exit times",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -1000,12 +1015,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0072",
+    "anomaly_id": "ANOM-0073",
     "canonical_pattern": "Running multi-model LLM consensus for newsletter generation — Council models disagree unpredictably; tie-breaking and coherence management across 9 outputs becomes manual overhead",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1014,12 +1029,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0073",
+    "anomaly_id": "ANOM-0074",
     "canonical_pattern": "transaction reconciliation between systems — exact amount matching fails when multiple transactions share the same amount (one-to-many relationships)",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1028,12 +1043,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0074",
+    "anomaly_id": "ANOM-0075",
     "canonical_pattern": "Solar power generation curtailment in Japan's electricity grid — 2.4 TWh of generated solar electricity is curtailed (thrown away) annually, representing operational mismatch between generation timing and grid capacity/demand",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -1042,12 +1057,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0075",
+    "anomaly_id": "ANOM-0076",
     "canonical_pattern": "API field deprecation and removal — Cannot actually remove deprecated API fields because unknown downstream dependencies break when removed",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -1056,12 +1071,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0076",
+    "anomaly_id": "ANOM-0077",
     "canonical_pattern": "Managing files across multiple cloud storage providers (Cloudflare R2, AWS S3, Supabase Storage) in different projects — Context switching between multiple storage provider dashboards to manage files, get URLs, and organize across projects",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -1070,12 +1085,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0077",
+    "anomaly_id": "ANOM-0078",
     "canonical_pattern": "Preventing mould growth in bathrooms by controlling extractor fan boost based on humidity differentials — Extracting expensive heated indoor air when outdoor air is actually more humid adds moisture instead of removing it; running boost manually via Pax app requires understanding when outdoor conditions make extraction worthwhile",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1084,12 +1099,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0078",
+    "anomaly_id": "ANOM-0079",
     "canonical_pattern": "Using ChatGPT web interface for conversational AI interactions — Interface stuck in 'thinking' state after chat stops, followed by network errors that persist even in new chat sessions, blocking all further usage",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1098,12 +1113,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0079",
+    "anomaly_id": "ANOM-0080",
     "canonical_pattern": "Network equipment recovery after power outage — 4 days attempting recovery. APs become unrecoverable zombies after power outage when on non-default VLAN, requiring potential full network reset and physical Cisco switch console access",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -1112,12 +1127,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0080",
+    "anomaly_id": "ANOM-0081",
     "canonical_pattern": "deploying web application to cloud platform — false-positive automated suspension blocks deployment; user cannot self-diagnose or resolve; 'flyctl deploy' fails with 'unauthorized' despite valid auth",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1126,12 +1141,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0081",
+    "anomaly_id": "ANOM-0082",
     "canonical_pattern": "AI agent requests to control home automation devices through external APIs — HA instance gets hammered by repeated agent queries; no query caching layer exists",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1140,12 +1155,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0082",
+    "anomaly_id": "ANOM-0083",
     "canonical_pattern": "Monitoring hardware component temperature in home server/NAS environment — HBA temperature monitoring data inaccessible through standard Linux monitoring tools despite critical temperature warnings",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1154,12 +1169,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0083",
+    "anomaly_id": "ANOM-0084",
     "canonical_pattern": "Deploying application updates by building Docker image locally and pushing to Fly.io container registry — Previously working Docker push workflow suddenly returns 400 Bad Request on manifest HEAD request, blocking all deployments including automated CI/CD pipeline with no infrastructure changes",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1168,12 +1183,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0084",
+    "anomaly_id": "ANOM-0085",
     "canonical_pattern": "Repurposing IoT energy monitoring device from one appliance to another while preserving historical data — Changing device name makes it appear the new appliance (dishwasher) has 1.5 years of usage history that actually belongs to old appliance (NAS)",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1182,26 +1197,27 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0085",
-    "canonical_pattern": "OpenAI Responses API server-side context compaction with parallel native shell tool calls — Parallel shell calls produce item ordering (call,call,output,output) that silently prevents server-side compaction, causing long tool loops to hit context limits despite enabled automatic compaction",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0031-5d79c8"
-    ],
-    "independent_sources": [
-      "discourse:openai-devs"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
     "anomaly_id": "ANOM-0086",
+    "canonical_pattern": "OpenAI Responses API server-side context compaction with parallel native shell tool calls — Parallel shell calls produce item ordering (call,call,output,output) that silently prevents server-side compaction, causing long tool loops to hit context limits despite enabled automatic compaction",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0031-5d79c8",
+      "OBS-20260809-0031-4ede94"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0087",
     "canonical_pattern": "serving large language models to multiple concurrent users on private infrastructure — achieving 30+ TPS decode for 5 concurrent users of 30B model within $3000 budget requires extensive research into GPU parallelism strategies and PCIe compatibility constraints",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1210,12 +1226,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0087",
+    "anomaly_id": "ANOM-0088",
     "canonical_pattern": "Detaching from remote console session in containerized application platform — Fixed detach keybinding cannot be customized when it conflicts with user workflows or terminal configurations",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1225,12 +1241,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0088",
+    "anomaly_id": "ANOM-0089",
     "canonical_pattern": "coordinating Python virtual environments with Julia package environments in dual-language projects — native package managers (Pkg.jl, pip) operate independently without project-level coordination for hybrid Julia-Python workflows",
     "hidden_function_class": "exception_handling",
     "observation_ids": [
@@ -1239,12 +1255,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0089",
+    "anomaly_id": "ANOM-0090",
     "canonical_pattern": "Sending email notifications with image attachments from home automation system — Working notification code with image attachments breaks when API is deprecated; user cannot determine how to replicate attachment functionality with replacement methods",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -1253,26 +1269,27 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0090",
-    "canonical_pattern": "Code review of multi-file changes — Navigation difficulty in combined diff when reviewing changes that touch many files; requires manual collapsing of every other file to focus on one",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0042-373fa0"
-    ],
-    "independent_sources": [
-      "discourse:openai-devs"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
     "anomaly_id": "ANOM-0091",
+    "canonical_pattern": "Code review of multi-file changes — Navigation difficulty in combined diff when reviewing changes that touch many files; requires manual collapsing of every other file to focus on one",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0042-373fa0",
+      "OBS-20260809-0042-205461"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0092",
     "canonical_pattern": "Running Frigate NVR video surveillance software in Proxmox LXC containers with NVIDIA GPU hardware acceleration — Frigate web UI intermittently returns HTTP 500 errors after running normally for minutes; the GUI needed to inspect logs is also broken when failure occurs; systemd masks actual Python process exit status by reporting clean deactivation; multiple independent problems layered on top of each other; symptom fixes applied without identifying underlying failure chain",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -1281,27 +1298,26 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0092",
-    "canonical_pattern": "allocating RAM resources for development workloads (coding agents, dev servers, e2e tests, browser testing) — Cannot access sufficient RAM (>8GB) for development workloads without manual approval process",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0044-0ab55d",
-      "OBS-20260810-0077-4c9621"
-    ],
-    "independent_sources": [
-      "discourse:fly-io"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
     "anomaly_id": "ANOM-0093",
+    "canonical_pattern": "allocating RAM resources for development workloads (coding agents, dev servers, e2e tests, browser testing) — Cannot access sufficient RAM (>8GB) for development workloads without manual approval process",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0044-0ab55d"
+    ],
+    "independent_sources": [
+      "discourse:fly-io"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0094",
     "canonical_pattern": "transaction reconciliation between systems — exact amount matching fails when one transaction in system A corresponds to multiple transactions in system B with the same total",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1310,12 +1326,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0094",
+    "anomaly_id": "ANOM-0095",
     "canonical_pattern": "personal memory journaling — manual journaling is easy to forget",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1324,27 +1340,26 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0095",
-    "canonical_pattern": "Decoding UTF-16 LE encoded text files with CRLF line endings — UTF-16 LE codec fails when Python's default line splitting breaks multi-byte line endings mid-sequence (0x0d 0x00 0x0a 0x00 split at 0x0a)",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0051-eee0d3",
-      "OBS-20260809-0062-d4e7a4"
-    ],
-    "independent_sources": [
-      "discourse:python"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
     "anomaly_id": "ANOM-0096",
+    "canonical_pattern": "Decoding UTF-16 LE encoded text files with CRLF line endings — UTF-16 LE codec fails when Python's default line splitting breaks multi-byte line endings mid-sequence (0x0d 0x00 0x0a 0x00 split at 0x0a)",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0051-eee0d3"
+    ],
+    "independent_sources": [
+      "discourse:python"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0097",
     "canonical_pattern": "Enrolling in energy grid demand-response events (Power Up/Power Down) and synchronizing them with home automation calendar — Calendar event not automatically created after enrolling in Power Up event despite integration update, uncertain wait time and unclear scope of automation coverage",
     "hidden_function_class": "unknown_scope_pricing",
     "observation_ids": [
@@ -1353,22 +1368,8 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0097",
-    "canonical_pattern": "getting legacy video games (DirectX 8/9 era) to run on modern operating systems (Windows 11/Linux) — repeated manual effort to configure old games for modern systems; games are 'a pain to get running' requiring expertise",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0054-ac3b7a"
-    ],
-    "independent_sources": [
-      "discourse:level1techs"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1376,13 +1377,14 @@
     "canonical_pattern": "DNS resolution for specific external hostnames from containerized applications — Application fails to connect to specific external hostname (enoad.nvmc.uscg.gov) despite outbound connectivity being healthy; DNS resolution fails only for this hostname while others (google.com) work; workaround requires manual /etc/hosts override or resolver change",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260809-0055-e8b18d"
+      "OBS-20260809-0055-e8b18d",
+      "OBS-20260809-0066-43433f"
     ],
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1395,8 +1397,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1409,8 +1411,8 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1423,8 +1425,8 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1437,8 +1439,8 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1451,8 +1453,8 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1465,8 +1467,8 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1479,8 +1481,8 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1493,8 +1495,8 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1507,8 +1509,8 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1521,8 +1523,8 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1535,8 +1537,8 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1549,8 +1551,8 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1563,8 +1565,8 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1577,8 +1579,8 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1591,8 +1593,8 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1606,8 +1608,8 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1620,8 +1622,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1634,8 +1636,8 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1648,8 +1650,8 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1662,8 +1664,8 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1676,8 +1678,8 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1690,8 +1692,8 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1704,8 +1706,8 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
@@ -1718,26 +1720,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
     "anomaly_id": "ANOM-0123",
-    "canonical_pattern": "Server-side context window management during multi-turn LLM API calls with parallel tool execution — Automatic context compaction silently fails when parallel shell calls arrive before their outputs (call_0, call_1, output_0, output_1), even though sequential ordering (call_0, output_0, call_1, output_1) compacts correctly. Long tool loops hit context limits despite enabled compaction. No warning returned.",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0031-4ede94"
-    ],
-    "independent_sources": [
-      "discourse:openai-devs"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0124",
     "canonical_pattern": "Network equipment recovery after power outage — 4 days attempting recovery using various hacks and tricks; APs become 'zombies' defaulting to 192.168.1.20, require VLAN reconfiguration or full network reset",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1746,12 +1734,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0125",
+    "anomaly_id": "ANOM-0124",
     "canonical_pattern": "deploying containerized application via Docker image push to Fly.io registry — Docker push command fails with 400 Bad Request when reusing tags; previously working CI/CD pipeline now broken; unclear whether tag reuse is supported or broken",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1760,12 +1748,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0126",
+    "anomaly_id": "ANOM-0125",
     "canonical_pattern": "Building production web applications in Rust — Developer spends significant time wiring infrastructure instead of building product features; configuration drift between Rust backend types and TypeScript frontend props",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -1774,12 +1762,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0127",
+    "anomaly_id": "ANOM-0126",
     "canonical_pattern": "Controlling motorized irrigation valves through home automation software components — Software component type incompatibility prevents using valve hardware features (limit switches, motor braking) together with sprinkler automation scheduling",
     "hidden_function_class": "exception_handling",
     "observation_ids": [
@@ -1788,26 +1776,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0128",
-    "canonical_pattern": "Code review of multi-file changes — When changes span many files, combined diff becomes difficult to navigate; requires manual collapsing of every other file to focus on one file at a time",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0042-205461"
-    ],
-    "independent_sources": [
-      "discourse:openai-devs"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0129",
+    "anomaly_id": "ANOM-0127",
     "canonical_pattern": "Monitoring temperature of HBA (Host Bus Adapter) card in home server/NAS setup — HBA sent alert showing 107°C temperature but user cannot reliably locate or continuously monitor the temperature reading using available tools despite trying multiple approaches",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -1816,12 +1790,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0130",
+    "anomaly_id": "ANOM-0128",
     "canonical_pattern": "vending machine placement site selection — time-intensive location discovery and evaluation before machine placement",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1830,12 +1804,12 @@
     "independent_sources": [
       "dev:entrepreneurship"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0131",
+    "anomaly_id": "ANOM-0129",
     "canonical_pattern": "Displaying date/time widget on Windows desktop — High memory consumption and CPU usage from existing widget solutions on low-end hardware",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1844,12 +1818,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0132",
+    "anomaly_id": "ANOM-0130",
     "canonical_pattern": "Coordinating separate package managers (pip/venv and Pkg.jl) for multi-language Julia+Python projects — Native package managers (pip, Pkg.jl) don't coordinate; developers must manually ensure Python interpreter/venv alignment across Julia-Python interop boundary",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1858,12 +1832,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0133",
+    "anomaly_id": "ANOM-0131",
     "canonical_pattern": "opening balcony door when roller shutter is down — shutter blocks door opening; requires remembering to raise it first then restore position after closing door",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1872,12 +1846,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0134",
+    "anomaly_id": "ANOM-0132",
     "canonical_pattern": "Multi-user LLM inference serving — Budget-constrained hardware procurement for multi-user inference workloads - must balance GPU memory, bandwidth, and parallelism strategies under $3k cap",
     "hidden_function_class": "unknown_scope_pricing",
     "observation_ids": [
@@ -1886,12 +1860,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0135",
+    "anomaly_id": "ANOM-0133",
     "canonical_pattern": "Running development environments with coding agents, dev servers, e2e tests, and browsers in cloud VMs — Default RAM limits insufficient for combining multiple dev tools (coding agent + dev server + e2e tests + browser) requiring manual intervention to upgrade",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -1900,12 +1874,26 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0136",
+    "anomaly_id": "ANOM-0134",
+    "canonical_pattern": "Reading UTF-16 LE encoded text files with CRLF line endings in Python — Reading binary mode and decoding per-line truncates multi-byte line endings mid-character, causing decode errors on UTF-16 files",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260809-0062-d4e7a4"
+    ],
+    "independent_sources": [
+      "discourse:python"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0135",
     "canonical_pattern": "Preventing residential HVAC from running with windows/doors open to avoid wasting energy — Most thermostats (including Nest) lack native open-window detection; wastes energy cooling/heating outdoors; requires manual thermostat adjustment or expensive thermostat replacement",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1914,12 +1902,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0137",
+    "anomaly_id": "ANOM-0136",
     "canonical_pattern": "Purchasing and consuming metered API credits (Codex) with automated billing deductions — 470 of 500 purchased credits disappeared overnight between sessions with no local record of usage, support cannot verify what consumed them but refuses refund due to lack of evidence the deduction was incorrect",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1928,12 +1916,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0138",
+    "anomaly_id": "ANOM-0137",
     "canonical_pattern": "Installing and operating Frigate NVR with NVIDIA GPU acceleration in Proxmox LXC containers — Intermittent HTTP 500 errors with web UI unavailable for diagnostics; underlying Frigate Python process silently exits and restarts; systemd logs mask actual failure; multiple independent configuration mismatches between Docker-oriented documentation and LXC filesystem layout",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1942,26 +1930,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0139",
-    "canonical_pattern": "DNS resolution for external government hostnames from containerized application infrastructure — Application fails to resolve one specific external hostname (enoad.nvmc.uscg.gov) through platform DNS resolver despite working connectivity, forcing manual /etc/hosts override workarounds",
-    "hidden_function_class": "unclassified",
-    "observation_ids": [
-      "OBS-20260809-0066-43433f"
-    ],
-    "independent_sources": [
-      "discourse:fly-io"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0140",
+    "anomaly_id": "ANOM-0138",
     "canonical_pattern": "Running large language models (LLMs) requiring hundreds of billions of parameters — Single machine cannot store and run entire huge model; moving huge expert weights over network is prohibitively expensive",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -1970,12 +1944,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0141",
+    "anomaly_id": "ANOM-0139",
     "canonical_pattern": "Synchronizing two physically separate motorized roller shutters in the same room to operate as a single unit — Two shutters wired to separate buttons must be controlled individually despite needing to behave as one; naive sync creates infinite command loops",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -1984,12 +1958,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0142",
+    "anomaly_id": "ANOM-0140",
     "canonical_pattern": "Managing rate-limited API quota resets for professional AI coding assistant (Codex) subscription — Automatic resets trigger when quota is 80% remaining, overwriting unused paid capacity instead of adding to it - wasting the economic value of the reset",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -1998,12 +1972,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0143",
+    "anomaly_id": "ANOM-0141",
     "canonical_pattern": "Installing and running legacy Windows video games on modern operating systems (Windows 11, Linux) — Legacy games are \"a pain to get running\" on modern systems; require emulation wrappers or complex setup",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2012,12 +1986,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0144",
+    "anomaly_id": "ANOM-0142",
     "canonical_pattern": "deploying and updating a Deno app with embedded JSON configuration files and SQLite-backed KV store — forced migration from Deno Deploy Classic requires learning Docker/database separation when previous workflow allowed updating JSON data files via git push without understanding infrastructure",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2026,26 +2000,27 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0145",
+    "anomaly_id": "ANOM-0143",
     "canonical_pattern": "importing specific functions/classes from multiple Python modules within a package — repetitive import statements when pulling items from multiple modules in same package; maintaining __init__.py re-exports",
     "hidden_function_class": "state_verification",
     "observation_ids": [
-      "OBS-20260810-0007-e1ac2d"
+      "OBS-20260810-0007-e1ac2d",
+      "OBS-20260811-0073-650eef"
     ],
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0146",
+    "anomaly_id": "ANOM-0144",
     "canonical_pattern": "Accessing security camera SD-card recordings remotely — Forced reliance on vendor's cloud P2P service to access recordings that already exist on local SD card; cannot access local storage through local network",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -2054,12 +2029,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0147",
+    "anomaly_id": "ANOM-0145",
     "canonical_pattern": "Warranty RMA for defective consumer electronics purchased internationally — RMA requires shipping $250 GPU to China at customer cost including customs/tariffs, making warranty claim economically worthless relative to item value and time lost",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2068,27 +2043,28 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0148",
+    "anomaly_id": "ANOM-0146",
     "canonical_pattern": "Launching HIPAA-covered healthcare application requiring Business Associate Agreement — Uncertainty whether BAA legal coverage extends to all platform components (Fly Machines and Managed Postgres) where PHI is stored",
     "hidden_function_class": "unknown_scope_pricing",
     "observation_ids": [
       "OBS-20260810-0011-8ce390",
+      "OBS-20260811-0066-9087db",
       "OBS-20260812-0077-72806e"
     ],
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0149",
+    "anomaly_id": "ANOM-0147",
     "canonical_pattern": "SaaS subscription pricing display and billing across multiple currencies — Displayed price at signup time differs from actual charge amount when payment processor uses different exchange rate at transaction time, causing customer confusion and disputes",
     "hidden_function_class": "unknown_scope_pricing",
     "observation_ids": [
@@ -2097,12 +2073,12 @@
     "independent_sources": [
       "dev:startup"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0150",
+    "anomaly_id": "ANOM-0148",
     "canonical_pattern": "Operating long-running Python web application API backend — API endpoints gradually slow down then hang after hours of continuous operation despite no traffic increase, requiring manual restart to restore normal response times",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2111,12 +2087,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0151",
+    "anomaly_id": "ANOM-0149",
     "canonical_pattern": "Adding new Zigbee devices to home automation system via zigbee2mqtt gateway — Device successfully joins Zigbee network and appears in zigbee2mqtt coordinator but does not appear in Home Assistant MQTT integration device list, breaking the expected automatic discovery chain",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2125,12 +2101,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0152",
+    "anomaly_id": "ANOM-0150",
     "canonical_pattern": "Security vulnerability remediation workflow: discover vulnerability → reproduce in controlled environment → fix code → verify fix → deploy — Developer cannot complete remediation workflow - tool finds vulnerability but blocks verification steps, leaving developer unable to confirm fix works before deployment",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2139,12 +2115,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0153",
+    "anomaly_id": "ANOM-0151",
     "canonical_pattern": "Using small local AI models (8b-27b parameters) for structured output generation (XML, code snippets) — Smaller models make predictable but different errors than medium models (missing XML tags, logic errors in C++ code); 12b model cannot fix conceptual errors even when pointed out; requires manual testing of 15k prompts to map error patterns",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2153,12 +2129,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0154",
+    "anomaly_id": "ANOM-0152",
     "canonical_pattern": "Running single-instance stateful applications on cloud infrastructure — Single-machine deployments experience unplanned downtime of multiple hours when platform migrates machine to different physical host; volumes prevent or complicate automatic migration; shared volumes not supported",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2167,12 +2143,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0155",
+    "anomaly_id": "ANOM-0153",
     "canonical_pattern": "tracking published content across platforms — published pages not appearing in any analytics counter despite being in personal ledger",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2181,12 +2157,12 @@
     "independent_sources": [
       "dev:startup"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0156",
+    "anomaly_id": "ANOM-0154",
     "canonical_pattern": "Using AI assistants with access to local files — Users unwilling to upload local files to cloud AI services to get document analysis capability",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2195,12 +2171,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0157",
+    "anomaly_id": "ANOM-0155",
     "canonical_pattern": "Building Python distributions that work across multiple Linux versions with different glibc versions — Python builds from python-build-standalone cannot use newer glibc symbols like os.copy_file_range() - must choose between portability and accessing new OS capabilities",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2209,12 +2185,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0158",
+    "anomaly_id": "ANOM-0156",
     "canonical_pattern": "Home automation system maintaining control integration with smart TV after vendor firmware update — TV firmware auto-update silently breaks volume control integration; re-pairing and reinstalling integration cannot restore volume entities despite other controls functioning",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -2223,12 +2199,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0159",
+    "anomaly_id": "ANOM-0157",
     "canonical_pattern": "Cybersecurity vulnerability research and exploit validation — Threat actors may deploy offensive AI at scale before defenders have equivalent AI-powered tools, creating an asymmetric capability gap in cybersecurity",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2237,12 +2213,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0160",
+    "anomaly_id": "ANOM-0158",
     "canonical_pattern": "Running dual GPUs in Windows workstation where one card has no display attached — Second GPU becomes unusable (Code 31 driver failure) within 5 minutes of idle when no display connected, forcing user to abandon Windows for Ubuntu or attach dummy displays",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2251,12 +2227,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0161",
+    "anomaly_id": "ANOM-0159",
     "canonical_pattern": "Converting manga/comic files for e-readers with device-specific formatting — Converting one file at a time on single machine, adjusting settings blindly, then rechecking results on physical device",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2265,12 +2241,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0162",
+    "anomaly_id": "ANOM-0160",
     "canonical_pattern": "Modifying directed acyclic graphs during runtime (adding/deleting nodes) — Performance bottleneck in graph node additions and deletions",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2279,12 +2255,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0163",
+    "anomaly_id": "ANOM-0161",
     "canonical_pattern": "Expanding Thread/Matter smart home network coverage with additional border router hardware — Thread border routers don't mesh automatically, creating coverage blind spots; low-cost alternative hardware has unpredictable connectivity behavior (works only when powered via laptop, not standalone power supply)",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2293,12 +2269,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0164",
+    "anomaly_id": "ANOM-0162",
     "canonical_pattern": "User attempts to control existing UI animations of chatbot companion pet feature through conversational commands — Pet animations exist but user cannot invoke them conversationally; pet appears only during processing, not as interactive companion",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2307,12 +2283,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0165",
+    "anomaly_id": "ANOM-0163",
     "canonical_pattern": "Managing visibility of pinned forum posts in personal feed view — Users tolerate unwanted pinned posts cluttering their Latest Posts view for years without knowing removal option exists",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2321,12 +2297,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0166",
+    "anomaly_id": "ANOM-0164",
     "canonical_pattern": "Interpreting platform machine state labels in serverless deployment context — Identical terminology ('suspended') used for both normal scale-to-zero machine state and account restriction creates confusion during incident diagnosis",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2335,12 +2311,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0167",
+    "anomaly_id": "ANOM-0165",
     "canonical_pattern": "Keeping a live video stream broadcasting continuously on game store pages (Steam/YouTube/Kick) to showcase current gameplay — PC-based continuous streaming requires constant supervision, fails unpredictably (especially overnight), lacks platform-specific encoding, cannot schedule content changes without disconnecting",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2349,12 +2325,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0168",
+    "anomaly_id": "ANOM-0166",
     "canonical_pattern": "Implementing Python extension modules in non-C languages (OCaml, Rust, etc.) with efficient method calling — PyMethod_New and PyMethod_Type excluded from stable ABI forces duplicate implementations across extension libraries or clunky workarounds like runtime type binding",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2363,12 +2339,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0169",
+    "anomaly_id": "ANOM-0167",
     "canonical_pattern": "Identity verification for cybersecurity professionals accessing OpenAI API tier (TAC) — Well-credentialed bug bounty hunter passes first verification (Persona) but gets denied at second tier (TAC) despite public track record",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -2377,12 +2353,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0170",
+    "anomaly_id": "ANOM-0168",
     "canonical_pattern": "selecting compatible Linux distribution for new laptop hardware — newer laptop hardware requires manual research to find Linux distro with working drivers for all devices",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2391,12 +2367,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0171",
+    "anomaly_id": "ANOM-0169",
     "canonical_pattern": "Push Docker image with reused tag to Fly.io registry for deployment updates — Previously working Docker push with reused 'dev' tag now fails with 400 Bad Request; same failure in CI/CD pipeline; forces workflow change",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2405,12 +2381,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0172",
+    "anomaly_id": "ANOM-0170",
     "canonical_pattern": "collecting and routing feature requests from customers — feature requests scattered across multiple tools and channels with no centralized intake",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2419,12 +2395,12 @@
     "independent_sources": [
       "dev:startup"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0173",
+    "anomaly_id": "ANOM-0171",
     "canonical_pattern": "Extending Thread mesh network to remote building using multiple border routers — Thread devices commissioned indoors stop working when moved to outbuilding with second border router; Google Nest WiFi refused to form unified mesh; require weatherproof repeater chain as workaround",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2433,12 +2409,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0174",
+    "anomaly_id": "ANOM-0172",
     "canonical_pattern": "monitoring API quota usage during active development session — context-switching between development work and quota checking in single terminal disrupts flow",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2447,12 +2423,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0175",
+    "anomaly_id": "ANOM-0173",
     "canonical_pattern": "troubleshooting why speech/audio is unexpectedly playing from POS terminal display speakers — customer confused by unexplained speech output, requiring support intervention to identify and disable screen reader",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2461,12 +2437,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0176",
+    "anomaly_id": "ANOM-0174",
     "canonical_pattern": "detaching from a remote console session in a cloud infrastructure platform — inflexible escape sequence conflicts with user workflows or muscle memory, requires terminal emulator-level workarounds to intercept",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2475,12 +2451,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0177",
+    "anomaly_id": "ANOM-0175",
     "canonical_pattern": "converting PDF, removing image backgrounds, cutting audio clips, obscuring sensitive information on documents — privacy risk from uploading sensitive personal and financial documents to unknown third-party servers",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -2489,12 +2465,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0178",
+    "anomaly_id": "ANOM-0176",
     "canonical_pattern": "Accessing local home automation web interface after software update — Software update changed default port behavior; existing bookmarks/knowledge of magic port number became invalid; user couldn't access web interface despite device being reachable on network",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2503,12 +2479,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0179",
+    "anomaly_id": "ANOM-0177",
     "canonical_pattern": "Managing cache routing for LLM API calls with shared prompt prefixes — Uncertainty about whether different prompt_cache_keys guarantee distinct cache instances and prevent cache sharing across parallel requests",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2517,12 +2493,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0180",
+    "anomaly_id": "ANOM-0178",
     "canonical_pattern": "connecting USB audio device through KVM switch to multiple computers — USB audio device not detected through KVM despite working on direct connection; requires device-specific troubleshooting",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2531,12 +2507,26 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0181",
+    "anomaly_id": "ANOM-0179",
+    "canonical_pattern": "Allocating RAM for development workloads (coding agents, dev servers, e2e tests, browsers) — Default 8GB RAM limit insufficient for concurrent developer tooling workloads, requiring request-approval cycle to access higher tiers",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260810-0077-4c9621"
+    ],
+    "independent_sources": [
+      "discourse:fly-io"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0180",
     "canonical_pattern": "Independent kennel phone intake and booking coordination — Simultaneous demands: physical kennel operations and live phone answering for booking; missed calls = lost revenue",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2546,12 +2536,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0182",
+    "anomaly_id": "ANOM-0181",
     "canonical_pattern": "Attaching external debuggers/profilers to a running Python interpreter process during CPython development — No built-in mechanism to pause execution and expose PID for debugger attachment when developing CPython",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2560,12 +2550,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0183",
+    "anomaly_id": "ANOM-0182",
     "canonical_pattern": "Home automation system software update and UI loading — UI pages partially load after software update, requiring manual page refresh to display correctly",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2574,12 +2564,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0184",
+    "anomaly_id": "ANOM-0183",
     "canonical_pattern": "Running AI inference workloads (Ollama) on laptop hardware — User has NPU hardware capability but cannot leverage it for their AI inference use case; asset sits idle",
     "hidden_function_class": "exception_handling",
     "observation_ids": [
@@ -2588,12 +2578,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0185",
+    "anomaly_id": "ANOM-0184",
     "canonical_pattern": "running AI agents for development work on remote cloud compute instances (Sprites) — instances frequently enter unrecoverable/unreachable states requiring recreation; user already reduced resource usage but failures persist",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2602,12 +2592,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0186",
+    "anomaly_id": "ANOM-0185",
     "canonical_pattern": "Converting file formats and processing media (PDFs, images, video, audio) — Privacy concern - uploading sensitive documents/photos to unknown remote servers for format conversion",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -2616,12 +2606,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0187",
+    "anomaly_id": "ANOM-0186",
     "canonical_pattern": "installing Python packages from PyPI or other package indexes — users must manually specify cooldown periods per install, syntax is unclear, no per-dependency differentiation",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2630,12 +2620,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0188",
+    "anomaly_id": "ANOM-0187",
     "canonical_pattern": "Configuring hardware acceleration (GPU offload) for OpenVINO inference in containerized Home Assistant add-on — GPU context initialization fails despite Protection Mode disabled and Hardware Access enabled; /dev/dri device passthrough unclear in Full Access add-on; traditional device configuration UI hidden",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2644,12 +2634,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0189",
+    "anomaly_id": "ANOM-0188",
     "canonical_pattern": "AI coding assistant maintaining multi-week development session state — IDE becomes unusable as session file grows to hundreds of GB; requires manual archiving and fresh session restart to restore performance",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2658,12 +2648,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0190",
+    "anomaly_id": "ANOM-0189",
     "canonical_pattern": "Building custom PC from components — Decade-long absence from PC building creates uncertainty about component compatibility with newer standards",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2672,26 +2662,27 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0191",
+    "anomaly_id": "ANOM-0190",
     "canonical_pattern": "UDP NAT traversal for real-time audio streaming — UDP replies originate from different public IP than request destination, breaking NAT traversal for clients behind home routers",
     "hidden_function_class": "state_verification",
     "observation_ids": [
-      "OBS-20260811-0022-afc321"
+      "OBS-20260811-0022-afc321",
+      "OBS-20260813-0044-7fd8ec"
     ],
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0192",
+    "anomaly_id": "ANOM-0191",
     "canonical_pattern": "monitoring automated workflow execution and data flow — workflow failures go undetected until downstream consumers notice missing data days later",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -2701,12 +2692,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0193",
+    "anomaly_id": "ANOM-0192",
     "canonical_pattern": "Monitoring multiple messaging/collaboration platforms (Messenger, Zalo, Gmail, Slack) for incoming messages — Notifications arrive 10+ minutes late or never; must manually click through six tabs to check for replies",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2715,12 +2706,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0194",
+    "anomaly_id": "ANOM-0193",
     "canonical_pattern": "Home automation system tracks energy generation/usage data from solar inverter over multiple years — User cannot safely remove integration for physically removed hardware without risking loss of 4 years of energy production/consumption history",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2729,12 +2720,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0195",
+    "anomaly_id": "ANOM-0194",
     "canonical_pattern": "CTF (Capture The Flag) cybersecurity competition participation — Top 10 CTF placements decided 4 hours into event by teams using AI agents while manual teams can't compete; organizational pressure to maintain competitive placements or lose conference attendance budget",
     "hidden_function_class": "unknown_scope_pricing",
     "observation_ids": [
@@ -2743,26 +2734,27 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0196",
+    "anomaly_id": "ANOM-0195",
     "canonical_pattern": "Blue-green deployment health verification — Deployments could proceed without verifying health of machines, allowing misconfigurations to reach production",
     "hidden_function_class": "state_verification",
     "observation_ids": [
-      "OBS-20260811-0033-0f1a85"
+      "OBS-20260811-0033-0f1a85",
+      "OBS-20260812-0044-e88415"
     ],
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0197",
+    "anomaly_id": "ANOM-0196",
     "canonical_pattern": "Functional medicine practitioners and personal trainers creating personalized supplement protocols for individual clients — Time-intensive custom protocol creation becomes bottleneck in high-volume clinical or training practices",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -2771,12 +2763,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0198",
+    "anomaly_id": "ANOM-0197",
     "canonical_pattern": "Building and distributing Python C extensions across multiple Python versions — Build matrix complexity - projects must compile and test extensions against multiple Python versions to ensure compatibility",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2785,27 +2777,26 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0199",
+    "anomaly_id": "ANOM-0198",
     "canonical_pattern": "Running automated security audit on source code repository using AI service — Security audit consumed entire monthly usage allowance in 26 minutes on 4.82MB repository without completing analysis or delivering final report",
     "hidden_function_class": "unclassified",
     "observation_ids": [
-      "OBS-20260811-0042-524aba",
-      "OBS-20260812-0064-83b4d7"
+      "OBS-20260811-0042-524aba"
     ],
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0200",
+    "anomaly_id": "ANOM-0199",
     "canonical_pattern": "reselling used computer motherboard on eBay — uncertain how to correctly categorize hardware with intermittent/minor defects for resale",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2814,12 +2805,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0201",
+    "anomaly_id": "ANOM-0200",
     "canonical_pattern": "Restoring PostgreSQL database backups during version migration — Previously could not directly restore MPGv1 backups into MPGv2 clusters, forcing intermediate migration steps",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2828,12 +2819,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0202",
+    "anomaly_id": "ANOM-0201",
     "canonical_pattern": "Students read textbooks, take notes, watch long lectures, try to understand complicated topics, create revision materials — Hours spent reading textbooks, making notes, watching long lectures - repetitive reading without understanding",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -2842,12 +2833,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0203",
+    "anomaly_id": "ANOM-0202",
     "canonical_pattern": "Monitoring and restoring power to electrical circuits after residual-current device trips — Transient RCD trips (e.g., from damp) clear themselves but leave circuits powered off until manual reset, causing food spoilage or other losses from extended downtime",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2856,12 +2847,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0204",
+    "anomaly_id": "ANOM-0203",
     "canonical_pattern": "Reviewing conversational AI agent execution history in desktop application — Messages auto-hidden by default create confusing flow where questions appear without context until user manually uncollapses previous dialog",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2870,28 +2861,29 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0205",
+    "anomaly_id": "ANOM-0204",
     "canonical_pattern": "Restoring a PostgreSQL database cluster to a specific point in time after accidental data deletion or bad migration — Recovery from accidental delete or bad migration required switching from CLI to dashboard, naming restored clusters was manual",
     "hidden_function_class": "state_verification",
     "observation_ids": [
       "OBS-20260811-0055-876113",
       "OBS-20260812-0066-f32c7d",
-      "OBS-20260812-0066-d82a23"
+      "OBS-20260812-0066-d82a23",
+      "OBS-20260813-0077-0767e7"
     ],
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0206",
+    "anomaly_id": "ANOM-0205",
     "canonical_pattern": "scanning personal media files for NSFW content — privacy risk when scanning personal media - users must send private files to external services",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -2900,12 +2892,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0207",
+    "anomaly_id": "ANOM-0206",
     "canonical_pattern": "Migrating Python libraries to support multiple Python versions (pre-3.14 and 3.14+) with different annotation semantics — Cannot conditionally import __future__ annotations based on version; creates 'flag day' at Python 3.13 EOL; forces choice between stringifying behavior or breaking compatibility",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2915,12 +2907,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0208",
+    "anomaly_id": "ANOM-0207",
     "canonical_pattern": "Home renovation with smart home integration - coordinating electrical, lighting, HVAC, security systems and ensuring local control compatibility during major building work — Must choose and specify all smart home infrastructure (protocols, devices, wiring runs) during renovation window before construction proceeds, requiring deep technical knowledge of integrations, protocols, and compatibility",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2929,12 +2921,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0209",
+    "anomaly_id": "ANOM-0208",
     "canonical_pattern": "Enterprise network router operation and reliability management — Enterprise router requires escalating manual intervention (power cycling) over 6-8 months, eventually failing weekly despite UPS and active cooling investments totaling $500",
     "hidden_function_class": "liability_transfer",
     "observation_ids": [
@@ -2943,26 +2935,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0210",
-    "canonical_pattern": "Obtaining written confirmation of Business Associate Agreement (BAA) scope for HIPAA compliance before launching healthcare application — Customer must seek written confirmation that BAA covers all components where protected health information is stored (Machines and Postgres) before launching",
-    "hidden_function_class": "unknown_scope_pricing",
-    "observation_ids": [
-      "OBS-20260811-0066-9087db"
-    ],
-    "independent_sources": [
-      "discourse:fly-io"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0211",
+    "anomaly_id": "ANOM-0209",
     "canonical_pattern": "airline pre-departure safety compliance — single passenger's refusal to comply with seating requirement forces cancellation of entire flight affecting all passengers",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -2971,12 +2949,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0212",
+    "anomaly_id": "ANOM-0210",
     "canonical_pattern": "Personal monthly spending tracking and budget management — Cannot predict safe daily spending amount; discover overspending only after it happens",
     "hidden_function_class": "unknown_scope_pricing",
     "observation_ids": [
@@ -2985,26 +2963,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0213",
-    "canonical_pattern": "importing multiple classes/functions from different modules within a Python package — writing three import lines instead of one when pulling names from sibling modules in same package",
-    "hidden_function_class": "state_verification",
-    "observation_ids": [
-      "OBS-20260811-0073-650eef"
-    ],
-    "independent_sources": [
-      "discourse:python"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0214",
+    "anomaly_id": "ANOM-0211",
     "canonical_pattern": "watching live video feed from battery-powered outdoor bird feeder camera — feeder sleeps between uses requiring long wake time; vendor streams HEVC (Safari-only); only one concurrent session allowed per account; fetching thumbnails would drain battery by waking device; stream URLs expire mid-session requiring refresh",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3013,12 +2977,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0215",
+    "anomaly_id": "ANOM-0212",
     "canonical_pattern": "using AI models for professional workloads requiring large context windows — context limits below 1 million tokens make professional workloads impractical, forcing users to choose competitors",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3027,12 +2991,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0216",
+    "anomaly_id": "ANOM-0213",
     "canonical_pattern": "Enterprise AI query routing and model selection — Companies overspend on frontier AI API tokens by routing all requests to expensive models instead of using cheaper local models for routine tasks",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3041,12 +3005,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0217",
+    "anomaly_id": "ANOM-0214",
     "canonical_pattern": "Running single-machine applications on cloud infrastructure — Single-machine apps experience frequent unplanned downtime during automatic host migrations and deploys; volumes prevent or complicate auto-migration; congestion can cause multi-hour outages",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3055,12 +3019,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0218",
+    "anomaly_id": "ANOM-0215",
     "canonical_pattern": "merging AI-generated code into production codebase — developers merge AI-written code they cannot explain or maintain",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3069,12 +3033,12 @@
     "independent_sources": [
       "dev:startup"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0219",
+    "anomaly_id": "ANOM-0216",
     "canonical_pattern": "JIT compiler (TorchDynamo) reading frame local variables during trace execution via eval frame API (PEP 523) — Each CPython update requires manual re-auditing and maintenance before PyTorch can support it; fragile interface hard to maintain; no public API to get PyFrameObject from _PyInterpreterFrame",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3084,12 +3048,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0220",
+    "anomaly_id": "ANOM-0217",
     "canonical_pattern": "Home automation users control camera settings (HDR, flip, watermark, night vision, volume) through integration polling — API polling consumes platform quota even when users only need on-demand control actions",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3098,12 +3062,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0221",
+    "anomaly_id": "ANOM-0218",
     "canonical_pattern": "forking conversation threads in CLI chat tool to explore alternative dialogue paths — forked conversations fail to resume, don't appear in list, require trial-and-error with conversation IDs to locate correct thread",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3112,12 +3076,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0222",
+    "anomaly_id": "ANOM-0219",
     "canonical_pattern": "self-hosting games and services from home network — CGNAT blocks inbound connections preventing self-hosting; requires complex VPN tunneling through rented VPS to make home services publicly accessible",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3126,12 +3090,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0223",
+    "anomaly_id": "ANOM-0220",
     "canonical_pattern": "Code signing key management and rotation in software distribution — Signing keys accidentally committed to public repositories requiring emergency revocation and redistribution of new certificates to all users",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3140,12 +3104,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0224",
+    "anomaly_id": "ANOM-0221",
     "canonical_pattern": "converting file formats and manipulating media (PDF, images, video, audio) — users forced to upload sensitive files (private PDFs, confidential documents, personal photos) to untrusted remote servers for format conversion",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -3154,12 +3118,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0225",
+    "anomaly_id": "ANOM-0222",
     "canonical_pattern": "debugging CPython interpreter during development contributions — no standardized mechanism to pause CPython execution and expose PID for debugger/profiler attachment during development",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3168,12 +3132,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0226",
+    "anomaly_id": "ANOM-0223",
     "canonical_pattern": "API-mediated video generation service where payment occurs before moderation check completes — 10% of customer requests flagged by moderation with unclear billing status requiring refund decisions",
     "hidden_function_class": "capital_time_risk",
     "observation_ids": [
@@ -3182,12 +3146,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0227",
+    "anomaly_id": "ANOM-0224",
     "canonical_pattern": "Debugging PC build failure using motherboard POST codes — 50-70 seconds of waiting through POST codes before failure, no visual feedback explaining what D6 means for troubleshooting, requires forum help to interpret",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3196,26 +3160,27 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0228",
+    "anomaly_id": "ANOM-0225",
     "canonical_pattern": "Running AI agent dev work sessions on remote cloud sprite instances — Sprites frequently enter unreachable/bricked state requiring manual intervention despite reducing network and memory usage",
     "hidden_function_class": "state_verification",
     "observation_ids": [
-      "OBS-20260812-0022-1e3c2a"
+      "OBS-20260812-0022-1e3c2a",
+      "OBS-20260812-0022-ae7005"
     ],
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0229",
+    "anomaly_id": "ANOM-0226",
     "canonical_pattern": "Software development on resource-constrained device — Severe hardware resource constraint requiring navigation of 5 different tech stacks in first year while operating under extreme memory limitations",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3224,12 +3189,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0230",
+    "anomaly_id": "ANOM-0227",
     "canonical_pattern": "Functional medicine practitioners and personal trainers drafting clinical supplement protocols for clients — Time-intensive manual work creating customized supplement protocols",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -3238,12 +3203,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0231",
+    "anomaly_id": "ANOM-0228",
     "canonical_pattern": "Installing Python packages from PyPI via pip while mitigating supply-chain attacks — Users find the ISO 8601 duration syntax unclear and need examples for common security cooldown periods (2 weeks, 1 month)",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -3252,12 +3217,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0232",
+    "anomaly_id": "ANOM-0229",
     "canonical_pattern": "Browsing and selecting presets/favorites or SXM/radio channels on multi-zone home audio amplifier system through home automation interface — Browse media section shows empty for all zones despite system having favorites configured; unable to access or control SXM/radio channels through Home Assistant",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3266,12 +3231,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0233",
+    "anomaly_id": "ANOM-0230",
     "canonical_pattern": "Installing Linux operating system on new ARM-based Snapdragon X2 laptop hardware — Cannot install any Linux distribution on new hardware despite kernel patches existing; must either wait unknown duration for pre-compiled builds or compile custom kernel",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -3280,12 +3245,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0234",
+    "anomaly_id": "ANOM-0231",
     "canonical_pattern": "UDP NAT traversal for real-time audio streaming — UDP replies come from different public IP than request destination, breaking NAT traversal for clients behind home routers",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3295,12 +3260,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0235",
+    "anomaly_id": "ANOM-0232",
     "canonical_pattern": "Automated publishing workflow where script types content into web editor — Automated typing produced text that could not be published despite successful character entry",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3309,12 +3274,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0236",
+    "anomaly_id": "ANOM-0233",
     "canonical_pattern": "University students searching for off-campus housing and roommates — Students must dig through multiple WhatsApp groups; cannot verify listing authenticity; encounter scam listings, no-shows, and incompatible roommate matches",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3323,12 +3288,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0237",
+    "anomaly_id": "ANOM-0234",
     "canonical_pattern": "Smart home automation: checking multiple door sensors and sending notifications when doors are left open at specific times — User cannot include the specific door name in notification messages when automation detects open doors - system reports 'Door(s) open' but not which door",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3337,12 +3302,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0238",
+    "anomaly_id": "ANOM-0235",
     "canonical_pattern": "Using VSCode with Codex AI coding assistant over extended development sessions — VSCode becomes unusable due to slow performance; system stress from working with 200GB files; IDE has trouble loading sessions after restart",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3351,12 +3316,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0239",
+    "anomaly_id": "ANOM-0236",
     "canonical_pattern": "Running AI inference workloads (e.g., Ollama LLM) on laptop hardware — Hardware acceleration component (NPU) present in purchased device but inaccessible/unusable for desired AI workloads; developer unable to leverage owned hardware capability",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -3365,26 +3330,27 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0240",
+    "anomaly_id": "ANOM-0237",
     "canonical_pattern": "blue-green deployments on distributed infrastructure — blue-green deployments could fail silently due to misconfigured machines not being health-checked, or machines getting stuck on unreachable hosts",
     "hidden_function_class": "state_verification",
     "observation_ids": [
-      "OBS-20260812-0044-fa4c2e"
+      "OBS-20260812-0044-fa4c2e",
+      "OBS-20260813-0055-4e14f5"
     ],
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0241",
+    "anomaly_id": "ANOM-0238",
     "canonical_pattern": "tracking calories and nutrition for Singapore hawker center meals — users must treat local hawker food as afterthought with incorrect nutritional values",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -3393,12 +3359,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0242",
+    "anomaly_id": "ANOM-0239",
     "canonical_pattern": "Compiling Python C extensions to support multiple Python versions — Cannot change PyObject header layout without breaking extensions; maintainability costs and performance limitations from frozen internal structures",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3407,12 +3373,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0243",
+    "anomaly_id": "ANOM-0240",
     "canonical_pattern": "Importing historical energy consumption data from utility website into home automation system while maintaining state history — Home automation state database rejects repeated identical 'unknown' placeholder states, forcing complex workarounds involving dummy attributes, timestamp manipulation, and direct database updates",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3421,12 +3387,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0244",
+    "anomaly_id": "ANOM-0241",
     "canonical_pattern": "migrating Postgres database from MPGv1 to MPGv2 architecture — users need to migrate between major Postgres versions but previously lacked direct migration path",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3435,12 +3401,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0245",
+    "anomaly_id": "ANOM-0242",
     "canonical_pattern": "Settling gold trades in London's wholesale market — Settlement delays, high operational costs, reconciliation errors, and inefficiency in tracking gold bar ownership across fragmented custody chain",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3449,12 +3415,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0246",
+    "anomaly_id": "ANOM-0243",
     "canonical_pattern": "submitting images to web forms with size/dimension requirements — forms reject images that don't meet exact dimension or file-size limits; existing tools require uploads or lack precise controls",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3463,12 +3429,26 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0247",
+    "anomaly_id": "ANOM-0244",
+    "canonical_pattern": "security auditing a small code repository using an AI service — entire usage allowance consumed in 26 minutes auditing a 4.82 MB repository without completing the security audit or producing a final report",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260812-0064-83b4d7"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0245",
     "canonical_pattern": "Competitive CTF (Capture The Flag) pentesting challenges in time-constrained events — Top 10 placements at Red Team Village CTF decided within 4 hours by teams using AI agents while manual teams cannot compete on speed; risk of losing company sponsorship for event attendance without competitive results",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3477,12 +3457,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0248",
+    "anomaly_id": "ANOM-0246",
     "canonical_pattern": "personal care product ingredient disclosure and labeling — consumers cannot identify presence of suspected hazardous chemicals in 85% of personal care products they purchase",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3491,12 +3471,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0249",
+    "anomaly_id": "ANOM-0247",
     "canonical_pattern": "habit tracking and behavior change reinforcement — abandoning habit tracking systems after one missed day breaks the streak, making ordinary bad days feel like complete failure",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -3505,12 +3485,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0250",
+    "anomaly_id": "ANOM-0248",
     "canonical_pattern": "Detecting shower usage to trigger bathroom fan automation in multi-user household — Light-usage patterns insufficient to distinguish shower from non-shower bathroom use across different household members",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3519,12 +3499,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0251",
+    "anomaly_id": "ANOM-0249",
     "canonical_pattern": "Reviewing AI coding assistant conversation history to understand context and decisions — Confusing conversation flow where questions appear without context; users must repeatedly uncollapse sections to understand the full interaction chain",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3533,12 +3513,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0252",
+    "anomaly_id": "ANOM-0250",
     "canonical_pattern": "Selling used computer motherboard on eBay — Uncertain how to categorize board with intermittent fan failure - full listing vs parts-only affects price/liability but no clear threshold",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3547,12 +3527,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0253",
+    "anomaly_id": "ANOM-0251",
     "canonical_pattern": "Launching HIPAA-covered healthcare application — Uncertainty about whether BAA legal coverage extends to all infrastructure components where PHI will be stored",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3561,12 +3541,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0254",
+    "anomaly_id": "ANOM-0252",
     "canonical_pattern": "monitoring browser extension adoption metrics via third-party analytics dashboard — developer must mentally track which specific metrics within same dashboard are reliable versus unreliable when making decisions",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -3575,12 +3555,12 @@
     "independent_sources": [
       "dev:startup"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0255",
+    "anomaly_id": "ANOM-0253",
     "canonical_pattern": "web scraping / data extraction setup and pricing — customers pay quoted prices but jobs fail or are dropped when actual fetch costs exceed estimates due to anti-bot measures",
     "hidden_function_class": "unknown_scope_pricing",
     "observation_ids": [
@@ -3589,12 +3569,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0256",
+    "anomaly_id": "ANOM-0254",
     "canonical_pattern": "Migrating MCP server endpoint for published ChatGPT app integration — Cannot edit base URL for published app when switching MCP server providers",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -3603,12 +3583,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0257",
+    "anomaly_id": "ANOM-0255",
     "canonical_pattern": "Diagnosing hardware instability in high-end workstation builds after shutdown/restart cycles — Cannot boot to Windows desktop; system freezes at motherboard screen despite BIOS accessibility; must manually test different hardware settings to isolate root cause",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3617,12 +3597,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0258",
+    "anomaly_id": "ANOM-0256",
     "canonical_pattern": "tracking extension usage metrics via third-party analytics dashboard — same dashboard source produces one trustworthy metric and one untrustworthy metric, creating uncertainty about which data to rely on",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -3631,12 +3611,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0259",
+    "anomaly_id": "ANOM-0257",
     "canonical_pattern": "angel investor pre-investment due diligence on startups — no systematic signal for early detection of promising startups; relies on manual GitHub inspection",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3645,12 +3625,12 @@
     "independent_sources": [
       "dev:startup"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0260",
+    "anomaly_id": "ANOM-0258",
     "canonical_pattern": "Opening and viewing 3D model files (STL, GLB, STEP, etc.) on Windows — File association breakage after Microsoft removal; alternative viewers require login/subscription for basic file viewing",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3659,12 +3639,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0261",
+    "anomaly_id": "ANOM-0259",
     "canonical_pattern": "Debugging or inspecting Python dictionaries with meaningful insertion order — reprlib discards meaningful insertion order when generating size-limited representations, forcing users to lose semantic information or avoid the library",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3673,12 +3653,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0262",
+    "anomaly_id": "ANOM-0260",
     "canonical_pattern": "Pairing Shelly Gen 4 dimmer with Zigbee2MQTT smart home controller — Multi-step cross-protocol setup process: WiFi connection, app download, firmware update, then Zigbee pairing - unclear which MQTT settings to configure",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -3687,12 +3667,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0263",
+    "anomaly_id": "ANOM-0261",
     "canonical_pattern": "Authenticating to access AI coding models via enterprise team plan — Employees on company plans must link personal phone numbers; cannot use service without sharing personal mobile number or installing WhatsApp",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3701,12 +3681,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0264",
+    "anomaly_id": "ANOM-0262",
     "canonical_pattern": "Desktop PC real-time audio playback via Bluetooth during concurrent GPU load and USB I/O — Audio crackling persists despite systematic elimination of software/driver variables; user unable to isolate root cause among hardware interrupt conflicts, forcing repeated manual investigation cycles",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -3715,26 +3695,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0265",
-    "canonical_pattern": "running autonomous dev agents on remote cloud instances — instances repeatedly enter 'unreachable state' (bricked) requiring manual intervention despite reducing network and memory usage; same workloads run fine on local Mac",
-    "hidden_function_class": "state_verification",
-    "observation_ids": [
-      "OBS-20260812-0022-ae7005"
-    ],
-    "independent_sources": [
-      "discourse:fly-io"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0266",
+    "anomaly_id": "ANOM-0263",
     "canonical_pattern": "monitoring published web pages remain accessible and serve correct content — six pages simultaneously became unreachable requiring diagnosis",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3743,12 +3709,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0267",
+    "anomaly_id": "ANOM-0264",
     "canonical_pattern": "Inserting images (especially charts) over desktop screen during AI coding interactions, presentations, or trading analysis — Existing alternatives handle inserting images over desktop poorly - cannot stretch, transform, or remove backgrounds from inserted charts",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3757,12 +3723,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0268",
+    "anomaly_id": "ANOM-0265",
     "canonical_pattern": "syncing personal health data from Apple Health to Home Assistant for home automation use — Apple Health data is siloed on iOS devices; getting it into home automation systems requires manual sync apps or workarounds; existing solutions force subscriptions or use third-party servers instead of direct local transfer",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3771,12 +3737,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0269",
+    "anomaly_id": "ANOM-0266",
     "canonical_pattern": "Rendering AI model responses with web search citations in production applications — Invisible Unicode citation markers leak into visible output causing junk text artifacts in user-facing responses",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3785,12 +3751,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0270",
+    "anomaly_id": "ANOM-0267",
     "canonical_pattern": "Configuring resource limits for multi-user interactive Linux servers using cgroups and PAM — Difficulty finding coherent training materials for user-space resource controls; understanding threshold variables requires synthesizing information from multiple incomplete sources",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -3799,12 +3765,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0271",
+    "anomaly_id": "ANOM-0268",
     "canonical_pattern": "Running multiple OpenCode AI coding-assistant sessions across separate terminals and worktrees — No direct way for independent OpenCode sessions to coordinate or communicate with each other during concurrent development work",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3813,12 +3779,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0272",
+    "anomaly_id": "ANOM-0269",
     "canonical_pattern": "formatting terminal text output with VT100 escape codes in Python IDE — enabling terminal emulation for ctrl-C support breaks VT100 escape code rendering, forcing choice between interrupt capability and formatted output",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3827,12 +3793,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0273",
+    "anomaly_id": "ANOM-0270",
     "canonical_pattern": "Acquiring compatible electronic components for DIY smart home device projects — Sourcing the right hardware can stop a project getting off the ground; time spent ensuring parts are compatible and working out how to wire them together",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3841,12 +3807,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0274",
+    "anomaly_id": "ANOM-0271",
     "canonical_pattern": "Returning to paused AI chat sessions after days/weeks to resume work — Context switching cost when resuming AI chats - users forget chat purpose, relevant points, and planned next steps",
     "hidden_function_class": "lost_information_reconstruction",
     "observation_ids": [
@@ -3855,12 +3821,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0275",
+    "anomaly_id": "ANOM-0272",
     "canonical_pattern": "Deploying and configuring high-density GPU compute servers with 16 GPUs on Turin platform — Cannot get 16 GPU cards to initialize (stuck on debug code 99); works with 8 but fails at 16; must search for working BIOS version on other machines",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -3869,26 +3835,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0276",
-    "canonical_pattern": "blue-green deployment health checking — blue-green deployments could complete without checking if new machines were properly configured, leading to unreachable or misconfigured production hosts",
-    "hidden_function_class": "state_verification",
-    "observation_ids": [
-      "OBS-20260812-0044-e88415"
-    ],
-    "independent_sources": [
-      "discourse:fly-io"
-    ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
-    "status": "WATCH"
-  },
-  {
-    "anomaly_id": "ANOM-0277",
+    "anomaly_id": "ANOM-0273",
     "canonical_pattern": "Remote Wake-on-LAN (WOL) to wake sleeping devices on home network from internet — Most routers deliberately block broadcast forwarding needed for WOL; opening standard WOL ports creates DDoS vulnerability; need authenticated filtering",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3897,12 +3849,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0278",
+    "anomaly_id": "ANOM-0274",
     "canonical_pattern": "AI code agent sandbox boundary approval — Auto-review triggers generate unexpectedly high API usage (12,092 turns) invisible to users until they check analytics dashboard",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3911,12 +3863,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0279",
+    "anomaly_id": "ANOM-0275",
     "canonical_pattern": "Exposing self-hosted web service to internet without revealing home network public IP — SSL/TLS termination fails when traffic passes through VPN tunnel and NAT forwarding - certificate validation breaks across network boundaries",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3925,12 +3877,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0280",
+    "anomaly_id": "ANOM-0276",
     "canonical_pattern": "Migrating PostgreSQL database from MPGv1 to MPGv2 infrastructure — Database version migration requires multi-step backup-restore process instead of seamless upgrade; CLI tooling lags UI feature availability",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3939,12 +3891,12 @@
     "independent_sources": [
       "discourse:fly-io"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0281",
+    "anomaly_id": "ANOM-0277",
     "canonical_pattern": "Verifying AI-generated code before deployment — Fear of shipping due to AI code silently breaking, lack of confidence in AI code reliability long-term",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3953,12 +3905,12 @@
     "independent_sources": [
       "hacker_news"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0282",
+    "anomaly_id": "ANOM-0278",
     "canonical_pattern": "solo coaches managing client pipeline from initial lead contact through payment collection — missed follow-ups and forgotten payment reminders causing client attrition despite quality coaching",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -3967,12 +3919,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0283",
+    "anomaly_id": "ANOM-0279",
     "canonical_pattern": "Automating FM radio station preset selection on smart-home-connected Yamaha receiver — Cannot automate switching between FM radio presets through home automation system despite receiver being networked/integrated",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -3981,12 +3933,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0284",
+    "anomaly_id": "ANOM-0280",
     "canonical_pattern": "Diagnosing performance bottlenecks in local LLM inference workloads — Cannot determine if RAM bandwidth or CPU is the bottleneck because monitoring tools only show RAM capacity utilization, not bandwidth utilization",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -3995,12 +3947,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0285",
+    "anomaly_id": "ANOM-0281",
     "canonical_pattern": "Provisioning electrical power infrastructure for AI data centers — Cannot deploy AI compute capacity even when semiconductors are available due to transformer supply constraint",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -4009,12 +3961,12 @@
     "independent_sources": [
       "dev:discuss"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0286",
+    "anomaly_id": "ANOM-0282",
     "canonical_pattern": "English vocabulary practice and learning — Vocabulary practice feels repetitive and boring, failing to sustain learner engagement",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -4023,12 +3975,12 @@
     "independent_sources": [
       "product_hunt"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0287",
+    "anomaly_id": "ANOM-0283",
     "canonical_pattern": "attaching external debugger or profiler to running CPython interpreter during development — no built-in mechanism to pause interpreter and expose PID for external tool attachment during CPython development workflow",
     "hidden_function_class": "unclassified",
     "observation_ids": [
@@ -4037,12 +3989,12 @@
     "independent_sources": [
       "discourse:python"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0288",
+    "anomaly_id": "ANOM-0284",
     "canonical_pattern": "Configuring motion sensor triggers for home automation lighting — Motion sensors report 'always detected' state while occupancy entity works normally; user cannot determine correct trigger entity without community help",
     "hidden_function_class": "state_verification",
     "observation_ids": [
@@ -4051,12 +4003,12 @@
     "independent_sources": [
       "discourse:home-assistant"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0289",
+    "anomaly_id": "ANOM-0285",
     "canonical_pattern": "Evaluating conflicting technical recommendations from multiple AI models — Difficult to determine which AI-generated engineering recommendation to trust when models give different answers; model agreement doesn't indicate correctness",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -4065,12 +4017,12 @@
     "independent_sources": [
       "discourse:openai-devs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0290",
+    "anomaly_id": "ANOM-0286",
     "canonical_pattern": "Managing limited storage on fixed-capacity devices — Repeated manual work to free up space on non-upgradeable storage; time-consuming to identify deletable files",
     "hidden_function_class": "variability_buffering",
     "observation_ids": [
@@ -4079,12 +4031,12 @@
     "independent_sources": [
       "discourse:level1techs"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   },
   {
-    "anomaly_id": "ANOM-0291",
+    "anomaly_id": "ANOM-0287",
     "canonical_pattern": "Monitoring home water usage via IoT device — Device owners cannot directly access their own device's data without reverse-engineering vendor encryption",
     "hidden_function_class": "rare_decision_trust",
     "observation_ids": [
@@ -4093,8 +4045,344 @@
     "independent_sources": [
       "lobsters"
     ],
-    "first_seen": "2026-08-12",
-    "last_seen": "2026-08-12",
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0288",
+    "canonical_pattern": "Publishing AI-generated content articles for SEO/ranking — AI content tools produce generic, ungrounded articles without citations that Google and readers can detect as low-quality",
+    "hidden_function_class": "rare_decision_trust",
+    "observation_ids": [
+      "OBS-20260813-0006-54f39a"
+    ],
+    "independent_sources": [
+      "product_hunt"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0289",
+    "canonical_pattern": "Setting time-based voice reminders through home automation assistant — LLM returned timestamp 3 years wrong; 2 of 6 identical requests produced no reminder but confirmed \"I've set it\" - silent failure worse than error because user stops thinking about it",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0008-daa9cd"
+    ],
+    "independent_sources": [
+      "discourse:home-assistant"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0290",
+    "canonical_pattern": "Finding billing information in a multi-tenant cloud platform UI — Repeated manual explanation of billing page location to onboarded friends; users searching in expected but wrong UI locations",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0011-40baef"
+    ],
+    "independent_sources": [
+      "discourse:fly-io"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0291",
+    "canonical_pattern": "Java continuous integration test execution — CI pipelines waste compute resources and time re-running tests that have no dependency on changed code",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0017-d66d76"
+    ],
+    "independent_sources": [
+      "product_hunt"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0292",
+    "canonical_pattern": "switching active computer with KVM device — keyboard becomes unresponsive after KVM switch; requires multi-step workaround of unplugging specific mouse models in sequence to restore keyboard function",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0021-8b7cc9"
+    ],
+    "independent_sources": [
+      "discourse:level1techs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0293",
+    "canonical_pattern": "user account email change and authentication state management — account becomes inaccessible after email change despite apps continuing to run",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260813-0022-8d558c"
+    ],
+    "independent_sources": [
+      "discourse:fly-io"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0294",
+    "canonical_pattern": "OpenAI plugin creation/upload by verified developers — Developer remains blocked from plugin creation despite completing identity verification months prior and upgrading to Business plan; error persists across permission levels",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260813-0031-715955"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0295",
+    "canonical_pattern": "Remote desktop connection from one Linux system to another using RDP client — Keyboard completely non-functional in remote session despite mouse working; spent night and day troubleshooting; workaround requires xrdp running separate X11 session",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0032-1d7022"
+    ],
+    "independent_sources": [
+      "discourse:level1techs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0296",
+    "canonical_pattern": "running AI agent dev sessions on remote cloud instances (Sprites) — instances frequently enter unreachable/unrecoverable state ('bricked') despite reducing resource usage; requires manual debugging via syslogs; uncertainty about RAM allocation (8GB vs 16GB) causing OOM failures",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260813-0033-8d1026"
+    ],
+    "independent_sources": [
+      "discourse:fly-io"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0297",
+    "canonical_pattern": "Customer support chatbot setup and knowledge base synchronization — AI chatbots hallucinate answers not grounded in company knowledge, making businesses look careless",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0039-f264f9"
+    ],
+    "independent_sources": [
+      "product_hunt"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0298",
+    "canonical_pattern": "Controlling non-KNX home automation devices (Zigbee) from KNX wall switches — Asymmetric integration complexity - KNX-to-HA requires manual automation per device while HA-to-KNX works automatically through configuration",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0041-038051"
+    ],
+    "independent_sources": [
+      "discourse:home-assistant"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0299",
+    "canonical_pattern": "Running AI agent reasoning/chain-of-thought in desktop application — Application crashes consistently during agent command execution; causes system-wide lag even when idle",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0042-93aaaa"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0300",
+    "canonical_pattern": "Securing cryptographic operations and system attestation — Software TPM exposes entire operating system as attack surface versus hardware's lower-level implementation; only suitable for development environments",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0043-edf10e"
+    ],
+    "independent_sources": [
+      "discourse:level1techs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0301",
+    "canonical_pattern": "Multi-step LLM inference with tool calling using prompt caching — Cache architecture forces choice between cache misses at scale or degraded performance at low volumes; single user question with 5 tool calls consumes 5 requests toward 15 RPM limit",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0053-231fdb"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0302",
+    "canonical_pattern": "testing backup restores and configuration changes in homelab without affecting production VMs — Cannot safely test backup restores or changes without risking production servers; must either accept risk or add hardware",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0054-094c5e"
+    ],
+    "independent_sources": [
+      "discourse:level1techs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0303",
+    "canonical_pattern": "Website page load delivery to end users — Pages taking too long to load, causing user wait time",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0059-4861c7"
+    ],
+    "independent_sources": [
+      "dev:startup"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0304",
+    "canonical_pattern": "AI agent execution in production environments — AI agents execute irreversible destructive actions (database deletion, record overwrites) without human intervention before damage occurs",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0061-76b18a"
+    ],
+    "independent_sources": [
+      "product_hunt"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0305",
+    "canonical_pattern": "Python developers reusing custom utility modules across multiple sibling projects in a monorepo workspace — IDE cannot resolve import until runtime, produces persistent warnings despite code working; requires boilerplate path manipulation in every importing script",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0062-b5baae"
+    ],
+    "independent_sources": [
+      "discourse:python"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0306",
+    "canonical_pattern": "Switching ESP32 firmware build toolchain from PlatformIO to ESP-IDF — Identical ESP32 configuration compiled with different toolchain (esp-idf vs platformio) causes sensors to frequently go offline/online with packet loss",
+    "hidden_function_class": "liability_transfer",
+    "observation_ids": [
+      "OBS-20260813-0063-c51bf5"
+    ],
+    "independent_sources": [
+      "discourse:home-assistant"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0307",
+    "canonical_pattern": "Planning token usage across a weekly quota reset period for API/model access — Unexpected quota reset date changes invalidate multi-day work plans and force re-scheduling of development tasks",
+    "hidden_function_class": "rare_decision_trust",
+    "observation_ids": [
+      "OBS-20260813-0064-5ca760"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0308",
+    "canonical_pattern": "short-term hardware testing/validation for specific GPU models or embedded devices — cloud GPU rental marketplaces only stock high-margin devices (H100, 4090); specific lower-end or uncommon hardware unavailable at any price despite need",
+    "hidden_function_class": "state_verification",
+    "observation_ids": [
+      "OBS-20260813-0065-698ff2"
+    ],
+    "independent_sources": [
+      "discourse:level1techs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0309",
+    "canonical_pattern": "restoring PostgreSQL database backups across major version upgrades — users needed ability to restore old version backups directly into new cluster version without intermediate migration steps",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0066-966fc4"
+    ],
+    "independent_sources": [
+      "discourse:fly-io"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0310",
+    "canonical_pattern": "home automation system storage management and cleanup — continuous increase in storage usage after software update, suggesting cleanup processes not executing properly",
+    "hidden_function_class": "unclassified",
+    "observation_ids": [
+      "OBS-20260813-0074-41512d"
+    ],
+    "independent_sources": [
+      "discourse:home-assistant"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
+    "status": "WATCH"
+  },
+  {
+    "anomaly_id": "ANOM-0311",
+    "canonical_pattern": "Multi-step LLM function calling with tool results appended to conversation history — Explicit cache mode unusable with function tools because tool results cannot be marked cacheable, forcing all users into implicit mode with 25% markup on all input tokens",
+    "hidden_function_class": "unknown_scope_pricing",
+    "observation_ids": [
+      "OBS-20260813-0075-85077e"
+    ],
+    "independent_sources": [
+      "discourse:openai-devs"
+    ],
+    "first_seen": "2026-08-13",
+    "last_seen": "2026-08-13",
     "status": "WATCH"
   }
 ]
