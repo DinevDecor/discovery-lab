@@ -38,9 +38,9 @@ class StartabilityGapOpenFindingTests(unittest.TestCase):
         shock = ShockForecast(shock_type=DATED,
                                date_bound=DateBound(earliest="2027-01-01", latest="2027-01-01",
                                                      evidence_status=OBSERVED))
-        l_remaining_denovo = NumberClaim(value=100, evidence_status=OBSERVED)
+        l_irr_denovo = NumberClaim(value=100, evidence_status=OBSERVED)
         clock_open_date = DateBound(earliest="2026-11-01", evidence_status=OBSERVED)
-        finding = specialist.open_finding_startability_gap(shock, l_remaining_denovo, clock_open_date)
+        finding = specialist.open_finding_startability_gap(shock, l_irr_denovo, clock_open_date)
         self.assertIsNotNone(finding.value)
         self.assertFalse(finding.affects_scoring)
 
@@ -52,9 +52,9 @@ class StartabilityGapOpenFindingTests(unittest.TestCase):
         shock = ShockForecast(shock_type=DATED,
                                date_bound=DateBound(earliest="2027-01-01", latest="2027-01-01",
                                                      evidence_status=OBSERVED))
-        l_remaining_denovo = NumberClaim(value=100, evidence_status=OBSERVED)
+        l_irr_denovo = NumberClaim(value=100, evidence_status=OBSERVED)
         clock_open_date = DateBound(earliest="2026-11-01", evidence_status=OBSERVED)
-        finding = specialist.open_finding_startability_gap(shock, l_remaining_denovo, clock_open_date)
+        finding = specialist.open_finding_startability_gap(shock, l_irr_denovo, clock_open_date)
         self.assertLess(finding.value, 0)
         self.assertIn("already mathematically late", finding.note)
 

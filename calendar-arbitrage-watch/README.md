@@ -76,10 +76,11 @@ In brief:
   our progress keeps pace with the calendar, G_r stays flat by construction (there is no
   elapsed-time term in the formula to double-count) — see
   `tests/test_specialist_readiness_gap.py`.
-- **G_d split by competitor posture** — `G_d^novo` (a hypothetical fresh entrant
-  starting today) and `G_d^active` (a specific competitor whose clock is already
-  running, anchored to an interval `competitor_start_bound`, always read at the bound
-  UNFAVORABLE to us) are two distinct fields, never one scalar —
+- **G_d split by competitor posture** — `G_d^novo = L_irr - T_shock` (a hypothetical
+  fresh entrant starting today; **positive** = they don't have enough time; increases as
+  a DATED shock approaches) and `G_d^active` (a specific tracked competitor, screened at
+  their `l_min_remaining_as_of` — the earliest defensible finish, unfavorable to us) are
+  two distinct fields, never one scalar, and never share a formula —
   `tests/test_specialist_defensive_gap.py`.
 - **Demand — four fields, never one multiplier**: Demand Obligation Certainty,
   Shock-Date Stability, Deadline-Relief Risk, and demand_suppression_risk (kept separate
@@ -98,10 +99,13 @@ In brief:
 - **Unknown competitor filing date** is a `DateBound` interval, read at the bound
   unfavorable to us; `INSUFFICIENT_DATA` if no bound is defensible — never a fabricated
   point estimate.
-- **`S_ready`** normalizes G_r onto the same 0..1 unit convention as the demand fields;
-  **`RI`** (Readiness Index) composes `S_ready` with demand certainty. Both are
-  documented working-definition **ASSUMPTIONS**, not certified formulas — see
-  `specialist.py`'s docstrings and the implementation report.
+- **`S_ready = rho * sum(q_k for competitors ready by shock)`** — a competitor-supply
+  aggregate in a real physical/operational unit (e.g. MW), screened at each competitor's
+  `l_min`/`q_max`; `rho` defaults to `1.0` without evidence. **NOT** a normalized
+  readiness score for our own candidate. **`RI` (Rivalry Index) = `D_shock / (S_existing
+  + S_ready)`** — never a composite with demand certainty/DSI/DRR. `D_shock`,
+  `S_existing`, and `S_ready` must share one unit or the result is `INSUFFICIENT_DATA`
+  — see `specialist.py`'s docstrings.
 - **`C3 >= DC x 0.25`** and **`startability_gap = t_lockout_novo - clock_open_date`**
   are recorded as `OPEN_FINDING`s with `affects_scoring` hard-coded `False` — see
   `tests/test_open_findings.py`.
@@ -133,8 +137,12 @@ the current pass/fail count.
 - **Zero retrospective validation passes.** Unlike Constraint Archaeology v0.5 (5
   retrospective passes, 4 calibration points), this methodology has none yet. Its
   findings must not borrow CA's credibility by association.
-- **`S_ready` and `RI` formulas are documented assumptions**, not calibrated or
-  human-certified — see `specialist.py`.
+- **`D_shock`/`S_existing` have no capture/extraction path yet.** `S_ready`/`RI`'s
+  formulas are canonical (2026-08-15-2 correction), but populating `D_shock` and
+  `S_existing` for a real candidate is future capture work, out of scope for this pass.
+- **`rho` per-candidate values still need their own evidence citation** whenever a
+  candidate asserts `rho < 1.0` — the `1.0` default itself is specified policy, not an
+  open question.
 - **`C3 >= DC x 0.25`** cannot be evaluated numerically in this implementation: `C3` and
   `DC` are quantities from the unlocated research documents, and this session could not
   find their definitions anywhere reachable. The finding is recorded by name only.

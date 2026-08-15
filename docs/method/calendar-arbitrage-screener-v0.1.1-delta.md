@@ -9,6 +9,30 @@ place. `calendar-arbitrage-watch/`'s code implements this delta directly (protoc
 version `caw0.1.2`); it does not implement v0.1's original rules where this delta
 supersedes them.
 
+## Correction — 2026-08-15-2 (implementation semantic regression fix)
+
+A correction pass on the same day found that this package's **first implementation**
+(not the approval itself) had drifted from the canonical v0.1.2 semantics in four
+places. Fixed in code; this document is edited in place here (not append-only, unlike
+the ledger) because the wrong text was this session's own first-draft error, not an
+approved historical artifact — the audit trail is this section, not a second file.
+`protocol_version` stays `caw0.1.2`: the methodology itself did not move, the
+implementation was simply wrong and is now conformant.
+
+| # | Quantity | Old (wrong) formula | New (canonical) formula |
+|---|---|---|---|
+| 1 | `G_d^novo` | `days_to_shock(as_of) - l_remaining_denovo` (reused `compute_readiness_gap`; decreased as shock approached) | `L_irr - days_to_shock(as_of)` (own formula, never reuses `compute_readiness_gap`); **increases** as a DATED shock approaches with constant `L_irr`. Positive = de-novo entrant does not have enough time. |
+| 2 | `S_ready` | `clamp(G_r / shock_horizon_days, 0, 1)` — a normalized readiness score for **our own candidate** | `rho * sum(q_k for competitors ready by shock)`, screened at each competitor's `l_min_remaining_as_of` (min) and its `q` (max), against the unfavorable shock date. Not a 0..1 score; a competitor-supply aggregate in a real physical/operational unit. |
+| 3 | `RI` | "Readiness Index" = `S_ready * demand_obligation_certainty` | **Rivalry Index** = `D_shock / (S_existing + S_ready)`. Demand Certainty/DSI/DRR are separate dimensions and never enter this formula. |
+| 4 | `G_d^active` | `(competitor_l_remaining - days_running_since_start_bound) - our_l_remaining` — subtracted elapsed competitor time from a quantity that could already be an "as of" remaining estimate (double-counting risk) | `tracked_competitor.l_min_remaining_as_of - our_l_remaining` — both inputs are already "as of now" remaining durations; no further elapsed-time subtraction. A start-bound + nominal-duration case is derived exactly **once** via `specialist.derive_remaining_from_start`, never combined with a direct assertion for the same competitor record. |
+
+See `specialist.py` for the corrected implementations and
+`tests/test_specialist_defensive_gap.py` / `tests/test_specialist_rivalry.py` for the
+regression tests (including the exact numeric examples: 24-month `L_irr` against a
+fixed DATED shock showing `G_d^novo` increasing; 10 MW + 100 MW competitors summing to
+110 MW, not "2 positions"; `rho=1.0` default; unknown capacity/unit forcing
+`INSUFFICIENT_DATA`; and no double-counting of elapsed competitor time).
+
 ## 0. Provenance note — read this before anything else
 
 The three prior research documents this delta corrects — Calendar Moat Analysis,
@@ -64,13 +88,18 @@ questions.
 
 **Corrected rule:** two separate fields.
 
-- `G_d^novo` — could a **fresh** competitor starting today still beat the shock date?
-  Correct DATED dynamics: a de-novo entrant's required work does not shrink with
-  calendar time (they haven't started), so `G_d^novo` decreases monotonically purely
-  from the shock date approaching — a different, and correct, dynamic from `G_r`
-  (which can legitimately stay flat).
-- `G_d^active` — relative lead/lag against a **specific** competitor whose clock is
-  already running, anchored to `competitor_start_bound` (an interval, never a point).
+- `G_d^novo = L_irr - T_shock` (canonical, see the 2026-08-15-2 correction above) —
+  could a **fresh** competitor starting today still beat the shock date? `L_irr` is the
+  irreducible build-time such an entrant would need. **Positive** means they do NOT have
+  enough time (a real timing moat for us). Correct DATED dynamics: a de-novo entrant's
+  required work does not shrink with calendar time (they haven't started), so `G_d^novo`
+  **increases** monotonically as a DATED shock date approaches with constant `L_irr` — a
+  different, and correct, dynamic from `G_r` (which can legitimately stay flat).
+- `G_d^active` — relative lead/lag against a **specific** tracked competitor, screened at
+  that competitor's `l_min_remaining_as_of` (their earliest defensible finish, i.e. the
+  bound most threatening to us) — see item 4 of the 2026-08-15-2 correction above for
+  why this is no longer derived from a start-date bound inside the same function that
+  also holds an already-"as of" remaining estimate.
 
 See `specialist.compute_defensive_gap_novo` / `compute_defensive_gap_active` and
 `tests/test_specialist_defensive_gap.py`.
@@ -147,9 +176,9 @@ All five implemented in `calendar_arbitrage_watch.models`:
 |---|---|---|
 | `shock_type: DATED \| ROLLING` | `ShockForecast.shock_type` | `intake.py` rejects a `DATED` submission whose `date_bound` is a real interval (`earliest != latest`) — a genuine forecast range must be `ROLLING`. |
 | versioned `T_shock` at ROLLING | `ShockForecast.forecast_version`, `as_of` | A ROLLING re-forecast is a **new** `ShockForecast` (new `forecast_version`), appended as a new ledger line — never an edited one. |
-| `G_d^novo` correct dynamics for DATED | `specialist.compute_defensive_gap_novo` | Monotonic decrease as the shock date approaches, constant `l_remaining_denovo` — proven in `tests/test_specialist_defensive_gap.py::test_g_d_novo_decreases_monotonically...`. |
-| competitor bounds, not a point estimate | `DefensiveGapAssessment.competitor_start_bound: DateBound` | Always read at the bound UNFAVORABLE to us; `INSUFFICIENT_DATA` if neither bound is defensible (2026-08-15 approval, point 8). |
-| `S_ready` in the same unit as demand | `specialist.compute_s_ready` | Normalized to `[0, 1]` (`unit="ratio"`), the same scale `DemandProfile`'s fields use — see section 6 below on this being a documented assumption, not a certified formula. |
+| `G_d^novo` correct dynamics for DATED | `specialist.compute_defensive_gap_novo` | `G_d^novo = L_irr - T_shock`; monotonic **increase** as the shock date approaches, constant `l_irr_denovo` — proven in `tests/test_specialist_defensive_gap.py::test_g_d_novo_increases_as_dated_shock_approaches_with_constant_l_irr` (corrected 2026-08-15-2; was a monotonic-decrease claim on an inverted formula). |
+| competitor bounds, not a point estimate | `CompetitorFinish.l_min_remaining_as_of` / `.l_max_remaining_as_of` | Screening always uses `l_min_remaining_as_of` (the bound UNFAVORABLE to us); `INSUFFICIENT_DATA` if not defensible (2026-08-15 approval, point 8; field shape corrected 2026-08-15-2 item 4). |
+| `S_ready` in the same unit as demand/supply | `specialist.compute_s_ready` | Canonical: `rho * sum(q_k for competitors ready by shock)`, screened at `l_min`/`q_max`; shares `unit` with `D_shock`/`S_existing` or `INSUFFICIENT_DATA` — corrected 2026-08-15-2 item 2 (was, wrongly, a normalized 0..1 score for our own candidate). |
 | DSI heuristic, not Bayesian | `specialist.compute_demand_stability_index` | See section 3 above. |
 | DRR separate from demand suppression risk | `DemandProfile.deadline_relief_risk` vs `.demand_suppression_risk` | See section 3 above. |
 
@@ -181,27 +210,38 @@ recovered or re-specified.**
 ## `startability_gap = t_lockout_novo - clock_open_date`
 
 Computable from fields this package defines: `t_lockout_novo = shock_date(unfavorable) -
-l_remaining_denovo`; `clock_open_date` is a new field on `CalendarAssessment`
-(`DateBound`) recording when the underlying procedure/queue/registration actually
-became accessible. A **negative** `startability_gap` flags the regime the approval
-names explicitly: de-novo supply was already mathematically too late the moment the
-procedure became available. `specialist.open_finding_startability_gap` computes this
-when inputs allow it, but `affects_scoring=False` always — diagnostic only, pending
-review. See `tests/test_open_findings.py`.
+l_irr_denovo`; `clock_open_date` is a field on `CalendarAssessment` (`DateBound`)
+recording when the underlying procedure/queue/registration actually became accessible.
+A **negative** `startability_gap` flags the regime the approval names explicitly:
+de-novo supply was already mathematically too late the moment the procedure became
+available. `specialist.open_finding_startability_gap` computes this when inputs allow
+it, but `affects_scoring=False` always — diagnostic only, pending review. See
+`tests/test_open_findings.py`.
 
-## Unknown competitor filing date
+## Unknown competitor filing/finish date
 
-Never a fabricated point estimate. `DateBound` with `earliest`/`latest`; when a bound is
-used, it is always the one **unfavorable to the candidate**. When neither bound is
-defensible, the result is `INSUFFICIENT_DATA`, not a guess — see
-`specialist.compute_defensive_gap_active` and the approval's point 8, applied literally.
+Never a fabricated point estimate. `CompetitorFinish.l_min_remaining_as_of` /
+`.l_max_remaining_as_of` (or, when only a start-date bound + nominal duration is known,
+derived once via `specialist.derive_remaining_from_start` — never combined with a direct
+assertion for the same competitor record). Screening always uses the bound
+**unfavorable to the candidate** (`l_min_remaining_as_of` — the competitor's fastest
+defensible finish). When no bound is defensible, the result is `INSUFFICIENT_DATA`, not
+a guess — see `specialist.compute_defensive_gap_active` / `compute_s_ready` and the
+approval's point 8, applied literally.
 
-## `S_ready` and `RI` (Readiness Index) — documented assumptions, not certified
+## `S_ready` and `RI` (Rivalry Index) — canonical formulas, given by the 2026-08-15-2 correction
 
-Neither formula was specified with an exact equation anywhere in the approved
-methodology — only the constraints "S_ready in the same unit as demand" and "RI is
-deterministic" were given. This delta and `specialist.py` record the working
-definitions used (`S_ready = clamp(G_r / shock_horizon_days, 0, 1)`;
-`RI = S_ready * demand_obligation_certainty`) explicitly as **assumptions pending
-review** — not adopted, calibrated scoring. A future review may replace either formula
-without touching anything else in this delta.
+These are **no longer open assumptions** — the 2026-08-15-2 correction specified exact
+formulas (see the correction section at the top of this document):
+`S_ready = rho * sum(q_k for competitors ready by shock)`,
+`RI = D_shock / (S_existing + S_ready)`. What remains genuinely open, per that same
+correction:
+
+- `rho` **defaults to 1.0** whenever no evidence justifies a lower discount — this is a
+  specified policy (the unfavorable-to-candidate default), not an unresolved formula,
+  but any *particular* candidate's asserted `rho < 1.0` still needs its own evidence
+  citation, checked case by case.
+- `D_shock` and `S_existing` are new per-candidate quantities this package now requires
+  a caller to assert (in the same unit as `S_ready`) — no source registry or extraction
+  path for them exists yet; populating them is future capture work, out of scope for
+  this correction pass.

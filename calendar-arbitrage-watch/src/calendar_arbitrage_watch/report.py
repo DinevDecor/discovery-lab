@@ -71,18 +71,18 @@ def _shock_forecast_changed(prev: Dict[str, Any], new: Dict[str, Any]) -> bool:
 def pick_best_next_action(new_current: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
     """Exactly one recommendation, never a ranked list (headquarters'
     Attention Engine precedent: 'never Top 10'). Candidates already at a
-    MAX_AUTOMATIC state, ranked by readiness_index value (highest first,
-    ties broken by candidate_id for reproducibility), are the ones
-    genuinely waiting on the human gate. Every other candidate is
-    reported in the brief's own listings, never as a second priority
-    list."""
+    MAX_AUTOMATIC state, ranked by Rivalry Index value (highest first -
+    more demand relative to supply means more urgency, ties broken by
+    candidate_id for reproducibility), are the ones genuinely waiting on
+    the human gate. Every other candidate is reported in the brief's own
+    listings, never as a second priority list."""
     from .models import MAX_AUTOMATIC_STATES
     waiting = [r for r in new_current if r["lifecycle_state"] in MAX_AUTOMATIC_STATES]
     if not waiting:
         return None
 
     def sort_key(r):
-        ri = (r.get("readiness_index") or {}).get("value")
+        ri = ((r.get("rivalry") or {}).get("rivalry_index") or {}).get("value")
         return (-(ri if ri is not None else -1.0), r["candidate_id"])
 
     waiting.sort(key=sort_key)

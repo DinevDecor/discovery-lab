@@ -204,22 +204,76 @@ class ReadinessAssessment:
 
 
 @dataclass(frozen=True)
+class CompetitorFinish:
+    """One competitor's remaining-time-to-finish bounds, asserted directly
+    AS OF a given date - never reconstructed by subtracting elapsed time
+    from a quantity that is already itself an 'as of' remaining estimate
+    (2026-08-15-2 correction, item 4 - the exact double-counting bug this
+    replaces).
+
+    `l_min_remaining_as_of` / `l_max_remaining_as_of` MUST be populated
+    one of two ways, never both for the same record:
+      (a) asserted directly from evidence ("their own status page says 6
+          months remaining as of today"), or
+      (b) derived ONCE via `specialist.derive_remaining_from_start` from a
+          start-date bound + a total nominal duration.
+    Screening (`specialist.compute_defensive_gap_active`) always uses
+    `l_min_remaining_as_of` - the EARLIEST defensible finish, i.e. the
+    bound most threatening to us.
+
+    `q` is this competitor's quantity/capacity contribution (e.g. MW,
+    units) if they turn out to be ready by the shock date - used only by
+    `specialist.compute_s_ready`, read at its own asserted value (callers
+    are responsible for asserting the MAXIMUM defensible `q`, per the
+    Rivalry Index correction, item 2)."""
+    competitor_id: str = ""
+    l_min_remaining_as_of: NumberClaim = field(default_factory=NumberClaim)
+    l_max_remaining_as_of: NumberClaim = field(default_factory=NumberClaim)
+    q: NumberClaim = field(default_factory=NumberClaim)
+    as_of: str = ""
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "competitor_id": self.competitor_id,
+            "l_min_remaining_as_of": self.l_min_remaining_as_of.to_dict(),
+            "l_max_remaining_as_of": self.l_max_remaining_as_of.to_dict(),
+            "q": self.q.to_dict(),
+            "as_of": self.as_of,
+        }
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> "CompetitorFinish":
+        return CompetitorFinish(
+            competitor_id=data.get("competitor_id", ""),
+            l_min_remaining_as_of=NumberClaim.from_dict(data.get("l_min_remaining_as_of") or {}),
+            l_max_remaining_as_of=NumberClaim.from_dict(data.get("l_max_remaining_as_of") or {}),
+            q=NumberClaim.from_dict(data.get("q") or {}),
+            as_of=data.get("as_of", ""),
+        )
+
+
+@dataclass(frozen=True)
 class DefensiveGapAssessment:
-    """G_d split by competitor posture (methodology delta v0.1.1 #2):
-    `g_d_novo_days` assumes a competitor starting today; `g_d_active_days`
-    assumes one whose clock is already running, anchored to
-    `competitor_start_bound` (an interval, never a point)."""
+    """G_d split by competitor posture (methodology delta v0.1.1 #2,
+    corrected 2026-08-15-2):
+
+    `g_d_novo_days` = L_irr - days_to_shock (a hypothetical fresh
+    competitor starting today). POSITIVE means a de-novo entrant does NOT
+    have enough time before the shock - this is the canonical sign, fixed
+    from this package's first implementation which had it inverted.
+
+    `g_d_active_days` is the horse race against ONE specific tracked
+    rival (`tracked_competitor`), screened at that rival's
+    `l_min_remaining_as_of` (item 4)."""
     g_d_novo_days: NumberClaim = field(default_factory=NumberClaim)
     g_d_active_days: NumberClaim = field(default_factory=NumberClaim)
-    competitor_start_bound: DateBound = field(default_factory=DateBound)
-    bound_used: str = ""  # "earliest" | "latest" | "" - always the bound UNFAVORABLE to us
+    tracked_competitor: CompetitorFinish = field(default_factory=CompetitorFinish)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
             "g_d_novo_days": self.g_d_novo_days.to_dict(),
             "g_d_active_days": self.g_d_active_days.to_dict(),
-            "competitor_start_bound": self.competitor_start_bound.to_dict(),
-            "bound_used": self.bound_used,
+            "tracked_competitor": self.tracked_competitor.to_dict(),
         }
 
     @staticmethod
@@ -227,8 +281,7 @@ class DefensiveGapAssessment:
         return DefensiveGapAssessment(
             g_d_novo_days=NumberClaim.from_dict(data.get("g_d_novo_days") or {}),
             g_d_active_days=NumberClaim.from_dict(data.get("g_d_active_days") or {}),
-            competitor_start_bound=DateBound.from_dict(data.get("competitor_start_bound") or {}),
-            bound_used=data.get("bound_used", ""),
+            tracked_competitor=CompetitorFinish.from_dict(data.get("tracked_competitor") or {}),
         )
 
 
@@ -296,6 +349,58 @@ class PendingCompetitionAssessment:
 
 
 @dataclass(frozen=True)
+class RivalryAssessment:
+    """S_ready and RI (Rivalry Index), corrected 2026-08-15-2 (items 2-3).
+
+    Canonical formulas (see specialist.compute_s_ready / compute_rivalry_index):
+
+        S_ready(T_shock) = rho * sum(q_k for competitors k ready by shock)
+        RI = D_shock / (S_existing + S_ready)
+
+    `d_shock`, `s_existing`, and `s_ready` MUST share the same physical/
+    operational `unit` (e.g. MW, units/year) - if no defensible unit can
+    be asserted, every quantity here stays INSUFFICIENT_DATA rather than
+    a fabricated ratio. `rho` defaults to 1.0 when no evidence justifies a
+    lower discount (the unfavorable-to-candidate default) - see
+    specialist.py.
+
+    THIS IS NOT a normalized 0..1 readiness score for our own candidate -
+    that concept does not exist under the name S_ready. If a future need
+    for one arises it must get its own name (2026-08-15-2 approval,
+    item 2)."""
+    d_shock: NumberClaim = field(default_factory=NumberClaim)
+    s_existing: NumberClaim = field(default_factory=NumberClaim)
+    s_ready: NumberClaim = field(default_factory=NumberClaim)
+    rho: NumberClaim = field(default_factory=NumberClaim)
+    unit: str = ""
+    competitors: List[CompetitorFinish] = field(default_factory=list)
+    rivalry_index: NumberClaim = field(default_factory=NumberClaim)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "d_shock": self.d_shock.to_dict(),
+            "s_existing": self.s_existing.to_dict(),
+            "s_ready": self.s_ready.to_dict(),
+            "rho": self.rho.to_dict(),
+            "unit": self.unit,
+            "competitors": [c.to_dict() for c in self.competitors],
+            "rivalry_index": self.rivalry_index.to_dict(),
+        }
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> "RivalryAssessment":
+        return RivalryAssessment(
+            d_shock=NumberClaim.from_dict(data.get("d_shock") or {}),
+            s_existing=NumberClaim.from_dict(data.get("s_existing") or {}),
+            s_ready=NumberClaim.from_dict(data.get("s_ready") or {}),
+            rho=NumberClaim.from_dict(data.get("rho") or {}),
+            unit=data.get("unit", ""),
+            competitors=[CompetitorFinish.from_dict(c) for c in data.get("competitors", [])],
+            rivalry_index=NumberClaim.from_dict(data.get("rivalry_index") or {}),
+        )
+
+
+@dataclass(frozen=True)
 class OpenFinding:
     """An explicitly uncalibrated rule or diagnostic quantity that MUST
     NOT influence scoring yet (2026-08-15 approval, points 4 and 7).
@@ -341,8 +446,7 @@ class CalendarAssessment:
     pending_competition: PendingCompetitionAssessment = field(default_factory=PendingCompetitionAssessment)
 
     demand_stability_index: str = INSUFFICIENT_DATA  # DSI: heuristic tier, see specialist.py
-    s_ready: NumberClaim = field(default_factory=NumberClaim)  # same 0..1 unit as demand fields
-    readiness_index: NumberClaim = field(default_factory=NumberClaim)  # RI: composite, see specialist.py
+    rivalry: RivalryAssessment = field(default_factory=RivalryAssessment)  # S_ready / RI, see specialist.py
 
     open_findings: List[OpenFinding] = field(default_factory=list)
 
@@ -375,8 +479,7 @@ class CalendarAssessment:
             "demand": self.demand.to_dict(),
             "pending_competition": self.pending_competition.to_dict(),
             "demand_stability_index": self.demand_stability_index,
-            "s_ready": self.s_ready.to_dict(),
-            "readiness_index": self.readiness_index.to_dict(),
+            "rivalry": self.rivalry.to_dict(),
             "open_findings": [f.to_dict() for f in self.open_findings],
             "lifecycle_state": self.lifecycle_state,
             "lifecycle_reason": self.lifecycle_reason,
@@ -407,8 +510,7 @@ class CalendarAssessment:
             demand=DemandProfile.from_dict(data.get("demand") or {}),
             pending_competition=PendingCompetitionAssessment.from_dict(data.get("pending_competition") or {}),
             demand_stability_index=data.get("demand_stability_index", INSUFFICIENT_DATA),
-            s_ready=NumberClaim.from_dict(data.get("s_ready") or {}),
-            readiness_index=NumberClaim.from_dict(data.get("readiness_index") or {}),
+            rivalry=RivalryAssessment.from_dict(data.get("rivalry") or {}),
             open_findings=[OpenFinding.from_dict(f) for f in data.get("open_findings", [])],
             lifecycle_state=data.get("lifecycle_state", WATCH),
             lifecycle_reason=data.get("lifecycle_reason", ""),

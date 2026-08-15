@@ -90,9 +90,19 @@ enforced by `tests/test_safety.py`, not just this document.
 - collapse Demand Obligation Certainty, Shock-Date Stability, Deadline-Relief Risk, or
   demand_suppression_risk into one confidence number, or compute DSI as a Bayesian
   posterior rather than a rule-based heuristic tier (2026-08-15 approval, point 5).
-- fabricate a competitor start date as a point estimate. An unknown competitor start is
-  a `DateBound` interval; the bound used is always the one UNFAVORABLE to us; if no
-  bound is defensible the result is `INSUFFICIENT_DATA` (2026-08-15 approval, point 8).
+- fabricate a competitor's remaining-time-to-finish as a point estimate. An unknown
+  competitor finish is `CompetitorFinish.l_min_remaining_as_of` /
+  `.l_max_remaining_as_of`; screening always uses the bound UNFAVORABLE to us
+  (`l_min_remaining_as_of`); if no bound is defensible the result is
+  `INSUFFICIENT_DATA` (2026-08-15 approval, point 8). A start-date bound + nominal
+  duration may be derived into a remaining estimate exactly ONCE
+  (`specialist.derive_remaining_from_start`) — never combined with a direct assertion
+  for the same competitor record (2026-08-15-2 correction, item 4).
+- use `S_ready` as a normalized readiness score for our own candidate, or `RI` as a
+  composite with demand certainty/DSI/DRR. `S_ready = rho * sum(q_k for competitors
+  ready by shock)` (a competitor-supply aggregate); `RI` (Rivalry Index) `= D_shock /
+  (S_existing + S_ready)`; `rho` defaults to `1.0` without evidence
+  (2026-08-15-2 correction, items 2-3).
 - automatically DEGRADE a candidate's lifecycle state on a delay event. A delay
   recomputes T_shock, G_r, G_d^novo, and G_d^active together; only a subsequent,
   separate adversarial-review pass may change lifecycle state (2026-08-15 approval,
