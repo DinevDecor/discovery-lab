@@ -1,0 +1,40 @@
+{
+  "candidate_id": "synthetic-regclock-0001",
+  "mode": "DISCOVERY",
+  "category": "regulatory_clock",
+  "title": "Synthetic test fixture — DATED regulatory clock",
+  "summary": "Made-up example for pipeline tests only. Not real evidence.",
+  "shock_forecast": {
+    "shock_type": "DATED",
+    "date_bound": {
+      "earliest": "2027-03-01",
+      "latest": "2027-03-01",
+      "basis": "synthetic fixture, not a real filing",
+      "evidence_status": "OBSERVED"
+    },
+    "as_of": "2026-08-15"
+  },
+  "latest_safe_date_as_of": {
+    "earliest": "2027-01-15",
+    "latest": "2027-01-15",
+    "basis": "synthetic fixture",
+    "evidence_status": "OBSERVED"
+  },
+  "readiness": {
+    "l_remaining_days": {
+      "value": 120,
+      "unit": "days",
+      "provenance": "REPEATED",
+      "evidence_status": "OBSERVED",
+      "note": "synthetic fixture"
+    }
+  },
+  "demand": {
+    "demand_obligation_certainty": {"value": 0.85, "evidence_status": "OBSERVED"},
+    "shock_date_stability": {"value": 0.6, "evidence_status": "OBSERVED"},
+    "deadline_relief_risk": {"value": 0.3, "evidence_status": "OBSERVED"},
+    "demand_suppression_risk": {"value": 0.05, "evidence_status": "OBSERVED"}
+  },
+  "evidence_ids": ["synthetic-ev-1"],
+  "provenance": ["synthetic fixture, tests/fixtures/README.md"]
+}

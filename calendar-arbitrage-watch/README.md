@@ -1,0 +1,145 @@
+# Calendar Arbitrage Watch v0.1.2
+
+A durable, auditable evidence ledger for one question, asked about one candidate
+calendar position at a time: **is our position on a regulatory/infrastructure/
+accreditation/environmental/demand clock ahead of, or behind, the competition that
+could take it from us — and by how much?**
+
+Sibling package to `constraint-archaeology-agents/`, `business-candidate-analyst/`,
+`constraint-change-observatory/`, and `capability-observatory/` — same skeleton
+(`CONTRACT.md`, append-only ledger + rebuilt snapshot, `tests/test_safety.py`,
+`run_*.py` CLI entrypoint), zero import dependency in either direction.
+
+## Origin
+
+Approved by a read-only architecture review and a follow-up implementation approval,
+both on 2026-08-15, in this repository's own session. The prior research context
+(Calendar Moat Analysis, Calendar Arbitrage Screener v0.1, Calendar Arbitrage
+Multi-Agent Watch v0.1) could not be located in this repository or in
+`DinevDecor/project-memory/archive` — see the implementation report delivered alongside
+this package and `docs/method/calendar-arbitrage-screener-v0.1.1-delta.md`'s provenance
+note. This package implements the corrected methodology exactly as specified in the
+approval conversation; it does not transcribe or paraphrase the unlocated research
+documents.
+
+## What this does
+
+- Holds `CalendarAssessment` records: candidate identity, mode (`DISCOVERY` /
+  `ARCHAEOLOGY` / `CONVERSION`), category, a versioned `ShockForecast` (T_shock,
+  `DATED` or `ROLLING`), a `latest_safe_date_as_of` boundary (was "t_lockout_self" —
+  renamed per the approval, point 6), readiness (`G_r`), defensive gaps split by
+  competitor posture (`G_d^novo` / `G_d^active`), a four-field demand profile, and a
+  five-field pending-competition profile.
+- Runs the corrected math deterministically (`specialist.py`) — see "Methodology" below.
+- Runs an adversarial review pass (`gate.py`) that always persists one of three
+  outcomes: `CONFIRMED`, `CHALLENGED`, `KILLED` — never only the promotions.
+- Advances a five-state lifecycle (`lifecycle.py`): `WATCH -> CHEAP_TEST ->
+  {START_CLOCK_CANDIDATE | BUY_CALENDAR_CANDIDATE} -> REJECTED` (from any state).
+  `REJECTED` is terminal; automatic revival is out of scope. The two "candidate" states
+  are the maximum this package ever reaches on its own — see CONTRACT.md's Human
+  Authority Boundary.
+- Keeps every assessment ever authored, forever, in an append-only ledger
+  (`data/calendar_events.jsonl`), and rebuilds a deterministic current-state snapshot
+  from it on every run (`data/calendar_candidates.json`) — never a read-modify-write. A
+  revision shares `candidate_id` with its predecessor; a genuinely different lineage
+  that retires an old one sets `supersedes`, mirroring
+  `constraint_change_observatory.ledger`'s own supersedes lineage.
+- Renders a daily brief (`reports/daily-<date>.md`) capped at six categories: new
+  signals (≤5 shown), promotions, degradations, dead clocks, material evidence changes,
+  and one best next action. `NO MATERIAL CALENDAR CHANGE` is the expected default —
+  "silence is the default" (`docs/operations/bca-daily-pipeline.md`'s own principle).
+
+## What this does NOT do
+
+- **Not a collector.** No code path here fetches anything from the network — enforced
+  by `tests/test_safety.py`. Capture (reading a regulatory filing, permit register,
+  accreditation listing, or grid-connection queue) happens outside this package
+  entirely, the same capture/processing split `reality-sensor/` and
+  `capability-observatory/` already use.
+- **Not wired into `run_daily_pipeline.py`.** This phase is a 30-day validation of the
+  analyst and its longitudinal state, standing alone exactly the way
+  `capability-observatory/` and `constraint-change-observatory/` do today. Wiring into
+  the shared daily pipeline is a separate, later, explicit human decision after a
+  retrospective (2026-08-15 approval, point 9).
+- **Not connected to any existing analyst package.** Zero import dependency, both
+  directions, enforced by `tests/test_safety.py`.
+- **Never acts.** No outbound contact, no application, no reservation, no payment, no
+  contract, no incorporation, no paid procedure — see CONTRACT.md.
+
+## Methodology — v0.1.1/v0.1.2 corrected math
+
+Full delta and open findings: `docs/method/calendar-arbitrage-screener-v0.1.1-delta.md`.
+In brief:
+
+- **G_r (Readiness Gap)** — `T_shock - L_remaining`, where `L_remaining` is an
+  independently asserted remaining-work estimate, never derived from elapsed time. If
+  our progress keeps pace with the calendar, G_r stays flat by construction (there is no
+  elapsed-time term in the formula to double-count) — see
+  `tests/test_specialist_readiness_gap.py`.
+- **G_d split by competitor posture** — `G_d^novo` (a hypothetical fresh entrant
+  starting today) and `G_d^active` (a specific competitor whose clock is already
+  running, anchored to an interval `competitor_start_bound`, always read at the bound
+  UNFAVORABLE to us) are two distinct fields, never one scalar —
+  `tests/test_specialist_defensive_gap.py`.
+- **Demand — four fields, never one multiplier**: Demand Obligation Certainty,
+  Shock-Date Stability, Deadline-Relief Risk, and demand_suppression_risk (kept separate
+  from DRR — the obligation staying certain while its date moves is a different risk
+  from the obligation itself shrinking). **DSI** (Demand Stability Index) is a
+  rule-based heuristic tier over (DOC, SDS), explicitly not a Bayesian posterior.
+- **Delay never auto-DEGRADEs.** A delay event recomputes T_shock (new versioned
+  forecast), G_r, G_d^novo, and G_d^active together; only a subsequent, separate
+  adversarial-review pass may change lifecycle state.
+- **Pending competition — five separate fields.** Formal free capacity alone is
+  insufficient for infrastructure candidates; pending applications, issued connection
+  opinions, known queue ahead, and committed competing projects are tracked
+  independently, never collapsed into one "availability" number.
+- **`latest_safe_date_as_of`** (was "t_lockout_self") is modeled as a moving, versioned
+  boundary — never a permanently fixed date.
+- **Unknown competitor filing date** is a `DateBound` interval, read at the bound
+  unfavorable to us; `INSUFFICIENT_DATA` if no bound is defensible — never a fabricated
+  point estimate.
+- **`S_ready`** normalizes G_r onto the same 0..1 unit convention as the demand fields;
+  **`RI`** (Readiness Index) composes `S_ready` with demand certainty. Both are
+  documented working-definition **ASSUMPTIONS**, not certified formulas — see
+  `specialist.py`'s docstrings and the implementation report.
+- **`C3 >= DC x 0.25`** and **`startability_gap = t_lockout_novo - clock_open_date`**
+  are recorded as `OPEN_FINDING`s with `affects_scoring` hard-coded `False` — see
+  `tests/test_open_findings.py`.
+
+## How assessments are added
+
+```bash
+python3 run_calendar_arbitrage_watch.py add path/to/submission.json   # validate + append + review + report
+python3 run_calendar_arbitrage_watch.py report                         # re-render the report, add nothing
+python3 run_calendar_arbitrage_watch.py rebuild                        # rebuild the snapshot only
+```
+
+A submission file is a JSON object or array of objects — see `tests/fixtures/` for
+worked (synthetic, non-research-derived) examples and `models.py`'s
+`CalendarAssessment` for the full field reference.
+
+## Tests
+
+```bash
+cd calendar-arbitrage-watch
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+```
+
+Offline, deterministic, no network, no model call. See the implementation report for
+the current pass/fail count.
+
+## Limitations, stated rather than hidden
+
+- **Zero retrospective validation passes.** Unlike Constraint Archaeology v0.5 (5
+  retrospective passes, 4 calibration points), this methodology has none yet. Its
+  findings must not borrow CA's credibility by association.
+- **`S_ready` and `RI` formulas are documented assumptions**, not calibrated or
+  human-certified — see `specialist.py`.
+- **`C3 >= DC x 0.25`** cannot be evaluated numerically in this implementation: `C3` and
+  `DC` are quantities from the unlocated research documents, and this session could not
+  find their definitions anywhere reachable. The finding is recorded by name only.
+- **No fixture derived from the real research baseline.** `tests/fixtures/` is entirely
+  synthetic — see `tests/fixtures/README.md`.
+- **LLM wiring is a seam, not a working feature.** `gate.py`'s `JudgeProtocol` mirrors
+  `ca_agents.same_mechanism_gate.JudgeProtocol`'s shape but nothing implements or calls
+  it in this phase.
