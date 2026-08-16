@@ -307,8 +307,12 @@ def compute_demand_stability_index(demand: DemandProfile) -> str:
     v0.1.1 -> v0.1.2, section P5, renames `SDS` to `DSI` and specifies it
     as an additive heuristic index with fixed, capped penalties
     (explicitly NOT a Bayesian update - no prior, no likelihood, no
-    normalization), `DSI = 1` when `shock_type = ROLLING`, and feeds
-    `C3_score = DC * DSI * (1 - DRR)`, floored at `DC * 0.25`. An earlier
+    normalization), `DSI = 1` when `shock_type = ROLLING`, and research
+    v0.1.2 §P5 defines/proposes `C3_score = DC * DSI * (1 - DRR)`, floored
+    at `DC * 0.25` - that floor is the origin of the `C3 >= DC * 0.25` rule,
+    which remains an OPEN FINDING with `affects_scoring=False`, NOT adopted
+    and NOT scored, pending calibration (see
+    `open_finding_pending_competition_threshold` below). An earlier
     version of this docstring incorrectly claimed no such definition
     existed anywhere reachable; that claim is retracted.
 
