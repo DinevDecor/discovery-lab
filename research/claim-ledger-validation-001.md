@@ -3,7 +3,7 @@
 **Status:** IN PROGRESS
 **Started (setup):** 2026-08-16 13:54 UTC
 **Day 1 begins:** with the first Business Candidate Analyst output produced *after* this setup — the 22:00 UTC 2026-08-16 run of `constraint-archaeology-daily.yml` (Constraint Archaeology → Business Candidate Analyst), or its report file, whichever lands first.
-**Ends:** 7 calendar days after Day 1's first logged claim, OR when 20 decision-relevant claims have been logged, whichever comes first.
+**Ends:** the experiment runs for **at least** 7 consecutive calendar days from Day 1's first logged claim, **and** requires **at least** 20 decision-relevant claims — both conditions must hold, not either. Concretely: if 20 claims accumulate before day 7, logging/reconciliation continues anyway through the end of day 7, and the experiment concludes then. If day 7 arrives with fewer than 20 claims logged, the experiment continues past day 7, logging only, until 20 decision-relevant claims are reached. The moment both the 7-day minimum and the 20-claim minimum are satisfied, the experiment stops immediately and the final report is issued. (Corrected 2026-08-16, before Day 1 began — the original scaffold below used an "OR, whichever first" rule; nothing else about the schema, save criteria, or daily process changed.)
 **This is not a software task.** No product, service, database, or BCA logic change is created by this file or this process. This is a manual, append-only research log.
 
 ---
