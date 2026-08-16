@@ -3,11 +3,17 @@ Coordinator, per the approved architecture review's role-collapse
 decision (section 5): no separate Coordinator agent, just this
 entrypoint, mirroring every other package's run_*.py + cli.py split.
 
-`add`   validate a submission file -> append to the ledger -> run the
-        adversarial gate -> apply the lifecycle transition -> append the
-        POST-review record too (a lifecycle change is its own new ledger
-        line, never a mutation of the specialist's own line) -> rebuild
-        the snapshot -> render the daily report.
+`add`   validate a submission file -> derive the deterministic assessment
+        (specialist.derive_assessment: populates g_r_days/g_d_novo_days/
+        g_d_active_days/s_ready/rivalry_index from the submission's own
+        raw inputs - added 2026-08-15-5, REAL-CASE-001 finding #1: this
+        step did not exist before, and the gate was reading empty
+        defaults regardless of what a submitter asserted) -> append to
+        the ledger -> run the adversarial gate -> apply the lifecycle
+        transition -> append the POST-review record too (a lifecycle
+        change is its own new ledger line, never a mutation of the
+        specialist's own line) -> rebuild the snapshot -> render the
+        daily report.
 `report`  re-render the report from the current snapshot, add nothing.
 `rebuild` rebuild the snapshot from the ledger only.
 
@@ -23,7 +29,7 @@ import sys
 from dataclasses import replace
 from typing import Any, Dict, List, Optional, Sequence
 
-from . import intake, ledger, report
+from . import intake, ledger, report, specialist
 from .gate import review as gate_review
 from .lifecycle import apply_review
 from .models import CalendarAssessment
@@ -71,7 +77,7 @@ def cmd_add(root: str, submission_paths: Sequence[str]) -> int:
                 exit_code = 1
                 continue
 
-            assessment: CalendarAssessment = result.assessment
+            assessment: CalendarAssessment = specialist.derive_assessment(result.assessment, _today_iso())
             assessment.analyst_version = ANALYST_VERSION
             if not assessment.first_seen:
                 assessment.first_seen = recorded_at

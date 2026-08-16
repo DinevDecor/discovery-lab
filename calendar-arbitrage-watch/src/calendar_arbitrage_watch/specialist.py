@@ -33,10 +33,12 @@ so "cannot compute this" is representable as INSUFFICIENT_DATA rather than
 
 from __future__ import annotations
 
+from dataclasses import replace as _replace
 from datetime import date, timedelta
 from typing import List, Optional, Sequence
 
 from .models import (
+    CalendarAssessment,
     CompetitorFinish,
     DateBound,
     DemandProfile,
@@ -555,3 +557,54 @@ def open_finding_startability_gap(shock: ShockForecast, l_irr_denovo: NumberClai
         status="OPEN_FINDING", affects_scoring=False, value=gap_days,
         note=f"t_lockout_novo={lockout_dt.isoformat()}, clock_open_date={open_dt.isoformat()}; {note}",
     )
+
+
+# ---------------------------------------------------------------------------
+# Assessment derivation - added 2026-08-15-5 (REAL-CASE-001 finding #1)
+# ---------------------------------------------------------------------------
+
+def derive_assessment(assessment: CalendarAssessment, as_of: str) -> CalendarAssessment:
+    """The ONE deterministic derivation step: populates every DERIVED
+    field (`readiness.g_r_days`, `defensive.g_d_novo_days`,
+    `defensive.g_d_active_days`, `rivalry.s_ready`, `rivalry.rivalry_index`)
+    from the assessment's own RAW input fields, by calling this module's
+    existing pure `compute_*` functions - it adds no new math of its own.
+
+    Pure function: returns a NEW `CalendarAssessment`; never mutates its
+    argument. Never fabricates a raw input and never overrides one a
+    submitter already asserted - every `compute_*` call already returns
+    `INSUFFICIENT_DATA` on its own when an input is missing, so a
+    submission with no evidence for a given quantity still gets
+    `INSUFFICIENT_DATA` for that quantity's derived field, not a
+    fabricated number.
+
+    REAL-CASE-001 (the first real validation case run against this
+    package) exposed that nothing called this module's math from the CLI
+    pipeline at all - `g_r_days`/`g_d_novo_days`/`g_d_active_days`/
+    `s_ready`/`rivalry_index` stayed at their empty defaults in the
+    ledger regardless of what a submitter asserted, and the adversarial
+    gate then read those empty defaults as "no competitive picture
+    asserted" even when one had been. This function, called once by
+    `cli.cmd_add` between intake validation and the ledger append, is the
+    fix: a submitter supplies raw evidence, this function derives the
+    same numbers `tests/test_specialist_*.py` already prove correct, and
+    the gate reads what was actually derived.
+
+    Deliberately excludes `open_findings` (`startability_gap`,
+    `C3 >= DC x 0.25`) and `demand_stability_index` (still
+    `NOT_IMPLEMENTED`) - out of scope for this correction; wiring those
+    in, if ever wanted, is a separate, later decision.
+    """
+    g_r = compute_readiness_gap(as_of, assessment.shock_forecast, assessment.readiness.l_remaining_days)
+    g_d_novo = compute_defensive_gap_novo(as_of, assessment.shock_forecast, assessment.defensive.l_irr_denovo)
+    g_d_active = compute_defensive_gap_active(assessment.defensive.tracked_competitor,
+                                               assessment.readiness.l_remaining_days)
+    s_ready = compute_s_ready(as_of, assessment.shock_forecast, assessment.rivalry.competitors,
+                               assessment.rivalry.unit, assessment.rivalry.rho)
+    rivalry_index = compute_rivalry_index(assessment.rivalry.d_shock, assessment.rivalry.s_existing, s_ready,
+                                           assessment.rivalry.unit)
+
+    new_readiness = _replace(assessment.readiness, g_r_days=g_r)
+    new_defensive = _replace(assessment.defensive, g_d_novo_days=g_d_novo, g_d_active_days=g_d_active)
+    new_rivalry = _replace(assessment.rivalry, s_ready=s_ready, rivalry_index=rivalry_index)
+    return _replace(assessment, readiness=new_readiness, defensive=new_defensive, rivalry=new_rivalry)
