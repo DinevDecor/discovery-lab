@@ -33,32 +33,53 @@ fixed DATED shock showing `G_d^novo` increasing; 10 MW + 100 MW competitors summ
 110 MW, not "2 positions"; `rho=1.0` default; unknown capacity/unit forcing
 `INSUFFICIENT_DATA`; and no double-counting of elapsed competitor time).
 
+## Correction — 2026-08-15-3 (final pre-merge correction pass)
+
+Three further implementation bugs were found and fixed, plus a provenance correction:
+
+| # | Item | Old (wrong) | New (fixed) |
+|---|---|---|---|
+| 1 | `compute_s_ready` exclusion rule | A competitor with unknown/`INSUFFICIENT_DATA` `l_min_remaining_as_of` was silently `continue`d out of the sum | Unknown readiness is NOT proof of non-readiness; such a competitor forces the WHOLE `S_ready` aggregate to `INSUFFICIENT_DATA`. Only a competitor with a defensible `l_min_remaining_as_of` that exceeds days-to-shock may be excluded. |
+| 2 | `compute_rivalry_index` unit check | `if unit and claim.unit and claim.unit != unit` — an empty `unit` param, or an operand with an empty `.unit`, silently passed | Requires a non-empty declared `unit`, and each of `d_shock`/`s_existing`/`s_ready` must carry that EXACT unit — any empty or mismatched unit is `INSUFFICIENT_DATA`. |
+| 3 | `compute_demand_stability_index` | Invented `HIGH`/`MEDIUM`/`LOW` heuristic from `min(DOC, SDS)` — not a canonical formula | Returns `NOT_IMPLEMENTED` unconditionally. The source research artifacts (see the provenance note below) define `SDS` as its own field, confirmed non-Bayesian, but no separate "DSI" combining it with anything else was found — this package does not invent one under that name. |
+| 4 | C3/DC provenance | Claimed the source research documents were "not defined in any artifact reachable from this session" | **Retracted.** The Drive-hosted research artifacts (`calendar-arbitrage-screener-v0.1.md`, the v0.1.1/v0.1.2 delta documents) ARE reachable and have been read. `C3` (Demand certainty) is a named, weighted CMS-score component there. The `C3 >= DC x 0.25` rule remains `OPEN_FINDING`/non-scoring for **calibration** reasons (the source's own numbers are stated as estimates, not audited data) — not unavailability. |
+
+See `specialist.py` for the fixes and `tests/test_specialist_rivalry.py` /
+`tests/test_specialist_demand.py` for the regression tests.
+
 ## 0. Provenance note — read this before anything else
 
 The three prior research documents this delta corrects — Calendar Moat Analysis,
-Calendar Arbitrage Screener v0.1, Calendar Arbitrage Multi-Agent Watch v0.1 — were
-expected to live in `DinevDecor/project-memory/archive` per the 2026-08-15 approval's
-condition 1. **They are not there.** This implementation session cloned
-`DinevDecor/project-memory` (commit `6e4ac96f9811c7b3902374a83a96cf8e3083c8e0` as of the
-clone) and found only `AI-Collaboration-Architecture-v1_0.md`,
-`AI-Collaboration-Architecture-v1_1.md`, `architecture-design-document.md`,
-`project-memory-phase-1.zip`, and `spike-protocol-potok-b.md` under `archive/` — nothing
-calendar- or arbitrage-related, and no commit in the (shallow-cloned) history mentioning
-either term.
+Calendar Arbitrage Screener v0.1, Calendar Arbitrage Multi-Agent Watch v0.1, plus their
+v0.1.1 and v0.1.2 delta documents — are **not checked into this repository** and were
+expected to live in `DinevDecor/project-memory/archive` per the original 2026-08-15
+approval's condition 1. **They are not there** (that repository's `archive/` holds only
+`AI-Collaboration-Architecture-v1_0.md`, `AI-Collaboration-Architecture-v1_1.md`,
+`architecture-design-document.md`, `project-memory-phase-1.zip`, and
+`spike-protocol-potok-b.md` — confirmed at commit `6e4ac96f9811c7b3902374a83a96cf8e3083c8e0`).
 
-This delta is therefore written **directly from the corrected methodology the human
-specified in the architecture-review and approval conversation itself**, not by reading
-and correcting the original v0.1 text. Every rule below that originates in that
-conversation is cited as such. Two consequences:
+**They ARE reachable via Google Drive and have been read**, as of the 2026-08-15-3
+correction pass (`calendar-arbitrage-screener-v0.1.md`,
+`calendar-arbitrage-multi-agent-watch-v0.1.md`, and DELTA v0.1→v0.1.1 and
+v0.1.1→v0.1.2 documents, all owned by `dinevdecor@gmail.com`). Per the original
+approval's condition 1, this repository does not copy them verbatim as a second source
+of truth — this delta continues to state the corrected methodology directly, now
+cross-checked against the Drive originals rather than written blind. Confirmed by that
+cross-check: the `G_r`/`G_d^novo`/`S_ready`/`RI` formulas already adopted in the
+2026-08-15-2 correction match the Drive documents' own canonical definitions (the
+`L_min`/`q_max`/`rho_max`-default-1.0 screening table in the v0.1→v0.1.1 delta is the
+same table this package already implements).
 
-- Quantities the human named but did not give an exact original v0.1 formula for (`C3`,
-  `DC` in the `C3 >= DC x 0.25` rule) cannot be reproduced or corrected here — they are
-  recorded as a named, non-scoring **OPEN FINDING** in section 5, not evaluated.
-- If the real v0.1/Moat Analysis/Multi-Agent Watch documents are later located (a
-  different branch, a different archive path, a different repository, or supplied
-  directly), this delta should be reviewed against them and amended — as a **new**
-  delta revision, never an edit of this file in place, matching this repo's append-only
-  discipline for methodology documents.
+Two things remain genuinely open, not resolved by this cross-check:
+
+- `C3`/`DC`'s exact relationship in the `C3 >= DC x 0.25` rule was not fully resolved
+  (found: `C3` is the CMS score's "Demand certainty" component; the full CMS/EF/PI
+  scoring apparatus it belongs to was not read in full, deliberately, to avoid
+  broadening this correction pass's scope) — recorded as an **OPEN FINDING** in the
+  section below, now for calibration reasons, not unavailability.
+- A minimal immutable fixture derived from the real Drive-hosted baseline scan remains
+  future work — see `tests/fixtures/README.md`; nothing here fabricates one from
+  memory.
 
 ## 1. Readiness Gap — G_r
 
@@ -119,11 +140,14 @@ postponed."
   kept **separate** from DRR per the 2026-08-15 approval, point 5: a date moving and an
   obligation shrinking are different failure modes with different consequences.
 
-**DSI (Demand Stability Index)** — a rule-based **heuristic** tier over (DOC, SDS),
-explicitly **not** a Bayesian posterior: no prior, no likelihood multiplication, no
-probability update. `specialist.compute_demand_stability_index` implements this as a
-simple threshold lookup (`min(DOC, SDS)` against two cutoffs), documented and
-reviewable, not a statistical estimator.
+**DSI — `NOT_IMPLEMENTED` (corrected 2026-08-15-3).** An earlier draft of this delta
+invented a `HIGH`/`MEDIUM`/`LOW` heuristic tier over `min(DOC, SDS)` under the name
+"Demand Stability Index." That formula did not correspond to anything in the source
+research artifacts once they were read — those artifacts define `SDS` (Shock-Date
+Stability) as its own field, explicitly confirmed non-Bayesian, but no separate "DSI"
+combining it with anything else. `specialist.compute_demand_stability_index` now
+returns the `NOT_IMPLEMENTED` constant unconditionally rather than a fabricated tier
+under the canonical name — not needed for the minimal 30-day watch slice.
 
 ## 4. Delay handling — no automatic DEGRADE
 
@@ -179,7 +203,7 @@ All five implemented in `calendar_arbitrage_watch.models`:
 | `G_d^novo` correct dynamics for DATED | `specialist.compute_defensive_gap_novo` | `G_d^novo = L_irr - T_shock`; monotonic **increase** as the shock date approaches, constant `l_irr_denovo` — proven in `tests/test_specialist_defensive_gap.py::test_g_d_novo_increases_as_dated_shock_approaches_with_constant_l_irr` (corrected 2026-08-15-2; was a monotonic-decrease claim on an inverted formula). |
 | competitor bounds, not a point estimate | `CompetitorFinish.l_min_remaining_as_of` / `.l_max_remaining_as_of` | Screening always uses `l_min_remaining_as_of` (the bound UNFAVORABLE to us); `INSUFFICIENT_DATA` if not defensible (2026-08-15 approval, point 8; field shape corrected 2026-08-15-2 item 4). |
 | `S_ready` in the same unit as demand/supply | `specialist.compute_s_ready` | Canonical: `rho * sum(q_k for competitors ready by shock)`, screened at `l_min`/`q_max`; shares `unit` with `D_shock`/`S_existing` or `INSUFFICIENT_DATA` — corrected 2026-08-15-2 item 2 (was, wrongly, a normalized 0..1 score for our own candidate). |
-| DSI heuristic, not Bayesian | `specialist.compute_demand_stability_index` | See section 3 above. |
+| DSI | `specialist.compute_demand_stability_index` | `NOT_IMPLEMENTED` — see section 3 above (corrected 2026-08-15-3; do not confuse with SDS, which IS implemented as its own `DemandProfile` field). |
 | DRR separate from demand suppression risk | `DemandProfile.deadline_relief_risk` vs `.demand_suppression_risk` | See section 3 above. |
 
 ---
@@ -200,12 +224,16 @@ permanently fixed date. A correction is a new `CalendarAssessment` line, never a
 ## `C3 >= DC x 0.25`
 
 The candidate pending-competition threshold rule named in the prior research context.
-**`C3` and `DC` are not defined in any artifact reachable from this session** (see
-section 0's provenance note) — evaluating this numerically would require guessing what
-they mean. `specialist.open_finding_pending_competition_threshold` therefore returns a
-named `OpenFinding` with `value=None` and an honest note, never a fabricated number.
-**Remains OPEN until real calibration evidence exists AND the C3/DC definitions are
-recovered or re-specified.**
+**Corrected provenance (2026-08-15-3):** `C3`/`DC` ARE defined in the source research
+artifacts, reachable via Drive and read as of this correction pass — `C3` (Demand
+certainty) is a named, weighted component of that source's Calendar Moat Strength
+score. `specialist.open_finding_pending_competition_threshold` still returns a named
+`OpenFinding` with `value=None`, but the reason is now stated correctly: this rule is
+**uncalibrated** (the source's own backtest numbers are stated as calibration
+estimates, not audited data) and implementing the full CMS/EF/PI scoring apparatus it
+depends on is out of scope for this correction pass — not that the terms are
+unavailable. **Remains OPEN until real calibration evidence exists**, deferred to a
+future, separately-scoped task.
 
 ## `startability_gap = t_lockout_novo - clock_open_date`
 
@@ -245,3 +273,11 @@ correction:
   a caller to assert (in the same unit as `S_ready`) — no source registry or extraction
   path for them exists yet; populating them is future capture work, out of scope for
   this correction pass.
+
+**Fixed 2026-08-15-3 (not open anymore):** `compute_s_ready` no longer silently excludes
+a competitor whose readiness is unknown — that was optimistic bias (equivalent to
+assuming an unassessed competitor is not a threat). It now forces the whole aggregate to
+`INSUFFICIENT_DATA` unless the competitor is provably not ready. `compute_rivalry_index`
+no longer accepts a missing/mismatched unit on any operand — a non-empty declared unit
+and an exact match on `d_shock`/`s_existing`/`s_ready` are now required. See
+`tests/test_specialist_rivalry.py`.

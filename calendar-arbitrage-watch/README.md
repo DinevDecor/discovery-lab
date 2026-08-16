@@ -12,15 +12,16 @@ Sibling package to `constraint-archaeology-agents/`, `business-candidate-analyst
 
 ## Origin
 
-Approved by a read-only architecture review and a follow-up implementation approval,
-both on 2026-08-15, in this repository's own session. The prior research context
-(Calendar Moat Analysis, Calendar Arbitrage Screener v0.1, Calendar Arbitrage
-Multi-Agent Watch v0.1) could not be located in this repository or in
-`DinevDecor/project-memory/archive` — see the implementation report delivered alongside
-this package and `docs/method/calendar-arbitrage-screener-v0.1.1-delta.md`'s provenance
-note. This package implements the corrected methodology exactly as specified in the
-approval conversation; it does not transcribe or paraphrase the unlocated research
-documents.
+Approved by a read-only architecture review and two follow-up correction passes, all on
+2026-08-15, in this repository's own session. The prior research context (Calendar Moat
+Analysis, Calendar Arbitrage Screener v0.1, Calendar Arbitrage Multi-Agent Watch v0.1,
+plus their v0.1.1/v0.1.2 delta documents) is not checked into this repository or into
+`DinevDecor/project-memory/archive`, but IS reachable and has been read from Drive as of
+the 2026-08-15-3 correction pass — see
+`docs/method/calendar-arbitrage-screener-v0.1.1-delta.md`'s provenance note. This
+package implements the corrected methodology as specified across the approval and
+correction conversations; it does not copy the Drive documents verbatim into this
+repository as a second source of truth (per the original approval's condition 1).
 
 ## What this does
 
@@ -83,10 +84,12 @@ In brief:
   two distinct fields, never one scalar, and never share a formula —
   `tests/test_specialist_defensive_gap.py`.
 - **Demand — four fields, never one multiplier**: Demand Obligation Certainty,
-  Shock-Date Stability, Deadline-Relief Risk, and demand_suppression_risk (kept separate
-  from DRR — the obligation staying certain while its date moves is a different risk
-  from the obligation itself shrinking). **DSI** (Demand Stability Index) is a
-  rule-based heuristic tier over (DOC, SDS), explicitly not a Bayesian posterior.
+  Shock-Date Stability (SDS — confirmed non-Bayesian in the source artifacts),
+  Deadline-Relief Risk, and demand_suppression_risk (kept separate from DRR — the
+  obligation staying certain while its date moves is a different risk from the
+  obligation itself shrinking). **DSI is `NOT_IMPLEMENTED`** — no canonical DSI formula
+  distinct from SDS was found in the source artifacts, and this package does not invent
+  one under that name (2026-08-15-3 correction).
 - **Delay never auto-DEGRADEs.** A delay event recomputes T_shock (new versioned
   forecast), G_r, G_d^novo, and G_d^active together; only a subsequent, separate
   adversarial-review pass may change lifecycle state.
@@ -143,9 +146,17 @@ the current pass/fail count.
 - **`rho` per-candidate values still need their own evidence citation** whenever a
   candidate asserts `rho < 1.0` — the `1.0` default itself is specified policy, not an
   open question.
-- **`C3 >= DC x 0.25`** cannot be evaluated numerically in this implementation: `C3` and
-  `DC` are quantities from the unlocated research documents, and this session could not
-  find their definitions anywhere reachable. The finding is recorded by name only.
+- **`C3 >= DC x 0.25`** is not evaluated numerically. `C3`/`DC` ARE defined in the
+  source research artifacts (reachable via Drive, read as of the 2026-08-15-3
+  correction) — this is deliberately deferred pending calibration (the source's own
+  backtest numbers are stated as estimates, not audited data), and implementing the
+  full CMS/EF/PI scoring apparatus `C3` belongs to is out of scope for this pass, not
+  because the term is undefined.
+- **DSI is explicitly `NOT_IMPLEMENTED`.** The source artifacts define `SDS`
+  (Shock-Date Stability, confirmed non-Bayesian) as its own field but no separate "DSI"
+  combining it with anything else was found — `specialist.compute_demand_stability_index`
+  returns the `NOT_IMPLEMENTED` constant rather than inventing a replacement heuristic
+  under that name (2026-08-15-3 correction).
 - **No fixture derived from the real research baseline.** `tests/fixtures/` is entirely
   synthetic — see `tests/fixtures/README.md`.
 - **LLM wiring is a seam, not a working feature.** `gate.py`'s `JudgeProtocol` mirrors

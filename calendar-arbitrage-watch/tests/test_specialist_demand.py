@@ -1,54 +1,57 @@
 """Methodology delta v0.1.1 #3 + 2026-08-15 approval point 5: demand is
 four separate fields (DOC, SDS, DRR, demand_suppression_risk), never one
-confidence multiplier. DSI is a rule-based heuristic tier, never a
-Bayesian posterior.
+confidence multiplier. DSI is explicitly NOT_IMPLEMENTED (2026-08-15-3
+correction) - a previous draft invented a HIGH/MEDIUM/LOW heuristic under
+that name; the source research artifacts define SDS as its own
+non-Bayesian field but no separate canonical "DSI". Do not resurrect the
+old heuristic under the DSI name.
 """
 
 import _pathsetup  # noqa: F401
 import unittest
 
 from calendar_arbitrage_watch import specialist
-from calendar_arbitrage_watch.models import DemandProfile, NumberClaim, OBSERVED, INSUFFICIENT_DATA
+from calendar_arbitrage_watch.models import DemandProfile, NumberClaim, OBSERVED, NOT_IMPLEMENTED
 
 
 class DemandStabilityIndexTests(unittest.TestCase):
-    def test_missing_doc_yields_insufficient_data(self):
-        demand = DemandProfile(shock_date_stability=NumberClaim(value=0.9, evidence_status=OBSERVED))
-        self.assertEqual(specialist.compute_demand_stability_index(demand), INSUFFICIENT_DATA)
+    def test_always_not_implemented_regardless_of_input(self):
+        """Regression test for the 2026-08-15-3 correction: no matter what
+        demand evidence is supplied - fully populated, empty, high/low
+        certainty - DSI must return NOT_IMPLEMENTED, never a fabricated
+        HIGH/MEDIUM/LOW tier."""
+        cases = [
+            DemandProfile(),
+            DemandProfile(demand_obligation_certainty=NumberClaim(value=0.9, evidence_status=OBSERVED)),
+            DemandProfile(shock_date_stability=NumberClaim(value=0.9, evidence_status=OBSERVED)),
+            DemandProfile(
+                demand_obligation_certainty=NumberClaim(value=0.95, evidence_status=OBSERVED),
+                shock_date_stability=NumberClaim(value=0.95, evidence_status=OBSERVED),
+            ),
+            DemandProfile(
+                demand_obligation_certainty=NumberClaim(value=0.05, evidence_status=OBSERVED),
+                shock_date_stability=NumberClaim(value=0.05, evidence_status=OBSERVED),
+            ),
+        ]
+        for demand in cases:
+            self.assertEqual(specialist.compute_demand_stability_index(demand), NOT_IMPLEMENTED)
 
-    def test_missing_sds_yields_insufficient_data(self):
-        demand = DemandProfile(demand_obligation_certainty=NumberClaim(value=0.9, evidence_status=OBSERVED))
-        self.assertEqual(specialist.compute_demand_stability_index(demand), INSUFFICIENT_DATA)
-
-    def test_high_tier(self):
-        demand = DemandProfile(
-            demand_obligation_certainty=NumberClaim(value=0.9, evidence_status=OBSERVED),
-            shock_date_stability=NumberClaim(value=0.75, evidence_status=OBSERVED),
-        )
-        self.assertEqual(specialist.compute_demand_stability_index(demand), "HIGH")
-
-    def test_low_tier_dragged_down_by_the_weaker_field(self):
-        """Almost-certain obligation with an unstable date must NOT read
-        as HIGH just because one field is high - this is the exact
-        'obligation nearly certain, date gets postponed' example from the
-        task, and DSI must be sensitive to it."""
-        demand = DemandProfile(
-            demand_obligation_certainty=NumberClaim(value=0.95, evidence_status=OBSERVED),
-            shock_date_stability=NumberClaim(value=0.1, evidence_status=OBSERVED),
-        )
-        self.assertEqual(specialist.compute_demand_stability_index(demand), "LOW")
-
-    def test_dsi_is_not_a_probability_product(self):
-        """A Bayesian-style combination (e.g. multiplying the two
-        certainties) would produce 0.9*0.75=0.675 - a number. DSI must
-        instead be a discrete tier string, never a float."""
+    def test_never_returns_a_fabricated_tier_string(self):
         demand = DemandProfile(
             demand_obligation_certainty=NumberClaim(value=0.9, evidence_status=OBSERVED),
             shock_date_stability=NumberClaim(value=0.75, evidence_status=OBSERVED),
         )
         result = specialist.compute_demand_stability_index(demand)
-        self.assertIsInstance(result, str)
-        self.assertIn(result, ("HIGH", "MEDIUM", "LOW", INSUFFICIENT_DATA))
+        self.assertNotIn(result, ("HIGH", "MEDIUM", "LOW"))
+        self.assertEqual(result, NOT_IMPLEMENTED)
+
+    def test_default_field_value_on_a_fresh_assessment_is_not_implemented(self):
+        """models.CalendarAssessment.demand_stability_index defaults to
+        NOT_IMPLEMENTED, not INSUFFICIENT_DATA - the two mean different
+        things (see models.py's NOT_IMPLEMENTED docstring)."""
+        from calendar_arbitrage_watch.models import CalendarAssessment
+        a = CalendarAssessment(candidate_id="c1")
+        self.assertEqual(a.demand_stability_index, NOT_IMPLEMENTED)
 
 
 class DeadlineReliefVsSuppressionTests(unittest.TestCase):

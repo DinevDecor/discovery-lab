@@ -44,6 +44,7 @@ from .models import (
     OpenFinding,
     ShockForecast,
     INSUFFICIENT_DATA,
+    NOT_IMPLEMENTED,
     OBSERVED,
     MEASURED,
     REPEATED,
@@ -296,28 +297,26 @@ def recompute_after_delay(
 
 
 # ---------------------------------------------------------------------------
-# Demand Stability Index (DSI) - heuristic, NOT Bayesian (2026-08-15 approval, point 5)
+# Demand/Date Stability Index (DSI) - NOT IMPLEMENTED (2026-08-15-3 correction)
 # ---------------------------------------------------------------------------
 
 def compute_demand_stability_index(demand: DemandProfile) -> str:
-    """DSI is a rule-based tier lookup over
-    (demand_obligation_certainty, shock_date_stability), deliberately NOT
-    a Bayesian posterior - no prior is assumed, no likelihood is
-    multiplied, nothing here updates a probability. This is a documented,
-    reviewable threshold table, not a statistical estimator, per the
-    explicit instruction that DSI must be a heuristic."""
-    doc = demand.demand_obligation_certainty
-    sds = demand.shock_date_stability
-    if doc.evidence_status == INSUFFICIENT_DATA or sds.evidence_status == INSUFFICIENT_DATA:
-        return INSUFFICIENT_DATA
-    if doc.value is None or sds.value is None:
-        return INSUFFICIENT_DATA
-    lo = min(doc.value, sds.value)
-    if lo >= 0.7:
-        return "HIGH"
-    if lo >= 0.4:
-        return "MEDIUM"
-    return "LOW"
+    """CORRECTION (2026-08-15-3): this function previously computed a
+    HIGH/MEDIUM/LOW tier from min(demand_obligation_certainty,
+    shock_date_stability) - an invented heuristic that does not
+    correspond to any canonical DSI formula found in the source research
+    artifacts. Those artifacts define `SDS` (Shock-Date Stability) as its
+    own field, explicitly confirmed non-Bayesian, but do not define a
+    separate "DSI" that combines it with anything else.
+
+    Per instruction not to leave a different heuristic under the
+    canonical DSI name, and given DSI is not required by the minimal
+    30-day watch slice, this function is explicitly NOT_IMPLEMENTED: it
+    ignores its argument and always returns the `NOT_IMPLEMENTED`
+    constant, never a fabricated tier. `demand` is kept as a parameter
+    (unused) so the call signature stays stable if a canonical DSI
+    definition is confirmed and implemented in a future pass."""
+    return NOT_IMPLEMENTED
 
 
 # ---------------------------------------------------------------------------
@@ -358,6 +357,17 @@ def compute_s_ready(
     reported as if it were complete (that would understate competitive
     supply, which is optimistic bias, the opposite of this package's
     unfavorable-by-default convention).
+
+    CORRECTION (2026-08-15-3): a known competitor whose
+    `l_min_remaining_as_of` is INSUFFICIENT_DATA/missing MUST NOT be
+    silently excluded from the sum - excluding them is equivalent to
+    assuming they are NOT ready, which is an optimistic assumption about
+    the candidate's competitive position with no evidence behind it. Such
+    a competitor forces the WHOLE aggregate to INSUFFICIENT_DATA. The
+    ONLY way to legitimately exclude a competitor from the sum is
+    evidence that PROVES they cannot be ready by shock - i.e. a
+    defensible `l_min_remaining_as_of` whose value exceeds
+    days-to-shock.
     """
     if not unit:
         return NumberClaim(evidence_status=INSUFFICIENT_DATA, note="no defensible unit declared for S_ready")
@@ -373,11 +383,21 @@ def compute_s_ready(
     for c in competitors:
         l_min = c.l_min_remaining_as_of
         if l_min.evidence_status == INSUFFICIENT_DATA or l_min.value is None:
-            continue  # cannot assess this competitor's readiness - excluded, not assumed ready or not
+            # Unknown readiness is NOT proof of non-readiness - silently
+            # excluding this competitor would be optimistic bias. The
+            # whole aggregate is undefensible until this is resolved.
+            return NumberClaim(unit=unit, evidence_status=INSUFFICIENT_DATA,
+                                note=f"competitor {c.competitor_id!r} has unknown l_min_remaining_as_of - cannot "
+                                     "be excluded from S_ready without evidence proving it cannot be ready by "
+                                     "shock (2026-08-15-3 correction)")
         finish_as_of = c.as_of or as_of
         finish_days_to_shock = _days_between(finish_as_of, shock_date)
         if finish_days_to_shock is None:
-            continue
+            # Same principle as an unknown l_min: an unparseable date is
+            # not proof this competitor cannot be ready by shock.
+            return NumberClaim(unit=unit, evidence_status=INSUFFICIENT_DATA,
+                                note=f"competitor {c.competitor_id!r} has an unparseable as_of/shock date - "
+                                     "cannot be excluded from S_ready without evidence")
         if l_min.value > finish_days_to_shock:
             continue  # this competitor is NOT ready by shock (their fastest case still finishes after)
         # Ready by shock - their q MUST be defensible in the operative unit.
@@ -408,15 +428,21 @@ def compute_rivalry_index(d_shock: NumberClaim, s_existing: NumberClaim, s_ready
     2026-08-15-2 approval item 3: "Demand Certainty / DSI / DRR са
     отделни dimensions и не променят дефиницията на Rivalry Index").
 
-    `d_shock`, `s_existing`, and `s_ready` must all share `unit` - if any
-    is missing, INSUFFICIENT_DATA, or in a different unit, the result is
-    INSUFFICIENT_DATA. Division by zero (S_existing + S_ready == 0, i.e.
-    zero supply against nonzero demand) is reported as INSUFFICIENT_DATA
-    rather than a fabricated infinity."""
+    `unit` must be a non-empty, declared common unit, and `d_shock`,
+    `s_existing`, and `s_ready` must EACH carry that exact unit - a
+    missing/empty `unit` on any operand is INSUFFICIENT_DATA, not
+    acceptable (2026-08-15-3 correction: the previous check only compared
+    units when BOTH the declared `unit` and the operand's own `.unit`
+    were truthy, so an operand with an empty unit silently passed).
+    Division by zero (S_existing + S_ready == 0, i.e. zero supply against
+    nonzero demand) is reported as INSUFFICIENT_DATA rather than a
+    fabricated infinity."""
+    if not unit:
+        return NumberClaim(evidence_status=INSUFFICIENT_DATA, note="no declared common unit for Rivalry Index")
     for claim, name in ((d_shock, "d_shock"), (s_existing, "s_existing"), (s_ready, "s_ready")):
         if claim.evidence_status == INSUFFICIENT_DATA or claim.value is None:
             return NumberClaim(evidence_status=INSUFFICIENT_DATA, note=f"{name} not available")
-        if unit and claim.unit and claim.unit != unit:
+        if claim.unit != unit:
             return NumberClaim(evidence_status=INSUFFICIENT_DATA,
                                 note=f"{name} unit {claim.unit!r} does not match declared unit {unit!r}")
 
@@ -439,24 +465,37 @@ def compute_rivalry_index(d_shock: NumberClaim, s_existing: NumberClaim, s_ready
 
 def open_finding_pending_competition_threshold(pending_competition) -> OpenFinding:
     """The candidate rule 'C3 >= DC x 0.25' from the pre-existing research
-    baseline. C3 and DC are quantities defined in the Calendar Arbitrage
-    research documents (Calendar Moat Analysis / Screener v0.1); those
-    documents could not be located in this repository or in
-    DinevDecor/project-memory/archive as of this implementation (see
-    methodology assumptions in the delta doc and the final implementation
-    report). Without their definitions this rule cannot be evaluated
-    numerically without guessing - so it is recorded as a named,
-    permanently open, NON-scoring placeholder rather than silently
-    approximated. affects_scoring is hard-coded False; nothing in gate.py
-    or lifecycle.py reads this finding's `value`."""
+    baseline.
+
+    CORRECTED PROVENANCE (2026-08-15-3): the Calendar Arbitrage research
+    artifacts (calendar-arbitrage-screener-v0.1.md and the v0.1.1/v0.1.2
+    delta documents) ARE reachable and have been read from Drive as of
+    this correction pass - the earlier claim that C3/DC were undefined
+    anywhere reachable was itself stale and is retracted. `C3` (Demand
+    certainty) is a named, weighted component of that source's Calendar
+    Moat Strength (CMS) score.
+
+    This rule stays an OPEN_FINDING with `affects_scoring` hard-coded
+    False for a DIFFERENT reason than before: CALIBRATION, not
+    unavailability. The source document itself states its scoring
+    numbers are "calibration estimates, not audited data" ("Числата в
+    backtest-а са калибрационни оценки, не одитирани данни"), and
+    wiring a specific numeric threshold into this package's scoring
+    would import that same uncalibrated status without the source's own
+    caveat attached. Actually implementing the full CMS/EF/PI scoring
+    apparatus this rule depends on is out of scope for this correction
+    pass - deferred to a future, separately-scoped task. Nothing in
+    gate.py or lifecycle.py reads this finding's `value`."""
     return OpenFinding(
         finding_id="c3_ge_dc_times_0_25",
         description="C3 >= DC x 0.25 (pending-competition threshold candidate from the prior research baseline)",
         status="OPEN_FINDING",
         affects_scoring=False,
         value=None,
-        note="C3/DC not defined in any artifact reachable from this session; recorded by name only, "
-             "uncalibrated, not evaluated numerically. See docs/method/calendar-arbitrage-screener-v0.1.1-delta.md.",
+        note="C3/DC are defined in the source research artifacts (reachable, read 2026-08-15-3); this rule "
+             "remains OPEN_FINDING/non-scoring because it is uncalibrated (the source's own backtest numbers "
+             "are stated as calibration estimates, not audited data), not because the terms are unavailable. "
+             "See docs/method/calendar-arbitrage-screener-v0.1.1-delta.md.",
     )
 
 

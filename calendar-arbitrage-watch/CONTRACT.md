@@ -88,8 +88,11 @@ enforced by `tests/test_safety.py`, not just this document.
 - treat `startability_gap` as anything but a diagnostic, non-scoring `OPEN_FINDING`
   (2026-08-15 approval, point 7).
 - collapse Demand Obligation Certainty, Shock-Date Stability, Deadline-Relief Risk, or
-  demand_suppression_risk into one confidence number, or compute DSI as a Bayesian
-  posterior rather than a rule-based heuristic tier (2026-08-15 approval, point 5).
+  demand_suppression_risk into one confidence number (2026-08-15 approval, point 5).
+- invent a DSI heuristic under the canonical name. No canonical DSI formula distinct
+  from Shock-Date Stability was confirmed in the source research artifacts;
+  `specialist.compute_demand_stability_index` returns `NOT_IMPLEMENTED`, never a
+  fabricated tier (2026-08-15-3 correction, item 3).
 - fabricate a competitor's remaining-time-to-finish as a point estimate. An unknown
   competitor finish is `CompetitorFinish.l_min_remaining_as_of` /
   `.l_max_remaining_as_of`; screening always uses the bound UNFAVORABLE to us
@@ -98,6 +101,14 @@ enforced by `tests/test_safety.py`, not just this document.
   duration may be derived into a remaining estimate exactly ONCE
   (`specialist.derive_remaining_from_start`) — never combined with a direct assertion
   for the same competitor record (2026-08-15-2 correction, item 4).
+- silently exclude a competitor from `S_ready` because their readiness is unknown -
+  only a competitor PROVEN not ready (a defensible `l_min_remaining_as_of` exceeding
+  days-to-shock) may be excluded; unknown readiness forces the whole aggregate to
+  `INSUFFICIENT_DATA` (2026-08-15-3 correction, item 1).
+- compute `compute_rivalry_index` with a missing or partially-matching unit. A
+  non-empty common `unit` is required, and `d_shock`/`s_existing`/`s_ready` must each
+  carry that exact unit or the result is `INSUFFICIENT_DATA` (2026-08-15-3 correction,
+  item 2).
 - use `S_ready` as a normalized readiness score for our own candidate, or `RI` as a
   composite with demand certainty/DSI/DRR. `S_ready = rho * sum(q_k for competitors
   ready by shock)` (a competitor-supply aggregate); `RI` (Rivalry Index) `= D_shock /

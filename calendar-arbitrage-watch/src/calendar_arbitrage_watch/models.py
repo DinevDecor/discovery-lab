@@ -25,6 +25,14 @@ INFERRED = "INFERRED"
 INSUFFICIENT_DATA = "INSUFFICIENT_DATA"
 EVIDENCE_STATUSES = (OBSERVED, INFERRED, INSUFFICIENT_DATA)
 
+# NOT_IMPLEMENTED is distinct from INSUFFICIENT_DATA: the latter means "we
+# tried to compute this and the evidence doesn't support a value"; the
+# former means "this computation itself does not exist yet" - used by DSI
+# (2026-08-15-3 correction: no canonical Date/Demand Stability Index
+# formula was verified in the source research artifacts as distinct from
+# SDS, so this package does not invent one under that name).
+NOT_IMPLEMENTED = "NOT_IMPLEMENTED"
+
 # --- number-provenance discipline, independently adopted for this package.
 # The convention this echoes (mark every load-bearing number MEASURED or
 # REPEATED) lives in the frozen constraint-archaeology-v0.5-patch.md S1
@@ -445,7 +453,7 @@ class CalendarAssessment:
     demand: DemandProfile = field(default_factory=DemandProfile)
     pending_competition: PendingCompetitionAssessment = field(default_factory=PendingCompetitionAssessment)
 
-    demand_stability_index: str = INSUFFICIENT_DATA  # DSI: heuristic tier, see specialist.py
+    demand_stability_index: str = NOT_IMPLEMENTED  # DSI: NOT canonically implemented, see specialist.py
     rivalry: RivalryAssessment = field(default_factory=RivalryAssessment)  # S_ready / RI, see specialist.py
 
     open_findings: List[OpenFinding] = field(default_factory=list)
@@ -509,7 +517,7 @@ class CalendarAssessment:
             defensive=DefensiveGapAssessment.from_dict(data.get("defensive") or {}),
             demand=DemandProfile.from_dict(data.get("demand") or {}),
             pending_competition=PendingCompetitionAssessment.from_dict(data.get("pending_competition") or {}),
-            demand_stability_index=data.get("demand_stability_index", INSUFFICIENT_DATA),
+            demand_stability_index=data.get("demand_stability_index", NOT_IMPLEMENTED),
             rivalry=RivalryAssessment.from_dict(data.get("rivalry") or {}),
             open_findings=[OpenFinding.from_dict(f) for f in data.get("open_findings", [])],
             lifecycle_state=data.get("lifecycle_state", WATCH),
