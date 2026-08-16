@@ -1,0 +1,2 @@
+Intentionally empty at implementation time. daily-<date>.md reports are
+created on each `add`/`report` CLI run.

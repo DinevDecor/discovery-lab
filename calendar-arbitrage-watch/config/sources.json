@@ -1,0 +1,12 @@
+{
+  "_comment": "Source registry - same role as constraint-archaeology-agents/config/sources.json, read by whoever performs the external capture step (this package's own code never fetches these). Deliberately empty: this session has no verified, specific regulatory/permit/accreditation/infrastructure/environmental-rights/demand-shock source URLs to record, and fabricating one would misrepresent an unverified claim as a real source (CLAUDE.md: 'Provenance is truthful or absent'). A human with real domain knowledge of the target jurisdiction/sector must populate `sources` before capture begins. Every entry's `category` must be one of the six values in `categories` below - this is the single registry the six research-doc 'hunter' roles collapse into (see approved architecture review, section 5).",
+  "categories": [
+    "regulatory_clock",
+    "accreditation_qualification",
+    "infrastructure_calendar",
+    "calendar_archaeology",
+    "environmental_scarcity_rights",
+    "demand_shock"
+  ],
+  "sources": []
+}

@@ -1,0 +1,29 @@
+{
+  "candidate_id": "synthetic-infraqueue-0001",
+  "mode": "ARCHAEOLOGY",
+  "category": "infrastructure_calendar",
+  "title": "Synthetic test fixture — ROLLING infrastructure queue",
+  "summary": "Made-up example for pipeline tests only. Not real evidence.",
+  "shock_forecast": {
+    "shock_type": "ROLLING",
+    "date_bound": {
+      "earliest": "2027-06-01",
+      "latest": "2028-01-01",
+      "basis": "synthetic fixture, forecast range not a filed date",
+      "evidence_status": "OBSERVED"
+    },
+    "as_of": "2026-08-15",
+    "forecast_version": 1
+  },
+  "pending_competition": {
+    "formal_free_capacity": {"value": 50, "unit": "MW", "evidence_status": "OBSERVED"},
+    "known_queue_ahead": {"value": 48, "unit": "MW", "evidence_status": "OBSERVED"},
+    "committed_competing_projects": {"value": 6, "unit": "projects", "evidence_status": "OBSERVED"}
+  },
+  "demand": {
+    "demand_obligation_certainty": {"value": 0.7, "evidence_status": "OBSERVED"},
+    "shock_date_stability": {"value": 0.4, "evidence_status": "OBSERVED"}
+  },
+  "evidence_ids": ["synthetic-ev-2"],
+  "provenance": ["synthetic fixture, tests/fixtures/README.md"]
+}

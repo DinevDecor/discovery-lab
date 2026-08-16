@@ -1,0 +1,4 @@
+Intentionally empty at implementation time. calendar_events.jsonl and
+calendar_candidates.json are created on first `python3
+run_calendar_arbitrage_watch.py add ...` run. No baseline scan was
+performed for this task — see the implementation report.
