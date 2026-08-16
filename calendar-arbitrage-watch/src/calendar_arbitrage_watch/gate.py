@@ -69,6 +69,17 @@ def review(assessment: CalendarAssessment) -> ReviewDecision:
     the candidate's max_allowed_state; the review never itself sets
     lifecycle_state - that stays lifecycle.py's job, using this decision
     as one input.
+
+    `kill_reasons` is reserved for genuine falsification / fatal-veto
+    evidence - a structural contradiction in what WAS asserted (e.g. two
+    strongly OBSERVED inputs that cannot both be true), never mere
+    absence of evidence. As of the 2026-08-15-6 correction no rule below
+    populates it - REVIEW_KILLED is currently unreachable through this
+    function. That is accepted, not a bug: inventing a kill rule just to
+    keep the branch reachable was explicitly out of scope for that
+    correction. The branch, and REVIEW_KILLED -> REJECTED's terminal
+    lifecycle semantics, stay in place for the next rule that has a real
+    falsification case to encode.
     """
     reasons: List[str] = []
     kill_reasons: List[str] = []
@@ -102,10 +113,22 @@ def review(assessment: CalendarAssessment) -> ReviewDecision:
             f"{', '.join(repeated_only)} carries only REPEATED provenance, not independently MEASURED - "
             "cannot alone support promotion to a MAX_AUTOMATIC state without independent verification")
 
-    # Rule 4: both defensive gaps missing at once means the candidate has
-    # no stated competitive picture at all.
+    # Rule 4 (corrected 2026-08-15-6, approved gate-policy decision):
+    # both defensive gaps missing means the competitive position is not
+    # yet quantitatively assessable - a data-completeness state, not a
+    # falsification. This is an ordinary CHALLENGED reason (-> capped at
+    # WATCH, revivable the moment either gap gets real evidence - see
+    # lifecycle.apply_review), never a KILL. Before this correction the
+    # wording said "no competitive picture asserted", which was wrong
+    # whenever a submission actually supplied structured competitor
+    # evidence (tracked_competitor, rivalry.competitors) that simply
+    # hadn't been derived into g_d_novo_days/g_d_active_days yet
+    # (REAL-CASE-001) - the wording no longer claims absence of evidence,
+    # only absence of a quantitative result.
     if g_d_novo.evidence_status == INSUFFICIENT_DATA and g_d_active.evidence_status == INSUFFICIENT_DATA:
-        kill_reasons.append("both G_d^novo and G_d^active are INSUFFICIENT_DATA - no competitive picture asserted")
+        reasons.append(
+            "both defensive gaps are INSUFFICIENT_DATA - competitive position cannot yet be "
+            "quantitatively assessed")
 
     if kill_reasons:
         return ReviewDecision(assessment.candidate_id, REVIEW_KILLED, kill_reasons + reasons, "REJECTED")

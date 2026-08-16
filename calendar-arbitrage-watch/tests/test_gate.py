@@ -1,6 +1,14 @@
-"""All three adversarial review outcomes must be reachable and are always
-returned as a persisted decision (CLAUDE.md: 'All gate outcomes
-persist').
+"""Adversarial review outcomes are always returned as a persisted decision
+(CLAUDE.md: 'All gate outcomes persist').
+
+Corrected 2026-08-15-6 (approved gate-policy decision): both defensive
+gaps being INSUFFICIENT_DATA is a data-completeness state, not a
+falsification, so it is an ordinary CHALLENGED reason - never KILLED.
+REVIEW_KILLED/REJECTED stays available as the terminal path for a future
+genuine falsification rule, but no rule in gate.py produces it today;
+see test_gate_insufficient_vs_falsification.py for the direct coverage
+of that contract (INSUFFICIENT_DATA != falsified, and REJECTED still
+behaves as terminal when a KILLED decision IS supplied).
 """
 
 import _pathsetup  # noqa: F401
@@ -63,11 +71,23 @@ class GateTests(unittest.TestCase):
         self.assertEqual(decision.outcome, REVIEW_CHALLENGED)
         self.assertTrue(any("REPEATED" in r for r in decision.reasons))
 
-    def test_killed_when_both_defensive_gaps_missing(self):
+    def test_challenged_not_killed_when_both_defensive_gaps_missing(self):
+        """Corrected 2026-08-15-6: missing evidence caps at WATCH via
+        CHALLENGED - it must never terminally REJECT the candidate."""
         a = _base_assessment(defensive=DefensiveGapAssessment())
         decision = gate.review(a)
-        self.assertEqual(decision.outcome, REVIEW_KILLED)
-        self.assertEqual(decision.max_allowed_state, "REJECTED")
+        self.assertEqual(decision.outcome, REVIEW_CHALLENGED)
+        self.assertEqual(decision.max_allowed_state, "WATCH")
+
+    def test_both_gaps_missing_reason_does_not_claim_no_evidence_was_asserted(self):
+        """The old wording ('no competitive picture asserted') was wrong
+        whenever a submission actually supplied structured competitor
+        evidence that simply hadn't been derived yet (REAL-CASE-001). The
+        corrected wording only claims absence of a quantitative result."""
+        a = _base_assessment(defensive=DefensiveGapAssessment())
+        decision = gate.review(a)
+        self.assertTrue(any("cannot yet be quantitatively assessed" in r for r in decision.reasons))
+        self.assertFalse(any("no competitive picture asserted" in r for r in decision.reasons))
 
     def test_decision_reasons_are_never_empty(self):
         """Even CONFIRMED must record why - a refused promotion or an
@@ -77,13 +97,30 @@ class GateTests(unittest.TestCase):
             decision = gate.review(a)
             self.assertTrue(decision.reasons)
 
-    def test_all_three_outcomes_are_reachable(self):
+    def test_confirmed_and_challenged_are_both_reachable(self):
         outcomes = {
             gate.review(_base_assessment()).outcome,
             gate.review(_base_assessment(readiness=ReadinessAssessment())).outcome,
             gate.review(_base_assessment(defensive=DefensiveGapAssessment())).outcome,
         }
-        self.assertEqual(outcomes, {REVIEW_CONFIRMED, REVIEW_CHALLENGED, REVIEW_KILLED})
+        self.assertEqual(outcomes, {REVIEW_CONFIRMED, REVIEW_CHALLENGED})
+
+    def test_killed_is_not_produced_by_any_current_rule(self):
+        """Accepted consequence of the 2026-08-15-6 correction: no rule
+        in gate.py fabricates a kill just to keep REVIEW_KILLED reachable.
+        The outcome and its terminal lifecycle handling remain available
+        (see test_gate_insufficient_vs_falsification.py) for the next
+        rule that has a real falsification case to encode."""
+        scenarios = [
+            _base_assessment(),
+            _base_assessment(readiness=ReadinessAssessment()),
+            _base_assessment(demand=DemandProfile()),
+            _base_assessment(defensive=DefensiveGapAssessment()),
+            _base_assessment(readiness=ReadinessAssessment(), demand=DemandProfile(),
+                              defensive=DefensiveGapAssessment()),
+        ]
+        for a in scenarios:
+            self.assertNotEqual(gate.review(a).outcome, REVIEW_KILLED)
 
 
 if __name__ == "__main__":

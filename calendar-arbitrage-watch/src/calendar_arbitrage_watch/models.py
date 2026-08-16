@@ -277,13 +277,26 @@ class DefensiveGapAssessment:
 
     `g_d_active_days` is the horse race against ONE specific tracked
     rival (`tracked_competitor`), screened at that rival's
-    `l_min_remaining_as_of` (item 4)."""
+    `l_min_remaining_as_of` (item 4).
+
+    `l_irr_denovo` (RAW input, corrected 2026-08-15-5 - REAL-CASE-001
+    finding #2): the irreducible build-time a hypothetical fresh
+    competitor starting today would need. `compute_defensive_gap_novo`
+    has always required this as an argument, but until this correction no
+    field on this dataclass carried it - a submitter had no canonical
+    place to assert it, and `g_d_novo_days` could never be derived from a
+    real submission. `l_irr_denovo` is the RAW, evidence-backed input;
+    `g_d_novo_days` remains the DERIVED output - same raw/derived split
+    already used by `ReadinessAssessment.l_remaining_days` /
+    `.g_r_days`. See `specialist.derive_assessment`."""
+    l_irr_denovo: NumberClaim = field(default_factory=NumberClaim)
     g_d_novo_days: NumberClaim = field(default_factory=NumberClaim)
     g_d_active_days: NumberClaim = field(default_factory=NumberClaim)
     tracked_competitor: CompetitorFinish = field(default_factory=CompetitorFinish)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "l_irr_denovo": self.l_irr_denovo.to_dict(),
             "g_d_novo_days": self.g_d_novo_days.to_dict(),
             "g_d_active_days": self.g_d_active_days.to_dict(),
             "tracked_competitor": self.tracked_competitor.to_dict(),
@@ -292,6 +305,7 @@ class DefensiveGapAssessment:
     @staticmethod
     def from_dict(data: Dict[str, Any]) -> "DefensiveGapAssessment":
         return DefensiveGapAssessment(
+            l_irr_denovo=NumberClaim.from_dict(data.get("l_irr_denovo") or {}),
             g_d_novo_days=NumberClaim.from_dict(data.get("g_d_novo_days") or {}),
             g_d_active_days=NumberClaim.from_dict(data.get("g_d_active_days") or {}),
             tracked_competitor=CompetitorFinish.from_dict(data.get("tracked_competitor") or {}),
