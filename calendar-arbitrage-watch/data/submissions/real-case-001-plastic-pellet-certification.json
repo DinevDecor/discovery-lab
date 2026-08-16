@@ -1,0 +1,101 @@
+{
+  "candidate_id": "real-case-001-plastic-pellet-certification",
+  "mode": "DISCOVERY",
+  "category": "accreditation_qualification",
+  "title": "EU plastic pellet certification capacity — accredited certifier entry opportunity (Regulation (EU) 2025/2365)",
+  "summary": "Regulation (EU) 2025/2365 on preventing plastic pellet losses requires large/medium operators handling >=1500 t/year to hold third-party certification of compliance by 2027-12-17, issued by a certification body accredited (ISO/IEC 17065 and/or 17021, plastics-sector scope) under the OCS Europe scheme. Candidate question: is there a de-novo-entrant calendar arbitrage opportunity in becoming such an accredited certifier before the deadline. See real-case-001-evidence-pack.md for full sourcing, caveats, and the access-constraint note (direct WebFetch to EUR-Lex/Consilium/EC was blocked this session; facts below are WebSearch-aggregated and flagged accordingly).",
+
+  "shock_forecast": {
+    "shock_type": "DATED",
+    "date_bound": {
+      "earliest": "2027-12-17",
+      "latest": "2027-12-17",
+      "basis": "Certification deadline for large/medium operators (>=1500 t/year) under Regulation (EU) 2025/2365, published in the Official Journal 2025-11-26. Multiple independent secondary sources (Council of the EU press release, European Commission environment news page, ChemRadar, Hoganlovells, KHLaw) converge on this date via WebSearch aggregation; primary EUR-Lex text was not independently opened this session (network egress blocked). See evidence pack section 2.",
+      "evidence_status": "OBSERVED"
+    },
+    "as_of": "2026-08-16",
+    "forecast_version": 1
+  },
+
+  "clock_open_date": {
+    "earliest": "2023-10-16",
+    "latest": "2023-10-16",
+    "basis": "European Commission proposal COM(2023) 645 final, 2023/0373 (COD), dated 16 October 2023 — the date the regulatory direction and the OCS Europe-based certification approach first became publicly knowable. Multiple independent sources converge, including a direct hit on a PDF carrying the Commission's own header date. See evidence pack section 'clock_open_date'.",
+    "evidence_status": "OBSERVED"
+  },
+
+  "demand": {
+    "demand_obligation_certainty": {
+      "value": 0.9,
+      "unit": "",
+      "provenance": "REPEATED",
+      "evidence_status": "OBSERVED",
+      "as_of": "2026-08-16",
+      "note": "Regulation (EU) 2025/2365 is adopted and published (not a proposal) — multi-source convergence via WebSearch aggregation. High but not 1.0: this session could not independently re-read the primary EUR-Lex text to rule out an error in the secondary-source convergence. See evidence pack section 1."
+    },
+    "shock_date_stability": {
+      "evidence_status": "INSUFFICIENT_DATA",
+      "note": "No source found assessing amendment/delay risk for the 2027-12-17 date specifically, in either direction. Absence of evidence of instability is not evidence of stability — left INSUFFICIENT_DATA rather than assumed favorable. See evidence pack section 2."
+    },
+    "deadline_relief_risk": {
+      "evidence_status": "INSUFFICIENT_DATA",
+      "note": "No evidence found of political/administrative pressure toward, or against, delaying the certification deadline specifically. See evidence pack section 2."
+    },
+    "demand_suppression_risk": {
+      "evidence_status": "INSUFFICIENT_DATA",
+      "note": "Mechanism is real and evidenced: EMAS-registered operators are exempt from third-party certification if their EMAS verifier verifies compliance instead; operators below the 1500 t/year certification threshold (including all micro-enterprises) may use self-declaration instead of third-party certification. Both remove demand for a NEW certifier's services. Magnitude (what fraction of in-scope operators these routes cover) was not found. See evidence pack section 3."
+    }
+  },
+
+  "defensive": {
+    "tracked_competitor": {
+      "competitor_id": "incumbent-ocs-europe-certifiers-fastest-of (SGS / DQS / BSI / Bureau Veritas / DNV)",
+      "l_min_remaining_as_of": {
+        "value": 0,
+        "unit": "days",
+        "provenance": "REPEATED",
+        "evidence_status": "INFERRED",
+        "as_of": "2026-08-16",
+        "note": "SGS, DQS, BSI, Bureau Veritas, and DNV each publicly market and describe themselves as accredited providers of OCS Europe certification audits TODAY (company service pages, found via WebSearch, not independently opened). Treated as the fastest-of-several already-active incumbents, hence l_min ~ 0. This is an INFERENCE from marketing pages, not a confirmed accreditation-register entry naming a specific certifier as accredited under the Regulation's own framework (as opposed to the pre-existing voluntary OCS Europe scheme) — hence INFERRED, not OBSERVED, and REPEATED, not MEASURED. See evidence pack sections 5 and 7."
+      },
+      "as_of": "2026-08-16"
+    }
+  },
+
+  "rivalry": {
+    "unit": "",
+    "competitors": [
+      {"competitor_id": "SGS", "l_min_remaining_as_of": {"value": 0, "unit": "days", "provenance": "REPEATED", "evidence_status": "INFERRED", "as_of": "2026-08-16", "note": "Markets OCS Europe certification audits today per company service page (WebSearch, not independently opened)."}, "as_of": "2026-08-16"},
+      {"competitor_id": "DQS", "l_min_remaining_as_of": {"value": 0, "unit": "days", "provenance": "REPEATED", "evidence_status": "INFERRED", "as_of": "2026-08-16", "note": "Markets OCS certification audits, qualified auditors across Europe, per company page (WebSearch, not independently opened)."}, "as_of": "2026-08-16"},
+      {"competitor_id": "BSI", "l_min_remaining_as_of": {"value": 0, "unit": "days", "provenance": "REPEATED", "evidence_status": "INFERRED", "as_of": "2026-08-16", "note": "Markets OCS Europe Certification (facility-level verification) per company page (WebSearch, not independently opened)."}, "as_of": "2026-08-16"},
+      {"competitor_id": "Bureau Veritas", "l_min_remaining_as_of": {"value": 0, "unit": "days", "provenance": "REPEATED", "evidence_status": "INFERRED", "as_of": "2026-08-16", "note": "Markets itself as recognised/accredited OCS certification body per company page (WebSearch, not independently opened)."}, "as_of": "2026-08-16"},
+      {"competitor_id": "DNV", "l_min_remaining_as_of": {"value": 0, "unit": "days", "provenance": "REPEATED", "evidence_status": "INFERRED", "as_of": "2026-08-16", "note": "Markets OCS certification services per company page (WebSearch, not independently opened)."}, "as_of": "2026-08-16"}
+    ]
+  },
+
+  "open_findings": [],
+
+  "lifecycle_state": "WATCH",
+
+  "evidence_ids": [
+    "eur-lex-reg-2025-2365-oj-2025-11-26",
+    "eur-lex-com-2023-645-final-2023-10-16",
+    "consilium-pr-2025-09-22-plastic-pellets",
+    "ec-environment-news-2025-12-16-microplastics-law",
+    "europarl-legislative-train-microplastics",
+    "chemradar-2025-plastic-pellet-loss-regulation",
+    "hoganlovells-2025-plastic-pellet-obligations",
+    "khlaw-plastic-pellet-draft-agreement",
+    "sgs-ocs-europe-certification-service-page",
+    "dqs-ocs-europe-certification-service-page",
+    "bsi-ocs-europe-certification-service-page",
+    "bureauveritas-ocs-certification-service-page",
+    "dnv-ocs-certification-service-page",
+    "opcleansweep-eu-ocs-europe-scheme-requirements",
+    "iso17011-accreditation-transfer-general-commentary-certbetter-align-schellman",
+    "bas-nab-bas-bg-scope-identification"
+  ],
+  "provenance": [
+    "WebSearch tool aggregation, session date 2026-08-16. Direct WebFetch to eur-lex.europa.eu, consilium.europa.eu, environment.ec.europa.eu, and every other external domain attempted was blocked by this session's network egress policy (confirmed via repeated EGRESS_BLOCKED errors; not bypassed). See calendar-arbitrage-watch/data/submissions/real-case-001-evidence-pack.md for the full source list, per-item evidence status, and this caveat applied consistently."
+  ]
+}
