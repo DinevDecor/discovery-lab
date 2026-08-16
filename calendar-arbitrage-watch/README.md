@@ -84,12 +84,14 @@ In brief:
   two distinct fields, never one scalar, and never share a formula —
   `tests/test_specialist_defensive_gap.py`.
 - **Demand — four fields, never one multiplier**: Demand Obligation Certainty,
-  Shock-Date Stability (SDS — confirmed non-Bayesian in the source artifacts),
-  Deadline-Relief Risk, and demand_suppression_risk (kept separate from DRR — the
-  obligation staying certain while its date moves is a different risk from the
-  obligation itself shrinking). **DSI is `NOT_IMPLEMENTED`** — no canonical DSI formula
-  distinct from SDS was found in the source artifacts, and this package does not invent
-  one under that name (2026-08-15-3 correction).
+  Shock-Date Stability, Deadline-Relief Risk, and demand_suppression_risk (kept separate
+  from DRR — the obligation staying certain while its date moves is a different risk
+  from the obligation itself shrinking). **DSI (Date Stability Index) is `NOT_IMPLEMENTED`
+  in this slice** — DSI IS canonically defined (research v0.1.2, DELTA v0.1.1→v0.1.2
+  §P5: `SDS` renamed to `DSI`, an additive heuristic index, explicitly non-Bayesian,
+  `DSI=1` at `shock_type=ROLLING`) but is deliberately deferred: its heuristic penalties
+  are uncalibrated and it has zero scoring/lifecycle effect in this 30-day minimal
+  watch slice (2026-08-15-4 correction).
 - **Delay never auto-DEGRADEs.** A delay event recomputes T_shock (new versioned
   forecast), G_r, G_d^novo, and G_d^active together; only a subsequent, separate
   adversarial-review pass may change lifecycle state.
@@ -152,11 +154,12 @@ the current pass/fail count.
   backtest numbers are stated as estimates, not audited data), and implementing the
   full CMS/EF/PI scoring apparatus `C3` belongs to is out of scope for this pass, not
   because the term is undefined.
-- **DSI is explicitly `NOT_IMPLEMENTED`.** The source artifacts define `SDS`
-  (Shock-Date Stability, confirmed non-Bayesian) as its own field but no separate "DSI"
-  combining it with anything else was found — `specialist.compute_demand_stability_index`
-  returns the `NOT_IMPLEMENTED` constant rather than inventing a replacement heuristic
-  under that name (2026-08-15-3 correction).
+- **DSI is explicitly `NOT_IMPLEMENTED`.** DSI (Date Stability Index) IS defined by
+  research v0.1.2 (DELTA v0.1.1→v0.1.2 §P5 — `specialist.compute_demand_stability_index`'s
+  docstring quotes it in full). It is deliberately deferred, not implemented, in this
+  30-day minimal watch slice: its heuristic penalties (P5's additive table, 0.5 penalty
+  cap, 0.25 floor) remain uncalibrated, and `demand_stability_index` currently has zero
+  scoring/lifecycle effect anywhere in this package (2026-08-15-4 correction).
 - **No fixture derived from the real research baseline.** `tests/fixtures/` is entirely
   synthetic — see `tests/fixtures/README.md`.
 - **LLM wiring is a seam, not a working feature.** `gate.py`'s `JudgeProtocol` mirrors

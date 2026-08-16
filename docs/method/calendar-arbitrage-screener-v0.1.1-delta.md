@@ -9,6 +9,31 @@ place. `calendar-arbitrage-watch/`'s code implements this delta directly (protoc
 version `caw0.1.2`); it does not implement v0.1's original rules where this delta
 supersedes them.
 
+## Correction — 2026-08-15-4 (provenance-only; no code/methodology behavior changed)
+
+The 2026-08-15-3 correction (below) stated that "no canonical DSI formula distinct
+from SDS was found in the source research artifacts." **That claim was wrong and is
+retracted.** DSI IS canonically defined: Calendar Arbitrage Multi-Agent Watch DELTA
+v0.1.1 → v0.1.2, **section P5**, explicitly renames `SDS` to `DSI` — "Date Stability
+Index" — and specifies it as an additive heuristic index with fixed, capped penalties
+(explicitly non-Bayesian: no prior, no likelihood, no normalization), `DSI = 1` when
+`shock_type = ROLLING`, feeding `C3_score = DC * DSI * (1 - DRR)` floored at `DC * 0.25`.
+
+**Code behavior is unchanged**: `specialist.compute_demand_stability_index` still
+returns `NOT_IMPLEMENTED` unconditionally. What changes here is only the stated
+*reason*:
+
+- DSI IS defined by research v0.1.2 (§P5) — not an absent or unverifiable concept.
+- It is intentionally `NOT_IMPLEMENTED` in this repository's current 30-day minimal
+  watch slice — a scope decision, not a blocked one.
+- Its heuristic penalties (P5's additive table, the 0.5 total-penalty cap, the 0.25
+  floor) remain uncalibrated against real cases.
+- It currently has zero scoring/lifecycle effect — nothing in `gate.py` or
+  `lifecycle.py` reads `demand_stability_index`.
+
+See `specialist.py`'s `compute_demand_stability_index` docstring (quotes §P5 in full)
+and `models.py`'s `NOT_IMPLEMENTED` constant comment for the corrected text.
+
 ## Correction — 2026-08-15-2 (implementation semantic regression fix)
 
 A correction pass on the same day found that this package's **first implementation**
@@ -41,7 +66,7 @@ Three further implementation bugs were found and fixed, plus a provenance correc
 |---|---|---|---|
 | 1 | `compute_s_ready` exclusion rule | A competitor with unknown/`INSUFFICIENT_DATA` `l_min_remaining_as_of` was silently `continue`d out of the sum | Unknown readiness is NOT proof of non-readiness; such a competitor forces the WHOLE `S_ready` aggregate to `INSUFFICIENT_DATA`. Only a competitor with a defensible `l_min_remaining_as_of` that exceeds days-to-shock may be excluded. |
 | 2 | `compute_rivalry_index` unit check | `if unit and claim.unit and claim.unit != unit` — an empty `unit` param, or an operand with an empty `.unit`, silently passed | Requires a non-empty declared `unit`, and each of `d_shock`/`s_existing`/`s_ready` must carry that EXACT unit — any empty or mismatched unit is `INSUFFICIENT_DATA`. |
-| 3 | `compute_demand_stability_index` | Invented `HIGH`/`MEDIUM`/`LOW` heuristic from `min(DOC, SDS)` — not a canonical formula | Returns `NOT_IMPLEMENTED` unconditionally. The source research artifacts (see the provenance note below) define `SDS` as its own field, confirmed non-Bayesian, but no separate "DSI" combining it with anything else was found — this package does not invent one under that name. |
+| 3 | `compute_demand_stability_index` | Invented `HIGH`/`MEDIUM`/`LOW` heuristic from `min(DOC, SDS)` — not a canonical formula | Returns `NOT_IMPLEMENTED` unconditionally. **Provenance corrected 2026-08-15-4:** DSI IS canonically defined (research v0.1.2 §P5 — see the correction section above); it is deliberately deferred in this 30-day minimal slice, not implemented because no definition exists. |
 | 4 | C3/DC provenance | Claimed the source research documents were "not defined in any artifact reachable from this session" | **Retracted.** The Drive-hosted research artifacts (`calendar-arbitrage-screener-v0.1.md`, the v0.1.1/v0.1.2 delta documents) ARE reachable and have been read. `C3` (Demand certainty) is a named, weighted CMS-score component there. The `C3 >= DC x 0.25` rule remains `OPEN_FINDING`/non-scoring for **calibration** reasons (the source's own numbers are stated as estimates, not audited data) — not unavailability. |
 
 See `specialist.py` for the fixes and `tests/test_specialist_rivalry.py` /
@@ -140,14 +165,23 @@ postponed."
   kept **separate** from DRR per the 2026-08-15 approval, point 5: a date moving and an
   obligation shrinking are different failure modes with different consequences.
 
-**DSI — `NOT_IMPLEMENTED` (corrected 2026-08-15-3).** An earlier draft of this delta
-invented a `HIGH`/`MEDIUM`/`LOW` heuristic tier over `min(DOC, SDS)` under the name
-"Demand Stability Index." That formula did not correspond to anything in the source
-research artifacts once they were read — those artifacts define `SDS` (Shock-Date
-Stability) as its own field, explicitly confirmed non-Bayesian, but no separate "DSI"
-combining it with anything else. `specialist.compute_demand_stability_index` now
-returns the `NOT_IMPLEMENTED` constant unconditionally rather than a fabricated tier
-under the canonical name — not needed for the minimal 30-day watch slice.
+**DSI — canonically defined, `NOT_IMPLEMENTED` here by deliberate scope decision
+(corrected 2026-08-15-4).** An earlier draft of this delta invented a
+`HIGH`/`MEDIUM`/`LOW` heuristic tier over `min(DOC, SDS)` under the name "Demand
+Stability Index" (fixed 2026-08-15-3) and then, in that same fix, incorrectly claimed
+no canonical DSI definition existed anywhere reachable (retracted 2026-08-15-4).
+
+DSI ("Date Stability Index") **IS** defined: Calendar Arbitrage Multi-Agent Watch
+DELTA v0.1.1 → v0.1.2, §P5, renames `SDS` to `DSI` and specifies it as an additive
+heuristic index with fixed, capped penalties — explicitly **not** Bayesian (no prior,
+no likelihood, no normalization) — `DSI = 1` when `shock_type = ROLLING`, feeding
+`C3_score = DC * DSI * (1 - DRR)` floored at `DC * 0.25`.
+
+`specialist.compute_demand_stability_index` still returns `NOT_IMPLEMENTED`
+unconditionally — unchanged behavior. The reason is now stated correctly: DSI is
+intentionally deferred in this 30-day minimal watch slice (not required for the
+validation this slice runs), its §P5 penalty table is uncalibrated against real
+cases, and it currently has zero scoring/lifecycle effect anywhere in this package.
 
 ## 4. Delay handling — no automatic DEGRADE
 
@@ -203,7 +237,7 @@ All five implemented in `calendar_arbitrage_watch.models`:
 | `G_d^novo` correct dynamics for DATED | `specialist.compute_defensive_gap_novo` | `G_d^novo = L_irr - T_shock`; monotonic **increase** as the shock date approaches, constant `l_irr_denovo` — proven in `tests/test_specialist_defensive_gap.py::test_g_d_novo_increases_as_dated_shock_approaches_with_constant_l_irr` (corrected 2026-08-15-2; was a monotonic-decrease claim on an inverted formula). |
 | competitor bounds, not a point estimate | `CompetitorFinish.l_min_remaining_as_of` / `.l_max_remaining_as_of` | Screening always uses `l_min_remaining_as_of` (the bound UNFAVORABLE to us); `INSUFFICIENT_DATA` if not defensible (2026-08-15 approval, point 8; field shape corrected 2026-08-15-2 item 4). |
 | `S_ready` in the same unit as demand/supply | `specialist.compute_s_ready` | Canonical: `rho * sum(q_k for competitors ready by shock)`, screened at `l_min`/`q_max`; shares `unit` with `D_shock`/`S_existing` or `INSUFFICIENT_DATA` — corrected 2026-08-15-2 item 2 (was, wrongly, a normalized 0..1 score for our own candidate). |
-| DSI | `specialist.compute_demand_stability_index` | `NOT_IMPLEMENTED` — see section 3 above (corrected 2026-08-15-3; do not confuse with SDS, which IS implemented as its own `DemandProfile` field). |
+| DSI | `specialist.compute_demand_stability_index` | Defined by research v0.1.2 §P5; `NOT_IMPLEMENTED` here by deliberate scope decision — see section 3 above (provenance corrected 2026-08-15-4). Not to be confused with SDS, which IS implemented as its own `DemandProfile` field. |
 | DRR separate from demand suppression risk | `DemandProfile.deadline_relief_risk` vs `.demand_suppression_risk` | See section 3 above. |
 
 ---

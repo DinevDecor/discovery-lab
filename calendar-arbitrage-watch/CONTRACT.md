@@ -89,10 +89,13 @@ enforced by `tests/test_safety.py`, not just this document.
   (2026-08-15 approval, point 7).
 - collapse Demand Obligation Certainty, Shock-Date Stability, Deadline-Relief Risk, or
   demand_suppression_risk into one confidence number (2026-08-15 approval, point 5).
-- invent a DSI heuristic under the canonical name. No canonical DSI formula distinct
-  from Shock-Date Stability was confirmed in the source research artifacts;
-  `specialist.compute_demand_stability_index` returns `NOT_IMPLEMENTED`, never a
-  fabricated tier (2026-08-15-3 correction, item 3).
+- implement DSI (Date Stability Index) in this phase. DSI IS canonically defined
+  (research v0.1.2, DELTA v0.1.1→v0.1.2 §P5), but is deliberately deferred: its
+  heuristic penalty table is uncalibrated and it is not required by this 30-day
+  minimal watch slice. `specialist.compute_demand_stability_index` returns
+  `NOT_IMPLEMENTED` unconditionally, never a fabricated tier, and nothing in gate.py
+  or lifecycle.py reads it (2026-08-15-3 correction, item 3; provenance corrected
+  2026-08-15-4).
 - fabricate a competitor's remaining-time-to-finish as a point estimate. An unknown
   competitor finish is `CompetitorFinish.l_min_remaining_as_of` /
   `.l_max_remaining_as_of`; screening always uses the bound UNFAVORABLE to us

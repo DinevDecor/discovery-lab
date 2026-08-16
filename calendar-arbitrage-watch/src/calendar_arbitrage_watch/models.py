@@ -28,9 +28,14 @@ EVIDENCE_STATUSES = (OBSERVED, INFERRED, INSUFFICIENT_DATA)
 # NOT_IMPLEMENTED is distinct from INSUFFICIENT_DATA: the latter means "we
 # tried to compute this and the evidence doesn't support a value"; the
 # former means "this computation itself does not exist yet" - used by DSI
-# (2026-08-15-3 correction: no canonical Date/Demand Stability Index
-# formula was verified in the source research artifacts as distinct from
-# SDS, so this package does not invent one under that name).
+# (Date Stability Index). DSI IS canonically defined by research v0.1.2
+# (Calendar Arbitrage Multi-Agent Watch DELTA v0.1.1 -> v0.1.2, section
+# P5 - an additive heuristic index, explicitly non-Bayesian, DSI=1 at
+# ROLLING shock_type). It is deliberately deferred, not implemented, in
+# this 30-day minimal watch slice: its heuristic penalties are
+# uncalibrated and it currently has no scoring/lifecycle effect
+# (2026-08-15-4 correction - retracts the earlier, incorrect claim that
+# no such definition existed anywhere reachable).
 NOT_IMPLEMENTED = "NOT_IMPLEMENTED"
 
 # --- number-provenance discipline, independently adopted for this package.
@@ -453,7 +458,7 @@ class CalendarAssessment:
     demand: DemandProfile = field(default_factory=DemandProfile)
     pending_competition: PendingCompetitionAssessment = field(default_factory=PendingCompetitionAssessment)
 
-    demand_stability_index: str = NOT_IMPLEMENTED  # DSI: NOT canonically implemented, see specialist.py
+    demand_stability_index: str = NOT_IMPLEMENTED  # DSI: defined by research v0.1.2 P5, deliberately deferred - see specialist.py
     rivalry: RivalryAssessment = field(default_factory=RivalryAssessment)  # S_ready / RI, see specialist.py
 
     open_findings: List[OpenFinding] = field(default_factory=list)

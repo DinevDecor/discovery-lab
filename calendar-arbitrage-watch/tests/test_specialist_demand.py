@@ -1,10 +1,17 @@
 """Methodology delta v0.1.1 #3 + 2026-08-15 approval point 5: demand is
 four separate fields (DOC, SDS, DRR, demand_suppression_risk), never one
-confidence multiplier. DSI is explicitly NOT_IMPLEMENTED (2026-08-15-3
-correction) - a previous draft invented a HIGH/MEDIUM/LOW heuristic under
-that name; the source research artifacts define SDS as its own
-non-Bayesian field but no separate canonical "DSI". Do not resurrect the
-old heuristic under the DSI name.
+confidence multiplier.
+
+DSI (Date Stability Index) IS canonically defined - research v0.1.2,
+DELTA v0.1.1->v0.1.2 §P5, renames SDS to DSI as an additive heuristic
+index, explicitly non-Bayesian, DSI=1 at shock_type=ROLLING (provenance
+corrected 2026-08-15-4; a prior draft of this test module incorrectly
+claimed no such definition existed anywhere reachable). It is
+deliberately NOT_IMPLEMENTED here: not needed for this 30-day minimal
+watch slice, its §P5 penalty table is uncalibrated, and it has zero
+scoring/lifecycle effect. Do not resurrect the earlier invented
+HIGH/MEDIUM/LOW heuristic under the DSI name - implementing §P5's
+actual formula is a separate, future, deliberately-scoped task.
 """
 
 import _pathsetup  # noqa: F401

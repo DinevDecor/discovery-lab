@@ -297,25 +297,35 @@ def recompute_after_delay(
 
 
 # ---------------------------------------------------------------------------
-# Demand/Date Stability Index (DSI) - NOT IMPLEMENTED (2026-08-15-3 correction)
+# Date Stability Index (DSI) - defined by research v0.1.2, NOT IMPLEMENTED here
+# (2026-08-15-3 correction, provenance corrected 2026-08-15-4)
 # ---------------------------------------------------------------------------
 
 def compute_demand_stability_index(demand: DemandProfile) -> str:
-    """CORRECTION (2026-08-15-3): this function previously computed a
-    HIGH/MEDIUM/LOW tier from min(demand_obligation_certainty,
-    shock_date_stability) - an invented heuristic that does not
-    correspond to any canonical DSI formula found in the source research
-    artifacts. Those artifacts define `SDS` (Shock-Date Stability) as its
-    own field, explicitly confirmed non-Bayesian, but do not define a
-    separate "DSI" that combines it with anything else.
+    """CORRECTED PROVENANCE (2026-08-15-4): DSI ('Date Stability Index') IS
+    canonically defined - Calendar Arbitrage Multi-Agent Watch DELTA
+    v0.1.1 -> v0.1.2, section P5, renames `SDS` to `DSI` and specifies it
+    as an additive heuristic index with fixed, capped penalties
+    (explicitly NOT a Bayesian update - no prior, no likelihood, no
+    normalization), `DSI = 1` when `shock_type = ROLLING`, and feeds
+    `C3_score = DC * DSI * (1 - DRR)`, floored at `DC * 0.25`. An earlier
+    version of this docstring incorrectly claimed no such definition
+    existed anywhere reachable; that claim is retracted.
 
-    Per instruction not to leave a different heuristic under the
-    canonical DSI name, and given DSI is not required by the minimal
-    30-day watch slice, this function is explicitly NOT_IMPLEMENTED: it
-    ignores its argument and always returns the `NOT_IMPLEMENTED`
-    constant, never a fabricated tier. `demand` is kept as a parameter
-    (unused) so the call signature stays stable if a canonical DSI
-    definition is confirmed and implemented in a future pass."""
+    This function still returns `NOT_IMPLEMENTED` unconditionally,
+    UNCHANGED behavior - the decision to defer DSI is deliberate, not
+    forced by an absent definition:
+      - DSI is intentionally NOT implemented in this 30-day minimal
+        watch slice (not required for the validation this slice exists
+        to run).
+      - Its heuristic penalty table (P5's additive penalties, the 0.5
+        penalty cap, the 0.25 floor) remains uncalibrated against real
+        cases.
+      - It currently has zero scoring/lifecycle effect - nothing in
+        gate.py or lifecycle.py reads this value.
+
+    `demand` is kept as a parameter (unused) so the call signature stays
+    stable for a future pass that implements P5's actual formula."""
     return NOT_IMPLEMENTED
 
 
