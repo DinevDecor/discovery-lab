@@ -637,6 +637,62 @@ finding and grounds to move this probe's status from WATCH toward DROP rather th
 discovery-sprint effort asking customers a question this probe's own research already suggests the
 data does not exist to answer. It is not performed as part of this probe.
 
+### Section 20 follow-up (2026-08-17): one domain confirmed
+
+The feasibility check above was run, informally, in response to a direct follow-up question, using
+the same research method as the rest of this probe (external search, no pipeline data touched). It
+found one real domain where a task-level cost figure and a task-level business-value figure already
+coexist, close enough in time to compute a stopping-rule decision retroactively, without any
+bespoke instrumentation:
+
+**AI customer-support / contact-center resolution, specifically outcome-priced deflection.**
+
+- **Cost side (native, per-task, real-time):** token/compute cost per resolved conversation is
+  already metered by every LLM provider's usage API. Industry figures found: AI resolutions run
+  **$0.50–$2.37** per unit-level resolution (Fin AI charges **$0.99**; Sierra **~$1.50**), with
+  realistic all-in B2B figures near **$5** once connectors/engineering/platform fees are counted.
+  ([Fin AI 2026 benchmark](https://fin.ai/learn/roi-ai-customer-service-agents-benchmarks),
+  [Macha economics](https://www.getmacha.com/blog/economics-ai-support-credits-models-cost-per-resolution))
+- **Value side (native, per-task, established substitution price):** two independent, already-
+  existing value proxies attach to the same event — (1) the outcome-based price itself: Fin and
+  Sierra only charge when a conversation is resolved end-to-end, so billing is already a per-task
+  value gate ([Value Add VC on Sierra](https://valueaddvc.com/blog/how-does-sierra-ai-make-money-outcome-based-pricing-enterprise-agents-and-the-business-model-breakdown));
+  and (2) avoided human-agent cost, a decades-old contact-center benchmark — Gartner puts
+  agent-assisted contact at **$13.50**, with channel breakdowns of $6–$16 (email/ticket), $5–$14
+  (chat), $17–$25 (phone); one aggregate figure found was **$7.40 human vs. $0.62 AI** per
+  resolution. ([eesel AI 2026](https://www.eesel.ai/blog/ai-agent-vs-human-agent-cost),
+  [unthread.io benchmarks](https://unthread.io/blog/customer-support-cost-per-resolution-statistics/))
+- **Resolution window is short:** reopened-ticket status is confirmed within hours to days, not
+  weeks — short enough to feed a real-time stopping decision, unlike sales-attribution or
+  SEO-content value, which resolve too late to act on.
+- **Evidence this pairing is already used as a live allocation decision, not just reported after
+  the fact:** a 2026 margin case study found a team routing 70% of support tasks to a smaller model
+  at 10% of frontier cost, explicitly "bumping margins 10–15 points" — cost and value (margin) were
+  both being watched together to make a routing call, in production, not just audited retrospectively.
+  ([Causo Hub margin playbook](https://hub.causo.ai/guides/how-to-price-ai-product-token-costs-margins-2026))
+  This is the same domain the $4.20-value/$4.79-cost case in Section 5 came from — not an outlier,
+  representative of the same benchmark set.
+
+**Caveat, stated the way the rest of this probe is hedged:** the "value" figure here is a
+*substitution price* — what a human resolution would have cost, or what the vendor contracted to
+charge — not a ground-truth measure of how much the customer's actual problem being solved was
+worth to the business. That is a narrower thing than Section 7's class G (autonomous business
+tasks generally). It is exactly the slice Section 15 already predicted would be the one coherent
+product cut: objectively-measurable quality (resolved / not reopened) paired with a business system
+that already emits a value number, because contact-center benchmarking has done that measurement
+work for decades. It does not generalize to writing, research, or planning tasks, where no
+analogous substitution price exists — Section 7's broader finding is unchanged.
+
+**Effect on this probe's status:** this upgrades one specific falsification condition — Section 20's
+own binary test ("can even one clean example be found") returns **yes**, which per that section's
+own stated rule rules out moving the decision toward DROP on frequency/measurability grounds alone.
+It does **not** upgrade the decision to INVESTIGATE: one confirmed domain is evidence the narrow
+product cut from Section 15 is buildable-on-paper, not evidence of a buyer, a wedge, or a moat
+distinct from what Section 12 and Section 14 already found for that same narrow slice (a
+CFO-sponsored, contact-center-specific stopping rule, competing with vendors — Fin AI, Sierra,
+Decagon — who already have this exact cost/value pairing natively and a much shorter integration
+path than any third party). **Decision remains WATCH.**
+
 ---
 
 *This document does not modify, gate, promote, or backfill any record in
