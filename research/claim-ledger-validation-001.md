@@ -55,6 +55,7 @@ A `CLAIM_LEDGER_SAVE` is counted **only** when the ledger exposes something that
 |---|---|---|---|---|---|
 | 0 (setup) | 2026-08-16 | `business-candidates-2026-08-15.md` (baseline only, not logged from) | 0 | — | Ledger created; waiting for first new run |
 | 1 | 2026-08-16 | `business-candidates-2026-08-16.md` (real scheduled run 31... completed 22:57:58Z, merged into this branch) | 2 (CLV-001, CLV-002) | N/A — no prior OPEN claims to reconcile yet | One real lifecycle escalation (WATCH→VALIDATING) landed on Day 1; both logged claims are about that escalation's evidentiary basis, not manufactured for volume |
+| 2 | 2026-08-17 | none — no new report produced | 0 | None possible — no new data; CLV-001/CLV-002 remain OPEN unchanged | Real pipeline failure, not a delay: run `32075974441` (schedule, main), unit-test steps 4–6 all passed, step 7 "Run daily pipeline" itself failed after 26 min (22:26:04Z→22:52:52Z), commit step correctly skipped. `main` still at yesterday's head (`f2ff868`). Per protocol: 0 claims logged, no diagnosis/fix attempted (out of scope for this experiment) |
 
 ## 5. Claims
 
