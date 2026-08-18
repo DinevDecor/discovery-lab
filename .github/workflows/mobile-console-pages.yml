@@ -9,12 +9,18 @@ name: Mobile Machine Console — Pages Deploy
 # writing anywhere (mobile-console/tests/test_safety.py
 # ::NoMutationSurfaceInSiteTests).
 #
-# This repo has never had Pages enabled. The "Set up Pages" step below
-# passes enablement: true, so actions/configure-pages attempts to enable
-# it via the Pages API itself (available to a write-access token on a
-# public repo, no manual Settings step required). If that ever stops
-# working — e.g. the repo goes private — enable Pages once by hand under
-# Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+# One-time repo setting required before this can succeed: Settings ->
+# Pages -> Build and deployment -> Source: "GitHub Actions". This repo
+# has never had Pages enabled, and the default GITHUB_TOKEN this workflow
+# runs with cannot create a Pages site itself even with
+# `enablement: true` on actions/configure-pages@v5 - creating a Pages
+# site for the first time needs real repo-admin permission, which the
+# workflow token structurally does not have ("Resource not accessible by
+# integration" on the create-pages-site API call, confirmed by an actual
+# run of this workflow - see run 32175718020). A human with admin access
+# to this repo must flip that Settings toggle once; after that, this
+# workflow's own GET-then-deploy path works on every push with no
+# further manual step.
 
 on:
   push:
@@ -62,12 +68,6 @@ jobs:
 
       - name: Set up Pages
         uses: actions/configure-pages@v5
-        with:
-          # This repo has never had Pages enabled before. On a public repo,
-          # a user/token with write access can enable it via the Pages API
-          # directly, so let the action attempt that instead of only
-          # verifying a site that doesn't exist yet.
-          enablement: true
 
       - name: Upload site/ as the Pages artifact
         uses: actions/upload-pages-artifact@v3
