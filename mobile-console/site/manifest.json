@@ -1,0 +1,25 @@
+{
+  "name": "Machine Console",
+  "short_name": "Machine",
+  "description": "A read-only mobile console over discovery-lab's real ledgers: opportunities, pipeline, ground truth, and activity.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ECEEF1",
+  "theme_color": "#33456B",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-180.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
