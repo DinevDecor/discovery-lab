@@ -41,9 +41,9 @@ class WorkflowIsolationTests(unittest.TestCase):
         self.assertIn("workflow_dispatch", trigger)
         self.assertNotIn("schedule", trigger, "task instructions: do NOT schedule this workflow yet")
 
-    def test_all_four_jobs_present(self):
+    def test_all_five_jobs_present(self):
         self.assertEqual(set(self.jobs.keys()),
-                          {"prepare-input", "claude-analysis", "gpt-analysis", "merge-reveal"})
+                          {"prepare-input", "claude-analysis", "gpt-analysis", "merge-reveal", "persist-to-git"})
 
     def test_claude_analysis_does_not_depend_on_gpt_analysis(self):
         self.assertNotIn("gpt-analysis", self._needs("claude-analysis"))
@@ -127,6 +127,106 @@ class WorkflowIsolationTests(unittest.TestCase):
                 self.assertNotIn("echo $OPENAI_API_KEY", run_text)
                 self.assertNotIn("echo \"${{ secrets.ANTHROPIC_API_KEY }}\"", run_text)
                 self.assertNotIn("echo \"${{ secrets.OPENAI_API_KEY }}\"", run_text)
+
+
+@unittest.skipUnless(_HAVE_YAML, "PyYAML not installed - offline test-only dependency, skip rather than fail")
+@unittest.skipUnless(WORKFLOW_PATH.exists(), f"{WORKFLOW_PATH} not present")
+class PersistToGitWriteBoundaryTests(unittest.TestCase):
+    """Stage 3B (task §4/§5/§6): only persist-to-git may write to Git,
+    only after merge-reveal, with bounded retry, no force push, and a
+    hard failure on any persistence error."""
+
+    def setUp(self):
+        with open(WORKFLOW_PATH, encoding="utf-8") as f:
+            self.workflow = yaml.safe_load(f)
+        self.jobs = self.workflow["jobs"]
+
+    def _needs(self, job_name: str) -> list:
+        needs = self.jobs[job_name].get("needs", [])
+        return [needs] if isinstance(needs, str) else list(needs)
+
+    def _run_text(self, job_name: str) -> str:
+        return "\n".join(step.get("run", "") for step in self.jobs[job_name].get("steps", []))
+
+    def test_persist_to_git_depends_on_merge_reveal(self):
+        self.assertEqual(self._needs("persist-to-git"), ["merge-reveal"])
+
+    def test_only_persist_to_git_has_contents_write(self):
+        for job_name, job in self.jobs.items():
+            permissions = job.get("permissions", {})
+            if job_name == "persist-to-git":
+                self.assertEqual(permissions.get("contents"), "write")
+            else:
+                self.assertEqual(permissions.get("contents"), "read",
+                                  f"{job_name} must declare contents: read explicitly")
+
+    def test_only_persist_to_git_job_contains_a_git_push(self):
+        for job_name in self.jobs:
+            run_text = self._run_text(job_name)
+            if job_name == "persist-to-git":
+                self.assertIn("git push", run_text)
+            else:
+                self.assertNotIn("git push", run_text,
+                                  f"{job_name} must never push to git - only persist-to-git may")
+
+    def test_model_jobs_have_no_write_permission_and_no_git_write_calls(self):
+        """Task §11 acceptance field: 'model jobs have no write
+        permission'."""
+        for job_name in ("prepare-input", "claude-analysis", "gpt-analysis", "merge-reveal"):
+            self.assertEqual(self.jobs[job_name].get("permissions", {}).get("contents"), "read")
+            run_text = self._run_text(job_name)
+            for forbidden in ("git push", "git commit", "git add"):
+                self.assertNotIn(forbidden, run_text, f"{job_name} must never touch git")
+
+    def test_persist_to_git_job_has_no_model_secrets(self):
+        """Task §11: 'persistence job has no model secrets' - it never
+        calls a model, only durably records already-produced artifacts."""
+        job = self.jobs["persist-to-git"]
+        env_names = set()
+        for step in job.get("steps", []):
+            env_names.update(step.get("env", {}).keys())
+        self.assertNotIn("ANTHROPIC_API_KEY", env_names)
+        self.assertNotIn("OPENAI_API_KEY", env_names)
+
+    def test_persist_to_git_has_a_concurrency_group_with_cancel_in_progress_false(self):
+        concurrency = self.jobs["persist-to-git"].get("concurrency", {})
+        self.assertTrue(concurrency.get("group"))
+        self.assertIs(concurrency.get("cancel-in-progress"), False)
+
+    def test_persist_to_git_never_force_pushes(self):
+        run_text = self._run_text("persist-to-git")
+        self.assertNotIn("--force", run_text)
+        self.assertNotIn("-f ", run_text)
+        self.assertNotIn("push --force", run_text)
+
+    def test_persist_to_git_pulls_before_retrying_push(self):
+        run_text = self._run_text("persist-to-git")
+        self.assertIn("git pull --rebase", run_text)
+
+    def test_persist_to_git_retry_is_bounded(self):
+        run_text = self._run_text("persist-to-git")
+        self.assertIn("max_attempts", run_text)
+
+    def test_persist_to_git_fails_the_job_when_push_exhausts_retries(self):
+        """Task §6: 'if Git persistence fails, the workflow must FAIL' -
+        checked here as a literal exit 1 inside the retry-exhaustion
+        branch, not merely a comment."""
+        run_text = self._run_text("persist-to-git")
+        self.assertIn("exit 1", run_text)
+
+    def test_persist_to_git_calls_the_persist_subcommand_not_merge(self):
+        run_text = self._run_text("persist-to-git")
+        self.assertIn("run_stage3_job.py persist", run_text)
+        self.assertNotIn("run_stage3_job.py merge", run_text)
+
+    def test_persist_to_git_only_stages_the_designated_knowledge_paths(self):
+        """Task §9: the resulting commit must change ONLY the designated
+        blind-analysis knowledge paths - checked here as the literal
+        `git add` argument list, which is also what test_workflow_isolation
+        's model-job tests prove no other job ever invokes."""
+        run_text = self._run_text("persist-to-git")
+        self.assertIn("git add blind-analysis-kernel/data/analyses.jsonl "
+                       "blind-analysis-kernel/data/runs.jsonl", run_text)
 
 
 if __name__ == "__main__":
