@@ -115,7 +115,7 @@ def main() -> None:
         decision,
         provider=PROVIDER,
         model=DEFAULT_MODEL,
-        source_case_id=f"{left_case_id}|{right_case_id}",
+        source_case_ids=[left_case_id, right_case_id],
         source_artifact_ids=[left.id, right.id],
     )
     report["real_provider_run"] = "SUCCESS"

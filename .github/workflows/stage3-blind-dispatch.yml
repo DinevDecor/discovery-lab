@@ -1,0 +1,136 @@
+name: Stage 3 Blind Dispatch (manual only)
+
+# Manual-only per task instructions - not scheduled yet. This workflow
+# builds one immutable evidence packet, then runs two independent
+# analysis jobs (Claude, GPT) against it with no needs: dependency
+# between them, so neither can see the other's output before both
+# complete. Only the merge job (needs: [claude-analysis, gpt-analysis])
+# ever has both outputs visible at once - see
+# blind-analysis-kernel/CONTRACT.md.
+on:
+  workflow_dispatch:
+    inputs:
+      anomaly_id:
+        description: 'Real, already-committed CA anomaly_id to independently analyze'
+        required: false
+        default: 'ANOM-0001'
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-input:
+    runs-on: ubuntu-latest
+    outputs:
+      packet_sha256: ${{ steps.build.outputs.packet_sha256 }}
+      run_id: ${{ steps.build.outputs.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - id: build
+        run: |
+          OUTPUT=$(python3 blind-analysis-kernel/run_stage3_job.py prepare \
+            --anomaly-id "${{ github.event.inputs.anomaly_id }}" \
+            --run-id "${{ github.run_id }}" \
+            --out packet.json)
+          echo "$OUTPUT"
+          echo "run_id=${{ github.run_id }}" >> "$GITHUB_OUTPUT"
+          PACKET_SHA256=$(echo "$OUTPUT" | python3 -c "import json, sys; print(json.load(sys.stdin)['packet_sha256'])")
+          echo "packet_sha256=$PACKET_SHA256" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evidence-packet
+          path: packet.json
+          retention-days: 7
+
+  # Neither this job nor gpt-analysis has `needs:` on the other - each
+  # depends ONLY on prepare-input, so the scheduler has no ordering
+  # relationship between them and neither job's log/output is reachable
+  # from the other while it runs (separate, isolated runner VMs).
+  claude-analysis:
+    needs: [prepare-input]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: evidence-packet
+      - name: Independent Claude analysis
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY is not set - this job must fail loudly, not substitute another model or report INSUFFICIENT_DATA."
+            exit 1
+          fi
+          python3 blind-analysis-kernel/run_stage3_job.py claude \
+            --packet packet.json --out claude-analysis.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: claude-analysis
+          path: claude-analysis.json
+          retention-days: 7
+
+  gpt-analysis:
+    needs: [prepare-input]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: evidence-packet
+      - name: Independent GPT analysis
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error::OPENAI_API_KEY is not set - this job must fail loudly, not substitute another model or report INSUFFICIENT_DATA."
+            exit 1
+          fi
+          python3 blind-analysis-kernel/run_stage3_job.py gpt \
+            --packet packet.json --out gpt-analysis.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gpt-analysis
+          path: gpt-analysis.json
+          retention-days: 7
+
+  # The only job allowed to see both outputs together - it downloads both
+  # workflow artifacts, records the reveal (ids, whether the two input
+  # hashes matched, whether the two artifact ids are distinct), and
+  # persists both into the append-only analysis ledger. No semantic
+  # comparison, no combined conclusion, no lifecycle change happens here
+  # (task §10 STOP boundary) - that is explicitly Stage 4's job.
+  merge-reveal:
+    needs: [claude-analysis, gpt-analysis]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: claude-analysis
+      - uses: actions/download-artifact@v4
+        with:
+          name: gpt-analysis
+      - name: Reveal + persist both independent artifacts
+        run: |
+          python3 blind-analysis-kernel/run_stage3_job.py merge \
+            --claude-artifact claude-analysis.json \
+            --gpt-artifact gpt-analysis.json \
+            --ledger-out blind-analysis-kernel/data/analyses.jsonl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blind-dispatch-reveal
+          path: blind-analysis-kernel/data/analyses.jsonl
+          retention-days: 30

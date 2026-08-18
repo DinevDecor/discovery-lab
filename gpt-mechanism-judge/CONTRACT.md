@@ -51,7 +51,7 @@ state — `run_stage2_acceptance.py` prints its report to stdout only.
   an artifact anywhere — all explicitly out of scope for this stage.
 - put provider identity inside a Case's or a Claim's semantic identity
   (`case_claim_kernel.identity`, Stage 1, untouched). `AttributedAnalysis` carries
-  `provider`/`model` alongside a `source_case_id`, never folded into it.
+  `provider`/`model` alongside `source_case_ids`, never folded into them.
 - silently swallow a transport failure (`OpenAIError` — missing key, HTTP/network
   error) as if it were "the model said nothing useful." Only a genuinely
   malformed/unparseable response body degrades to the gate's existing
@@ -76,7 +76,7 @@ state — `run_stage2_acceptance.py` prints its report to stdout only.
 - Document the exact default model name (`openai_client.DEFAULT_MODEL`) and note
   that it should be reconfirmed against OpenAI's current model list before any real
   spend, rather than silently trusting a hardcoded guess.
-- Record `provider`, `model`, `created_at`, and `source_case_id`/`source_artifact_ids`
+- Record `provider`, `model`, `created_at`, and `source_case_ids`/`source_artifact_ids`
   on every `AttributedAnalysis` — never a partial attribution.
 - Keep `OpenAIMechanismJudge`'s `SYSTEM` prompt and error-handling contract aligned
   with `ClaudeMechanismJudge`'s, so a difference in gate outcome reflects a real

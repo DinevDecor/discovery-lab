@@ -18,7 +18,7 @@ router, not persistence. See `CONTRACT.md`.
   structurally — this module has zero import dependency on `ca_agents`.
 - `src/gpt_mechanism_judge/attribution.py` — `AttributedAnalysis`: wraps a
   `MechanismProfile`/`GateDecision` with `provider`/`model`/`created_at`/
-  `source_case_id`/`source_artifact_ids`. Not a ledger — nothing here persists.
+  `source_case_ids`/`source_artifact_ids`. Not a ledger — nothing here persists.
 - `run_stage2_acceptance.py` — loads two real, already-committed CA anomalies, builds
   the real `GateAnomaly` pair, and calls the real, unmodified `gate_pair()` with an
   `OpenAIMechanismJudge`.
