@@ -46,7 +46,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Select the two persisted analyses and compute the deterministic diff
+      - name: Select the two persisted analyses, compute the diff, and build the one shared EvidencePacket
         run: |
           python3 adversarial-review-kernel/run_stage4_job.py select \
             --run-id "${{ github.event.inputs.run_id }}" \
@@ -54,6 +54,10 @@ jobs:
           python3 adversarial-review-kernel/run_stage4_job.py disagree \
             --claude-artifact claude-analysis.json --gpt-artifact gpt-analysis.json \
             --out disagreements.json
+          python3 adversarial-review-kernel/run_stage4_job.py build-packet \
+            --anomaly-id "${{ github.event.inputs.anomaly_id }}" \
+            --run-id "${{ github.event.inputs.run_id }}" \
+            --out packet.json
       - uses: actions/upload-artifact@v4
         with:
           name: disagreement-inputs
@@ -61,6 +65,7 @@ jobs:
             claude-analysis.json
             gpt-analysis.json
             disagreements.json
+            packet.json
           retention-days: 7
 
   # Neither this job nor gpt-falsify has `needs:` on the other - each
@@ -92,8 +97,7 @@ jobs:
           fi
           python3 adversarial-review-kernel/run_stage4_job.py claude-falsify \
             --gpt-artifact gpt-analysis.json --disagreements disagreements.json \
-            --anomaly-id "${{ github.event.inputs.anomaly_id }}" \
-            --run-id "${{ github.event.inputs.run_id }}" \
+            --packet packet.json \
             --out claude-falsification.json
       - uses: actions/upload-artifact@v4
         with:
@@ -124,8 +128,7 @@ jobs:
           fi
           python3 adversarial-review-kernel/run_stage4_job.py gpt-falsify \
             --claude-artifact claude-analysis.json --disagreements disagreements.json \
-            --anomaly-id "${{ github.event.inputs.anomaly_id }}" \
-            --run-id "${{ github.event.inputs.run_id }}" \
+            --packet packet.json \
             --out gpt-falsification.json
       - uses: actions/upload-artifact@v4
         with:

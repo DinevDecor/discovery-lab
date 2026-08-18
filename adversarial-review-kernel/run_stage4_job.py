@@ -1,12 +1,28 @@
 """CLI entrypoint for the Stage 4 GitHub Actions job roles: `select`
 (pulls the two already-persisted IndependentAnalysisArtifact records for
 one run out of blind-analysis-kernel's durable Git ledger), `disagree`
-(deterministic diff), `claude-falsify` / `gpt-falsify` (each
+(deterministic diff), `build-packet` (builds the ONE EvidencePacket both
+Falsifiers must consume), `claude-falsify` / `gpt-falsify` (each
 independently critiques the OTHER provider's analysis), `judge` (the
 deterministic decision - no model call), and `persist` (writes both
 falsification artifacts and the judgment artifact to their local ledger
 files - never calls git itself, exactly like blind-analysis-kernel's own
 `persist` subcommand).
+
+WHY `build-packet` IS ITS OWN STEP
+    `EvidencePacket.created_at` is a wall-clock timestamp baked in at
+    build time, and `packet_sha256` is computed over the packet's full
+    `to_dict()` - so two independent calls to `build_falsifier_packet`
+    (one from claude-falsify's job, one from gpt-falsify's job, running
+    on separate runner VMs at different real times) produce two
+    DIFFERENT hashes even though every semantic field is identical. The
+    `judge` subcommand's structural-integrity gate would then correctly,
+    but uselessly, refuse every real run. `build-packet` builds the
+    packet exactly ONCE (in the select-disagreements job) and both
+    Falsifiers download and consume that same file - mirroring
+    blind_analysis_kernel's own `prepare` -> `{claude, gpt}` precedent
+    exactly (one packet built once, handed to both provider jobs
+    unmodified).
 
 Read-only against blind-analysis-kernel's and constraint-archaeology-
 agents' data. Writes only to files the caller names via --out/--*-out -
@@ -33,6 +49,7 @@ from adversarial_review_kernel.identity import make_judgment_id  # noqa: E402
 from adversarial_review_kernel.judgment import decide  # noqa: E402
 from adversarial_review_kernel.ledger import FalsificationLedger, JudgmentLedger  # noqa: E402
 from adversarial_review_kernel.models import Disagreement, FalsificationArtifact, PROVIDER_ANTHROPIC, PROVIDER_OPENAI  # noqa: E402
+from blind_analysis_kernel.packet import EvidencePacket, packet_sha256  # noqa: E402
 
 DEFAULT_CA_ANOMALIES = os.path.join(REPO_ROOT, "constraint-archaeology-agents", "data", "anomalies.json")
 DEFAULT_CA_OBSERVATIONS = os.path.join(REPO_ROOT, "constraint-archaeology-agents", "data", "observations.jsonl")
@@ -121,11 +138,26 @@ def _resolve_anomaly_and_observations(args: argparse.Namespace):
     return anomalies[args.anomaly_id], observations
 
 
+def cmd_build_packet(args: argparse.Namespace) -> None:
+    """Builds the ONE EvidencePacket both Falsifiers must consume, and
+    writes it to a file - see this module's own docstring for why this
+    must happen exactly once, not independently inside each Falsifier
+    job."""
+    anomaly, observations = _resolve_anomaly_and_observations(args)
+    packet = build_falsifier_packet(anomaly, observations, args.run_id)
+    _dump_json(packet.to_dict(), args.out)
+    print(json.dumps({
+        "run_id": args.run_id,
+        "packet_sha256": packet_sha256(packet),
+        "source_case_ids": packet.source_case_ids,
+        "out": args.out,
+    }, indent=2, sort_keys=True))
+
+
 def cmd_claude_falsify(args: argparse.Namespace) -> None:
     gpt = _load_json(args.gpt_artifact)
     disagreements = _load_disagreements(args.disagreements)
-    anomaly, observations = _resolve_anomaly_and_observations(args)
-    packet = build_falsifier_packet(anomaly, observations, args.run_id)
+    packet = EvidencePacket.from_dict(_load_json(args.packet))
     if packet.source_case_ids != gpt["source_case_ids"]:
         raise SystemExit(
             f"packet source_case_ids {packet.source_case_ids!r} do not match the persisted "
@@ -138,8 +170,7 @@ def cmd_claude_falsify(args: argparse.Namespace) -> None:
 def cmd_gpt_falsify(args: argparse.Namespace) -> None:
     claude = _load_json(args.claude_artifact)
     disagreements = _load_disagreements(args.disagreements)
-    anomaly, observations = _resolve_anomaly_and_observations(args)
-    packet = build_falsifier_packet(anomaly, observations, args.run_id)
+    packet = EvidencePacket.from_dict(_load_json(args.packet))
     if packet.source_case_ids != claude["source_case_ids"]:
         raise SystemExit(
             f"packet source_case_ids {packet.source_case_ids!r} do not match the persisted "
@@ -253,27 +284,26 @@ def main() -> None:
     p_disagree.add_argument("--out", required=True)
     p_disagree.set_defaults(func=cmd_disagree)
 
-    common_falsify = dict(
-        anomaly_id=("--anomaly-id", {"required": True}),
-        run_id=("--run-id", {"required": True}),
-        ca_anomalies_path=("--ca-anomalies-path", {"default": DEFAULT_CA_ANOMALIES}),
-        ca_observations_path=("--ca-observations-path", {"default": DEFAULT_CA_OBSERVATIONS}),
-    )
+    p_bp = sub.add_parser("build-packet", help="build the one EvidencePacket both Falsifiers must consume")
+    p_bp.add_argument("--anomaly-id", required=True)
+    p_bp.add_argument("--run-id", required=True)
+    p_bp.add_argument("--ca-anomalies-path", default=DEFAULT_CA_ANOMALIES)
+    p_bp.add_argument("--ca-observations-path", default=DEFAULT_CA_OBSERVATIONS)
+    p_bp.add_argument("--out", required=True)
+    p_bp.set_defaults(func=cmd_build_packet)
 
     p_cf = sub.add_parser("claude-falsify", help="Claude critiques GPT's analysis")
     p_cf.add_argument("--gpt-artifact", required=True)
     p_cf.add_argument("--disagreements", required=True)
+    p_cf.add_argument("--packet", required=True)
     p_cf.add_argument("--out", required=True)
-    for flag, kwargs in common_falsify.values():
-        p_cf.add_argument(flag, **kwargs)
     p_cf.set_defaults(func=cmd_claude_falsify)
 
     p_gf = sub.add_parser("gpt-falsify", help="GPT critiques Claude's analysis")
     p_gf.add_argument("--claude-artifact", required=True)
     p_gf.add_argument("--disagreements", required=True)
+    p_gf.add_argument("--packet", required=True)
     p_gf.add_argument("--out", required=True)
-    for flag, kwargs in common_falsify.values():
-        p_gf.add_argument(flag, **kwargs)
     p_gf.set_defaults(func=cmd_gpt_falsify)
 
     p_judge = sub.add_parser("judge", help="deterministic judgment (no model call)")
