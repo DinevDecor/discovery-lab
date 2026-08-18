@@ -1,0 +1,202 @@
+{
+  "audit_id": "AUDIT-20260818T094415Z",
+  "run_id": "32120712833",
+  "selection_algorithm_version": "0.1",
+  "seed": "d3ca2e5ed43d7d2c6171681c7cf1b9a51ee1a2c948d2cf19c412314a9f670d91",
+  "target_sample_size": 20,
+  "base_max_per_family": 3,
+  "effective_max_per_family": 3,
+  "total_candidate_pool": 108,
+  "families_present_count": 13,
+  "families_represented_in_sample": [
+    "ai_agent_operational_failure",
+    "api_platform_restriction",
+    "blocked_workflow",
+    "cannot_control_predict_usage",
+    "compliance_burden",
+    "forced_workaround",
+    "manual_workaround",
+    "repeated_failure",
+    "tool_fragmentation",
+    "unexpected_cost_bill",
+    "waiting_queue_capacity"
+  ],
+  "family_counts_in_sample": {
+    "ai_agent_operational_failure": 1,
+    "api_platform_restriction": 1,
+    "blocked_workflow": 2,
+    "cannot_control_predict_usage": 2,
+    "compliance_burden": 1,
+    "forced_workaround": 2,
+    "manual_workaround": 2,
+    "repeated_failure": 3,
+    "tool_fragmentation": 2,
+    "unexpected_cost_bill": 2,
+    "waiting_queue_capacity": 2
+  },
+  "selection_provenance": "external",
+  "selection_note": "Selection was run externally against the real Run-1 probe-observations.jsonl (not reproducible in this session, which lacks that file) using the pre-registered algorithm/seed/version above. Frozen here verbatim as reported by the human operator, per explicit instruction not to re-select or alter any ID. created_at/retrieved_at were not reported for the individual posts and are left empty rather than fabricated.",
+  "frozen_in_session_at": "2026-08-18T09:44:15.491160+00:00",
+  "selected": [
+    {
+      "post_id": "2087551132381954449",
+      "query_family": "compliance_burden",
+      "query_id": "q13",
+      "canonical_url": "https://x.com/i/status/2087551132381954449",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2087884400411201575",
+      "query_family": "cannot_control_predict_usage",
+      "query_id": "q04",
+      "canonical_url": "https://x.com/i/status/2087884400411201575",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2087968887715377611",
+      "query_family": "cannot_control_predict_usage",
+      "query_id": "q04",
+      "canonical_url": "https://x.com/i/status/2087968887715377611",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2088685766998159822",
+      "query_family": "waiting_queue_capacity",
+      "query_id": "q11",
+      "canonical_url": "https://x.com/i/status/2088685766998159822",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2088723766041882654",
+      "query_family": "waiting_queue_capacity",
+      "query_id": "q11",
+      "canonical_url": "https://x.com/i/status/2088723766041882654",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2088748752874209590",
+      "query_family": "api_platform_restriction",
+      "query_id": "q22",
+      "canonical_url": "https://x.com/i/status/2088748752874209590",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2088996453620310019",
+      "query_family": "ai_agent_operational_failure",
+      "query_id": "q23",
+      "canonical_url": "https://x.com/i/status/2088996453620310019",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089426316290650121",
+      "query_family": "unexpected_cost_bill",
+      "query_id": "q01",
+      "canonical_url": "https://x.com/i/status/2089426316290650121",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089440362083623088",
+      "query_family": "unexpected_cost_bill",
+      "query_id": "q02",
+      "canonical_url": "https://x.com/i/status/2089440362083623088",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089445647078285751",
+      "query_family": "tool_fragmentation",
+      "query_id": "q19",
+      "canonical_url": "https://x.com/i/status/2089445647078285751",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089503052348686497",
+      "query_family": "tool_fragmentation",
+      "query_id": "q19",
+      "canonical_url": "https://x.com/i/status/2089503052348686497",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089539662889329124",
+      "query_family": "repeated_failure",
+      "query_id": "q08",
+      "canonical_url": "https://x.com/i/status/2089539662889329124",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089572600414339456",
+      "query_family": "manual_workaround",
+      "query_id": "q05",
+      "canonical_url": "https://x.com/i/status/2089572600414339456",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089606836370743369",
+      "query_family": "manual_workaround",
+      "query_id": "q05",
+      "canonical_url": "https://x.com/i/status/2089606836370743369",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089624066374136069",
+      "query_family": "repeated_failure",
+      "query_id": "q07",
+      "canonical_url": "https://x.com/i/status/2089624066374136069",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089631346599842041",
+      "query_family": "repeated_failure",
+      "query_id": "q07",
+      "canonical_url": "https://x.com/i/status/2089631346599842041",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089631411863273591",
+      "query_family": "blocked_workflow",
+      "query_id": "q09",
+      "canonical_url": "https://x.com/i/status/2089631411863273591",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089636647058993236",
+      "query_family": "blocked_workflow",
+      "query_id": "q09",
+      "canonical_url": "https://x.com/i/status/2089636647058993236",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089637475694018850",
+      "query_family": "forced_workaround",
+      "query_id": "q17",
+      "canonical_url": "https://x.com/i/status/2089637475694018850",
+      "created_at": "",
+      "retrieved_at": ""
+    },
+    {
+      "post_id": "2089638565999235189",
+      "query_family": "forced_workaround",
+      "query_id": "q17",
+      "canonical_url": "https://x.com/i/status/2089638565999235189",
+      "created_at": "",
+      "retrieved_at": ""
+    }
+  ]
+}
