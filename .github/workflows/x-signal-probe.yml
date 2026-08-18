@@ -1,0 +1,60 @@
+name: X Signal Probe (manual, bounded)
+
+# Manual-only probe run - see x-signal-probe/CONTRACT.md and README.md.
+# workflow_dispatch only, no schedule, until a human has reviewed at least
+# one successful bounded run. Never commits to the repository - uploads
+# the run's outputs (reference/provenance only, no raw X post text - see
+# README's storage design) as a short-retention build artifact instead,
+# the same pattern observation-agent.yml uses. Entirely separate from
+# constraint-archaeology-daily.yml: this workflow never runs the daily
+# pipeline, and a failure here can never break it.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: x-signal-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    name: Run X Signal Probe (bounded, read-only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout discovery-lab
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run X Signal Probe offline unit tests
+        working-directory: x-signal-probe
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Run bounded probe (see CONTRACT.md for the fixed bounds)
+        working-directory: x-signal-probe
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: python3 run_x_signal_probe.py
+
+      - name: Upload probe outputs (reference/provenance only - no raw post text)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: x-signal-probe-run-${{ github.run_number }}
+          path: |
+            x-signal-probe/data/
+            x-signal-probe/reports/
+          retention-days: 14
+          if-no-files-found: warn
