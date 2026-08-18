@@ -14,12 +14,15 @@ _PKG_ROOT = Path(__file__).resolve().parents[1]
 _REPO_ROOT = _PKG_ROOT.parent
 
 _WRITE_MODE_PATTERN = re.compile(r"open\([^)]*['\"][wax][b+]?['\"]|\.write_text\(|\.write_bytes\(")
-_ALLOWED_WRITE_MODULES = {"ledger.py"}
+# manifest.py (Stage 3B) owns RunManifestLedger, the run-manifest analog
+# of ledger.py's AnalysisLedger - same append-only discipline, same
+# reason it's allowed to open a file in a writing mode.
+_ALLOWED_WRITE_MODULES = {"ledger.py", "manifest.py"}
 
 # Only dispatch.py may import another package's code - it IS the
 # blind-dispatch boundary (see its own docstring). Every other module in
-# this package (models/identity/packet/validator/ledger) must be a
-# standalone library, same discipline case-claim-kernel and
+# this package (models/identity/packet/validator/ledger/manifest) must be
+# a standalone library, same discipline case-claim-kernel and
 # gpt-mechanism-judge already hold their own libraries to.
 _OTHER_PACKAGE_IMPORT = re.compile(
     r"^\s*(import\s+(ca_agents|case_claim_kernel|gpt_mechanism_judge|business_candidate_analyst)\b|"
@@ -27,7 +30,7 @@ _OTHER_PACKAGE_IMPORT = re.compile(
     re.MULTILINE,
 )
 
-_NON_DISPATCH_LIBRARY_MODULES = ("models.py", "identity.py", "packet.py", "validator.py", "ledger.py")
+_NON_DISPATCH_LIBRARY_MODULES = ("models.py", "identity.py", "packet.py", "validator.py", "ledger.py", "manifest.py")
 
 _HARDCODED_SECRET = re.compile(r"(sk-[A-Za-z0-9_-]{20,}|sk-ant-[A-Za-z0-9_-]{20,})")
 

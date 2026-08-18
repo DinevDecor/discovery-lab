@@ -7,6 +7,15 @@ name: Stage 3 Blind Dispatch (manual only)
 # complete. Only the merge job (needs: [claude-analysis, gpt-analysis])
 # ever has both outputs visible at once - see
 # blind-analysis-kernel/CONTRACT.md.
+#
+# Stage 3B: after merge-reveal verifies structural integrity, a SEPARATE
+# persist-to-git job durably appends both artifacts (plus a run manifest)
+# to Git-tracked files under blind-analysis-kernel/data/ and pushes to
+# the default branch. Every other job keeps contents: read explicitly -
+# only persist-to-git ever declares contents: write, and it is the only
+# job in this workflow with a git push step. If persistence fails, that
+# job fails, and a failed job fails the whole run (task §6: a successful
+# model call followed by failed persistence is not a successful run).
 on:
   workflow_dispatch:
     inputs:
@@ -20,6 +29,8 @@ permissions:
 
 jobs:
   prepare-input:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     outputs:
       packet_sha256: ${{ steps.build.outputs.packet_sha256 }}
@@ -50,6 +61,8 @@ jobs:
   # relationship between them and neither job's log/output is reachable
   # from the other while it runs (separate, isolated runner VMs).
   claude-analysis:
+    permissions:
+      contents: read
     needs: [prepare-input]
     runs-on: ubuntu-latest
     steps:
@@ -77,6 +90,8 @@ jobs:
           retention-days: 7
 
   gpt-analysis:
+    permissions:
+      contents: read
     needs: [prepare-input]
     runs-on: ubuntu-latest
     steps:
@@ -103,13 +118,17 @@ jobs:
           path: gpt-analysis.json
           retention-days: 7
 
-  # The only job allowed to see both outputs together - it downloads both
-  # workflow artifacts, records the reveal (ids, whether the two input
-  # hashes matched, whether the two artifact ids are distinct), and
-  # persists both into the append-only analysis ledger. No semantic
-  # comparison, no combined conclusion, no lifecycle change happens here
-  # (task §10 STOP boundary) - that is explicitly Stage 4's job.
+  # The only job allowed to see both outputs together - downloads both
+  # workflow artifacts, verifies structural integrity (matching input
+  # hash, matching source_case_ids, distinct artifact ids - `merge`
+  # exits non-zero and fails this job if any check fails), and writes a
+  # local copy of the append-only analysis ledger for inspection. Still
+  # contents: read - no git call happens here. No semantic comparison,
+  # no combined conclusion, no lifecycle change (task §10 STOP boundary)
+  # - that remains Stage 4's job.
   merge-reveal:
+    permissions:
+      contents: read
     needs: [claude-analysis, gpt-analysis]
     runs-on: ubuntu-latest
     steps:
@@ -123,7 +142,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: gpt-analysis
-      - name: Reveal + persist both independent artifacts
+      - name: Reveal + verify structural integrity
         run: |
           python3 blind-analysis-kernel/run_stage3_job.py merge \
             --claude-artifact claude-analysis.json \
@@ -134,3 +153,71 @@ jobs:
           name: blind-dispatch-reveal
           path: blind-analysis-kernel/data/analyses.jsonl
           retention-days: 30
+
+  # Stage 3B. The ONLY job with contents: write and the ONLY job that
+  # ever runs `git push` in this workflow. Runs only after merge-reveal
+  # has verified structural integrity. Re-verifies independently (see
+  # run_stage3_job.py's `persist` subcommand) before writing anything, so
+  # a structurally broken pair can never reach Git even if this job were
+  # ever invoked out of order. No ANTHROPIC_API_KEY/OPENAI_API_KEY here -
+  # this job never calls a model, it only durably records already-produced
+  # artifacts.
+  #
+  # Concurrency: scoped to this job alone (not the whole workflow), so
+  # two different runs' model jobs can still proceed in parallel - only
+  # the git-writing step is serialized, queued (never cancelled) if
+  # another run's persistence is in flight. The push step itself also
+  # pulls --rebase and retries a bounded number of times, so a race that
+  # slips past the queue still resolves without a force push.
+  persist-to-git:
+    permissions:
+      contents: write
+    needs: [merge-reveal]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: stage3-blind-dispatch-persist-to-git
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: claude-analysis
+      - uses: actions/download-artifact@v4
+        with:
+          name: gpt-analysis
+      - name: Durably append both artifacts + run manifest, then commit and push
+        run: |
+          set -e
+          python3 blind-analysis-kernel/run_stage3_job.py persist \
+            --claude-artifact claude-analysis.json \
+            --gpt-artifact gpt-analysis.json \
+            --ledger-out blind-analysis-kernel/data/analyses.jsonl \
+            --manifest-out blind-analysis-kernel/data/runs.jsonl \
+            --workflow-run-id "${{ github.run_id }}" \
+            --head-sha "${{ github.sha }}"
+
+          git config user.name "blind-analysis-kernel-bot"
+          git config user.email "blind-analysis-kernel-bot@users.noreply.github.com"
+          git add blind-analysis-kernel/data/analyses.jsonl blind-analysis-kernel/data/runs.jsonl
+
+          if git diff --cached --quiet; then
+            echo "No new content to persist (idempotent rerun of an already-recorded run)."
+            exit 0
+          fi
+
+          git commit -m "Stage 3 blind dispatch: persist run ${{ github.run_id }} (ANOM ${{ github.event.inputs.anomaly_id }})"
+
+          attempt=1
+          max_attempts=3
+          until git push origin "HEAD:${GITHUB_REF_NAME}"; do
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "::error::git push failed after $max_attempts attempts - Git persistence did not succeed, this run must fail."
+              exit 1
+            fi
+            echo "push attempt $attempt failed, pulling --rebase and retrying..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            attempt=$((attempt + 1))
+          done
