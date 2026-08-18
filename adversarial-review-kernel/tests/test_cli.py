@@ -11,11 +11,14 @@ import json
 import os
 import sys
 import tempfile
+import time
 import unittest
+from unittest.mock import patch
 
 _PKG_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _PKG_ROOT not in sys.path:
     sys.path.insert(0, _PKG_ROOT)
+_REPO_ROOT = os.path.dirname(_PKG_ROOT)
 
 import run_stage4_job as cli  # noqa: E402
 from adversarial_review_kernel.ledger import FalsificationLedger, JudgmentLedger  # noqa: E402
@@ -24,6 +27,15 @@ from adversarial_review_kernel.models import (  # noqa: E402
     FalsificationFinding,
     SCHEMA_AMBIGUITY,
 )
+
+_ANALYSES_LEDGER = os.path.join(_REPO_ROOT, "blind-analysis-kernel", "data", "analyses.jsonl")
+_CA_ANOMALIES_PATH = os.path.join(_REPO_ROOT, "constraint-archaeology-agents", "data", "anomalies.json")
+_REAL_RUN_ID = "32142997999"
+_FALSIFIER_RESPONSE = json.dumps({"findings": [
+    {"field": f, "classification": "SUPPORTED_BY_SOURCE", "reason": "r", "material": False}
+    for f in ("hidden_function", "inputs", "outputs", "carrier", "failure_class",
+              "failure_mechanism", "repair", "confidence")
+]})
 
 _HASH = "d" * 64
 CLAUDE_ID = "analysis:claude"
@@ -239,6 +251,102 @@ class SelectAndDisagreeSubcommandTests(_TmpDirTestCase):
         with open(self.disagreements_path, encoding="utf-8") as f:
             rows = json.load(f)
         self.assertEqual([r["field"] for r in rows], ["carrier"])
+
+
+@unittest.skipUnless(os.path.exists(_ANALYSES_LEDGER), f"{_ANALYSES_LEDGER} not present")
+@unittest.skipUnless(os.path.exists(_CA_ANOMALIES_PATH), f"{_CA_ANOMALIES_PATH} not present")
+class SharedPacketAcrossFalsifyJobsTests(_TmpDirTestCase):
+    """Regression guard for a real bug found in the first live acceptance
+    run: `EvidencePacket.created_at` is a wall-clock timestamp baked in
+    at build time, so two INDEPENDENT `build-packet`-equivalent calls
+    (one per Falsifier job, as GitHub Actions actually runs them on
+    separate runner VMs at different real times) produce two DIFFERENT
+    `packet_sha256` values even though every semantic field is identical
+    - `judge`'s structural-integrity gate then correctly, but uselessly,
+    refuses every real run. The fix: build the packet exactly ONCE
+    (`build-packet`) and have both `claude-falsify`/`gpt-falsify`
+    consume that same file via `--packet`. This test proves the CLI
+    subcommands actually wired that fix in - not just the underlying
+    library functions (which were already correct in isolation, see
+    test_falsify_blindness.py::test_both_falsifiers_report_the_same
+    _input_packet_sha256)."""
+
+    def test_build_packet_called_twice_produces_different_hashes(self):
+        """Documents WHY build-packet must run only once: confirms the
+        wall-clock-dependent hash actually changes between two calls a
+        moment apart, so the fix below is not accidentally a no-op."""
+        packet_path_1 = os.path.join(self._tmp.name, "packet1.json")
+        packet_path_2 = os.path.join(self._tmp.name, "packet2.json")
+        build_args = lambda out: argparse.Namespace(  # noqa: E731
+            anomaly_id="ANOM-0001", run_id=_REAL_RUN_ID,
+            ca_anomalies_path=cli.DEFAULT_CA_ANOMALIES, ca_observations_path=cli.DEFAULT_CA_OBSERVATIONS,
+            out=out,
+        )
+        cli.cmd_build_packet(build_args(packet_path_1))
+        time.sleep(1.1)  # created_at has second granularity
+        cli.cmd_build_packet(build_args(packet_path_2))
+        with open(packet_path_1, encoding="utf-8") as f:
+            packet_1 = json.load(f)
+        with open(packet_path_2, encoding="utf-8") as f:
+            packet_2 = json.load(f)
+        self.assertNotEqual(packet_1["created_at"], packet_2["created_at"])
+
+    def test_claude_falsify_and_gpt_falsify_against_the_same_packet_file_agree_on_input_hash(self):
+        packet_path = os.path.join(self._tmp.name, "packet.json")
+        cli.cmd_build_packet(argparse.Namespace(
+            anomaly_id="ANOM-0001", run_id=_REAL_RUN_ID,
+            ca_anomalies_path=cli.DEFAULT_CA_ANOMALIES, ca_observations_path=cli.DEFAULT_CA_OBSERVATIONS,
+            out=packet_path,
+        ))
+
+        claude = gpt = None
+        with open(_ANALYSES_LEDGER, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                row = json.loads(line)
+                if row.get("run_id") != _REAL_RUN_ID:
+                    continue
+                if row["provider"] == "anthropic":
+                    claude = row
+                elif row["provider"] == "openai":
+                    gpt = row
+        self._write_json(self.claude_path, claude)
+        self._write_json(self.gpt_path, gpt)
+        disagreements_path = os.path.join(self._tmp.name, "disagreements.json")
+        cli.cmd_disagree(argparse.Namespace(claude_artifact=self.claude_path, gpt_artifact=self.gpt_path,
+                                             out=disagreements_path))
+
+        with patch("adversarial_review_kernel.falsify.call_claude", return_value=_FALSIFIER_RESPONSE):
+            cli.cmd_claude_falsify(argparse.Namespace(
+                gpt_artifact=self.gpt_path, disagreements=disagreements_path, packet=packet_path,
+                out=self.claude_fals_path,
+            ))
+        with patch("adversarial_review_kernel.falsify.call_openai", return_value=_FALSIFIER_RESPONSE):
+            cli.cmd_gpt_falsify(argparse.Namespace(
+                claude_artifact=self.claude_path, disagreements=disagreements_path, packet=packet_path,
+                out=self.gpt_fals_path,
+            ))
+
+        with open(self.claude_fals_path, encoding="utf-8") as f:
+            claude_fals = json.load(f)
+        with open(self.gpt_fals_path, encoding="utf-8") as f:
+            gpt_fals = json.load(f)
+        self.assertEqual(claude_fals["input_packet_sha256"], gpt_fals["input_packet_sha256"],
+                          "both Falsifiers must report the same input_packet_sha256 when given the same "
+                          "--packet file - this is the exact invariant the real acceptance run's first "
+                          "attempt violated by building the packet independently in each job")
+
+        # judge must then succeed (not refuse) on this pair.
+        judgment_path = os.path.join(self._tmp.name, "judgment.json")
+        cli.cmd_judge(argparse.Namespace(
+            claude_artifact=self.claude_path, gpt_artifact=self.gpt_path,
+            disagreements=disagreements_path,
+            claude_falsification=self.claude_fals_path, gpt_falsification=self.gpt_fals_path,
+            out=judgment_path,
+        ))  # must not raise
+        self.assertTrue(os.path.exists(judgment_path))
 
 
 if __name__ == "__main__":
