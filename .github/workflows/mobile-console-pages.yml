@@ -9,10 +9,12 @@ name: Mobile Machine Console — Pages Deploy
 # writing anywhere (mobile-console/tests/test_safety.py
 # ::NoMutationSurfaceInSiteTests).
 #
-# One-time repo setting required before this can succeed: Settings ->
-# Pages -> Build and deployment -> Source: "GitHub Actions". Until that is
-# set, the deploy-pages step below will fail even though this workflow
-# itself is otherwise correct.
+# This repo has never had Pages enabled. The "Set up Pages" step below
+# passes enablement: true, so actions/configure-pages attempts to enable
+# it via the Pages API itself (available to a write-access token on a
+# public repo, no manual Settings step required). If that ever stops
+# working — e.g. the repo goes private — enable Pages once by hand under
+# Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
 
 on:
   push:
@@ -60,6 +62,12 @@ jobs:
 
       - name: Set up Pages
         uses: actions/configure-pages@v5
+        with:
+          # This repo has never had Pages enabled before. On a public repo,
+          # a user/token with write access can enable it via the Pages API
+          # directly, so let the action attempt that instead of only
+          # verifying a site that doesn't exist yet.
+          enablement: true
 
       - name: Upload site/ as the Pages artifact
         uses: actions/upload-pages-artifact@v3
