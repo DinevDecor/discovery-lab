@@ -1,0 +1,91 @@
+name: Mobile Machine Console — Pages Deploy
+
+# Publishes mobile-console/site/ (a static, read-only, serverless viewer —
+# see mobile-console/CONTRACT.md) to GitHub Pages. This workflow is glue
+# only: it checks out the repository, rebuilds the snapshot from the real
+# ledgers already in this repo, and uploads the static site as a Pages
+# artifact. It never writes to any other package's data, calls a model, or
+# mutates anything — the site it deploys is structurally incapable of
+# writing anywhere (mobile-console/tests/test_safety.py
+# ::NoMutationSurfaceInSiteTests).
+#
+# One-time repo setting required before this can succeed: Settings ->
+# Pages -> Build and deployment -> Source: "GitHub Actions". This repo
+# has never had Pages enabled, and the default GITHUB_TOKEN this workflow
+# runs with cannot create a Pages site itself even with
+# `enablement: true` on actions/configure-pages@v5 - creating a Pages
+# site for the first time needs real repo-admin permission, which the
+# workflow token structurally does not have ("Resource not accessible by
+# integration" on the create-pages-site API call, confirmed by an actual
+# run of this workflow - see run 32175718020). A human with admin access
+# to this repo must flip that Settings toggle once; after that, this
+# workflow's own GET-then-deploy path works on every push with no
+# further manual step.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mobile-console/**"
+      - ".github/workflows/mobile-console-pages.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build snapshot + package site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout discovery-lab
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run mobile-console tests (offline, deterministic)
+        working-directory: mobile-console
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Rebuild the real snapshot from canonical ledgers
+        working-directory: mobile-console
+        run: python3 run_mobile_console.py build
+
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site/ as the Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: mobile-console/site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

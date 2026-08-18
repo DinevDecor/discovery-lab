@@ -1,0 +1,246 @@
+name: Stage 4 Adversarial Review (manual only)
+
+# Manual-only per task instructions - not scheduled yet. Consumes the two
+# real, already-durably-persisted IndependentAnalysisArtifact records
+# Stage 3B wrote to blind-analysis-kernel/data/analyses.jsonl for one
+# run_id - it does NOT re-run or replace the original analyses, even
+# though they disagree. select-disagreements reads them read-only.
+#
+# Each provider then independently falsifies ONLY the OTHER provider's
+# analysis: claude-falsify and gpt-falsify have no needs: dependency on
+# each other, so neither can see the other's Falsifier output before
+# both complete - only deterministic-judge (needs: both) ever has both
+# falsifications visible at once. deterministic-judge itself makes NO
+# model or network call - it is a pure function over already-computed
+# data (adversarial-review-kernel/src/adversarial_review_kernel
+# /judgment.py). See adversarial-review-kernel/CONTRACT.md.
+#
+# Only persist-to-git ever declares contents: write, and it is the only
+# job in this workflow with a git push step. Every other job explicitly
+# declares contents: read. If persistence fails, that job fails, and a
+# failed job fails the whole run - a successful pair of model calls
+# followed by failed Git persistence is never reported as a successful
+# run, matching Stage 3B's own precedent exactly.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Real, already-persisted Stage 3B run_id to adjudicate (blind-analysis-kernel/data/analyses.jsonl)'
+        required: false
+        default: '32142997999'
+      anomaly_id:
+        description: 'The CA anomaly_id that run_id analyzed (used to rebuild the same real evidence floor)'
+        required: false
+        default: 'ANOM-0001'
+
+permissions:
+  contents: read
+
+jobs:
+  select-disagreements:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Select the two persisted analyses, compute the diff, and build the one shared EvidencePacket
+        run: |
+          python3 adversarial-review-kernel/run_stage4_job.py select \
+            --run-id "${{ github.event.inputs.run_id }}" \
+            --claude-out claude-analysis.json --gpt-out gpt-analysis.json
+          python3 adversarial-review-kernel/run_stage4_job.py disagree \
+            --claude-artifact claude-analysis.json --gpt-artifact gpt-analysis.json \
+            --out disagreements.json
+          python3 adversarial-review-kernel/run_stage4_job.py build-packet \
+            --anomaly-id "${{ github.event.inputs.anomaly_id }}" \
+            --run-id "${{ github.event.inputs.run_id }}" \
+            --out packet.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: disagreement-inputs
+          path: |
+            claude-analysis.json
+            gpt-analysis.json
+            disagreements.json
+            packet.json
+          retention-days: 7
+
+  # Neither this job nor gpt-falsify has `needs:` on the other - each
+  # depends ONLY on select-disagreements, so neither job's log/output is
+  # reachable from the other while it runs (separate, isolated runner
+  # VMs). Claude critiques ONLY GPT's analysis - never Claude's own prior
+  # analysis (not even downloaded here) and never GPT's Falsifier output
+  # (does not exist yet).
+  claude-falsify:
+    permissions:
+      contents: read
+    needs: [select-disagreements]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: disagreement-inputs
+      - name: Claude falsifies GPT's analysis
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY is not set - this job must fail loudly, not substitute another model or report INSUFFICIENT_DATA."
+            exit 1
+          fi
+          python3 adversarial-review-kernel/run_stage4_job.py claude-falsify \
+            --gpt-artifact gpt-analysis.json --disagreements disagreements.json \
+            --packet packet.json \
+            --out claude-falsification.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: claude-falsification
+          path: claude-falsification.json
+          retention-days: 7
+
+  gpt-falsify:
+    permissions:
+      contents: read
+    needs: [select-disagreements]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: disagreement-inputs
+      - name: GPT falsifies Claude's analysis
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error::OPENAI_API_KEY is not set - this job must fail loudly, not substitute another model or report INSUFFICIENT_DATA."
+            exit 1
+          fi
+          python3 adversarial-review-kernel/run_stage4_job.py gpt-falsify \
+            --claude-artifact claude-analysis.json --disagreements disagreements.json \
+            --packet packet.json \
+            --out gpt-falsification.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gpt-falsification
+          path: gpt-falsification.json
+          retention-days: 7
+
+  # The only job allowed to see both Falsifier outputs together. No model
+  # or network call happens here - judgment.py::decide() is a pure
+  # function over already-computed data. Refuses (non-zero exit) to
+  # judge a structurally broken pair (mismatched input_packet_sha256,
+  # wrong target_artifact_id, mismatched source_case_ids).
+  deterministic-judge:
+    permissions:
+      contents: read
+    needs: [claude-falsify, gpt-falsify]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: disagreement-inputs
+      - uses: actions/download-artifact@v4
+        with:
+          name: claude-falsification
+      - uses: actions/download-artifact@v4
+        with:
+          name: gpt-falsification
+      - name: Deterministic judgment (no model call)
+        run: |
+          python3 adversarial-review-kernel/run_stage4_job.py judge \
+            --claude-artifact claude-analysis.json --gpt-artifact gpt-analysis.json \
+            --disagreements disagreements.json \
+            --claude-falsification claude-falsification.json \
+            --gpt-falsification gpt-falsification.json \
+            --out judgment.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adversarial-review-judgment
+          path: judgment.json
+          retention-days: 30
+
+  # Stage 4's persistence layer. The ONLY job with contents: write and
+  # the ONLY job that ever runs `git push` in this workflow. Runs only
+  # after deterministic-judge has decided. Re-validates both
+  # FalsificationArtifacts and the JudgmentArtifact against the package's
+  # own validator before writing anything (see run_stage4_job.py's
+  # `persist` subcommand, which calls FalsificationLedger/JudgmentLedger
+  # .append(), both of which validate before writing). No
+  # ANTHROPIC_API_KEY/OPENAI_API_KEY here - this job never calls a model,
+  # it only durably records already-produced artifacts.
+  #
+  # Concurrency: scoped to this job alone (not the whole workflow), so
+  # two different runs' model jobs can still proceed in parallel - only
+  # the git-writing step is serialized, queued (never cancelled) if
+  # another run's persistence is in flight. The push step itself also
+  # pulls --rebase and retries a bounded number of times, so a race that
+  # slips past the queue still resolves without a force push.
+  persist-to-git:
+    permissions:
+      contents: write
+    needs: [deterministic-judge]
+    runs-on: ubuntu-latest
+    concurrency:
+      group: stage4-adversarial-review-persist-to-git
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: claude-falsification
+      - uses: actions/download-artifact@v4
+        with:
+          name: gpt-falsification
+      - uses: actions/download-artifact@v4
+        with:
+          name: adversarial-review-judgment
+      - name: Durably append both falsifications + the judgment, then commit and push
+        run: |
+          set -e
+          python3 adversarial-review-kernel/run_stage4_job.py persist \
+            --claude-falsification claude-falsification.json \
+            --gpt-falsification gpt-falsification.json \
+            --judgment judgment.json \
+            --falsification-ledger-out adversarial-review-kernel/data/falsifications.jsonl \
+            --judgment-ledger-out adversarial-review-kernel/data/judgments.jsonl
+
+          git config user.name "adversarial-review-kernel-bot"
+          git config user.email "adversarial-review-kernel-bot@users.noreply.github.com"
+          git add adversarial-review-kernel/data/falsifications.jsonl adversarial-review-kernel/data/judgments.jsonl
+
+          if git diff --cached --quiet; then
+            echo "No new content to persist (idempotent rerun of an already-recorded review)."
+            exit 0
+          fi
+
+          git commit -m "Stage 4 adversarial review: persist judgment for run ${{ github.event.inputs.run_id }} (ANOM ${{ github.event.inputs.anomaly_id }})"
+
+          attempt=1
+          max_attempts=3
+          until git push origin "HEAD:${GITHUB_REF_NAME}"; do
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "::error::git push failed after $max_attempts attempts - Git persistence did not succeed, this run must fail."
+              exit 1
+            fi
+            echo "push attempt $attempt failed, pulling --rebase and retrying..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            attempt=$((attempt + 1))
+          done

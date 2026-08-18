@@ -1,0 +1,2 @@
+{"observation_id": "OBS-20260810-0001-abcdef", "source": "hacker_news", "url": "https://example.com/1", "process": "cloud cost monitoring", "pain": "unpredictable cloud spend spikes monthly usage costs cannot be forecast", "failure_mode": "billing surprise"}
+{"observation_id": "OBS-20260811-0002-fedcba", "source": "reddit:smallbusiness", "url": "https://example.com/2", "process": "vendor onboarding", "pain": "manual paperwork duplicated across systems", "failure_mode": "repeated data entry"}
