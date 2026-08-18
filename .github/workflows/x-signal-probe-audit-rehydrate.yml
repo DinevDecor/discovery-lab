@@ -1,0 +1,49 @@
+name: X Signal Probe Audit - Rehydrate (manual, single lookup)
+
+# One-off, manual-only rehydration of the frozen Run-1 Human Quality
+# Audit sample (x-signal-probe/audit/run1-sample-20260818T094415Z.json).
+# Makes exactly one X API ID-lookup request for the 20 frozen post IDs
+# and prints ONLY availability + canonical_url + provenance to the log -
+# rehydrate_availability_only.py never reads or prints post text, so no
+# X content ever enters this workflow's log, an artifact, or a commit.
+# See x-signal-probe/audit/README.md. Never search_recent, never a
+# fallback search, never a second lookup, never a commit.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: x-signal-probe-audit-rehydrate
+  cancel-in-progress: false
+
+jobs:
+  rehydrate:
+    name: Rehydrate frozen audit sample (availability only, read-only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout discovery-lab
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run X Signal Probe offline unit tests
+        working-directory: x-signal-probe
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Rehydrate frozen sample (availability + canonical_url only)
+        working-directory: x-signal-probe
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: python3 rehydrate_availability_only.py --sample audit/run1-sample-20260818T094415Z.json

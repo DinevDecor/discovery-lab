@@ -170,6 +170,30 @@ class TopLevelScriptSafetyTests(unittest.TestCase):
         for needle in _NETWORK_NEEDLES:
             self.assertNotIn(needle, text)
 
+    def test_rehydrate_availability_only_never_opens_a_file_in_writing_mode(self):
+        text = (self._ROOT / "rehydrate_availability_only.py").read_text(encoding="utf-8")
+        self.assertIsNone(
+            _WRITE_MODE_PATTERN.search(text),
+            "rehydrate_availability_only.py must never write to a file - output is stdout only",
+        )
+
+    def test_rehydrate_availability_only_never_reads_the_text_field(self):
+        code = _code_only((self._ROOT / "rehydrate_availability_only.py").read_text(encoding="utf-8"))
+        self.assertNotIn(
+            '["text"]', code,
+            "rehydrate_availability_only.py must never read found[pid]['text'] - "
+            "only availability (dict membership) may be derived from the lookup result",
+        )
+        self.assertNotIn("['text']", code)
+
+    def test_rehydrate_availability_only_does_not_import_search_recent(self):
+        code = _code_only((self._ROOT / "rehydrate_availability_only.py").read_text(encoding="utf-8"))
+        self.assertIsNone(_SEARCH_RECENT_PATTERN.search(code))
+
+    def test_rehydrate_availability_only_calls_get_bearer_token(self):
+        text = (self._ROOT / "rehydrate_availability_only.py").read_text(encoding="utf-8")
+        self.assertIn("get_bearer_token", text)
+
 
 if __name__ == "__main__":
     unittest.main()
