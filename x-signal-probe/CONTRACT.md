@@ -112,6 +112,24 @@ not just this document.
 This contract binds the tool, not whoever runs it — same precedent as
 `observation-agent/CONTRACT.md`.
 
+## Human Quality Audit (Run 1) — additional boundary
+
+`audit/README.md` documents a separate, one-off audit of Run 1's
+`candidate_incremental` observations. It inherits every rule above and adds:
+
+- selection (`select_audit_sample.py`) is a pure function over already-persisted
+  metadata — never the X API, never `config/queries.json`;
+- rehydration (`review_audit_sample.py` / `audit_client.py`) makes **exactly one**
+  X API request, against the ID-lookup endpoint only — never `search_recent`,
+  never a fallback search, never a second lookup call;
+- a selected post the API does not return is recorded once as `UNAVAILABLE` and is
+  **never replaced** by drawing another post;
+- rehydrated post text is never written to a file, git commit, CI log, or chat
+  transcript — `review_audit_sample.py` is local-reviewer-only by design, not by
+  incidental limitation;
+- the reviewer never sees the automated `classification`, a running tally, or
+  other reviewers' verdicts while reviewing.
+
 ## Revocation and change
 
 This tool may be modified, extended, or retired at any time by direct repository

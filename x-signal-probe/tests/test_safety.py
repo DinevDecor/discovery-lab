@@ -7,11 +7,14 @@ test makes that boundary a build failure, not just a docstring:
 
   - no destructive/git-action call anywhere;
   - no model/LLM call anywhere - classification is fully deterministic;
-  - a network call may only happen in client.py - nowhere else reaches out to
-    the X API or anything else;
-  - a file may only be opened in a writing mode from probe.py or report.py - the
-    only modules that persist ProbeObservations or render the report, both
-    confined to x-signal-probe/data and x-signal-probe/reports;
+  - a network call may only happen in client.py or audit_client.py (the audit
+    subsystem's own, separate, ID-lookup-only client - see test_audit_safety.py
+    for its stricter no-search boundary) - nowhere else reaches out to the X API
+    or anything else;
+  - a file may only be opened in a writing mode from probe.py, report.py, or
+    audit_io.py - the only modules that persist ProbeObservations, render the
+    daily report, or persist audit sample/verdict/report files, all confined to
+    x-signal-probe/data, x-signal-probe/reports, or x-signal-probe/audit;
   - no module imports ca_agents or business_candidate_analyst, so there is no
     code path back into Constraint Archaeology or Business Candidate Analyst;
   - models.ProbeObservation - the only shape ever written to disk - never grows
@@ -26,8 +29,8 @@ from pathlib import Path
 
 _SRC_ROOT = Path(__file__).resolve().parents[1] / "src"
 
-_ALLOWED_WRITE_MODULES = {"probe.py", "report.py"}
-_ALLOWED_NETWORK_MODULES = {"client.py"}
+_ALLOWED_WRITE_MODULES = {"probe.py", "report.py", "audit_io.py"}
+_ALLOWED_NETWORK_MODULES = {"client.py", "audit_client.py"}
 
 _FORBIDDEN_ANYWHERE = [
     r"^\s*import subprocess\b",
