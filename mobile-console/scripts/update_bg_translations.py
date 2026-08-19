@@ -3,12 +3,12 @@
 
 This script is intentionally outside src/mobile_console: the console itself
 remains a deterministic, read-only viewer with no model/network client.
-The script is run by a separate GitHub Actions translation job when canonical
-records change. It writes only site/translations-bg.json.
+The script is run by GitHub Actions when canonical records change. It writes
+only site/translations-bg.json.
 
 Only strings that the current mobile UI can actually render are collected.
-That keeps the refresh bounded and avoids paying to translate hidden ledger
-fields that the user never sees.
+Translation requests run in a small bounded pool so a full refresh completes
+inside the Actions budget without changing canonical data or browser safety.
 """
 
 from __future__ import annotations
@@ -22,9 +22,10 @@ import sys
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Set
+from typing import Any, Dict, Iterable, List, Set, Tuple
 
 CONSOLE_ROOT = Path(__file__).resolve().parents[1]
 SRC = CONSOLE_ROOT / "src"
@@ -66,11 +67,7 @@ def _add(bucket: Set[str], value: Any) -> None:
 
 
 def _collect_case_static_strings(bucket: Set[str]) -> None:
-    """Collect human-facing text nodes from the CASE DETAIL section only.
-
-    This covers the one hand-authored full docket without translating the
-    whole console chrome. Dynamic candidate text comes from canonical data.
-    """
+    """Collect human-facing text nodes from the special CASE DETAIL docket."""
     if not APP_JS_PATH.exists():
         return
     text = APP_JS_PATH.read_text(encoding="utf-8")
@@ -87,13 +84,7 @@ def _collect_case_static_strings(bucket: Set[str]) -> None:
 
 
 def collect_source_strings() -> List[str]:
-    """Collect only narrative strings that the current console renders.
-
-    Generic candidate details show an anomaly title, the first observation's
-    process/quote/pain, and potential_product_function. Pipeline Stage 3 shows
-    hidden_function. Ground Truth cards show domain/proposition. The special
-    BC-0001 docket is hand-authored in app.js and is collected separately.
-    """
+    """Collect only narrative strings that the current console renders."""
     raw = load_all()
     bucket: Set[str] = set()
 
@@ -130,15 +121,15 @@ def collect_source_strings() -> List[str]:
 
 def _response_json(payload: Dict[str, Any], api_key: str, retries: int = 4) -> Dict[str, Any]:
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(
-        "https://api.openai.com/v1/chat/completions",
-        data=body,
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        method="POST",
-    )
     for attempt in range(retries):
+        req = urllib.request.Request(
+            "https://api.openai.com/v1/chat/completions",
+            data=body,
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            method="POST",
+        )
         try:
-            with urllib.request.urlopen(req, timeout=120) as res:
+            with urllib.request.urlopen(req, timeout=75) as res:
                 return json.loads(res.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
             if exc.code not in (429, 500, 502, 503, 504) or attempt == retries - 1:
@@ -186,6 +177,7 @@ def translate_batch(texts: List[str], api_key: str, model: str) -> Dict[str, str
         missing = sorted(expected - set(translated))
         extra = sorted(set(translated) - expected)
         raise RuntimeError(f"translation id mismatch; missing={missing[:5]} extra={extra[:5]}")
+
     out: Dict[str, str] = {}
     for item in items:
         value = translated[item["id"]]
@@ -200,7 +192,12 @@ def chunks(items: List[str], size: int) -> Iterable[List[str]]:
         yield items[i:i + size]
 
 
-def update_cache(api_key: str, model: str, batch_size: int) -> Dict[str, int]:
+def _translate_indexed_batch(args: Tuple[int, List[str], str, str]) -> Tuple[int, List[str], Dict[str, str]]:
+    index, batch, api_key, model = args
+    return index, batch, translate_batch(batch, api_key, model)
+
+
+def update_cache(api_key: str, model: str, batch_size: int, concurrency: int) -> Dict[str, int]:
     source_strings = collect_source_strings()
     cache = load_cache(CACHE_PATH)
     entries = dict(cache.get("entries", {}))
@@ -208,16 +205,40 @@ def update_cache(api_key: str, model: str, batch_size: int) -> Dict[str, int]:
     current_hashes = {source_hash(text): text for text in source_strings}
     entries = {key: value for key, value in entries.items() if key in current_hashes}
     missing = [text for key, text in current_hashes.items() if key not in entries]
+    batches = list(chunks(missing, batch_size))
 
-    for batch in chunks(missing, batch_size):
-        translated = translate_batch(batch, api_key, model)
-        for text in batch:
-            digest = source_hash(text)
-            entries[digest] = {
-                "source": text,
-                "bg": translated[digest],
-                "source_sha256": digest,
-            }
+    print(
+        json.dumps(
+            {
+                "sources": len(source_strings),
+                "already_cached": len(entries),
+                "missing": len(missing),
+                "batches": len(batches),
+                "batch_size": batch_size,
+                "concurrency": concurrency,
+            },
+            sort_keys=True,
+        ),
+        flush=True,
+    )
+
+    if batches:
+        workers = max(1, min(concurrency, len(batches)))
+        work = [(i, batch, api_key, model) for i, batch in enumerate(batches, 1)]
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            futures = {pool.submit(_translate_indexed_batch, item): item[0] for item in work}
+            completed = 0
+            for future in as_completed(futures):
+                index, batch, translated = future.result()
+                for text in batch:
+                    digest = source_hash(text)
+                    entries[digest] = {
+                        "source": text,
+                        "bg": translated[digest],
+                        "source_sha256": digest,
+                    }
+                completed += 1
+                print(f"translated batch {index}/{len(batches)}; completed={completed}", flush=True)
 
     payload = {
         "version": 1,
@@ -236,7 +257,8 @@ def update_cache(api_key: str, model: str, batch_size: int) -> Dict[str, int]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", default=DEFAULT_MODEL)
-    parser.add_argument("--batch-size", type=int, default=40)
+    parser.add_argument("--batch-size", type=int, default=60)
+    parser.add_argument("--concurrency", type=int, default=6)
     parser.add_argument("--collect-only", action="store_true", help="print source count without calling a model or writing")
     args = parser.parse_args()
 
@@ -248,8 +270,13 @@ def main() -> None:
     api_key = os.environ.get("OPENAI_API_KEY", "").strip()
     if not api_key:
         raise SystemExit("OPENAI_API_KEY is required for translation-cache updates")
-    result = update_cache(api_key, args.model, max(1, args.batch_size))
-    print(json.dumps(result, indent=2, sort_keys=True))
+    result = update_cache(
+        api_key,
+        args.model,
+        max(1, args.batch_size),
+        max(1, args.concurrency),
+    )
+    print(json.dumps(result, indent=2, sort_keys=True), flush=True)
 
 
 if __name__ == "__main__":
