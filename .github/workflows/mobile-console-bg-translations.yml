@@ -1,0 +1,128 @@
+name: Mobile Machine Console — Bulgarian Display Refresh
+
+# Separate derived-display pipeline:
+#   canonical ledgers -> Bulgarian translation cache -> static Pages build.
+# The model call exists ONLY in the translate job. The Pages build/deploy
+# jobs receive no model/API secret and remain deterministic/read-only.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "constraint-archaeology-agents/data/**"
+      - "business-candidate-analyst/data/**"
+      - "blind-analysis-kernel/data/**"
+      - "adversarial-review-kernel/data/**"
+      - "prospective-ground-truth/data/**"
+      - "mobile-console/site/app.js"
+      - "mobile-console/site/bg-ui.js"
+      - "mobile-console/scripts/update_bg_translations.py"
+      - "mobile-console/src/mobile_console/translations.py"
+      - ".github/workflows/mobile-console-bg-translations.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    name: Refresh derived Bulgarian cache
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      TRANSLATION_MODEL: gpt-4.1-mini
+    steps:
+      - name: Checkout discovery-lab
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Require translation secret
+        run: test -n "$OPENAI_API_KEY" || (echo "OPENAI_API_KEY secret is missing" && exit 1)
+
+      - name: Refresh Bulgarian display cache
+        run: python3 mobile-console/scripts/update_bg_translations.py
+
+      - name: Validate translation cache and console safety
+        working-directory: mobile-console
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Persist derived cache to Git
+        shell: bash
+        run: |
+          git config user.name "mobile-console-translation-bot"
+          git config user.email "mobile-console-translation-bot@users.noreply.github.com"
+          git add mobile-console/site/translations-bg.json
+          if git diff --cached --quiet; then
+            echo "Translation cache already current."
+            exit 0
+          fi
+          git commit -m "chore: refresh Bulgarian mobile translations [skip ci]"
+          git push origin HEAD:main
+
+  build:
+    name: Build Bulgarian static console
+    needs: translate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout latest main including derived cache
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run mobile-console tests
+        working-directory: mobile-console
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Rebuild real snapshot from canonical ledgers
+        working-directory: mobile-console
+        run: python3 run_mobile_console.py build
+
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Bulgarian-enabled site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: mobile-console/site
+
+  deploy:
+    name: Deploy Bulgarian console to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
