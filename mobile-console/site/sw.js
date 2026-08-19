@@ -1,5 +1,5 @@
-const SHELL_CACHE = "machine-console-shell-v2";
-const DATA_CACHE = "machine-console-data-v2";
+const SHELL_CACHE = "machine-console-shell-v3";
+const DATA_CACHE = "machine-console-data-v3";
 
 const SHELL_ASSETS = [
   "./",

@@ -72,6 +72,12 @@ class BulgarianDisplaySafetyTests(unittest.TestCase):
         for method in ('method: "POST"', "method: 'POST'", 'method: "PUT"', 'method: "PATCH"', 'method: "DELETE"'):
             self.assertNotIn(method, js)
 
+    def test_translation_observer_cannot_self_trigger_forever(self):
+        js = (SITE / "bg-ui.js").read_text(encoding="utf-8")
+        self.assertIn('parent.id === "language-toggle"', js)
+        self.assertIn('if (button.textContent !== nextText) button.textContent = nextText;', js)
+        self.assertIn('requestAnimationFrame(() => {', js)
+
 
 if __name__ == "__main__":
     unittest.main()
