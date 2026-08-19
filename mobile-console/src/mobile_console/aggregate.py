@@ -87,8 +87,18 @@ def load_all() -> Dict[str, Any]:
     }
 
 
+def _is_past_watch(candidate: Dict[str, Any]) -> bool:
+    """The one definition of 'past WATCH' this console uses anywhere -
+    shared by compute_machine_status's candidates_past_watch count, the
+    Pipeline row's own count, and the Candidates-past-WATCH drill-down
+    list, so the three can never silently disagree. Any state other than
+    WATCH or an absent state counts as past WATCH - unchanged from the
+    rule already in place before the drill-down was added."""
+    return candidate.get("state") not in ("WATCH", None)
+
+
 def compute_machine_status(raw: Dict[str, Any]) -> Dict[str, Any]:
-    validating_or_further = [c for c in raw["candidates"] if c.get("state") not in ("WATCH", None)]
+    validating_or_further = [c for c in raw["candidates"] if _is_past_watch(c)]
     pgt_awaiting = [c for c in raw["pgt_cases"]
                      if not any(r["prospective_case_id"] == c["prospective_case_id"] for r in raw["pgt_resolutions"])]
     all_timestamps = _collect_all_timestamps(raw)
@@ -104,6 +114,18 @@ def compute_machine_status(raw: Dict[str, Any]) -> Dict[str, Any]:
         "prospective_cases_awaiting_outcome": len(pgt_awaiting),
         "total_resolutions": len(raw["pgt_resolutions"]),
         "last_activity_at": max(all_timestamps) if all_timestamps else None,
+    }
+
+
+def _observation_summary(o: Dict[str, Any]) -> Dict[str, Any]:
+    """The real, exposed fields for one observation record - shared by a
+    candidate's Case facts and the Pipeline's Observations drill-down so
+    the two never drift into two different ideas of what an observation
+    looks like."""
+    return {
+        "observation_id": o["observation_id"], "source": o.get("source"), "url": o.get("url"),
+        "published_at": o.get("published_at"), "process": o.get("process"), "pain": o.get("pain"),
+        "failure_mode": o.get("failure_mode"), "evidence_quote": o.get("evidence_quote"),
     }
 
 
@@ -177,11 +199,7 @@ def _real_case_facts(raw: Dict[str, Any], candidate: Dict[str, Any]) -> Dict[str
     dims = candidate.get("dimensions", {})
     return {
         "anomaly": ev["anomaly"],
-        "observations": [{
-            "observation_id": o["observation_id"], "source": o.get("source"), "url": o.get("url"),
-            "published_at": o.get("published_at"), "process": o.get("process"), "pain": o.get("pain"),
-            "failure_mode": o.get("failure_mode"), "evidence_quote": o.get("evidence_quote"),
-        } for o in ev["observations"]],
+        "observations": [_observation_summary(o) for o in ev["observations"]],
         "dimensions": {k: dims[k] for k in _CASE_FACT_DIMENSIONS if k in dims},
     }
 
@@ -211,16 +229,116 @@ def compute_pipeline(raw: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Every stage count is a direct len() over a real ledger - the
     order mirrors the pipeline's own README.md diagram
     (observations -> anomalies -> candidates -> blind analysis ->
-    falsification -> judgment), nothing invented in between."""
+    falsification -> judgment), nothing invented in between.
+
+    Each stage's own `id` matches a key in `compute_pipeline_records()`
+    (or, for "candidates", the existing `opportunities` section) - the
+    drill-down list a tapped row opens is always sized from the exact
+    same underlying records this count was taken from, never a second,
+    independently-filtered copy."""
     return [
-        {"stage": "Observations captured", "count": len(raw["observations"])},
-        {"stage": "Anomalies clustered", "count": len(raw["anomalies"])},
-        {"stage": "Business candidates opened", "count": len(raw["candidates"])},
-        {"stage": "Candidates past WATCH", "count": len([c for c in raw["candidates"] if c.get("state") != "WATCH"])},
-        {"stage": "Blind dual-model analyses (Stage 3)", "count": len(raw["blind_analyses"])},
-        {"stage": "Adversarial falsifications (Stage 4)", "count": len(raw["falsifications"])},
-        {"stage": "Deterministic judgments (Stage 4)", "count": len(raw["judgments"])},
+        {"id": "observations", "stage": "Observations captured", "count": len(raw["observations"])},
+        {"id": "anomalies", "stage": "Anomalies clustered", "count": len(raw["anomalies"])},
+        {"id": "candidates", "stage": "Business candidates opened", "count": len(raw["candidates"])},
+        {"id": "candidates_past_watch", "stage": "Candidates past WATCH",
+         "count": len([c for c in raw["candidates"] if _is_past_watch(c)])},
+        {"id": "blind_analyses", "stage": "Blind dual-model analyses (Stage 3)", "count": len(raw["blind_analyses"])},
+        {"id": "falsifications", "stage": "Adversarial falsifications (Stage 4)", "count": len(raw["falsifications"])},
+        {"id": "judgments", "stage": "Deterministic judgments (Stage 4)", "count": len(raw["judgments"])},
     ]
+
+
+def list_observations(raw: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """One entry per real observation record - the Pipeline's
+    'Observations captured' drill-down. Unfiltered, so its length always
+    equals that row's own count by construction."""
+    return [_observation_summary(o) for o in raw["observations"]]
+
+
+def list_anomalies(raw: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """One entry per real anomaly record - the Pipeline's 'Anomalies
+    clustered' drill-down. Unfiltered."""
+    return [{
+        "anomaly_id": a["anomaly_id"],
+        "canonical_pattern": a.get("canonical_pattern"),
+        "status": a.get("status"),
+        "first_seen": a.get("first_seen"),
+        "last_seen": a.get("last_seen"),
+        "observation_ids": a.get("observation_ids", []),
+    } for a in raw["anomalies"]]
+
+
+def list_candidates_past_watch_ids(raw: Dict[str, Any]) -> List[str]:
+    """Just the ids of candidates past WATCH, via the one shared
+    `_is_past_watch` predicate - the client resolves each id against the
+    `opportunities` section it already has, so this list is never a
+    second, heavier copy of candidate data."""
+    return [c["candidate_id"] for c in raw["candidates"] if _is_past_watch(c)]
+
+
+def list_blind_analyses(raw: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """One entry per real Stage 3 independent-analysis artifact - the
+    Pipeline's 'Blind dual-model analyses' drill-down. Unfiltered."""
+    out = []
+    for a in raw["blind_analyses"]:
+        analysis = a.get("analysis", {})
+        out.append({
+            "artifact_id": a["artifact_id"],
+            "run_id": a.get("run_id"),
+            "provider": a.get("provider"),
+            "model": a.get("model"),
+            "created_at": a.get("created_at"),
+            "hidden_function": analysis.get("hidden_function"),
+            "failure_class": analysis.get("failure_class"),
+            "confidence": analysis.get("confidence"),
+        })
+    return out
+
+
+def list_falsifications(raw: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """One entry per real Stage 4 falsification artifact - the
+    Pipeline's 'Adversarial falsifications' drill-down. `findings_count`
+    is a direct len() over that artifact's own `findings` list, the same
+    license every other count in this module already uses - never a
+    rate or a synthesized verdict. Unfiltered."""
+    return [{
+        "artifact_id": f["artifact_id"],
+        "run_id": f.get("run_id"),
+        "critic_provider": f.get("critic_provider"),
+        "critic_model": f.get("critic_model"),
+        "target_artifact_id": f.get("target_artifact_id"),
+        "created_at": f.get("created_at"),
+        "findings_count": len(f.get("findings", [])),
+    } for f in raw["falsifications"]]
+
+
+def list_judgments(raw: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """One entry per real Stage 4 deterministic judgment - the
+    Pipeline's 'Deterministic judgments' drill-down. Unfiltered."""
+    return [{
+        "judgment_id": j["judgment_id"],
+        "case_id": j.get("case_id"),
+        "source_run_id": j.get("source_run_id"),
+        "status": j.get("status"),
+        "material_disagreements": j.get("material_disagreements", []),
+        "created_at": j.get("created_at"),
+    } for j in raw["judgments"]]
+
+
+def compute_pipeline_records(raw: Dict[str, Any]) -> Dict[str, Any]:
+    """The real records behind 5 of the 7 Pipeline rows. The other two
+    ('candidates' and 'candidates_past_watch's full rows) are resolved by
+    the client against the already-present `opportunities` section - see
+    `list_candidates_past_watch_ids` - so this dict never duplicates the
+    174-candidate list a second time."""
+    return {
+        "observations": list_observations(raw),
+        "anomalies": list_anomalies(raw),
+        "candidates_past_watch": list_candidates_past_watch_ids(raw),
+        "blind_analyses": list_blind_analyses(raw),
+        "falsifications": list_falsifications(raw),
+        "judgments": list_judgments(raw),
+    }
 
 
 def compute_ground_truth(raw: Dict[str, Any]) -> Dict[str, Any]:
@@ -315,6 +433,7 @@ def build_snapshot() -> Dict[str, Any]:
         "machine_status": compute_machine_status(raw),
         "opportunities": compute_opportunities(raw),
         "pipeline": compute_pipeline(raw),
+        "pipeline_records": compute_pipeline_records(raw),
         "ground_truth": compute_ground_truth(raw),
         "activity": compute_activity(raw),
     }
