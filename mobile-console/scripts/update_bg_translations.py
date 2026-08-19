@@ -5,6 +5,10 @@ This script is intentionally outside src/mobile_console: the console itself
 remains a deterministic, read-only viewer with no model/network client.
 The script is run by a separate GitHub Actions translation job when canonical
 records change. It writes only site/translations-bg.json.
+
+Only strings that the current mobile UI can actually render are collected.
+That keeps the refresh bounded and avoids paying to translate hidden ledger
+fields that the user never sees.
 """
 
 from __future__ import annotations
@@ -23,7 +27,6 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Set
 
 CONSOLE_ROOT = Path(__file__).resolve().parents[1]
-REPO_ROOT = CONSOLE_ROOT.parent
 SRC = CONSOLE_ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
@@ -84,51 +87,42 @@ def _collect_case_static_strings(bucket: Set[str]) -> None:
 
 
 def collect_source_strings() -> List[str]:
+    """Collect only narrative strings that the current console renders.
+
+    Generic candidate details show an anomaly title, the first observation's
+    process/quote/pain, and potential_product_function. Pipeline Stage 3 shows
+    hidden_function. Ground Truth cards show domain/proposition. The special
+    BC-0001 docket is hand-authored in app.js and is collected separately.
+    """
     raw = load_all()
     bucket: Set[str] = set()
 
     obs_by_id = {o.get("observation_id"): o for o in raw["observations"]}
     anomaly_by_id = {a.get("anomaly_id"): a for a in raw["anomalies"]}
 
-    # Business cases: only narrative fields actually surfaced by Case Detail.
-    for c in raw["candidates"]:
-        for anomaly_id in c.get("anomaly_ids", []):
-            anomaly = anomaly_by_id.get(anomaly_id, {})
-            _add(bucket, anomaly.get("canonical_pattern"))
-        for observation_id in c.get("observation_ids", []):
-            obs = obs_by_id.get(observation_id, {})
-            for field in ("process", "pain", "failure_mode", "evidence_quote"):
-                _add(bucket, obs.get(field))
-        for dim in c.get("dimensions", {}).values():
-            if isinstance(dim, dict):
-                _add(bucket, dim.get("value"))
-                _add(bucket, dim.get("note"))
+    for candidate in raw["candidates"]:
+        for anomaly_id in candidate.get("anomaly_ids", []):
+            _add(bucket, anomaly_by_id.get(anomaly_id, {}).get("canonical_pattern"))
 
-    # Stage 3: full analysis text, even when the compact drill-down shows less.
+        observation_ids = candidate.get("observation_ids", [])
+        if observation_ids:
+            obs = obs_by_id.get(observation_ids[0], {})
+            for field in ("process", "pain", "evidence_quote"):
+                _add(bucket, obs.get(field))
+
+        product = candidate.get("dimensions", {}).get("potential_product_function", {})
+        if isinstance(product, dict):
+            _add(bucket, product.get("value"))
+            _add(bucket, product.get("note"))
+
     for artifact in raw["blind_analyses"]:
         analysis = artifact.get("analysis", {})
         if isinstance(analysis, dict):
-            for value in analysis.values():
-                _add(bucket, value)
+            _add(bucket, analysis.get("hidden_function"))
 
-    # Stage 4: source-grounded falsifier reasons and deterministic reasons.
-    for artifact in raw["falsifications"]:
-        for finding in artifact.get("findings", []):
-            _add(bucket, finding.get("reason"))
-    for judgment in raw["judgments"]:
-        _add(bucket, judgment.get("reasons"))
-
-    # Prospective ground truth: the decision-facing narrative and T0 summaries.
     for case in raw["pgt_cases"]:
-        for field in ("domain", "proposition", "decision_relevance"):
-            _add(bucket, case.get(field))
-        expected = case.get("expected_resolution", {})
-        for field in ("resolution_question", "positive_condition", "negative_condition", "ambiguous_condition"):
-            _add(bucket, expected.get(field))
-        _add(bucket, expected.get("resolution_sources_expected"))
-        for evidence in case.get("t0", {}).get("evidence", []):
-            _add(bucket, evidence.get("citation"))
-            _add(bucket, evidence.get("quote_or_summary"))
+        _add(bucket, case.get("domain"))
+        _add(bucket, case.get("proposition"))
 
     _collect_case_static_strings(bucket)
     return sorted(bucket, key=lambda s: (len(s), s))
@@ -212,7 +206,6 @@ def update_cache(api_key: str, model: str, batch_size: int) -> Dict[str, int]:
     entries = dict(cache.get("entries", {}))
 
     current_hashes = {source_hash(text): text for text in source_strings}
-    # Drop translations that no longer correspond to any current display source.
     entries = {key: value for key, value in entries.items() if key in current_hashes}
     missing = [text for key, text in current_hashes.items() if key not in entries]
 
@@ -243,7 +236,7 @@ def update_cache(api_key: str, model: str, batch_size: int) -> Dict[str, int]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", default=DEFAULT_MODEL)
-    parser.add_argument("--batch-size", type=int, default=25)
+    parser.add_argument("--batch-size", type=int, default=40)
     parser.add_argument("--collect-only", action="store_true", help="print source count without calling a model or writing")
     args = parser.parse_args()
 
