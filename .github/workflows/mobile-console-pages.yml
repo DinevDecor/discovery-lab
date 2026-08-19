@@ -15,6 +15,7 @@ on:
       - "blind-analysis-kernel/data/**"
       - "adversarial-review-kernel/data/**"
       - "prospective-ground-truth/data/**"
+      - "tool-radar/data/**"
       - "mobile-console/**"
       - ".github/workflows/mobile-console-pages.yml"
   workflow_dispatch: {}
@@ -100,6 +101,9 @@ jobs:
       - name: Rebuild the real snapshot from canonical ledgers
         working-directory: mobile-console
         run: python3 run_mobile_console.py build
+
+      - name: Build Project Tool Radar from append-only stream
+        run: python3 mobile-console/scripts/build_tool_radar.py
 
       - name: Set up Pages
         uses: actions/configure-pages@v5
