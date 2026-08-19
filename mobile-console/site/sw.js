@@ -1,10 +1,11 @@
-const SHELL_CACHE = "machine-console-shell-v1";
-const DATA_CACHE = "machine-console-data-v1";
+const SHELL_CACHE = "machine-console-shell-v2";
+const DATA_CACHE = "machine-console-data-v2";
 
 const SHELL_ASSETS = [
   "./",
   "index.html",
   "app.js",
+  "bg-ui.js",
   "styles.css",
   "manifest.json",
   "icons/icon.svg",
@@ -35,7 +36,7 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(req.url);
 
-  if (url.pathname.endsWith("data.json")) {
+  if (url.pathname.endsWith("data.json") || url.pathname.endsWith("translations-bg.json")) {
     event.respondWith(
       fetch(req)
         .then((res) => {
