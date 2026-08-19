@@ -12,7 +12,7 @@
     if (!radar) {
       return `
         <div class="section-label">Project Tool Radar</div>
-        <div class="card"><div class="loading" style="min-height:0;padding:18px 0">loading tool radar…</div></div>
+        <div class="card"><div class="loading" style="min-height:0;padding:18px 0">TOOL RADAR…</div></div>
       `;
     }
     const top = (radar.signals || []).slice(0, 3);
@@ -22,10 +22,9 @@
         ${top.map((r) => `
           <a class="row" href="tools.html">
             <div class="row-head"><span class="row-id">${escLocal(r.product)}</span><span class="pill">${escLocal(r.use_type)}</span></div>
-            <div class="row-title">${escLocal(r.project_fit_bg || r.project_fit_en || "—")}</div>
           </a>
         `).join("")}
-        <a class="row" href="tools.html"><div class="row-title">Отвори всички tool сигнали →</div></a>
+        <a class="row" href="tools.html"><div class="row-title">ALL TOOL SIGNALS →</div></a>
       </div>
     `;
   }
