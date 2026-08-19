@@ -136,9 +136,9 @@ def _response_json(payload: Dict[str, Any], api_key: str, retries: int = 4) -> D
                 detail = exc.read().decode("utf-8", errors="replace")
                 raise RuntimeError(f"OpenAI translation request failed HTTP {exc.code}: {detail[:1000]}") from exc
             time.sleep(2 ** attempt)
-        except urllib.error.URLError as exc:
+        except (urllib.error.URLError, TimeoutError) as exc:
             if attempt == retries - 1:
-                raise RuntimeError(f"OpenAI translation request failed: {exc}") from exc
+                raise RuntimeError(f"OpenAI translation request failed after retries: {exc}") from exc
             time.sleep(2 ** attempt)
     raise RuntimeError("translation request exhausted retries")
 
