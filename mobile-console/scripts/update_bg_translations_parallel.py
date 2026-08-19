@@ -3,7 +3,9 @@
 
 Uses the existing translation contract and source collection, but executes
 independent translation batches concurrently so the refresh finishes well
-inside the GitHub Actions timeout. Writes only site/translations-bg.json.
+inside the GitHub Actions timeout. If the model omits one or more ids from a
+batch response, that batch is split and retried instead of failing the whole
+refresh. Writes only site/translations-bg.json.
 """
 
 from __future__ import annotations
@@ -25,6 +27,32 @@ def _chunks(items: List[str], size: int) -> List[List[str]]:
     return [items[i:i + size] for i in range(0, len(items), size)]
 
 
+def _translate_resilient(texts: List[str], api_key: str, model: str) -> Dict[str, str]:
+    """Translate a batch, recursively splitting only on id-omission responses."""
+    try:
+        return base.translate_batch(texts, api_key, model)
+    except RuntimeError as exc:
+        if "translation id mismatch" not in str(exc):
+            raise
+        if len(texts) <= 1:
+            # A one-item batch should be structurally easy for the model.
+            # Give it two clean retries before surfacing a real failure.
+            last = exc
+            for _ in range(2):
+                try:
+                    return base.translate_batch(texts, api_key, model)
+                except RuntimeError as retry_exc:
+                    last = retry_exc
+                    if "translation id mismatch" not in str(retry_exc):
+                        raise
+            raise last
+
+        mid = len(texts) // 2
+        left = _translate_resilient(texts[:mid], api_key, model)
+        right = _translate_resilient(texts[mid:], api_key, model)
+        return {**left, **right}
+
+
 def refresh(api_key: str, model: str, batch_size: int, workers: int) -> Dict[str, int]:
     source_strings = base.collect_source_strings()
     cache = base.load_cache(CACHE_PATH)
@@ -38,7 +66,7 @@ def refresh(api_key: str, model: str, batch_size: int, workers: int) -> Dict[str
     if batches:
         with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
             future_to_batch = {
-                pool.submit(base.translate_batch, batch, api_key, model): batch
+                pool.submit(_translate_resilient, batch, api_key, model): batch
                 for batch in batches
             }
             for future in as_completed(future_to_batch):
@@ -76,7 +104,7 @@ def refresh(api_key: str, model: str, batch_size: int, workers: int) -> Dict[str
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", default=os.environ.get("TRANSLATION_MODEL", "gpt-4.1-mini"))
-    parser.add_argument("--batch-size", type=int, default=20)
+    parser.add_argument("--batch-size", type=int, default=12)
     parser.add_argument("--workers", type=int, default=8)
     args = parser.parse_args()
 
