@@ -12,6 +12,7 @@
   const ORIGINAL = new WeakMap();
   let translations = new Map();
   let applying = false;
+  let renderScheduled = false;
   let language = localStorage.getItem("machine-console-language") === "en" ? "en" : "bg";
 
   const STATUS_BG = new Map([
@@ -65,6 +66,7 @@
         acceptNode(node) {
           const parent = node.parentElement;
           if (!parent) return NodeFilter.FILTER_REJECT;
+          if (parent.id === "language-toggle") return NodeFilter.FILTER_REJECT;
           if (["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
           return node.nodeValue && node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
         },
@@ -82,7 +84,8 @@
   function updateToggle() {
     const button = document.getElementById("language-toggle");
     if (!button) return;
-    button.textContent = language === "bg" ? "BG · EN" : "EN · BG";
+    const nextText = language === "bg" ? "BG · EN" : "EN · BG";
+    if (button.textContent !== nextText) button.textContent = nextText;
     button.setAttribute("aria-label", language === "bg" ? "Покажи оригинала на английски" : "Покажи българския превод");
     button.title = language === "bg" ? "Покажи оригинала" : "Покажи български";
   }
@@ -134,8 +137,28 @@
     }
   }
 
+  function scheduleApply() {
+    if (renderScheduled) return;
+    renderScheduled = true;
+    requestAnimationFrame(() => {
+      renderScheduled = false;
+      applyTranslations(document.body);
+    });
+  }
+
   function observeRenders() {
-    const observer = new MutationObserver(() => applyTranslations(document.body));
+    // app.js replaces sections of the read-only UI after data loads and route
+    // changes. Batch those mutations into one animation-frame translation pass.
+    // This deliberately avoids a MutationObserver microtask feedback loop.
+    const observer = new MutationObserver((mutations) => {
+      const meaningful = mutations.some((mutation) => {
+        const target = mutation.target.nodeType === Node.TEXT_NODE
+          ? mutation.target.parentElement
+          : mutation.target;
+        return !(target && target.id === "language-toggle");
+      });
+      if (meaningful) scheduleApply();
+    });
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
