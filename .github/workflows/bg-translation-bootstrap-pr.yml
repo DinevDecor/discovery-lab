@@ -1,0 +1,48 @@
+name: Bulgarian Translation Bootstrap — Observable
+
+# Temporary one-time bootstrap path used only to make the first translation
+# run observable through a pull-request workflow. It never writes to main.
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/bg-translation-bootstrap-pr.yml"
+      - "mobile-console/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+env:
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  TRANSLATION_MODEL: gpt-4.1-mini
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Require translation secret
+        run: test -n "$OPENAI_API_KEY" || (echo "OPENAI_API_KEY secret is missing" && exit 1)
+
+      - name: Generate Bulgarian display cache
+        run: python3 mobile-console/scripts/update_bg_translations.py
+
+      - name: Run mobile-console tests
+        working-directory: mobile-console
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Upload generated cache
+        uses: actions/upload-artifact@v4
+        with:
+          name: bg-translations-bootstrap
+          path: mobile-console/site/translations-bg.json
+          if-no-files-found: error
