@@ -1,31 +1,20 @@
 name: Mobile Machine Console — Pages Deploy
 
-# Publishes mobile-console/site/ (a static, read-only, serverless viewer —
-# see mobile-console/CONTRACT.md) to GitHub Pages. This workflow is glue
-# only: it checks out the repository, rebuilds the snapshot from the real
-# ledgers already in this repo, and uploads the static site as a Pages
-# artifact. It never writes to any other package's data, calls a model, or
-# mutates anything — the site it deploys is structurally incapable of
-# writing anywhere (mobile-console/tests/test_safety.py
-# ::NoMutationSurfaceInSiteTests).
-#
-# One-time repo setting required before this can succeed: Settings ->
-# Pages -> Build and deployment -> Source: "GitHub Actions". This repo
-# has never had Pages enabled, and the default GITHUB_TOKEN this workflow
-# runs with cannot create a Pages site itself even with
-# `enablement: true` on actions/configure-pages@v5 - creating a Pages
-# site for the first time needs real repo-admin permission, which the
-# workflow token structurally does not have ("Resource not accessible by
-# integration" on the create-pages-site API call, confirmed by an actual
-# run of this workflow - see run 32175718020). A human with admin access
-# to this repo must flip that Settings toggle once; after that, this
-# workflow's own GET-then-deploy path works on every push with no
-# further manual step.
+# Publishes the static, read-only Mobile Machine Console to GitHub Pages.
+# Bulgarian display text is DERIVED UI data only: canonical ledgers stay
+# authoritative and unchanged. The translate job may call a model and writes
+# only mobile-console/site/translations-bg.json. The build/deploy jobs receive
+# no model/API secret and remain deterministic/read-only.
 
 on:
   push:
     branches: [main]
     paths:
+      - "constraint-archaeology-agents/data/**"
+      - "business-candidate-analyst/data/**"
+      - "blind-analysis-kernel/data/**"
+      - "adversarial-review-kernel/data/**"
+      - "prospective-ground-truth/data/**"
       - "mobile-console/**"
       - ".github/workflows/mobile-console-pages.yml"
   workflow_dispatch: {}
@@ -37,19 +26,65 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
+  translate:
+    name: Refresh Bulgarian display cache
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      TRANSLATION_MODEL: gpt-4.1-mini
+    steps:
+      - name: Checkout discovery-lab
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Require translation secret
+        run: test -n "$OPENAI_API_KEY" || (echo "OPENAI_API_KEY secret is missing" && exit 1)
+
+      - name: Refresh derived Bulgarian display cache
+        run: python3 mobile-console/scripts/update_bg_translations.py
+
+      - name: Run mobile-console tests
+        working-directory: mobile-console
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Persist derived translation cache only
+        shell: bash
+        run: |
+          git config user.name "mobile-console-translation-bot"
+          git config user.email "mobile-console-translation-bot@users.noreply.github.com"
+          git add mobile-console/site/translations-bg.json
+          if git diff --cached --quiet; then
+            echo "Bulgarian display cache already current."
+            exit 0
+          fi
+          git commit -m "chore: refresh Bulgarian mobile translations [skip ci]"
+          git push origin HEAD:main
+
   build:
     name: Build snapshot + package site
+    needs: translate
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: read
     steps:
-      - name: Checkout discovery-lab
+      - name: Checkout latest main including Bulgarian cache
         uses: actions/checkout@v4
         with:
+          ref: main
           persist-credentials: false
           fetch-depth: 1
 
