@@ -1,0 +1,53 @@
+name: Bulgarian Translation Bootstrap — Final
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+env:
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  TRANSLATION_MODEL: gpt-4.1-mini
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Require translation secret
+        run: test -n "$OPENAI_API_KEY" || (echo "OPENAI_API_KEY secret is missing" && exit 1)
+
+      - name: Generate Bulgarian cache in parallel
+        run: python3 mobile-console/scripts/update_bg_translations_parallel.py --workers 8 --batch-size 20
+
+      - name: Run mobile-console tests
+        working-directory: mobile-console
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Persist generated cache and remove bootstrap workflow
+        shell: bash
+        run: |
+          git config user.name "mobile-console-translation-bot"
+          git config user.email "mobile-console-translation-bot@users.noreply.github.com"
+          git add mobile-console/site/translations-bg.json
+          git rm .github/workflows/bg-bootstrap-final.yml
+          if git diff --cached --quiet; then
+            echo "Nothing to persist."
+            exit 0
+          fi
+          git commit -m "chore: bootstrap Bulgarian mobile translations"
+          git push origin HEAD:${{ github.head_ref }}
