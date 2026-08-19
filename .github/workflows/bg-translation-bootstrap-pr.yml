@@ -1,7 +1,8 @@
 name: Bulgarian Translation Bootstrap — Observable
 
 # Temporary one-time bootstrap path used only to make the first translation
-# run observable through a pull-request workflow. It never writes to main.
+# run observable through a pull-request workflow. It never writes to main
+# directly; a successful cache is committed only to this same PR branch.
 
 on:
   pull_request:
@@ -11,7 +12,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -22,8 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Checkout PR
+      - name: Checkout bootstrap branch
         uses: actions/checkout@v4
+        with:
+          ref: chatgpt/bg-bootstrap-observable
+          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -46,3 +50,12 @@ jobs:
           name: bg-translations-bootstrap
           path: mobile-console/site/translations-bg.json
           if-no-files-found: error
+
+      - name: Commit cache to bootstrap branch
+        shell: bash
+        run: |
+          git config user.name "mobile-console-translation-bot"
+          git config user.email "mobile-console-translation-bot@users.noreply.github.com"
+          git add mobile-console/site/translations-bg.json
+          git commit -m "chore: seed Bulgarian mobile translations [skip ci]"
+          git push origin HEAD:chatgpt/bg-bootstrap-observable
