@@ -54,7 +54,7 @@ jobs:
         run: test -n "$OPENAI_API_KEY" || (echo "OPENAI_API_KEY secret is missing" && exit 1)
 
       - name: Refresh derived Bulgarian display cache
-        run: python3 mobile-console/scripts/update_bg_translations.py
+        run: python3 mobile-console/scripts/update_bg_translations_parallel.py --workers 8 --batch-size 20
 
       - name: Run mobile-console tests
         working-directory: mobile-console
