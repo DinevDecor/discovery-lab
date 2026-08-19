@@ -4,6 +4,8 @@ name: Mobile Machine Console — Bulgarian Display Refresh
 #   canonical ledgers -> Bulgarian translation cache -> static Pages build.
 # The model call exists ONLY in the translate job. The Pages build/deploy
 # jobs receive no model/API secret and remain deterministic/read-only.
+# This no-op metadata change intentionally bootstraps the first refresh now
+# that this workflow already exists on the default branch.
 
 on:
   push:
