@@ -133,6 +133,11 @@ function renderOpportunities() {
 }
 
 // ---------- PIPELINE ----------
+function pipelineLabel(id) {
+  const stage = (DATA.pipeline || []).find((s) => s.id === id);
+  return stage ? stage.stage : id;
+}
+
 function renderPipeline() {
   const stages = DATA.pipeline;
   const max = Math.max(...stages.map((s) => s.count), 1);
@@ -141,17 +146,138 @@ function renderPipeline() {
       <h2>Observable funnel</h2>
       <div class="funnel">
         ${stages.map((s) => `
-          <div class="funnel-row">
-            <span class="funnel-label">${esc(s.stage)}</span>
-            <span class="funnel-count">${s.count}</span>
-          </div>
-          <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:${Math.max(2, (s.count / max) * 100)}%"></div></div>
+          <a class="funnel-item" href="#/pipeline/${encodeURIComponent(s.id)}">
+            <div class="funnel-row">
+              <span class="funnel-label">${esc(s.stage)}</span>
+              <span class="funnel-count">${s.count}</span>
+            </div>
+            <div class="funnel-bar-track"><div class="funnel-bar-fill" style="width:${Math.max(2, (s.count / max) * 100)}%"></div></div>
+          </a>
         `).join("")}
       </div>
     </div>
     <div class="not-reached-card">
       <div class="nr-label">What this is not</div>
-      <p>These are direct counts over real ledger records only — no conversion rate, no percentage, no funnel-drop-off estimate. A stage with 0 records shows 0.</p>
+      <p>These are direct counts over real ledger records only — no conversion rate, no percentage, no funnel-drop-off estimate. A stage with 0 records shows 0. Tap a row to see the real records behind its count.</p>
+    </div>
+  `;
+}
+
+// ---------- PIPELINE DRILL-DOWN ----------
+const PIPELINE_ID_FIELD = {
+  observations: "observation_id",
+  anomalies: "anomaly_id",
+  blind_analyses: "artifact_id",
+  falsifications: "artifact_id",
+  judgments: "judgment_id",
+};
+
+function pipelineListFor(id) {
+  if (id === "candidates") return DATA.opportunities;
+  if (id === "candidates_past_watch") {
+    const ids = new Set(DATA.pipeline_records.candidates_past_watch);
+    return DATA.opportunities.filter((o) => ids.has(o.candidate_id));
+  }
+  return DATA.pipeline_records[id] || [];
+}
+
+function artifactTitleAndMeta(kind, item) {
+  switch (kind) {
+    case "observations":
+      return {
+        title: item.process || item.observation_id,
+        meta: [item.source, fmtDate(item.published_at)].filter(Boolean),
+      };
+    case "anomalies":
+      return {
+        title: item.canonical_pattern || item.anomaly_id,
+        meta: [fmtDate(item.first_seen)].filter(Boolean),
+        pillState: item.status,
+      };
+    case "blind_analyses":
+      return {
+        title: item.hidden_function || item.artifact_id,
+        meta: [item.provider, item.model, fmtDate(item.created_at)].filter(Boolean),
+      };
+    case "falsifications":
+      return {
+        title: `${item.critic_provider || "—"} critique of ${item.target_artifact_id || "—"}`,
+        meta: [`${item.findings_count} finding${item.findings_count === 1 ? "" : "s"}`, fmtDate(item.created_at)].filter(Boolean),
+      };
+    case "judgments":
+      return {
+        title: item.status,
+        meta: [item.source_run_id ? `run ${item.source_run_id}` : null, fmtDate(item.created_at)].filter(Boolean),
+        pillState: item.status,
+      };
+    default:
+      return { title: "—", meta: [] };
+  }
+}
+
+function artifactRow(kind, item) {
+  const id = item[PIPELINE_ID_FIELD[kind]];
+  const { title, meta, pillState } = artifactTitleAndMeta(kind, item);
+  const statePill = pillState
+    ? `<span class="pill ${pillState === "WATCH" ? "state-watch" : "state-validating"}"><span class="dot"></span>${esc(pillState)}</span>`
+    : "";
+  return `
+    <a class="row" href="#/pipeline/${encodeURIComponent(kind)}/${encodeURIComponent(id)}">
+      <div class="row-head">
+        <span class="row-id">${esc(id)}</span>
+      </div>
+      <div class="row-title">${esc(title)}</div>
+      <div class="row-meta">
+        ${statePill}
+        ${meta.map((m) => `<span class="pill">${esc(m)}</span>`).join("")}
+      </div>
+    </a>
+  `;
+}
+
+function renderPipelineDrilldown(id) {
+  const items = pipelineListFor(id);
+  const label = pipelineLabel(id);
+  const isCandidateKind = id === "candidates" || id === "candidates_past_watch";
+  const rows = isCandidateKind ? items.map(candidateRow) : items.map((it) => artifactRow(id, it));
+  return `
+    <div class="section-label">${items.length} record${items.length === 1 ? "" : "s"} — ${esc(label)}</div>
+    ${items.length ? `<div class="list">${rows.join("")}</div>` : `<div class="empty-state">No records yet.</div>`}
+  `;
+}
+
+function fieldLabel(key) {
+  return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function formatFieldValue(v) {
+  if (v == null || v === "") return "—";
+  if (Array.isArray(v)) return v.length ? v.join(", ") : "—";
+  return String(v);
+}
+
+function renderArtifactDetail(kind, itemId) {
+  const idField = PIPELINE_ID_FIELD[kind];
+  if (!idField) return `<div class="empty-state">Unknown record kind ${esc(kind)}.</div>`;
+  const list = DATA.pipeline_records[kind] || [];
+  const item = list.find((it) => String(it[idField]) === itemId);
+  if (!item) return `<div class="empty-state">Unknown record ${esc(itemId)}.</div>`;
+  return `
+    <div class="docket-wrap">
+      <div class="masthead">
+        <div class="eyebrow">${esc(pipelineLabel(kind))}</div>
+        <h1 style="font-size:19px;word-break:break-word">${esc(itemId)}</h1>
+      </div>
+      <div class="docket-card">
+        <dl class="fact-grid">
+          ${Object.entries(item).map(([k, v]) => `
+            <div class="fact">
+              <dt>${esc(fieldLabel(k))}</dt>
+              <dd class="muted">${esc(formatFieldValue(v))}</dd>
+            </div>
+          `).join("")}
+        </dl>
+      </div>
     </div>
   `;
 }
@@ -426,6 +552,22 @@ function render() {
   if (route === "home") { html = renderHome(); titleEl.textContent = "Machine Console"; eyebrowEl.textContent = "discovery-lab · machine console"; lastMainRoute = "home"; }
   else if (route === "opportunities") { html = renderOpportunities(); titleEl.textContent = "Opportunities"; eyebrowEl.textContent = `${DATA.opportunities.length} business candidates`; lastMainRoute = "opportunities"; }
   else if (route === "pipeline") { html = renderPipeline(); titleEl.textContent = "Pipeline"; eyebrowEl.textContent = "observable funnel · real counts only"; lastMainRoute = "pipeline"; }
+  else if (route.startsWith("pipeline/")) {
+    const rest = route.slice("pipeline/".length);
+    const slashIdx = rest.indexOf("/");
+    if (slashIdx === -1) {
+      const pid = decodeURIComponent(rest);
+      html = renderPipelineDrilldown(pid);
+      titleEl.textContent = pipelineLabel(pid);
+      eyebrowEl.innerHTML = `<a href="#/pipeline" style="color:var(--case-accent);text-decoration:none">‹ back</a>`;
+    } else {
+      const pid = decodeURIComponent(rest.slice(0, slashIdx));
+      const itemId = decodeURIComponent(rest.slice(slashIdx + 1));
+      html = renderArtifactDetail(pid, itemId);
+      titleEl.textContent = "Record Detail";
+      eyebrowEl.innerHTML = `<a href="#/pipeline/${encodeURIComponent(pid)}" style="color:var(--case-accent);text-decoration:none">‹ back</a>`;
+    }
+  }
   else if (route === "ground-truth") { html = renderGroundTruth(); titleEl.textContent = "Ground Truth"; eyebrowEl.textContent = "prospective cases · independent of Stage 4"; lastMainRoute = "ground-truth"; }
   else if (route === "activity") { html = renderActivity(); titleEl.textContent = "Activity"; eyebrowEl.textContent = "real timestamped events"; lastMainRoute = "activity"; }
   else if (route.startsWith("case/")) {
