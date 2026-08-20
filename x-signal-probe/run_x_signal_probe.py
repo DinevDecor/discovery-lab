@@ -64,6 +64,7 @@ def main() -> None:
                 "status": "OK",
                 "posts_fetched": m.posts_fetched,
                 "unique_posts": m.unique_posts,
+                "cross_run_duplicates": m.cross_run_duplicates,
                 "candidates_incremental": m.candidates_incremental,
                 "automated_signal": m.automated_signal,
                 "errors": len(result["errors"]),

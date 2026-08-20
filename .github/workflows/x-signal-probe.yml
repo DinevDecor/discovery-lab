@@ -1,19 +1,31 @@
-name: X Signal Probe (manual, bounded)
+name: X Signal Probe (daily, bounded)
 
-# Manual-only probe run - see x-signal-probe/CONTRACT.md and README.md.
-# workflow_dispatch only, no schedule, until a human has reviewed at least
-# one successful bounded run. Never commits to the repository - uploads
-# the run's outputs (reference/provenance only, no raw X post text - see
-# README's storage design) as a short-retention build artifact instead,
-# the same pattern observation-agent.yml uses. Entirely separate from
-# constraint-archaeology-daily.yml: this workflow never runs the daily
-# pipeline, and a failure here can never break it.
+# Daily, bounded X Signal Probe run - see x-signal-probe/CONTRACT.md and
+# README.md. A human has reviewed a successful bounded manual run (Run 1),
+# so this is now scheduled - workflow_dispatch stays available too, for
+# on-demand runs.
+#
+# Scheduled at 21:00 UTC, one hour before Constraint Archaeology Daily's
+# own 22:00 UTC cron (constraint-archaeology-daily.yml). There is
+# currently no code path from this probe's ledger into Constraint
+# Archaeology or Business Candidate Analyst - see CONTRACT.md's "X -> CA
+# Bridge" section for why the bridge is deliberately not built yet - so
+# today this ordering has no functional effect. It's set anyway so that
+# if the bridge is ever approved later, the cadence never needs to change.
+#
+# Commits ONLY this package's own durable, text-free ledger and report -
+# x-signal-probe/data/ and x-signal-probe/reports/ - the same pattern
+# constraint-archaeology-daily.yml uses for its own data, scoped to this
+# package's paths only. Entirely separate workflow: this never runs the
+# daily CA/BCA pipeline, and a failure here can never break it.
 
 on:
   workflow_dispatch: {}
+  schedule:
+    - cron: '0 21 * * *'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: x-signal-probe
@@ -21,17 +33,16 @@ concurrency:
 
 jobs:
   probe:
-    name: Run X Signal Probe (bounded, read-only)
+    name: Run X Signal Probe (bounded, read-only against X)
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
-      contents: read
+      contents: write
     steps:
       - name: Checkout discovery-lab
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -48,13 +59,15 @@ jobs:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
         run: python3 run_x_signal_probe.py
 
-      - name: Upload probe outputs (reference/provenance only - no raw post text)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: x-signal-probe-run-${{ github.run_number }}
-          path: |
-            x-signal-probe/data/
-            x-signal-probe/reports/
-          retention-days: 14
-          if-no-files-found: warn
+      - name: Commit X Signal Probe ledger and report (X-owned paths only)
+        run: |
+          git config user.name "x-signal-probe-bot"
+          git config user.email "x-signal-probe-bot@users.noreply.github.com"
+          git add x-signal-probe/data x-signal-probe/reports
+          if git diff --cached --quiet; then
+            echo "No new ledger rows or report changes to commit."
+            exit 0
+          fi
+          git commit -m "Update X Signal Probe ledger and report"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

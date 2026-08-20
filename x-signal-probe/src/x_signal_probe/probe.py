@@ -1,6 +1,15 @@
-"""Orchestrates one bounded X Signal Probe run: fetch -> mechanical
-filters -> three-tier dedupe/classification -> persist ProbeObservations
-(reference/provenance only, no post text) -> render report.
+"""Orchestrates one bounded X Signal Probe run: fetch -> cross-run
+identity check -> mechanical filters -> three-tier dedupe/classification
+-> persist ProbeObservations (reference/provenance only, no post text)
+-> render report.
+
+`probe-observations.jsonl` is a durable, append-only ledger keyed by the
+real X post_id: `_load_ledgered_post_ids` reads every post_id already
+recorded there before this run writes anything, and any post fetched
+again in a later run - the same real X post_id, exact string match,
+never a fuzzy/title-based match - is counted as a cross-run duplicate
+and never gets a second row. One X post has exactly one row in the
+ledger, ever, across every run that has ever found it.
 
 This module and report.py are the only ones in this package that open a
 file in a writing mode (enforced by tests/test_safety.py). This module
@@ -27,6 +36,28 @@ def _load_queries(path: str) -> list[dict]:
     with open(path, encoding="utf-8") as f:
         cfg = json.load(f)
     return cfg["queries"]
+
+
+def _load_ledgered_post_ids(obs_path: str) -> set[str]:
+    """Every post_id already recorded in the durable ledger, from any
+    previous run. Exact string match only on the real X post_id - never
+    fuzzy, never based on text/title similarity. A post_id in this set
+    is never written to the ledger again, regardless of what this run's
+    filters/classification would otherwise call it: the ledger holds at
+    most one row per distinct post_id, ever."""
+    if not os.path.exists(obs_path):
+        return set()
+    ids: set[str] = set()
+    with open(obs_path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            row = json.loads(line)
+            pid = row.get("post_id")
+            if pid:
+                ids.add(pid)
+    return ids
 
 
 def run_probe(
@@ -92,11 +123,21 @@ def run_probe(
             )
 
     posts_fetched = len(raw_posts)
+    obs_path = os.path.join(data_dir, "probe-observations.jsonl")
+    already_ledgered = _load_ledgered_post_ids(obs_path)
     retrieval_dups = dedupe.mark_retrieval_duplicates(raw_posts)
     existing = existing_sources.load_existing_pain_texts(existing_source_paths)
 
     observations: list[ProbeObservation] = []
+    cross_run_duplicates = 0
     for i, p in enumerate(raw_posts):
+        if p.post_id in already_ledgered:
+            # Already has exactly one row in the durable ledger from a
+            # prior run - never re-recorded, regardless of what this
+            # run's filters would otherwise classify it as.
+            cross_run_duplicates += 1
+            continue
+
         matched = ""
         if i in retrieval_dups:
             classification = "retrieval_duplicate"
@@ -126,12 +167,14 @@ def run_probe(
         )
 
     os.makedirs(data_dir, exist_ok=True)
-    obs_path = os.path.join(data_dir, "probe-observations.jsonl")
     with open(obs_path, "a", encoding="utf-8") as f:
         for o in observations:
             f.write(json.dumps(to_dict(o), ensure_ascii=False) + "\n")
 
-    metrics = evaluator.evaluate_run(observations, posts_fetched, len(errors), cost_per_post_usd)
+    metrics = evaluator.evaluate_run(
+        observations, posts_fetched, len(errors), cost_per_post_usd,
+        cross_run_duplicates=cross_run_duplicates,
+    )
 
     bounds = {
         "queries_configured": len(queries),

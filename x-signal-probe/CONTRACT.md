@@ -9,14 +9,17 @@ and `business-candidate-analyst/CONTRACT.md` — not a governance/Employee Role 
 ## Position (or rather, lack of one) in the pipeline
 
 ```
-X API  ──▶  x-signal-probe (isolated)  ──▶  probe-observations.jsonl + report
+X API  ──▶  x-signal-probe (isolated, daily)  ──▶  probe-observations.jsonl + report
+                                                     (durable, committed, X-owned)
 ```
 
 This package has **no position in the Discovery Lab pipeline**. It does not sit
 between any two existing stages, is never invoked by `run_daily_pipeline.py`, and
 is never invoked by `constraint-archaeology-daily.yml`. Its own workflow
-(`.github/workflows/x-signal-probe.yml`) is `workflow_dispatch`-only and entirely
-separate.
+(`.github/workflows/x-signal-probe.yml`) runs daily (`workflow_dispatch` still
+available for on-demand runs) and is entirely separate — see "X → CA Bridge"
+below for the deliberate, currently-blocked gap between this package and
+Constraint Archaeology's actual Observation contract.
 
 ## Pre-registered hypothesis
 
@@ -34,7 +37,9 @@ check only:
 
 No authority beyond producing its own output is granted:
 
-- `x-signal-probe/data/probe-observations.jsonl` (append-only, probe-only)
+- `x-signal-probe/data/probe-observations.jsonl` — append-only, durable, committed
+  to git daily by this package's own workflow, and read by no other package
+  (see "X → CA Bridge" below)
 - `x-signal-probe/reports/x-signal-probe-<date>.md`
 
 Every path this tool ever opens in a writing mode lives under `x-signal-probe/`
@@ -64,18 +69,21 @@ not just this document.
   `classification`) — enforced by `tests/test_safety.py`'s static field check and
   `tests/test_secret_never_persisted.py`'s dynamic check on both the bearer token
   and post text;
-- upload raw X post text as a GitHub Actions artifact in v1 — the workflow uploads
-  only `data/` and `reports/`, which by construction never contain post text;
+- persist X post text as a GitHub Actions artifact or a git commit, ever — the
+  workflow's commit step touches only `x-signal-probe/data/` and
+  `x-signal-probe/reports/`, which by construction never contain post text;
 - echo `X_BEARER_TOKEN`, or any other secret, into logs, files, or artifacts;
 - fabricate an API-cost figure — cost fields are `null`/"not computed" unless a
   `--cost-per-post-usd` value is explicitly supplied for that run;
 - fall back to a hardcoded credential, or silently continue, when
   `X_BEARER_TOKEN` is missing — it must fail the run clearly;
-- run on a schedule before a human has reviewed at least one successful bounded
-  manual run — `.github/workflows/x-signal-probe.yml` is `workflow_dispatch` only;
-- commit anything to the repository from its workflow — outputs are uploaded as a
-  short-retention build artifact, the same pattern `observation-agent.yml` uses,
-  never a `git commit`/`git push` step;
+- write a second row for a post_id already present anywhere in
+  `probe-observations.jsonl` — `probe.py::_load_ledgered_post_ids` reads the
+  existing ledger before every run and treats a repeat as a cross-run duplicate,
+  never a new row; identity is exact `post_id` string match only, never fuzzy;
+- commit anything to the repository from its workflow **outside**
+  `x-signal-probe/data/` and `x-signal-probe/reports/` — no other path is ever
+  `git add`-ed by `.github/workflows/x-signal-probe.yml`;
 - retry without bound, or paginate without bound — `max_pages`, `max_results`,
   `max_posts_per_run`, and retry count are all hard caps, never removed or made
   "unlimited" by a config change without a new, explicit human decision;
@@ -107,6 +115,42 @@ not just this document.
 - Report the automated PASS/FAIL-candidate label as a mechanical signal only, and
   say so in the report itself — a genuine verdict requires human review.
 
+## X → CA Bridge: BLOCKED_BY_EVIDENCE_BOUNDARY
+
+**There is no code path from this package's ledger into
+`constraint-archaeology-agents/data/observations.jsonl`, any Constraint
+Archaeology Observation, any Business Candidate, or any Claim/Trust Ledger.**
+This is deliberate, and it stays this way until a separate, explicit human
+decision changes it. Do not add one as a side effect of any other task.
+
+**Why:** a traced audit (not a guess) of `dimensions.py` and `lifecycle.py`
+found that none of Business Candidate Analyst's fourteen evaluation dimensions,
+and none of Constraint Archaeology's same-mechanism gate or K1–K6 evaluation,
+require an Observation's `evidence_quote` to be non-empty. `process`, `pain`,
+`hidden_function_hint`, `current_carrier`, and `failure_mode` — all
+model-derived — are already sufficient on their own to satisfy every dimension
+in the WATCH → VALIDATING → INVESTIGATE → PROMISING ladder. This is a
+source-agnostic property of the existing method (an HN or Reddit Observation
+with an accidentally-empty `evidence_quote` already has the same gap today) —
+not something this package introduced — but connecting X to that contract
+would be the first *deliberate* exercise of it, at scale, and would do so with
+a source whose real evidentiary anchor (`evidence_quote`) is intentionally kept
+empty (see the hard boundary above: never persist X post text/quotes to git).
+That combination — model-derived fields able to carry a candidate on their own,
+paired with a source that structurally cannot supply the one field meant to
+anchor those fields to real text — is exactly the invariant this repo's
+governance calls out: **model interpretation ≠ evidence.**
+
+**What would need to be true to unblock it:** either Business Candidate
+Analyst's dimensions gain a structural requirement that promotion-relevant
+evidence trace to non-empty `evidence_quote` (or an equivalent verbatim
+anchor) — a change to `dimensions.py`/`lifecycle.py`, out of scope for this
+package to make unilaterally — or a different, explicit human decision to
+accept the existing method's evidentiary gap for X specifically. Neither has
+happened. Until one does, `x-signal-probe/data/probe-observations.jsonl`
+remains a standalone, X-owned ledger with no reader anywhere else in this
+repository.
+
 ## Executor independence
 
 This contract binds the tool, not whoever runs it — same precedent as
@@ -117,5 +161,6 @@ This contract binds the tool, not whoever runs it — same precedent as
 This tool may be modified, extended, or retired at any time by direct repository
 change. A change that would grant it write access to any Constraint Archaeology or
 Business Candidate Analyst file, a code path into `run_daily_pipeline.py`, a model
-call, persistence of raw X post text, or a move to scheduled (non-manual) execution
-is out of scope for this contract entirely and needs a new, explicit human decision.
+call, or persistence of raw X post text is out of scope for this contract entirely
+and needs a new, explicit human decision — see "X → CA Bridge" above for the
+specific, currently-blocked change this rules out.

@@ -1,7 +1,14 @@
 # X Signal Probe v0.1
 
 A small, bounded, read-only experiment. Not a new Discovery Lab source, not a
-production integration. See `CONTRACT.md` for the hard boundary.
+production integration. See `CONTRACT.md` for the hard boundary — in particular
+**"X → CA Bridge: BLOCKED_BY_EVIDENCE_BOUNDARY"**: this probe's ledger is not
+connected to Constraint Archaeology, Business Candidate Analyst, or any
+Claim/Trust Ledger, and won't be until a separate, explicit human decision
+resolves a traced epistemic gap in the existing method (model-derived fields
+can already satisfy BCA's promotion ladder with no non-empty verbatim-quote
+requirement). This package runs daily now purely as a sensor/acquisition
+layer with its own durable, X-owned ledger — nothing downstream reads it yet.
 
 ## The one question this probe answers
 
@@ -38,7 +45,10 @@ recorded experimental iteration, never a silent rewrite of what was actually tes
 
 ### Changelog
 
-- 2026-08-18 — `queries.json` created, 25 queries, run 1 not yet executed.
+- 2026-08-18 — `queries.json` created, 25 queries.
+- 2026-08-18 — Run 1 executed live: 109 posts fetched, 108 `candidate_incremental`.
+- 2026-08-18 — daily schedule + durable committed ledger + cross-run dedupe added.
+  No query/threshold change — queries.json itself remains untouched.
 
 ## Storage design (why no post text is ever persisted)
 
@@ -74,7 +84,18 @@ backs into by accident.
 against fake post text containing a distinctive marker and a fake bearer token, then
 asserts neither string appears in any file the run wrote.
 
-## Dedupe — three tiers, never conflated
+## Dedupe — cross-run identity, then three within-run tiers
+
+**Cross-run identity comes first, before any of the three tiers below.**
+`probe.py::_load_ledgered_post_ids` reads every `post_id` already present in
+`data/probe-observations.jsonl` before a run starts. A post found again in a
+later run — exact `post_id` string match, never fuzzy, never based on title or
+text similarity — is counted as a `cross_run_duplicate` and never gets a
+second row. The durable ledger holds **at most one row per real X post, ever**,
+across every run that has found it — that's what makes it a ledger and not
+just a per-run log.
+
+Within one run, for posts not already ledgered:
 
 1. **Duplicate retrieval** (`dedupe.py`) — the same `post_id` found by more than one
    pre-registered query in this run.
@@ -93,9 +114,9 @@ This is deliberately *not* the same-mechanism gate (`ca_agents.same_mechanism_ga
 ## Evaluation
 
 Each run's report (`reports/x-signal-probe-<date>.md`) states: posts fetched, unique
-posts, retrieval duplicates, filtered (retweet), filtered (marketing/spam-like),
-already represented by existing sources, genuinely incremental candidates, API
-errors, and — only if a per-post cost is explicitly configured — estimated cost,
+posts newly admitted this run, cross-run duplicates already in the ledger, retrieval
+duplicates, filtered (retweet), filtered (marketing/spam-like), already represented
+by existing sources, genuinely incremental candidates, API errors, and — only if a per-post cost is explicitly configured — estimated cost,
 cost per usable observation, cost per incremental observation. If cost is not
 configured, those fields say so; they are never invented (`evaluator.py`).
 
@@ -124,11 +145,14 @@ that explicit comparison, "X found it" is not evidence "X found it first."
 
 ## Running it
 
-Manual only. `python3 run_x_signal_probe.py` reads `X_BEARER_TOKEN` from the
-environment and fails clearly (no fallback) if it is absent. In CI, this only ever
-runs via `.github/workflows/x-signal-probe.yml`'s `workflow_dispatch` trigger — no
-schedule exists yet, and the first real run against the live API requires an
-explicit human trigger.
+`python3 run_x_signal_probe.py` reads `X_BEARER_TOKEN` from the environment and
+fails clearly (no fallback) if it is absent. In CI, `.github/workflows/x-signal-
+probe.yml` runs it daily at 21:00 UTC — one hour before `constraint-archaeology-
+daily.yml`'s own 22:00 UTC cron, so a future CA bridge (currently blocked, see
+`CONTRACT.md`) would have this run's ledger ready in time without a cadence
+change — and also stays available via `workflow_dispatch` for on-demand runs.
+Each successful run commits only `x-signal-probe/data/` and
+`x-signal-probe/reports/` — no other path in the repository.
 
 ## Tests
 

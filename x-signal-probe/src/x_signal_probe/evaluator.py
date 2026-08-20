@@ -30,6 +30,7 @@ class RunMetrics:
     filtered_marketing: int = 0
     existing_source_duplicates: int = 0
     candidates_incremental: int = 0
+    cross_run_duplicates: int = 0
     api_errors: int = 0
     estimated_cost_usd: float | None = None
     cost_per_usable_observation_usd: float | None = None
@@ -43,6 +44,7 @@ def evaluate_run(
     posts_fetched: int,
     api_errors: int,
     cost_per_post_usd: float | None = None,
+    cross_run_duplicates: int = 0,
 ) -> RunMetrics:
     """`automated_signal` is a mechanical label only - PASS_CANDIDATE,
     FAIL_CANDIDATE, or INSUFFICIENT_DATA - never a final PASS/FAIL. A
@@ -51,8 +53,15 @@ def evaluate_run(
     and whether X was actually earlier than another independent public
     source or just more visible) - matching CLAUDE.md's rule that
     model/mechanically generated content is never itself evidence.
+
+    `cross_run_duplicates` counts posts this run re-fetched that already
+    had a row in the durable ledger from a prior run (probe.py computes
+    this before building `observations`, since a cross-run duplicate
+    never becomes a ProbeObservation at all) - never itself a criterion
+    of `automated_signal`, purely a truthful count of ledger identity
+    already holding.
     """
-    m = RunMetrics(posts_fetched=posts_fetched, api_errors=api_errors)
+    m = RunMetrics(posts_fetched=posts_fetched, api_errors=api_errors, cross_run_duplicates=cross_run_duplicates)
     unique: set[str] = set()
     for o in observations:
         unique.add(o.post_id)
