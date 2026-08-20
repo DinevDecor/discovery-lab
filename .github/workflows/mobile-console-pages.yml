@@ -5,6 +5,10 @@ name: Mobile Machine Console — Pages Deploy
 # authoritative and unchanged. The translate job may call a model and writes
 # only mobile-console/site/translations-bg.json. The build/deploy jobs receive
 # no model/API secret and remain deterministic/read-only.
+#
+# Fresh canonical data is more important than fresh derived translations.
+# If translation fails or times out, build/deploy still runs with the last
+# valid Bulgarian cache; untranslated new text falls back to source English.
 
 on:
   push:
@@ -77,12 +81,16 @@ jobs:
   build:
     name: Build snapshot + package site
     needs: translate
+    # Translation is optional derived UI data. A translation error/timeout must
+    # never prevent fresh canonical ledgers from reaching the mobile console.
+    # Skip only when the whole workflow was deliberately cancelled by a newer run.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
       contents: read
     steps:
-      - name: Checkout latest main including Bulgarian cache
+      - name: Checkout latest main including any successful Bulgarian cache refresh
         uses: actions/checkout@v4
         with:
           ref: main
