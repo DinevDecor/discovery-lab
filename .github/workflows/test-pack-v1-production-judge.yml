@@ -29,12 +29,7 @@ name: Test Pack v1 - Production Judge (isolated, temporary push trigger)
 # and is independent of constraint-archaeology-daily.yml.
 
 on:
-  push:
-    branches:
-      - claude/constraint-archaeology-test-pack-n4xmv4
-    paths:
-      - 'evaluation/test-pack-v1/**'
-      - '.github/workflows/test-pack-v1-production-judge.yml'
+  workflow_dispatch: {}
 
 permissions:
   contents: write
