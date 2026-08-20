@@ -1,0 +1,11 @@
+[
+  {
+    "candidate_id": "BC-0117",
+    "event_id": "state_changed:BC-0117:51eddf84934ad137612a64b4",
+    "from_state": "WATCH",
+    "material_type": "lifecycle_escalation",
+    "reason": "reached VALIDATING: distinct_sources>=2 (have 2); economic_consequence EVIDENCED",
+    "recorded_at": "2026-08-20T23:08:38Z",
+    "to_state": "VALIDATING"
+  }
+]
