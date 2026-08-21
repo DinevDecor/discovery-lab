@@ -65,9 +65,9 @@ of `ClaudeMechanismJudge` specifically. `report.md` §10 recommends the
 smallest next experiment to isolate whether the observed bias belongs to the
 gate's decision rule or to this judge substitution.
 
-## Follow-up: production-judge validation
+## Follow-up: production-judge validation — six runs, not one
 
-That follow-up experiment was run: the same 10 frozen pairs through the real
+That follow-up experiment was run **six times**: the same 10 frozen pairs through the real
 `ca_agents.mechanism_judge.ClaudeMechanismJudge` (actual Anthropic API,
 `claude-sonnet-4-5`), via a temporary, narrowly-scoped GitHub Actions
 workflow (`.github/workflows/test-pack-v1-production-judge.yml`, now reverted
@@ -75,15 +75,27 @@ to inert `workflow_dispatch`) that reused the repo's existing
 `ANTHROPIC_API_KEY` secret. See:
 
 - `run_test_pack_production.py` — harness, same unmodified gate functions
-- `results-production-judge.json` — raw output (model/provider info in `run_metadata`)
-- `production-judge-comparison.md` — side-by-side isolated-vs-production table,
-  metrics, per-case diagnostics, and a `GATE_DEFECT` / `JUDGE_ARTIFACT` / `MIXED`
-  / `INSUFFICIENT_DATA` classification
+- `results-production-judge.json` (PROD-R1), `results-production-judge-PROD-R2.json`
+  through `-R6.json` — raw output of all six independent runs (model/provider info in each
+  file's own `run_metadata`)
+- `aggregate_production_runs.py` — deterministic, offline aggregator that reads all six
+  result files and recomputes every count in `production-judge-comparison.md` §2 directly
+  from them; `tests/test_aggregate_production_runs.py` covers it (21 tests)
+- `production-judge-comparison.md` — the six-run distribution as the primary evidence
+  (§2), a `GATE_DEFECT` classification with a narrower `GATE/JUDGE CONTRACT DEFECT`
+  carved out specifically for 3 runtime/parser crashes (§11), and a ground-truth risk
+  section (§12)
 
-Headline: **6/10 correct, 0 false merges (both runs), 2 false splits (down from
-3), but 2 new incorrectly-resolved UNRESOLVED cases** that did not occur with
-the isolated substitute — the production judge is measurably less willing to
-self-report low confidence on thin evidence than the substitute was.
+**Headline is now distributional, not a single number:** across 6 runs × 10 cases (60
+attempts), **38 correct, 19 wrong, 3 runtime errors**. Zero false merges of any
+RELATED_DISTINCT case in all 30 attempts on those cases — but the UNRESOLVED case TP-09
+was falsely merged in 3 of 5 completed attempts, so "0 false merges" is true only for the
+RELATED_DISTINCT class, never stated unqualified. TP-08 (0/6) and TP-09 (0/5 completed)
+were never once correctly resolved as `unresolved`. TP-01 and TP-02 are sampling-sensitive
+— the same frozen pair, same unmodified gate code, lands on a different edge on different
+real-judge samples (TP-01: 3/6 correct; TP-02: 1/6 correct). PROD-R1's own 6/10 is still a
+true statement about that one run, but it is one sample among six, not the production
+result. See `production-judge-comparison.md` for the full breakdown.
 
 ## Distribution
 

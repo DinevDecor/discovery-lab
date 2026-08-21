@@ -1,0 +1,642 @@
+{
+  "run_ids": [
+    "PROD-R1",
+    "PROD-R2",
+    "PROD-R3",
+    "PROD-R4",
+    "PROD-R5",
+    "PROD-R6"
+  ],
+  "total_attempts": 60,
+  "total_correct": 38,
+  "total_wrong_semantic": 19,
+  "total_runtime_errors": 3,
+  "per_run": {
+    "PROD-R1": {
+      "cases_present": 10,
+      "completed": 10,
+      "runtime_errors": [],
+      "correct": 6,
+      "edge_distribution": {
+        "related_distinct": 9,
+        "merged": 1
+      }
+    },
+    "PROD-R2": {
+      "cases_present": 10,
+      "completed": 10,
+      "runtime_errors": [],
+      "correct": 6,
+      "edge_distribution": {
+        "related_distinct": 9,
+        "merged": 1
+      }
+    },
+    "PROD-R3": {
+      "cases_present": 10,
+      "completed": 9,
+      "runtime_errors": [
+        "TP-09"
+      ],
+      "correct": 7,
+      "edge_distribution": {
+        "merged": 2,
+        "related_distinct": 7
+      }
+    },
+    "PROD-R4": {
+      "cases_present": 10,
+      "completed": 10,
+      "runtime_errors": [],
+      "correct": 7,
+      "edge_distribution": {
+        "merged": 3,
+        "related_distinct": 7
+      }
+    },
+    "PROD-R5": {
+      "cases_present": 10,
+      "completed": 9,
+      "runtime_errors": [
+        "TP-03"
+      ],
+      "correct": 7,
+      "edge_distribution": {
+        "merged": 3,
+        "related_distinct": 6
+      }
+    },
+    "PROD-R6": {
+      "cases_present": 10,
+      "completed": 9,
+      "runtime_errors": [
+        "TP-03"
+      ],
+      "correct": 5,
+      "edge_distribution": {
+        "related_distinct": 8,
+        "merged": 1
+      }
+    }
+  },
+  "per_case": [
+    {
+      "test_case_id": "TP-01",
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 3,
+      "wrong": 3,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 3,
+        "merged": 3
+      },
+      "behavior": "sampling_sensitive",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-02",
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 1,
+      "wrong": 5,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 5,
+        "merged": 1
+      },
+      "behavior": "sampling_sensitive",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-03",
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "runs_present": 6,
+      "completed_runs": 4,
+      "correct": 4,
+      "wrong": 0,
+      "runtime_error": 2,
+      "edge_distribution_completed_runs": {
+        "merged": 4
+      },
+      "behavior": "stable_correct",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "correct",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "runtime_error",
+          "actual_verdict": null,
+          "actual_edge": null,
+          "error": "could not convert string to float: 'high'"
+        },
+        "PROD-R6": {
+          "classification": "runtime_error",
+          "actual_verdict": null,
+          "actual_edge": null,
+          "error": "could not convert string to float: 'high'"
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-04",
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 6,
+      "wrong": 0,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 6
+      },
+      "behavior": "stable_correct",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-05",
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 6,
+      "wrong": 0,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 6
+      },
+      "behavior": "stable_correct",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-06",
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 6,
+      "wrong": 0,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 6
+      },
+      "behavior": "stable_correct",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-07",
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 6,
+      "wrong": 0,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 6
+      },
+      "behavior": "stable_correct",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-08",
+      "expected_verdict": "insufficient_data",
+      "expected_edge": "unresolved",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 0,
+      "wrong": 6,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 6
+      },
+      "behavior": "stable_wrong",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-09",
+      "expected_verdict": "insufficient_data",
+      "expected_edge": "unresolved",
+      "runs_present": 6,
+      "completed_runs": 5,
+      "correct": 0,
+      "wrong": 5,
+      "runtime_error": 1,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 2,
+        "merged": 3
+      },
+      "behavior": "sampling_sensitive",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "wrong",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "runtime_error",
+          "actual_verdict": null,
+          "actual_edge": null,
+          "error": "could not convert string to float: 'high'"
+        },
+        "PROD-R4": {
+          "classification": "wrong",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "wrong",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "wrong",
+          "actual_verdict": "same_mechanism",
+          "actual_edge": "merged",
+          "error": null
+        }
+      }
+    },
+    {
+      "test_case_id": "TP-10",
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "runs_present": 6,
+      "completed_runs": 6,
+      "correct": 6,
+      "wrong": 0,
+      "runtime_error": 0,
+      "edge_distribution_completed_runs": {
+        "related_distinct": 6
+      },
+      "behavior": "stable_correct",
+      "per_run": {
+        "PROD-R1": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R2": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R3": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R4": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R5": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        },
+        "PROD-R6": {
+          "classification": "correct",
+          "actual_verdict": "different_mechanisms",
+          "actual_edge": "related_distinct",
+          "error": null
+        }
+      }
+    }
+  ],
+  "false_merge_analysis": {
+    "false_merge_of_related_distinct_ground_truth": [],
+    "false_merge_of_unresolved_ground_truth": [
+      {
+        "run": "PROD-R4",
+        "case": "TP-09"
+      },
+      {
+        "run": "PROD-R5",
+        "case": "TP-09"
+      },
+      {
+        "run": "PROD-R6",
+        "case": "TP-09"
+      }
+    ]
+  },
+  "runtime_error_locations": [
+    {
+      "run": "PROD-R3",
+      "case": "TP-09",
+      "error": "could not convert string to float: 'high'"
+    },
+    {
+      "run": "PROD-R5",
+      "case": "TP-03",
+      "error": "could not convert string to float: 'high'"
+    },
+    {
+      "run": "PROD-R6",
+      "case": "TP-03",
+      "error": "could not convert string to float: 'high'"
+    }
+  ],
+  "runtime_error_root_cause": "same_mechanism_gate.py's profile_anomaly() calls float(raw.get('confidence', 0.0)) on the judge's raw profile response with no type validation and no try/except. PROFILE_PROMPT's own JSON contract lists 'confidence' as a bare key with no numeric-format instruction (unlike failure_class, which is given an explicit enum) - so a production judge answer of a category word ('high') instead of a 0-1 float is not a contract the judge was ever unambiguously told to honor. Observed literal error text in every occurrence: \"could not convert string to float: 'high'\"."
+}
