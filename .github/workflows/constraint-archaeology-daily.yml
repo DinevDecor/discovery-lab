@@ -2,8 +2,12 @@ name: Constraint Archaeology Daily
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/manual/constraint-archaeology.trigger'
   schedule:
-    - cron: '0 22 * * *'
+    - cron: '17 22 * * *'
+    - cron: '47 23 * * *'
 
 permissions:
   contents: write
@@ -22,20 +26,51 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Decide whether this run is needed
+        id: gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_EVENT_NAME}" != "schedule" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          stamp="$(date -u +%F)"
+          status="reports/pipeline-status-${stamp}.json"
+          if [[ -f "$status" ]] && grep -q '"status": "OK"' "$status"; then
+            echo "Daily pipeline already completed successfully for ${stamp}; skipping retry schedule."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "No successful pipeline status for ${stamp}; running now."
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Run Constraint Archaeology unit tests
+        if: steps.gate.outputs.run == 'true'
         working-directory: constraint-archaeology-agents
         run: python3 -m unittest discover -s tests -v
       - name: Run Business Candidate Analyst unit tests
+        if: steps.gate.outputs.run == 'true'
         working-directory: business-candidate-analyst
         run: python3 -m unittest discover -s tests -v
       - name: Run pipeline orchestrator tests
+        if: steps.gate.outputs.run == 'true'
         run: python3 -m unittest tests.test_daily_pipeline -v
       - name: Run daily pipeline (Constraint Archaeology -> Business Candidate Analyst)
+        id: pipeline
+        if: steps.gate.outputs.run == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PRODUCT_HUNT_TOKEN: ${{ secrets.PRODUCT_HUNT_TOKEN }}
-        run: python3 run_daily_pipeline.py
-      - name: Commit generated evidence and reports
+        shell: bash
+        run: |
+          set +e
+          python3 run_daily_pipeline.py
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: Commit generated evidence, reports, and failure diagnostics
+        if: steps.gate.outputs.run == 'true'
         run: |
           git config user.name "constraint-archaeology-bot"
           git config user.email "constraint-archaeology-bot@users.noreply.github.com"
@@ -49,3 +84,9 @@ jobs:
           git commit -m "Update daily Constraint Archaeology and Business Candidate Analyst evidence"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
+      - name: Surface pipeline failure after diagnostics are persisted
+        if: steps.gate.outputs.run == 'true' && steps.pipeline.outputs.exit_code != '0'
+        shell: bash
+        run: |
+          echo "Daily pipeline failed with exit code ${{ steps.pipeline.outputs.exit_code }}; diagnostics were persisted before failing the workflow."
+          exit "${{ steps.pipeline.outputs.exit_code }}"
