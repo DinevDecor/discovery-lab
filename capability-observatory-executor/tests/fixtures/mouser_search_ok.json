@@ -1,0 +1,21 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "MouserPartNumber": "511-STM32F103C8T6",
+        "ManufacturerPartNumber": "STM32F103C8T6",
+        "Manufacturer": "STMicroelectronics",
+        "Description": "ARM Microcontrollers - MCU 32BIT Cortex M3",
+        "Availability": "15234 In Stock",
+        "LeadTime": "8 Weeks",
+        "Package": "LQFP-48",
+        "PriceBreaks": [
+          {"Quantity": 1, "Price": "$3.4200", "Currency": "USD"},
+          {"Quantity": 10, "Price": "$3.1000", "Currency": "USD"}
+        ]
+      }
+    ]
+  }
+}

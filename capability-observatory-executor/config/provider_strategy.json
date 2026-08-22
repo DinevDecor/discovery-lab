@@ -1,0 +1,32 @@
+{
+  "strategy_version": "2026-08-09-v1",
+  "source": "docs/architecture/reality-observatory-slice-03-executor-design.md, Section 4",
+  "note": "Machine-readable mirror of the design doc's provider table, for humans to review -- cli.py currently routes by the provider_* prefix in config/panel.json directly, not by reading this file, so a change here does not by itself change executor behavior. Kept as the single reviewable statement of intent.",
+  "providers": {
+    "provider_a_automationdirect": {
+      "method": "html",
+      "confidence": "medium",
+      "rationale": "No confirmed public self-serve API; a real but unverified API signal exists (an on-site 'Product API' reference and a community-forum thread this session could not reach). Gated by a reachability + robots.txt probe (automationdirect.py) before any capture is attempted."
+    },
+    "provider_b_grainger": {
+      "method": "human",
+      "confidence": "medium",
+      "rationale": "No public self-serve API found; only punchout/EDI for enterprise procurement accounts (4-6 week setup, not viable within a 30-day trial). HTML risk against likely enterprise-grade bot management unverified. Never automated."
+    },
+    "provider_c_mcmaster": {
+      "method": "human",
+      "confidence": "medium-high",
+      "rationale": "Publishes a 'Product Information API' (mcmaster.com/help/api/) explicitly for approved procurement customers only, not public self-serve signup. Industry reputation for aggressive anti-automation measures. Never automated."
+    },
+    "provider_d_digikey": {
+      "method": "api",
+      "confidence": "high",
+      "rationale": "Confirmed public, self-serve developer portal (developer.digikey.com), Product Information V4 with real-time pricing and availability."
+    },
+    "provider_e_mouser": {
+      "method": "api",
+      "confidence": "high",
+      "rationale": "Confirmed public, free, self-serve Search API (mouser.com/api-hub) explicitly returning price, availability, and lead time in one documented schema -- the most complete single-call match of the five providers."
+    }
+  }
+}

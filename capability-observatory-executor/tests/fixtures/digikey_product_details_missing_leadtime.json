@@ -1,0 +1,15 @@
+{
+  "Products": [
+    {
+      "Product": {
+        "ManufacturerProductNumber": "STM32F103C8T6",
+        "Manufacturer": {"Name": "STMicroelectronics"},
+        "Package": {"Value": "LQFP-48"},
+        "UnitPrice": 3.42,
+        "Currency": "USD",
+        "QuantityAvailable": 15234,
+        "ProductStatus": {"Status": "Active"}
+      }
+    }
+  ]
+}

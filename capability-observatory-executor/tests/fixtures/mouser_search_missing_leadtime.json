@@ -1,0 +1,17 @@
+{
+  "Errors": [],
+  "SearchResults": {
+    "NumberOfResult": 1,
+    "Parts": [
+      {
+        "MouserPartNumber": "511-STM32F103C8T6",
+        "ManufacturerPartNumber": "STM32F103C8T6",
+        "Manufacturer": "STMicroelectronics",
+        "Availability": "0 In Stock",
+        "LeadTime": "",
+        "Package": "LQFP-48",
+        "PriceBreaks": []
+      }
+    ]
+  }
+}
