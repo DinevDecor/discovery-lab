@@ -1,4 +1,4 @@
-# Business Candidate Analyst — 2026-08-22T11:00:13Z
+# Business Candidate Analyst — 2026-08-22T23:56:34Z
 
 This report is produced by a downstream, read-only consumer of Constraint Archaeology's published evidence (`observations.jsonl`, `anomalies.json`, `latest-evaluations.json`). It never modifies that evidence, never calls a model, and never searches the web — see `CONTRACT.md`. Two analytical modes are reported separately and are not merged conceptually.
 
@@ -6,181 +6,302 @@ This report is produced by a downstream, read-only consumer of Constraint Archae
 
 Mode A: Constraint Archaeology evidence → missing function / unmet need → business candidate.
 
-Anomalies considered: **564** · Opportunity groups formed: **454** · Registry events appended: **13** · Candidates on file: **166**
+Anomalies considered: **593** · Opportunity groups formed: **485** · Registry events appended: **18** · Candidates on file: **182**
 
 - **PROMISING**: 1 — BC-0039
 - **INVESTIGATE**: 0
 - **VALIDATING**: 2 — BC-0117, BC-0130
-- **WATCH**: 163 — BC-0001, BC-0002, BC-0003, BC-0004, BC-0005, BC-0006, BC-0007, BC-0008, BC-0009, BC-0010, BC-0011, BC-0012, BC-0013, BC-0014, BC-0015, BC-0016, BC-0017, BC-0018, BC-0019, BC-0020, BC-0021, BC-0022, BC-0023, BC-0024, BC-0025, BC-0026, BC-0027, BC-0028, BC-0029, BC-0030, BC-0031, BC-0032, BC-0033, BC-0034, BC-0035, BC-0036, BC-0037, BC-0038, BC-0040, BC-0041, BC-0042, BC-0043, BC-0044, BC-0045, BC-0046, BC-0047, BC-0048, BC-0049, BC-0062, BC-0063, BC-0064, BC-0065, BC-0066, BC-0067, BC-0068, BC-0069, BC-0070, BC-0071, BC-0072, BC-0073, BC-0074, BC-0075, BC-0076, BC-0077, BC-0078, BC-0079, BC-0080, BC-0081, BC-0082, BC-0083, BC-0084, BC-0085, BC-0086, BC-0087, BC-0088, BC-0089, BC-0090, BC-0091, BC-0101, BC-0102, BC-0103, BC-0104, BC-0105, BC-0106, BC-0107, BC-0108, BC-0109, BC-0110, BC-0111, BC-0112, BC-0113, BC-0116, BC-0118, BC-0119, BC-0120, BC-0121, BC-0122, BC-0123, BC-0124, BC-0125, BC-0128, BC-0129, BC-0131, BC-0132, BC-0133, BC-0137, BC-0138, BC-0139, BC-0140, BC-0141, BC-0142, BC-0143, BC-0144, BC-0145, BC-0146, BC-0147, BC-0148, BC-0149, BC-0150, BC-0151, BC-0152, BC-0153, BC-0154, BC-0155, BC-0156, BC-0157, BC-0158, BC-0162, BC-0163, BC-0164, BC-0165, BC-0166, BC-0167, BC-0168, BC-0169, BC-0170, BC-0171, BC-0172, BC-0173, BC-0175, BC-0176, BC-0177, BC-0178, BC-0179, BC-0180, BC-0181, BC-0182, BC-0184, BC-0185, BC-0186, BC-0187, BC-0188, BC-0189, BC-0190, BC-0191, BC-0192, BC-0193, BC-0194, BC-0195, BC-0196, BC-0197, BC-0198, BC-0199
+- **WATCH**: 179 — BC-0001, BC-0002, BC-0003, BC-0004, BC-0005, BC-0006, BC-0007, BC-0008, BC-0009, BC-0010, BC-0011, BC-0012, BC-0013, BC-0014, BC-0015, BC-0016, BC-0017, BC-0018, BC-0019, BC-0020, BC-0021, BC-0022, BC-0023, BC-0024, BC-0025, BC-0026, BC-0027, BC-0028, BC-0029, BC-0030, BC-0031, BC-0032, BC-0033, BC-0034, BC-0035, BC-0036, BC-0037, BC-0038, BC-0040, BC-0041, BC-0042, BC-0043, BC-0044, BC-0045, BC-0046, BC-0047, BC-0048, BC-0049, BC-0062, BC-0063, BC-0064, BC-0065, BC-0066, BC-0067, BC-0068, BC-0069, BC-0070, BC-0071, BC-0072, BC-0073, BC-0074, BC-0075, BC-0076, BC-0077, BC-0078, BC-0079, BC-0080, BC-0081, BC-0082, BC-0083, BC-0084, BC-0085, BC-0086, BC-0087, BC-0088, BC-0089, BC-0090, BC-0091, BC-0101, BC-0102, BC-0103, BC-0104, BC-0105, BC-0106, BC-0107, BC-0108, BC-0109, BC-0110, BC-0111, BC-0112, BC-0113, BC-0116, BC-0118, BC-0119, BC-0120, BC-0121, BC-0122, BC-0123, BC-0124, BC-0125, BC-0128, BC-0129, BC-0131, BC-0132, BC-0133, BC-0137, BC-0138, BC-0139, BC-0140, BC-0141, BC-0142, BC-0143, BC-0144, BC-0145, BC-0146, BC-0147, BC-0148, BC-0149, BC-0150, BC-0151, BC-0152, BC-0153, BC-0154, BC-0155, BC-0156, BC-0157, BC-0158, BC-0162, BC-0163, BC-0164, BC-0165, BC-0166, BC-0167, BC-0168, BC-0169, BC-0170, BC-0171, BC-0172, BC-0173, BC-0175, BC-0176, BC-0177, BC-0178, BC-0179, BC-0180, BC-0181, BC-0182, BC-0184, BC-0185, BC-0186, BC-0187, BC-0188, BC-0189, BC-0190, BC-0191, BC-0192, BC-0193, BC-0194, BC-0195, BC-0196, BC-0197, BC-0198, BC-0199, BC-0204, BC-0205, BC-0206, BC-0207, BC-0208, BC-0209, BC-0210, BC-0211, BC-0212, BC-0213, BC-0214, BC-0215, BC-0216, BC-0217, BC-0218, BC-0219
 - **REJECTED**: 0
 
-### New candidates (9)
+### New candidates (16)
 
-### BC-0191 — WATCH
-From anomalies: `ANOM-0527`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Developer manually runs terminal command 'lsof' to query port usage, interprets cryptic process names/PIDs, decides safety of termination, then executes kill command _(evidence: OBS-20260822-0006-a8c268)_
-  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260822-0006-a8c268)_
+### BC-0204 — WATCH
+From anomalies: `ANOM-0532`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Platform maintains persistent GitHub repository associations even after permission revocation, creating phantom dependency states; cleanup and state reconciliation after migrating between different deployment toolchains _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0006-a8c268)_
-  - ✓ **current_workaround**: EVIDENCED — Developer using Terminal with lsof command and manual process interpretation _(evidence: OBS-20260822-0006-a8c268)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Port already in use blocks new development server from starting, requires context-switching to Terminal and manual investigation _(evidence: OBS-20260822-0006-a8c268)_
-  - ✓ **potential_product_function**: EVIDENCED — Developer manually runs terminal command 'lsof' to query port usage, interprets cryptic process names/PIDs, decides safety of termination, then executes kill command _(evidence: OBS-20260822-0006-a8c268)_
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0033-0462c1)_
+  - ✓ **current_workaround**: EVIDENCED — Fly.io platform database storing GitHub repository attachments without self-service deletion interface; manual intervention by platform support staff to detach orphaned GitHub app connections _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **why_solutions_fail**: EVIDENCED — No self-service mechanism to detach repositories; admin intervention required to resolve stale integration state; state remnants from old deployment method create unremovable UI errors and prevent clean migration between deployment approaches _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **potential_product_function**: EVIDENCED — Platform maintains persistent GitHub repository associations even after permission revocation, creating phantom dependency states; cleanup and state reconciliation after migrating between different deployment toolchains _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260822-0006-a8c268)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0006-a8c268)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0006-a8c268)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
 
-### BC-0192 — WATCH
-From anomalies: `ANOM-0536`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Routing: distinguishing trivial acknowledgments from substantive queries before expensive compute _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **economic_consequence**: EVIDENCED — cost; costs _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **frequency**: EVIDENCED — every _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **current_workaround**: EVIDENCED — Full language model inference runs on every message regardless of complexity _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **why_solutions_fail**: EVIDENCED — No differentiation between high-value queries and low-value phatic expressions; uniform expensive processing _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **potential_product_function**: EVIDENCED — Routing: distinguishing trivial acknowledgments from substantive queries before expensive compute _(evidence: OBS-20260822-0020-cebe96)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0020-cebe96)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.72, min=0.72, bucket=MODERATE _(evidence: OBS-20260822-0020-cebe96)_
-
-### BC-0193 — WATCH
-From anomalies: `ANOM-0540`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Device ships in binary mode (only fully-open/fully-closed); percentage positioning requires manual calibration step _(evidence: OBS-20260822-0030-98d70b)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0030-98d70b)_
+### BC-0205 — WATCH
+From anomalies: `ANOM-0534, ANOM-0590`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Packaging systems must bridge local experimentation environments and deployed systems, handling dependency resolution, version pinning, and environment recreation; Researchers and data scientists must manually reconfigure experimental code to become reproducible, packaged applications suitable for production environments _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0030-98d70b)_
-  - ✓ **current_workaround**: EVIDENCED — User must discover and trigger calibration button or 10-second hold procedure before position control works _(evidence: OBS-20260822-0030-98d70b)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Fresh install percentage commands do nothing; short-press appears dead at limits; testing button accidentally triggers pairing mode and network dropout _(evidence: OBS-20260822-0030-98d70b)_
-  - ✓ **potential_product_function**: EVIDENCED — Device ships in binary mode (only fully-open/fully-closed); percentage positioning requires manual calibration step _(evidence: OBS-20260822-0030-98d70b)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0073-d2c2c0)_
+  - ✓ **current_workaround**: EVIDENCED — Manual reworking of Python packages and dependencies when transitioning from research to production; managing packaging incompatibilities across environments; Python packaging tools (pip, setuptools, etc.) used by researchers and engineers _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Research code fails to deploy reliably in production; packaging differences between development and production cause breaks; Research code that works locally fails to reproduce or deploy reliably in production environments _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **potential_product_function**: EVIDENCED — Packaging systems must bridge local experimentation environments and deployed systems, handling dependency resolution, version pinning, and environment recreation; Researchers and data scientists must manually reconfigure experimental code to become reproducible, packaged applications suitable for production environments _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260822-0030-98d70b)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0030-98d70b)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0030-98d70b)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.5, min=0.4, bucket=LOW _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
 
-### BC-0194 — WATCH
-From anomalies: `ANOM-0541`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — users need documented policies on usage limit reset behavior when changing subscription tiers to make informed purchase decisions _(evidence: OBS-20260822-0031-f816eb)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0031-f816eb)_
+### BC-0206 — WATCH
+From anomalies: `ANOM-0542, ANOM-0583`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Deployment system searches for config file in main branch regardless of selected deployment branch; configuration file discovery must search across different branches to match deployment target _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0055-d19028)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0031-f816eb)_
-  - ✓ **current_workaround**: EVIDENCED — requesting documentation from vendor support multiple times, searching help center manually, asking community forums _(evidence: OBS-20260822-0031-f816eb)_
-  - ✓ **why_solutions_fail**: EVIDENCED — support cannot provide documentation link after six requests, policy exists but is not publicly written down _(evidence: OBS-20260822-0031-f816eb)_
-  - ✓ **potential_product_function**: EVIDENCED — users need documented policies on usage limit reset behavior when changing subscription tiers to make informed purchase decisions _(evidence: OBS-20260822-0031-f816eb)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0055-d19028)_
+  - ✓ **current_workaround**: EVIDENCED — Fly.io UI GitHub integration with branch selection and config path specification; developer manually ensuring staging configuration files exist in main branch despite deploying from staging branch _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Config file not found error when deploying from staging branch with fly-staging.toml present in staging but not main; deployment fails with 'Config file not found' error when config exists in deployment branch but not in main _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **potential_product_function**: EVIDENCED — Deployment system searches for config file in main branch regardless of selected deployment branch; configuration file discovery must search across different branches to match deployment target _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0031-f816eb)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0031-f816eb)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0031-f816eb)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
 
-### BC-0195 — WATCH
-From anomalies: `ANOM-0542`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — platform abuse filter blocks legitimate app names containing branded keywords like 'github' _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0033-eeb152)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **current_workaround**: EVIDENCED — manual allowlist request via support forum _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **why_solutions_fail**: EVIDENCED — false positive: abuse filter blocks app name 'programmable-authority-github-session-v1' containing 'github' string despite legitimate use case _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **potential_product_function**: EVIDENCED — platform abuse filter blocks legitimate app names containing branded keywords like 'github' _(evidence: OBS-20260822-0033-eeb152)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.82, min=0.82, bucket=HIGH _(evidence: OBS-20260822-0033-eeb152)_
-
-### BC-0196 — WATCH
-From anomalies: `ANOM-0544`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — OAuth redirect flow requires localhost callback URL to complete authentication handshake between Spotify and local Home Assistant instance _(evidence: OBS-20260822-0041-a3808b)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0041-a3808b)_
-  - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0041-a3808b)_
-  - ✓ **current_workaround**: EVIDENCED — Manual browser-based OAuth flow with redirect URLs configured in Spotify developer settings _(evidence: OBS-20260822-0041-a3808b)_
-  - ✓ **why_solutions_fail**: EVIDENCED — URL mismatch between configured redirect (my.home-assistant.io/redirect/oauth) and actual callback attempt (127.0.0.1:5588/login) causes authentication to break _(evidence: OBS-20260822-0041-a3808b)_
-  - ✓ **potential_product_function**: EVIDENCED — OAuth redirect flow requires localhost callback URL to complete authentication handshake between Spotify and local Home Assistant instance _(evidence: OBS-20260822-0041-a3808b)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260822-0041-a3808b)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0041-a3808b)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260822-0041-a3808b)_
-
-### BC-0197 — WATCH
-From anomalies: `ANOM-0556`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Developer spends time re-explaining previously discovered root causes and architectural lessons to AI agent across multi-month development cycles _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **economic_consequence**: EVIDENCED — spend _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **frequency**: EVIDENCED — again _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **current_workaround**: EVIDENCED — Developer must repeatedly guide AI through same debugging cycles; static context documents (AGENTS.md, architecture docs, conversation history) don't capture experiential learning from past failures _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Agent initially implements UI panels with hide/show causing refresh/lifecycle problems, spends rounds patching symptoms; weeks later encounters similar situation and makes same mistake again despite previous debugging effort _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **potential_product_function**: EVIDENCED — Developer spends time re-explaining previously discovered root causes and architectural lessons to AI agent across multi-month development cycles _(evidence: OBS-20260822-0064-4aa2be)_
-  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
-  - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0064-4aa2be)_
-  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0064-4aa2be)_
-
-### BC-0198 — WATCH
+### BC-0207 — WATCH
 From anomalies: `ANOM-0560`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — developer cannot fully verify what AI model has generated in security-sensitive software _(evidence: OBS-20260822-0069-6a6ed5)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0069-6a6ed5)_
+  - ✓ **underlying_job_or_problem**: EVIDENCED — manually detecting GPU failures, re-submitting jobs, waiting for new allocations, tracking which runs succeeded _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **economic_consequence**: EVIDENCED — paid; pay ; spend _(evidence: OBS-20260822-0001-d0d0ef)_
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **current_workaround**: EVIDENCED — data scientists and ML engineers performing manual retry loops and monitoring _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **why_solutions_fail**: EVIDENCED — researchers pay for failed GPU hours, spend time monitoring runs, manually restart jobs, lose progress when instances fail _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **potential_product_function**: EVIDENCED — manually detecting GPU failures, re-submitting jobs, waiting for new allocations, tracking which runs succeeded _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **willingness_to_pay**: EVIDENCED — paid _(evidence: OBS-20260822-0001-d0d0ef)_
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['hacker_news'] _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0001-d0d0ef)_
+
+### BC-0208 — WATCH
+From anomalies: `ANOM-0564`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Static egress IPs can lose routing to large portions of the internet; operator must manually diagnose connection failures, test from non-static-IP machines for comparison, and release/reassign the IP to restore connectivity _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260822-0011-057a50)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0069-6a6ed5)_
-  - ✓ **current_workaround**: EVIDENCED — developer manual code review of AI-assisted code _(evidence: OBS-20260822-0069-6a6ed5)_
-  - ✓ **why_solutions_fail**: EVIDENCED — inability to fully verify security properties of AI-generated code before production deployment _(evidence: OBS-20260822-0069-6a6ed5)_
-  - ✓ **potential_product_function**: EVIDENCED — developer cannot fully verify what AI model has generated in security-sensitive software _(evidence: OBS-20260822-0069-6a6ed5)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **current_workaround**: EVIDENCED — DevOps engineer or site reliability engineer running diagnostic curl commands, comparing egress behaviors across machines, and performing manual IP release operations via CLI _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Egress IP routing failure: outbound TCP handshakes never complete to most destinations while same requests succeed from machines without static IPs; releasing the static IP immediately restores connectivity _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **potential_product_function**: EVIDENCED — Static egress IPs can lose routing to large portions of the internet; operator must manually diagnose connection failures, test from non-static-IP machines for comparison, and release/reassign the IP to restore connectivity _(evidence: OBS-20260822-0011-057a50)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['dev:discuss'] _(evidence: OBS-20260822-0069-6a6ed5)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0069-6a6ed5)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0011-057a50)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0069-6a6ed5)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260822-0011-057a50)_
 
-### BC-0199 — WATCH
-From anomalies: `ANOM-0561`
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Teams attempting to assess account health and readiness for renewals by manually recalling scattered conversations across multiple channels _(evidence: OBS-20260822-0072-0365ee)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0072-0365ee)_
+### BC-0209 — WATCH
+From anomalies: `ANOM-0568`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual credential sharing and custom glue code development for each agent platform to access different life data sources _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **economic_consequence**: EVIDENCED — cost; paid _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **frequency**: EVIDENCED — every _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **current_workaround**: EVIDENCED — Developers writing custom integration code for each agent harness, sharing live tokens directly with agents _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Agents inefficiently rediscover APIs, developers duplicate integration work across platforms, credentials exposed without granular control _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual credential sharing and custom glue code development for each agent platform to access different life data sources _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **willingness_to_pay**: EVIDENCED — paid _(evidence: OBS-20260822-0028-0aef52)_
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0028-0aef52)_
+
+### BC-0210 — WATCH
+From anomalies: `ANOM-0569`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Converting nested list structures into contiguous memory buffers for fast cross-process transmission _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0029-601ae0)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0072-0365ee)_
-  - ✓ **current_workaround**: EVIDENCED — Conversations in shared Slack/Teams channels with separate legacy support ticketing tools that don't connect to messaging platforms _(evidence: OBS-20260822-0072-0365ee)_
-  - ✓ **why_solutions_fail**: EVIDENCED — Account health assessment requires guessing from usage data and whoever remembered the last conversation; AI models operating on fragmented data _(evidence: OBS-20260822-0072-0365ee)_
-  - ✓ **potential_product_function**: EVIDENCED — Teams attempting to assess account health and readiness for renewals by manually recalling scattered conversations across multiple channels _(evidence: OBS-20260822-0072-0365ee)_
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **current_workaround**: EVIDENCED — Nested list[list[float|int|str|None]] serialized via pickle.dumps(), requiring manual Python loop to flatten into binary array _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Bytecode execution over nested loops creates performance wall; standard library lacks native C-speed 2D-to-buffer flattening, forcing custom userland implementation with complex edge case handling _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **potential_product_function**: EVIDENCED — Converting nested list structures into contiguous memory buffers for fast cross-process transmission _(evidence: OBS-20260822-0029-601ae0)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260822-0072-0365ee)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0072-0365ee)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0029-601ae0)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.3, min=0.3, bucket=LOW _(evidence: OBS-20260822-0072-0365ee)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260822-0029-601ae0)_
 
-### Strengthened (1)
+### BC-0211 — WATCH
+From anomalies: `ANOM-0570`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — diagnosing network-accessible services requires physical access to the device and router inspection when remote interfaces fail _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0030-bf586c)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **current_workaround**: EVIDENCED — physical monitor connection, router admin interface checks, observing LED patterns _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **why_solutions_fail**: EVIDENCED — interface loads extremely slowly with connection lost errors while device appears online in router _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **potential_product_function**: EVIDENCED — diagnosing network-accessible services requires physical access to the device and router inspection when remote interfaces fail _(evidence: OBS-20260822-0030-bf586c)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0030-bf586c)_
 
-- **BC-0039**: VALIDATING → PROMISING (anomalies: `ANOM-0106, ANOM-0219, ANOM-0310, ANOM-0401, ANOM-0443, ANOM-0545`)
+### BC-0212 — WATCH
+From anomalies: `ANOM-0572`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — certificate validation and DNS resolution for internal network services requiring secure connections _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0032-9c9ac2)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **current_workaround**: EVIDENCED — manual DNS entries in router, Cosmos Cloud insecure LAN toggle, certificate renewal cycles _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **why_solutions_fail**: EVIDENCED — local HTTPS access alternates between working and certificate failures; service becomes unreliable for bandwidth-intensive operations _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **potential_product_function**: EVIDENCED — certificate validation and DNS resolution for internal network services requiring secure connections _(evidence: OBS-20260822-0032-9c9ac2)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0032-9c9ac2)_
+
+### BC-0213 — WATCH
+From anomalies: `ANOM-0576`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — specialized quantization format and custom llama.cpp fork required to achieve usable inference speeds on AMD Strix Halo APU _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0043-d0e4d8)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **current_workaround**: EVIDENCED — ROCmFPX fork with ROCmFP4 quantization; standard ROCm/llama.cpp insufficient for performance _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **why_solutions_fail**: EVIDENCED — without ROCmFP4 quantization and ROCmFPX fork, dense models run too slowly on Strix Halo to be practical _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **potential_product_function**: EVIDENCED — specialized quantization format and custom llama.cpp fork required to achieve usable inference speeds on AMD Strix Halo APU _(evidence: OBS-20260822-0043-d0e4d8)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.82, min=0.82, bucket=HIGH _(evidence: OBS-20260822-0043-d0e4d8)_
+
+### BC-0214 — WATCH
+From anomalies: `ANOM-0578`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — preventing duplicate charges when async jobs retry after failures while maintaining accurate customer usage tracking _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **economic_consequence**: EVIDENCED — credit; credits _(evidence: OBS-20260822-0048-958f5e)_
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **current_workaround**: EVIDENCED — backend developers manually implementing idempotency and state management logic for each credit-consuming operation _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **why_solutions_fail**: EVIDENCED — duplicate charges on retry, lost credit state, inaccurate usage tracking across job failures and duplicate requests _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **potential_product_function**: EVIDENCED — preventing duplicate charges when async jobs retry after failures while maintaining accurate customer usage tracking _(evidence: OBS-20260822-0048-958f5e)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['dev:startup'] _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0048-958f5e)_
+
+### BC-0215 — WATCH
+From anomalies: `ANOM-0581`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Internal worker routing architecture determines execution duration limits: durable worker routing (wfr_/SAServer) previously allowed >100min chat sessions, but current ordinary chat receives foreground/non-Temporal routing terminating at ~26min, while Work mode still receives worker handoff _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0053-476dea)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **current_workaround**: EVIDENCED — OpenAI ChatGPT Plus product differentiating ordinary Chat (26min foreground execution class) from Work mode (durable worker routing with temporal_conversation_turn:true) _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Execution environment forcibly ends tool interaction before acceptance gates reached; 31/1,200 required ledger rows completed when terminated at 26m43s; reproduced across web and Windows desktop clients _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **potential_product_function**: EVIDENCED — Internal worker routing architecture determines execution duration limits: durable worker routing (wfr_/SAServer) previously allowed >100min chat sessions, but current ordinary chat receives foreground/non-Temporal routing terminating at ~26min, while Work mode still receives worker handoff _(evidence: OBS-20260822-0053-476dea)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260822-0053-476dea)_
+
+### BC-0216 — WATCH
+From anomalies: `ANOM-0586`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual memory control prevents AI from auto-inferring/synthesizing story elements that violate authorial intent or narrative canon _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0064-a4e099)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **current_workaround**: EVIDENCED — ChatGPT Legacy memory system with explicit user-controlled memory saves (no automatic inference) _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Automatic memory synthesis cannot distinguish narrative intention from conversational content, corrupting story universes maintained over weeks/months _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual memory control prevents AI from auto-inferring/synthesizing story elements that violate authorial intent or narrative canon _(evidence: OBS-20260822-0064-a4e099)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.82, min=0.82, bucket=HIGH _(evidence: OBS-20260822-0064-a4e099)_
+
+### BC-0217 — WATCH
+From anomalies: `ANOM-0588`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — pattern matching across thousands of lines of unfamiliar driver code to locate logic errors _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0068-09ac9f)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **current_workaround**: EVIDENCED — manual code review by maintainer (Linus Torvalds) reading through Intel GPU driver code _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **why_solutions_fail**: EVIDENCED — bottleneck on maintainer time/expertise for obscure driver issues; slower bug resolution in unfamiliar subsystems _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **potential_product_function**: EVIDENCED — pattern matching across thousands of lines of unfamiliar driver code to locate logic errors _(evidence: OBS-20260822-0068-09ac9f)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['lobsters'] _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0068-09ac9f)_
+
+### BC-0218 — WATCH
+From anomalies: `ANOM-0589`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Independent runtime verification of code changes made by autonomous coding agents _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0072-54d5cb)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **current_workaround**: EVIDENCED — Developer manually checking runtime behavior after agent makes code changes _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Agent claims successful fix but endpoint still returns 500 error without detection _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **potential_product_function**: EVIDENCED — Independent runtime verification of code changes made by autonomous coding agents _(evidence: OBS-20260822-0072-54d5cb)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0072-54d5cb)_
+
+### BC-0219 — WATCH
+From anomalies: `ANOM-0592`
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual copying/pasting of AI-generated text into external note-taking systems, with loss of conversation context and linkage _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0075-be63b8)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **current_workaround**: EVIDENCED — Users manually copy valuable ChatGPT response fragments to external tools (notes apps, documents) without source links or searchability _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Valuable insights generated in conversations are lost or require manual extraction and organization in separate systems _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual copying/pasting of AI-generated text into external note-taking systems, with loss of conversation context and linkage _(evidence: OBS-20260822-0075-be63b8)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260822-0075-be63b8)_
+
+### Strengthened (0)
+
+_None this run._
+
 
 ### Weakened (0)
 
 _None this run._
 
 
-### Merged (1)
+### Merged (0)
 
-- **BC-0083** merged into **BC-0039** (bridging anomalies: `ANOM-0106, ANOM-0219, ANOM-0310, ANOM-0401, ANOM-0443, ANOM-0545`)
+_None this run._
+
 
 ### Rejected (0)
 
@@ -192,31 +313,31 @@ _None this run._
 _None this run._
 
 
-### Evidence seen but not yet a WATCH candidate (289)
+### Evidence seen but not yet a WATCH candidate (302)
 
 Anomaly groups that did not clear the minimum bar (identifiable buyer + current workaround + why existing solutions fail, all EVIDENCED). Recorded here for transparency only — nothing is written to the registry for these.
 
 - anomalies `ANOM-0006` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0014, ANOM-0027` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0016, ANOM-0029` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0017` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0013` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0015, ANOM-0027` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0016` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0018` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0019` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0020` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0021` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0032` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0030, ANOM-0041` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0033` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0034` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0035` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0036` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0037` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0039` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0038` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0040` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0042` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0042, ANOM-0058` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0043, ANOM-0059` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0044, ANOM-0060` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0045, ANOM-0061` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0044` — missing: ['identifiable_buyer']
+- anomalies `ANOM-0045` — missing: ['identifiable_buyer']
 - anomalies `ANOM-0046` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0047` — missing: ['identifiable_buyer']
-- anomalies `ANOM-0049, ANOM-0062` — missing: ['identifiable_buyer']
-- … and 269 more
+- anomalies `ANOM-0048, ANOM-0060` — missing: ['identifiable_buyer']
+- … and 282 more
 
 ### Why — full dimension detail for every touched candidate
 
@@ -2605,20 +2726,20 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260820-0029-20c6f7)_
 
 ### BC-0186 — WATCH
-  - ✓ **underlying_job_or_problem**: EVIDENCED — Network path setup between VMs that haven't communicated recently; On-demand route/tunnel setup between Machines that haven't exchanged packets recently _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
-  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0066-961841)_
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Network path setup between VMs that haven't communicated recently; On-demand route/tunnel setup between Machines that haven't exchanged packets recently; On-demand route/tunnel setup in overlay network infrastructure delays initial packet delivery _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
-  - ✓ **frequency**: EVIDENCED — every _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
-  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260820-0030-e0902b)_
-  - ✓ **current_workaround**: EVIDENCED — Application developers implementing keepalive traffic or holding permanent connections; Dropping first SYN packet while 6PN route/tunnel comes up, causing 1-3 second kernel retransmit delay _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
-  - ✓ **why_solutions_fail**: EVIDENCED — First SYN packet dropped while 6PN route comes up (~1s setup time); requires retransmit; no application workaround for fresh Machine boots; First TCP SYN is dropped inside 6PN after path idle, kernel retransmits after 1s, path takes ~1s to establish _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
-  - ✓ **potential_product_function**: EVIDENCED — Network path setup between VMs that haven't communicated recently; On-demand route/tunnel setup between Machines that haven't exchanged packets recently _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
+  - ✓ **frequency**: EVIDENCED — every _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0077-bd9c1c)_
+  - ✓ **current_workaround**: EVIDENCED — Application developers implementing keepalive traffic or holding permanent connections; Developer writes application-level keepalive logic (connection pools with tcp_keepalives, permanent min_connections) to prevent path decay; Dropping first SYN packet while 6PN route/tunnel comes up, causing 1-3 second kernel retransmit delay _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
+  - ✓ **why_solutions_fail**: EVIDENCED — First SYN packet dropped while 6PN route comes up (~1s setup time); requires retransmit; no application workaround for fresh Machine boots; First TCP SYN is dropped inside 6PN after path idle, kernel retransmits after 1s, path takes ~1s to establish; SYN packet dropped during ~1 second route setup period, kernel retransmits after 1 second, total 2+ second delay; happens every machine boot and after variable idle periods _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
+  - ✓ **potential_product_function**: EVIDENCED — Network path setup between VMs that haven't communicated recently; On-demand route/tunnel setup between Machines that haven't exchanged packets recently; On-demand route/tunnel setup in overlay network infrastructure delays initial packet delivery _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=3, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.95, min=0.95, bucket=HIGH _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.95, min=0.95, bucket=HIGH _(evidence: OBS-20260820-0030-e0902b, OBS-20260822-0066-961841, OBS-20260822-0077-bd9c1c)_
 
 ### BC-0187 — WATCH
   - ✓ **underlying_job_or_problem**: EVIDENCED — Developers must manually reason about thread safety, explicitly declare shared objects, and handle race conditions when writing concurrent Python code _(evidence: OBS-20260820-0037-d70799)_
@@ -2749,20 +2870,20 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0031-f816eb)_
 
 ### BC-0195 — WATCH
-  - ✓ **underlying_job_or_problem**: EVIDENCED — platform abuse filter blocks legitimate app names containing branded keywords like 'github' _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0033-eeb152)_
+  - ✓ **underlying_job_or_problem**: EVIDENCED — abuse filter blocks legitimate app names containing vendor/brand strings (github) to prevent phishing; platform abuse filter blocks legitimate app names containing branded keywords like 'github' _(evidence: OBS-20260822-0033-eeb152, OBS-20260822-0044-3ca5b6)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0044-3ca5b6)_
   - · **economic_consequence**: INSUFFICIENT_DATA — None
   - · **frequency**: INSUFFICIENT_DATA — None
-  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **current_workaround**: EVIDENCED — manual allowlist request via support forum _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **why_solutions_fail**: EVIDENCED — false positive: abuse filter blocks app name 'programmable-authority-github-session-v1' containing 'github' string despite legitimate use case _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **potential_product_function**: EVIDENCED — platform abuse filter blocks legitimate app names containing branded keywords like 'github' _(evidence: OBS-20260822-0033-eeb152)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0044-3ca5b6)_
+  - ✓ **current_workaround**: EVIDENCED — manual allowlist request to platform support team; manual allowlist request via support forum _(evidence: OBS-20260822-0033-eeb152, OBS-20260822-0044-3ca5b6)_
+  - ✓ **why_solutions_fail**: EVIDENCED — false positive: abuse filter blocks app name 'programmable-authority-github-session-v1' containing 'github' string despite legitimate use case; false positive: abuse prevention system blocks non-phishing app containing 'github' substring _(evidence: OBS-20260822-0033-eeb152, OBS-20260822-0044-3ca5b6)_
+  - ✓ **potential_product_function**: EVIDENCED — abuse filter blocks legitimate app names containing vendor/brand strings (github) to prevent phishing; platform abuse filter blocks legitimate app names containing branded keywords like 'github' _(evidence: OBS-20260822-0033-eeb152, OBS-20260822-0044-3ca5b6)_
   - · **willingness_to_pay**: INSUFFICIENT_DATA — None
   - · **scalability**: INSUFFICIENT_DATA — None
-  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0033-eeb152)_
-  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0033-eeb152)_
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0033-eeb152, OBS-20260822-0044-3ca5b6)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0033-eeb152, OBS-20260822-0044-3ca5b6)_
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
-  - ✓ **confidence_quality**: EVIDENCED — mean=0.82, min=0.82, bucket=HIGH _(evidence: OBS-20260822-0033-eeb152)_
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.835, min=0.82, bucket=HIGH _(evidence: OBS-20260822-0033-eeb152, OBS-20260822-0044-3ca5b6)_
 
 ### BC-0196 — WATCH
   - ✓ **underlying_job_or_problem**: EVIDENCED — OAuth redirect flow requires localhost callback URL to complete authentication handshake between Spotify and local Home Assistant instance _(evidence: OBS-20260822-0041-a3808b)_
@@ -2828,11 +2949,267 @@ Anomaly groups that did not clear the minimum bar (identifiable buyer + current 
   - ✓ **contradictory_evidence**: EVIDENCED — none_observed
   - ✓ **confidence_quality**: EVIDENCED — mean=0.3, min=0.3, bucket=LOW _(evidence: OBS-20260822-0072-0365ee)_
 
+### BC-0204 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Platform maintains persistent GitHub repository associations even after permission revocation, creating phantom dependency states; cleanup and state reconciliation after migrating between different deployment toolchains _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0033-0462c1)_
+  - ✓ **current_workaround**: EVIDENCED — Fly.io platform database storing GitHub repository attachments without self-service deletion interface; manual intervention by platform support staff to detach orphaned GitHub app connections _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **why_solutions_fail**: EVIDENCED — No self-service mechanism to detach repositories; admin intervention required to resolve stale integration state; state remnants from old deployment method create unremovable UI errors and prevent clean migration between deployment approaches _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **potential_product_function**: EVIDENCED — Platform maintains persistent GitHub repository associations even after permission revocation, creating phantom dependency states; cleanup and state reconciliation after migrating between different deployment toolchains _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0022-5f666d, OBS-20260822-0033-0462c1)_
+
+### BC-0205 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Packaging systems must bridge local experimentation environments and deployed systems, handling dependency resolution, version pinning, and environment recreation; Researchers and data scientists must manually reconfigure experimental code to become reproducible, packaged applications suitable for production environments _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0073-d2c2c0)_
+  - ✓ **current_workaround**: EVIDENCED — Manual reworking of Python packages and dependencies when transitioning from research to production; managing packaging incompatibilities across environments; Python packaging tools (pip, setuptools, etc.) used by researchers and engineers _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Research code fails to deploy reliably in production; packaging differences between development and production cause breaks; Research code that works locally fails to reproduce or deploy reliably in production environments _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **potential_product_function**: EVIDENCED — Packaging systems must bridge local experimentation environments and deployed systems, handling dependency resolution, version pinning, and environment recreation; Researchers and data scientists must manually reconfigure experimental code to become reproducible, packaged applications suitable for production environments _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.5, min=0.4, bucket=LOW _(evidence: OBS-20260822-0029-80446a, OBS-20260822-0073-d2c2c0)_
+
+### BC-0206 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Deployment system searches for config file in main branch regardless of selected deployment branch; configuration file discovery must search across different branches to match deployment target _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0055-d19028)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0055-d19028)_
+  - ✓ **current_workaround**: EVIDENCED — Fly.io UI GitHub integration with branch selection and config path specification; developer manually ensuring staging configuration files exist in main branch despite deploying from staging branch _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Config file not found error when deploying from staging branch with fly-staging.toml present in staging but not main; deployment fails with 'Config file not found' error when config exists in deployment branch but not in main _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **potential_product_function**: EVIDENCED — Deployment system searches for config file in main branch regardless of selected deployment branch; configuration file discovery must search across different branches to match deployment target _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=2, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0044-4a0f52, OBS-20260822-0055-d19028)_
+
+### BC-0207 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — manually detecting GPU failures, re-submitting jobs, waiting for new allocations, tracking which runs succeeded _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **economic_consequence**: EVIDENCED — paid; pay ; spend _(evidence: OBS-20260822-0001-d0d0ef)_
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **current_workaround**: EVIDENCED — data scientists and ML engineers performing manual retry loops and monitoring _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **why_solutions_fail**: EVIDENCED — researchers pay for failed GPU hours, spend time monitoring runs, manually restart jobs, lose progress when instances fail _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **potential_product_function**: EVIDENCED — manually detecting GPU failures, re-submitting jobs, waiting for new allocations, tracking which runs succeeded _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **willingness_to_pay**: EVIDENCED — paid _(evidence: OBS-20260822-0001-d0d0ef)_
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['hacker_news'] _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0001-d0d0ef)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0001-d0d0ef)_
+
+### BC-0208 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Static egress IPs can lose routing to large portions of the internet; operator must manually diagnose connection failures, test from non-static-IP machines for comparison, and release/reassign the IP to restore connectivity _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **pain_severity**: EVIDENCED — MODERATE _(evidence: OBS-20260822-0011-057a50)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **current_workaround**: EVIDENCED — DevOps engineer or site reliability engineer running diagnostic curl commands, comparing egress behaviors across machines, and performing manual IP release operations via CLI _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Egress IP routing failure: outbound TCP handshakes never complete to most destinations while same requests succeed from machines without static IPs; releasing the static IP immediately restores connectivity _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **potential_product_function**: EVIDENCED — Static egress IPs can lose routing to large portions of the internet; operator must manually diagnose connection failures, test from non-static-IP machines for comparison, and release/reassign the IP to restore connectivity _(evidence: OBS-20260822-0011-057a50)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:fly-io'] _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0011-057a50)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260822-0011-057a50)_
+
+### BC-0209 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual credential sharing and custom glue code development for each agent platform to access different life data sources _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **economic_consequence**: EVIDENCED — cost; paid _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **frequency**: EVIDENCED — every _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **current_workaround**: EVIDENCED — Developers writing custom integration code for each agent harness, sharing live tokens directly with agents _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Agents inefficiently rediscover APIs, developers duplicate integration work across platforms, credentials exposed without granular control _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual credential sharing and custom glue code development for each agent platform to access different life data sources _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **willingness_to_pay**: EVIDENCED — paid _(evidence: OBS-20260822-0028-0aef52)_
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0028-0aef52)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0028-0aef52)_
+
+### BC-0210 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Converting nested list structures into contiguous memory buffers for fast cross-process transmission _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0029-601ae0)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **current_workaround**: EVIDENCED — Nested list[list[float|int|str|None]] serialized via pickle.dumps(), requiring manual Python loop to flatten into binary array _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Bytecode execution over nested loops creates performance wall; standard library lacks native C-speed 2D-to-buffer flattening, forcing custom userland implementation with complex edge case handling _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **potential_product_function**: EVIDENCED — Converting nested list structures into contiguous memory buffers for fast cross-process transmission _(evidence: OBS-20260822-0029-601ae0)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:python'] _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0029-601ae0)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260822-0029-601ae0)_
+
+### BC-0211 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — diagnosing network-accessible services requires physical access to the device and router inspection when remote interfaces fail _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0030-bf586c)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **current_workaround**: EVIDENCED — physical monitor connection, router admin interface checks, observing LED patterns _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **why_solutions_fail**: EVIDENCED — interface loads extremely slowly with connection lost errors while device appears online in router _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **potential_product_function**: EVIDENCED — diagnosing network-accessible services requires physical access to the device and router inspection when remote interfaces fail _(evidence: OBS-20260822-0030-bf586c)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:home-assistant'] _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0030-bf586c)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0030-bf586c)_
+
+### BC-0212 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — certificate validation and DNS resolution for internal network services requiring secure connections _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0032-9c9ac2)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **current_workaround**: EVIDENCED — manual DNS entries in router, Cosmos Cloud insecure LAN toggle, certificate renewal cycles _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **why_solutions_fail**: EVIDENCED — local HTTPS access alternates between working and certificate failures; service becomes unreliable for bandwidth-intensive operations _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **potential_product_function**: EVIDENCED — certificate validation and DNS resolution for internal network services requiring secure connections _(evidence: OBS-20260822-0032-9c9ac2)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0032-9c9ac2)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.85, min=0.85, bucket=HIGH _(evidence: OBS-20260822-0032-9c9ac2)_
+
+### BC-0213 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — specialized quantization format and custom llama.cpp fork required to achieve usable inference speeds on AMD Strix Halo APU _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0043-d0e4d8)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **current_workaround**: EVIDENCED — ROCmFPX fork with ROCmFP4 quantization; standard ROCm/llama.cpp insufficient for performance _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **why_solutions_fail**: EVIDENCED — without ROCmFP4 quantization and ROCmFPX fork, dense models run too slowly on Strix Halo to be practical _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **potential_product_function**: EVIDENCED — specialized quantization format and custom llama.cpp fork required to achieve usable inference speeds on AMD Strix Halo APU _(evidence: OBS-20260822-0043-d0e4d8)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:level1techs'] _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0043-d0e4d8)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.82, min=0.82, bucket=HIGH _(evidence: OBS-20260822-0043-d0e4d8)_
+
+### BC-0214 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — preventing duplicate charges when async jobs retry after failures while maintaining accurate customer usage tracking _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **economic_consequence**: EVIDENCED — credit; credits _(evidence: OBS-20260822-0048-958f5e)_
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **current_workaround**: EVIDENCED — backend developers manually implementing idempotency and state management logic for each credit-consuming operation _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **why_solutions_fail**: EVIDENCED — duplicate charges on retry, lost credit state, inaccurate usage tracking across job failures and duplicate requests _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **potential_product_function**: EVIDENCED — preventing duplicate charges when async jobs retry after failures while maintaining accurate customer usage tracking _(evidence: OBS-20260822-0048-958f5e)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['dev:startup'] _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0048-958f5e)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0048-958f5e)_
+
+### BC-0215 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Internal worker routing architecture determines execution duration limits: durable worker routing (wfr_/SAServer) previously allowed >100min chat sessions, but current ordinary chat receives foreground/non-Temporal routing terminating at ~26min, while Work mode still receives worker handoff _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0053-476dea)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **current_workaround**: EVIDENCED — OpenAI ChatGPT Plus product differentiating ordinary Chat (26min foreground execution class) from Work mode (durable worker routing with temporal_conversation_turn:true) _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Execution environment forcibly ends tool interaction before acceptance gates reached; 31/1,200 required ledger rows completed when terminated at 26m43s; reproduced across web and Windows desktop clients _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **potential_product_function**: EVIDENCED — Internal worker routing architecture determines execution duration limits: durable worker routing (wfr_/SAServer) previously allowed >100min chat sessions, but current ordinary chat receives foreground/non-Temporal routing terminating at ~26min, while Work mode still receives worker handoff _(evidence: OBS-20260822-0053-476dea)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0053-476dea)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.92, min=0.92, bucket=HIGH _(evidence: OBS-20260822-0053-476dea)_
+
+### BC-0216 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual memory control prevents AI from auto-inferring/synthesizing story elements that violate authorial intent or narrative canon _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0064-a4e099)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **current_workaround**: EVIDENCED — ChatGPT Legacy memory system with explicit user-controlled memory saves (no automatic inference) _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Automatic memory synthesis cannot distinguish narrative intention from conversational content, corrupting story universes maintained over weeks/months _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual memory control prevents AI from auto-inferring/synthesizing story elements that violate authorial intent or narrative canon _(evidence: OBS-20260822-0064-a4e099)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0064-a4e099)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.82, min=0.82, bucket=HIGH _(evidence: OBS-20260822-0064-a4e099)_
+
+### BC-0217 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — pattern matching across thousands of lines of unfamiliar driver code to locate logic errors _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0068-09ac9f)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — operator _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **current_workaround**: EVIDENCED — manual code review by maintainer (Linus Torvalds) reading through Intel GPU driver code _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **why_solutions_fail**: EVIDENCED — bottleneck on maintainer time/expertise for obscure driver issues; slower bug resolution in unfamiliar subsystems _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **potential_product_function**: EVIDENCED — pattern matching across thousands of lines of unfamiliar driver code to locate logic errors _(evidence: OBS-20260822-0068-09ac9f)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['lobsters'] _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0068-09ac9f)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0068-09ac9f)_
+
+### BC-0218 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Independent runtime verification of code changes made by autonomous coding agents _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **pain_severity**: EVIDENCED — LOW _(evidence: OBS-20260822-0072-54d5cb)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **current_workaround**: EVIDENCED — Developer manually checking runtime behavior after agent makes code changes _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Agent claims successful fix but endpoint still returns 500 error without detection _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **potential_product_function**: EVIDENCED — Independent runtime verification of code changes made by autonomous coding agents _(evidence: OBS-20260822-0072-54d5cb)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['product_hunt'] _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0072-54d5cb)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.4, min=0.4, bucket=LOW _(evidence: OBS-20260822-0072-54d5cb)_
+
+### BC-0219 — WATCH
+  - ✓ **underlying_job_or_problem**: EVIDENCED — Manual copying/pasting of AI-generated text into external note-taking systems, with loss of conversation context and linkage _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **pain_severity**: EVIDENCED — SEVERE _(evidence: OBS-20260822-0075-be63b8)_
+  - · **economic_consequence**: INSUFFICIENT_DATA — None
+  - · **frequency**: INSUFFICIENT_DATA — None
+  - ✓ **identifiable_buyer**: EVIDENCED — api_consumer _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **current_workaround**: EVIDENCED — Users manually copy valuable ChatGPT response fragments to external tools (notes apps, documents) without source links or searchability _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **why_solutions_fail**: EVIDENCED — Valuable insights generated in conversations are lost or require manual extraction and organization in separate systems _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **potential_product_function**: EVIDENCED — Manual copying/pasting of AI-generated text into external note-taking systems, with loss of conversation context and linkage _(evidence: OBS-20260822-0075-be63b8)_
+  - · **willingness_to_pay**: INSUFFICIENT_DATA — None
+  - · **scalability**: INSUFFICIENT_DATA — None
+  - ✓ **evidence_diversity**: EVIDENCED — distinct_sources=1, sources=['discourse:openai-devs'] _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **independent_observation_count**: EVIDENCED — observation_count=1, distinct_urls=1, distinct_sources=1 _(evidence: OBS-20260822-0075-be63b8)_
+  - ✓ **contradictory_evidence**: EVIDENCED — none_observed
+  - ✓ **confidence_quality**: EVIDENCED — mean=0.75, min=0.75, bucket=MODERATE _(evidence: OBS-20260822-0075-be63b8)_
+
 ## Legacy Business Rearchitecture Candidates
 
 Mode B: existing business / industry → historical constraint → organizational adaptation → constraint weakened or still binding → new business architecture (if defensible). AI is one of sixteen possible enablers considered, never assumed - see README's Mode B section.
 
-Anomalies considered: **564** · URL-connected groups formed: **462** · Registry events appended: **4** · Candidates on file: **37**
+Anomalies considered: **593** · URL-connected groups formed: **492** · Registry events appended: **2** · Candidates on file: **37**
 
 - **PROMISING**: 0
 - **INVESTIGATE**: 0
@@ -3496,18 +3873,18 @@ Anomalies considered: **564** · URL-connected groups formed: **462** · Registr
   - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
 
 #### BC-0200 — WATCH
-**Provenance**: anomalies `ANOM-0528` · observations `OBS-20260822-0007-eda57d`
-  - ✓ **Existing business / job-to-be-done** [OBSERVED]: Building personal data-mixing projects (scraping public data, merging with personal data, manual review/editing, outputting to HTML/PDF/calendar formats) _(evidence: OBS-20260822-0007-eda57d)_
+**Provenance**: anomalies `ANOM-0523` · observations `OBS-20260822-0007-eda57d, OBS-20260822-0062-e94e7b`
+  - ✓ **Existing business / job-to-be-done** [OBSERVED]: Building personal data integration projects that combine scraped/personal data, manual review/editing, and multi-format output; Building personal data-mixing projects (scraping public data, merging with personal data, manual review/editing, outputting to HTML/PDF/calendar formats) _(evidence: OBS-20260822-0007-eda57d, OBS-20260822-0062-e94e7b)_
     _verbatim `process` extracted upstream by the Sensor Agent_
-  - ~ **Historical constraint** [INFERRED]: manual_dispute_resolution _(evidence: OBS-20260822-0007-eda57d)_
+  - ~ **Historical constraint** [INFERRED]: manual_dispute_resolution _(evidence: OBS-20260822-0007-eda57d, OBS-20260822-0062-e94e7b)_
     _legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact_
-  - ~ **Evidence the constraint existed** [INFERRED]: manual review _(evidence: OBS-20260822-0007-eda57d)_
+  - ~ **Evidence the constraint existed** [INFERRED]: manual review _(evidence: OBS-20260822-0007-eda57d, OBS-20260822-0062-e94e7b)_
     _only the legacy structure itself was found, not an explicit stated reason for it_
   - · **Current evidence it may be weakened** [INSUFFICIENT_DATA]: None
     _no weakening language found in the grouped evidence_
-  - ✓ **Legacy structure created by the constraint** [OBSERVED]: Manual integration of disparate tools: scrapy for scraping, sqlmodel for ORM, jinja for templating, click for CLI, separate export libraries - each project requires rebuilding connections between these components _(evidence: OBS-20260822-0007-eda57d)_
+  - ✓ **Legacy structure created by the constraint** [OBSERVED]: Custom scripts combining scrapy/requests for data, YAML/TOML/JSON files or ORM for storage, jinja for output, click for CLI; Manual integration of disparate tools: scrapy for scraping, sqlmodel for ORM, jinja for templating, click for CLI, separate export libraries - each project requires rebuilding connections between these components _(evidence: OBS-20260822-0007-eda57d, OBS-20260822-0062-e94e7b)_
     _verbatim current_carrier extracted upstream by the Sensor Agent_
-  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If an unidentified structural change has genuinely weakened manual verification/reconciliation held against unavailable automated records, then Manual integration of disparate tools: scrapy for scraping, sqlmodel for ORM, jinja for templating, click for CLI, separate export libraries - each project requires rebuilding connections between these components may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260822-0007-eda57d)_
+  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If an unidentified structural change has genuinely weakened manual verification/reconciliation held against unavailable automated records, then Custom scripts combining scrapy/requests for data, YAML/TOML/JSON files or ORM for storage, jinja for output, click for CLI; Manual integration of disparate tools: scrapy for scraping, sqlmodel for ORM, jinja for templating, click for CLI, separate export libraries - each project requires rebuilding connections between these components may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260822-0007-eda57d, OBS-20260822-0062-e94e7b)_
     _FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition_
   - · **Why now** [INSUFFICIENT_DATA]: None
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
@@ -3516,20 +3893,20 @@ Anomalies considered: **564** · URL-connected groups formed: **462** · Registr
   - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
 
 #### BC-0201 — WATCH
-**Provenance**: anomalies `ANOM-0533` · observations `OBS-20260822-0017-c75eb3`
-  - ✓ **Existing business / job-to-be-done** [OBSERVED]: video subtitle creation workflow: AI transcription → manual review/correction → styling → translation → export _(evidence: OBS-20260822-0017-c75eb3)_
+**Provenance**: anomalies `ANOM-0528, ANOM-0579` · observations `OBS-20260822-0017-c75eb3, OBS-20260822-0050-68f9ef`
+  - ✓ **Existing business / job-to-be-done** [OBSERVED]: reviewing and correcting AI-generated video transcripts before publication; video subtitle creation workflow: AI transcription → manual review/correction → styling → translation → export _(evidence: OBS-20260822-0017-c75eb3, OBS-20260822-0050-68f9ef)_
     _verbatim `process` extracted upstream by the Sensor Agent_
-  - ~ **Historical constraint** [INFERRED]: manual_dispute_resolution _(evidence: OBS-20260822-0017-c75eb3)_
+  - ~ **Historical constraint** [INFERRED]: manual_dispute_resolution _(evidence: OBS-20260822-0017-c75eb3, OBS-20260822-0050-68f9ef)_
     _legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact_
-  - ~ **Evidence the constraint existed** [INFERRED]: manual review _(evidence: OBS-20260822-0017-c75eb3)_
+  - ~ **Evidence the constraint existed** [INFERRED]: manual review _(evidence: OBS-20260822-0017-c75eb3, OBS-20260822-0050-68f9ef)_
     _only the legacy structure itself was found, not an explicit stated reason for it_
   - · **Current evidence it may be weakened** [INSUFFICIENT_DATA]: None
     _no weakening language found in the grouped evidence_
-  - ✓ **Legacy structure created by the constraint** [OBSERVED]: multiple separate tools for transcription, text correction, timing adjustment, styling, translation, and export _(evidence: OBS-20260822-0017-c75eb3)_
+  - ✓ **Legacy structure created by the constraint** [OBSERVED]: bouncing between multiple tools (transcription service, text editor, timing editor, style/export tool); multiple separate tools for transcription, text correction, timing adjustment, styling, translation, and export _(evidence: OBS-20260822-0017-c75eb3, OBS-20260822-0050-68f9ef)_
     _verbatim current_carrier extracted upstream by the Sensor Agent_
-  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If ai has genuinely weakened manual verification/reconciliation held against unavailable automated records, then multiple separate tools for transcription, text correction, timing adjustment, styling, translation, and export may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260822-0017-c75eb3)_
+  - ~ **Proposed rearchitecture (framing only, not evidence)** [INFERRED]: If ai has genuinely weakened manual verification/reconciliation held against unavailable automated records, then bouncing between multiple tools (transcription service, text editor, timing editor, style/export tool); multiple separate tools for transcription, text correction, timing adjustment, styling, translation, and export may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead. _(evidence: OBS-20260822-0017-c75eb3, OBS-20260822-0050-68f9ef)_
     _FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition_
-  - ✓ **Why now** [OBSERVED]: ai=[' ai '] _(evidence: OBS-20260822-0017-c75eb3)_
+  - ✓ **Why now** [OBSERVED]: ai=[' ai '] _(evidence: OBS-20260822-0017-c75eb3, OBS-20260822-0050-68f9ef)_
     _specific enabler categories named in the text, not defaulted to AI_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
@@ -3553,7 +3930,7 @@ Anomalies considered: **564** · URL-connected groups formed: **462** · Registr
     _no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found; why_now: no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence
 
 #### BC-0203 — WATCH
 **Provenance**: anomalies `ANOM-0551` · observations `OBS-20260822-0053-0f77e0`
@@ -3573,7 +3950,7 @@ Anomalies considered: **564** · URL-connected groups formed: **462** · Registr
     _specific enabler categories named in the text, not defaulted to AI_
   - · **Potential economic effect** [INSUFFICIENT_DATA]: None
     _no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found_
-  - **Evidence gaps**: historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
+  - **Evidence gaps**: evidence_constraint_existed: INFERRED only, not OBSERVED - only the legacy structure itself was found, not an explicit stated reason for it; evidence_constraint_weakened: no weakening language found in the grouped evidence; historical_constraint: INFERRED only, not OBSERVED - legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact; potential_economic_effect: no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found
 
 ### Merged (0)
 
@@ -3585,29 +3962,29 @@ _None this run._
 _None this run._
 
 
-### Evidence seen but not yet a WATCH candidate (424)
+### Evidence seen but not yet a WATCH candidate (455)
 
 Anomaly groups where no structural-constraint pattern matched, or the legacy structure itself was not evidenced. Nothing is written to the registry for these.
 
-- anomalies `ANOM-0001, ANOM-0010` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0001` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0002` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0003` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0004, ANOM-0022` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0004, ANOM-0021` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0006` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0007` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0008, ANOM-0142` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0011, ANOM-0024, ANOM-0041` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0008` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0010, ANOM-0023, ANOM-0039` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0011, ANOM-0024` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0012, ANOM-0025` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0013, ANOM-0026` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0014, ANOM-0027` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0015, ANOM-0028` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0016, ANOM-0029` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0013` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0014, ANOM-0026` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0015, ANOM-0027` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0016` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0017` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0018` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0020` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0019` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0029` — missing: ['historical_constraint OBSERVED-or-INFERRED']
+- anomalies `ANOM-0030, ANOM-0041` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0031` — missing: ['historical_constraint OBSERVED-or-INFERRED']
 - anomalies `ANOM-0032` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0033` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- anomalies `ANOM-0034` — missing: ['historical_constraint OBSERVED-or-INFERRED']
-- … and 404 more
+- … and 435 more
 

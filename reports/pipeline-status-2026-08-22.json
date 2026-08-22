@@ -6,22 +6,22 @@
     ],
     "returncode": 0,
     "stderr_tail": "",
-    "stdout_tail": "{\"mode_a\": {\"anomalies_considered\": 564, \"groups_formed\": 454, \"events_appended\": 13, \"candidates_total\": 166}, \"report_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/business-candidates-2026-08-22.md\", \"snapshot_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidates.json\", \"events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidate_events.jsonl\", \"mode_b\": {\"anomalies_considered\": 564, \"groups_formed\": 462, \"events_appended\": 4, \"candidates_total\": 37}, \"material_events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/material-events-2026-08-22.json\", \"material_events_count\": 1}\n",
+    "stdout_tail": "{\"mode_a\": {\"anomalies_considered\": 593, \"groups_formed\": 485, \"events_appended\": 18, \"candidates_total\": 182}, \"report_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/business-candidates-2026-08-22.md\", \"snapshot_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidates.json\", \"events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidate_events.jsonl\", \"mode_b\": {\"anomalies_considered\": 593, \"groups_formed\": 492, \"events_appended\": 2, \"candidates_total\": 37}, \"material_events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/material-events-2026-08-22.json\", \"material_events_count\": 0}\n",
     "summary": {
       "events_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidate_events.jsonl",
-      "material_events_count": 1,
+      "material_events_count": 0,
       "material_events_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/material-events-2026-08-22.json",
       "mode_a": {
-        "anomalies_considered": 564,
-        "candidates_total": 166,
-        "events_appended": 13,
-        "groups_formed": 454
+        "anomalies_considered": 593,
+        "candidates_total": 182,
+        "events_appended": 18,
+        "groups_formed": 485
       },
       "mode_b": {
-        "anomalies_considered": 564,
+        "anomalies_considered": 593,
         "candidates_total": 37,
-        "events_appended": 4,
-        "groups_formed": 462
+        "events_appended": 2,
+        "groups_formed": 492
       },
       "report_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/business-candidates-2026-08-22.md",
       "snapshot_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidates.json"
@@ -34,7 +34,7 @@
     ],
     "returncode": 0,
     "stderr_tail": "",
-    "stdout_tail": "{\"captures\": 80, \"observations\": 38, \"anomalies\": 564, \"evaluated\": 0, \"gate_decisions\": 87, \"errors\": 5}\n"
+    "stdout_tail": "{\"captures\": 80, \"observations\": 38, \"anomalies\": 593, \"evaluated\": 0, \"gate_decisions\": 92, \"errors\": 5}\n"
   },
   "date": "2026-08-22",
   "status": "OK"

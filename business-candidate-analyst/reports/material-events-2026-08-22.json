@@ -1,11 +1,1 @@
-[
-  {
-    "candidate_id": "BC-0039",
-    "event_id": "state_changed:BC-0039:90fd0836d97ab04c13f65e13",
-    "from_state": "VALIDATING",
-    "material_type": "merge_with_lifecycle_change",
-    "reason": "reached PROMISING: willingness_to_pay EVIDENCED; economic_consequence EVIDENCED; scalability EVIDENCED; pain_severity == SEVERE",
-    "recorded_at": "2026-08-22T11:00:13Z",
-    "to_state": "PROMISING"
-  }
-]
+[]
