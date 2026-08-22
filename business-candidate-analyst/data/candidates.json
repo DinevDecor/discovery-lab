@@ -7314,11 +7314,12 @@
   },
   {
     "anomaly_ids": [
-      "ANOM-0109",
-      "ANOM-0143",
-      "ANOM-0316",
-      "ANOM-0405",
-      "ANOM-0446"
+      "ANOM-0106",
+      "ANOM-0219",
+      "ANOM-0310",
+      "ANOM-0401",
+      "ANOM-0443",
+      "ANOM-0545"
     ],
     "candidate_id": "BC-0039",
     "candidate_type": "NEW_MARKET",
@@ -7328,18 +7329,20 @@
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "confidence_quality",
         "note": "",
         "status": "EVIDENCED",
         "value": {
           "bucket": "MODERATE",
-          "mean": 0.867,
-          "min": 0.75
+          "mean": 0.846,
+          "min": 0.72
         }
       },
       "contradictory_evidence": {
@@ -7353,10 +7356,12 @@
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "current_workaround",
         "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
@@ -7365,7 +7370,9 @@
           "Automatic quota reset system that triggers based on OpenAI's schedule rather than user consumption patterns",
           "Fly.io Machines API with per-app machine provisioning, 5-minute polling reconciler, manual limit increase requests via email",
           "Manual coordination with cloud provider to pre-emptively raise account limits before hitting provisioning walls during growth",
+          "Periodic API polling to cloud platform to refresh device state",
           "User manual tracking of daily work patterns and subscription tier limits; purchased add-on credits that require manual verification of application",
+          "User manually creates new Chat mode conversation, re-uploads files, and re-explains entire project context when Work quota exhausted",
           "User monitors quota dashboard, plans work timing around 7-day reset cycles, attempts to optimize usage before automatic resets waste unused allocation",
           "User-side calendar planning and token budgeting spreadsheets/mental models"
         ]
@@ -7391,18 +7398,21 @@
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "evidence_diversity",
         "note": "",
         "status": "EVIDENCED",
         "value": {
-          "distinct_sources": 2,
+          "distinct_sources": 3,
           "sources": [
             "discourse:fly-io",
+            "discourse:home-assistant",
             "discourse:openai-devs"
           ]
         }
@@ -7423,10 +7433,12 @@
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "identifiable_buyer",
         "note": "",
@@ -7437,27 +7449,30 @@
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "independent_observation_count",
         "note": "some observations share the same source URL - they are multiple extractions from one capture, not independent corroboration; distinct_urls is the more conservative count",
         "status": "EVIDENCED",
         "value": {
-          "distinct_sources": 2,
-          "distinct_urls": 4,
-          "observation_count": 6
+          "distinct_sources": 3,
+          "distinct_urls": 6,
+          "observation_count": 8
         }
       },
       "pain_severity": {
         "evidence": [
           "OBS-20260809-0075-075205",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "pain_severity",
-        "note": "strong severity markers found: ['blocking', 'waste', 'wasted']",
+        "note": "strong severity markers found: ['blocking', 'cannot', 'waste', 'wasted']",
         "status": "EVIDENCED",
         "value": "SEVERE"
       },
@@ -7465,46 +7480,57 @@
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "potential_product_function",
         "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
         "status": "EVIDENCED",
         "value": [
+          "Managing quota-constrained premium AI service consumption within continuous multi-session projects that mix intensive and routine tasks",
           "Multi-tenant SaaS operators provision isolated compute instances (1 machine per customer) instead of shared infrastructure, requiring API-driven fleet management and polling for reconciliation",
           "Multi-tenant SaaS platforms avoid per-customer infrastructure isolation, but this AI assistant requires dedicated machines per user; provisioning and lifecycle management become operational bottlenecks",
           "User manually tracks remaining quota percentage to plan when intensive coding work can be done without hitting limits",
+          "Users manually configure camera hardware settings per device instead of automating based on ambient conditions",
           "Users manually track quota consumption rates and schedule their development work to stay within weekly limits",
           "Users monitor their own quota consumption patterns month-over-month to detect metering changes, because provider-side usage allocation/counting is opaque",
           "Users need to time-shift capacity consumption across variable workload periods within billing cycles"
         ]
       },
       "scalability": {
-        "evidence": [],
+        "evidence": [
+          "OBS-20260809-0075-b44ef9",
+          "OBS-20260822-0042-2ae15f"
+        ],
         "name": "scalability",
-        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
-        "status": "INSUFFICIENT_DATA",
-        "value": null
+        "note": "multiple sources (['discourse:fly-io', 'discourse:home-assistant', 'discourse:openai-devs']) and multiple named vendors (['chatgpt', 'codex']) mentioned - weak signal only, not proof the underlying job generalizes beyond these contexts",
+        "status": "EVIDENCED",
+        "value": "weak_signal_multi_platform"
       },
       "underlying_job_or_problem": {
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "underlying_job_or_problem",
         "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
+          "Managing quota-constrained premium AI service consumption within continuous multi-session projects that mix intensive and routine tasks",
           "Multi-tenant SaaS operators provision isolated compute instances (1 machine per customer) instead of shared infrastructure, requiring API-driven fleet management and polling for reconciliation",
           "Multi-tenant SaaS platforms avoid per-customer infrastructure isolation, but this AI assistant requires dedicated machines per user; provisioning and lifecycle management become operational bottlenecks",
           "User manually tracks remaining quota percentage to plan when intensive coding work can be done without hitting limits",
+          "Users manually configure camera hardware settings per device instead of automating based on ambient conditions",
           "Users manually track quota consumption rates and schedule their development work to stay within weekly limits",
           "Users monitor their own quota consumption patterns month-over-month to detect metering changes, because provider-side usage allocation/counting is opaque",
           "Users need to time-shift capacity consumption across variable workload periods within billing cycles"
@@ -7514,15 +7540,19 @@
         "evidence": [
           "OBS-20260809-0075-075205",
           "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
           "OBS-20260813-0064-5ca760",
           "OBS-20260816-0042-9e0bf4",
           "OBS-20260818-0044-76a687",
-          "OBS-20260819-0077-0bf871"
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
         ],
         "name": "why_solutions_fail",
         "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
+          "Conversation remains locked to Work mode after quota exhaustion, forcing context loss or project interruption despite Chat mode being sufficient for remaining tasks",
+          "Entity state becomes stale when polling disabled to save quota; must choose between quota consumption and state accuracy",
           "Hitting hard provisioning limits during customer signup spikes, blocking new user onboarding until support manually raises account quotas",
           "Provider changes reset schedule mid-period without warning, causing users to lose planned allocation and scramble to reorganize work",
           "Runaway provisioning protection limits legitimate growth; operators must predict capacity needs and request increases via support email before hitting caps",
@@ -7607,19 +7637,44 @@
         "event_type": "state_changed",
         "reason": "reached VALIDATING: distinct_sources>=2 (have 2); economic_consequence EVIDENCED",
         "recorded_at": "2026-08-19T23:06:21Z"
+      },
+      {
+        "derived_from": [
+          "ANOM-0106",
+          "ANOM-0219",
+          "ANOM-0310",
+          "ANOM-0401",
+          "ANOM-0443",
+          "ANOM-0545",
+          "OBS-20260809-0075-075205",
+          "OBS-20260809-0075-b44ef9",
+          "OBS-20260812-0008-2cf7ed",
+          "OBS-20260813-0064-5ca760",
+          "OBS-20260816-0042-9e0bf4",
+          "OBS-20260818-0044-76a687",
+          "OBS-20260819-0077-0bf871",
+          "OBS-20260822-0042-2ae15f"
+        ],
+        "event_id": "state_changed:BC-0039:90fd0836d97ab04c13f65e13",
+        "event_type": "state_changed",
+        "reason": "reached PROMISING: willingness_to_pay EVIDENCED; economic_consequence EVIDENCED; scalability EVIDENCED; pain_severity == SEVERE",
+        "recorded_at": "2026-08-22T11:00:13Z"
       }
     ],
     "merged_from": [
+      "BC-0083",
       "BC-0169"
     ],
     "merged_into": null,
     "observation_ids": [
       "OBS-20260809-0075-075205",
       "OBS-20260809-0075-b44ef9",
+      "OBS-20260812-0008-2cf7ed",
       "OBS-20260813-0064-5ca760",
       "OBS-20260816-0042-9e0bf4",
       "OBS-20260818-0044-76a687",
-      "OBS-20260819-0077-0bf871"
+      "OBS-20260819-0077-0bf871",
+      "OBS-20260822-0042-2ae15f"
     ],
     "rearchitecture": null,
     "rejected_reason": null,
@@ -7627,8 +7682,8 @@
       "buyer_bucket": "api_consumer",
       "function_class": "resource_visibility"
     },
-    "state": "VALIDATING",
-    "updated_at": "2026-08-19T23:06:21Z"
+    "state": "PROMISING",
+    "updated_at": "2026-08-22T11:00:13Z"
   },
   {
     "anomaly_ids": [
@@ -14947,10 +15002,24 @@
         "event_type": "candidate_created",
         "reason": "created at WATCH: meets the WATCH bar",
         "recorded_at": "2026-08-12T05:28:49Z"
+      },
+      {
+        "derived_from": [
+          "ANOM-0106",
+          "ANOM-0219",
+          "ANOM-0310",
+          "ANOM-0401",
+          "ANOM-0443",
+          "ANOM-0545"
+        ],
+        "event_id": "candidates_merged:BC-0083:e3fee903196f53847ef0ca03",
+        "event_type": "candidates_merged",
+        "reason": "evidence now bridges BC-0083 and BC-0039 under the same buyer/function signature - see merge_reasons on the canonical candidate's next event",
+        "recorded_at": "2026-08-22T11:00:13Z"
       }
     ],
     "merged_from": [],
-    "merged_into": null,
+    "merged_into": "BC-0039",
     "observation_ids": [
       "OBS-20260812-0008-2cf7ed"
     ],
@@ -14961,7 +15030,7 @@
       "function_class": "resource_visibility"
     },
     "state": "WATCH",
-    "updated_at": "2026-08-12T05:28:49Z"
+    "updated_at": "2026-08-22T11:00:13Z"
   },
   {
     "anomaly_ids": [
@@ -32365,7 +32434,8 @@
   },
   {
     "anomaly_ids": [
-      "ANOM-0505"
+      "ANOM-0504",
+      "ANOM-0558"
     ],
     "candidate_id": "BC-0186",
     "candidate_type": "NEW_MARKET",
@@ -32373,7 +32443,8 @@
     "dimensions": {
       "confidence_quality": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "confidence_quality",
         "note": "",
@@ -32393,13 +32464,15 @@
       },
       "current_workaround": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "current_workaround",
         "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
-          "Application developers implementing keepalive traffic or holding permanent connections"
+          "Application developers implementing keepalive traffic or holding permanent connections",
+          "Dropping first SYN packet while 6PN route/tunnel comes up, causing 1-3 second kernel retransmit delay"
         ]
       },
       "economic_consequence": {
@@ -32411,7 +32484,8 @@
       },
       "evidence_diversity": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "evidence_diversity",
         "note": "",
@@ -32425,7 +32499,8 @@
       },
       "frequency": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "frequency",
         "note": "",
@@ -32445,34 +32520,37 @@
       },
       "independent_observation_count": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "independent_observation_count",
-        "note": "",
+        "note": "some observations share the same source URL - they are multiple extractions from one capture, not independent corroboration; distinct_urls is the more conservative count",
         "status": "EVIDENCED",
         "value": {
           "distinct_sources": 1,
           "distinct_urls": 1,
-          "observation_count": 1
+          "observation_count": 2
         }
       },
       "pain_severity": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260822-0066-961841"
         ],
         "name": "pain_severity",
-        "note": "moderate severity markers found: ['workaround']",
+        "note": "strong severity markers found: ['fails']",
         "status": "EVIDENCED",
-        "value": "MODERATE"
+        "value": "SEVERE"
       },
       "potential_product_function": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "potential_product_function",
         "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
         "status": "EVIDENCED",
         "value": [
+          "Network path setup between VMs that haven't communicated recently",
           "On-demand route/tunnel setup between Machines that haven't exchanged packets recently"
         ]
       },
@@ -32485,24 +32563,28 @@
       },
       "underlying_job_or_problem": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "underlying_job_or_problem",
         "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
+          "Network path setup between VMs that haven't communicated recently",
           "On-demand route/tunnel setup between Machines that haven't exchanged packets recently"
         ]
       },
       "why_solutions_fail": {
         "evidence": [
-          "OBS-20260820-0030-e0902b"
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
         ],
         "name": "why_solutions_fail",
         "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
-          "First SYN packet dropped while 6PN route comes up (~1s setup time); requires retransmit; no application workaround for fresh Machine boots"
+          "First SYN packet dropped while 6PN route comes up (~1s setup time); requires retransmit; no application workaround for fresh Machine boots",
+          "First TCP SYN is dropped inside 6PN after path idle, kernel retransmits after 1s, path takes ~1s to establish"
         ]
       },
       "willingness_to_pay": {
@@ -32523,12 +32605,25 @@
         "event_type": "candidate_created",
         "reason": "created at WATCH: meets the WATCH bar",
         "recorded_at": "2026-08-20T23:08:38Z"
+      },
+      {
+        "derived_from": [
+          "ANOM-0504",
+          "ANOM-0558",
+          "OBS-20260820-0030-e0902b",
+          "OBS-20260822-0066-961841"
+        ],
+        "event_id": "evidence_reassessed:BC-0186:925aa3db49277041a625949a",
+        "event_type": "evidence_reassessed",
+        "reason": "re-assessed with current evidence; state remains WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
       }
     ],
     "merged_from": [],
     "merged_into": null,
     "observation_ids": [
-      "OBS-20260820-0030-e0902b"
+      "OBS-20260820-0030-e0902b",
+      "OBS-20260822-0066-961841"
     ],
     "rearchitecture": null,
     "rejected_reason": null,
@@ -32537,7 +32632,7 @@
       "function_class": "unclassified"
     },
     "state": "WATCH",
-    "updated_at": "2026-08-20T23:08:38Z"
+    "updated_at": "2026-08-22T11:00:13Z"
   },
   {
     "anomaly_ids": [
@@ -32713,7 +32808,8 @@
   },
   {
     "anomaly_ids": [
-      "ANOM-0509"
+      "ANOM-0508",
+      "ANOM-0564"
     ],
     "candidate_id": "BC-0188",
     "candidate_type": "NEW_MARKET",
@@ -32721,14 +32817,15 @@
     "dimensions": {
       "confidence_quality": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "confidence_quality",
         "note": "",
         "status": "EVIDENCED",
         "value": {
           "bucket": "HIGH",
-          "mean": 0.92,
+          "mean": 0.935,
           "min": 0.92
         }
       },
@@ -32741,18 +32838,21 @@
       },
       "current_workaround": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "current_workaround",
         "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
+          "Google Workspace SSO with dependency on Google's account suspension policies and support ticket resolution times",
           "Google Workspace SSO with support ticket escalation for account suspensions"
         ]
       },
       "economic_consequence": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "economic_consequence",
         "note": "",
@@ -32763,7 +32863,8 @@
       },
       "evidence_diversity": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "evidence_diversity",
         "note": "",
@@ -32784,7 +32885,8 @@
       },
       "identifiable_buyer": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "identifiable_buyer",
         "note": "",
@@ -32793,35 +32895,39 @@
       },
       "independent_observation_count": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "independent_observation_count",
-        "note": "",
+        "note": "some observations share the same source URL - they are multiple extractions from one capture, not independent corroboration; distinct_urls is the more conservative count",
         "status": "EVIDENCED",
         "value": {
           "distinct_sources": 1,
           "distinct_urls": 1,
-          "observation_count": 1
+          "observation_count": 2
         }
       },
       "pain_severity": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "pain_severity",
-        "note": "strong severity markers found: ['cannot']",
+        "note": "strong severity markers found: ['blocking', 'cannot']",
         "status": "EVIDENCED",
         "value": "SEVERE"
       },
       "potential_product_function": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "potential_product_function",
         "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
         "status": "EVIDENCED",
         "value": [
-          "Google Workspace serves as central authentication provider for all company systems; when suspended, cascading lockout occurs across engineering infrastructure (Fly.io), email, and other integrated services"
+          "Google Workspace serves as central authentication provider for all company systems; when suspended, cascading lockout occurs across engineering infrastructure (Fly.io), email, and other integrated services",
+          "When primary authentication provider (Google Workspace) suspends an account, even super admins cannot override the suspension - requires vendor support ticket and multi-day resolution. Company owner was locked out of all company systems for several days."
         ]
       },
       "scalability": {
@@ -32833,23 +32939,27 @@
       },
       "underlying_job_or_problem": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "underlying_job_or_problem",
         "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
-          "Google Workspace serves as central authentication provider for all company systems; when suspended, cascading lockout occurs across engineering infrastructure (Fly.io), email, and other integrated services"
+          "Google Workspace serves as central authentication provider for all company systems; when suspended, cascading lockout occurs across engineering infrastructure (Fly.io), email, and other integrated services",
+          "When primary authentication provider (Google Workspace) suspends an account, even super admins cannot override the suspension - requires vendor support ticket and multi-day resolution. Company owner was locked out of all company systems for several days."
         ]
       },
       "why_solutions_fail": {
         "evidence": [
-          "OBS-20260820-0040-504650"
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
         ],
         "name": "why_solutions_fail",
         "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
         "status": "EVIDENCED",
         "value": [
+          "Authentication provider suspended legitimate user account, blocking access to all integrated systems; administrative controls insufficient to override vendor security decision; support ticket required multiple days to resolve",
           "Legitimate logins flagged as suspicious trigger automatic account suspension; even organization super admin lacks authority to restore access; dependency on external support ticket resolution creates multi-day downtime"
         ]
       },
@@ -32871,12 +32981,25 @@
         "event_type": "candidate_created",
         "reason": "created at WATCH: meets the WATCH bar",
         "recorded_at": "2026-08-20T23:08:38Z"
+      },
+      {
+        "derived_from": [
+          "ANOM-0508",
+          "ANOM-0564",
+          "OBS-20260820-0040-504650",
+          "OBS-20260822-0077-c5b904"
+        ],
+        "event_id": "evidence_reassessed:BC-0188:e5a9d9f4acd5c973d1f232c0",
+        "event_type": "evidence_reassessed",
+        "reason": "re-assessed with current evidence; state remains WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
       }
     ],
     "merged_from": [],
     "merged_into": null,
     "observation_ids": [
-      "OBS-20260820-0040-504650"
+      "OBS-20260820-0040-504650",
+      "OBS-20260822-0077-c5b904"
     ],
     "rearchitecture": null,
     "rejected_reason": null,
@@ -32885,7 +33008,7 @@
       "function_class": "resource_visibility"
     },
     "state": "WATCH",
-    "updated_at": "2026-08-20T23:08:38Z"
+    "updated_at": "2026-08-22T11:00:13Z"
   },
   {
     "anomaly_ids": [
@@ -33230,5 +33353,1998 @@
     },
     "state": "WATCH",
     "updated_at": "2026-08-20T23:08:38Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0527"
+    ],
+    "candidate_id": "BC-0191",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "LOW",
+          "mean": 0.4,
+          "min": 0.4
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Developer using Terminal with lsof command and manual process interpretation"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [],
+        "name": "economic_consequence",
+        "note": "no cost/billing/spend language found in grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "product_hunt"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [],
+        "name": "frequency",
+        "note": "no repetition language found; a single reported incident is not evidence of recurrence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "api_consumer"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "pain_severity",
+        "note": "moderate severity markers found: ['manual']",
+        "status": "EVIDENCED",
+        "value": "MODERATE"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "Developer manually runs terminal command 'lsof' to query port usage, interprets cryptic process names/PIDs, decides safety of termination, then executes kill command"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Developer manually runs terminal command 'lsof' to query port usage, interprets cryptic process names/PIDs, decides safety of termination, then executes kill command"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0006-a8c268"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Port already in use blocks new development server from starting, requires context-switching to Terminal and manual investigation"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0527",
+          "OBS-20260822-0006-a8c268"
+        ],
+        "event_id": "candidate_created:BC-0191:6593097a754c7e96d12f880b",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0006-a8c268"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "api_consumer",
+      "function_class": "resource_visibility"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0536"
+    ],
+    "candidate_id": "BC-0192",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "MODERATE",
+          "mean": 0.72,
+          "min": 0.72
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Full language model inference runs on every message regardless of complexity"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "economic_consequence",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": [
+          "cost",
+          "costs"
+        ]
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "discourse:openai-devs"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "frequency",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": [
+          "every"
+        ]
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "api_consumer"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "pain_severity",
+        "note": "pain text present but no severity marker matched",
+        "status": "EVIDENCED",
+        "value": "LOW"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "Routing: distinguishing trivial acknowledgments from substantive queries before expensive compute"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Routing: distinguishing trivial acknowledgments from substantive queries before expensive compute"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0020-cebe96"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "No differentiation between high-value queries and low-value phatic expressions; uniform expensive processing"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0536",
+          "OBS-20260822-0020-cebe96"
+        ],
+        "event_id": "candidate_created:BC-0192:aa518d90ba7d4399956f4c04",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0020-cebe96"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "api_consumer",
+      "function_class": "resource_visibility"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0540"
+    ],
+    "candidate_id": "BC-0193",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "HIGH",
+          "mean": 0.85,
+          "min": 0.85
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "User must discover and trigger calibration button or 10-second hold procedure before position control works"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [],
+        "name": "economic_consequence",
+        "note": "no cost/billing/spend language found in grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "discourse:home-assistant"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [],
+        "name": "frequency",
+        "note": "no repetition language found; a single reported incident is not evidence of recurrence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "api_consumer"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "pain_severity",
+        "note": "pain text present but no severity marker matched",
+        "status": "EVIDENCED",
+        "value": "LOW"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "Device ships in binary mode (only fully-open/fully-closed); percentage positioning requires manual calibration step"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Device ships in binary mode (only fully-open/fully-closed); percentage positioning requires manual calibration step"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0030-98d70b"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Fresh install percentage commands do nothing; short-press appears dead at limits; testing button accidentally triggers pairing mode and network dropout"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0540",
+          "OBS-20260822-0030-98d70b"
+        ],
+        "event_id": "candidate_created:BC-0193:3770f0c5e6daaab8123e8fce",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0030-98d70b"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "api_consumer",
+      "function_class": "resource_visibility"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0541"
+    ],
+    "candidate_id": "BC-0194",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "HIGH",
+          "mean": 0.85,
+          "min": 0.85
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "requesting documentation from vendor support multiple times, searching help center manually, asking community forums"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [],
+        "name": "economic_consequence",
+        "note": "no cost/billing/spend language found in grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "discourse:openai-devs"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [],
+        "name": "frequency",
+        "note": "no repetition language found; a single reported incident is not evidence of recurrence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "operator"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "pain_severity",
+        "note": "strong severity markers found: ['cannot']",
+        "status": "EVIDENCED",
+        "value": "SEVERE"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "users need documented policies on usage limit reset behavior when changing subscription tiers to make informed purchase decisions"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "users need documented policies on usage limit reset behavior when changing subscription tiers to make informed purchase decisions"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0031-f816eb"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "support cannot provide documentation link after six requests, policy exists but is not publicly written down"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0541",
+          "OBS-20260822-0031-f816eb"
+        ],
+        "event_id": "candidate_created:BC-0194:0b746dfa8151279715913ed0",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0031-f816eb"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "operator",
+      "function_class": "resource_visibility"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0542"
+    ],
+    "candidate_id": "BC-0195",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "HIGH",
+          "mean": 0.82,
+          "min": 0.82
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "manual allowlist request via support forum"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [],
+        "name": "economic_consequence",
+        "note": "no cost/billing/spend language found in grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "discourse:fly-io"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [],
+        "name": "frequency",
+        "note": "no repetition language found; a single reported incident is not evidence of recurrence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "operator"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "pain_severity",
+        "note": "pain text present but no severity marker matched",
+        "status": "EVIDENCED",
+        "value": "LOW"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "platform abuse filter blocks legitimate app names containing branded keywords like 'github'"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "platform abuse filter blocks legitimate app names containing branded keywords like 'github'"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0033-eeb152"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "false positive: abuse filter blocks app name 'programmable-authority-github-session-v1' containing 'github' string despite legitimate use case"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0542",
+          "OBS-20260822-0033-eeb152"
+        ],
+        "event_id": "candidate_created:BC-0195:57f5cbe134ace27b061cbddb",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0033-eeb152"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "operator",
+      "function_class": "unclassified"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0544"
+    ],
+    "candidate_id": "BC-0196",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "MODERATE",
+          "mean": 0.75,
+          "min": 0.75
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Manual browser-based OAuth flow with redirect URLs configured in Spotify developer settings"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [],
+        "name": "economic_consequence",
+        "note": "no cost/billing/spend language found in grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "discourse:home-assistant"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [],
+        "name": "frequency",
+        "note": "no repetition language found; a single reported incident is not evidence of recurrence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "api_consumer"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "pain_severity",
+        "note": "strong severity markers found: ['fails']",
+        "status": "EVIDENCED",
+        "value": "SEVERE"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "OAuth redirect flow requires localhost callback URL to complete authentication handshake between Spotify and local Home Assistant instance"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "OAuth redirect flow requires localhost callback URL to complete authentication handshake between Spotify and local Home Assistant instance"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0041-a3808b"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "URL mismatch between configured redirect (my.home-assistant.io/redirect/oauth) and actual callback attempt (127.0.0.1:5588/login) causes authentication to break"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0544",
+          "OBS-20260822-0041-a3808b"
+        ],
+        "event_id": "candidate_created:BC-0196:5caf47c13c60fb09dd435f0b",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0041-a3808b"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "api_consumer",
+      "function_class": "state_recovery"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0556"
+    ],
+    "candidate_id": "BC-0197",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "HIGH",
+          "mean": 0.85,
+          "min": 0.85
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Developer must repeatedly guide AI through same debugging cycles; static context documents (AGENTS.md, architecture docs, conversation history) don't capture experiential learning from past failures"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "economic_consequence",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": [
+          "spend"
+        ]
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "discourse:openai-devs"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "frequency",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": [
+          "again"
+        ]
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "api_consumer"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "pain_severity",
+        "note": "pain text present but no severity marker matched",
+        "status": "EVIDENCED",
+        "value": "LOW"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "Developer spends time re-explaining previously discovered root causes and architectural lessons to AI agent across multi-month development cycles"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Developer spends time re-explaining previously discovered root causes and architectural lessons to AI agent across multi-month development cycles"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Agent initially implements UI panels with hide/show causing refresh/lifecycle problems, spends rounds patching symptoms; weeks later encounters similar situation and makes same mistake again despite previous debugging effort"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0556",
+          "OBS-20260822-0064-4aa2be"
+        ],
+        "event_id": "candidate_created:BC-0197:4b1affd8992b29382b2f7a77",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0064-4aa2be"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "api_consumer",
+      "function_class": "resource_visibility"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0560"
+    ],
+    "candidate_id": "BC-0198",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "LOW",
+          "mean": 0.4,
+          "min": 0.4
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "developer manual code review of AI-assisted code"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [],
+        "name": "economic_consequence",
+        "note": "no cost/billing/spend language found in grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "dev:discuss"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [],
+        "name": "frequency",
+        "note": "no repetition language found; a single reported incident is not evidence of recurrence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "api_consumer"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "pain_severity",
+        "note": "pain text present but no severity marker matched",
+        "status": "EVIDENCED",
+        "value": "LOW"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "developer cannot fully verify what AI model has generated in security-sensitive software"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "developer cannot fully verify what AI model has generated in security-sensitive software"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "inability to fully verify security properties of AI-generated code before production deployment"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0560",
+          "OBS-20260822-0069-6a6ed5"
+        ],
+        "event_id": "candidate_created:BC-0198:b3492d087535e01029d0b19b",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0069-6a6ed5"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "api_consumer",
+      "function_class": "trust_dispute"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0561"
+    ],
+    "candidate_id": "BC-0199",
+    "candidate_type": "NEW_MARKET",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {
+      "confidence_quality": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "confidence_quality",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "bucket": "LOW",
+          "mean": 0.3,
+          "min": 0.3
+        }
+      },
+      "contradictory_evidence": {
+        "evidence": [],
+        "name": "contradictory_evidence",
+        "note": "checked grouped evidence for explicit contradiction markers; found none - this is not proof of consistency, only that this heuristic found nothing",
+        "status": "EVIDENCED",
+        "value": "none_observed"
+      },
+      "current_workaround": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "current_workaround",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Conversations in shared Slack/Teams channels with separate legacy support ticketing tools that don't connect to messaging platforms"
+        ]
+      },
+      "economic_consequence": {
+        "evidence": [],
+        "name": "economic_consequence",
+        "note": "no cost/billing/spend language found in grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "evidence_diversity": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "evidence_diversity",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "sources": [
+            "product_hunt"
+          ]
+        }
+      },
+      "frequency": {
+        "evidence": [],
+        "name": "frequency",
+        "note": "no repetition language found; a single reported incident is not evidence of recurrence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "identifiable_buyer": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "identifiable_buyer",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": "api_consumer"
+      },
+      "independent_observation_count": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "independent_observation_count",
+        "note": "",
+        "status": "EVIDENCED",
+        "value": {
+          "distinct_sources": 1,
+          "distinct_urls": 1,
+          "observation_count": 1
+        }
+      },
+      "pain_severity": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "pain_severity",
+        "note": "strong severity markers found: ['cannot']",
+        "status": "EVIDENCED",
+        "value": "SEVERE"
+      },
+      "potential_product_function": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "potential_product_function",
+        "note": "FRAMING ONLY - not evidence, must never by itself justify a state transition",
+        "status": "EVIDENCED",
+        "value": [
+          "Teams attempting to assess account health and readiness for renewals by manually recalling scattered conversations across multiple channels"
+        ]
+      },
+      "scalability": {
+        "evidence": [],
+        "name": "scalability",
+        "note": "evidence confined to a single source/vendor context; scalability beyond it is not evidenced",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "underlying_job_or_problem": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "underlying_job_or_problem",
+        "note": "verbatim hidden_function_hint phrasings extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Teams attempting to assess account health and readiness for renewals by manually recalling scattered conversations across multiple channels"
+        ]
+      },
+      "why_solutions_fail": {
+        "evidence": [
+          "OBS-20260822-0072-0365ee"
+        ],
+        "name": "why_solutions_fail",
+        "note": "verbatim failure_mode extracted upstream by the Sensor Agent",
+        "status": "EVIDENCED",
+        "value": [
+          "Account health assessment requires guessing from usage data and whoever remembered the last conversation; AI models operating on fragmented data"
+        ]
+      },
+      "willingness_to_pay": {
+        "evidence": [],
+        "name": "willingness_to_pay",
+        "note": "no evidence of money already committed by the buyer (purchase, subscription, paid credits); presence of cost alone is not willingness-to-pay evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0561",
+          "OBS-20260822-0072-0365ee"
+        ],
+        "event_id": "candidate_created:BC-0199:7a4cce6f555d393b23f50b18",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0072-0365ee"
+    ],
+    "rearchitecture": null,
+    "rejected_reason": null,
+    "signature": {
+      "buyer_bucket": "api_consumer",
+      "function_class": "resource_visibility"
+    },
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0528"
+    ],
+    "candidate_id": "BC-0200",
+    "candidate_type": "OLD_BUSINESS_REARCHITECTURE",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {},
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0528",
+          "OBS-20260822-0007-eda57d"
+        ],
+        "event_id": "candidate_created:BC-0200:fa7e9a66b17dcefb27e14091",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0007-eda57d"
+    ],
+    "rearchitecture": {
+      "evidence_constraint_existed": {
+        "evidence": [
+          "OBS-20260822-0007-eda57d"
+        ],
+        "name": "evidence_constraint_existed",
+        "note": "only the legacy structure itself was found, not an explicit stated reason for it",
+        "status": "INFERRED",
+        "value": [
+          "manual review"
+        ]
+      },
+      "evidence_constraint_weakened": {
+        "evidence": [],
+        "name": "evidence_constraint_weakened",
+        "note": "no weakening language found in the grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "existing_business_or_jtbd": {
+        "evidence": [
+          "OBS-20260822-0007-eda57d"
+        ],
+        "name": "existing_business_or_jtbd",
+        "note": "verbatim `process` extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "Building personal data-mixing projects (scraping public data, merging with personal data, manual review/editing, outputting to HTML/PDF/calendar formats)"
+        ]
+      },
+      "historical_constraint": {
+        "evidence": [
+          "OBS-20260822-0007-eda57d"
+        ],
+        "name": "historical_constraint",
+        "note": "legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact",
+        "status": "INFERRED",
+        "value": "manual_dispute_resolution"
+      },
+      "legacy_structure": {
+        "evidence": [
+          "OBS-20260822-0007-eda57d"
+        ],
+        "name": "legacy_structure",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "Manual integration of disparate tools: scrapy for scraping, sqlmodel for ORM, jinja for templating, click for CLI, separate export libraries - each project requires rebuilding connections between these components"
+        ]
+      },
+      "potential_economic_effect": {
+        "evidence": [],
+        "name": "potential_economic_effect",
+        "note": "no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "proposed_rearchitecture": {
+        "evidence": [
+          "OBS-20260822-0007-eda57d"
+        ],
+        "name": "proposed_rearchitecture",
+        "note": "FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition",
+        "status": "INFERRED",
+        "value": "If an unidentified structural change has genuinely weakened manual verification/reconciliation held against unavailable automated records, then Manual integration of disparate tools: scrapy for scraping, sqlmodel for ORM, jinja for templating, click for CLI, separate export libraries - each project requires rebuilding connections between these components may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead."
+      },
+      "why_now": {
+        "evidence": [],
+        "name": "why_now",
+        "note": "no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "rejected_reason": null,
+    "signature": null,
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0533"
+    ],
+    "candidate_id": "BC-0201",
+    "candidate_type": "OLD_BUSINESS_REARCHITECTURE",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {},
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0533",
+          "OBS-20260822-0017-c75eb3"
+        ],
+        "event_id": "candidate_created:BC-0201:abd529203a8ae9366a2c1789",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0017-c75eb3"
+    ],
+    "rearchitecture": {
+      "evidence_constraint_existed": {
+        "evidence": [
+          "OBS-20260822-0017-c75eb3"
+        ],
+        "name": "evidence_constraint_existed",
+        "note": "only the legacy structure itself was found, not an explicit stated reason for it",
+        "status": "INFERRED",
+        "value": [
+          "manual review"
+        ]
+      },
+      "evidence_constraint_weakened": {
+        "evidence": [],
+        "name": "evidence_constraint_weakened",
+        "note": "no weakening language found in the grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "existing_business_or_jtbd": {
+        "evidence": [
+          "OBS-20260822-0017-c75eb3"
+        ],
+        "name": "existing_business_or_jtbd",
+        "note": "verbatim `process` extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "video subtitle creation workflow: AI transcription → manual review/correction → styling → translation → export"
+        ]
+      },
+      "historical_constraint": {
+        "evidence": [
+          "OBS-20260822-0017-c75eb3"
+        ],
+        "name": "historical_constraint",
+        "note": "legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact",
+        "status": "INFERRED",
+        "value": "manual_dispute_resolution"
+      },
+      "legacy_structure": {
+        "evidence": [
+          "OBS-20260822-0017-c75eb3"
+        ],
+        "name": "legacy_structure",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "multiple separate tools for transcription, text correction, timing adjustment, styling, translation, and export"
+        ]
+      },
+      "potential_economic_effect": {
+        "evidence": [],
+        "name": "potential_economic_effect",
+        "note": "no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "proposed_rearchitecture": {
+        "evidence": [
+          "OBS-20260822-0017-c75eb3"
+        ],
+        "name": "proposed_rearchitecture",
+        "note": "FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition",
+        "status": "INFERRED",
+        "value": "If ai has genuinely weakened manual verification/reconciliation held against unavailable automated records, then multiple separate tools for transcription, text correction, timing adjustment, styling, translation, and export may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead."
+      },
+      "why_now": {
+        "evidence": [
+          "OBS-20260822-0017-c75eb3"
+        ],
+        "name": "why_now",
+        "note": "specific enabler categories named in the text, not defaulted to AI",
+        "status": "OBSERVED",
+        "value": {
+          "ai": [
+            " ai "
+          ]
+        }
+      }
+    },
+    "rejected_reason": null,
+    "signature": null,
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0535"
+    ],
+    "candidate_id": "BC-0202",
+    "candidate_type": "OLD_BUSINESS_REARCHITECTURE",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {},
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0535",
+          "OBS-20260822-0019-f6b25d"
+        ],
+        "event_id": "candidate_created:BC-0202:33f6a94d7ebc9ab4340ff9e8",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0019-f6b25d"
+    ],
+    "rearchitecture": {
+      "evidence_constraint_existed": {
+        "evidence": [
+          "OBS-20260822-0019-f6b25d"
+        ],
+        "name": "evidence_constraint_existed",
+        "note": "only the legacy structure itself was found, not an explicit stated reason for it",
+        "status": "INFERRED",
+        "value": [
+          "manual monitoring"
+        ]
+      },
+      "evidence_constraint_weakened": {
+        "evidence": [],
+        "name": "evidence_constraint_weakened",
+        "note": "no weakening language found in the grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "existing_business_or_jtbd": {
+        "evidence": [
+          "OBS-20260822-0019-f6b25d"
+        ],
+        "name": "existing_business_or_jtbd",
+        "note": "verbatim `process` extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "monitoring home alarm system availability and alerting when connectivity is lost"
+        ]
+      },
+      "historical_constraint": {
+        "evidence": [
+          "OBS-20260822-0019-f6b25d"
+        ],
+        "name": "historical_constraint",
+        "note": "legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact",
+        "status": "INFERRED",
+        "value": "continuous_oversight"
+      },
+      "legacy_structure": {
+        "evidence": [
+          "OBS-20260822-0019-f6b25d"
+        ],
+        "name": "legacy_structure",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "manual checking of alarm system status in Home Assistant or waiting until discovering alarm was offline during an incident"
+        ]
+      },
+      "potential_economic_effect": {
+        "evidence": [],
+        "name": "potential_economic_effect",
+        "note": "no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "proposed_rearchitecture": {
+        "evidence": [
+          "OBS-20260822-0019-f6b25d"
+        ],
+        "name": "proposed_rearchitecture",
+        "note": "FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition",
+        "status": "INFERRED",
+        "value": "If an unidentified structural change has genuinely weakened manual monitoring held against a lack of continuous/remote observability, then manual checking of alarm system status in Home Assistant or waiting until discovering alarm was offline during an incident may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead."
+      },
+      "why_now": {
+        "evidence": [],
+        "name": "why_now",
+        "note": "no enabler (technological, economic, legal, social, or infrastructural) named in the grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      }
+    },
+    "rejected_reason": null,
+    "signature": null,
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
+  },
+  {
+    "anomaly_ids": [
+      "ANOM-0551"
+    ],
+    "candidate_id": "BC-0203",
+    "candidate_type": "OLD_BUSINESS_REARCHITECTURE",
+    "created_at": "2026-08-22T11:00:13Z",
+    "dimensions": {},
+    "history": [
+      {
+        "derived_from": [
+          "ANOM-0551",
+          "OBS-20260822-0053-0f77e0"
+        ],
+        "event_id": "candidate_created:BC-0203:f19a592723c394177a9858db",
+        "event_type": "candidate_created",
+        "reason": "created at WATCH: meets the WATCH bar",
+        "recorded_at": "2026-08-22T11:00:13Z"
+      }
+    ],
+    "merged_from": [],
+    "merged_into": null,
+    "observation_ids": [
+      "OBS-20260822-0053-0f77e0"
+    ],
+    "rearchitecture": {
+      "evidence_constraint_existed": {
+        "evidence": [
+          "OBS-20260822-0053-0f77e0"
+        ],
+        "name": "evidence_constraint_existed",
+        "note": "only the legacy structure itself was found, not an explicit stated reason for it",
+        "status": "INFERRED",
+        "value": [
+          "in-person"
+        ]
+      },
+      "evidence_constraint_weakened": {
+        "evidence": [],
+        "name": "evidence_constraint_weakened",
+        "note": "no weakening language found in the grouped evidence",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "existing_business_or_jtbd": {
+        "evidence": [
+          "OBS-20260822-0053-0f77e0"
+        ],
+        "name": "existing_business_or_jtbd",
+        "note": "verbatim `process` extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "learning AI/ML tooling and OpenAI platform features"
+        ]
+      },
+      "historical_constraint": {
+        "evidence": [
+          "OBS-20260822-0053-0f77e0"
+        ],
+        "name": "historical_constraint",
+        "note": "legacy structure pattern matched, but no explicit causal language found - a hypothesis, not a confirmed historical fact",
+        "status": "INFERRED",
+        "value": "physical_presence"
+      },
+      "legacy_structure": {
+        "evidence": [
+          "OBS-20260822-0053-0f77e0"
+        ],
+        "name": "legacy_structure",
+        "note": "verbatim current_carrier extracted upstream by the Sensor Agent",
+        "status": "OBSERVED",
+        "value": [
+          "posting geographic-specific requests in online forums to find nearby experts willing to meet in person"
+        ]
+      },
+      "potential_economic_effect": {
+        "evidence": [],
+        "name": "potential_economic_effect",
+        "note": "no cost/speed/margin/capital/quality/convenience/trust/accessibility/scalability language found",
+        "status": "INSUFFICIENT_DATA",
+        "value": null
+      },
+      "proposed_rearchitecture": {
+        "evidence": [
+          "OBS-20260822-0053-0f77e0"
+        ],
+        "name": "proposed_rearchitecture",
+        "note": "FRAMING ONLY - a templated hypothesis, not evidence; must never by itself justify a state transition",
+        "status": "INFERRED",
+        "value": "If ai has genuinely weakened a physical-presence requirement held against remote identity/signature verification, then posting geographic-specific requests in online forums to find nearby experts willing to meet in person may no longer be structurally necessary and could be rebuilt from zero around today's constraints instead."
+      },
+      "why_now": {
+        "evidence": [
+          "OBS-20260822-0053-0f77e0"
+        ],
+        "name": "why_now",
+        "note": "specific enabler categories named in the text, not defaulted to AI",
+        "status": "OBSERVED",
+        "value": {
+          "ai": [
+            " ai "
+          ]
+        }
+      }
+    },
+    "rejected_reason": null,
+    "signature": null,
+    "state": "WATCH",
+    "updated_at": "2026-08-22T11:00:13Z"
   }
 ]
