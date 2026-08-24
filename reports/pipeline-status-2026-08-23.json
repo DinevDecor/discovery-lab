@@ -1,0 +1,41 @@
+{
+  "bca": {
+    "command": [
+      "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python3",
+      "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/run_business_candidate_analyst.py"
+    ],
+    "returncode": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"mode_a\": {\"anomalies_considered\": 628, \"groups_formed\": 516, \"events_appended\": 25, \"candidates_total\": 188}, \"report_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/business-candidates-2026-08-23.md\", \"snapshot_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidates.json\", \"events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidate_events.jsonl\", \"mode_b\": {\"anomalies_considered\": 628, \"groups_formed\": 524, \"events_appended\": 7, \"candidates_total\": 42}, \"material_events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/material-events-2026-08-23.json\", \"material_events_count\": 0}\n",
+    "summary": {
+      "events_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidate_events.jsonl",
+      "material_events_count": 0,
+      "material_events_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/material-events-2026-08-23.json",
+      "mode_a": {
+        "anomalies_considered": 628,
+        "candidates_total": 188,
+        "events_appended": 25,
+        "groups_formed": 516
+      },
+      "mode_b": {
+        "anomalies_considered": 628,
+        "candidates_total": 42,
+        "events_appended": 7,
+        "groups_formed": 524
+      },
+      "report_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/business-candidates-2026-08-23.md",
+      "snapshot_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidates.json"
+    }
+  },
+  "ca": {
+    "command": [
+      "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python3",
+      "/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/run_daily.py"
+    ],
+    "returncode": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"captures\": 80, \"observations\": 39, \"anomalies\": 628, \"evaluated\": 0, \"gate_decisions\": 96, \"errors\": 5}\n"
+  },
+  "date": "2026-08-23",
+  "status": "OK"
+}
