@@ -1,8 +1,8 @@
-import os, sys, unittest
+import json, os, sys, tempfile, unittest
 ROOT=os.path.dirname(os.path.dirname(__file__))
 sys.path.insert(0,os.path.join(ROOT,"src"))
 from ca_agents.models import Observation
-from ca_agents.memory import rebuild_anomalies, classify_function
+from ca_agents.memory import rebuild_anomalies, classify_function, append_jsonl, load_jsonl
 
 class TestMemory(unittest.TestCase):
     def obs(self,i,source,process,pain,crosspost_group=""):
@@ -49,6 +49,23 @@ class TestMemory(unittest.TestCase):
         self.assertEqual(len(ans),1)
         self.assertEqual(ans[0].independent_sources,["hacker_news"])
         self.assertEqual(len(ans[0].observation_ids),3)
+
+    def test_append_jsonl_skips_existing_observation_id(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=os.path.join(d,"observations.jsonl")
+            first={"observation_id":"OBS-SRC-abc","process":"first phrasing"}
+            retry={"observation_id":"OBS-SRC-abc","process":"different LLM phrasing"}
+            self.assertEqual(append_jsonl(path,[first]),1)
+            self.assertEqual(append_jsonl(path,[retry]),0)
+            rows=load_jsonl(path)
+            self.assertEqual(rows,[first])
+
+    def test_append_jsonl_dedups_same_id_within_batch(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=os.path.join(d,"observations.jsonl")
+            rows=[{"observation_id":"OBS-SRC-abc","x":1},{"observation_id":"OBS-SRC-abc","x":2}]
+            self.assertEqual(append_jsonl(path,rows),1)
+            self.assertEqual(len(load_jsonl(path)),1)
 
 if __name__=="__main__":
     unittest.main()
