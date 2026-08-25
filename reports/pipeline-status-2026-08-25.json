@@ -1,15 +1,41 @@
 {
-  "bca": null,
-  "bca_skipped_reason": "Constraint Archaeology daily scan did not complete successfully",
+  "bca": {
+    "command": [
+      "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python3",
+      "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/run_business_candidate_analyst.py"
+    ],
+    "returncode": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"mode_a\": {\"anomalies_considered\": 762, \"groups_formed\": 602, \"events_appended\": 54, \"candidates_total\": 227}, \"report_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/business-candidates-2026-08-25.md\", \"snapshot_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidates.json\", \"events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidate_events.jsonl\", \"mode_b\": {\"anomalies_considered\": 762, \"groups_formed\": 612, \"events_appended\": 11, \"candidates_total\": 52}, \"material_events_path\": \"/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/material-events-2026-08-25.json\", \"material_events_count\": 0}\n",
+    "summary": {
+      "events_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidate_events.jsonl",
+      "material_events_count": 0,
+      "material_events_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/material-events-2026-08-25.json",
+      "mode_a": {
+        "anomalies_considered": 762,
+        "candidates_total": 227,
+        "events_appended": 54,
+        "groups_formed": 602
+      },
+      "mode_b": {
+        "anomalies_considered": 762,
+        "candidates_total": 52,
+        "events_appended": 11,
+        "groups_formed": 612
+      },
+      "report_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/reports/business-candidates-2026-08-25.md",
+      "snapshot_path": "/home/runner/work/discovery-lab/discovery-lab/business-candidate-analyst/data/candidates.json"
+    }
+  },
   "ca": {
     "command": [
       "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python3",
       "/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/run_daily.py"
     ],
-    "returncode": 1,
-    "stderr_tail": "aeology-agents/run_daily.py\", line 35, in main\n    anomalies,gate_decisions=rebuild_anomalies(allobs,judge=judge,return_decisions=True)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/memory.py\", line 73, in rebuild_anomalies\n    decision=gate_pair(\n             ^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py\", line 129, in gate_pair\n    return same_mechanism(left,right,lp,rp,judge,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py\", line 119, in same_mechanism\n    cf=[_cross_test(left_profile,right,right_profile,judge),_cross_test(right_profile,left,left_profile,judge)]\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py\", line 104, in _cross_test\n    raw=judge.counterfactual(COUNTERFACTUAL_PROMPT.format(repair=repair_profile.repair,process=target.process,pain=target.pain,failure_mechanism=target_profile.failure_mechanism))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/mechanism_judge.py\", line 28, in counterfactual\n    return parse_json_object(call_claude(SYSTEM,prompt,900))\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/llm.py\", line 31, in call_claude\n    raise LLMError(\"Claude returned no text\")\nca_agents.llm.LLMError: Claude returned no text\n",
-    "stdout_tail": ""
+    "returncode": 0,
+    "stderr_tail": "",
+    "stdout_tail": "{\"captures\": 80, \"observations\": 36, \"anomalies\": 762, \"evaluated\": 0, \"gate_decisions\": 137, \"errors\": 5}\n"
   },
   "date": "2026-08-25",
-  "status": "CA_FAILED"
+  "status": "OK"
 }
