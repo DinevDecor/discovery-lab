@@ -1,0 +1,845 @@
+{
+  "run_metadata": {
+    "generated_at": "2026-08-09T07:17:38Z",
+    "gate_module": "constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py",
+    "gate_unmodified": true,
+    "judge": "ca_agents.mechanism_judge.ClaudeMechanismJudge (production, real Anthropic API)",
+    "provider": "Anthropic",
+    "anthropic_api_url": "https://api.anthropic.com/v1/messages",
+    "anthropic_api_version_header": "2023-06-01",
+    "model": "claude-sonnet-4-5",
+    "model_env_override_present": false,
+    "errors": []
+  },
+  "results": [
+    {
+      "test_case_id": "TP-01",
+      "category": "same_mechanism",
+      "cross_domain": true,
+      "domains": [
+        "software",
+        "medicine"
+      ],
+      "left_observation": {
+        "id": "TP-01-L",
+        "source": "test_pack_v1",
+        "process": "an on-call engineer handing off an active production incident to the next on-call engineer at shift change",
+        "pain": "the incoming engineer re-diagnoses steps the outgoing engineer already ruled out",
+        "current_carrier": "a verbal handoff call between the two engineers",
+        "failure_mode": "decisions already made during the incident are repeated or contradicted by the next engineer",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-01-R",
+        "source": "test_pack_v1",
+        "process": "a nurse handing off a ward patient's pending care tasks to the nurse starting the next shift",
+        "pain": "the incoming nurse re-asks the family questions the previous nurse already resolved",
+        "current_carrier": "a spoken bedside report between the two nurses",
+        "failure_mode": "care decisions already agreed with the patient are forgotten or redone by the next shift",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": false,
+      "short_circuited": false,
+      "reasons": [
+        "counterfactual fails: TP-01-L->TP-01-R: The proposed change creates a persistent log for diagnostic actions and results between engineers during technical handoffs. The failure involves nurses tracking patient/family negotiation states and decisions during care handoffs. While both involve handoff problems, the engineering log specifically tracks diagnostic actions (technical troubleshooting steps), whereas the nursing failure requires tracking which care decisions have already been negotiated with families versus which remain open. A log of diagnostic actions taken does not capture agreement states, decision negotiation status, or distinguish 'still deciding' from 'already decided with family' - these are fundamentally different information types than timestamped diagnostic actions and their technical results.; TP-01-R->TP-01-L: The proposed change adds structured agreement-state tracking for care decisions negotiated with patients/families in medical handoffs. The failure involves transmission of diagnostic decision history (ruled-out troubleshooting steps) during incident handoff between engineers. The mechanism creates structured encoding of negotiated care agreements, not diagnostic action history. The failure requires persistent shared representation of investigation actions and ruled-out paths, while the change tracks which care decisions have been agreed upon - a fundamentally different type of state. An engineer handoff has no patient/family agreements to track; it needs diagnostic path history. The structural pattern differs: one tracks bilateral agreement outcomes, the other needs unilateral investigation audit trail."
+      ],
+      "counterfactuals": [
+        {
+          "repair_from": "TP-01-L",
+          "applied_to": "TP-01-R",
+          "removes_failure": false,
+          "reason": "The proposed change creates a persistent log for diagnostic actions and results between engineers during technical handoffs. The failure involves nurses tracking patient/family negotiation states and decisions during care handoffs. While both involve handoff problems, the engineering log specifically tracks diagnostic actions (technical troubleshooting steps), whereas the nursing failure requires tracking which care decisions have already been negotiated with families versus which remain open. A log of diagnostic actions taken does not capture agreement states, decision negotiation status, or distinguish 'still deciding' from 'already decided with family' - these are fundamentally different information types than timestamped diagnostic actions and their technical results."
+        },
+        {
+          "repair_from": "TP-01-R",
+          "applied_to": "TP-01-L",
+          "removes_failure": false,
+          "reason": "The proposed change adds structured agreement-state tracking for care decisions negotiated with patients/families in medical handoffs. The failure involves transmission of diagnostic decision history (ruled-out troubleshooting steps) during incident handoff between engineers. The mechanism creates structured encoding of negotiated care agreements, not diagnostic action history. The failure requires persistent shared representation of investigation actions and ruled-out paths, while the change tracks which care decisions have been agreed upon - a fundamentally different type of state. An engineer handoff has no patient/family agreements to track; it needs diagnostic path history. The structural pattern differs: one tracks bilateral agreement outcomes, the other needs unilateral investigation audit trail."
+        }
+      ],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-01-L",
+        "hidden_function": "transmit incident state including diagnostic decisions already attempted and their outcomes across engineer shift boundaries",
+        "inputs": [
+          "diagnostic steps already performed",
+          "findings from each diagnostic step (ruled out causes, confirmed symptoms)",
+          "current hypotheses state",
+          "decisions made and rationale",
+          "timestamp/sequence of investigation actions"
+        ],
+        "outputs": [
+          "complete incident investigation history received by incoming engineer",
+          "awareness of which diagnostic paths are closed",
+          "current position in decision tree"
+        ],
+        "carrier": "verbal handoff call",
+        "failure_class": "absence",
+        "failure_mechanism": "verbal transmission of incident state lacks structured encoding of diagnostic decision history; spoken handoff privileges narrative of current state over exhaustive enumeration of ruled-out paths; incoming engineer receives what outgoing engineer remembers to mention rather than complete record of investigation actions; absence of persistent shared representation means diagnostic history exists only in outgoing engineer's working memory and what survives lossy verbal compression",
+        "repair": "create persistent shared incident log that both engineers write to and read from, containing timestamped record of each diagnostic action taken and its result, visible before and during handoff",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-01-R",
+        "hidden_function": "persist and transfer patient-family agreement state across shift boundaries",
+        "inputs": [
+          "care decisions negotiated with patient/family during previous shift",
+          "questions already asked and answered",
+          "context of why certain decisions were made",
+          "family preferences and concerns already addressed"
+        ],
+        "outputs": [
+          "incoming nurse knows which decisions are already settled",
+          "incoming nurse knows which questions have been asked",
+          "incoming nurse can continue care without re-negotiating resolved items"
+        ],
+        "carrier": "spoken bedside report between the two nurses",
+        "failure_class": "absence",
+        "failure_mechanism": "spoken handoff lacks structured encoding of agreement state; verbal summary focuses on clinical tasks/status rather than tracking which decisions have already undergone patient/family negotiation; no persistent record distinguishes 'still deciding' from 'already decided with family'; incoming nurse has no way to verify what was previously discussed versus what remains open",
+        "repair": "add explicit agreement-state field to handoff carrier indicating which care decisions have already been negotiated and resolved with patient/family (e.g. checkboxes or structured verbal protocol: 'family already agreed to X, still deciding on Y')",
+        "confidence": 0.92,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.95,
+      "right_profile_confidence": 0.92,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-02",
+      "category": "same_mechanism",
+      "cross_domain": true,
+      "domains": [
+        "aviation",
+        "logistics"
+      ],
+      "left_observation": {
+        "id": "TP-02-L",
+        "source": "test_pack_v1",
+        "process": "an MRO shop supplying a wear part for an aircraft-on-ground repair",
+        "pain": "the shop holds no stock of the part beyond the average monthly draw",
+        "current_carrier": "a purchase order raised only after the part is requested",
+        "failure_mode": "when demand exceeds the average, the part is sourced by paid emergency air freight from another region",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-02-R",
+        "source": "test_pack_v1",
+        "process": "a regional distribution center fulfilling retail store replenishment orders",
+        "pain": "the center holds inventory sized to average weekly sell-through only",
+        "current_carrier": "a replenishment order triggered by the prior week's actual sales",
+        "failure_mode": "when a store's sales spike above average, the shortfall is covered by paid next-day courier shipments from a distant hub",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": false,
+      "short_circuited": true,
+      "reasons": [
+        "failure_class differs: capacity vs latency"
+      ],
+      "counterfactuals": [],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-02-L",
+        "hidden_function": "ensure part availability matches demand volatility to prevent emergency sourcing",
+        "inputs": [
+          "part request timing",
+          "actual demand pattern",
+          "average monthly draw calculation",
+          "stock level",
+          "regional supplier lead times"
+        ],
+        "outputs": [
+          "part available locally for AOG repair",
+          "procurement cost within normal bounds",
+          "aircraft downtime minimized"
+        ],
+        "carrier": "inventory policy based on average demand only, with reactive purchase orders",
+        "failure_class": "capacity",
+        "failure_mechanism": "The stock level is sized using average demand as the sole parameter, which does not account for demand variance. When actual demand exceeds the average (a statistically normal occurrence in any variable distribution), the deterministic stock level is insufficient. The reactive purchase order process has no anticipatory mechanism, forcing emergency air freight as the only option to meet AOG time constraints.",
+        "repair": "Size stock level using demand distribution variance (e.g., safety stock = standard deviation × service level factor) instead of average alone, so that predictable demand volatility is absorbed by local inventory rather than triggering emergency freight",
+        "confidence": 0.93,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-02-R",
+        "hidden_function": "match regional inventory availability to store demand within acceptable cost and time constraints",
+        "inputs": [
+          "prior week's actual sales per store",
+          "regional distribution center inventory levels",
+          "store replenishment orders"
+        ],
+        "outputs": [
+          "inventory allocation to stores",
+          "shipment method selection (standard vs. expedited courier)"
+        ],
+        "carrier": "replenishment order triggered by prior week's actual sales",
+        "failure_class": "latency",
+        "failure_mechanism": "The carrier uses lagging (prior week) sales data to predict current week demand. When demand spikes above historical average, the prediction lag means the regional center was stocked for lower demand. The inventory shortfall is discovered only when current orders exceed available regional stock, forcing expensive expedited shipments from distant hub to meet timing requirements.",
+        "repair": "Incorporate leading demand signals (same-week or real-time sales data) into the replenishment trigger mechanism to reduce prediction lag",
+        "confidence": 0.92,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.93,
+      "right_profile_confidence": 0.92,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-03",
+      "category": "same_mechanism",
+      "cross_domain": true,
+      "domains": [
+        "finance",
+        "construction"
+      ],
+      "left_observation": {
+        "id": "TP-03-L",
+        "source": "test_pack_v1",
+        "process": "releasing an outbound wire transfer requested near the end of the banking day",
+        "pain": "the beneficiary account details are keyed once and sent without a second person checking them",
+        "current_carrier": "the single operator who receives and enters the wire instruction",
+        "failure_mode": "funds are sent to a mistyped or fraudulent account and the error surfaces only when the intended recipient reports non-receipt days later",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-03-R",
+        "source": "test_pack_v1",
+        "process": "pouring concrete for a structural slab on a schedule-pressured site",
+        "pain": "the rebar placement is checked by the same crew that installed it, with no independent hold point before the pour",
+        "current_carrier": "the installing crew's own visual check",
+        "failure_mode": "rebar is out of position or missing in a section and the defect surfaces only when a later structural inspection cores the slab",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "same_mechanism",
+      "expected_edge": "merged",
+      "actual_verdict": "same_mechanism",
+      "actual_edge": "merged",
+      "pass": true,
+      "short_circuited": false,
+      "reasons": [
+        "each repair removes the other's failure"
+      ],
+      "counterfactuals": [
+        {
+          "repair_from": "TP-03-L",
+          "applied_to": "TP-03-R",
+          "removes_failure": true,
+          "reason": "The proposed change directly addresses the core failure mechanism: self-inspection creating verification bypass. By requiring a second independent operator to verify against the original instruction before the irreversible action (wire transmission/concrete pour), the change eliminates the cognitive bias problem inherent in self-inspection. The installing crew's bias toward confirming their own work would be blocked by an independent verification checkpoint before the point of no return, preventing positioning errors from being encased in concrete."
+        },
+        {
+          "repair_from": "TP-03-R",
+          "applied_to": "TP-03-L",
+          "removes_failure": true,
+          "reason": "The proposed change mandates independent verification by a separate person as a hold point before authorization of an irreversible process. In the wire transfer failure, beneficiary account details are manually transcribed by a single operator without independent verification before irrevocable transmission. If the proposed change were applied (separate inspector/verifier as mandatory hold point between data entry completion and transmission authorization), a second person would independently verify the account details before the wire transfer is authorized and sent. This directly addresses the failure mechanism: the typographical errors or fraudulent substitutions would be caught by the independent verifier before the irrevocable transmission occurs, preventing funds from settling in the wrong account."
+        }
+      ],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-03-L",
+        "hidden_function": "ensure wire transfer beneficiary account details match the intended recipient before funds are irrevocably transmitted",
+        "inputs": [
+          "wire transfer instruction from requestor",
+          "beneficiary account details (account number, routing number, beneficiary name)",
+          "time of day (near end of banking day)",
+          "intended recipient identity"
+        ],
+        "outputs": [
+          "wire transfer transmitted to beneficiary account",
+          "funds debited from originating account",
+          "irrevocable payment instruction to receiving institution"
+        ],
+        "carrier": "single operator who receives and manually enters wire instruction into transmission system",
+        "failure_class": "unverified",
+        "failure_mechanism": "beneficiary account details are manually transcribed by a single operator without independent verification before irrevocable transmission; typographical errors or fraudulent substitutions in account numbers pass directly into the payment network; the irreversible nature of wire transfers means the error cannot be detected until the intended recipient notices non-receipt days later, after funds have already settled in the wrong account",
+        "repair": "require a second independent operator to verify beneficiary account details against the original instruction before the wire transfer is transmitted",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-03-R",
+        "hidden_function": "independently verify rebar position and completeness before concrete pour becomes irreversible",
+        "inputs": [
+          "installed rebar configuration",
+          "structural design specifications",
+          "placement tolerance requirements"
+        ],
+        "outputs": [
+          "verification of rebar conformance to design",
+          "hold/proceed decision for concrete pour"
+        ],
+        "carrier": "visual inspection by the same crew that performed installation",
+        "failure_class": "unverified",
+        "failure_mechanism": "self-inspection creates verification bypass - the installing crew has cognitive bias toward confirming their own work is acceptable, and no independent checkpoint exists to catch positioning errors before the irreversible concrete pour encases the defect",
+        "repair": "add independent verification step (separate inspector or crew) as mandatory hold point between rebar installation completion and concrete pour authorization",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.95,
+      "right_profile_confidence": 0.95,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-04",
+      "category": "related_distinct",
+      "cross_domain": true,
+      "domains": [
+        "aviation",
+        "medicine"
+      ],
+      "left_observation": {
+        "id": "TP-04-L",
+        "source": "test_pack_v1",
+        "process": "finalizing a flight's weight-and-balance calculation before dispatch release",
+        "pain": "dispatch is asked to release the flight before cargo loading is complete",
+        "current_carrier": "the load sheet, which can only be completed once loading finishes",
+        "failure_mode": "the release is delayed or reworked because the final loaded weight needed for the calculation does not exist yet at the time it is requested",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-04-R",
+        "source": "test_pack_v1",
+        "process": "a hospital admitting team deciding on a new medication for an incoming patient",
+        "pain": "the admitting team is asked to prescribe before the patient's allergy history arrives",
+        "current_carrier": "a paper allergy record held at the patient's regular clinic",
+        "failure_mode": "the prescription is delayed or reworked because the allergy history, though already recorded elsewhere, was never requested or sent to the admitting team",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": true,
+      "short_circuited": true,
+      "reasons": [
+        "failure_class differs: latency vs absence"
+      ],
+      "counterfactuals": [],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-04-L",
+        "hidden_function": "synchronize flight dispatch release timing with cargo loading completion status",
+        "inputs": [
+          "dispatch release request timing",
+          "cargo loading completion status",
+          "current loaded weight data",
+          "weight-and-balance calculation requirements"
+        ],
+        "outputs": [
+          "finalized weight-and-balance calculation",
+          "dispatch release authorization"
+        ],
+        "carrier": "load sheet containing final loaded weight data",
+        "failure_class": "latency",
+        "failure_mechanism": "the weight-and-balance calculation requires final loaded weight as input, but this data only becomes available upon cargo loading completion; dispatch release is requested before the loading process finishes, creating a temporal gap where required input data does not yet exist for the calculation that must precede release",
+        "repair": "delay dispatch release request until cargo loading completes and final loaded weight is available, OR provide interim weight-and-balance calculation capability using predicted/preliminary weight that can be updated before actual dispatch",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-04-R",
+        "hidden_function": "transfer allergy contraindication data from storage location to prescribing decision point",
+        "inputs": [
+          "patient identifier linking to existing allergy record",
+          "timing of admission relative to prescribing decision",
+          "location of allergy record (regular clinic)"
+        ],
+        "outputs": [
+          "allergy history data available at admitting team decision point"
+        ],
+        "carrier": "paper allergy record at regular clinic (static storage, requires active retrieval)",
+        "failure_class": "absence",
+        "failure_mechanism": "no mechanism exists to trigger retrieval and transmission of the allergy record from the regular clinic to the admitting team before the prescribing decision deadline; the data exists but remains isolated at the source location because no party initiated the transfer process",
+        "repair": "establish a protocol that triggers allergy record request from the regular clinic immediately upon patient admission, before prescribing decisions are required",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.95,
+      "right_profile_confidence": 0.95,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-05",
+      "category": "related_distinct",
+      "cross_domain": true,
+      "domains": [
+        "software",
+        "manufacturing"
+      ],
+      "left_observation": {
+        "id": "TP-05-L",
+        "source": "test_pack_v1",
+        "process": "running the automated test suite in continuous integration",
+        "pain": "tests fail intermittently depending on which other tests ran before them",
+        "current_carrier": "a shared in-memory database fixture reused across test cases",
+        "failure_mode": "one test's leftover state causes a later, unrelated test to assert against the wrong value",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-05-R",
+        "source": "test_pack_v1",
+        "process": "stamping sheet-metal brackets on a production line using a dedicated jig",
+        "pain": "an increasing fraction of brackets fail dimensional inspection as a production run continues",
+        "current_carrier": "the stamping jig's locating pins, unchanged since the run began",
+        "failure_mode": "the jig's locating pins wear during the run, so later brackets drift out of tolerance while early brackets in the same run passed",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": true,
+      "short_circuited": true,
+      "reasons": [
+        "failure_class differs: conflict vs corruption"
+      ],
+      "counterfactuals": [],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-05-L",
+        "hidden_function": "isolate test case state so each test runs against a known baseline",
+        "inputs": "test execution order, prior test modifications to shared database fixture",
+        "outputs": "database state available to current test",
+        "carrier": "shared in-memory database fixture reused across test cases",
+        "failure_class": "conflict",
+        "failure_mechanism": "test execution shares mutable state through the carrier (in-memory database fixture), and test cases write to this shared state without restoration; when test B runs after test A, test B inherits test A's mutations, causing test B to assert against contaminated data rather than the expected baseline state",
+        "repair": "reset the in-memory database fixture to a clean baseline state before each test case executes",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-05-R",
+        "hidden_function": "maintain precise spatial reference position for sheet-metal alignment during repeated stamping operations",
+        "inputs": [
+          "contact force from sheet-metal placement",
+          "lateral shear forces during stamping",
+          "repetitive mechanical loading cycles",
+          "friction from metal-on-metal contact"
+        ],
+        "outputs": [
+          "fixed spatial datum for bracket positioning",
+          "constraint of sheet-metal degrees of freedom"
+        ],
+        "carrier": "locating pin geometry and surface integrity",
+        "failure_class": "corruption",
+        "failure_mechanism": "cumulative material removal from locating pin surfaces through abrasive wear and/or adhesive wear, causing progressive enlargement of pin-to-hole clearances and degradation of positioning accuracy below dimensional tolerance requirements",
+        "repair": "restore locating pin geometry to original dimensions (or replace pins with identical geometry)",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.95,
+      "right_profile_confidence": 0.95,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-06",
+      "category": "related_distinct",
+      "cross_domain": true,
+      "domains": [
+        "logistics",
+        "construction"
+      ],
+      "left_observation": {
+        "id": "TP-06-L",
+        "source": "test_pack_v1",
+        "process": "clearing an imported container through customs at the destination port",
+        "pain": "the container sits at the port past its free time and starts accruing charges",
+        "current_carrier": "the customs entry paperwork, which is only started after the vessel arrives",
+        "failure_mode": "clearance is delayed because the required import documentation was not prepared in advance, and the delay is billed as demurrage",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-06-R",
+        "source": "test_pack_v1",
+        "process": "obtaining a municipal inspection sign-off before covering a completed foundation",
+        "pain": "the crew sits idle waiting for the inspection to happen",
+        "current_carrier": "the municipal inspector's visit queue",
+        "failure_mode": "the sign-off is delayed because the inspection department has more requests that week than it has inspectors, regardless of how early the contractor requested it",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": true,
+      "short_circuited": true,
+      "reasons": [
+        "failure_class differs: latency vs capacity"
+      ],
+      "counterfactuals": [],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-06-L",
+        "hidden_function": "verify imported goods comply with destination country regulations and authorize release from port custody",
+        "inputs": [
+          "vessel arrival notification",
+          "commercial invoice",
+          "packing list",
+          "bill of lading",
+          "certificate of origin",
+          "product classification codes",
+          "importer identification",
+          "destination country regulatory requirements"
+        ],
+        "outputs": [
+          "customs clearance approval",
+          "duty assessment",
+          "release authorization for container"
+        ],
+        "carrier": "customs entry paperwork preparation and submission process",
+        "failure_class": "latency",
+        "failure_mechanism": "The carrier initiates only after vessel arrival, creating a serial dependency where document preparation time adds directly to port dwell time. Required documentation (commercial invoices, certificates, classifications) exists earlier in the supply chain but is not forwarded to the customs broker until the triggering event (arrival) occurs. This temporal gap between information availability and information utilization converts preparation latency into demurrage-incurring delay.",
+        "repair": "Initiate customs entry paperwork preparation upon bill of lading issuance or vessel departure from origin port, rather than upon destination port arrival",
+        "confidence": 0.92,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-06-R",
+        "hidden_function": "certifying that foundation work meets code requirements before it becomes inaccessible",
+        "inputs": "completed foundation, inspection request",
+        "outputs": "municipal sign-off permitting work to proceed",
+        "carrier": "municipal inspector's physical visit and evaluation",
+        "failure_class": "capacity",
+        "failure_mechanism": "inspection department has fixed inspector headcount that becomes saturated when weekly inspection requests exceed available inspector-hours, creating queue backlog independent of request timing",
+        "repair": "increase inspector capacity to match peak weekly demand (additional inspectors, extended hours, or longer inspection windows)",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.92,
+      "right_profile_confidence": 0.95,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-07",
+      "category": "adversarial_near_match",
+      "cross_domain": false,
+      "domains": [
+        "software",
+        "software"
+      ],
+      "left_observation": {
+        "id": "TP-07-L",
+        "source": "test_pack_v1",
+        "process": "serving product prices from a read-through cache in front of the pricing database",
+        "pain": "customers occasionally see a price that is already out of date",
+        "current_carrier": "cache entries that are not touched when the underlying price is updated",
+        "failure_mode": "a price update in the database does not trigger removal of the old cached value, so the stale price is served until it expires on its own",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-07-R",
+        "source": "test_pack_v1",
+        "process": "displaying same-day revenue on an internal analytics dashboard",
+        "pain": "viewers occasionally see a number that is already out of date",
+        "current_carrier": "a nightly batch job that recalculates the dashboard's figures once per day",
+        "failure_mode": "same-day transactions are not reflected until the next scheduled batch run, so the dashboard lags true activity by up to a day even though the pipeline is working exactly as designed",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": true,
+      "short_circuited": true,
+      "reasons": [
+        "failure_class differs: absence vs latency"
+      ],
+      "counterfactuals": [],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-07-L",
+        "hidden_function": "maintain consistency between cached price data and authoritative database price data",
+        "inputs": [
+          "price update event in database",
+          "cache entry for affected product",
+          "product identifier linking database record to cache key"
+        ],
+        "outputs": [
+          "invalidation signal to cache",
+          "removal of stale cache entry",
+          "consistent price data available for subsequent reads"
+        ],
+        "carrier": "cache invalidation pathway triggered by database write events",
+        "failure_class": "absence",
+        "failure_mechanism": "The cache invalidation pathway does not exist or is not connected to database write operations. When a price is updated in the database, no signal propagates to the cache layer to remove or refresh the affected entry. The cache operates purely on time-based expiration without awareness of data mutations at the source of truth. The read-through cache correctly populates on misses but has no mechanism to detect when its cached values have become stale due to upstream changes.",
+        "repair": "Add cache invalidation trigger on database price update that removes or marks invalid the corresponding cache entry for the affected product",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-07-R",
+        "hidden_function": "provide current-day revenue visibility to internal stakeholders",
+        "inputs": "same-day transaction events occurring throughout the day",
+        "outputs": "revenue figure displayed on analytics dashboard",
+        "carrier": "nightly batch job that recalculates dashboard figures once per 24-hour cycle",
+        "failure_class": "latency",
+        "failure_mechanism": "batch processing cadence (24-hour cycle) creates information lag; same-day transactions completed after most recent batch run remain invisible until next scheduled execution, producing staleness window of 0-24 hours depending on when transaction occurs relative to batch schedule",
+        "repair": "increase batch job frequency to run multiple times per day, or implement incremental update mechanism that incorporates new transactions between full recalculations",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.95,
+      "right_profile_confidence": 0.95,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-08",
+      "category": "unresolved",
+      "cross_domain": true,
+      "domains": [
+        "finance",
+        "medicine"
+      ],
+      "left_observation": {
+        "id": "TP-08-L",
+        "source": "test_pack_v1",
+        "process": "a handoff between two people in a finance operations team",
+        "pain": "things reportedly get lost sometimes",
+        "current_carrier": "a person, no further detail available",
+        "failure_mode": "not clearly described; one team member mentioned it happens occasionally but gave no specifics",
+        "evidence_count": 1,
+        "confidence": 0.3
+      },
+      "right_observation": {
+        "id": "TP-08-R",
+        "source": "test_pack_v1",
+        "process": "a hospital ward pharmacist reviewing a patient's medication list at admission",
+        "pain": "duplicate doses are occasionally given for a home medication",
+        "current_carrier": "the admission medication reconciliation form, filled in from patient interview",
+        "failure_mode": "the reconciliation form lists the home medication by brand name, and the prescribing system does not flag it as identical to the hospital formulary's generic-name entry",
+        "evidence_count": 3,
+        "confidence": 0.85
+      },
+      "expected_verdict": "insufficient_data",
+      "expected_edge": "unresolved",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": false,
+      "short_circuited": false,
+      "reasons": [
+        "counterfactual fails: TP-08-L->TP-08-R: The handoff checklist would ensure the receiving pharmacist explicitly confirms receipt of the medication list, but does not address the root cause: the prescribing system's lack of a drug normalization function. Even with perfect handoff confirmation, the system would still fail to recognize 'Advil' and 'ibuprofen' as the same medication, allowing duplicate entries to pass through the duplicate-checking algorithm undetected. The failure is a data normalization and identity resolution problem in the prescribing system, not a communication or handoff process problem.; TP-08-R->TP-08-L: The proposed change addresses duplicate detection of pharmaceutical nomenclature in a prescribing system. The failure involves unstructured information handoff between finance operations team members with no verification protocol. These are completely independent mechanisms in unrelated domains - mapping drug names has no causal relationship to whether finance personnel confirm receipt of all necessary information elements during handoffs. The prescribing system change provides no checklist, confirmation protocol, or structured handoff mechanism for finance operations."
+      ],
+      "counterfactuals": [
+        {
+          "repair_from": "TP-08-L",
+          "applied_to": "TP-08-R",
+          "removes_failure": false,
+          "reason": "The handoff checklist would ensure the receiving pharmacist explicitly confirms receipt of the medication list, but does not address the root cause: the prescribing system's lack of a drug normalization function. Even with perfect handoff confirmation, the system would still fail to recognize 'Advil' and 'ibuprofen' as the same medication, allowing duplicate entries to pass through the duplicate-checking algorithm undetected. The failure is a data normalization and identity resolution problem in the prescribing system, not a communication or handoff process problem."
+        },
+        {
+          "repair_from": "TP-08-R",
+          "applied_to": "TP-08-L",
+          "removes_failure": false,
+          "reason": "The proposed change addresses duplicate detection of pharmaceutical nomenclature in a prescribing system. The failure involves unstructured information handoff between finance operations team members with no verification protocol. These are completely independent mechanisms in unrelated domains - mapping drug names has no causal relationship to whether finance personnel confirm receipt of all necessary information elements during handoffs. The prescribing system change provides no checklist, confirmation protocol, or structured handoff mechanism for finance operations."
+        }
+      ],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-08-L",
+        "hidden_function": "Transfer accountability and context for specific financial tasks or documents from one team member to another",
+        "inputs": "Financial task specifications, associated documents, current status, pending actions, decision context, deadlines",
+        "outputs": "Complete task understanding and responsibility accepted by receiving team member",
+        "carrier": "Human-to-human verbal or informal communication (no structured system mentioned)",
+        "failure_class": "absence",
+        "failure_mechanism": "Unstructured handoff allows information elements to be omitted without detection. No confirmation protocol exists to verify all necessary inputs were transmitted and received. The carrier (person) has no external memory constraint forcing completeness verification, and the receiver has no checklist to identify missing elements until task execution fails.",
+        "repair": "Introduce a handoff checklist that both parties must complete, with receiving party explicitly confirming receipt of each required information element before accepting responsibility",
+        "confidence": 0.75,
+        "evidence_count": 1
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-08-R",
+        "hidden_function": "Map medication identifiers across naming systems to detect therapeutic duplicates",
+        "inputs": [
+          "Home medication name (brand name format)",
+          "Hospital formulary medication name (generic name format)",
+          "Patient's medication list from admission interview"
+        ],
+        "outputs": [
+          "Duplicate medication alert",
+          "Therapeutic equivalence flag between reconciliation form entry and prescribing system entry"
+        ],
+        "carrier": "The prescribing system's medication database and duplicate-checking logic",
+        "failure_class": "absence",
+        "failure_mechanism": "The prescribing system lacks a cross-reference table or normalization function that maps brand names to generic names (or to a canonical medication identifier). When the reconciliation form contains 'Advil' and the prescribing system contains 'ibuprofen', no identity relationship is established, so the duplicate-checking algorithm evaluates them as distinct medications and does not trigger an alert.",
+        "repair": "Add brand-name-to-generic-name mapping table to the prescribing system's duplicate detection function, so entries differing only in proprietary vs. nonproprietary nomenclature are recognized as identical therapeutic entities",
+        "confidence": 0.95,
+        "evidence_count": 3
+      },
+      "left_profile_confidence": 0.75,
+      "right_profile_confidence": 0.95,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-09",
+      "category": "unresolved",
+      "cross_domain": true,
+      "domains": [
+        "construction",
+        "maintenance"
+      ],
+      "left_observation": {
+        "id": "TP-09-L",
+        "source": "test_pack_v1",
+        "process": "coordinating framing completion with the start of electrical rough-in on a renovation",
+        "pain": "electrical work has started late on some floors",
+        "current_carrier": "a text message the framing lead sends when he believes his crew is done",
+        "failure_mode": "on two floors the text was sent before framing was actually complete, so electricians began work in areas that still needed framing changes; site management has floated requiring a walkthrough sign-off instead of a text, but this has not been tried yet and nobody has assessed whether a walkthrough would actually have caught the two incidents",
+        "evidence_count": 1,
+        "confidence": 0.6
+      },
+      "right_observation": {
+        "id": "TP-09-R",
+        "source": "test_pack_v1",
+        "process": "coordinating diagnostic completion with the start of a repair step on a multi-step overhaul",
+        "pain": "repair work has started before diagnostics were finished on some jobs",
+        "current_carrier": "a shared whiteboard mark the diagnostic technician updates when a step is believed finished",
+        "failure_mode": "on a few jobs the whiteboard was marked before diagnostics were actually complete, so repair started on the wrong assumption; a supervisor has suggested replacing the whiteboard mark with a signed checklist, but nobody has reviewed the incident records closely enough to say whether a signed checklist would have prevented those specific cases",
+        "evidence_count": 1,
+        "confidence": 0.6
+      },
+      "expected_verdict": "insufficient_data",
+      "expected_edge": "unresolved",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": false,
+      "short_circuited": false,
+      "reasons": [
+        "counterfactual fails: TP-09-L->TP-09-R: The proposed change adds verification of physical framing state against completion criteria before authorization. However, the failure mechanism involves a technician's incorrect belief state being transmitted via whiteboard marking - the technician genuinely but incorrectly believed diagnostics were finished. The proposed walkthrough sign-off would verify physical state against criteria, but only if the criteria themselves are correct and if the sign-off occurs. The core issue is that the technician's belief was wrong about what remained to be done. A verification step comparing physical state to completion criteria would only catch this if: (1) the completion criteria accurately enumerate all required diagnostic work, and (2) the physical state clearly reveals incomplete diagnostics. The failure describes the technician marking completion based on incorrect belief - this suggests the incompleteness may not have been physically obvious, or the criteria may have been ambiguous. The proposed change addresses authorization timing but doesn't directly address the root cause: incorrect belief formation about diagnostic completion status. The technician could still form incorrect beliefs and the verification might not catch subtle incomplete diagnostic work."
+      ],
+      "counterfactuals": [
+        {
+          "repair_from": "TP-09-L",
+          "applied_to": "TP-09-R",
+          "removes_failure": false,
+          "reason": "The proposed change adds verification of physical framing state against completion criteria before authorization. However, the failure mechanism involves a technician's incorrect belief state being transmitted via whiteboard marking - the technician genuinely but incorrectly believed diagnostics were finished. The proposed walkthrough sign-off would verify physical state against criteria, but only if the criteria themselves are correct and if the sign-off occurs. The core issue is that the technician's belief was wrong about what remained to be done. A verification step comparing physical state to completion criteria would only catch this if: (1) the completion criteria accurately enumerate all required diagnostic work, and (2) the physical state clearly reveals incomplete diagnostics. The failure describes the technician marking completion based on incorrect belief - this suggests the incompleteness may not have been physically obvious, or the criteria may have been ambiguous. The proposed change addresses authorization timing but doesn't directly address the root cause: incorrect belief formation about diagnostic completion status. The technician could still form incorrect beliefs and the verification might not catch subtle incomplete diagnostic work."
+        },
+        {
+          "repair_from": "TP-09-R",
+          "applied_to": "TP-09-L",
+          "removes_failure": true,
+          "reason": "The proposed change adds a verification step between technician (framing lead) belief and signal transmission that confirms diagnostic work (framing completion) is actually complete before the signal is made visible to repair personnel (electricians). This directly addresses the failure mechanism where the framing lead's self-assessment is transmitted directly as authorization without independent verification against actual completion state. With perfect implementation, the verification step would detect discrepancies between reported completion and physical reality before electricians receive and act on the signal, preventing late starts caused by premature authorization."
+        }
+      ],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-09-L",
+        "hidden_function": "Verify that framing work meets the completion criteria required for electrical rough-in to begin safely and efficiently",
+        "inputs": "Physical state of framing work on a floor; framing lead's judgment of completion",
+        "outputs": "Authorization signal for electrical crew to begin rough-in work on that floor",
+        "carrier": "Text message from framing lead stating belief that crew is done",
+        "failure_class": "unverified",
+        "failure_mechanism": "The framing lead's self-assessment of completion is transmitted directly as authorization without independent verification against actual completion state; the carrier (text message) conveys the lead's belief but provides no evidence of actual completion; no mechanism exists to detect discrepancy between reported completion and physical reality before electricians act on the signal",
+        "repair": "Add verification step that compares physical framing state against completion criteria before authorization signal is sent (the proposed walkthrough sign-off would provide this verification capability)",
+        "confidence": 0.95,
+        "evidence_count": 1
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-09-R",
+        "hidden_function": "signal that diagnostic work on a specific job has reached a state where repair work may safely begin",
+        "inputs": "diagnostic technician's belief that diagnostic work on a job is complete",
+        "outputs": "visible indication to repair personnel that they may start repair work on that job",
+        "carrier": "whiteboard mark written by diagnostic technician",
+        "failure_class": "unverified",
+        "failure_mechanism": "the carrier transmits the diagnostic technician's belief state without any verification that the belief corresponds to actual completion; the technician marked the whiteboard based on incorrect belief that diagnostics were finished when work remained",
+        "repair": "add a verification step between technician belief and signal transmission that confirms diagnostic work is actually complete before the signal is made visible to repair personnel",
+        "confidence": 0.92,
+        "evidence_count": 1
+      },
+      "left_profile_confidence": 0.95,
+      "right_profile_confidence": 0.92,
+      "error": null
+    },
+    {
+      "test_case_id": "TP-10",
+      "category": "related_distinct",
+      "cross_domain": true,
+      "domains": [
+        "maintenance",
+        "finance"
+      ],
+      "left_observation": {
+        "id": "TP-10-L",
+        "source": "test_pack_v1",
+        "process": "replacing a failed component on a machine with the part the parts desk has on hand",
+        "pain": "the same machine keeps failing at the same location a few weeks after each repair",
+        "current_carrier": "a lower-spec substitute part that fits the same mounting but is rated below the original manufacturer's tolerance",
+        "failure_mode": "the substitute part wears out faster than the original design tolerance, so the same failure recurs on a shortened cycle",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "right_observation": {
+        "id": "TP-10-R",
+        "source": "test_pack_v1",
+        "process": "extending trade credit terms to a customer segment at account opening",
+        "pain": "the same customer segment keeps going delinquent a few weeks after each collections cleanup",
+        "current_carrier": "a standard credit-term offer applied to the segment regardless of the segment's typical cash conversion cycle",
+        "failure_mode": "the credit term extended exceeds the segment's actual payment capacity, so the same delinquency recurs on a repeating cycle",
+        "evidence_count": 2,
+        "confidence": 0.8
+      },
+      "expected_verdict": "different_mechanisms",
+      "expected_edge": "related_distinct",
+      "actual_verdict": "different_mechanisms",
+      "actual_edge": "related_distinct",
+      "pass": true,
+      "short_circuited": true,
+      "reasons": [
+        "failure_class differs: capacity vs conflict"
+      ],
+      "counterfactuals": [],
+      "left_mechanism_profile": {
+        "anomaly_id": "TP-10-L",
+        "hidden_function": "maintain machine operational tolerance by replacing worn components with parts that meet original design specifications",
+        "inputs": [
+          "failed component location",
+          "available substitute part from parts desk",
+          "mounting compatibility"
+        ],
+        "outputs": [
+          "machine returned to service",
+          "component physically installed"
+        ],
+        "carrier": "lower-spec substitute part selected based on physical fit rather than performance rating",
+        "failure_class": "capacity",
+        "failure_mechanism": "The substitute part lacks the capacity (durability/tolerance rating) required by the original design. While mounting compatibility is verified, the performance specification gap means the part degrades under normal operating conditions faster than design cycle. Each repair resets the failure clock to a shorter interval because the root cause—insufficient part capacity—is never addressed.",
+        "repair": "Replace failed component with part that meets or exceeds original manufacturer's tolerance specification, not just mounting compatibility",
+        "confidence": 0.95,
+        "evidence_count": 2
+      },
+      "right_mechanism_profile": {
+        "anomaly_id": "TP-10-R",
+        "hidden_function": "match credit term duration to customer segment's cash conversion cycle to prevent structural delinquency",
+        "inputs": [
+          "customer segment classification",
+          "segment's cash conversion cycle duration",
+          "requested credit term length",
+          "collections cleanup events"
+        ],
+        "outputs": [
+          "credit term offer duration",
+          "delinquency occurrence pattern"
+        ],
+        "carrier": "standard credit-term offer applied uniformly to segment",
+        "failure_class": "conflict",
+        "failure_mechanism": "the credit term duration conflicts with the segment's cash conversion cycle—customers receive payment capacity only after their own receivables convert to cash, but the fixed credit term expires before this cycle completes, creating structural delinquency that recurs cyclically after each collections cleanup because the root mismatch persists",
+        "repair": "set credit term duration to equal or exceed the segment's measured cash conversion cycle length",
+        "confidence": 0.93,
+        "evidence_count": 2
+      },
+      "left_profile_confidence": 0.95,
+      "right_profile_confidence": 0.93,
+      "error": null
+    }
+  ]
+}
