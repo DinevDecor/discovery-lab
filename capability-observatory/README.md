@@ -86,8 +86,31 @@ A `capture_outcome` must be recorded for every panel item attempted, even
 on failure — a failed capture is stored (evidence that we tried and what
 happened), never turned into a missing record. Allowed outcomes: `ok`,
 `unavailable` (source reached, item confirmed not available — a real
-market observation, not a sensor failure), `access_blocked`, `parse_error`,
-`source_missing`. Only `ok` and `unavailable` may produce an Observation.
+market observation, not a sensor failure), `parse_error`, `source_missing`,
+plus five failure outcomes distinguishing *why* no trustworthy content was
+obtained: `provider_access_blocked` (the provider itself denied access —
+CAPTCHA, WAF challenge, explicit denial, robots.txt disallow),
+`executor_network_blocked` (the request never reached the provider at all —
+DNS/TLS/connection failure, an egress policy on the executor's own network),
+`timeout`, `credentials_error` (API-backed capture, bad/missing/expired
+credentials), and `api_quota_error` (API-backed capture, rate/quota limit
+hit). Only `ok` and `unavailable` may produce an Observation — every
+failure outcome, old or new, is infrastructure/access evidence, never
+market evidence.
+
+**`access_blocked` is legacy** (present in `models.CAPTURE_OUTCOMES` for
+backward compatibility only, still valid to read, never used by new
+submissions going forward). It predates the five-way split above and
+conflated two very different situations: a provider denying access, and an
+executor's own network failing before ever reaching the provider. The
+first 20 real captures (week of 2026-08-09) are recorded under
+`access_blocked` and are **never rewritten** — append-only means a
+correction is a new record, not an edit of the old one. Read those 20
+records' `notes` field for which situation actually applied; the incident
+that produced them was, in fact, an executor network failure (an AI
+session's own egress policy blocking the five provider domains), not
+provider-side blocking — see
+`docs/decisions/003-c3-capture-outcome-vocabulary-extended.md`.
 
 ## Storage format
 

@@ -1,0 +1,5 @@
+{
+  "access_token": "FAKE-TEST-TOKEN-not-a-real-secret",
+  "token_type": "bearer",
+  "expires_in": 599
+}
