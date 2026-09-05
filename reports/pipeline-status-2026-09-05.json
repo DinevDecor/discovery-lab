@@ -1,0 +1,15 @@
+{
+  "bca": null,
+  "bca_skipped_reason": "Constraint Archaeology daily scan did not complete successfully",
+  "ca": {
+    "command": [
+      "/opt/hostedtoolcache/Python/3.11.16/x64/bin/python3",
+      "/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/run_daily.py"
+    ],
+    "returncode": 1,
+    "stderr_tail": "anomalies,gate_decisions=rebuild_anomalies(allobs,judge=judge,return_decisions=True)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/memory.py\", line 73, in rebuild_anomalies\n    decision=gate_pair(\n             ^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py\", line 129, in gate_pair\n    return same_mechanism(left,right,lp,rp,judge,**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py\", line 119, in same_mechanism\n    cf=[_cross_test(left_profile,right,right_profile,judge),_cross_test(right_profile,left,left_profile,judge)]\n                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/same_mechanism_gate.py\", line 104, in _cross_test\n    raw=judge.counterfactual(COUNTERFACTUAL_PROMPT.format(repair=repair_profile.repair,process=target.process,pain=target.pain,failure_mechanism=target_profile.failure_mechanism))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/mechanism_judge.py\", line 28, in counterfactual\n    return parse_json_object(call_claude(SYSTEM,prompt,900))\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/discovery-lab/discovery-lab/constraint-archaeology-agents/src/ca_agents/llm.py\", line 31, in call_claude\n    raise LLMError(\"Claude returned no text\")\nca_agents.llm.LLMError: Claude returned no text\n",
+    "stdout_tail": ""
+  },
+  "date": "2026-09-05",
+  "status": "CA_FAILED"
+}
