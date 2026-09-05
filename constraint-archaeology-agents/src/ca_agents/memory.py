@@ -29,9 +29,30 @@ def load_jsonl(path):
     with open(path,encoding="utf-8") as f: return [json.loads(x) for x in f if x.strip()]
 
 def append_jsonl(path, rows):
+    """Append rows idempotently when they carry observation_id.
+
+    Existing append-only ledgers remain untouched. For observations, a retry
+    of the same stable source event is skipped rather than creating duplicate
+    evidence. Other JSONL callers retain ordinary append semantics.
+    Returns the number of rows actually appended.
+    """
     os.makedirs(os.path.dirname(path),exist_ok=True)
+    existing_ids=set()
+    if os.path.exists(path):
+        for row in load_jsonl(path):
+            oid=row.get("observation_id") if isinstance(row,dict) else None
+            if oid: existing_ids.add(oid)
+    accepted=[]
+    batch_ids=set()
+    for r in rows:
+        oid=r.get("observation_id") if isinstance(r,dict) else None
+        if oid and (oid in existing_ids or oid in batch_ids):
+            continue
+        accepted.append(r)
+        if oid: batch_ids.add(oid)
     with open(path,"a",encoding="utf-8") as f:
-        for r in rows: f.write(json.dumps(r,ensure_ascii=False)+"\n")
+        for r in accepted: f.write(json.dumps(r,ensure_ascii=False)+"\n")
+    return len(accepted)
 
 def _gate_obs(obs, evidence_count=1):
     return GateAnomaly(
@@ -49,12 +70,6 @@ def rebuild_anomalies(observations, threshold=.22, judge=None, return_decisions=
     RELATED_DISTINCT and UNRESOLVED decisions are retained for audit.
     """
     anomalies=[]; decisions=[]; byid={}
-    # Per-anomaly set of crosspost_group ids already counted toward
-    # independent_sources. A second observation whose story_group is already
-    # here is the same underlying event reposted elsewhere - it stays in
-    # observation_ids for audit, but must not inflate independence. Local to
-    # this rebuild; nothing persisted on Anomaly, since anomalies.json is
-    # fully recomputed from observations.jsonl every run.
     seen_groups: dict[str, set[str]] = {}
     for o in observations:
         obs=Observation(**o) if isinstance(o,dict) else o
