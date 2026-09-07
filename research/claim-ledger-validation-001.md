@@ -78,6 +78,7 @@ A `CLAIM_LEDGER_SAVE` is counted **only** when the ledger exposes something that
 | 20 | 2026-09-04 | none new on `main` (latest BCA report still 09-03) | 0 | None needed — no new data | 2 more partial-progress commits today (`486ce34`, `cdfd63c`), same recurring signature — `observations.jsonl` only, never reaching the BCA report step |
 | 21 | 2026-09-05 | none new on `main` (latest BCA report still 09-03) | 0 | None needed — no new data | 1 more partial-progress commit today (`86759da`), same signature |
 | 22 | 2026-09-06 | `business-candidates-2026-09-06.md` (report timestamp 03:42:23Z; backlog catch-up, 230 new observations, clean merge; `material-events-2026-09-06.json` empty — no lifecycle transitions) | 0 new; 3 reconciled (CLV-001, CLV-002, CLV-003 — no status change on any) | None new — `BC-0130` unchanged; `BC-0039` gained more threads (now 12 anomaly_ids), further corroborating its already-FALSIFIED status; `ANOM-0362` repeated a previously-seen value (UAE shareholder resolutions, same as Day 9) — first exact repeat observed, not a new distinct value, not a new save | Pipeline recovered after the failure streak (Days 20–21) |
+| 23 | 2026-09-07 | none new on `main` (latest BCA report still 09-06) | 0 | None needed — no new data | 1 more partial-progress commit today (`ed3383b`), same recurring signature |
 
 ## 5. Claims
 
