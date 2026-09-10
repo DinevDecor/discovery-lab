@@ -81,6 +81,7 @@ A `CLAIM_LEDGER_SAVE` is counted **only** when the ledger exposes something that
 | 23 | 2026-09-07 | none new on `main` (latest BCA report still 09-06) | 0 | None needed — no new data | 1 more partial-progress commit today (`ed3383b`), same recurring signature |
 | 24 | 2026-09-08 | none new on `main` (latest BCA report still 09-06) | 0 | None needed — no new data | 2 more partial-progress commits today (`d77e638`, `7b15f0e`), same recurring signature — `observations.jsonl` only, never reaching the BCA report step |
 | 25 | 2026-09-09 | none new on `main` (latest BCA report still 09-06) | 0 | None needed — no new data | 2 more partial-progress commits today (`fb40e37`, `5307059`), same signature. `main` has now gone 3 consecutive calendar days (09-07 through 09-09) without producing new BCA output |
+| 26 | 2026-09-10 | none new on `main` (latest BCA report still 09-06) | 0 | None needed — no new data | 1 more partial-progress commit today (`953d78b`), same signature. `main` has now gone 4 consecutive calendar days (09-07 through 09-10) without producing new BCA output |
 
 ## 5. Claims
 
